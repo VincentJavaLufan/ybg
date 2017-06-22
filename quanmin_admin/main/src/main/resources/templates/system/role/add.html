@@ -1,0 +1,67 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<#include "/common/common.ftl"/>
+<script type="text/javascript" src="/js/system/role/add.js">
+    
+</script>
+<style type="text/css">
+.col-sm-3 {
+	width: 15%;
+	float: left;
+}
+
+.col-sm-9 {
+	width: 85%;
+	float: left;
+}
+
+label[class^="btn btn-default"] {
+	margin-top: -4px;
+}
+</style>
+</head>
+<body>
+	<div class="l_err" style="width: 100%; margin-top: 2px;"></div>
+	<form id="form" name="form" class="form-horizontal" method="post" action="/role/role_do/create.do" onsubmit="return add(this);">
+		<section class="panel panel-default">
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="col-sm-3 control-label">角色名</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control checkacc" required lay-verify="required" placeholder="请输入角色名" name="name" id="name">
+				</div>
+			</div>
+			<div class="line line-dashed line-lg pull-in"></div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">roleKey</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control checkacc" required lay-verify="required" placeholder="请输入roleKey" name="rolekey" id="roleKey">
+				</div>
+			</div>
+			<div class="line line-dashed line-lg pull-in"></div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">描述</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" placeholder="请输入角色描述" name="description" id="description">
+				</div>
+			</div>
+			<div class="line line-dashed line-lg pull-in"></div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">角色状态</label>
+				<div class="col-sm-9">
+					<select name="state" class="form-control" required lay-verify="required">
+						<option value="0">是</option>
+						<option value="1">否</option>
+					</select>
+				</div>
+			</div>
+			<div class="line line-dashed line-lg pull-in"></div>
+		</div>
+		<footer class="panel-footer text-right bg-light lter">
+		<button type="submit" class="btn btn-success btn-s-xs">提交</button>
+		</footer> </section>
+	</form>
+</body>
+</html>

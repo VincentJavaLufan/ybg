@@ -1,0 +1,165 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<#include "/common/common.ftl"/>
+<script type="text/javascript" src="/js/system/resources/add.js"></script>
+<style type="text/css">
+#but button {
+	margin-bottom: 5px;
+	margin-right: 5px;
+}
+
+.col-sm-3 {
+	width: 15%;
+	float: left;
+}
+
+.col-sm-9 {
+	width: 85%;
+	float: left;
+}
+
+label[class^="btn btn-default"] {
+	margin-top: -4px;
+}
+</style>
+<script type="text/javascript">
+    function tosetIcon(icon) {
+        layer.tips('选择了这张图片<i class="fa '+icon+' icon" style="font-size: 40px;><i>', "#" + icon);
+        $("#icon").val(icon);
+        $("#showicon").removeClass();
+        $("#showicon").addClass("fa " + icon + " icon");
+    }
+    function showorhide() {
+        if ($('#iconlist').css('display') == 'block') {
+            $('#iconlist').hide();
+        } else {
+            $('#iconlist').show();
+        }
+    }
+</script>
+</head>
+<body>
+	<div class="l_err" style="width: 100%; margin-top: 2px;"></div>
+	<form id="form" name="form" class="form-horizontal" method="post" action="/res/res_do/create.do">
+		<section class="panel panel-default">
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="col-sm-3 control-label">菜单名称</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control checkacc" placeholder="请输入菜单名称" name="name" id="name">
+				</div>
+			</div>
+			<div class="line line-dashed line-lg pull-in"></div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">菜单标识</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control checkacc" placeholder="请输入菜单标识" name="reskey" id="reskey">
+				</div>
+			</div>
+			<div class="line line-dashed line-lg pull-in"></div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">菜单url</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control checkacc" placeholder="请输入菜单url" name="resurl" id="resurl">
+				</div>
+			</div>
+			<div class="line line-dashed line-lg pull-in"></div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">上级菜单</label>
+				<div class="col-sm-9">
+					<select id="parentid" name="parentid" class="form-control m-b" tabindex="-1">
+					</select>
+				</div>
+			</div>
+			<div class="line line-dashed line-lg pull-in"></div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">菜单类型</label>
+				<div class="col-sm-9">
+					<select id="type" name="type" class="form-control m-b" tabindex="-1" onchange="but(this)">
+						<option value="0">------ 目录 ------</option>
+						<option value="1">------ 菜单 ------</option>
+						<option value="2">------ 按扭 ------</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group" id="divbut" style="display: none;">
+				<label class="col-sm-3 control-label">选择</label>
+				<div class="col-sm-9">
+					<div id="but" class="doc-buttons"></div>
+					<font color="red">可自定义填入html代码</font>
+				</div>
+			</div>
+			<div class="line line-dashed line-lg pull-in"></div>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<button class="btn btn-sm btn-default" onclick="showorhide()" data-toggle="class:show">
+						<i class="fa fa-plus text"></i>
+						<span class="text">展开</span>
+						<i class="fa fa-minus text-active"></i>
+						<span class="text-active">收起</span>
+					</button>
+				</div>
+				<div id="iconlist" class="col-sm-12" style="display: none;">
+					<#list iconlist as iconlist> <i id="${iconlist.iconclass!}" style="font-size: 40px; width: 40px; border-color: green; border: 1PX; background-color: #CCCCCC;" class="fa ${iconlist.iconclass!} icon" onclick="tosetIcon('${iconlist.iconclass!}')"> </i> </#list>
+				</div>
+				<label class="col-sm-3 control-label">图标</label>
+				<div class="col-sm-9">
+					<i id="showicon" style="font-size: 40px; width: 40px; color: red;" class="fa icon"> </i>
+					<input type="hidden" class="form-control checkacc" placeholder="请输入icon" name="icon" id="icon">
+				</div>
+			</div>
+			<div class="line line-dashed line-lg pull-in"></div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">菜单颜色</label>
+				<div class="col-sm-9">
+					<select id="colorid" name="colorid" class="form-control m-b" tabindex="-1">
+						<#list colorlist as clist>
+						<option value="${clist.id!}" class="${clist.colorclass!}">${clist.description!}</option>
+						</#list>
+					</select>
+				</div>
+			</div>
+			<div class="line line-dashed line-lg pull-in"></div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">是否隐藏</label>
+				<div class="col-sm-9">
+					<input id="gritter-light" type="checkbox" name="ishide" id="ishide" class="ace ace-switch ace-switch-5" value="1">
+				</div>
+			</div>
+			<div class="line line-dashed line-lg pull-in"></div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">菜单描述</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control checkacc" placeholder="请输入菜单描述" name="description" id="description">
+				</div>
+			</div>
+			<div class="line line-dashed line-lg pull-in"></div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">选择按钮</label>
+				<div class="col-sm-9">
+					新增
+					<input id="gritter-light" type="checkbox" name="btnaddfun" id="btnaddfun" class="ace ace-switch ace-switch-5" value="1">
+					&nbsp; &nbsp;&nbsp; 删除
+					<input id="gritter-light" type="checkbox" name="btnaddfun" id="btnaddfun" class="ace ace-switch ace-switch-5" value="1">
+					&nbsp;&nbsp;&nbsp; 新增初始化
+					<input id="gritter-light" type="checkbox" name="btnaddfun" id="btnaddfun" class="ace ace-switch ace-switch-5" value="1">
+					&nbsp;&nbsp;&nbsp; 更新初始化
+					<input id="gritter-light" type="checkbox" name="btnaddfun" id="btnaddfun" class="ace ace-switch ace-switch-5" value="1">
+					&nbsp;&nbsp;&nbsp; 查询
+					<input id="gritter-light" type="checkbox" name="btnaddfun" id="btnaddfun" class="ace ace-switch ace-switch-5" value="1">
+					&nbsp;&nbsp;&nbsp; 修改
+					<input id="gritter-light" type="checkbox" name="btnaddfun" id="btnaddfun" class="ace ace-switch ace-switch-5" value="1">
+				</div>
+			</div>
+		</div>
+		<footer class="panel-footer text-right bg-light lter">
+		<button type="submit" class="btn btn-success btn-s-xs">提交</button>
+		</footer> </section>
+	</form>
+</body>
+</html>
+<script type="text/javascript">
+    $("#type")
+</script>

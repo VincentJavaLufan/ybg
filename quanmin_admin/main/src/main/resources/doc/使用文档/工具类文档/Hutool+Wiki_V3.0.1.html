@@ -1,0 +1,2641 @@
+			<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  	<title>Hutool Wiki_V3.0.1</title>
+  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<style>
+		        body {
+            color: #666666;
+            font-family: 微软雅黑,Verdana,sans-serif,宋体;
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            color: #999999;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #16B28F;
+        }
+        .sin_navi ul {
+            list-style: none outside none;
+            margin: 0;
+            padding: 0 0 0 10px;
+        }
+        .sin_navi ul li {
+            line-height: 30px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        li {
+            line-height: 24px;
+        }
+        table {
+            border-left: 1px solid #CCCCCC;
+            border-top: 1px solid #CCCCCC;
+            margin: 5px 10px;
+            text-align: left;
+            width: 678px;
+        }
+        table th {
+            background-color: #EEEEEE;
+            border-bottom: 1px solid #CCCCCC;
+            border-right: 1px solid #CCCCCC;
+            padding: 10px;
+        }
+        table td {
+            border-bottom: 1px solid #CCCCCC;
+            border-right: 1px solid #CCCCCC;
+        }
+        p {
+            line-height: 24px;
+            margin: 10px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #111111;
+            font-weight: normal;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 26px;
+        }
+        h2 {
+            border-bottom: 1px dashed #CCCCCC;
+            font-size: 24px;
+            padding: 10px 0;
+        }
+        h3 {
+            font-size: 20px;
+            padding: 8px 0;
+        }
+        h4 {
+            font-size: 18px;
+            margin-left: 10px;
+            padding: 5px 0;
+        }
+        h5 {
+            font-size: 16px;
+            margin-left: 10px;
+            padding: 5px 0;
+        }
+        h6 {
+            font-size: 16px;
+            margin-left: 10px;
+            padding: 5px 0;
+        }
+        blockquote {
+            background: url("../../../img/blockquote.gif") no-repeat scroll left top #F4F5F7;
+            margin: 5px 10px;
+            padding: 10px 10px 10px 30px;
+        }
+        pre {
+            background: none repeat scroll 0 0 #EEEEEE;
+            margin: 5px 10px;
+            padding: 10px;
+        }
+        .sin_callout {
+            margin: 5px 10px;
+        }
+        .sin_header {
+            background-color: #F7F7F7;
+            border-bottom: 1px solid #CCCCCC;
+            height: 80px;
+            width: 100%;
+        }
+        .sin_title {
+            margin: 0 auto;
+            width: 1000px;
+        }
+        .sin_title_text {
+            color: #000000;
+            float: left;
+            line-height: 80px;
+        }
+        .sin_version {
+            color: #999999;
+            float: left;
+            font-size: 14px;
+            padding-top: 25px;
+            margin-left: 10px;
+        }
+        .sin_main {
+            margin: 0 auto;
+            width: 1000px;
+        }
+        .sin_navi {
+            float: left;
+            margin-bottom: 20px;
+            overflow-y: scroll;
+            padding: 0;
+            position: relative;
+            width: 279px;
+            z-index: 1;
+        }
+        .sin_navi_nomove {
+            position: fixed;
+            top: 0;
+        }
+        .sin_navi_ca a {
+            color: #333333;
+        }
+        .sin_navi_ca a:hover {
+            color: #16B28F;
+        }
+        .sin_navi_current {
+            border-right: 3px solid #16B28F;
+        }
+        .sin_navi_current a {
+            color: #16B28F;
+        }
+        .sin_content {
+            background-color: #FFFFFF;
+            border-left: 1px solid #CCCCCC;
+            float: left;
+            margin-left: -20px;
+            padding: 10px 20px;
+            position: relative;
+            width: 699px;
+            z-index: 2;
+        }
+        .sin_content_mar {
+            margin-left: 259px;
+        }
+        .sin_footer {
+            border-top: 1px solid #CCCCCC;
+            color: #999999;
+            height: 80px;
+            line-height: 80px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .sin_info {
+            background: none repeat scroll 0 0 #FFFFCC;
+            border: 1px solid #D5D4D4;
+            border-radius: 4px 4px 4px 4px;
+            color: #999999;
+            margin: 10px 0;
+            padding: 14px;
+        }
+        .sin_link_logo {
+            color: #16B28F;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .sin_text {
+            margin-bottom: 10px;
+        }
+        .d_callout {
+            margin-bottom: 10px;
+        }
+        .d_callout_info {
+            background: none repeat scroll 0 0 #F4F8FA;
+            border-left: 4px solid #5BC0DE;
+            padding: 10px;
+        }
+        .d_callout_warn {
+            background: none repeat scroll 0 0 #FCF8F2;
+            border-left: 4px solid #F0AD4E;
+            padding: 10px;
+        }
+        .d_callout_danger {
+            background: none repeat scroll 0 0 #FDF7F7;
+            border-left: 4px solid #D9534F;
+            padding: 10px;
+        }
+        .d_callout_success {
+            background: none repeat scroll 0 0 #F3F8F3;
+            border-left: 4px solid #50AF51;
+            padding: 10px;
+        }
+        .d_callout input {
+            background-color: rgba(0, 0, 0, 0);
+            font-size: 15px;
+            margin-bottom: 5px;
+            padding: 10px 5px 0 10px;
+        }
+        .d_callout textarea {
+            background-color: rgba(0, 0, 0, 0);
+        }
+        .d_callout_icons a {
+            color: #AAAAAA;
+            margin-left: 10px;
+        }
+        a.d_callout_icon_info {
+            color: #5BC0DE;
+        }
+        a.d_callout_icon_warn {
+            color: #F0AD4E;
+        }
+        a.d_callout_icon_danger {
+            color: #D9534F;
+        }
+        a.d_callout_icon_success {
+            color: #50AF51;
+        }
+        .clear {
+            clear: both;
+        }
+
+	</style>
+</head>
+<body>
+	<div class="sin_header">
+		<div class="sin_title">
+			<h1 class="sin_title_text">Hutool Wiki</h1>
+			<span class="sin_version">V3.0.1</span>
+			<div class="clear"></div>
+		</div>
+		<div id="top_end"></div>
+	</div>
+	<div class="sin_main">
+		<div class="sin_navi" id="sin_navi_id">
+			<ul style="margin: 20px 0;">
+				    																																													<li style="width: 246px;" id="navi_text_163364">
+									<a href="#text_163364">
+										前言
+									</a>	
+								</li>
+																															<li class="sin_navi_ca" style="width: 246px;" id="navi_category_39451">
+								<a href="#category_39451">
+									核心
+								</a>
+							</li>
+										<ul>
+									<li class="sin_navi_ca" style="width:236px" id="navi_category_39468">
+					<a href="#category_39468">
+						克隆
+					</a>
+				</li>
+							<ul>
+																			<li style="width:226px" id="navi_text_163381">
+						<a href="#text_163381">
+							支持泛型的克隆接口和克隆类
+						</a>	
+					</li>
+											</ul>
+													<li class="sin_navi_ca" style="width:236px" id="navi_category_39470">
+					<a href="#category_39470">
+						类型转换
+					</a>
+				</li>
+							<ul>
+																			<li style="width:226px" id="navi_text_163385">
+						<a href="#text_163385">
+							类型转换工具类-Convert
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_163707">
+						<a href="#text_163707">
+							自定义类型转换-ConverterRegistry
+						</a>	
+					</li>
+											</ul>
+													<li class="sin_navi_ca" style="width:236px" id="navi_category_39471">
+					<a href="#category_39471">
+						日期时间
+					</a>
+				</li>
+							<ul>
+																			<li style="width:226px" id="navi_text_165029">
+						<a href="#text_165029">
+							概述
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_163718">
+						<a href="#text_163718">
+							日期时间工具-DateUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_164389">
+						<a href="#text_164389">
+							日期时间对象-DateTime
+						</a>	
+					</li>
+											</ul>
+													<li class="sin_navi_ca" style="width:236px" id="navi_category_39472">
+					<a href="#category_39472">
+						IO
+					</a>
+				</li>
+							<ul>
+																			<li style="width:226px" id="navi_text_165030">
+						<a href="#text_165030">
+							概述
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_165251">
+						<a href="#text_165251">
+							IO工具类-IoUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_166112">
+						<a href="#text_166112">
+							文件工具类-FileUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_167136">
+						<a href="#text_167136">
+							文件类型判断-FileTypeUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_167859">
+						<a href="#text_167859">
+							文件监听-WatchMonitor
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_169076">
+						<a href="#text_169076">
+							ClassPath资源访问-ClassPathResource
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_169388">
+						<a href="#text_169388">
+							文件读取-FileReader
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_169393">
+						<a href="#text_169393">
+							文件写入-FileWriter
+						</a>	
+					</li>
+											</ul>
+													<li class="sin_navi_ca" style="width:236px" id="navi_category_39474">
+					<a href="#category_39474">
+						工具类
+					</a>
+				</li>
+							<ul>
+																			<li style="width:226px" id="navi_text_172468">
+						<a href="#text_172468">
+							概述
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172469">
+						<a href="#text_172469">
+							数组工具-ArrayUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172470">
+						<a href="#text_172470">
+							Bean工具-BeanUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172471">
+						<a href="#text_172471">
+							字符编码工具-CharsetUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172472">
+						<a href="#text_172472">
+							类工具-ClassUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172473">
+						<a href="#text_172473">
+							集合工具-CollectionUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172474">
+						<a href="#text_172474">
+							Escape工具-EscapeUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172475">
+						<a href="#text_172475">
+							Hash算法-HashUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172476">
+						<a href="#text_172476">
+							16进制工具-HexUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172477">
+						<a href="#text_172477">
+							图片工具-ImageUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172479">
+						<a href="#text_172479">
+							网络工具-NetUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172480">
+						<a href="#text_172480">
+							数字工具-NumberUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172481">
+						<a href="#text_172481">
+							对象工具-ObjectUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172482">
+						<a href="#text_172482">
+							分页工具-PageUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172483">
+						<a href="#text_172483">
+							随机工具-RandomUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172484">
+						<a href="#text_172484">
+							正则工具-ReUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172485">
+						<a href="#text_172485">
+							字符串工具-StrUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172486">
+						<a href="#text_172486">
+							线程工具-ThreadUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172487">
+						<a href="#text_172487">
+							URL工具-URLUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172488">
+						<a href="#text_172488">
+							XML工具-XmlUtil
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_172489">
+						<a href="#text_172489">
+							压缩工具-ZipUtil
+						</a>	
+					</li>
+											</ul>
+													<li class="sin_navi_ca" style="width:236px" id="navi_category_41914">
+					<a href="#category_41914">
+						语言特性
+					</a>
+				</li>
+							<ul>
+																			<li style="width:226px" id="navi_text_173090">
+						<a href="#text_173090">
+							单例工具——Singleton
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_173091">
+						<a href="#text_173091">
+							有界优先队列——BoundedPriorityQueue
+						</a>	
+					</li>
+																										<li style="width:226px" id="navi_text_173092">
+						<a href="#text_173092">
+							字段验证器——Validator
+						</a>	
+					</li>
+											</ul>
+								</ul>
+																									<li class="sin_navi_ca" style="width: 246px;" id="navi_category_39465">
+								<a href="#category_39465">
+									配置文件
+								</a>
+							</li>
+										<ul>
+																			<li style="width:236px" id="navi_text_172490">
+						<a href="#text_172490">
+							配置文件模块概述
+						</a>	
+					</li>
+																										<li style="width:236px" id="navi_text_172491">
+						<a href="#text_172491">
+							设置文件-Setting
+						</a>	
+					</li>
+																										<li style="width:236px" id="navi_text_172492">
+						<a href="#text_172492">
+							Properties扩展-Props
+						</a>	
+					</li>
+											</ul>
+																									<li class="sin_navi_ca" style="width: 246px;" id="navi_category_39463">
+								<a href="#category_39463">
+									脚本
+								</a>
+							</li>
+										<ul>
+																			<li style="width:236px" id="navi_text_172493">
+						<a href="#text_172493">
+							概述
+						</a>	
+					</li>
+																										<li style="width:236px" id="navi_text_172495">
+						<a href="#text_172495">
+							JavaScript引擎
+						</a>	
+					</li>
+											</ul>
+																									<li class="sin_navi_ca" style="width: 246px;" id="navi_category_39462">
+								<a href="#category_39462">
+									日志
+								</a>
+							</li>
+										<ul>
+																			<li style="width:236px" id="navi_text_172496">
+						<a href="#text_172496">
+							概述
+						</a>	
+					</li>
+																										<li style="width:236px" id="navi_text_172497">
+						<a href="#text_172497">
+							通用日志门面
+						</a>	
+					</li>
+											</ul>
+																									<li class="sin_navi_ca" style="width: 246px;" id="navi_category_39454">
+								<a href="#category_39454">
+									缓存
+								</a>
+							</li>
+										<ul>
+																			<li style="width:236px" id="navi_text_172498">
+						<a href="#text_172498">
+							概述
+						</a>	
+					</li>
+											</ul>
+																									<li class="sin_navi_ca" style="width: 246px;" id="navi_category_39452">
+								<a href="#category_39452">
+									aop
+								</a>
+							</li>
+										<ul>
+																			<li style="width:236px" id="navi_text_172516">
+						<a href="#text_172516">
+							概述
+						</a>	
+					</li>
+											</ul>
+																									<li class="sin_navi_ca" style="width: 246px;" id="navi_category_39456">
+								<a href="#category_39456">
+									加密解密
+								</a>
+							</li>
+										<ul>
+																			<li style="width:236px" id="navi_text_172518">
+						<a href="#text_172518">
+							概述
+						</a>	
+					</li>
+																										<li style="width:236px" id="navi_text_172520">
+						<a href="#text_172520">
+							对称加密
+						</a>	
+					</li>
+																										<li style="width:236px" id="navi_text_172521">
+						<a href="#text_172521">
+							非对称加密
+						</a>	
+					</li>
+																										<li style="width:236px" id="navi_text_172522">
+						<a href="#text_172522">
+							摘要加密
+						</a>	
+					</li>
+											</ul>
+																									<li class="sin_navi_ca" style="width: 246px;" id="navi_category_39453">
+								<a href="#category_39453">
+									布隆过滤
+								</a>
+							</li>
+																																<li class="sin_navi_ca" style="width: 246px;" id="navi_category_39457">
+								<a href="#category_39457">
+									DFA查找
+								</a>
+							</li>
+																																<li class="sin_navi_ca" style="width: 246px;" id="navi_category_39458">
+								<a href="#category_39458">
+									数据库
+								</a>
+							</li>
+										<ul>
+																			<li style="width:236px" id="navi_text_173087">
+						<a href="#text_173087">
+							概述
+						</a>	
+					</li>
+											</ul>
+																									<li class="sin_navi_ca" style="width: 246px;" id="navi_category_39461">
+								<a href="#category_39461">
+									http客户端
+								</a>
+							</li>
+																																<li class="sin_navi_ca" style="width: 246px;" id="navi_category_39460">
+								<a href="#category_39460">
+									地理位置
+								</a>
+							</li>
+																																<li class="sin_navi_ca" style="width: 246px;" id="navi_category_39459">
+								<a href="#category_39459">
+									扩展
+								</a>
+							</li>
+																																<li class="sin_navi_ca" style="width: 246px;" id="navi_category_40298">
+								<a href="#category_40298">
+									JSON
+								</a>
+							</li>
+										<ul>
+																			<li style="width:236px" id="navi_text_167133">
+						<a href="#text_167133">
+							概述
+						</a>	
+					</li>
+																										<li style="width:236px" id="navi_text_172523">
+						<a href="#text_172523">
+							JSONObject
+						</a>	
+					</li>
+																										<li style="width:236px" id="navi_text_173028">
+						<a href="#text_173028">
+							JSONArray
+						</a>	
+					</li>
+																										<li style="width:236px" id="navi_text_173044">
+						<a href="#text_173044">
+							JSONUtil
+						</a>	
+					</li>
+											</ul>
+																									<li class="sin_navi_ca" style="width: 246px;" id="navi_category_39455">
+								<a href="#category_39455">
+									定时任务
+								</a>
+							</li>
+										<ul>
+																			<li style="width:236px" id="navi_text_173086">
+						<a href="#text_173086">
+							定时任务模块概述
+						</a>	
+					</li>
+											</ul>
+																									<li class="sin_navi_ca" style="width: 246px;" id="navi_category_39467">
+								<a href="#category_39467">
+									系统调用
+								</a>
+							</li>
+																										</ul>
+		</div>
+		<div class="sin_content" id="sin_content_id">
+																													<h2 id="text_163364" class="sin_target">前言</h2>
+<div class="sin_text">
+    					<p><img src="https://raw.githubusercontent.com/looly/hutool/master/docs/resources/hutool.jpg" alt="封面"></p>
+<h2>全新项目主页：<a href="http://www.hutool.cn/" rel="nofollow">http://www.hutool.cn/</a></h2>
+<h2>Hutool交流QQ群：== <a href="http://shang.qq.com/wpa/qunwpa?idkey=382bb37ce779c11da77577f69d92d5171b340e3e7343d5ae0521f237c82c7810" rel="nofollow">537116831</a> ==</h2>
+<p>一个Java基础工具类，类似于<a href="http://jodd.org/" rel="nofollow">jodd</a>和<a href="http://commons.apache.org/" rel="nofollow">Apache commons lang</a>的Java工具类。</p>
+<h2>功能</h2>
+<p>一个Java基础工具类，对文件、流、加密解密、转码、正则、线程、XML等JDK方法进行封装，组成各种Util工具类，同时提供以下组件：<br>* 布隆过滤<br>* 缓存<br>* 克隆接口<br>* 类型转换<br>* 日期处理<br>* 数据库ORM（基于ActiveRecord思想）<br>* 基于DFA有限自动机的多个关键字查找<br>* HTTP客户端<br>* IO和文件<br>* 有用的一些数据结构<br>* 日志<br>* 反射代理类的简化（AOP切面实现）<br>* Setting（一种扩展Properties的配置文件）<br>* System（JVM和系统信息等）<br>* WatchService的封装（文件变动监控）<br>* XXXUtil各种有用的工具类</p>
+<h2>简介</h2>
+<p><a href="https://github.com/looly/hutool" rel="nofollow">Hutool</a>是一个工具包，我日常写项目的一些积累，希望你看了之后会有所启发或者能给你工作中带来帮助。这个工具包叫做Hutool也有“糊涂”之意，意为很多时候我们并不需要关注细节，专注业务。</p>
+<h2>设计哲学</h2>
+<p><a href="https://github.com/looly/hutool" rel="nofollow">Hutool</a>的设计思想是尽量减少重复的定义，让项目中的<code>util</code>这个package尽量少，总的来说有如下的几个思想：</p> 
+<ol> 
+ <li>减少代码录入。</li> 
+ <li>常用功能组合起来，实现一个功能只用一个方法。</li> 
+ <li>简化Java API，原来需要几个类实现的功能我也只是用一个类甚至一个方法（想想为了个线程池我得new多少类……而且名字还不好记）</li> 
+ <li>对于null的处理我没有可以回避，而是采取“你给我null我也给你返回null”这种思想，尽量不在工具类里抛空指针异常（这思想稍猥琐啊……直接把包袱扔给调用者了，好吧，谁让你给我null了）。</li> 
+ <li>一些固定使用的算法收集到一起，不用每次问度娘了（例如Base64算法、MD5、Sha-1，还有Hash算法）</li> 
+ <li>借鉴<a href="https://www.python.org/" rel="nofollow">Python</a>的很多小技巧（例如列表切片，列表支持负数index），让Java更加好用。</li> 
+ <li>非常好用的ORM框架，同样借鉴<a href="https://www.python.org/" rel="nofollow">Python</a>的<a href="https://www.djangoproject.com/" rel="nofollow">Django</a>框架，以键值对的实体代替对象实体，大大降低数据库访问的难度（再也不用像Hibernate一样配置半天ORM Mapping了）。</li> 
+ <li>极大简化了文件、日期的操作，尤其是相对路径和绝对路径问题做了非常好的封装，降低学习成本。</li> 
+</ol>
+<h2>安装</h2>
+<h3>Maven</h3>
+<p>在项目的pom.xml的dependencies中加入以下内容:</p> 
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.xiaoleilu&lt;/groupId&gt;
+    &lt;artifactId&gt;hutool-all&lt;/artifactId&gt;
+    &lt;version&gt;3.0.1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>注：工具包的**版本**可以通过 <a href="http://search.maven.org/" rel="nofollow">http://search.maven.org/</a> 搜索<code>hutool</code>找到项目。</p>
+<h3>非Maven项目</h3>
+<p>可以从<a href="http://search.maven.org/" rel="nofollow">http://search.maven.org/</a> 搜索<code>hutool</code>找到项目，点击对应版本，下面是相应的Jar包，导入即可使用。</p>
+			</div>
+
+																										<h2 id="category_39451">核心</h2>
+																		<h3 id="category_39468">克隆</h3>
+																						<h4 id="text_163381" class="sin_target">支持泛型的克隆接口和克隆类</h4>
+<div class="sin_text">
+    					<h2>我们解决什么问题</h2>
+<p>我们知道，JDK中的Cloneable接口只是一个空接口，并没有定义成员，它存在的意义仅仅是指明一个类的实例化对象支持位复制（就是对象克隆），如果不实现这个类，调用对象的clone()方法就会抛出CloneNotSupportedException异常。而且，因为clone()方法在Object对象中，返回值也是Object对象，因此克隆后我们需要自己强转下类型。</p>
+<h2>泛型克隆接口</h2>
+<p>因此，**com.xiaoleilu.hutool.clone.Cloneable**接口应运而生。此接口定义了一个返回泛型的成员方法，这样，实现此接口后会提示必须实现一个public的clone方法，调用父类clone方法即可：</p> 
+<pre><code>/**
+ * 猫猫类，使用实现Cloneable方式
+ * @author Looly
+ *
+ */
+private static class Cat implements Cloneable&lt;Cat&gt;{
+	private String name = "miaomiao";
+	private int age = 2;
+	
+	@Override
+	public Cat clone() {
+		try {
+			return (Cat) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new CloneRuntimeException(e);
+		}
+	}
+}
+</code></pre>
+<h2>泛型克隆类</h2>
+<p>但是实现此接口依旧有不方便之处，就是必须自己实现一个public类型的clone()方法，还要调用父类（Object）的clone方法并处理异常。于是**com.xiaoleilu.hutool.clone.CloneSupport**类产生，这个类帮我们实现了上面的clone方法，因此只要继承此类，不用写任何代码即可使用clone()方法：</p> 
+<pre><code>/**
+ * 狗狗类，用于继承CloneSupport类
+ * @author Looly
+ *
+ */
+private static class Dog extends CloneSupport&lt;Dog&gt;{
+	private String name = "wangwang";
+	private int age = 3;
+}
+</code></pre>
+<p>当然，使用**CloneSupport**的前提是你没有继承任何的类，谁让Java不支持多重继承呢（你依旧可以让父类实继承这个类，如果可以的话）。如果没办法继承类，那实现**com.xiaoleilu.hutool.clone.Cloneable**也是不错的主意，因此**hutool**提供了这两种方式，任选其一，在便捷和灵活上都提供了支持。</p>
+<h2>深克隆</h2>
+<p>我们知道实现Cloneable接口后克隆的对象是浅克隆，要想实现深克隆，请使用：</p> 
+<pre><code>ObjectUtil.cloneByStream(obj)
+</code></pre>
+<p>前提是对象必须实现Serializable接口。</p>
+<p><strong>ObjectUtil</strong>同样提供一些静态方法：**clone(obj)**、**cloneIfPossible(obj)**用于简化克隆调用，详细的说明请查看核心类的相关文档。</p>
+			</div>
+
+																						<h3 id="category_39470">类型转换</h3>
+																						<h4 id="text_163385" class="sin_target">类型转换工具类-Convert</h4>
+<div class="sin_text">
+    					<h2>痛点</h2>
+<p>在Java开发中我们要面对各种各样的类型转换问题，尤其是从命令行获取的用户参数、从HttpRequest获取的Parameter等等，这些参数类型多种多样，我们怎么去转换他们呢？常用的办法是先整成String，然后调用XXX.parseXXX方法，还要承受转换失败的风险，不得不加一层try catch，这个小小的过程混迹在业务代码中会显得非常难看和臃肿。</p>
+<h2>Convert类</h2>
+<p><strong>Convert</strong>类可以说是一个工具方法类，里面封装了针对Java常见类型的转换，用于简化类型转换。**Convert**类中大部分方法为toXXX，参数为Object，可以实现将任意可能的类型转换为指定类型。同时支持第二个参数**defaultValue**用于在转换失败时返回一个默认值。</p>
+<h3>Java常见类型转换</h3>
+<p>任意类型转为字符串：<br> </p>
+<pre><code><br>int a = 1;
+long[] b = {1,2,3,4,5};
+
+String aStr = Convert.toStr(a);
+Assert.assertEquals("1", aStr);
+String bStr = Convert.toStr(b);
+Assert.assertEquals("[1, 2, 3, 4, 5]", Convert.toStr(bStr));
+</code></pre>
+<br>我们可以看到转换工作变得非常容易，而且支持数组的转换字符串。同样，转换数组中元素的类型也同样支持：
+<br> 
+<pre><code><br>String[] b = { "1", "2", "3", "4" };
+		
+Integer[] intArray = Convert.toIntArray(false, (Object[])b);
+Assert.assertArrayEquals(intArray, new Integer[]{1,2,3,4});
+</code></pre>
+<br>为了实现统一性，参数使用了可变参数类型，其实我们需要传入一个Object数组（这里将String数组转为Object数组），转换后为Integer数组。
+<p></p> 
+<blockquote>
+ <h4>注意：</h4>
+ <p>由于Java中原始类型众多，Convert转换数组时并没有尝试封装所有的原始类型（例如int、long等），你可以使用**ArrayUtil.wrap**方法将其转换为包装类型数组：<br> </p>
+ <pre><code><br>long[] c = {1,2,3,4,5};
+Convert.toIntArray(false, (Object[])ArrayUtil.wrap(c));
+</code></pre>
+ <br>如果考虑性能，请自己实现循环然后使用Convert类转换每一个元素。
+ <p></p> 
+</blockquote>
+<h3>自定义类型转换</h3>
+<p>通过<code>Convert.convert(Class&lt;T&gt;, Object)</code>方法可以将任意类型转换为指定类型，Hutool中预定义了许多类型转换，例如转换为URI、URL、Calendar等等，这些类型的转换都依托于<code>ConverterRegistry</code>类。通过这个类和<code>Converter</code>接口，我们可以自定义一些类型转换。详细的使用请参阅“自定义类型转换”一节。</p>
+<h3>半角和全角转换</h3>
+<p>在很多文本的统一化中这两个方法非常有用，主要对标点符号的全角半角转换。</p>
+<p>半角转全角：<br> </p>
+<pre><code><br>String a = "123456789";
+String sbc = Convert.toSBC(a);
+Assert.assertEquals("１２３４５６７８９", sbc);
+</code></pre>
+<p></p>
+<p>全角转半角：<br> </p>
+<pre><code><br>String a = "１２３４５６７８９";
+String dbc = Convert.toDBC(a);
+Assert.assertEquals("123456789", dbc);
+</code></pre>
+<p></p>
+<h3>16进制（Hex）</h3>
+<p>在很多加密解密，以及中文字符串传输（比如表单提交）的时候，会用到16进制转换，就是Hex转换，为此Hutool中专门封装了**HexUtil**工具类，考虑到16进制转换也是转换的一部分，因此将其方法也放在Convert类中，便于理解和查找，使用同样非常简单：</p>
+<p>转为16进制（Hex）字符串<br> </p>
+<pre><code><br>String a = "我是一个小小的可爱的字符串";
+String hex = Convert.toHex(a, CharsetUtil.CHARSET_UTF_8);
+Assert.assertEquals("e68891e698afe4b880e4b8aae5b08fe5b08fe79a84e58fafe788b1e79a84e5ad97e7aca6e4b8b2", hex);
+</code></pre>
+<p></p>
+<p>将16进制（Hex）字符串转为普通字符串:<br> </p>
+<pre><code><br>String a = "我是一个小小的可爱的字符串";
+String hex = Convert.toHex(a, CharsetUtil.CHARSET_UTF_8);
+
+String raw = Convert.hexStrToStr(hex, CharsetUtil.CHARSET_UTF_8);
+Assert.assertEquals(a, raw);
+</code></pre>
+<p></p> 
+<blockquote>
+ <p>因为字符串牵涉到编码问题，因此必须传入编码对象，此处使用UTF-8编码。<br><strong>toHex</strong>方法同样支持传入byte[]，同样也可以使用**hexToBytes**方法将16进制转为byte[]</p> 
+</blockquote>
+<h3>Unicode和字符串转换</h3>
+<p>与16进制类似，Convert类同样可以在字符串和Unicode之间轻松转换：<br> </p>
+<pre><code><br>String a = "我是一个小小的可爱的字符串";
+		
+String unicode = Convert.strToUnicode(a);
+Assert.assertEquals("\\u6211\\u662f\\u4e00\\u4e2a\\u5c0f\\u5c0f\\u7684\\u53ef\\u7231\\u7684\\u5b57\\u7b26\\u4e32", unicode);
+
+String raw = Convert.unicodeToStr(unicode);
+Assert.assertEquals(raw, a);
+</code></pre>
+<br>很熟悉吧？如果你在properties文件中写过中文，你会明白这个方法的重要性。
+<p></p>
+<h3>编码转换</h3>
+<p>在接收表单的时候，我们常常被中文乱码所困扰，其实大多数原因是使用了不正确的编码方式解码了数据。于是<code>Convert.convertCharset</code>方法便派上用场了，它可以把乱码转为正确的编码方式：<br> </p>
+<pre><code><br>String a = "我不是乱码";
+//转换后result为乱码
+String result = Convert.convertCharset(a, CharsetUtil.UTF_8, CharsetUtil.ISO_8859_1);
+String raw = Convert.convertCharset(result, CharsetUtil.ISO_8859_1, "UTF-8");
+Assert.assertEquals(raw, a);
+</code></pre>
+<br>经过测试，UTF-8编码后用GBK解码再用GBK编码后用UTF-8解码会存在某些中文转换失败的问题。
+<p></p>
+<h3>时间单位转换</h3>
+<p><code>Convert.convertTime</code>方法主要用于转换时长单位，比如一个很大的毫秒，我想获得这个毫秒数对应多少分：<br> </p>
+<pre><code><br>long a = 4535345;
+long minutes = Convert.convertTime(a, TimeUnit.MILLISECONDS, TimeUnit.MINUTES);
+Assert.assertEquals(75, minutes);
+</code></pre>
+<p></p>
+<h3>金额大小写转换</h3>
+<p>面对财务类需求，<code>Convert.digitUppercase</code>将金钱数转换为大写形式：<br> </p>
+<pre><code><br>double a = 67556.32;
+String digitUppercase = Convert.digitUppercase(a);
+Assert.assertEquals("陆万柒仟伍佰伍拾陆元叁角贰分", digitUppercase);
+</code></pre>
+<br>当然，转换为大写只能精确到分（小数点儿后两位），之后的数字会被忽略。
+<p></p>
+<h3>原始类和包装类转换</h3>
+<p>有的时候，我们需要将包装类和原始类相互转换（比如Integer.classs 和 int.class），这时候我们可以：<br> </p>
+<pre><code><br>//去包装
+Class&lt;?&gt; wrapClass = Integer.class;
+Class&lt;?&gt; unWraped = Convert.unWrap(wrapClass);
+Assert.assertEquals(int.class, unWraped);
+
+//包装
+Class&lt;?&gt; primitiveClass = long.class;
+Class&lt;?&gt; wraped = Convert.wrap(primitiveClass);
+Assert.assertEquals(Long.class, wraped);
+</code></pre>
+<p></p>
+			</div>
+
+																						<h4 id="text_163707" class="sin_target">自定义类型转换-ConverterRegistry</h4>
+<div class="sin_text">
+    					<h2>由来</h2>
+<p>Hutool中类型转换最早只是一个工具类，叫做“Conver”，对于每一种类型转换都是用一个静态方法表示，但是这种方式有一个潜在问题，那就是扩展性不足，这导致Hutool只能满足部分类型转换的需求。</p>
+<h2>解决</h2>
+<p>为了解决这些问题，我对Hutool中这个类做了扩展。思想如下：</p> 
+<ul> 
+ <li><code>Converter</code> 类型转换接口，通过实现这个接口，重写convert方法，以实现不同类型的对象转换</li> 
+ <li><code>ConverterRegistry</code> 类型转换登记中心。将各种类型Convert对象放入登记中心，通过<code>convert</code>方法查找目标类型对应的转换器，将被转换对象转换之。在此类中，存放着**默认转换器**和**自定义转换器**，默认转换器是Hutool中预定义的一些转换器，自定义转换器存放用户自定的转换器。</li> 
+</ul>
+<p>通过这种方式，实现类灵活的类型转换。使用方式如下：<br> </p>
+<pre><code><br>int a = 3423;
+ConverterRegistry converterRegistry = ConverterRegistry.getInstance();
+String result = converterRegistry.convert(String.class, a);
+Assert.assertEquals("3423", result);
+</code></pre>
+<p></p>
+<h3>自定义转换</h3>
+<p>Hutool的默认转换有时候并不能满足我们自定义对象的一些需求，这时我们可以使用<code>ConverterRegistry.getInstance().putCustom()</code>方法自定义类型转换。</p> 
+<ol> 
+ <li>自定义转换器</li> 
+</ol> 
+<pre><code>public static class CustomConverter implements Converter&lt;String&gt;{
+	@Override
+	public String convert(Object value, String defaultValue) throws IllegalArgumentException {
+		return "Custom: " + value.toString();
+	}
+}
+</code></pre> 
+<ol> 
+ <li>注册转换器</li> 
+</ol> 
+<pre><code>ConverterRegistry converterRegistry = ConverterRegistry.getInstance();
+//此处做为示例自定义String转换，因为Hutool中已经提供String转换，请尽量不要替换
+//替换可能引发关联转换异常（例如覆盖String转换会影响全局）
+converterRegistry.putCustom(String.class, CustomConverter.class);
+</code></pre> 
+<ol> 
+ <li>执行转换</li> 
+</ol> 
+<pre><code>int a = 454553;
+String result = converterRegistry.convert(String.class, a);
+Assert.assertEquals("Custom: 454553", result);
+</code></pre> 
+<blockquote>
+ <p>注意：<br>convert(Class type, Object value, T defaultValue, boolean isCustomFirst)方法的最后一个参数可以选择转换时优先使用自定义转换器还是默认转换器。convert(Class type, Object value, T defaultValue)和convert(Class type, Object value)两个重载方法都是使用自定义转换器优先的模式。</p> 
+</blockquote>
+<h3><code>ConverterRegistry</code>单例和对象模式</h3>
+<p>ConverterRegistry提供一个静态方法getInstance()返回全局单例对象，这也是推荐的使用方式，当然如果想在某个限定范围内自定义转换，可以实例化ConverterRegistry对象。</p>
+			</div>
+
+																						<h3 id="category_39471">日期时间</h3>
+																						<h4 id="text_165029" class="sin_target">概述</h4>
+<div class="sin_text">
+    					<p>日期时间包是Hutool的核心包之一，提供针对JDK中Date和Calendar对象的封装，封装对象如下：</p>
+<h2>日期时间工具</h2> 
+<ul> 
+ <li><code>DateUtil</code> 针对日期时间操作提供一系列静态方法</li> 
+ <li><code>DateTime</code> 提供类似于Joda-Time中日期时间对象的封装，继承自Date类，并提供更加丰富的对象方法。</li> 
+ <li><code>FastDateFormat</code> 提供线程安全的针对Date对象的格式化和日期字符串解析支持。此对象在实际使用中并不需要感知，相关操作已经封装在<code>DateUtil</code>和<code>DateTime</code>的相关方法中。</li> 
+ <li><code>DateBetween</code> 计算两个时间间隔的类，除了通过构造新对象使用外，相关操作也已封装在<code>DateUtil</code>和<code>DateTime</code>的相关方法中。</li> 
+ <li><code>TimeInterval</code> 一个简单的计时器类，常用于计算某段代码的执行时间，提供包括毫秒、秒、分、时、天、周等各种单位的花费时长计算，对象的静态构造已封装在<code>DateUtil</code>中。</li> 
+ <li><code>DatePattern</code> 提供常用的日期格式化模式，包括<code>String</code>类型和<code>FastDateFormat</code>两种类型。</li> 
+</ul>
+<h2>日期枚举</h2>
+<p>考虑到<code>Calendar</code>类中表示时间的字段（field）都是使用<code>int</code>表示，在使用中非常不便，因此针对这些<code>int</code>字段，封装了与之对应的Enum枚举类，这些枚举类在<code>DateUtil</code>和<code>DateTime</code>相关方法中做为参数使用，可以更大限度的缩小参数限定范围。</p>
+<p>这些定义的枚举值可以通过<code>getValue()</code>方法获得其与<code>Calendar</code>类对应的int值，通过<code>of(int)</code>方法从<code>Calendar</code>中int值转为枚举对象。</p>
+<p>与<code>Calendar</code>对应的这些枚举包括：</p> 
+<ul> 
+ <li><code>Month</code> 表示月份，与Calendar中的int值一一对应。</li> 
+ <li><code>Week</code> 表示周，与Calendar中的int值一一对应</li> 
+</ul>
+<p>另外，Hutool还定义了**季度**枚举。<code>Season.SPRING</code>为第一季度，表示1~3月。季度的概念并不等同于季节，因为季节与月份并不对应，季度常用于统计概念。</p>
+<h2>时间枚举</h2>
+<p>时间枚举<code>DateUnit</code>主要表示某个时间单位对应的毫秒数，常用于计算时间差。</p>
+<p>例如：<code>DateUnit.MINUTE</code>表示分，也表示一分钟的毫米数，可以通过调用其<code>getMillis()</code>方法获得其毫秒数。</p>
+			</div>
+
+																						<h4 id="text_163718" class="sin_target">日期时间工具-DateUtil</h4>
+<div class="sin_text">
+    					<h2>由来</h2>
+<p>考虑到Java本身对日期时间的支持有限，并且Date和Calendar对象的并存导致各种方法使用混乱和复杂，故使用此工具类做了封装。这其中的封装主要是日期和字符串之间的转换，以及提供对日期的定位（一个月前等等）。</p>
+<p>对于Date对象，为了便捷，使用了一个DateTime类来代替之，继承自Date对象，主要的便利在于，覆盖了toString()方法，返回yyyy-MM-dd HH:mm:ss形式的字符串，方便在输出时的调用（例如日志记录等），提供了众多便捷的方法对日期对象操作，关于DateTime会在相关章节介绍。</p>
+<h2>方法</h2>
+<h3>转换</h3>
+<h4>Date、long、Calendar之间的相互转换</h4> 
+<pre><code>//当前时间
+Date date = DateUtil.date();
+//当前时间
+Date date2 = DateUtil.date(Calendar.getInstance());
+//当前时间
+Date date3 = DateUtil.date(System.currentTimeMillis());
+//当前时间字符串，格式：yyyy-MM-dd HH:mm:ss
+String now = DateUtil.now();
+//当前日期字符串，格式：yyyy-MM-dd
+String today= DateUtil.today();
+</code></pre>
+<h4>字符串转日期</h4>
+<p><code>DateUtil.parse</code>方法会自动识别一些常用格式，包括：<br>1. yyyy-MM-dd HH:mm:ss<br>2. yyyy-MM-dd<br>3. HH:mm:ss<br>4. yyyy-MM-dd HH:mm<br>5. yyyy-MM-dd HH:mm:ss.SSS</p> 
+<pre><code>String dateStr = "2017-03-01";
+Date date = DateUtil.parse(dateStr);
+</code></pre>
+<p>我们也可以使用自定义日期格式转化：<br> </p>
+<pre><code><br>String dateStr = "2017-03-01";
+Date date = DateUtil.parse(dateStr, "yyyy-MM-dd");
+</code></pre>
+<p></p>
+<h4>格式化日期输出</h4> 
+<pre><code>String dateStr = "2017-03-01";
+Date date = DateUtil.parse(dateStr);
+
+String format = DateUtil.format(date, "yyyy/MM/dd");
+Assert.assertEquals("2017/03/01", format);
+
+//常用格式的格式化
+String formatDate = DateUtil.formatDate(date);
+Assert.assertEquals("2017-03-01", formatDate);
+String formatDateTime = DateUtil.formatDateTime(date);
+Assert.assertEquals("2017-03-01 00:00:00", formatDateTime);
+String formatTime = DateUtil.formatTime(date);
+Assert.assertEquals("00:00:00", formatTime);
+</code></pre>
+<h4>获取Date对象的某个部分</h4> 
+<pre><code>Date date = DateUtil.date();
+//获得年的部分
+DateUtil.year(date);
+//获得月份，从1开始计数
+DateUtil.month(date);
+//获得月份枚举
+DateUtil.monthEnum(date);
+//.....
+</code></pre>
+<h4>开始和结束时间</h4>
+<p>有的时候我们需要获得每天的开始时间、结束时间，每月的开始和结束时间等等，DateUtil也提供了相关方法：</p> 
+<pre><code>String dateStr = "2017-03-01 22:33:23";
+Date date = DateUtil.parse(dateStr);
+
+//一天的开始
+Date beginOfDay = DateUtil.beginOfDay(date);
+Assert.assertEquals("2017-03-01 00:00:00", beginOfDay.toString());
+//一天的结束
+Date endOfDay = DateUtil.endOfDay(date);
+Assert.assertEquals("2017-03-01 23:59:59", endOfDay.toString());
+</code></pre>
+<h4>日期时间偏移</h4>
+<p>日期或时间的偏移指针对某个日期增加或减少分、小时、天等等，达到日期变更的目的。Hutool也针对其做了大量封装</p> 
+<pre><code>String dateStr = "2017-03-01 22:33:23";
+Date date = DateUtil.parse(dateStr);
+
+Date newDate = DateUtil.offset(date, DateField.DAY_OF_MONTH, 2);
+Assert.assertEquals("2017-03-03 22:33:23", newDate.toString());
+
+//常用偏移
+DateTime newDate2 = DateUtil.offsetDay(date, 3);
+Assert.assertEquals("2017-03-04 22:33:23", newDate2.toString());
+//常用偏移
+DateTime newDate3 = DateUtil.offsetHour(date, -3);
+Assert.assertEquals("2017-03-01 19:33:23", newDate3.toString());
+</code></pre>
+<p>针对当前时间，提供了简化的偏移方法（例如昨天、上周、上个月等）：<br> </p>
+<pre><code><br>//昨天
+DateUtil.yesterday()
+//明天
+DateUtil.tomorrow()
+//上周
+DateUtil.lastWeek()
+//下周
+DateUtil.nextWeek()
+//上个月
+DateUtil.lastMonth()
+//下个月
+DateUtil.nextMonth()
+</code></pre>
+<p></p>
+<h4>日期时间差</h4>
+<p>有时候我们需要计算两个日期之间的时间差（相差天数、相差小时数等等），Hutool将此类方法封装为between方法：</p> 
+<pre><code>String dateStr1 = "2017-03-01 22:33:23";
+Date date1 = DateUtil.parse(dateStr1);
+
+String dateStr2 = "2017-04-01 23:33:23";
+Date date2 = DateUtil.parse(dateStr2);
+
+long betweenDay = DateUtil.between(date1, date2, DateUnit.DAY);
+Assert.assertEquals(31, betweenDay);//相差一个月，31天
+</code></pre>
+<h4>格式化时间差</h4>
+<p>有时候我们希望看到易读的时间差，比如XX天XX小时XX分XX秒，此时使用<code>DateUtil.formatBetween</code>方法：</p> 
+<pre><code>//Level.MINUTE表示精确到分
+String formatBetween = DateUtil.formatBetween(between, Level.MINUTE);
+//输出：31天1小时
+Console.log(formatBetween);
+</code></pre>
+<h4>计时器</h4>
+<p>计时器用于计算某段代码或过程花费的时间</p> 
+<pre><code>TimeInterval timer = DateUtil.timer();
+
+//---------------------------------
+//-------这是执行过程
+//---------------------------------
+
+timer.interval();//花费毫秒数
+timer.intervalRestart();//返回花费时间，并重置开始时间
+timer.intervalMinute();//花费分钟数
+</code></pre>
+<h4>其它</h4> 
+<pre><code>//年龄
+DateUtil.ageOfNow("1990-01-30");
+
+//是否闰年
+DateUtil.isLeapYear(2017);
+</code></pre>
+			</div>
+
+																						<h4 id="text_164389" class="sin_target">日期时间对象-DateTime</h4>
+<div class="sin_text">
+    					<h2>由来</h2>
+<p>考虑工具类的局限性，在某些情况下使用并不简便，于是<code>DateTime</code>类诞生。<code>DateTime</code>对象充分吸取Joda-Time库的优点，并提供更多的便捷方法，这样我们在开发时不必再单独导入Joda-Time库便可以享受简单快速的日期时间处理过程。</p>
+<h2>说明</h2>
+<p><strong>DateTime</strong>类继承于java.util.Date类，为Date类扩展了众多简便方法，这些方法多是<code>DateUtil</code>静态方法的对象表现形式，使用DateTime对象可以完全替代开发中Date对象的使用。</p>
+<h2>使用</h2>
+<h3>新建对象</h3>
+<p><code>DateTime</code>对象包含众多的构造方法，构造方法支持的参数有：<br>- Date<br>- Calendar<br>- String(日期字符串，第二个参数是日期格式)<br>- long 毫秒数</p>
+<p>构建对象有两种方式：<code>DateTime.of()</code>和<code>new DateTime()</code>：</p> 
+<pre><code>Date date = new Date();
+		
+//new方式创建
+DateTime time = new DateTime(date);
+Console.log(time);
+
+//of方式创建
+DateTime now = DateTime.now();
+DateTime dt = DateTime.of(date);
+</code></pre>
+<h3>使用对象</h3>
+<p><code>DateTime</code>的成员方法与<code>DateUtil</code>中的静态方法所对应，因为是成员方法，因此可以使用更少的参数操作日期时间。</p>
+<p>示例：获取日期成员（年、月、日等）</p> 
+<pre><code>DateTime dateTime = new DateTime("2017-01-05 12:34:23", DatePattern.NORM_DATETIME_FORMAT);
+		
+//年
+int year = dateTime.year();
+Assert.assertEquals(2017, year);
+
+//季度（非季节）
+Season season = dateTime.seasonEnum();
+Assert.assertEquals(Season.SPRING, season);
+
+//月份
+Month month = dateTime.monthEnum();
+Assert.assertEquals(Month.JANUARY, month);
+
+//日
+int day = dateTime.dayOfMonth();
+Assert.assertEquals(5, day);
+</code></pre>
+<p>更多成员方法请参阅API文档。</p>
+<h3>对象的可变性</h3>
+<p>DateTime对象默认是可变对象（调用offset、setField、setTime方法默认变更自身），但是这种可变性有时候会引起很多问题（例如多个地方共用DateTime对象）。我们可以调用<code>setMutable(false)</code>方法使其变为不可变对象。在不可变模式下，<code>offset</code>、<code>setField</code>方法返回一个新对象，<code>setTime</code>方法抛出异常。</p> 
+<pre><code>DateTime dateTime = new DateTime("2017-01-05 12:34:23", DatePattern.NORM_DATETIME_FORMAT);
+
+//默认情况下DateTime为可变对象
+DateTime offsite = dateTime.offsite(DateField.YEAR, 0);
+Assert.assertTrue(offsite == dateTime);
+
+//设置为不可变对象后变动将返回新对象
+dateTime.setMutable(false);
+offsite = dateTime.offsite(DateField.YEAR, 0);
+Assert.assertFalse(offsite == dateTime);
+</code></pre>
+<h3>格式化为字符串</h3>
+<p>调用<code>toString()</code>方法即可返回格式为<code>yyyy-MM-dd HH:mm:ss</code>的字符串，调用<code>toString(String format)</code>可以返回指定格式的字符串。</p> 
+<pre><code>DateTime dateTime = new DateTime("2017-01-05 12:34:23", DatePattern.NORM_DATETIME_FORMAT);
+Assert.assertEquals("2017-01-05 12:34:23", dateTime.toString());
+
+String dateStr = dateTime.toString("yyyy/MM/dd");
+Assert.assertEquals("2017/01/05", dateStr);
+</code></pre>
+			</div>
+
+																						<h3 id="category_39472">IO</h3>
+																						<h4 id="text_165030" class="sin_target">概述</h4>
+<div class="sin_text">
+    					<h2>由来</h2>
+<p>IO的操作包括**读**和**写**，应用场景包括网络操作和文件操作。IO操作在Java中是一个较为复杂的过程，我们在面对不同的场景时，要选择不同的<code>InputStream</code>和<code>OutputStream</code>实现来完成这些操作。而如果想读写字节流，还需要<code>Reader</code>和<code>Writer</code>的各种实现类。这些繁杂的实现类，一方面给我我们提供了更多的灵活性，另一方面也增加了复杂性。</p>
+<h2>封装</h2>
+<p>io包的封装主要针对流、文件的读写封装，主要以工具类为主，提供常用功能的封装，这包括：</p> 
+<ul> 
+ <li><code>IoUtil</code> 流操作工具类</li> 
+ <li><code>FileUtil</code> 文件读写和操作的工具类。</li> 
+ <li><code>FileTypeUtil</code> 文件类型判断工具类</li> 
+ <li><code>WatchMonitor</code> 目录、文件监听，封装了JDK1.7中的WatchService</li> 
+ <li><code>ClassPathResource</code>针对ClassPath中资源的访问封装</li> 
+ <li><code>FileReader</code> 封装文件读取</li> 
+ <li><code>FileWriter</code> 封装文件写入</li> 
+</ul>
+<h2>流扩展</h2>
+<p>除了针对JDK的读写封装外，还针对特定环境和文件扩展了流实现。</p>
+<p>包括：<br>- <code>BOMInputStream</code>针对含有BOM头的流读取<br>- <code>FastByteArrayOutputStream</code> 基于快速缓冲FastByteBuffer的OutputStream，随着数据的增长自动扩充缓冲区（from blade）<br>- <code>FastByteBuffer</code> 快速缓冲，将数据存放在缓冲集中，取代以往的单一数组（from blade）</p>
+			</div>
+
+																						<h4 id="text_165251" class="sin_target">IO工具类-IoUtil</h4>
+<div class="sin_text">
+    					<h2>由来</h2>
+<p>IO工具类的存在主要针对InputStram、OutputStream、Reader、Writer封装简化，并对NIO相关操作做封装简化。总体来说，Hutool对IO的封装，主要是工具层面，我们努力做到在便捷、性能和灵活之间找到最好的平衡点。</p>
+<h2>方法</h2>
+<h3>拷贝</h3>
+<p>流的读写可以总结为从输入流读取，从输出流写出，这个过程我们定义为**拷贝**。这个是一个基本过程，也是文件、流操作的基础。</p>
+<p>以文件流拷贝为例：<br> </p>
+<pre><code><br>BufferedInputStream in = FileUtil.getInputStream("d:/test.txt");
+BufferedOutputStream out = FileUtil.getOutputStream("d:/test2.txt");
+long copySize = IoUtil.copy(in, out, IoUtil.DEFAULT_BUFFER_SIZE);
+</code></pre>
+<p></p>
+<p>copy方法同样针对Reader、Writer、Channel等对象有一些重载方法，并提供可选的缓存大小。默认的，缓存大小为<code>1024</code>个字节，如果拷贝大文件或流数据较大，可以适当调整这个参数。</p>
+<p>针对NIO，提供了<code>copyByNIO</code>方法，以便和BIO有所区别。我查阅过一些资料，使用NIO对文件流的操作有一定的提升，我并没有做具体实验。相关测试请参阅博客：<a href="http://www.cnblogs.com/gaopeng527/p/4896783.html" rel="nofollow">http://www.cnblogs.com/gaopeng527/p/4896783.html</a></p>
+<h3>Stream转Reader、Writer</h3> 
+<ul> 
+ <li><code>IoUtil.getReader</code>：将<code>InputStream</code>转为<code>BufferedReader</code>用于读取字符流，它是部分readXXX方法的基础。</li> 
+ <li><code>IoUtil.getWriter</code>：将<code>OutputStream</code>转为<code>OutputStreamWriter</code>用于写入字符流，它是部分writeXXX的基础。</li> 
+</ul>
+<p>本质上这两个方法只是简单new一个新的Reader或者Writer对象，但是封装为工具方法配合IDE的自动提示可以大大减少查阅次数（例如你对BufferedReader、OutputStreamWriter不熟悉，是不需要搜索一下相关类？）</p>
+<h3>读取流中的内容</h3>
+<p>读取流中的内容总结下来，可以分为read方法和readXXX方法。</p> 
+<ol> 
+ <li><code>read</code>方法有诸多的重载方法，根据参数不同，可以读取不同对象中的内容，这包括：</li> 
+</ol> 
+<ul> 
+ <li><code>InputStream</code></li> 
+ <li><code>Reader</code></li> 
+ <li><code>FileChannel</code></li> 
+</ul>
+<p>这三个重载大部分返回String字符串，为字符流读取提供极大便利。</p> 
+<ol> 
+ <li><code>readXXX</code>方法主要针对返回值做一些处理，例如：</li> 
+</ol> 
+<ul> 
+ <li><code>readBytes</code> 返回byte数组（读取图片等）</li> 
+ <li><code>readHex</code> 读取16进制字符串</li> 
+ <li><code>readObj</code> 读取序列化对象（反序列化）</li> 
+ <li><code>readLines</code> 按行读取</li> 
+</ul> 
+<ol> 
+ <li><code>toStream</code>方法则是将某些对象转换为流对象，便于在某些情况下操作：</li> 
+</ol> 
+<ul> 
+ <li><code>String</code> 转换为<code>ByteArrayInputStream</code></li> 
+ <li><code>File</code> 转换为<code>FileInputStream</code></li> 
+</ul>
+<h3>写入到流</h3> 
+<ul> 
+ <li><code>IoUtil.write</code>方法有两个重载方法，一个直接调用<code>OutputStream.write</code>方法，另一个用于将对象转换为字符串（调用toString方法），然后写入到流中。</li> 
+ <li><code>IoUtil.writeObjects</code> 用于将可序列化对象序列化后写入到流中。</li> 
+</ul>
+<p><code>write</code>方法并没有提供writeXXX，需要自己转换为String或byte[]。</p>
+<h3>关闭</h3>
+<p>对于IO操作来说，使用频率最高（也是最容易被遗忘）的就是<code>close</code>操作，好在Java规范使用了优雅的<code>Closeable</code>接口，这样我们只需简单封装调用此接口的方法即可。</p>
+<p>关闭操作会面临两个问题：<br>1. 被关闭对象为空<br>2. 对象关闭失败（或对象已关闭）</p>
+<p><code>IoUtil.close</code>方法很好的解决了这两个问题。</p>
+<p>在JDK1.7中，提供了<code>AutoCloseable</code>接口，在<code>IoUtil</code>中同样提供相应的重载方法，在使用中并不能感觉到有哪些不同。</p>
+			</div>
+
+																						<h4 id="text_166112" class="sin_target">文件工具类-FileUtil</h4>
+<div class="sin_text">
+    					<h2>简介</h2>
+<p>在IO操作中，文件的操作相对来说是比较复杂的，但也是使用频率最高的部分，我们几乎所有的项目中几乎都躺着一个叫做FileUtil或者FileUtils的工具类，我想Hutool应该将这个工具类纳入其中，解决用来解决大部分的文件操作问题。</p>
+<p>总体来说，FileUtil类包含以下几类操作工具：<br>1. 文件操作：包括文件目录的新建、删除、复制、移动、改名等<br>2. 文件判断：判断文件或目录是否非空，是否为目录，是否为文件等等。<br>3. 绝对路径：针对ClassPath中的文件转换为绝对路径文件。<br>4. 文件名：主文件名，扩展名的获取<br>5. 读操作：包括类似IoUtil中的getReader、readXXX操作<br>6. 写操作：包括getWriter和writeXXX操作 </p>
+<p>在FileUtil中，我努力将方法名与Linux相一致，例如创建文件的方法并不是createFile，而是<code>touch</code>，这种统一对于熟悉Linux的人来说，大大提高了上手速度。当然，如果你不熟悉Linux，那FileUtil工具类的使用则是在帮助你学习Linux命令。这些类Linux命令的方法包括：</p> 
+<ul> 
+ <li><code>ls</code> 列出目录和文件</li> 
+ <li><code>touch</code> 创建文件，如果父目录不存在也自动创建</li> 
+ <li><code>mkdir</code> 创建目录，会递归创建每层目录</li> 
+ <li><code>del</code> 删除文件或目录（递归删除，不判断是否为空），这个方法相当于Linux的delete命令</li> 
+ <li><code>copy</code> 拷贝文件或目录</li> 
+</ul>
+<p>这些方法提供了人性化的操作，例如<code>touch</code>方法，在创建文件的情况下会自动创建上层目录（我想对于使用者来说这也是大部分情况下的需求），同样<code>mkdir</code>也会创建父目录。</p> 
+<blockquote>
+ <p>需要注意的是，<code>del</code>方法会删除目录而不判断其是否为空，这一方面方便了使用，另一方面也可能造成一些预想不到的后果（比如拼写错路径而删除不应该删除的目录），所以请谨慎使用此方法。</p> 
+</blockquote>
+<p>关于FileUtil中更多工具方法，请参阅API文档。</p>
+			</div>
+
+																						<h4 id="text_167136" class="sin_target">文件类型判断-FileTypeUtil</h4>
+<div class="sin_text">
+    					<h2>由来</h2>
+<p>在文件上传时，有时候我们需要判断文件类型。但是又不能简单的通过扩展名来判断（防止恶意脚本等通过上传到服务器上），于是我们需要在服务端通过读取文件的首部几个二进制位来判断常用的文件类型。</p>
+<h2>使用</h2>
+<p>这个工具类使用非常简单，通过调用<code>FileTypeUtil.getType</code>即可判断，这个方法同时提供众多的重载方法，用于读取不同的文件和流。</p> 
+<pre><code>File file = FileUtil.file("d:/test.jpg");
+String type = FileTypeUtil.getType(file);
+//输出 jpg则说明确实为jpg文件
+Console.log(type);
+</code></pre>
+<h2>原理和局限性</h2>
+<p>这个类是通过读取文件流中前N个byte值来判断文件类型，在类中我们通过Map形式将常用的文件类型做了映射，这些映射都是网络上搜集而来。也就是说，我们只能识别有限的几种文件类型。但是这些类型已经涵盖了常用的图片、音频、视频、Office文档类型，可以应对大部分的使用场景。</p> 
+<blockquote>
+ <p>对于某些文本格式的文件我们并不能通过首部byte判断其类型，比如<code>JSON</code>，这类文件本质上是文本文件，我们应该读取其文本内容，通过其语法判断类型。</p> 
+</blockquote>
+<h2>自定义类型</h2>
+<p>为了提高<code>FileTypeUtil</code>的扩展性，我们通过<code>putFileType</code>方法可以自定义文件类型。</p> 
+<pre><code>FileTypeUtil.putFileType("ffd8ffe000104a464946", "new_jpg");
+</code></pre>
+<p>第一个参数是文件流的前N个byte的16进制表示，我们可以读取自定义文件查看，选取一定长度即可(长度越长越精确)，第二个参数就是文件类型，然后使用<code>FileTypeUtil.getType</code>即可。</p>
+			</div>
+
+																						<h4 id="text_167859" class="sin_target">文件监听-WatchMonitor</h4>
+<div class="sin_text">
+    					<h2>由来</h2>
+<p><code>WatchMonitor</code>主要针对JDK1.7中<code>WatchService</code>做了封装，针对文件和目录的变动（创建、更新、删除）做一个钩子，在<code>Watcher</code>中定义相应的逻辑来应对这些文件的变化。</p>
+<p>在hutool-setting模块，使用WatchMonitor监测配置文件变化，然后自动load到内存中。WatchMonitor的使用可以避免轮询，以事件响应的方式应对文件变化。</p>
+<h2>使用</h2>
+<p><code>WatchMonitor</code>提供的事件有：</p> 
+<ul> 
+ <li><code>ENTRY_MODIFY</code> 文件修改的事件</li> 
+ <li><code>ENTRY_CREATE</code> 文件或目录创建的事件</li> 
+ <li><code>ENTRY_DELETE</code> 文件或目录删除的事件</li> 
+ <li><code>OVERFLOW</code> 丢失的事件</li> 
+</ul>
+<p>这些事件对应<code>StandardWatchEventKinds</code>中的事件。</p>
+<p>下面我们介绍WatchMonitor的使用：</p> 
+<pre><code>File file = FileUtil.file("example.properties");
+WatchMonitor watchMonitor = WatchMonitor.create(file, WatchMonitor.ENTRY_MODIFY);
+watchMonitor.setWatcher(new Watcher(){
+	
+	@Override
+	public void onOverflow(WatchEvent&lt;?&gt; event) {
+		Console.log("EVENT overflow");
+	}
+	
+	@Override
+	public void onModify(WatchEvent&lt;?&gt; event) {
+		Console.log("EVENT modify");
+	}
+	
+	@Override
+	public void onDelete(WatchEvent&lt;?&gt; event) {
+		Console.log("EVENT delete");
+	}
+	
+	@Override
+	public void onCreate(WatchEvent&lt;?&gt; event) {
+		Console.log("EVENT create");
+	}
+});
+</code></pre>
+<p>其实我们不必实现<code>Watcher</code>的所有接口方法，Hutool同时提供了<code>SimpleWatcher</code>类，只需重写对应方法即可。</p>
+<p>同样，如果我们想监听所有事件，可以：<br> </p>
+<pre><code><br>WatchMonitor.createAll(file, new SimpleWatcher(){
+	@Override
+	public void onModify(WatchEvent&lt;?&gt; event) {
+		Console.log("EVENT modify");
+	}
+});
+</code></pre>
+<p></p>
+<p><code>createAll</code>方法会创建一个监听所有事件的WatchMonitor，同时在第二个参数中定义Watcher来负责处理这些变动。</p>
+			</div>
+
+																						<h4 id="text_169076" class="sin_target">ClassPath资源访问-ClassPathResource</h4>
+<div class="sin_text">
+    					<h2>什么是ClassPath</h2>
+<p>简单说来ClassPath就是查找class文件的路径，在Tomcat等容器下，ClassPath一般是<code>WEB-INF/classes</code>，在普通java程序中，我们可以通过定义<code>-cp</code>或者<code>-classpath</code>参数来定义查找class文件的路径，这些路径就是ClassPath。</p>
+<p>为了项目方便，我们定义的配置文件肯定不能使用绝对路径，所以需要使用相对路径，这时候最好的办法就是把配置文件和class文件放在一起，便于查找。</p>
+<h2>由来</h2>
+<p>在Java编码过程中，我们常常希望读取项目内的配置文件，按照Maven的习惯，这些文件一般放在项目的<code>src/main/resources</code>下，读取的时候使用：</p> 
+<pre><code>String path = "config.properties";
+InputStream in = this.class.getResource(path).openStream();
+</code></pre>
+<p>使用当前类来获得资源其实就是使用当前类的类加载器获取资源，最后openStream()方法获取输入流来读取文件流。</p>
+<h2>封装</h2>
+<p>面对这种复杂的读取操作，我们封装了<code>ClassPathResource</code>类来简化这种资源的读取：</p> 
+<pre><code>ClassPathResource resource = new ClassPathResource("test.properties");
+Properties properties = new Properties();
+properties.load(resource.getStream());
+
+Console.log("Properties: {}", properties);
+</code></pre>
+<p>这样就大大简化了ClassPath中资源的读取。</p> 
+<blockquote>
+ <p>Hutool提供针对properties的封装类<code>Props</code>，同时提供更加强大的配置文件Setting类，这两个类已经针对ClassPath做过相应封装，可以以更加便捷的方式读取配置文件。相关文档请参阅Hutool-setting章节</p> 
+</blockquote>
+			</div>
+
+																						<h4 id="text_169388" class="sin_target">文件读取-FileReader</h4>
+<div class="sin_text">
+    					<h2>由来</h2>
+<p>在<code>FileUtil</code>中本来已经针对文件的读操作做了大量的静态封装，但是根据职责分离原则，我觉得有必要针对文件读取单独封装一个类，这样项目更加清晰。当然，使用FileUtil操作文件是最方便的。</p>
+<h2>使用</h2>
+<p>在JDK中，同样有一个FileReader类，但是并不如想象中的那样好用，于是Hutool便提供了更加便捷FileReader类。</p> 
+<pre><code>//默认UTF-8编码，可以在构造中传入第二个参数做为编码
+FileReader fileReader = new FileReader("test.properties");
+String result = fileReader.readString();
+</code></pre>
+<p>FileReader提供了以下方法来快速读取文件内容：</p> 
+<ul> 
+ <li><code>readBytes</code></li> 
+ <li><code>readString</code></li> 
+ <li><code>readLines</code></li> 
+</ul>
+<p>同时，此类还提供了以下方法用于转换为流或者BufferedReader：<br>- <code>getReader</code><br>- <code>getInputStream</code></p>
+			</div>
+
+																						<h4 id="text_169393" class="sin_target">文件写入-FileWriter</h4>
+<div class="sin_text">
+    					<p>相应的，文件读取有了，自然有文件写入类，使用方式与<code>FileReader</code>也类似：</p> 
+<pre><code>FileWriter writer = new FileWriter("test.properties");
+writer.write("test");
+</code></pre>
+<p>写入文件分为追加模式和覆盖模式两类，追加模式可以用<code>append</code>方法，覆盖模式可以用<code>write</code>方法，同时也提供了一个write方法，第二个参数是可选覆盖模式。</p>
+<p>同样，此类提供了：<br>- <code>getOutputStream</code><br>- <code>getWriter</code><br>- <code>getPrintWriter</code></p>
+<p>这些方法用于转换为相应的类提供更加灵活的写入操作。</p>
+			</div>
+
+																						<h3 id="category_39474">工具类</h3>
+																					<h4 id="text_172468" class="sin_target">概述</h4>
+<div class="sin_text">
+    </div>
+
+																					<h4 id="text_172469" class="sin_target">数组工具-ArrayUtil</h4>
+<div class="sin_text">
+    </div>
+
+																					<h4 id="text_172470" class="sin_target">Bean工具-BeanUtil</h4>
+<div class="sin_text">
+    </div>
+
+																					<h4 id="text_172471" class="sin_target">字符编码工具-CharsetUtil</h4>
+<div class="sin_text">
+    </div>
+
+																						<h4 id="text_172472" class="sin_target">类工具-ClassUtil</h4>
+<div class="sin_text">
+    					<h2>类处理工具 <code>ClassUtil</code></h2>
+<p>这个工具主要是封装了一些反射的方法，使调用更加方便。而这个类中最有用的方法是<code>scanPackage</code>方法，这个方法会扫描classpath下所有类，这个在Spring中是特性之一，主要为<a href="https://github.com/looly/hulu" rel="nofollow">Hulu</a>框架中类扫描的一个基础。下面介绍下这个类中的方法。</p>
+<h3>1.<code>scanPackage</code>方法</h3>
+<p>此方法唯一的参数是包的名称，返回结果为此包以及子包下所有的类。方法使用很简单，但是过程复杂一些，包扫面首先会调用 <code>getClassPaths</code>方法获得ClassPath，然后扫描ClassPath，如果是目录，扫描目录下的类文件，或者jar文件。如果是jar包，则直接从jar包中获取类名。这个方法的作用显而易见，就是要找出所有的类，在Spring中用于依赖注入，我在<a href="https://github.com/looly/hulu" rel="nofollow">Hulu</a>中则用于找到Action类。当然，你也可以传一个<code>ClassFilter</code>对象，用于过滤不需要的类。</p>
+<h3>2.<code>getMethods</code>方法</h3>
+<p>此方法同Class对象的·getMethods·方法，只不过只返回方法的名称（字符串），封装非常简单。</p>
+<h3>3.<code>getClassPaths</code>方法</h3>
+<p>此方法是获得当前线程的ClassPath，核心是<code>Thread.currentThread().getContextClassLoader().getResources</code>的调用。</p>
+<h3>4.<code>getJavaClassPaths</code>方法</h3>
+<p>此方法用于获得java的系统变量定义的ClassPath。</p>
+<h3>5.<code>parse</code>方法。</h3>
+<p>此方法封装了强制类型转换，首先会调用对象本身的<code>cast</code>方法，失败则尝试是否为基本类型（int,long,double,float等），再失败则尝试日期、数字和字节流，总之这是一个包容性较好的类型转换方法，省去我们在不知道类型的情况下多次尝试的繁琐。</p>
+<h3>6.<code>parseBasic</code>方法</h3>
+<p>此方法被<code>parse</code>方法调用，专门用于将字符集串转换为基本类型的对象(Integer,Double等等)。可以说这是一个一站式的转换方法，JDK的方法名太别扭了，例如你要转换成Long，你得调用<code>Long.parseLong</code>方法，直接<code>Long.parse</code>不就行了……真搞不懂，所以才有了这个方法。</p>
+<h3>7.<code>castToPrimitive</code>方法</h3>
+<p>这个方法比较别扭，就是把例如Integer类变成int.class，貌似没啥用处，忘了哪里用了，如果你能用到，就太好了。</p>
+<h3>8.<code>getClassLoader</code>和<code>getContextClassLoader</code>方法</h3>
+<p>后者只是获得当前线程的ClassLoader，前者在获取失败的时候获取<code>ClassUtil</code>这个类的ClassLoader。</p>
+<h3>9. <code>newInstance</code>方法</h3>
+<p>实例化对象，封装了<code>Class.forName(clazz).newInstance()</code>方法。</p>
+<h3>10.<code>cloneObj</code>方法</h3>
+<p>克隆对象。对于有些对象没有实现<code>Cloneable</code>接口的对象想克隆下真是费劲，例如封装Redis客户端的时候，配置对象想克隆下基本不可能，于是写了这个方法，原理是使用<code>ObjectOutputStream</code>复制对象流。</p>
+			</div>
+
+																						<h4 id="text_172473" class="sin_target">集合工具-CollectionUtil</h4>
+<div class="sin_text">
+    					<h2>集合工具 <code>CollectionUtil</code></h2>
+<p>这个工具主要增加了对数组、集合类的操作。</p>
+<h3>1. <code>join</code> 方法</h3>
+<p>将集合转换为字符串，这个方法还是挺常用，是<code>StrUtil.split</code>的反方法。这个方法的参数支持各种类型对象的集合，最后连接每个对象时候调用其<code>toString()</code>方法。栗子如下：<br> </p>
+<pre><code><br>String[] col= new String[]{a,b,c,d,e};
+String str = CollectionUtil.join(col, "#"); //str -&gt; a#b#c#d#e
+</code></pre>
+<p></p>
+<h3>2. <code>sortPageAll</code>、<code>sortPageAll2</code>方法</h3>
+<p>这个方法其实是一个真正的组合方法，功能是：将给定的多个集合放到一个列表（<code>List</code>）中，根据给定的<code>Comparator</code>对象排序，然后分页取数据。这个方法非常类似于数据库多表查询后排序分页，这个方法存在的意义也是在此。<code>sortPageAll2</code>功能和<code>sortPageAll</code>的使用方式和结果是 一样的，区别是<code>sortPageAll2</code>使用了<code>BoundedPriorityQueue</code>这个类来存储组合后的列表，不知道哪种性能更好一些，所以就都保留了。使用此方法，栗子如下：<br> </p>
+<pre><code><br>//Integer比较器
+Comparator&lt;Integer&gt; comparator = new Comparator&lt;Integer&gt;(){
+	@Override
+	public int compare(Integer o1, Integer o2) {
+		return o1.compareTo(o2);
+	}
+};
+
+//新建三个列表，CollectionUtil.newArrayList方法表示新建ArrayList并填充元素
+List&lt;Integer&gt; list1 = CollectionUtil.newArrayList(1, 2, 3);
+List&lt;Integer&gt; list2 = CollectionUtil.newArrayList(4, 5, 6);
+List&lt;Integer&gt; list3 = CollectionUtil.newArrayList(7, 8, 9);
+
+//参数表示把list1,list2,list3合并并按照从小到大排序后，取0~2个（包括第0个，不包括第2个），结果是[1,2]
+@SuppressWarnings("unchecked")
+List&lt;Integer&gt; result = CollectionUtil.sortPageAll(0, 2, comparator, list1, list2, list3);
+System.out.println(result);     //输出 [1,2]
+</code></pre>
+<p></p>
+<h3>3. <code>sortEntrySetToList</code>方法</h3>
+<p>这个方法主要是对<code>Entry&lt;Long, Long&gt;</code>按照Value的值做排序，使用局限性较大，我已经忘记哪里用到过了……</p>
+<h3>4. <code>popPart</code>方法</h3>
+<p>这个方法传入一个栈对象，然后弹出指定数目的元素对象，弹出是指<code>pop()</code>方法，会从原栈中删掉。</p>
+<h3>5.<code>newHashMap</code>、<code>newHashSet</code>、<code>newArrayList</code>方法</h3>
+<p>这些方法是新建相应的数据结构，数据结构元素的类型取决于你变量的类型，栗子如下：<br> </p>
+<pre><code><br>HashMap&lt;String, String&gt; map = CollectionUtil.newHashMap();
+HashSet&lt;String&gt; set = CollectionUtil.newHashSet();
+ArrayList&lt;String&gt; list = CollectionUtil.newArrayList();
+</code></pre>
+<p></p>
+<h3>6. <code>append</code>方法</h3>
+<p>在给定数组里末尾加一个元素，其实List.add()也是这么实现的，这个方法存在的意义是只有少量的添加元素时使用，因为内部使用了<code>System.arraycopy</code>,每调用一次就要拷贝数组一次。这个方法也是为了在某些只能使用数组的情况下使用，省去了先要转成<code>List</code>，添加元素，再转成Array。</p>
+<h3>7. <code>resize</code>方法</h3>
+<p>重新调整数据的大小，如果调整后的大小比原来小，截断，如果比原来大，则多出的位置空着。（貌似List在扩充的时候会用到类似的方法）</p>
+<h3>8. <code>addAll</code>方法</h3>
+<p>将多个数据合并成一个数组</p>
+<h5>9. <code>range</code>方法</h5>
+<p>这个方法来源于<a href="https://www.python.org/" rel="nofollow">Python</a>的一个语法糖，给定开始和结尾以及步进，就会生成一个等差数列（列表）<br> </p>
+<pre><code><br>int[] a1 = CollectionUtil.range(6);       //[0,1,2,3,4,5]
+int[] a2 = CollectionUtil.range(4, 7);    //[4,5,6]
+int[] a3 = CollectionUtil.range(4, 9, 2); //[4,6,8]
+</code></pre>`
+<p></p>
+<h3>10. <code>sub</code>方法</h3>
+<p>对集合切片，其他类型的集合会转换成<code>List</code>，封装<code>List.subList</code>方法，自动修正越界等问题，完全避免<code>IndexOutOfBoundsException</code>异常。</p>
+<h3>11. <code>isEmpty</code>、<code>isNotEmpty</code>方法</h3>
+<p>判断集合是否为空（包括null和没有元素的集合）。</p>
+<h3>12. <code>zip</code>方法</h3>
+<p>此方法也是来源于<a href="https://www.python.org/" rel="nofollow">Python</a>的一个语法糖，给定两个集合，然后两个集合中的元素一一对应，成为一个Map。此方法还有一个重载方法，可以传字符，然后给定分分隔符，字符串会被split成列表。栗子：<br> </p>
+<pre><code><br>String[] keys = new String[]{"a", "b", "c"};
+Integer[] values = new Integer[]{1, 2, 3};
+Map&lt;String, Integer&gt; map = CollectionUtil.zip(keys,values);
+System.out.println(map);    // {b=2, c=3, a=1}
+
+String a = "a,b,c";
+String b = "1,2,3";
+Map&lt;String, String&gt; map2 = CollectionUtil.zip(a,b, ",");
+System.out.println(map2);   // {b=2, c=3, a=1}
+</code></pre>
+<p></p>
+			</div>
+
+																					<h4 id="text_172474" class="sin_target">Escape工具-EscapeUtil</h4>
+<div class="sin_text">
+    </div>
+
+																					<h4 id="text_172475" class="sin_target">Hash算法-HashUtil</h4>
+<div class="sin_text">
+    </div>
+
+																					<h4 id="text_172476" class="sin_target">16进制工具-HexUtil</h4>
+<div class="sin_text">
+    </div>
+
+																					<h4 id="text_172477" class="sin_target">图片工具-ImageUtil</h4>
+<div class="sin_text">
+    </div>
+
+																					<h4 id="text_172479" class="sin_target">网络工具-NetUtil</h4>
+<div class="sin_text">
+    </div>
+
+																					<h4 id="text_172480" class="sin_target">数字工具-NumberUtil</h4>
+<div class="sin_text">
+    </div>
+
+																					<h4 id="text_172481" class="sin_target">对象工具-ObjectUtil</h4>
+<div class="sin_text">
+    </div>
+
+																					<h4 id="text_172482" class="sin_target">分页工具-PageUtil</h4>
+<div class="sin_text">
+    </div>
+
+																					<h4 id="text_172483" class="sin_target">随机工具-RandomUtil</h4>
+<div class="sin_text">
+    </div>
+
+																						<h4 id="text_172484" class="sin_target">正则工具-ReUtil</h4>
+<div class="sin_text">
+    					<h2>前言</h2>
+<p>在文本处理中，正则表达式几乎是全能的，但是Java的正则表达式有时候处理一些事情还是有些繁琐，所以我封装了部分常用功能。就比如说我要匹配一段文本中的某些部分，我们需要这样做：</p> 
+<pre><code>Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
+Matcher matcher = pattern.matcher(content);
+if (matcher.find()) {
+    String result= matcher.group();
+}
+</code></pre>
+<p>其中牵涉到多个对象，想用的时候真心记不住。好吧，既然功能如此常用，我就封装一下：</p> 
+<pre><code>/**
+* 获得匹配的字符串
+* 
+* @param pattern 编译后的正则模式
+* @param content 被匹配的内容
+* @param groupIndex 匹配正则的分组序号
+* @return 匹配后得到的字符串，未匹配返回null
+*/
+public static String get(Pattern pattern, String content, int groupIndex) {
+    Matcher matcher = pattern.matcher(content);
+    if (matcher.find()) {
+        return matcher.group(groupIndex);
+    }
+    return null;
+}
+
+/**
+* 获得匹配的字符串
+* 
+* @param regex 匹配的正则
+* @param content 被匹配的内容
+* @param groupIndex 匹配正则的分组序号
+* @return 匹配后得到的字符串，未匹配返回null
+*/
+public static String get(String regex, String content, int groupIndex) {
+    Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
+    return get(pattern, content, groupIndex);
+}
+</code></pre>
+<h2>Demo代码</h2> 
+<pre><code>package com.xiaoleilu.hutool.demo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.slf4j.Logger;
+
+import com.xiaoleilu.hutool.Log;
+import com.xiaoleilu.hutool.ReUtil;
+
+/**
+ * 正则表达式工具类Demo
+ * @author Looly
+ *
+ */
+public class ReUtilDemo {
+    private final static Logger log = Log.get();
+    
+    public static void main(String[] args) {
+        String content = "ZZZaaabbbccc中文1234";
+        
+        //get demo 正则查找匹配的第一个字符串
+        String resultGet = ReUtil.get("\\w{2}", content, 0);
+        log.debug("get: {}", resultGet);
+        
+        log.debug("---------------------------------------------------------");
+        
+        //抽取多个分组然后把它们拼接起来
+        String resultExtractMulti = ReUtil.extractMulti("(\\w)aa(\\w)", content, "$1-$2");
+        log.debug("extractMulti: {}", resultExtractMulti);
+        
+        log.debug("---------------------------------------------------------");
+        
+        //抽取多个分组然后把原文匹配到位置之前的内容都删除
+        String[] contents = new String[]{content};
+        String resultExtractMultiAndDelPre = ReUtil.extractMultiAndDelPre("(\\w)aa(\\w)", contents, "$1-$2");
+        log.debug("extractMultiAndDelPre: content: {}, extract: {}", contents[0], resultExtractMultiAndDelPre);
+        
+        log.debug("---------------------------------------------------------");
+        
+        //删除第一个匹配到的内容
+        String resultDelFirst = ReUtil.delFirst("(\\w)aa(\\w)", content);
+        log.debug("delFirst: {}", resultDelFirst);
+        
+        log.debug("---------------------------------------------------------");
+        
+        //删除第一个匹配到的内容以及之前的文本
+        String resultDelPre = ReUtil.delPre("(\\w)aa(\\w)", content);
+        log.debug("delPre: {}", resultDelPre);
+        
+        log.debug("---------------------------------------------------------");
+        
+        //查找所有匹配文本
+        List&lt;String&gt; resultFindAll = ReUtil.findAll("\\w{2}", content, 0, new ArrayList&lt;String&gt;());
+        log.debug("findAll: {}", resultFindAll);
+        
+        log.debug("---------------------------------------------------------");
+        
+        //找到匹配的第一个数字
+        Integer resultGetFirstNumber= ReUtil.getFirstNumber(content);
+        log.debug("getFirstNumber: {}", resultGetFirstNumber);
+        
+        log.debug("---------------------------------------------------------");
+        
+        //格式是否符合Ipv4格式
+        log.debug("isIpv4: {}", ReUtil.isIpv4("127.0.0.1"));
+        
+        log.debug("---------------------------------------------------------");
+        
+        //给定字符串是否匹配给定正则
+        log.debug("isMatch: {}", ReUtil.isMatch("\\w+[\u4E00-\u9FFF]+\\d+", content));
+        
+        log.debug("---------------------------------------------------------");
+        
+        //通过正则查找到字符串，然后把匹配到的字符串加入到replacementTemplate中，$1表示分组1的字符串
+        log.debug("replaceAll: {}", ReUtil.replaceAll(content, "(\\d+)", "-&gt;$1&lt;-"));
+        
+        log.debug("---------------------------------------------------------");
+        
+        //转义给定字符串，为正则相关的特殊符号转义
+        log.debug("replaceAll: {}", ReUtil.escape("我有个$符号{}"));
+        
+        log.debug("---------------------------------------------------------");
+    }
+}
+</code></pre>
+			</div>
+
+																						<h4 id="text_172485" class="sin_target">字符串工具-StrUtil</h4>
+<div class="sin_text">
+    					<h4>字符串处理工具类 <code>StrUtil</code></h4>
+<p>这个工具的用处类似于<a href="http://commons.apache.org/" rel="nofollow">Apache Commons Lang</a>中的<code>StringUtil</code>，之所以使用<code>StrUtil</code>而不是使用<code>StringUtil</code>是因为前者更短，而且<code>Str</code>这个简写我想已经深入人心了，大家都知道是字符串的意思。常用的方法例如<code>isBlank</code>、<code>isNotBlank</code>、<code>isEmpty</code>、<code>isNotEmpty</code>这些我就不做介绍了，判断字符串是否为空，下面我说几个比较好用的功能。</p>
+<h5>1. <code>hasBlank</code>、<code>hasEmpty</code>方法</h5>
+<p>就是给定一些字符串，如果一旦有空的就返回true，常用于判断好多字段是否有空的（例如web表单数据）。</p>
+<p><strong>这两个方法的区别是<code>hasEmpty</code>只判断是否为null或者空字符串（""），<code>hasBlank</code>则会把不可见字符也算做空，<code>isEmpty</code>和<code>isBlank</code>同理。</strong></p>
+<h5>2. <code>removePrefix</code>、<code>removeSuffix</code>方法</h5>
+<p>这两个是去掉字符串的前缀后缀的，例如去个文件名的扩展名啥。<br> </p>
+<pre><code><br>String fileName = StrUtil.removeSuffix("pretty_girl.jpg", ".jpg")  //fileName -&gt; pretty_girl
+</code></pre>
+<br>还有忽略大小写的
+<code>removePrefixIgnoreCase</code>和
+<code>removeSuffixIgnoreCase</code>都比较实用。
+<p></p>
+<h5>3. <code>sub</code>方法</h5>
+<p>不得不提一下这个方法，有人说String有了subString你还写它干啥，我想说subString方法越界啥的都会报异常，你还得自己判断，难受死了，我把各种情况判断都加进来了，而且index的位置还支付负数哦，-1表示最后一个字符（这个思想来自于<a href="https://www.python.org/" rel="nofollow">Python</a>，如果学过<a href="https://www.python.org/" rel="nofollow">Python</a>的应该会很喜欢的），还有就是如果不小心把第一个位置和第二个位置搞反了，也会自动修正（例如想截取第4个和第2个字符之间的部分也是可以的哦~）<br>举个栗子<br> </p>
+<pre><code><br>String str = "abcdefgh";
+String strSub1 = StrUtil.sub(str, 2, 3); //strSub1 -&gt; c
+String strSub2 = StrUtil.sub(str, 2, -3); //strSub2 -&gt; cde
+String strSub3 = StrUtil.sub(str, 3, 2); //strSub2 -&gt; c
+</code></pre>
+<p></p>
+<h5>4. <code>encode</code>、<code>decode</code>方法</h5>
+<p>好吧，我承认把<code>String.getByte(String charsetName)</code>方法封装在这里了，原生的<code>String.getByte()</code>这个方法太坑了，使用系统编码，经常会有人跳进来导致乱码问题，所以我就加了这两个方法强制指定字符集了，包了个try抛出一个运行时异常，省的我得在我业务代码里处理那个恶心的<code>UnsupportedEncodingException</code>。</p>
+<h5>5. format方法</h5>
+<p>我会告诉你这是我最引以为豪的方法吗？灵感来自slf4j，可以使用字符串模板代替字符串拼接，我也自己实现了一个，而且变量的标识符都一样，神马叫无缝兼容~~来，上栗子（吃多了上火吧……）<br> </p>
+<pre><code><br>String template = "{}爱{}，就像老鼠爱大米";
+String str = StrUtil.format(template, "我", "你"); //str -&gt; 我爱你，就像老鼠爱大米
+</code></pre>`
+<br>参数我定义成了Object类型，如果传别的类型的也可以，会自动调用toString()方法的。
+<p></p>
+<h5>6. 定义的一些常量</h5>
+<p>为了方便，我定义了一些比较常见的字符串常量在里面，像点、空串、换行符等等，还有HTML中的一些转移字符。</p>
+<p>OK，就到这里，剩下的一些方法自己去源码里看吧，我注释自认为写的比文档好多了，希望多多采纳。</p>
+			</div>
+
+																					<h4 id="text_172486" class="sin_target">线程工具-ThreadUtil</h4>
+<div class="sin_text">
+    </div>
+
+																					<h4 id="text_172487" class="sin_target">URL工具-URLUtil</h4>
+<div class="sin_text">
+    </div>
+
+																					<h4 id="text_172488" class="sin_target">XML工具-XmlUtil</h4>
+<div class="sin_text">
+    </div>
+
+																					<h4 id="text_172489" class="sin_target">压缩工具-ZipUtil</h4>
+<div class="sin_text">
+    </div>
+
+																						<h3 id="category_41914">语言特性</h3>
+																						<h4 id="text_173090" class="sin_target">单例工具——Singleton</h4>
+<div class="sin_text">
+    					<h2>为什么会有这个类</h2>
+<p>平常我们使用单例不外乎两种方式：</p> 
+<ol> 
+ <li>在对象里加个静态方法getInstance()来获取。此方式可以参考 <a href="http://my.oschina.net/looly/blog/152865" rel="nofollow">【转】线程安全的单例模式</a> 这篇博客，可分为饿汉和饱汉模式。</li> 
+ <li>通过Spring这类容器统一管理对象，用的时候去对象池中拿。Spring也可以通过配置决定懒汉或者饿汉模式</li> 
+</ol>
+<p>说实话我更倾向于第二种，但是Spring更对的的注入，而不是拿，于是我想做Singleton这个类，维护一个单例的池，用这个单例对象的时候直接来拿就可以，这里我用的懒汉模式。我只是想把单例的管理方式换一种思路，我希望管理单例的是一个容器工具，而不是一个大大的框架，这样能大大减少单例使用的复杂性。</p>
+<h2>使用</h2> 
+<pre><code>package com.xiaoleilu.hutool.demo;
+
+import com.xiaoleilu.hutool.Singleton;
+
+/**
+ * 单例样例
+ * @author loolly
+ *
+ */
+public class SingletonDemo {
+	
+	/**
+	 * 动物接口
+	 * @author loolly
+	 *
+	 */
+	public static interface Animal{
+		public void say();
+	}
+	
+	/**
+	 * 狗实现
+	 * @author loolly
+	 *
+	 */
+	public static class Dog implements Animal{
+		@Override
+		public void say() {
+			System.out.println("汪汪");
+		}
+	}
+	
+	/**
+	 * 猫实现
+	 * @author loolly
+	 *
+	 */
+	public static class Cat implements Animal{
+		@Override
+		public void say() {
+			System.out.println("喵喵");
+		}
+	}
+	
+	public static void main(String[] args) {
+		Animal dog = Singleton.get(Dog.class);
+		Animal cat = Singleton.get(Cat.class);
+		
+		//单例对象每次取出为同一个对象，除非调用Singleton.destroy()或者remove方法
+		System.out.println(dog == Singleton.get(Dog.class));		//True
+		System.out.println(cat == Singleton.get(Cat.class));			//True
+		
+		dog.say();		//汪汪
+		cat.say();		//喵喵
+	}
+}
+</code></pre>
+<h2>总结</h2>
+<p>大家如果有兴趣可以看下这个类，实现非常简单，一个HashMap用于做为单例对象池，通过newInstance()实例化对象（不支持带参数的构造方法），无论取还是创建对象都是线程安全的（在单例对象数量非常庞大且单例对象实例化非常耗时时可能会出现瓶颈），考虑到在get的时候使双重检查锁，但是并不是线程安全的，故直接加了<code>synchronized</code>做为修饰符，欢迎在此给出建议。</p>
+			</div>
+
+																						<h4 id="text_173091" class="sin_target">有界优先队列——BoundedPriorityQueue</h4>
+<div class="sin_text">
+    					<h2>简介</h2>
+<p>举个例子。我有一个用户表，这个表根据用户名被Hash到不同的数据库实例上，我要找出这些用户中最热门的5个，怎么做？我是这么做的：</p> 
+<ol> 
+ <li>在每个数据库实例上找出最热门的5个</li> 
+ <li>将每个数据库实例上的这5条数据按照热门程度排序，最后取出前5条</li> 
+</ol>
+<p>这个过程看似简单，但是你应用服务器上的代码要写不少。首先需要Query N个列表，加入到一个新列表中，排序，再取前5。这个过程不但代码繁琐，而且牵涉到多个列表，非常浪费空间。</p>
+<p>于是，<code>BoundedPriorityQueue</code>应运而生。</p>
+<p>先看Demo：</p> 
+<pre><code>/**
+ * 有界优先队列Demo
+ * @author Looly
+ *
+ */
+public class BoundedPriorityQueueDemo {
+	
+	public static void main(String[] args) {
+		//初始化队列，设置队列的容量为5（只能容纳5个元素），元素类型为integer使用默认比较器，在队列内部将按照从小到大排序
+		BoundedPriorityQueue&lt;Integer&gt; queue = new BoundedPriorityQueue&lt;Integer&gt;(5);
+                
+                //初始化队列，使用自定义的比较器
+		queue = new BoundedPriorityQueue&lt;&gt;(5, new Comparator&lt;Integer&gt;(){
+
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				return o1.compareTo(o2);
+			}
+		});
+		
+		//定义了6个元素，当元素加入到队列中，会按照从小到大排序，当加入第6个元素的时候，队列末尾（最大的元素）将会被抛弃
+		int[] array = new int[]{5,7,9,2,3,8};
+		for (int i : array) {
+			queue.offer(i);
+		}
+		
+                //队列可以转换为List哦~~
+		ArrayList&lt;Integer&gt; list = queue.toList();
+
+		System.out.println(queue);
+	}
+}
+</code></pre>
+<p>原理非常简单。设定好队列的容量，然后把所有的数据add或者offer进去（两个方法相同），就会得到前5条数据了。</p>
+			</div>
+
+																						<h4 id="text_173092" class="sin_target">字段验证器——Validator</h4>
+<div class="sin_text">
+    					<h2>作用</h2>
+<p>验证给定字符串是否满足指定条件，一般用在表单字段验证里。</p>
+<p>此类中全部为静态方法。</p>
+<h2>使用</h2>
+<p>直接调用<code>Validator.isXXX(String value)</code>既可验证字段，返回是否通过验证。</p>
+<p>例如：</p> 
+<pre><code>boolean isEmail = Validator.isEmail("loolly@gmail.com")
+</code></pre>
+<p>表示验证给定字符串是否复合电子邮件格式。</p>
+<p>其他验证信息请参阅<code>Validator</code>类</p>
+<p>如果Validator里的方法无法满足自己的需求，那还可以调用</p> 
+<pre><code>Validator.isByRegex("需要验证字段的正则表达式", "被验证内容")
+</code></pre>
+<p>来通过正则表达式灵活的验证内容。</p>
+			</div>
+
+																																				<h2 id="category_39465">配置文件</h2>
+																								<h3 id="text_172490" class="sin_target">配置文件模块概述</h3>
+<div class="sin_text">
+    					<h2>由来</h2>
+<h3>Setting</h3>
+<p>众所周知，Java中广泛应用的配置文件Properties存在一个特别大的诟病：不支持中文。每次使用时，如果想存放中文字符，必须借助IDE相关插件才能转为Unicode符号，而这种反人类的符号在命令行下根本没法看（想想部署在服务器上后修改配置文件是一件多么痛苦的事情）</p>
+<p>于是，在很多框架中开始渐渐抛弃Properties文件而转向XML配置文件（例如Hibernate和Spring早期版本）。但是XML罗嗦的配置方式实在无法忍受。于是，Setting诞生。</p>
+<h3>Props</h3>
+<p>Properties的第二个问题是读取非常不方便，需要我们自己写长长的代码进行load操作：</p> 
+<pre><code>properties = new Properties();
+try {
+	Class clazz = Demo1.class;
+	InputStream inputestream = clazz.getResourceAsStream("db.properties");
+	properties.load( inputestream);
+}catch (IOException e) {
+	//ignore
+}
+</code></pre>
+<p>而Props则大大简化为：<br> </p>
+<pre><code><br>Props props = new Props("db.properties");
+</code></pre>
+<p></p>
+<p>考虑到Properties使用依旧广泛，因此封装了Props类以应对兼容性。</p>
+			</div>
+
+																						<h3 id="text_172491" class="sin_target">设置文件-Setting</h3>
+<div class="sin_text">
+    					<h2>简介</h2>
+<p>Setting除了兼容Properties文件格式外，还提供了一些特有功能，这些功能包括：<br>- 各种编码方式支持<br>- 变量支持<br>- 分组支持</p>
+<p>首先说编码支持，在Properties中，只支<code>ISO8859-1</code>导致在Properties文件中注释和value没法使用中文，（用日本的那个插件在Eclipse里可以读写，放到服务器上读就费劲了），因此Setting中引入自定义编码，可以很好的支持各种编码的配置文件。</p>
+<p>再就是变量支持，在Setting中，支持${key}变量，可以将之前定义的键对应的值做为本条值得一部分，这个特性可以减少大量的配置文件冗余。</p>
+<p>最后是分组支持。分组的概念我第一次在Linux的rsync的/etc/rsyncd.conf配置文件中有所了解，发现特别实用，具体大家可以自行百度之。当然，在Windows的ini文件中也有分组的概念，Setting将这一概念引入，从而大大增加配置文件的可读性。</p>
+<h2>配置文件格式example.setting</h2> 
+<pre><code># -------------------------------------------------------------
+# ----- Setting File with UTF8-----
+# ----- 数据库配置文件 -----
+# -------------------------------------------------------------
+
+#中括表示一个分组，其下面的所有属性归属于这个分组，在此分组名为demo，也可以没有分组
+[demo]
+#自定义数据源设置文件，这个文件会针对当前分组生效，用于给当前分组配置单独的数据库连接池参数，没有则使用全局的配置
+ds.setting.path = config/other.setting
+#数据库驱动名，如果不指定，则会根据url自动判定
+driver = com.mysql.jdbc.Driver
+#JDBC url，必须
+url = jdbc:mysql://fedora.vmware:3306/extractor
+#用户名，必须
+user = root${demo.driver}
+#密码，必须，如果密码为空，请填写 pass = 
+pass = 123456
+</code></pre>
+<p>配置文件可以放在任意位置，具体Setting类如何寻在在构造方法中提供了多种读取方式，具体稍后介绍。现在说下配置文件的具体格式<br>Setting配置文件类似于Properties文件，规则如下：</p> 
+<ol> 
+ <li>注释用<code>#</code>开头表示，只支持单行注释，空行和无法正常被识别的键值对也会被忽略，可作为注释，但是建议显式指定注释。</li> 
+ <li>键值对使用key = value 表示，key和value在读取时会trim掉空格，所以不用担心空格。</li> 
+ <li>分组为中括号括起来的内容（例如配置文件中的<code>[demo]</code>），中括号以下的行都为此分组的内容，无分组相当于空字符分组，即<code>[]</code>。若某个<code>key</code>是<code>name</code>，分组是<code>group</code>，加上分组后的key相当于group.name。</li> 
+ <li>支持变量，默认变量命名为 ${变量名}，变量只能识别读入行的变量，例如第6行的变量在第三行无法读取，例如配置文件中的${driver}会被替换为com.mysql.jdbc.Driver，为了性能，Setting创建的时候构造方法会指定是否开启变量替换，默认不开启。</li> 
+</ol>
+<h2>代码</h2>
+<p>代码具体请见<code>com.xiaoleilu.hutool.demo.SettingDemo</code></p> 
+<pre><code>package com.xiaoleilu.hutool.demo;
+
+import java.io.IOException;
+
+import com.xiaoleilu.hutool.CharsetUtil;
+import com.xiaoleilu.hutool.FileUtil;
+import com.xiaoleilu.hutool.Setting;
+
+/**
+ * Setting演示样例类
+ * @author Looly
+ *
+ */
+public class SettingDemo {
+	public static void main(String[] args) throws IOException {
+		//--------------------------------------------- 初始化
+		//读取classpath下的XXX.setting，不使用变量
+		Setting setting = new Setting("XXX.setting");
+		
+		//读取classpath下的config目录下的XXX.setting，不使用变量
+		setting = new Setting("config/XXX.setting");
+		
+		//读取绝对路径文件/home/looly/XXX.setting（没有就创建，关于touch请查阅FileUtil）
+		//第二个参数为自定义的编码，请保持与Setting文件的编码一致
+		//第三个参数为是否使用变量，如果为true，则配置文件中的每个key都可以被之后的条目中的value引用形式为 ${key}
+		setting = new Setting(FileUtil.touch("/home/looly/XXX.setting"), CharsetUtil.UTF_8, true);
+		
+		//读取与SettingDemo.class文件同包下的XXX.setting
+		setting = new Setting("XXX.setting", SettingDemo.class, CharsetUtil.UTF_8, true);
+		
+		//--------------------------------------------- 使用
+		//获取key为name的值
+		setting.getString("name");
+		//获取分组为group下key为name的值
+		setting.getString("name", "group1");
+		//当获取的值为空（null或者空白字符时，包括多个空格），返回默认值
+		setting.getStringWithDefault("name", "默认值");
+		//完整的带有key、分组和默认值的获得值得方法
+		setting.getStringWithDefault("name", "group1", "默认值");
+		
+		//如果想获得其它类型的值，可以调用相应的getXXX方法，参数相似
+		
+		//有时候需要在key对应value不存在的时候（没有这项设置的时候）告知用户，故有此方法打印一个debug日志
+		setting.getWithLog("name");
+		setting.getWithLog("name", "group1");
+		
+		//重新读取配置文件，可以启用一个定时器调用此方法来定时更新配置
+		setting.reload();
+		
+		//当通过代码加入新的键值对的时候，调用store会保存到文件，但是会覆盖原来的文件，并丢失注释
+		setting.setSetting("name1", "value");
+		setting.store("/home/looly/XXX.setting");
+
+		//获得所有分组名
+		setting.getGroups();
+		
+		//将key-value映射为对象，原理是原理是调用对象对应的setXX方法
+		//setting.toObject();
+		
+		//设定变量名的正则表达式。
+		//Setting的变量替换是通过正则查找替换的，如果Setting中的变量名和其他冲突，可以改变变量的定义方式
+		//整个正则匹配变量名，分组1匹配key的名字
+		setting.setVarRegex("\\$\\{(.*?)\\}");
+	}
+}
+</code></pre>
+			</div>
+
+																						<h3 id="text_172492" class="sin_target">Properties扩展-Props</h3>
+<div class="sin_text">
+    					<h2>介绍</h2>
+<p>对于Properties的广泛使用使我也无能为力，有时候遇到Properties文件又想方便的读写也不容易，于是对Properties做了简单的封装，提供了方便的构造方法（与Setting一致），并提供了与Setting一致的getXXX方法来扩展Properties类，<code>Props</code>类继承自Properties，所以可以兼容Properties类。</p>
+<h2>使用</h2>
+<p>Props的使用方法和Properties以及Setting一致（同时支持）：<br> </p>
+<pre><code><br>Props props = new Props("test.properties");
+String user = props.getProperty("user");
+String driver = props.getStr("driver");
+</code></pre>
+<p></p>
+			</div>
+
+																														<h2 id="category_39463">脚本</h2>
+																							<h3 id="text_172493" class="sin_target">概述</h3>
+<div class="sin_text">
+    </div>
+
+																					<h3 id="text_172495" class="sin_target">JavaScript引擎</h3>
+<div class="sin_text">
+    </div>
+
+																														<h2 id="category_39462">日志</h2>
+																								<h3 id="text_172496" class="sin_target">概述</h3>
+<div class="sin_text">
+    					<p>很多时候我们为了在类中加日志不得不写一行，而且还要去手动改XXX这个类名</p> 
+<pre><code>private static Logger log = LoggerFactory.getLogger(XXX.class);
+</code></pre>
+<p>第二个问题，我特别喜欢这种形式： </p> 
+<pre><code>log.info("我在XXX 改了 {} 变量", "name");
+既省去了可恶的isInfoEnabled()的判断，还避免了拼接字符串，但是呀
+log.error("错误消息", e);
+</code></pre>
+<p>这样就不支持了，烦躁……</p>
+<p>写多了就觉得这种厌烦的工作实在让人无法忍受，于是就封装了下。</p>
+<p>Demo：</p> 
+<pre><code>import com.xiaoleilu.hutool.log.Log;
+import com.xiaoleilu.hutool.log.LogFactory;
+import com.xiaoleilu.hutool.log.dialect.ApacheCommonsLogFactory;
+import com.xiaoleilu.hutool.log.dialect.ConsoleLogFactory;
+import com.xiaoleilu.hutool.log.dialect.JdkLogFactory;
+import com.xiaoleilu.hutool.log.level.Level;
+
+public class LogDemo {
+	public static void main(String[] args) {
+		Log log = LogFactory.get();
+		
+		System.out.println("----------------------------自动选择日志------------------------------");
+		// 自动选择日志实现
+		log.debug("This is {} log", Level.DEBUG);
+		log.info("This is {} log", Level.INFO);
+		log.warn("This is {} log", Level.WARN);
+		log.error("This is {} log", Level.ERROR);
+
+		System.out.println("----------------------------自定义为Common Log日志------------------------------");
+		// 自定义日志实现
+		LogFactory.setCurrentLogFactory(new ApacheCommonsLogFactory());
+		log = LogFactory.get();
+		log.debug("This is {} log", Level.DEBUG);
+		log.info("This is {} log", Level.INFO);
+		log.warn("This is {} log", Level.WARN);
+		log.error("This is {} log", Level.ERROR);
+		
+		System.out.println("----------------------------自定义为JDK Log日志------------------------------");
+		// 自定义日志实现
+		LogFactory.setCurrentLogFactory(new JdkLogFactory());
+		log = LogFactory.get();
+		log.debug("This is {} log", Level.DEBUG);
+		log.info("This is {} log", Level.INFO);
+		log.warn("This is {} log", Level.WARN);
+		log.error("This is {} log", Level.ERROR);
+
+		System.out.println("----------------------------自定义为Console Log日志------------------------------");
+		// 自定义日志实现
+		LogFactory.setCurrentLogFactory(new ConsoleLogFactory());
+		log = LogFactory.get();
+		log.debug("This is {} log", Level.DEBUG);
+		log.info("This is {} log", Level.INFO);
+		log.warn("This is {} log", Level.WARN);
+		log.error("This is {} log", Level.ERROR);
+	}
+}
+</code></pre>
+<p>总结下来如果日志比较少，可以直接使用静态方法StaticLog.xxx，如果日志量很大，那么首先要构建好Logger，使用：</p> 
+<pre><code>private static final Log log = LogFactotry.get();
+
+log.debug("This is {} log", Level.DEBUG);
+log.info("This is {} log", Level.INFO);
+log.warn("This is {} log", Level.WARN);
+log.error("This is {} log", Level.ERROR);
+</code></pre>
+<p>比之前简短了很多，而且随便复制。<br>调用<code>log.xxx(log, "消息");</code></p>
+<p>对于不能使用format的情况，我把Throwable放在前面了，这样就可以使用动态参数了 <code>Object... argument</code>。</p>
+			</div>
+
+																					<h3 id="text_172497" class="sin_target">通用日志门面</h3>
+<div class="sin_text">
+    </div>
+
+																														<h2 id="category_39454">缓存</h2>
+																							<h3 id="text_172498" class="sin_target">概述</h3>
+<div class="sin_text">
+    </div>
+
+																														<h2 id="category_39452">aop</h2>
+																								<h3 id="text_172516" class="sin_target">概述</h3>
+<div class="sin_text">
+    					<h2>Hutool-aop概述</h2>
+<p>AOP模块主要针对JDK中动态代理进行封装，抽象动态代理为切面类<code>Aspect</code>，通过<code>ProxyUtil</code>代理工具类将切面对象与被代理对象融合，产生一个代理对象，从而可以针对每个方法执行前后做通用的功能。</p>
+<p>在aop模块中，默认实现可以下两个切面对象：<br>1. SimpleAspect 简单切面对象，不做任何操作，继承此对象可重写需要的方法即可，不必实现所有方法<br>2. TimeIntervalAspect 执行时间切面对象，用于简单计算方法执行时间，然后通过日志打印方法执行时间</p> 
+<blockquote>
+ <p>由于AOP模块封装JDK的代理，故被代理对象必须实现接口。</p> 
+</blockquote>
+<h2>使用</h2> 
+<ol> 
+ <li>我们定义一个接接口：</li> 
+</ol> 
+<pre><code>public interface Animal{
+	void eat();
+}
+</code></pre> 
+<ol> 
+ <li>定义一个实现类：</li> 
+</ol> 
+<pre><code>public class Cat implements Animal{
+
+	@Override
+	public void eat() {
+		Console.log("猫吃鱼");
+	}
+	
+}
+</code></pre> 
+<ol> 
+ <li>我们使用<code>TimeIntervalAspect</code>这个切面代理上述对象，来统计猫吃鱼的执行时间：</li> 
+</ol> 
+<pre><code>Animal cat = ProxyUtil.proxy(new Cat(), TimeIntervalAspect.class);
+cat.eat();
+</code></pre>
+<p>执行结果为：<br> </p>
+<pre><code><br>猫吃鱼
+Method [com.xiaoleilu.hutool.aop.test.AopTest$Cat.eat] execute spend [54]ms
+</code></pre>
+<p></p>
+<p>这样我们就是实现了切面代理。</p> 
+<blockquote>
+ <p>在调用proxy方法后，IDE自动补全返回对象为Cat，因为JDK机制的原因，我们的返回值必须是被代理类实现的接口，因此需要手动将返回值改为**Animal**，否则会报类型转换失败。</p> 
+</blockquote>
+<h2>其它方法</h2>
+<p>ProxyUtil中还提供了一些便捷的Proxy方法封装，例如newProxyInstance封装了Proxy.newProxyInstance方法，提供泛型返回值，并提供更多参数类型支持。</p>
+<h2>原理</h2>
+<p>动态代理对象的创建原理是：<br>假设创建的代理对象名为 $Proxy0<br>1. 根据传入的interfaces动态生成一个类，实现interfaces中的接口<br>2. 通过传入的classloder将刚生成的类加载到jvm中。即将$Proxy0类load<br>3. 调用$Proxy0的$Proxy0(InvocationHandler)构造函数 创建$Proxy0的对象，并且用interfaces参数遍历其所有接口的方法，并生成实现方法，这些实现方法的实现本质上是通过反射调用被代理对象的方法。<br>4. 将$Proxy0的实例返回给客户端。<br>5. 当调用代理类的相应方法时，相当于调用 InvocationHandler.invoke(Object, Method, Object []) 方法。</p>
+			</div>
+
+																														<h2 id="category_39456">加密解密</h2>
+																								<h3 id="text_172518" class="sin_target">概述</h3>
+<div class="sin_text">
+    					<h2>Hutool-crypto概述</h2>
+<p>加密分为三种：<br>1. 对称加密（symmetric），例如：AES、DES等<br>2. 非对称加密（asymmetric），例如：RSA、DSA等<br>3. 摘要加密（digest），例如：MD5、SHA-1、SHA-256、HMAC等</p>
+<p>hutool-crypto针对这三种加密类型分别封装，并提供常用的大部分加密算法。</p>
+<p>对于非对称加密，实现了：<br>- RSA<br>- DSA</p>
+<p>对于对称加密，实现了：<br>- AES<br>- ARCFOUR<br>- Blowfish<br>- DES<br>- DESede<br>- RC2<br>- PBEWithMD5AndDES<br>- PBEWithSHA1AndDESede<br>- PBEWithSHA1AndRC2_40</p>
+<p>对于摘要算法实现了：<br>- MD2<br>- MD5<br>- SHA-1<br>- SHA-256<br>- SHA-384<br>- SHA-512<br>- HmacMD5<br>- HmacSHA1<br>- HmacSHA256<br>- HmacSHA384<br>- HmacSHA512</p>
+<p>其中，针对常用到的算法，模块还提供<code>SecureUtil</code>工具类用于快速实现加密。</p>
+<p>关于各种加密方式的使用，请参阅后续章节。</p>
+			</div>
+
+																					<h3 id="text_172520" class="sin_target">对称加密</h3>
+<div class="sin_text">
+    </div>
+
+																					<h3 id="text_172521" class="sin_target">非对称加密</h3>
+<div class="sin_text">
+    </div>
+
+																					<h3 id="text_172522" class="sin_target">摘要加密</h3>
+<div class="sin_text">
+    </div>
+
+																														<h2 id="category_39453">布隆过滤</h2>
+																											<h2 id="category_39457">DFA查找</h2>
+																											<h2 id="category_39458">数据库</h2>
+																								<h3 id="text_173087" class="sin_target">概述</h3>
+<div class="sin_text">
+    					<h3>开篇</h3>
+<p>Hutool-db最早只是一个简单的SQL运行器，现在加入了方言支持，封装了增删改查，引入Session从而支持事务，可以说工程量巨大，在封装过程总我还是参考了<a href="http://jodd.org/" rel="nofollow">Jodd</a>的DbOom、<a href="http://www.jfinal.com/" rel="nofollow">Jfinal</a>的ActiveRecord、<a href="http://commons.apache.org/proper/commons-dbutils/" rel="nofollow">Apache Commons-DbUtils</a>，吸取优点，剔除我觉得没用的，再加入些自己的想法，尽量做到简单和灵活。</p>
+<h3>由来</h3>
+<p>考虑到<a href="http://hibernate.org/orm/" rel="nofollow">Hibernate</a>做ORM的复杂性，它想把一个对象映射到数据库，再加上各种外键的复杂对应关系，当时学习的时候整的我焦头烂额，而且其数据库连接配置全部放在xml里，需要连接池插件去为它开发对应的插件，显然这样做太霸道了，总之这种灵活性的缺失，导致在使用<a href="http://hibernate.org/orm/" rel="nofollow">Hibernate</a>的时候必须按照它指定的思路和方式走，痛苦万分啊，例如你执行一条SQL语句，查询的结果是个让人百思不得其解的列表，难用的要死。后来我便倾向于<a href="http://commons.apache.org/proper/commons-dbutils/" rel="nofollow">Apache Commons-DbUtils</a>，谁让业务简单呢，没几张表，简简的看了其源码，做了些简单的改进放到我的<a href="https://github.com/looly/hutool" rel="nofollow">Hutool</a>里来了，然后就看了<a href="http://www.jfinal.com/" rel="nofollow">Jfinal</a>的ActiveRecord，那段时间正在看Python的一个框架<a href="https://www.djangoproject.com/" rel="nofollow">Django</a>，发现其异曲同工之妙的ORM方式：将数据库表映射为一个Map，而不是一个对象。这样的灵活性大大的增加，字段也更加灵活。于是按照这个思想开始动工，封装增删改查的常用方法。</p>
+<h3>对象解释</h3>
+<h4>1. Entity</h4>
+<p>在ORM中，我把一张表中的一条数据映射成为一个叫做Entity的类，继承自HashMap，key是字段名，value是Object类型，字段值，这样一个Entity对象就是数据库表中的一条记录，当然这个对象中还有个字段是表的名字，方便之后的操作。之后对数据库增删改查操作的对象大多是这个。</p>
+<p>这个对象充当着两种角色，一个是数据的载体，表示一条数据，另一个就是where语句的条件，当然，Entity对象只支持 <code>=</code> 操作，更复杂的操作我以后再想别的办法。充当where条件时，key依旧是字段名，value是字段条件值。例如：<br> </p>
+<pre><code><br>Entity where = Entity.create(TABLE_NAME).set("条件1", "条件值");
+</code></pre>
+<p></p>
+<p>表示的where语句是：<br> </p>
+<pre><code><br>WHERE `条件1` = 条件值
+</code></pre>
+<p></p>
+<p>当然到时候会用PreparedStatement，不会出现SQL注入。</p>
+<h4>2. Table Column</h4>
+<p>这两个对象主要是描述数据库表结构的，暂时和ORM本身没啥关系，只是当你想获得一些字段信息的时候，这样来获得表结构信息：</p> 
+<pre><code>private static void getTableMetaInfo(DataSource ds) {
+	// 获得当前库的所有表的表名
+	List&lt;String&gt; tableNames = DbUtil.getTables(ds);
+	Log.info("{}", tableNames);
+
+	/*
+	 * 获得表结构 表结构封装为一个表对象，里面有Column对象表示一列，列中有列名、类型、大小、是否允许为空等信息
+	 */
+	Table table = DbUtil.getTableMeta(ds, TABLE_NAME);
+	Log.info("{}", table);
+}
+</code></pre>
+<h3>整体的架构</h3>
+<p>整体分为几部分</p> 
+<ol> 
+ <li>数据源 <code>DataSource</code></li> 
+ <li>SQL执行器 <code>SqlExecutor</code></li> 
+ <li>CRUD的封装 <code>SqlConnRunner</code> <code>SqlRunner</code></li> 
+ <li>支持事务的CRUD封装 <code>Session</code></li> 
+ <li>各种结果集处理类 <code>handler</code></li> 
+ <li>数据库的一些工具方法汇总 <code>DbUtil</code></li> 
+</ol>
+<p>还有就是没有列出来的dialect（数据库方言），我会根据给定的DataSource、Connection等对象自动识别是什么数据库，然后使用不同的方言构造SQL语句，暂时支持的数据库有MySQL、Oracle、SqlLite3，当然如果识别失败会用ANSI SQL，这样遇到不支持的数据，可以搞定大部分方法。</p>
+<p>下面解释下：</p>
+<h4>1. 数据源</h4>
+<p>无论是JDNI还是数据库连接池，最终给用户的都是一个DataSource，那么，我执行SQL的连接直接从数据源里拿就可以，至于数据源是JNDI还是哪种连接池我是不管的，这样大大提高了灵活性。在ds包中，我还自己封装了<code>SimpleDataSource</code>对象，这是不用数据库连接池的数据源，连接直接问<code>DriverManager</code>中拿，完全是JDBC原生的数据库连接获取操作，当然这个类由于没有连接池，仅供测试或打开关闭连接非常少的场合使用。当然，我还提供了一个<code>DruidDS</code>把数据库配置以及连接池配置放在配置文件里，更加方便。</p> 
+<pre><code>/**
+ * @return 获得数据源样例方法
+ */
+private static DataSource getDataSource() {
+	/*
+	 * 获得数据源，可以使用Druid、DBCP或者C3P0数据源
+	 * 我封装了Druid的数据源，在classpath下放置db.setting和druid.setting文件 
+	 * 详细格式请参考doc/db-example.setting和doc/db/example.setting 
+	 * 如果没有druid.setting文件，使用连接池默认的参数 可以配置多个数据源，用分组隔离
+	 */
+	DataSource ds = DruidDS.getDataSource("test");
+
+	//当然，如果你不喜欢用DruidDS类，你也可以自己去实例化连接池的数据源 具体的配置参数请参阅Druid官方文档
+	DruidDataSource ds2 = new DruidDataSource();
+	ds2.setUrl("jdbc:mysql://fedora.vmware:3306/extractor");
+	ds2.setUsername("root");
+	ds2.setPassword("123456");
+	ds = ds2;
+
+	return ds;
+}
+</code></pre>
+<h4>2. SQL执行器 <code>SqlExecutor</code></h4>
+<p>这是一个静态类，里面的静态方法只有两种：执行非查询的SQL语句和查询的SQL语句</p> 
+<pre><code>/**
+ * SqlExecutor样例方法&lt;br&gt;
+ * 如果你只是执行SQL语句，使用SqlExecutor类里的静态方法即可
+ * 
+ * @param ds 数据源
+ */
+public static void sqlExecutorDemo(DataSource ds) {
+	Connection conn = null;
+	try {
+		conn = ds.getConnection();
+		// 执行非查询语句，返回影响的行数
+		int count = SqlExecutor.execute(conn, "UPDATE " + TABLE_NAME + " set field1 = ? where id = ?", 0, 0);
+		log.info("影响行数：{}", count);
+		// 执行非查询语句，返回自增的键，如果有多个自增键，只返回第一个
+		Long generatedKey = SqlExecutor.executeForGeneratedKey(conn, "UPDATE " + TABLE_NAME + " set field1 = ? where id = ?", 0, 0);
+		log.info("主键：{}", generatedKey);
+
+		/* 执行查询语句，返回实体列表，一个Entity对象表示一行的数据，Entity对象是一个继承自HashMap的对象，存储的key为字段名，value为字段值 */
+		List&lt;Entity&gt; entityList = SqlExecutor.query(conn, "select * from " + TABLE_NAME + " where param1 = ?", new EntityHandler(), "值");
+		log.info("{}", entityList);
+	} catch (SQLException e) {
+		Log.error(log, e, "SQL error!");
+	} finally {
+		DbUtil.close(conn);
+	}
+}
+</code></pre>
+<h4>3. CRUD的封装 <code>SqlConnRunner</code> <code>SqlRunner</code></h4>
+<p>这两个类有些相似，里面都封装了增、删、改、查、分页、个数方法，差别是<code>SqlConnRunner</code>需要每个方法都传Connection对象，而<code>SqlRunner</code>继承自<code>SqlConnRunner</code>，在传入DataSource会自动获取Connection对象。Demo如下：</p> 
+<pre><code>/**
+ * SqlRunner是继承自SqlConnRunner的（SqlConnRunner继承自SqlExecutor），所以相应的方法也继承了下来，可以像SqlExecutor一样使用静态方法&lt;br&gt;
+ * 当然，SqlRunner更强大的功能在于对Entity对象做CRUD，避免写SQL语句。 SqlRunner需要实例化
+ * 
+ * SqlRunner同时提供了带Connection参数的CRUD方法，方便外部提供Connection对象而由使用者提供事务的操作
+ * 
+ * @param ds 数据源
+ */
+private static void sqlRunnerDemo(DataSource ds) {
+	Entity entity = Entity.create(TABLE_NAME).set("字段1", "值").set("字段2", 2);
+	Entity where = Entity.create(TABLE_NAME).set("条件1", "条件值");
+
+	try {
+		SqlRunner runner = SqlRunner.create(ds);
+		// 指定数据库方言，在此为MySQL
+		runner = SqlRunner.create(ds);
+
+		// 增，生成SQL为 INSERT INTO `table_name` SET(`字段1`, `字段2`) VALUES(?,?)
+		runner.insert(entity);
+
+		// 删，生成SQL为 DELETE FROM `table_name` WHERE `条件1` = ?
+		runner.del(where);
+
+		// 改，生成SQL为 UPDATE `table_name` SET `字段1` = ?, `字段2` = ? WHERE `条件1` = ?
+		runner.update(entity, where);
+
+		// 查，生成SQL为 SELECT * FROM `table_name` WHERE WHERE `条件1` = ? 第一个参数为返回的字段列表，如果null则返回所有字段
+		List&lt;Entity&gt; entityList = runner.find(null, where, new EntityHandler());
+		log.info("{}", entityList);
+
+		// 分页，注意，ANSI SQL中不支持分页！
+		List&lt;Entity&gt; pagedEntityList = runner.page(null, where, 0, 20, new EntityHandler());
+		log.info("{}", pagedEntityList);
+
+		// 满足条件的结果数，生成SQL为 SELECT count(1) FROM `table_name` WHERE WHERE `条件1` = ?
+		int count = runner.count(where);
+		log.info("count: {}", count);
+	} catch (SQLException e) {
+		Log.error(log, e, "SQL error!");
+	} finally {
+	}
+}
+</code></pre>
+<h4>4. 支持事务的CRUD封装 <code>Session</code></h4>
+<p><code>Session</code>非常类似于<code>SqlRunner</code>，差别是<code>Session</code>对象中只有一个Connection，所有操作也是用这个Connection，便于事务操作，而<code>SqlRunner</code>每执行一个方法都要从<code>DataSource</code>中去要Connection。样例如下：</p> 
+<pre><code>public static void sessionDemo(DataSource ds) {
+	Entity entity = Entity.create(TABLE_NAME).set("字段1", "值").set("字段2", 2);
+	Entity where = Entity.create(TABLE_NAME).set("条件1", "条件值");
+
+	Session session = Session.create(ds);
+	try {
+		session.beginTransaction();
+
+		// 增，生成SQL为 INSERT INTO `table_name` SET(`字段1`, `字段2`) VALUES(?,?)
+		session.insert(entity);
+
+		// 删，生成SQL为 DELETE FROM `table_name` WHERE `条件1` = ?
+		session.del(where);
+
+		// 改，生成SQL为 UPDATE `table_name` SET `字段1` = ?, `字段2` = ? WHERE `条件1` = ?
+		session.update(entity, where);
+
+		// 查，生成SQL为 SELECT * FROM `table_name` WHERE WHERE `条件1` = ? 第一个参数为返回的字段列表，如果null则返回所有字段
+		List&lt;Entity&gt; entityList = session.find(null, where, new EntityHandler());
+		log.info("{}", entityList);
+
+		// 分页，注意，ANSI SQL中不支持分页！
+		List&lt;Entity&gt; pagedEntityList = session.page(null, where, 0, 20, new EntityHandler());
+		log.info("{}", pagedEntityList);
+
+		session.commit();
+	} catch (Exception e) {
+		session.quietRollback();
+	} finally {
+		session.close();
+	}
+}
+</code></pre>
+<h4>5. 各种结果集处理类 <code>handler</code></h4>
+<p>此包中有个叫做<code>RsHandler</code>的接口，传入ResultSet对象，返回什么则在handle方法中自己指定。<br>实现的类有：</p> 
+<ol> 
+ <li>EntityListHandler 转换为Entity列表</li> 
+ <li>NumberHandler 当使用<code>select count(1)</code>这类语句的时候，或者返回只有一个结果，且为数字结果的时候，用这个handler</li> 
+ <li>EntityHandler 返回一条记录的时候用这个</li> 
+ <li><p>数据库的一些工具方法汇总 <code>DbUtil</code><br>提供一些工具方法，最常用的就是<code>close</code>方法了，由于JDK7才把<code>ResultSet``Statement``PreparedStatement``Connection</code>这几个接口实现了Closeable接口，所以之前只能判断类型再去关闭，这样一个close方法可以关闭多个对象。</p></li> 
+</ol>
+			</div>
+
+																														<h2 id="category_39461">http客户端</h2>
+																											<h2 id="category_39460">地理位置</h2>
+																											<h2 id="category_39459">扩展</h2>
+																											<h2 id="category_40298">JSON</h2>
+																								<h3 id="text_167133" class="sin_target">概述</h3>
+<div class="sin_text">
+    					<h2>Hutool-json</h2> 
+<hr>
+<h2>为何集成</h2>
+<p>JSON在现在的开发中做为跨平台的数据交换格式已经慢慢有替代XML的趋势（比如RestFul规范），我想大家在开发中对外提供接口也越来越多的使用JSON格式。</p>
+<p>不可否认，现在优秀的JSON框架非常多，我经常使用的像阿里的FastJSON，Jackson等都是非常优秀的包，性能突出，简单易用。Hutool开始也并不想自己写一个JSON，但是在各种工具的封装中，发现JSON已经不可或缺，因此将json.org官方的JSON解析纳入其中，进行改造。在改造过程中，积极吸取其它类库优点，优化成员方法，抽象接口和类，最终形成Hutool-json。</p>
+<h2>介绍</h2>
+<p>Hutool-json的核心类只有两个：<br>- JSONObject<br>- JSONArray<br>这与其它JSON包是类似的，与此同时，还提供一个<code>JSONUtil</code>工具类用于简化针对JSON的各种操作和转换。</p>
+<p>除了核心类，还提供了一些辅助类用于实现特定功能：<br>- JSONSupport Bean类继承此对象即可无缝转换为JSON或JSON字符串。同时实现了<code>toString()</code>方法可将当前对象输出为JSON字符串。<br>- XML 提供JSON与XML之间的快速转换，同时<code>JSONUtil</code>中有相应静态封装。<br>- JSON JSONObject和JSONArray共同实现的接口类，JSONUtil.parse方法默认返回此对象（因为不知道是JSON对象还是JSON数组），然后可以根据实际类型判断后转换对象类型。</p>
+<p>与FastJSON类似，JSONObject实现了Map接口，JSONArray实现了List接口，这样我们便可以使用熟悉的API来操作JSON。</p>
+<p>在JSON中，Hutool封装了getXXX方法，支持大部分内置类型的值获取操作。比如：</p> 
+<pre><code>JSONObject json1 = JSONUtil.createObj();
+json1.getStr("key");
+json1.getInt("key");
+json1.getLong("key");
+json1.getDouble("key");
+json1.getBigDecimal("key");
+</code></pre>
+<p>这些成员方法的加入，可以省掉大量的类型转换代码，大大提高JSON的操作简便性。</p>
+			</div>
+
+																						<h3 id="text_172523" class="sin_target">JSONObject</h3>
+<div class="sin_text">
+    					<h2>介绍</h2>
+<p>JSONObject代表一个JSON中的键值对象，这个对象以大括号包围，每个键值对使用<code>,</code>隔开，键与值使用<code>:</code>隔开，一个JSONObject类似于这样：<br> </p>
+<pre><code><br>{
+  "key1":"value1",
+  "key2":"value2"
+}
+</code></pre>
+<p></p>
+<p>此处键部分可以省略双引号，值为字符串时不能省略，为数字或波尔值时不加双引号。</p>
+<h2>使用</h2>
+<h3>创建</h3> 
+<pre><code>JSONObject json1 = JSONUtil.createObj();
+json1.put("a", "value1");
+json1.put("b", "value2");
+json1.put("c", "value3");
+</code></pre>
+<p><code>JSONUtil.createObj()</code>是快捷新建JSONObject的工具方法，同样我们可以直接new：</p> 
+<pre><code>JSONObject json1 = new JSONObject();
+</code></pre>
+<h3>转换</h3> 
+<pre><code>String jsonStr = "{\"b\":\"value2\",\"c\":\"value3\",\"a\":\"value1\"}";
+//方法一：使用工具类转换
+JSONObject jsonObject = JSONUtil.parseObj(jsonStr);
+//方法二：new的方式转换
+JSONObject jsonObject2 = new JSONObject(jsonStr);
+
+//JSON对象转字符串
+jsonObject.toString();
+</code></pre>
+<p>同样，<code>JSONUtil</code>还可以支持以下对象转为JSONObject对象：<br>- String对象<br>- Java Bean对象<br>- Map对象<br>- XML字符串（使用<code>JSONUtil.parseFromXml</code>方法）<br>- ResourceBundle(使用<code>JSONUtil.parseFromResourceBundle</code>)</p>
+<p><code>JSONUtil</code>还提供了JSONObject对象转换为其它对象的方法：<br>- toJsonStr 转换为JSON字符串<br>- toXmlStr 转换为XML字符串<br>- toBean 转换为JavaBean<br>- </p>
+			</div>
+
+																						<h3 id="text_173028" class="sin_target">JSONArray</h3>
+<div class="sin_text">
+    					<h2>介绍</h2>
+<p>在JSON中，JSONArray代表一个数组，使用中括号包围，每个元素使用逗号隔开。一个JSONArray类似于这样：<br> </p>
+<pre><code><br>["value1","value2","value3"]
+</code></pre>
+<p></p>
+<h2>使用</h2>
+<h3>创建</h3> 
+<pre><code>//方法1
+JSONArray array = JSONUtil.createArray();
+//方法2
+JSONArray array = new JSONArray();
+
+array.add("value1");
+array.add("value2");
+array.add("value3");
+
+//转为JSONArray字符串
+array.toString();
+</code></pre>
+<h3>转换</h3> 
+<pre><code>String jsonStr = "[\"value1\", \"value2\", \"value3\"]";
+JSONArray array = JSONUtil.parseArray(jsonStr);
+</code></pre>
+			</div>
+
+																						<h3 id="text_173044" class="sin_target">JSONUtil</h3>
+<div class="sin_text">
+    					<h2>介绍</h2>
+<p><code>JSONUtil</code>是针对JSONObject和JSONArray的静态快捷方法集合，在之前的章节我们已经介绍了一些工具方法，在本章节我们将做一些补充。</p>
+<h2>使用</h2>
+<h3>parseXXX和toXXX</h3>
+<p>这两种方法主要是针对JSON和其它对象之间的转换。</p>
+<h3>readXXX</h3>
+<p>这类方法主要是从JSON文件中读取JSON对象的快捷方法。包括：<br>- readJSON<br>- readJSONObject<br>- readJSONArray</p>
+<h3>其它方法</h3>
+<p>除了上面中常用的一些方法，JSONUtil还提供了一些JSON辅助方法：<br>- quote 对所有双引号做转义处理（使用双反斜杠做转义）<br>- wrap 包装对象，可以将普通任意对象转为JSON对象</p>
+			</div>
+
+																														<h2 id="category_39455">定时任务</h2>
+																								<h3 id="text_173086" class="sin_target">定时任务模块概述</h3>
+<div class="sin_text">
+    					<h3>牢骚</h3>
+<p>Java中定时任务使用的最多的我想就是<a href="http://www.quartz-scheduler.org/" rel="nofollow">quartz</a>了，但是这个框架太过庞大，而且我也不需要用到这么多东西，使用方法也是比较复杂（官方Demo我实在是无语……）。用过Linux的crontab的人都知道，使用其定时的表达式可以非常灵活的定义定时任务的时间以及频率（Linux的crontab精确到分，而quaeta的精确到秒，不过对我来说精确到分已经够用了，精确到秒的可以使用Timer可以搞定），然后就是crontab的那个迷人的配置文件，可以把定时任务很清晰的罗列出来，这个我也是比较喜欢的。（记得当时Spring整合quartz的时候那XML看的我眼都花了……）。于是Hutool-cron诞生。</p>
+<h3>封装</h3>
+<p>为了隐藏这个框架里面的东西，我对其做了封装，所谓封装，就是把任务调度放在一个配置文件里，然后启动即可（与Linux的crontab非常像）。</p>
+<h4>配置文件</h4>
+<p>对于Maven项目，首先在<code>src/main/resources/config</code>下放入cron.setting文件（默认是这个路径的这个文件），然后在文件中放入定时规则，规则如下：</p> 
+<pre><code>#我是注释
+[com.company.aaa.job]
+TestJob = */10 * * * *
+TestJob2 = */10 * * * *
+</code></pre>
+<p>中括号里面表示包名，第二行等号前面是要执行的定时任务类名，等号后面是定时表达式。</p>
+<p>关于定时任务表达式，它与Linux的crontab表达式一模一样，具体请看这里：<br><a href="http://www.cnblogs.com/peida/archive/2013/01/08/2850483.html" rel="nofollow">http://www.cnblogs.com/peida/archive/2013/01/08/2850483.html</a></p>
+<p>中括号以下都是使用这个包的，直到遇到下一个包名，以上配置等同于：</p> 
+<pre><code>com.company.aaa.job.TestJob = */10 * * * *
+com.company.aaa.job.TestJob2 = */10 * * * *
+</code></pre>
+<p>TestJob是一个实现了Runnable接口的类，在start()方法里就可以加逻辑代码了。</p>
+<h4>启动</h4>
+<p>调用CronUtil.start()既可启动定时任务服务，CrontabUtil.stop()关闭服务。</p>
+<h3>其他方法</h3>
+<p>当然，如果你想动态的添加定时任务，使用CronUtil.schedule(String schedulingPattern, Runnable task)方法即可（使用此方法加入的定时任务不会被写入到配置文件）。</p>
+			</div>
+
+																														<h2 id="category_39467">系统调用</h2>
+																						
+				  		<div class="sin_info" style="margin-top: 10px;">
+	  			版权所有 @路小磊 の Hutool project hutool.cn
+	  		</div>
+	  				</div>
+		<div class="clear"></div>
+	</div>
+	<div id="bottom_begin"></div>
+	<div class="sin_footer">
+		<div>
+			Powered by <a href="http://www.oschina.net" target="_blank">开源中国</a>
+		</div>
+	</div>
+	<script>
+		//计算图片的真实大小，如果超过编辑区域，则进行限制
+		var resizePicWidth = function(pic_width){
+			var imgs = document.getElementsByTagName("img");
+            var j=0;
+			for(var i=0;i<imgs.length;i++){
+                var realWidth;	//真实的宽度
+                var realHeight;		//真实的高度
+                //这里做下说明，$("<img/>")这里是创建一个临时的img标签，类似js创建一个new Image()对象！
+				var newImg = new Image();
+				newImg.onload=function() {
+                    realWidth = imgs[j].width;
+                    realHeight = imgs[j].height;
+                    //如果真实的宽度大于规定的宽度就按照100%显示
+                    if(realWidth>=pic_width){
+						imgs[j].style.width=(pic_width) + "px";
+                    } else{//如果小于浏览器的宽度按照原尺寸显示
+						imgs[j].style.width=realWidth+'px';
+                    }
+                    j++;
+                }
+				newImg.src=imgs[j].src;
+			}
+
+		}
+		var currentNode = null;
+		window.onscroll=function(){
+            var h = document.getElementById("top_end").getBoundingClientRect().top;
+            if(h<=0){
+				document.getElementById("sin_navi_id").className='sin_navi sin_navi_nomove';
+				document.getElementById("sin_content_id").className='sin_content sin_content_mar';
+            }else{
+                document.getElementById("sin_navi_id").className='sin_navi';
+                document.getElementById("sin_content_id").className='sin_content';
+            }
+            comLayout();
+            var arr= new Array();
+            var index = 0;
+			var sinTargets = getClass("h2","sin_target");
+			for(var i=0;i<sinTargets.length;i++){
+                var th = sinTargets[i].getBoundingClientRect().top - 80;	                if(th<=0){
+                    arr[index] = new Array();
+                    arr[index][0] = sinTargets[i].getAttribute("id");
+                    arr[index][1] = th;
+                    index++;
+                }
+			}
+
+            var curr = bubbleSort(arr);
+            if(curr!=null && curr!=currentNode){
+				var oldCurrIds = getClass("li","sin_navi_current");
+                if(oldCurrIds && oldCurrIds[0]){
+                    var oid=oldCurrIds[0].getAttribute("id");
+                    document.getElementById(oid).className=" ";
+                }
+				document.getElementById("navi_"+curr).className="sin_navi_current";
+                currentNode = curr;
+            }
+        }
+		
+		
+	    window.onresize = function(){
+            comLayout();
+		}
+
+        var ch = document.getElementById("sin_navi_id").offsetHeight;
+
+	    function comLayout() {
+	        var h = document.documentElement.clientHeight;
+	    	if(ch<h){
+	    		return;
+	    	}
+		    var i = document.getElementById("bottom_begin").getBoundingClientRect().top;
+	        if(i<h){
+                document.getElementById("sin_navi_id").style.height=(i+"px");
+		   	}else{
+                document.getElementById("sin_navi_id").style.height=(h+"px");
+		   	}
+	    }
+	    
+	    function bubbleSort(arr){
+	    	var i= arr.length;
+	    	if(i<=0){
+	    		return null;
+	    	}
+	    	var j;
+			var tempExchangVal;
+			while(i>0){
+				for(j=0;j<i-1;j++){
+					if(arr[j][1] < arr[j+1][1]){
+						tempExchangVal=arr[j];
+						arr[j]=arr[j+1];
+						arr[j+1]=tempExchangVal;
+					}
+				}
+				i--;
+			}
+			return arr[0][0];
+		}
+	    comLayout();
+	    resizePicWidth(680);
+
+        function getClass(tagname, className) { //tagname指元素，className指class的值
+            //判断浏览器是否支持getElementsByClassName，如果支持就直接的用
+            if (document.getElementsByClassName) {
+                return document.getElementsByClassName(className);
+            }
+            else {    //当浏览器不支持getElementsByClassName的时候用下面的方法
+                var tagname = document.getElementsByTagName(tagname);  //获取指定元素
+                var tagnameAll = [];     //这个数组用于存储所有符合条件的元素
+                for (var i = 0; i < tagname.length; i++) {     //遍历获得的元素
+                    if (tagname[i].className == className) {     //如果获得的元素中的class的值等于指定的类名，就赋值给tagnameAll
+                        tagnameAll[tagnameAll.length] = tagname[i];
+                    }
+                }
+                return tagnameAll;
+            }
+        }
+	</script>
+</body>
+</html>	
+<!-- Generated by OsChina.NET (init:1[ms],page:283[ms],ip:183.32.180.28) -->

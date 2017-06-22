@@ -1,0 +1,166 @@
+<html lang="en" class="bg-dark js no-touch no-android chrome no-firefox no-iemobile no-ie no-ie10 no-ie11 no-ios no-ios7 ipad"">
+<head>
+<meta property="wb:webmaster" content="5384339811cd5abe" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Google Chrome Frame也可以让IE用上Chrome的引擎: -->
+<meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<link href="/favicon.ico" type="image/x-icon" rel=icon>
+<link href="/favicon.ico" type="image/x-icon" rel="shortcut icon">
+<title>登录－云报告</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/notebook/notebook_files/font.css" />
+<link rel="stylesheet" href="/notebook/notebook_files/app.v1.css" />
+<link rel="stylesheet" href="/admin_files/awesome.css" />
+<script type="text/javascript" src="/js/jquery/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="/js/layer-v1.9.2/layer/layer.js"></script>
+<script type="text/javascript" src="/common/base.js"></script>
+<script type="text/javascript">
+    layer.config({
+        extend : [
+            'skin/moon/style.css'], //加载新皮肤skin/style.css
+        fix : false, // 用于设定层是否不随滚动条而滚动，固定在可视区域。
+        skin : 'layer-ext-moon' //一旦设定，所有弹层风格都采用此主题。layui-layer-molv
+    });
+    function getCookie(cookie_name) {
+        var allcookies = document.cookie;
+        var cookie_pos = allcookies.indexOf(cookie_name); //索引的长度
+        // 如果找到了索引，就代表cookie存在，
+        // 反之，就说明不存在。
+        if (cookie_pos != -1) {
+            // 把cookie_pos放在值的开始，只要给值加1即可。
+            cookie_pos += cookie_name.length + 1; //这里容易出问题，所以请大家参考的时候自己好好研究一下
+            var cookie_end = allcookies.indexOf(";", cookie_pos);
+            if (cookie_end == -1) {
+                cookie_end = allcookies.length;
+            }
+            var value = unescape(allcookies.substring(cookie_pos, cookie_end)); //这里就可以得到你想要的cookie的值了。。。
+        }
+        return value;
+    }
+    function checkUserForm() {
+        document.loginform.submit();
+    }
+    function tologin() {
+        var username = getCookie("xabpoUsername");
+        var password = getCookie("xabpoPassword");
+        $("#username").val(username);
+        $("#password").val(password);
+        if (username != undefined && password != undefined)
+            $("#loginform").submit();
+    }
+    function forgetpwd() {
+        $.ajax({
+            async : false,
+            url : "/common/login_do/reset.do",
+            data : {
+                "key" : key,
+                "value" : $("#" + key).val()
+            },
+            dataType : "json",
+            success : function(data) {
+                if (data.flag) {
+                    alert("更新成功！");
+                } else {
+                    alert("更新失败！");
+                }
+            }
+        });
+    }
+    function forgetpwd() {
+        layer.prompt({
+            title : '输入您的账号',
+            formType : 0
+        //prompt风格，支持0-2
+        }, function(pass) {
+            $.ajax({
+                async : false,
+                url : "/common/login_do/forgetpwd.do?username=" + pass,
+                data : {},
+                dataType : "json",
+                success : function(data) {
+                    alert(data.msg);
+                }
+            });
+        });
+    }
+</script>
+</head>
+<body class="">
+	<section id="content" class="m-t-lg wrapper-md animated fadeInUp">
+		<div class="container aside-xxl">
+			<div style="text-align: center;">
+				<img src="/images/webicon/logo.png" width="100%" />
+			</div>
+			<section class="panel panel-default bg-white m-t-lg">
+				<header class="panel-heading text-center">
+					<strong>登陆</strong>
+				</header>
+				<form action="/common/login_do/login.do" method="post" class="panel-body wrapper-lg">
+					<div class="form-group">
+						<label class="control-label">账号</label>
+						<input type="text" placeholder="请输入账号" id="username" name="username" class="form-control input-lg">
+					</div>
+					<div class="form-group">
+						<label class="control-label">密码</label>
+						<input type="password" placeholder="请输入密码" id="password" name="password" class="form-control input-lg">
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" name="rememberMe" checked="checked" value="true">
+							记住我
+						</label>
+					</div>
+					<a href="javascript:forgetpwd()" class="pull-right m-t-xs">
+						<small>忘记密码?</small>
+					</a>
+					<button type="submit" class="btn btn-primary" onclick="javascript:wait()">登陆</button>
+					<div class="line line-dashed"></div>
+					<a href="/common/weibo/sinalogin_do/tologin.do" class="btn btn-facebook btn-block m-b-sm">
+						<i class="fa fa-weibo pull-left"></i>
+						微博账号登陆
+					</a>
+					<a href="/common/qq/login_do/index.do" class="btn btn-twitter btn-block">
+						<i class="fa fa-qq pull-left"></i>
+						QQ账号登陆
+					</a>
+					<a href="/common/baidu_do/tologin.do" class="btn btn-gplus btn-block">
+						<i class="fa fa-baidu pull-left"></i>
+						百度账号登陆
+					</a>
+					<div class="line line-dashed"></div>
+					<p class="text-muted text-center">
+						<small>还没有账号?</small>
+					</p>
+					<a href="/common/login_do/toregister.do" class="btn btn-default btn-block">注册</a>
+				</form>
+			</section>
+		</div>
+	</section>
+	<!-- footer -->
+	<footer id="footer">
+		<div class="text-center padder">
+			<p>
+				<small>
+					<a href="http://www.miitbeian.gov.cn/">© 2016-2016 88ybg.com 版权所有 ICP证：粤ICP备16078942号-1</a>
+				</small>
+			</p>
+		</div>
+	</footer>
+	<!-- / footer -->
+	<!-- Bootstrap -->
+	<!-- App -->
+</body>
+</html>
+<#if error??>
+<script type="text/javascript">
+    if ("${error!}" != "") {
+        layer.tips('${error!}', '#username', {
+            tips : [
+                    1, '#FF3333']
+        //还可配置颜色
+        });
+    };
+    //tologin();
+</script>
+	</#if>

@@ -1,0 +1,154 @@
+<html lang="en" class="bg-dark js no-touch no-android chrome no-firefox no-iemobile no-ie no-ie10 no-ie11 no-ios no-ios7 ipad"">
+<head>
+<#include "/common/common.ftl"/>
+<script type="text/javascript">
+    function checkpassword() {
+        if ($("#inputPassword").val() != $("#password").val()) {
+            $("#checkpwd2").removeClass();
+            $("#checkpwd2").css('color', 'red');
+            $("#checkpwd2").html("两次密码不一致");
+            $("#checkpwd2").addClass('fa fa-times');
+        } else {
+            $("#checkpwd2").removeClass();
+            $("#checkpwd2").css('color', 'green');
+            $("#checkpwd2").html("");
+            $("#checkpwd2").addClass('fa fa-check');
+        }
+    }
+    //单独验证某一个input  class="checkpass"
+    $(function() {
+        $("#form").validate({
+            submitHandler : function(form) {// 必须写在验证前面，否则无法ajax提交
+                ly.ajaxSubmit(form, {// 验证新增是否成功
+                    type : "post",
+                    dataType : "json",
+                    success : function(data) {
+                        alert(data.msg);
+                    }
+                });
+            },
+            rules : {
+                "username" : {
+                    required : true,
+                    remote : { // 异步验证是否存在
+                        type : "POST",
+                        url : '/common/login_do/isexist.do',
+                        data : {
+                            username : function() {
+                                return $("#username").val();
+                            }
+                        }
+                    }
+                },
+                "email" : {
+                    required : true,
+                    remote : { // 异步验证是否存在
+                        type : "POST",
+                        url : '/common/login_do/isexist.do',
+                        data : {
+                            email : function() {
+                                return $("#email").val();
+                            }
+                        }
+                    }
+                }
+            },
+            messages : {
+                "username" : {
+                    required : "请输入账号",
+                    remote : "该账号已经存在"
+                },
+                "email" : {
+                    required : "请输入电子邮箱",
+                    remote : "该电子邮箱已经存在"
+                }
+            },
+            errorPlacement : function(error, element) {// 自定义提示错误位置
+                //$(".l_err").css('display', 'block');
+                // element.css('border','3px solid #FFCCCC');
+                //element.focus();
+                if (error.html() != '') {
+                    element.nextAll().removeClass();
+                    element.nextAll().css('color', 'red');
+                    element.nextAll().html(error.html());
+                    element.nextAll().addClass('fa fa-times');
+                } else {
+                    element.nextAll().removeClass();
+                    element.nextAll().css('color', 'green');
+                    element.nextAll().html(error.html());
+                    element.nextAll().addClass('fa fa-check');
+                }
+                //$(".l_err").html(error.html());
+            },
+            success : function(label) {// 验证通过后
+                //	$(".l_err").css('display', 'none');
+            }
+        });
+    });
+</script>
+</head>
+<body class="">
+	<section id="content" class="m-t-lg wrapper-md animated fadeInDown">
+		<div class="container aside-xxl">
+			<div style="text-align: center;">
+				<img src="/images/webicon/logo.png" width="100%" />
+			</div>
+			<section class="panel panel-default m-t-lg bg-white">
+				<header class="panel-heading text-center">
+					<strong>注册账号</strong>
+				</header>
+				<form action="/common/login_do/register.do" class="panel-body wrapper-lg" id="form">
+					<div class="form-group form-inline">
+						<label class="control-label">登陆账号</label>
+						<input type="text" id="username" name="username" required lay-verify="required" placeholder="您的账号" minlength="10" class="form-control input-lg">
+						<i id="checkname"></i>
+					</div>
+					<div class="form-group form-inline">
+						<label class="control-label">验证邮箱</label>
+						<input type="email" id="email" name="email" required lay-verify="required" placeholder="电子邮箱" class="form-control input-lg">
+						<i id="checkemail"></i>
+					</div>
+					<div class="form-group form-inline">
+						<label class="control-label">登陆密码</label>
+						<input type="password" id="password"  required lay-verify="required" name="password" onblur="checkpassword()" id="inputPassword" placeholder="您的密码" minlength="8" class="form-control input-lg">
+						<i id="checkpwd1"></i>
+					</div>
+					<div class="form-group form-inline">
+						<label class="control-label">确认密码</label>
+						<input type="password" id="inputPassword"required lay-verify="required" name="inputPassword" onblur="checkpassword()" placeholder="确认密码" class="form-control input-lg">
+						<i id="checkpwd2"></i>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox">
+							同意
+							<a href="javascript:alert('...')">《云报告协约》</a>
+						</label>
+					</div>
+					<button type="submit" class="btn btn-primary">注册</button>
+					<div class="line line-dashed"></div>
+					<p class="text-muted text-center">
+						<small>已经有了账号?</small>
+					</p>
+					<a href="/common/login_do/tologin.do" class="btn btn-default btn-block">登陆</a>
+				</form>
+			</section>
+		</div>
+	</section>
+	<!-- footer -->
+	<footer id="footer">
+		<div class="text-center padder clearfix">
+			<p>
+				<small>
+					您的报告无处不在
+					<br>
+					© Deament所有
+				</small>
+			</p>
+		</div>
+	</footer>
+	<!-- / footer -->
+	<!-- Bootstrap -->
+	<!-- App -->
+</body>
+</html>

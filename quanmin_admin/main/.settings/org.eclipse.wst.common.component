@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="com.ybg-0.0.1">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="ybg_rbac_base-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ybg_rbac_base/ybg_rbac_base">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ybg_base_jdbc-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ybg_base_jdbc/ybg_base_jdbc">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ybg_inter-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ybg_inter/ybg_inter">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ybg_base_util-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ybg_base_util/ybg_base_util">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ybg_jwt-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ybg_jwt/ybg_jwt">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ybg_rbac-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ybg_rbac/ybg_rbac">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ybg_email-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ybg_email/ybg_email">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ybg_quartz-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ybg_quartz/ybg_quartz">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ybg_company-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ybg_company/ybg_company">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ybg_login_qq-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ybg_login_qq/ybg_login_qq">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ybg_login_baidu-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ybg_login_baidu/ybg_login_baidu">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ybg_login_sina-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ybg_login_sina/ybg_login_sina">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ybg_mq-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ybg_mq/ybg_mq">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ybg_base_jar-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ybg_base_jar/ybg_base_jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="com.ybg"/>
+        <property name="java-output-path" value="/main/target/classes"/>
+    </wb-module>
+</project-modules>

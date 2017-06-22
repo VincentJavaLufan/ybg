@@ -1,0 +1,30 @@
+<script type="text/javascript" src="/js/system/user/list.js"></script>
+<div class="m-b-md">
+	<form class="form-inline" role="form" id="searchForm" name="searchForm">
+		<div class="form-group">
+			<label class="control-label">
+				<span class="h4 font-thin v-middle">账号:</span>
+			</label>
+			<input class="form-control" id="username" name="username">
+		</div>
+		<a href="javascript:void(0)" class="btn btn-s-md btn-default btn-rounded" id="search">查询</a>
+	</form>
+</div>
+<header class="panel-heading">
+	<div class="doc-buttons">
+		<button type="button" id="downFun" class="btn btn-sm btn-default" title="下载">
+			<i class="fa fa-download "></i>
+			导出
+		</button>
+		<button type="button" id="addAccount" class="btn btn-primary marR10">新增</button>
+		<button type="button" id="editAccount" class="btn btn-info marR10">编辑</button>
+		<button type="button" id="delAccount" class="btn btn-danger marR10">删除</button>
+		<button type="button" id="upLoad" class="btn btn-primary marR10">上传</button>
+	</div>
+</header>
+<div class="table-responsive">
+	<div id="paging" class="pagclass"></div>
+</div>
+<div id="callback_div" class="table-responsive" style="display: none;">
+	<div id="paging_callback" class="pagclass"></div>
+</div>
