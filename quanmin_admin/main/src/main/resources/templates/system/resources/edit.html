@@ -126,9 +126,14 @@ label[class^="btn btn-default"] {
 			<div class="form-group">
 				<label class="col-sm-3 control-label">是否隐藏</label>
 				<div class="col-sm-9">
-					<input id="gritter-light" type="checkbox"
-					<#if resources.ishide==1> checked="checked" </#if>
-					name="ishide" id="ishide" class="ace ace-switch ace-switch-5" value="1">
+				<select class="form-control" name="ishide" id="ishide" required  lay-verify="required" >
+						<option value="1">是
+						</option>
+						<option value="0">否
+						</option>
+					</select>
+				
+					
 				</div>
 			</div>
 			<div class="line line-dashed line-lg pull-in"></div>
@@ -144,8 +149,9 @@ label[class^="btn btn-default"] {
 		</footer> </section>
 	</form>
 	<script type="text/javascript">
-        $("#type").val("${resources.type}");
-        $("#colorid").val("${resources.colorid}");
+        $("#type").val("${resources.type!}");
+        $("#colorid").val("${resources.colorid!}");
+        $("#ishide").val("${resources.ishide!}");
         if ("${resources.type}" == "2") {
             showBut();
         }
