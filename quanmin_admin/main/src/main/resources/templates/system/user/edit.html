@@ -48,7 +48,7 @@
 				<div class="col-sm-9">
 					<select class="form-control" id="roleid" name="roleid" required  lay-verify="required" >
 						<#list roleselect as res>
-						<option value="${res.id}"<#if updateuser.roleid==res.id> selected="selected"</#if>>${res.name}
+						<option value="${res.id}">${res.name}
 						</option>
 						</#list>
 					</select>
@@ -59,9 +59,9 @@
 				<label class="col-sm-3 control-label">是否禁用</label>
 				<div class="col-sm-9">
 					<select class="form-control" name="state" id="state" required  lay-verify="required" >
-						<option value="lock"<#if updateuser.state=="lock">selected="selected"</#if>>是
+						<option value="lock">是
 						</option>
-						<option value="OK"<#if updateuser.state=="OK">selected="selected"</#if>>否
+						<option value="OK">否
 						</option>
 					</select>
 				</div>
@@ -74,6 +74,8 @@
 	</form>
 	<script type="text/javascript">
         onloadurl();
+        $("#state").val("'${updateuser.state}'");
+        $("#roleid").val("'${updateuser.roleid}'");
     </script>
 </body>
 </html>
