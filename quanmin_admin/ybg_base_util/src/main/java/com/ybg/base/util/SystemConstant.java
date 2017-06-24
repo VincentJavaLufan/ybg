@@ -8,7 +8,7 @@ public class SystemConstant {
 	
 	/** 是否调试模式 **/
 	private static Properties	props	= new Properties();
-	public static final boolean	DEBUG	= true;
+	public static final boolean	DEBUG	= false;
 	static {
 		try {
 			props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("systemconstant.properties"));
