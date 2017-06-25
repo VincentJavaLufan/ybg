@@ -30,6 +30,7 @@
 		<module>ybg_jwt</module>
 		<module>ybg_quartz</module>
 		<module>ybg_base_jar</module>
-	</modules>
+    <module>ybg_gen</module>
+  </modules>
 	
 </project>
