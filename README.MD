@@ -1,5 +1,5 @@
                                                     88ybg 网站 源码开源
-测试数据库地址：[输入链接说明](https://share.weiyun.com/e220f6d47c3b0f7b0e2bfe41f4731af3)
+测试数据库地址：[下载地址](https://share.weiyun.com/e220f6d47c3b0f7b0e2bfe41f4731af3)
 
 1.使用百度登陆（需要去开放平台申请）
 
