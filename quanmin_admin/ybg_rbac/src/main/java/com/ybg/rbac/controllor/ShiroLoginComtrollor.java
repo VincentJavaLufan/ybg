@@ -53,7 +53,10 @@ public class ShiroLoginComtrollor {
 	
 	@ApiOperation(value = "登录页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "/common/login_do/tologin.do", "/" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String tologin(Model model) {
+	public String tologin(ModelMap map) {
+		map.put("icp", SystemConstant.getICP());
+		map.put("systemname", SystemConstant.getSystemName());
+		map.put("systemdomain", SystemConstant.getSystemdomain());
 		return "/login";
 	}
 	
