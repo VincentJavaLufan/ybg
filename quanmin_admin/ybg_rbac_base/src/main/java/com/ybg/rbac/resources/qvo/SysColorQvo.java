@@ -1,9 +1,9 @@
 package com.ybg.rbac.resources.qvo;
 import com.ybg.base.jdbc.BaseQvoInter;
-import com.ybg.rbac.resources.domain.SysColorI;
+import com.ybg.rbac.resources.domain.SysColorDO;
 
 @SuppressWarnings("serial")
-public class SysColorQvo extends SysColorI implements BaseQvoInter {
+public class SysColorQvo extends SysColorDO implements BaseQvoInter {
 	
 	private boolean blurred;
 	

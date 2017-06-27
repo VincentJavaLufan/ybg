@@ -1,8 +1,8 @@
 package com.ybg.rbac.resources.qvo;
 import com.ybg.base.jdbc.BaseQvoInter;
-import com.ybg.rbac.resources.domain.ResourcesI;
+import com.ybg.rbac.resources.domain.ResourcesDO;
 
-public class ResourcesQvo extends ResourcesI implements BaseQvoInter {
+public class ResourcesQvo extends ResourcesDO implements BaseQvoInter {
 	
 	/**
 	 * 

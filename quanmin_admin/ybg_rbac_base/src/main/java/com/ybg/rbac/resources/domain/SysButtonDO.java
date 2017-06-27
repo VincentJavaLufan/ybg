@@ -2,7 +2,7 @@ package com.ybg.rbac.resources.domain;
 import java.io.Serializable;
 
 /** 系统按钮实体(数据库) **/
-public class SysButtonI implements Serializable {
+public class SysButtonDO implements Serializable {
 	
 	/**
 	 * 
@@ -73,7 +73,7 @@ public class SysButtonI implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SysButtonI other = (SysButtonI) obj;
+		SysButtonDO other = (SysButtonDO) obj;
 		if (button == null) {
 			if (other.button != null)
 				return false;

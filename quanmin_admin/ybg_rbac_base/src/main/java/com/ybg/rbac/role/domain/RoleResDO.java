@@ -2,7 +2,7 @@ package com.ybg.rbac.role.domain;
 import java.io.Serializable;
 
 /** 菜单 角色关联实体 （数据库) **/
-public class RoleResI implements Serializable {
+public class RoleResDO implements Serializable {
 	
 	/**
 	 * 
@@ -62,7 +62,7 @@ public class RoleResI implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RoleResI other = (RoleResI) obj;
+		RoleResDO other = (RoleResDO) obj;
 		if (resid == null) {
 			if (other.resid != null)
 				return false;

@@ -2,13 +2,13 @@ package com.ybg.rbac.role.mapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
-import com.ybg.rbac.role.domain.SysRole;
+import com.ybg.rbac.role.domain.SysRoleVO;
 
-public class RoleMapper implements RowMapper<SysRole> {
+public class RoleMapper implements RowMapper<SysRoleVO> {
 	
 
-	public SysRole mapRow(ResultSet rs, int index) throws SQLException {
-		SysRole bean = new SysRole();
+	public SysRoleVO mapRow(ResultSet rs, int index) throws SQLException {
+		SysRoleVO bean = new SysRoleVO();
 		bean.setId(rs.getString("id"));
 		bean.setState(rs.getString("state"));
 		bean.setName(rs.getString("name"));

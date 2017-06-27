@@ -9,7 +9,7 @@ import com.ybg.rbac.resources.domain.AbstractResources;
 import com.ybg.rbac.resources.domain.Button;
 import com.ybg.rbac.resources.domain.Directories;
 import com.ybg.rbac.resources.domain.Menu;
-import com.ybg.rbac.resources.domain.SysResources;
+import com.ybg.rbac.resources.domain.SysResourcesVO;
 import com.ybg.rbac.resources.qvo.ResourcesQvo;
 import com.ybg.rbac.resources.service.ResourcesService;
 
@@ -26,17 +26,17 @@ public class ResourcesUtil {
 	public List<Directories> getAllResources() {
 		ResourcesQvo qvo = new ResourcesQvo();
 		qvo.setIsdelete(0);
-		List<SysResources> alldb = resourcesService.query(qvo);
+		List<SysResourcesVO> alldb = resourcesService.query(qvo);
 		List<Directories> orgs = new ArrayList<Directories>();
 		List<Menu> menus = new ArrayList<Menu>();
-		for (SysResources r : alldb) {
+		for (SysResourcesVO r : alldb) {
 			if (r.getParentid() == "0") {
 				Directories org = new Directories();
 				BeanUtils.copyProperties(r, org);
 				orgs.add(org);
 			}
 		}
-		for (SysResources r : alldb) {
+		for (SysResourcesVO r : alldb) {
 			for (Directories o : orgs) {
 				if (o.getId().equals(r.getParentid())) {
 					Menu org = new Menu();
@@ -46,7 +46,7 @@ public class ResourcesUtil {
 				}
 			}
 		}
-		for (SysResources r : alldb) {
+		for (SysResourcesVO r : alldb) {
 			for (Menu o : menus) {
 				if (o.getId().equals(r.getParentid())) {
 					Button org = new Button();
@@ -63,7 +63,7 @@ public class ResourcesUtil {
 		if (!QvoConditionUtil.checkString(id)) {
 			return null;
 		}
-		SysResources iddbs = resourcesService.get(id);
+		SysResourcesVO iddbs = resourcesService.get(id);
 		if (iddbs == null) {
 			return null;
 		}
@@ -99,7 +99,7 @@ public class ResourcesUtil {
 	
 	/** 删除操作时，删除整个下级 **/
 	public void removebyid(String id) {
-		SysResources bean = resourcesService.get(id);
+		SysResourcesVO bean = resourcesService.get(id);
 		if (bean.getType().equals("1")) {
 			Directories dir = (Directories) get(id);
 			resourcesService.removebyid(id);
@@ -128,10 +128,10 @@ public class ResourcesUtil {
 	}
 	
 	/*** 快速对菜单添加一个增删查改 操作 **/
-	public void createMenuWithButton(SysResources resources, boolean add, boolean remove, boolean update, boolean get, boolean toadd, boolean toupdate, boolean list, boolean index) {
-		SysResources bean = resourcesService.create(resources);
+	public void createMenuWithButton(SysResourcesVO resources, boolean add, boolean remove, boolean update, boolean get, boolean toadd, boolean toupdate, boolean list, boolean index) {
+		SysResourcesVO bean = resourcesService.create(resources);
 		String parentid=bean.getId();
-		SysResources addbutton= new SysResources();
+		SysResourcesVO addbutton= new SysResourcesVO();
 		addbutton.setParentid(parentid);
 		addbutton.setResurl("");
 		addbutton.setType("3");

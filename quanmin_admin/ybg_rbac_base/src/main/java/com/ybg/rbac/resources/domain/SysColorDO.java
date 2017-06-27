@@ -2,7 +2,7 @@ package com.ybg.rbac.resources.domain;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class SysColorI implements Serializable {
+public class SysColorDO implements Serializable {
 	
 	private Integer	id;
 	private String	colorclass;	// 颜色

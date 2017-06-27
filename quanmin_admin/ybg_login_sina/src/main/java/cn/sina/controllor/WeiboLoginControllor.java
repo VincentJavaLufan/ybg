@@ -17,7 +17,7 @@ import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.ServletUtil;
 import com.ybg.config.security.YcAnthencationProder;
 import com.ybg.rbac.user.UserStateConstant;
-import com.ybg.rbac.user.domain.User;
+import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.LoginService;
 import com.ybg.rbac.user.service.UserService;
 import cn.sina.domain.WeiboUser;
@@ -64,7 +64,7 @@ public class WeiboLoginControllor  {
 			map.put("uid", token.getUid());
 			return "/weibo/weibobund";
 		}
-		User user = userService.get(weibouser.getUserid());
+		UserVO user = userService.get(weibouser.getUserid());
 		if (user.getState().equals(UserStateConstant.LOCK)) {
 			return "/lock";
 		}
@@ -97,7 +97,7 @@ public class WeiboLoginControllor  {
 		if (weibouser != null) {
 			return null;
 		}
-		User user = userService.login(username);
+		UserVO user = userService.login(username);
 		if (!(user.isAccountNonLocked())) {
 			request.setAttribute("error", "用户已经被锁定不能绑定，请与管理员联系！");
 		}

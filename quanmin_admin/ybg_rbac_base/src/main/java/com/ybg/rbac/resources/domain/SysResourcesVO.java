@@ -1,5 +1,5 @@
 package com.ybg.rbac.resources.domain;
-public class SysResources extends ResourcesI {
+public class SysResourcesVO extends ResourcesDO {
 	
 	/**
 	 * 

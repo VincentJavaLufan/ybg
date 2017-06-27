@@ -3,7 +3,7 @@ import java.io.Serializable;
 
 /** 菜单图标 **/
 @SuppressWarnings("serial")
-public class SysMenuIconI implements Serializable {
+public class SysMenuIconDO implements Serializable {
 	
 	private Integer	id;
 	private String	name;
@@ -76,7 +76,7 @@ public class SysMenuIconI implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SysMenuIconI other = (SysMenuIconI) obj;
+		SysMenuIconDO other = (SysMenuIconDO) obj;
 		if (createtime == null) {
 			if (other.createtime != null)
 				return false;

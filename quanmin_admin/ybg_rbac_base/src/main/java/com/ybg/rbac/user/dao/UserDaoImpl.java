@@ -10,7 +10,7 @@ import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.jdbc.util.DateUtil;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
-import com.ybg.rbac.user.domain.User;
+import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.mapper.UserMapper;
 import com.ybg.rbac.user.qvo.UserQvo;
 
@@ -20,7 +20,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	private static String	QUERY_TABLE_NAME	= "sys_user user";
 	private static String	QUERY_TABLE_COLUMN	= " user.id, user.username, user.phone, user.email, user.state, user.password, user.createtime, user.isdelete, user.roleid, user.credentialssalt ";
 	
-	public User createandid(User user) throws Exception {
+	public UserVO createandid(UserVO user) throws Exception {
 		BaseMap<String, Object> createmap = new BaseMap<String, Object>();
 		createmap.put("username", user.getUsername());
 		createmap.put("phone", user.getPhone());
@@ -70,23 +70,23 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		return sql.toString();
 	}
 	
-	public List<User> query(UserQvo qvo) {
+	public List<UserVO> query(UserQvo qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",role.`name` rolename").append(FROM).append(QUERY_TABLE_NAME).append(LEFT).append(JOIN).append("sys_role role").append(ON).append("user.roleid=role.id");
 		sql.append(getcondition(qvo));
 		return getJdbcTemplate().query(sql.toString(), new UserMapper());
 	}
 	
-	public User login(String loginname) {
+	public UserVO login(String loginname) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(WHERE).append("username='").append(loginname).append("'");
 		sql.append(OR).append("password='").append(loginname).append("'");
 		sql.append(OR).append("phone='").append(loginname).append("'");
-		List<User> list = getJdbcTemplate().query(sql.toString(), new RowMapper<User>() {
+		List<UserVO> list = getJdbcTemplate().query(sql.toString(), new RowMapper<UserVO>() {
 			
-			public User mapRow(ResultSet rs, int index) throws SQLException {
-				User user = new User();
+			public UserVO mapRow(ResultSet rs, int index) throws SQLException {
+				UserVO user = new UserVO();
 				user.setId(rs.getString("id"));
 				user.setCreatetime(rs.getString("createtime"));
 				user.setEmail(rs.getString("email"));
@@ -130,7 +130,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		if (email) {
 			StringBuilder sqlsub = new StringBuilder();
 			sqlsub.append(sql.toString()).append(" and user.email=" + qvo.getEmail());
-			List<User> list = getJdbcTemplate().query(sql.toString(), new UserMapper());
+			List<UserVO> list = getJdbcTemplate().query(sql.toString(), new UserMapper());
 			check = check && QvoConditionUtil.checkList(list);
 			if (!check) {
 				return check;
@@ -139,7 +139,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		if (username) {
 			StringBuilder sqlsub = new StringBuilder();
 			sqlsub.append(sql.toString()).append(" and user.username=" + qvo.getUsername());
-			List<User> list = getJdbcTemplate().query(sql.toString(), new UserMapper());
+			List<UserVO> list = getJdbcTemplate().query(sql.toString(), new UserMapper());
 			check = check && QvoConditionUtil.checkList(list);
 			if (!check) {
 				return check;
@@ -148,7 +148,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		if (email) {
 			StringBuilder sqlsub = new StringBuilder();
 			sqlsub.append(sql.toString()).append(" and user.email=" + qvo.getEmail());
-			List<User> list = getJdbcTemplate().query(sql.toString(), new UserMapper());
+			List<UserVO> list = getJdbcTemplate().query(sql.toString(), new UserMapper());
 			check = check && QvoConditionUtil.checkList(list);
 		}
 		return check;

@@ -12,7 +12,7 @@ import com.ybg.component.jwt.LoginPara;
 import com.ybg.component.jwt.MyUtils;
 import com.ybg.component.jwt.ResultMsg;
 import com.ybg.component.jwt.ResultStatusCode;
-import com.ybg.rbac.user.domain.User;
+import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.LoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,7 +39,7 @@ public class JsonWebToken {
 			}
 			// 验证码校验在后面章节添加
 			// 验证用户名密码
-			User user = (User) loginService.loadUserByUsername(loginPara.getUserName());
+			UserVO user = (UserVO) loginService.loadUserByUsername(loginPara.getUserName());
 			// UserInfo user = userRepositoy.findUserInfoByName(loginPara.getUserName());
 			if (user == null) {
 				resultMsg = new ResultMsg(ResultStatusCode.INVALID_PASSWORD.getErrcode(), ResultStatusCode.INVALID_PASSWORD.getErrmsg(), null);

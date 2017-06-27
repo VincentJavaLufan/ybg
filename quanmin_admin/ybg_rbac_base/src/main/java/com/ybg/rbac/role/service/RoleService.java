@@ -2,8 +2,8 @@ package com.ybg.rbac.role.service;
 import java.util.List;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
-import com.ybg.rbac.role.domain.RoleResI;
-import com.ybg.rbac.role.domain.SysRole;
+import com.ybg.rbac.role.domain.RoleResDO;
+import com.ybg.rbac.role.domain.SysRoleVO;
 import com.ybg.rbac.role.qvo.RoleQvo;
 
 public interface RoleService {
@@ -12,7 +12,7 @@ public interface RoleService {
 	 * 
 	 * @throws Exception **/
 	// sys_role
-	SysRole createandid(SysRole role) throws Exception;
+	SysRoleVO createandid(SysRoleVO role) throws Exception;
 	
 	/** 更新数据，条件 和 需要更新的字段都不能为空 不限个数个条件
 	 * 
@@ -32,13 +32,13 @@ public interface RoleService {
 	
 	/** 不分页查询 **/
 	// sys_role
-	List<SysRole> query(RoleQvo qvo);
+	List<SysRoleVO> query(RoleQvo qvo);
 	
 	/** 角色授权 增删改都在里面了 **/
 	// sys_res_role
-	void saveOrupdateRole_Res(List<RoleResI> list);
+	void saveOrupdateRole_Res(List<RoleResDO> list);
 	
-	SysRole get(String id);
+	SysRoleVO get(String id);
 	
 	void removebyid(String id);
 }

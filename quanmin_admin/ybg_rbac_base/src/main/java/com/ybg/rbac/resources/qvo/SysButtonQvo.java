@@ -1,7 +1,7 @@
 package com.ybg.rbac.resources.qvo;
-import com.ybg.rbac.resources.domain.SysButtonI;
+import com.ybg.rbac.resources.domain.SysButtonDO;
 
-public class SysButtonQvo extends SysButtonI {
+public class SysButtonQvo extends SysButtonDO {
 	
 	/**
 	 * 

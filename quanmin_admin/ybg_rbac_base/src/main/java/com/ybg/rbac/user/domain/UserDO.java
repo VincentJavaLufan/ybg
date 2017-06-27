@@ -9,7 +9,7 @@ import com.ybg.base.util.excel.ExcelVOAttribute;
 
 @ApiModel(value = "用戶实体类(数据库)", description = "")
 /** @author yy 2016-06-21 用戶实体类(数据库) */
-public class UserI implements Serializable {
+public class UserDO implements Serializable {
 	
 	/**
 	 * 
@@ -126,7 +126,7 @@ public class UserI implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "UserI [id=" + id + ", username=" + username + ", email=" + email + ", phone=" + phone + ", password=" + password + ", state=" + state + ", createtime=" + createtime + ", isdelete=" + isdelete + ", roleid=" + roleid + ", credentialssalt=" + credentialssalt + "]";
+		return "UserDO [id=" + id + ", username=" + username + ", email=" + email + ", phone=" + phone + ", password=" + password + ", state=" + state + ", createtime=" + createtime + ", isdelete=" + isdelete + ", roleid=" + roleid + ", credentialssalt=" + credentialssalt + "]";
 	}
 	
 	@Override
@@ -154,7 +154,7 @@ public class UserI implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserI other = (UserI) obj;
+		UserDO other = (UserDO) obj;
 		if (createtime == null) {
 			if (other.createtime != null)
 				return false;

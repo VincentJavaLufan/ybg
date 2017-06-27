@@ -20,7 +20,7 @@ import com.ybg.base.util.Page;
 import com.ybg.base.util.excel.ExcelUtil;
 import com.ybg.rbac.role.qvo.RoleQvo;
 import com.ybg.rbac.role.service.RoleService;
-import com.ybg.rbac.user.domain.User;
+import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.qvo.UserQvo;
 import com.ybg.rbac.user.service.UserService;
 import io.swagger.annotations.Api;
@@ -152,7 +152,7 @@ public class UserControllor {
 	@ApiImplicitParams({ @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "java.lang.String") })
 	@RequestMapping(value = { "toupdate.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String toupdate(@RequestParam(name = "id", required = true) String id, @ApiIgnore ModelMap map) {
-		User user = userService.get(id);
+		UserVO user = userService.get(id);
 		map.put("updateuser", user);
 		map.put("roleselect", roleService.query(new RoleQvo()));
 		return "/system/user/edit";
@@ -162,7 +162,7 @@ public class UserControllor {
 	@ApiOperation(value = "更新用户信息", notes = "只更新角色，用户状态(封号等)，email ,手机号", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "update.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json update(@ModelAttribute User user) {
+	public Json update(@ModelAttribute UserVO user) {
 		Json j = new Json();
 		j.setSuccess(true);
 		BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
@@ -211,7 +211,7 @@ public class UserControllor {
 		filename = java.net.URLEncoder.encode(filename, "UTF-8");
 		response.setHeader("Content-disposition", "attachment;filename=" + filename + ".xls");
 		ServletOutputStream out = response.getOutputStream();
-		ExcelUtil<User> util = new ExcelUtil<User>(User.class);// 创建工具类.
+		ExcelUtil<UserVO> util = new ExcelUtil<UserVO>(UserVO.class);// 创建工具类.
 		util.exportExcel(userService.query(qvo), "用户", out, 2, null, false);// 导出
 	}
 }

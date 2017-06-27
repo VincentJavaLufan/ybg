@@ -1,4 +1,4 @@
 package com.ybg.rbac.resources.domain;
 @SuppressWarnings("serial")
-public class SysColor extends SysColorI {
+public class SysColorVO extends SysColorDO {
 }

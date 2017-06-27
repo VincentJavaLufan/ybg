@@ -2,12 +2,12 @@ package com.ybg.rbac.resources.mapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
-import com.ybg.rbac.resources.domain.SysResources;
+import com.ybg.rbac.resources.domain.SysResourcesVO;
 
-public class ResourcesMapper implements RowMapper<SysResources> {
+public class ResourcesMapper implements RowMapper<SysResourcesVO> {
 	
-	public SysResources mapRow(ResultSet rs, int index) throws SQLException {
-		SysResources bean = new SysResources();
+	public SysResourcesVO mapRow(ResultSet rs, int index) throws SQLException {
+		SysResourcesVO bean = new SysResourcesVO();
 		bean.setId(rs.getString("id"));
 		bean.setName(rs.getString("name"));
 		bean.setParentid(rs.getString("parentid"));

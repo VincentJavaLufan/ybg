@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
 import com.ybg.rbac.user.dao.UserDao;
-import com.ybg.rbac.user.domain.User;
+import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.qvo.UserQvo;
 
 @Repository
@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 	 * 
 	 * @throws Exception **/
 	@CacheEvict(value = "userCache", allEntries = true)
-	public User createandid(User user) throws Exception {
+	public UserVO createandid(UserVO user) throws Exception {
 		return userDao.createandid(user);
 	}
 	
@@ -48,10 +48,10 @@ public class UserServiceImpl implements UserService {
 	
 	/** 获取单个信息 **/
 	@Cacheable(value = "userCache", key = "#root.method.name+#root.args[0]")
-	public User get(String id) {
+	public UserVO get(String id) {
 		UserQvo qvo = new UserQvo();
 		qvo.setId(id);
-		List<User> list = userDao.query(qvo);
+		List<UserVO> list = userDao.query(qvo);
 		return list != null && list.size() > 0 ? list.get(0) : null;
 	}
 	
@@ -63,13 +63,13 @@ public class UserServiceImpl implements UserService {
 	
 	/** 不分页查询用户信息 **/
 	@Cacheable(value = "userCache", key = "#root.method.name+#root.args[0]")
-	public List<User> query(UserQvo qvo) {
+	public List<UserVO> query(UserQvo qvo) {
 		return userDao.query(qvo);
 	}
 	
 	/** 登陆 **/
 	@Cacheable(value = "userCache", key = "#root.method.name+#root.args[0]")
-	public User login(String loginname) {
+	public UserVO login(String loginname) {
 		return userDao.login(loginname);
 	}
 	

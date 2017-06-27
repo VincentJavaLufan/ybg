@@ -32,7 +32,7 @@ import com.ybg.config.security.MyAuthenticationToken;
 import com.ybg.rbac.resources.service.ResourcesService;
 import com.ybg.rbac.syspro.service.SysproService;
 import com.ybg.rbac.user.UserStateConstant;
-import com.ybg.rbac.user.domain.User;
+import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.qvo.UserQvo;
 import com.ybg.rbac.user.service.LoginService;
 import com.ybg.rbac.user.service.UserService;
@@ -82,7 +82,7 @@ public class ShiroLoginComtrollor {
 					model.addAttribute("username", userDetail.getUsername());
 					UserQvo qvo = new UserQvo();
 					qvo.setUsername(userDetail.getUsername());
-					User u = userService.query(qvo).get(0);
+					UserVO u = userService.query(qvo).get(0);
 					model.addAttribute("realName", u.getUsername());
 					return "redirect:/common/login_do/index.do";
 				}
@@ -99,7 +99,7 @@ public class ShiroLoginComtrollor {
 					model.addAttribute("username", userDetail.getUsername());
 					UserQvo qvo = new UserQvo();
 					qvo.setUsername(userDetail.getUsername());
-					User u = userService.query(qvo).get(0);
+					UserVO u = userService.query(qvo).get(0);
 					model.addAttribute("realName", u.getUsername());
 				}
 				// 登录成功跳到主页
@@ -130,7 +130,7 @@ public class ShiroLoginComtrollor {
 	@ApiOperation(value = "注册", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = "/common/login_do/register.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public Json register(User user, @RequestParam(name = "email", required = true) String email) throws Exception {
+	public Json register(UserVO user, @RequestParam(name = "email", required = true) String email) throws Exception {
 		Json j = new Json();
 		j.setSuccess(true);
 		j.setMsg("我们将发送邮箱到您的邮箱中进行验证，大约3小时左右不验证将删除注册信息");
@@ -171,7 +171,7 @@ public class ShiroLoginComtrollor {
 		UserQvo qvo = new UserQvo();
 		qvo.setUsername(username);
 		qvo.setState(UserStateConstant.DIE);
-		List<User> list = userService.query(qvo);
+		List<UserVO> list = userService.query(qvo);
 		if (list != null && list.size() == 1) {
 			BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
 			BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
@@ -195,13 +195,13 @@ public class ShiroLoginComtrollor {
 		j.setSuccess(true);
 		UserQvo userqvo = new UserQvo();
 		userqvo.setUsername(username);
-		List<User> userlist = userService.query(userqvo);
+		List<UserVO> userlist = userService.query(userqvo);
 		if (userlist == null || userlist.size() == 0) {
 			j.setSuccess(false);
 			j.setMsg("无此账号");
 			return j;
 		}
-		User user = userlist.get(0);
+		UserVO user = userlist.get(0);
 		if (user.getState().equals(UserStateConstant.LOCK)) {
 			j.setSuccess(false);
 			j.setMsg("账号被锁 ，无法使用");
@@ -252,7 +252,7 @@ public class ShiroLoginComtrollor {
 			String userid = json.getString("uid");
 			String dietime = json.getString("dietime");
 			if (dietime.equals(DateUtil.getDate())) {
-				User user = userService.get(userid);
+				UserVO user = userService.get(userid);
 				if (user.getState().equals(UserStateConstant.LOCK)) {
 					return "/lock";
 				}
@@ -293,7 +293,7 @@ public class ShiroLoginComtrollor {
 				j.setMsg("操作失败！时间已过");
 				return j;
 			}
-			User user = userService.get(userid + "");
+			UserVO user = userService.get(userid + "");
 			if (user.getState().equals(UserStateConstant.LOCK)) {
 				j.setSuccess(false);
 				j.setMsg("账号被锁 ，无法使用");
@@ -342,7 +342,7 @@ public class ShiroLoginComtrollor {
 		Json j = new Json();
 		j.setSuccess(true);
 		j.setMsg("操作成功");
-		User user = (User) Common.findUserSession();
+		UserVO user = (UserVO) Common.findUserSession();
 		if (user == null) {
 			j.setMsg("您尚未登陆");
 			return j;

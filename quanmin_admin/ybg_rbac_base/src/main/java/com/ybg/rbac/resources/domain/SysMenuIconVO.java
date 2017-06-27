@@ -1,4 +1,4 @@
 package com.ybg.rbac.resources.domain;
 @SuppressWarnings("serial")
-public class SysMenuIcon extends SysMenuIconI {
+public class SysMenuIconVO extends SysMenuIconDO {
 }

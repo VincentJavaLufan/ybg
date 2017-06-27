@@ -1,5 +1,5 @@
 package com.ybg.rbac.role.domain;
-public class SysRole extends RoleI {
+public class SysRoleVO extends RoleDO {
 	
 	/**
 	 * 

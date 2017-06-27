@@ -20,11 +20,11 @@ import com.ybg.base.jdbc.BaseMap;
 
 import com.ybg.base.util.Json;
 import com.ybg.base.util.Page;
-import com.ybg.rbac.resources.domain.SysResources;
+import com.ybg.rbac.resources.domain.SysResourcesVO;
 import com.ybg.rbac.resources.qvo.ResourcesQvo;
 import com.ybg.rbac.resources.service.ResourcesService;
-import com.ybg.rbac.role.domain.RoleResI;
-import com.ybg.rbac.role.domain.SysRole;
+import com.ybg.rbac.role.domain.RoleResDO;
+import com.ybg.rbac.role.domain.SysRoleVO;
 import com.ybg.rbac.role.qvo.RoleQvo;
 import com.ybg.rbac.role.service.RoleService;
 
@@ -61,7 +61,7 @@ public class RoleControllor  {
 	@ApiOperation(value = "更新角色", notes = "只更新描述，名称，系统唯一标识,状态 ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "update.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json update(@ModelAttribute SysRole role) {
+	public Json update(@ModelAttribute SysRoleVO role) {
 		Json j = new Json();
 		j.setSuccess(true);
 		try {
@@ -106,7 +106,7 @@ public class RoleControllor  {
 	@ApiOperation(value = "创建角色", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "create.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json create(@ModelAttribute SysRole bean) {
+	public Json create(@ModelAttribute SysRoleVO bean) {
 		Json j = new Json();
 		j.setSuccess(true);
 		try {
@@ -142,11 +142,11 @@ public class RoleControllor  {
 	public Json addRoleRes(@RequestParam(name = "roleId", required = true) String roleId, @RequestParam(name = "resId[]", required = false) String[] resIds, ModelMap modelmap) {
 		Json j = new Json();
 		j.setSuccess(true);
-		List<SysResources> reslist = resourcesService.query(new ResourcesQvo());
+		List<SysResourcesVO> reslist = resourcesService.query(new ResourcesQvo());
 		try {
-			List<RoleResI> list = new ArrayList<RoleResI>();
-			for (SysResources res : reslist) {
-				RoleResI rr = new RoleResI();
+			List<RoleResDO> list = new ArrayList<RoleResDO>();
+			for (SysResourcesVO res : reslist) {
+				RoleResDO rr = new RoleResDO();
 				rr.setResid(res.getId());
 				rr.setRoleid(roleId);
 				rr.setState(1);// 禁止使用
@@ -154,7 +154,7 @@ public class RoleControllor  {
 			}
 			if (resIds != null && resIds.length > 0) {
 				for (String resid : resIds) {
-					for (RoleResI rr : list) {
+					for (RoleResDO rr : list) {
 						if (rr.getResid().equals(resid)) {
 							rr.setState(0);
 						}

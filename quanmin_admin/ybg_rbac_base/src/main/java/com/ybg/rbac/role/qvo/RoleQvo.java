@@ -1,12 +1,12 @@
 package com.ybg.rbac.role.qvo;
 import com.ybg.base.jdbc.BaseQvoInter;
-import com.ybg.rbac.role.domain.RoleI;
+import com.ybg.rbac.role.domain.RoleDO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /** 角色查询条件 **/
-@ApiModel(value = "角色查询条件", parent = RoleI.class)
-public class RoleQvo extends RoleI implements BaseQvoInter {
+@ApiModel(value = "角色查询条件", parent = RoleDO.class)
+public class RoleQvo extends RoleDO implements BaseQvoInter {
 	
 	private static final long	serialVersionUID	= -1516990738029741157L;
 	/** 是否模糊查询 **/

@@ -8,8 +8,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.ybg.rbac.user.UserStateConstant;
 
-@ApiModel(value = "用户类", parent = UserI.class)
-public class User extends UserI implements UserDetails {
+@ApiModel(value = "用户类", parent = UserDO.class)
+public class UserVO extends UserDO implements UserDetails {
 	
 	/**
 	 * 

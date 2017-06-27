@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
 import com.ybg.rbac.role.dao.RoleDao;
-import com.ybg.rbac.role.domain.RoleResI;
-import com.ybg.rbac.role.domain.SysRole;
+import com.ybg.rbac.role.domain.RoleResDO;
+import com.ybg.rbac.role.domain.SysRoleVO;
 import com.ybg.rbac.role.qvo.RoleQvo;
 @Repository
 public class RoleServiceImpl implements RoleService{
@@ -19,7 +19,7 @@ public class RoleServiceImpl implements RoleService{
 	/** 返回主键的创建 
 	 * @throws Exception **/
 	@CacheEvict(value = "roleCache", allEntries = true)
-	public SysRole createandid(SysRole role) throws Exception {
+	public SysRoleVO createandid(SysRoleVO role) throws Exception {
 		return roleDao.createandid(role);
 	}
 	
@@ -49,10 +49,10 @@ public class RoleServiceImpl implements RoleService{
 	
 	/** 获取单个实体信息 **/
 	@Cacheable(value = "roleCache", key = "#root.method.name+#root.args[0]")
-	public SysRole get(String id) {
+	public SysRoleVO get(String id) {
 		RoleQvo qvo = new RoleQvo();
 		qvo.setId(id);
-		List<SysRole> list = roleDao.query(qvo);
+		List<SysRoleVO> list = roleDao.query(qvo);
 		return list != null && list.size() > 0 ? list.get(0) : null;
 	}
 	
@@ -64,13 +64,13 @@ public class RoleServiceImpl implements RoleService{
 	
 	/** 不分页查询 **/
 	@Cacheable(value = "roleCache", key = "#root.method.name+#root.args[0]")
-	public List<SysRole> query(RoleQvo qvo) {
+	public List<SysRoleVO> query(RoleQvo qvo) {
 		return roleDao.query(qvo);
 	}
 	
 	/** 角色授权 增删改都在里面了 **/
 	@CacheEvict(value = "resroleCache", allEntries = true)
-	public void saveOrupdateRole_Res(List<RoleResI> list) {
+	public void saveOrupdateRole_Res(List<RoleResDO> list) {
 		roleDao.saveOrupdateRole_Res(list);
 	}
 }

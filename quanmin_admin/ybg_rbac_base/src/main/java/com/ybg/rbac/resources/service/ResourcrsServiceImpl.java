@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
 import com.ybg.rbac.resources.dao.ResourcesDao;
-import com.ybg.rbac.resources.domain.SysButton;
-import com.ybg.rbac.resources.domain.SysColor;
-import com.ybg.rbac.resources.domain.SysMenuIcon;
-import com.ybg.rbac.resources.domain.SysResources;
+import com.ybg.rbac.resources.domain.SysButtonVO;
+import com.ybg.rbac.resources.domain.SysColorVO;
+import com.ybg.rbac.resources.domain.SysMenuIconVO;
+import com.ybg.rbac.resources.domain.SysResourcesVO;
 import com.ybg.rbac.resources.qvo.ResourcesQvo;
 import com.ybg.rbac.resources.qvo.SysButtonQvo;
 import com.ybg.rbac.resources.qvo.SysColorQvo;
@@ -25,7 +25,7 @@ public class ResourcrsServiceImpl implements ResourcesService {
 	
 	/** 返回主键的创建 **/
 	@Caching(evict = { @CacheEvict(value = "resourcesCache", allEntries = true), @CacheEvict(value = "resroleCache", allEntries = true) })
-	public SysResources create(SysResources bean) {
+	public SysResourcesVO create(SysResourcesVO bean) {
 		return resourcesDao.create(bean);
 	}
 	
@@ -55,10 +55,10 @@ public class ResourcrsServiceImpl implements ResourcesService {
 	
 	/** 获取单个实体信息 **/
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]")
-	public SysResources get(String id) {
+	public SysResourcesVO get(String id) {
 		ResourcesQvo qvo = new ResourcesQvo();
 		qvo.setId(id);
-		List<SysResources> list = resourcesDao.query(qvo);
+		List<SysResourcesVO> list = resourcesDao.query(qvo);
 		return list != null && list.size() > 0 ? list.get(0) : null;
 	}
 	
@@ -70,37 +70,37 @@ public class ResourcrsServiceImpl implements ResourcesService {
 	
 	/** 不分页查询 **/
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]")
-	public List<SysResources> query(ResourcesQvo qvo) {
+	public List<SysResourcesVO> query(ResourcesQvo qvo) {
 		return resourcesDao.query(qvo);
 	}
 	
 	/** 角色 权限集合 **/
 	@Cacheable(value = "resroleCache", key = "#root.method.name+#root.args[0]")
-	public List<SysResources> getRolesByUserId(String roleid) {
+	public List<SysResourcesVO> getRolesByUserId(String roleid) {
 		return resourcesDao.getRolesByUserId(roleid);
 	}
 	
 	/** 授权的按钮操作 **/
 	@Cacheable(value = "resroleCache", key = "#root.method.name+#root.args[0]+#root.method.name+#root.args[1]")
-	public List<SysResources> getOperatorButton(String roleid, String parentid) {
+	public List<SysResourcesVO> getOperatorButton(String roleid, String parentid) {
 		return resourcesDao.getOperatorButton(roleid, parentid);
 	}
 	
 	/** 授权按钮组 **/
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]")
-	public List<SysButton> querybutton(SysButtonQvo qvo) {
+	public List<SysButtonVO> querybutton(SysButtonQvo qvo) {
 		return resourcesDao.querybutton(qvo);
 	}
 	
 	/*** 菜单Icon **/
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]")
-	public List<SysMenuIcon> queryicon(SysMenuIconQvo qvo) {
+	public List<SysMenuIconVO> queryicon(SysMenuIconQvo qvo) {
 		return resourcesDao.queryicon(qvo);
 	}
 	
 	/** 获取颜色列表 **/
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]")
-	public List<SysColor> querycolor(SysColorQvo qvo) {
+	public List<SysColorVO> querycolor(SysColorQvo qvo) {
 		return resourcesDao.querycolor(qvo);
 	}
 }

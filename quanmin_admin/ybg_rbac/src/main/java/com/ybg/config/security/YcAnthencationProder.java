@@ -8,7 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
-import com.ybg.rbac.user.domain.User;
+import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.LoginService;
 
 /** @author 自定义验证 */
@@ -22,7 +22,7 @@ public class YcAnthencationProder implements AuthenticationProvider {
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String username = authentication.getName();
 		String password = (String) authentication.getCredentials();
-		User user = userService.getUserByname(username);
+		UserVO user = userService.getUserByname(username);
 		if (user == null) {
 			throw new BadCredentialsException("Username not found.");
 		}

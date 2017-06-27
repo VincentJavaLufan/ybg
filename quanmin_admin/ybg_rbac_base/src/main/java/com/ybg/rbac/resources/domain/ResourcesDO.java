@@ -2,7 +2,7 @@ package com.ybg.rbac.resources.domain;
 import java.io.Serializable;
 
 /** 菜单类实体（ 数据库） **/
-public  class ResourcesI implements Serializable {
+public  class ResourcesDO implements Serializable {
 	
 	private static final long	serialVersionUID	= -8990353087139542849L;
 	/** 编号 **/
@@ -158,7 +158,7 @@ public  class ResourcesI implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ResourcesI other = (ResourcesI) obj;
+		ResourcesDO other = (ResourcesDO) obj;
 		if (colorid == null) {
 			if (other.colorid != null)
 				return false;

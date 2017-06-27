@@ -1,6 +1,6 @@
 package com.ybg.base.util;
 import org.springframework.security.core.context.SecurityContextHolder;
-import com.ybg.rbac.user.domain.User;
+import com.ybg.rbac.user.domain.UserVO;
 
 public class Common {
 	
@@ -9,10 +9,10 @@ public class Common {
 	 * @author lanyuan Email：mmm333zzz520@163.com date：2014-2-27
 	 * @param request
 	 * @return Object 返回是Object..需要转型为(Account)Object */
-	public static User findUserSession() {
-		User user = null;
+	public static UserVO findUserSession() {
+		UserVO user = null;
 		try {
-			user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			user = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		} catch (Exception e) {
 			return null;
 		}

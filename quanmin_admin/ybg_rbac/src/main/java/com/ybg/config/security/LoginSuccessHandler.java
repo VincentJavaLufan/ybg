@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import com.ybg.rbac.user.domain.User;
+import com.ybg.rbac.user.domain.UserVO;
 
 /** @author 朱良兴， 可以在这里将用户登录信息存入数据库。 */
 public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
@@ -13,7 +13,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 		// 获得授权后可得到用户信息 可使用SUserService进行数据库操作
-		User userDetails = (User) authentication.getPrincipal();
+		UserVO userDetails = (UserVO) authentication.getPrincipal();
 		request.getSession().setAttribute("userSession", userDetails);
 		// super.onAuthenticationSuccess(request, response, authentication);
 	}

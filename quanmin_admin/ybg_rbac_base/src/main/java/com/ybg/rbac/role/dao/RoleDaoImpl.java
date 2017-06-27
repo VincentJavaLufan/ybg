@@ -8,8 +8,8 @@ import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
-import com.ybg.rbac.role.domain.RoleResI;
-import com.ybg.rbac.role.domain.SysRole;
+import com.ybg.rbac.role.domain.RoleResDO;
+import com.ybg.rbac.role.domain.SysRoleVO;
 import com.ybg.rbac.role.mapper.RoleMapper;
 import com.ybg.rbac.role.qvo.RoleQvo;
 
@@ -19,7 +19,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 	private static String	QUERY_TABLE_NAME	= "sys_role role";
 	private static String	QUERY_TABLE_COLUMN	= " role.id,role.state,role.name,role.rolekey,role.description ,role.isdelete ";
 	
-	public SysRole createandid(SysRole role) throws Exception {
+	public SysRoleVO createandid(SysRoleVO role) throws Exception {
 		BaseMap<String, Object> createmap = new BaseMap<String, Object>();
 		String id = null;
 		createmap.put("state", role.getState());
@@ -61,14 +61,14 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		return sql.toString();
 	}
 	
-	public List<SysRole> query(RoleQvo qvo) {
+	public List<SysRoleVO> query(RoleQvo qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
 		return getJdbcTemplate().query(sql.toString(), new RoleMapper());
 	}
 	
-	public void saveOrupdateRole_Res(final List<RoleResI> list) {
+	public void saveOrupdateRole_Res(final List<RoleResDO> list) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(INSERT).append(INTO).append("sys_res_role (resid,roleid,state) ").append(VALUES).append("(?,?,?) ").append(ON).append(DUPLICATE).append(KEY).append(UPDATE).append("resid=?,roleid=?, state=? ");
 		getJdbcTemplate().batchUpdate(sql.toString(), new BatchPreparedStatementSetter() {

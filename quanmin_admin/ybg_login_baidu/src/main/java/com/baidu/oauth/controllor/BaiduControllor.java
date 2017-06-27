@@ -28,7 +28,7 @@ import com.baidu.oauth.service.BaiduUserService;
 import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.ServletUtil;
 import com.ybg.rbac.user.UserStateConstant;
-import com.ybg.rbac.user.domain.User;
+import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -114,7 +114,7 @@ public class BaiduControllor {
 			map.put("uid", loggedInUser.getUid());
 			return "/baidu/baidubund";
 		}
-		User user = this.userService.get(weibouser.getUserid());
+		UserVO user = this.userService.get(weibouser.getUserid());
 		if (user.getState().equals(UserStateConstant.LOCK)) {
 			return "/lock";
 		}
@@ -159,7 +159,7 @@ public class BaiduControllor {
 			return null;
 		}
 		baiduuser = new BaiduUser();
-		User user = userService.login(username);
+		UserVO user = userService.login(username);
 		// BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		if (!(user.isAccountNonLocked())) {
 			map.put("error", "用户已经被锁定不能绑定，请与管理员联系！");

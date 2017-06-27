@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.ybg.base.util.Common;
 import com.ybg.rbac.resources.service.ResourcesService;
-import com.ybg.rbac.user.domain.User;
+import com.ybg.rbac.user.domain.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -56,7 +56,7 @@ public class PageIndexController {
 	@ApiOperation(value = "登录成功后的页面 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/index.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String index(Model model) throws Exception {
-		User user = (User) Common.findUserSession();
+		UserVO user = (UserVO) Common.findUserSession();
 		if (user == null) {
 			return "redirect:/common/login_do/tologin.do";
 		}
@@ -70,7 +70,7 @@ public class PageIndexController {
 	@ApiOperation(value = "登录成功后的页面-菜单 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/menu.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String menu() {
-		User user = (User) Common.findUserSession();
+		UserVO user = (UserVO) Common.findUserSession();
 		if (user == null) {
 			return "";
 		}
@@ -81,7 +81,7 @@ public class PageIndexController {
 	@ApiOperation(value = "登录成功后的页面 -头部", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/head.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String head() {
-		User user = (User) Common.findUserSession();
+		UserVO user = (UserVO) Common.findUserSession();
 		if (user == null) {
 			return "";
 		}
@@ -91,7 +91,7 @@ public class PageIndexController {
 	@ApiOperation(value = "登录成功后的页面-欢迎页面 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/welcome.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String welcome() {
-		User user = (User) Common.findUserSession();
+		UserVO user = (UserVO) Common.findUserSession();
 		if (user == null) {
 			return "";
 		}

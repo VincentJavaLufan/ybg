@@ -8,10 +8,10 @@ import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
-import com.ybg.rbac.resources.domain.SysButton;
-import com.ybg.rbac.resources.domain.SysColor;
-import com.ybg.rbac.resources.domain.SysMenuIcon;
-import com.ybg.rbac.resources.domain.SysResources;
+import com.ybg.rbac.resources.domain.SysButtonVO;
+import com.ybg.rbac.resources.domain.SysColorVO;
+import com.ybg.rbac.resources.domain.SysMenuIconVO;
+import com.ybg.rbac.resources.domain.SysResourcesVO;
 import com.ybg.rbac.resources.mapper.ResourcesMapper;
 import com.ybg.rbac.resources.qvo.ResourcesQvo;
 import com.ybg.rbac.resources.qvo.SysButtonQvo;
@@ -24,7 +24,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 	private static String	QUERY_TABLE_NAME	= "sys_resources res";
 	private static String	QUERY_TABLE_COLUMN	= " res.id,res.name,res.parentid,res.reskey,res.type,res.resurl,res.level,res.icon,res.ishide,res.description,res.colorid ";
 	
-	public SysResources create(final SysResources bean) {
+	public SysResourcesVO create(final SysResourcesVO bean) {
 		BaseMap<String, Object> createmap = new BaseMap<String, Object>();
 		String id = null;
 		createmap.put("name", bean.getName());
@@ -82,14 +82,14 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		return sql.toString();
 	}
 	
-	public List<SysResources> query(ResourcesQvo qvo) {
+	public List<SysResourcesVO> query(ResourcesQvo qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",color.colorclass").append(FROM).append(QUERY_TABLE_NAME).append(",sys_color color");
 		sql.append(getcondition(qvo));
 		return getJdbcTemplate().query(sql.toString(), new ResourcesMapper());
 	}
 	
-	public List<SysResources> getRolesByUserId(String roleid) {
+	public List<SysResourcesVO> getRolesByUserId(String roleid) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",sc.colorclass").append(FROM).append("sys_resources res,sys_res_role rr,sys_color sc").append(WHERE).append("res.id=rr.resId");
 		sqlappen(sql, "rr.roleid", roleid);
@@ -99,7 +99,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		return getJdbcTemplate().query(sql.toString(), new ResourcesMapper());
 	}
 	
-	public List<SysResources> getOperatorButton(String roleid, String parentid) {
+	public List<SysResourcesVO> getOperatorButton(String roleid, String parentid) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",color.colorclass").append(FROM).append(QUERY_TABLE_NAME).append(", sys_res_role rr  ").append(",sys_color color");
 		sql.append(WHERE).append("res.id=rr.resId").append(AND).append("res.colorid=color.id").append(AND).append("rr.roleid=").append(roleid);
@@ -108,13 +108,13 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		return getJdbcTemplate().query(sql.toString(), new ResourcesMapper());
 	}
 	
-	public List<SysButton> querybutton(SysButtonQvo qvo) {
+	public List<SysButtonVO> querybutton(SysButtonQvo qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(" button.id,button.name,button.description,button.button ").append(FROM).append(" sys_button button");
-		return getJdbcTemplate().query(sql.toString(), new RowMapper<SysButton>() {
+		return getJdbcTemplate().query(sql.toString(), new RowMapper<SysButtonVO>() {
 			
-			public SysButton mapRow(ResultSet rs, int index) throws SQLException {
-				SysButton bean = new SysButton();
+			public SysButtonVO mapRow(ResultSet rs, int index) throws SQLException {
+				SysButtonVO bean = new SysButtonVO();
 				bean.setButton(rs.getString("button"));
 				bean.setDescription(rs.getString("description"));
 				bean.setId(rs.getInt("id"));
@@ -134,14 +134,14 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		return sql.toString();
 	}
 	
-	public List<SysMenuIcon> queryicon(SysMenuIconQvo qvo) {
+	public List<SysMenuIconVO> queryicon(SysMenuIconQvo qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append("icon.id,icon.name,icon.iconclass,icon.type").append(FROM).append("sys_icon icon");
 		sql.append(getIconCondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new RowMapper<SysMenuIcon>() {
+		return getJdbcTemplate().query(sql.toString(), new RowMapper<SysMenuIconVO>() {
 			
-			public SysMenuIcon mapRow(ResultSet rs, int index) throws SQLException {
-				SysMenuIcon bean = new SysMenuIcon();
+			public SysMenuIconVO mapRow(ResultSet rs, int index) throws SQLException {
+				SysMenuIconVO bean = new SysMenuIconVO();
 				bean.setId(rs.getInt("id"));
 				bean.setIconclass(rs.getString("iconclass"));
 				bean.setName(rs.getString("name"));
@@ -151,13 +151,13 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		});
 	}
 	
-	public List<SysColor> querycolor(SysColorQvo qvo) {
+	public List<SysColorVO> querycolor(SysColorQvo qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append("id,colorclass,description").append(FROM).append("sys_color");
-		return getJdbcTemplate().query(sql.toString(), new RowMapper<SysColor>() {
+		return getJdbcTemplate().query(sql.toString(), new RowMapper<SysColorVO>() {
 			
-			public SysColor mapRow(ResultSet rs, int index) throws SQLException {
-				SysColor bean = new SysColor();
+			public SysColorVO mapRow(ResultSet rs, int index) throws SQLException {
+				SysColorVO bean = new SysColorVO();
 				bean.setId(rs.getInt("id"));
 				bean.setDescription(rs.getString("description"));
 				bean.setColorclass(rs.getString("colorclass"));

@@ -2,7 +2,7 @@ package com.ybg.rbac.user.service;
 import java.util.List;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
-import com.ybg.rbac.user.domain.User;
+import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.qvo.UserQvo;
 
 public interface UserService {
@@ -11,7 +11,7 @@ public interface UserService {
 	 * 
 	 * @throws Exception **/
 	// sys_user
-	User createandid(User user) throws Exception;
+	UserVO createandid(UserVO user) throws Exception;
 	
 	/** 更新数据，条件 和 需要更新的字段都不能为空 不限个数个条件
 	 * 
@@ -31,11 +31,11 @@ public interface UserService {
 	
 	/** 不分页查询 **/
 	// sys_user
-	List<User> query(UserQvo qvo);
+	List<UserVO> query(UserQvo qvo);
 	
 	/** 登陆 **/
 	// sys_user
-	User login(String loginname);
+	UserVO login(String loginname);
 	
 	void remove(BaseMap<String, Object> wheremap);
 	
@@ -44,7 +44,7 @@ public interface UserService {
 	
 	void removebyid(String id);
 	
-	User get(String id);
+	UserVO get(String id);
 	
 	/** 查询账户是否已存在 **/
 	boolean checkisExist(UserQvo qvo);

@@ -17,8 +17,8 @@ import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.TreeObject;
 import com.ybg.base.util.TreeUtil;
-import com.ybg.rbac.resources.domain.SysButton;
-import com.ybg.rbac.resources.domain.SysResources;
+import com.ybg.rbac.resources.domain.SysButtonVO;
+import com.ybg.rbac.resources.domain.SysResourcesVO;
 import com.ybg.rbac.resources.qvo.ResourcesQvo;
 import com.ybg.rbac.resources.qvo.SysButtonQvo;
 import com.ybg.rbac.resources.qvo.SysColorQvo;
@@ -48,8 +48,8 @@ public class RescourcesControllor {
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String list(@ModelAttribute ResourcesQvo qvo, ModelMap map) {
 		List<TreeObject> list = new ArrayList<TreeObject>();
-		List<SysResources> dblist = resourcesService.query(qvo);
-		for (SysResources r : dblist) {
+		List<SysResourcesVO> dblist = resourcesService.query(qvo);
+		for (SysResourcesVO r : dblist) {
 			TreeObject ts = new TreeObject();
 			ts.setDescription(r.getDescription());
 			ts.setIcon(r.getIcon());
@@ -72,7 +72,7 @@ public class RescourcesControllor {
 	@ApiOperation(value = "创建授权资源", notes = "需要授权才可以访问的页面", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "create.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json create(@ModelAttribute SysResources res) {
+	public Json create(@ModelAttribute SysResourcesVO res) {
 		Json j = new Json();
 		j.setSuccess(true);
 		try {
@@ -89,7 +89,7 @@ public class RescourcesControllor {
 	@ApiOperation(value = "更新授权资源", notes = "需要授权才可以访问的页面", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "update.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json update(@ModelAttribute SysResources res) {
+	public Json update(@ModelAttribute SysResourcesVO res) {
 		Json j = new Json();
 		j.setSuccess(true);
 		try {
@@ -162,15 +162,15 @@ public class RescourcesControllor {
 	@ApiOperation(value = "授权资源树结构", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "reslists.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public List<SysResources> reslists(@ModelAttribute ResourcesQvo qvo) throws Exception {
-		List<SysResources> mps = resourcesService.query(qvo);
+	public List<SysResourcesVO> reslists(@ModelAttribute ResourcesQvo qvo) throws Exception {
+		List<SysResourcesVO> mps = resourcesService.query(qvo);
 		return mps;
 	}
 	
 	@ApiOperation(value = "授权资源 按钮列表", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "findByButtom.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public List<SysButton> findByButtom() {
+	public List<SysButtonVO> findByButtom() {
 		return resourcesService.querybutton(new SysButtonQvo());
 	}
 	
@@ -192,9 +192,9 @@ public class RescourcesControllor {
 	@ApiImplicitParams({ @ApiImplicitParam(name = "roleid", value = "角色ID", required = true, dataType = "java.lang.String") })
 	@RequestMapping(value = { "permissions.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String permissions(@ModelAttribute ResourcesQvo qvo, @RequestParam(name = "roleid", required = true) String roleid, ModelMap modelmap) {
-		List<SysResources> mps = resourcesService.query(qvo);
+		List<SysResourcesVO> mps = resourcesService.query(qvo);
 		List<TreeObject> list = new ArrayList<TreeObject>();
-		for (SysResources map : mps) {
+		for (SysResourcesVO map : mps) {
 			TreeObject ts = new TreeObject();
 			ts.setDescription(map.getDescription());
 			ts.setIcon(map.getIcon());
@@ -219,7 +219,7 @@ public class RescourcesControllor {
 	@ApiImplicitParam(name = "roleid", value = "角色ID", required = true, dataType = "java.lang.String")
 	@ResponseBody
 	@RequestMapping(value = { "findRes.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public List<SysResources> findUserRes(@RequestParam(name = "roleid", required = true) String roleid) {
+	public List<SysResourcesVO> findUserRes(@RequestParam(name = "roleid", required = true) String roleid) {
 		return resourcesService.getRolesByUserId(roleid);
 	}
 	

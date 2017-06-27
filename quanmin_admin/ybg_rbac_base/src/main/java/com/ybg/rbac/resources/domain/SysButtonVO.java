@@ -1,5 +1,5 @@
 package com.ybg.rbac.resources.domain;
-public class SysButton extends SysButtonI {
+public class SysButtonVO extends SysButtonDO {
 	
 	/**
 	 * 

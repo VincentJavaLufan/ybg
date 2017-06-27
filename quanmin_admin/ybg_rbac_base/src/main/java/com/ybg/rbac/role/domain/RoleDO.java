@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 /** 角色实体（数据库） **/
 @ApiModel("角色实体（数据库)")
-public class RoleI implements Serializable {
+public class RoleDO implements Serializable {
 	
 	private static final long	serialVersionUID	= -1911236558803130462L;
 	@ApiModelProperty(name = "id", dataType = "java.lang.String", value = "角色ID", hidden = false)
@@ -95,7 +95,7 @@ public class RoleI implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RoleI other = (RoleI) obj;
+		RoleDO other = (RoleDO) obj;
 		if (description == null) {
 			if (other.description != null)
 				return false;
