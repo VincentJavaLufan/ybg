@@ -20,7 +20,7 @@ import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.LoginService;
 import com.ybg.rbac.user.service.UserService;
-import cn.sina.domain.WeiboUser;
+import cn.sina.domain.WeiboUserVO;
 import cn.sina.service.WeiboUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -59,7 +59,7 @@ public class WeiboLoginControllor  {
 		String code = ServletUtil.getStringParamDefaultBlank(request, "code");
 		AccessToken token = oauth.getAccessTokenByCode(code);
 		// 查询绑定表中是否有绑定记录 没有则跳转到绑定账号 要求输入账号密码
-		WeiboUser weibouser = weiboUserService.get(token.getUid());
+		WeiboUserVO weibouser = weiboUserService.get(token.getUid());
 		if (weibouser == null) {
 			map.put("uid", token.getUid());
 			return "/weibo/weibobund";
@@ -93,7 +93,7 @@ public class WeiboLoginControllor  {
 		if (uid.equals("")) {
 			return null;
 		}
-		WeiboUser weibouser = weiboUserService.get(uid);
+		WeiboUserVO weibouser = weiboUserService.get(uid);
 		if (weibouser != null) {
 			return null;
 		}
@@ -109,7 +109,7 @@ public class WeiboLoginControllor  {
 			token2.setDetails(new WebAuthenticationDetails(request));
 			Authentication authenticatedUser = authenticationManager.authenticate(token2);
 			SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
-			WeiboUser bean = new WeiboUser();
+			WeiboUserVO bean = new WeiboUserVO();
 			bean.setUid(uid);
 			bean.setUserid(user.getId());
 			weiboUserService.create(bean);

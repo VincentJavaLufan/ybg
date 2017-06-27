@@ -1,8 +1,8 @@
 package cn.sina.qvo;
 import com.ybg.base.jdbc.BaseQvoInter;
-import cn.sina.domain.WeiboUserI;
+import cn.sina.domain.WeiboUserDO;
 
-public class WeiboUserQvo extends WeiboUserI implements BaseQvoInter {
+public class WeiboUserQuery extends WeiboUserDO implements BaseQvoInter {
 	
 	/**
 	 * 

@@ -2,5 +2,5 @@ package cn.sina.domain;
 
 
 @SuppressWarnings("serial")
-public class WeiboUser extends WeiboUserI{
+public class WeiboUserVO extends WeiboUserDO{
 }

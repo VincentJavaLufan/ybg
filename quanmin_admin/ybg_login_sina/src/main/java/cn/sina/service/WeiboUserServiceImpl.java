@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseMap;
 import cn.sina.dao.WeiboUserDao;
-import cn.sina.domain.WeiboUser;
-import cn.sina.qvo.WeiboUserQvo;
+import cn.sina.domain.WeiboUserVO;
+import cn.sina.qvo.WeiboUserQuery;
 
 @Repository
 public class WeiboUserServiceImpl implements WeiboUserService {
@@ -14,7 +14,7 @@ public class WeiboUserServiceImpl implements WeiboUserService {
 	@Autowired
 	WeiboUserDao weiboUserDao;
 	
-	public void create(WeiboUser bean) throws Exception {
+	public void create(WeiboUserVO bean) throws Exception {
 		weiboUserDao.create(bean);
 	}
 	
@@ -26,14 +26,14 @@ public class WeiboUserServiceImpl implements WeiboUserService {
 		weiboUserDao.remove(wheremap);
 	}
 	
-	public List<WeiboUser> query(WeiboUserQvo qvo) {
+	public List<WeiboUserVO> query(WeiboUserQuery qvo) {
 		return weiboUserDao.query(qvo);
 	}
 	
-	public WeiboUser get(String uid) {
-		WeiboUserQvo qvo = new WeiboUserQvo();
+	public WeiboUserVO get(String uid) {
+		WeiboUserQuery qvo = new WeiboUserQuery();
 		qvo.setUid(uid);
-		List<WeiboUser> list = weiboUserDao.query(qvo);
+		List<WeiboUserVO> list = weiboUserDao.query(qvo);
 		return list != null && list.size() > 0 ? list.get(0) : null;
 	}
 	

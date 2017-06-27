@@ -8,8 +8,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
-import cn.sina.domain.WeiboUser;
-import cn.sina.qvo.WeiboUserQvo;
+import cn.sina.domain.WeiboUserVO;
+import cn.sina.qvo.WeiboUserQuery;
 
 @Repository
 public class WeiboUserDaoImpl extends BaseDao implements WeiboUserDao {
@@ -18,7 +18,7 @@ public class WeiboUserDaoImpl extends BaseDao implements WeiboUserDao {
 	private static String		QUERY_TABLE_NAME	= "sina_user weibo";
 	
 	@Override
-	public void create(WeiboUser bean) throws Exception {
+	public void create(WeiboUserVO bean) throws Exception {
 		BaseMap<String, Object> createmap = new BaseMap<>();
 		createmap.put("userid", bean.getUserid());
 		createmap.put("uid", bean.getUid());
@@ -36,15 +36,15 @@ public class WeiboUserDaoImpl extends BaseDao implements WeiboUserDao {
 	}
 	
 	@Override
-	public List<WeiboUser> query(WeiboUserQvo qvo) {
+	public List<WeiboUserVO> query(WeiboUserQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new RowMapper<WeiboUser>() {
+		return getJdbcTemplate().query(sql.toString(), new RowMapper<WeiboUserVO>() {
 			
 			@Override
-			public WeiboUser mapRow(ResultSet rs, int index) throws SQLException {
-				WeiboUser bean = new WeiboUser();
+			public WeiboUserVO mapRow(ResultSet rs, int index) throws SQLException {
+				WeiboUserVO bean = new WeiboUserVO();
 				bean.setId(rs.getInt("id"));
 				bean.setUid(rs.getString("uid"));
 				bean.setUserid(rs.getString("userid"));
@@ -53,7 +53,7 @@ public class WeiboUserDaoImpl extends BaseDao implements WeiboUserDao {
 		});
 	}
 	
-	private String getcondition(WeiboUserQvo qvo) {
+	private String getcondition(WeiboUserQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
 		sqlappen(sql, "weibo.id", qvo.getId());

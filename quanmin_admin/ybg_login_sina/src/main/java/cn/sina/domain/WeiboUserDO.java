@@ -2,7 +2,7 @@ package cn.sina.domain;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class WeiboUserI implements Serializable {
+public class WeiboUserDO implements Serializable {
 	
 	private Integer	id;
 	private String	uid;
