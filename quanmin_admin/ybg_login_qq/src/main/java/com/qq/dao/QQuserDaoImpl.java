@@ -4,8 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import com.qq.domain.QQuser;
-import com.qq.qvo.QQuserQvo;
+import com.qq.domain.QQuserVO;
+import com.qq.qvo.QQuserQuery;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
 
@@ -16,7 +16,7 @@ public class QQuserDaoImpl extends BaseDao implements QQuserDao {
 	private static String		QUERY_TABLE_NAME	= "qq_user qq";
 	
 	@Override
-	public void create(QQuser bean) throws Exception {
+	public void create(QQuserVO bean) throws Exception {
 		BaseMap<String, Object> createmap = new BaseMap<String, Object>();
 		createmap.put("openid", bean.getOpenid());
 		createmap.put("userid", bean.getUserid());
@@ -34,15 +34,15 @@ public class QQuserDaoImpl extends BaseDao implements QQuserDao {
 	}
 	
 	@Override
-	public List<QQuser> query(QQuserQvo qvo) {
+	public List<QQuserVO> query(QQuserQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new RowMapper<QQuser>() {
+		return getJdbcTemplate().query(sql.toString(), new RowMapper<QQuserVO>() {
 			
 			@Override
-			public QQuser mapRow(ResultSet rs, int index) throws SQLException {
-				QQuser bean = new QQuser();
+			public QQuserVO mapRow(ResultSet rs, int index) throws SQLException {
+				QQuserVO bean = new QQuserVO();
 				bean.setId(rs.getString("id"));
 				bean.setOpenid(rs.getString("openid"));
 				bean.setUserid(rs.getString("userid"));
@@ -51,7 +51,7 @@ public class QQuserDaoImpl extends BaseDao implements QQuserDao {
 		});
 	}
 	
-	private String getcondition(QQuserQvo qvo) {
+	private String getcondition(QQuserQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
 		sqlappen(sql, "qq.id", qvo.getId());

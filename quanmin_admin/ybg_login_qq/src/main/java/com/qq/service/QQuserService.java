@@ -3,8 +3,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.qq.dao.QQuserDao;
-import com.qq.domain.QQuser;
-import com.qq.qvo.QQuserQvo;
+import com.qq.domain.QQuserVO;
+import com.qq.qvo.QQuserQuery;
 import com.ybg.base.jdbc.BaseMap;
 
 @Service
@@ -13,7 +13,7 @@ public class QQuserService {
 	@Autowired
 	QQuserDao	qQuserDao;
 	
-	public void create(QQuser bean) throws Exception {
+	public void create(QQuserVO bean) throws Exception {
 		qQuserDao.create(bean);
 	}
 	
@@ -25,14 +25,14 @@ public class QQuserService {
 		qQuserDao.remove(wheremap);
 	}
 	
-	public List<QQuser> query(QQuserQvo qvo) {
+	public List<QQuserVO> query(QQuserQuery qvo) {
 		return qQuserDao.query(qvo);
 	}
 	
-	public QQuser getByopenId(String openid) {
-		QQuserQvo qvo = new QQuserQvo();
+	public QQuserVO getByopenId(String openid) {
+		QQuserQuery qvo = new QQuserQuery();
 		qvo.setOpenid(openid);
-		List<QQuser> list = qQuserDao.query(qvo);
+		List<QQuserVO> list = qQuserDao.query(qvo);
 		return list != null && list.size() > 0 ? list.get(0) : null;
 	}
 }

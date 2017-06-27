@@ -16,7 +16,7 @@ import com.qq.connect.QQConnectException;
 import com.qq.connect.api.OpenID;
 import com.qq.connect.javabeans.AccessToken;
 import com.qq.connect.oauth.Oauth;
-import com.qq.domain.QQuser;
+import com.qq.domain.QQuserVO;
 import com.qq.service.QQuserService;
 import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.ServletUtil;
@@ -57,7 +57,7 @@ public class QQloginControllor {
 			// 利用获取到的accessToken 去获取当前用的openid -------- start
 			OpenID openIDObj = new OpenID(accessToken);
 			openID = openIDObj.getUserOpenID();
-			QQuser qquser = qQuserService.getByopenId(openID);
+			QQuserVO qquser = qQuserService.getByopenId(openID);
 			if (qquser == null) {
 				map.put("openid", openID);
 				return "/qq/qqbund";
@@ -91,7 +91,7 @@ public class QQloginControllor {
 		if (openid.equals("")) {
 			return null;
 		}
-		QQuser weibouser = qQuserService.getByopenId(openid);
+		QQuserVO weibouser = qQuserService.getByopenId(openid);
 		if (weibouser != null) {
 			return null;
 		}
@@ -108,7 +108,7 @@ public class QQloginControllor {
 			token2.setDetails(new WebAuthenticationDetails(request));
 			Authentication authenticatedUser = authenticationManager.authenticate(token2);
 			SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
-			QQuser bean = new QQuser();
+			QQuserVO bean = new QQuserVO();
 			bean.setOpenid(openid);
 			bean.setUserid(user.getId());
 			qQuserService.create(bean);

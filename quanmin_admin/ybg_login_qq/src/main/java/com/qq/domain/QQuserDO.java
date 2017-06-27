@@ -2,7 +2,7 @@ package com.qq.domain;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class QQuserI implements Serializable {
+public class QQuserDO implements Serializable {
 	
 	private String	id;
 	private String	openid;
