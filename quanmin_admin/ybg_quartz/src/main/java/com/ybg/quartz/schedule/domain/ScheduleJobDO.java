@@ -30,7 +30,7 @@ public class ScheduleJobDO implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "ScheduleJobEntity [jobId=" + jobId + ", beanName=" + beanName + ", methodName=" + methodName + ", params=" + params + ", cronExpression=" + cronExpression + ", status=" + status + ", remark=" + remark + ", createTime=" + createTime + "]";
+		return "ScheduleJobDO [jobId=" + jobId + ", beanName=" + beanName + ", methodName=" + methodName + ", params=" + params + ", cronExpression=" + cronExpression + ", status=" + status + ", remark=" + remark + ", createTime=" + createTime + "]";
 	}
 	
 	/** 设置：任务id

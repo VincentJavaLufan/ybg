@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import com.ybg.base.jdbc.util.DateUtil;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
 
@@ -37,11 +38,15 @@ public class BaseDao extends BaseSQL {
 		UUID uuid = UUID.randomUUID();
 		String id = uuid.toString().replaceAll("-", "");
 		StringBuilder sql = new StringBuilder();
+		
 		sql.append(INSERT).append(INTO).append(table_name).append("(");
+		
 		if (createmap != null && createmap.size() > 0) {
 			if (id_name != null && id_name.trim().length() > 0) {
 				createmap.put(id_name, id);
 			}
+			createmap.put("gmt_modified", DateUtil.getDateTime());
+			createmap.put("gmt_create", DateUtil.getDateTime());
 			for (Entry<String, Object> entry : createmap.entrySet()) {
 				sql.append(entry.getKey()).append(",");
 			}
@@ -122,6 +127,7 @@ public class BaseDao extends BaseSQL {
 	 *            返回的类型
 	 * @throws Exception **/
 	@SuppressWarnings("unused")
+	@Deprecated
 	public Object basecreate(final Map<String, Object> createmap, String table_name, boolean returnid, Object idtype) throws Exception {
 		final BaseMap<String, Object> basemap = new BaseMap<String, Object>();
 		for (Entry<String, Object> entry : createmap.entrySet()) {
@@ -279,6 +285,8 @@ public class BaseDao extends BaseSQL {
 			if (id_name != null && id_name.trim().length() > 0) {
 				createmap.put(id_name, id);
 			}
+			createmap.put("gmt_modified", DateUtil.getDateTime());
+			createmap.put("gmt_create", DateUtil.getDateTime());
 			for (Entry<String, Object> entry : createmap.entrySet()) {
 				sql.append(entry.getKey() + ",");
 			}
@@ -304,6 +312,7 @@ public class BaseDao extends BaseSQL {
 		for (String u : unionkey) {
 			updatemap.remove(u);
 		}
+		updatemap.remove("gmt_create");
 		updatemap.remove(id_name);
 		if (updatemap != null && updatemap.size() > 0) {
 			for (Entry<String, Object> entry : updatemap.entrySet()) {
@@ -421,6 +430,9 @@ public class BaseDao extends BaseSQL {
 		StringBuilder sql = new StringBuilder();
 		sql.append(UPDATE + table_name + SET);
 		if (updatemap != null && updatemap.size() > 0) {
+			updatemap.put("gmt_modified", DateUtil.getDateTime());
+			
+			
 			for (Entry<String, Object> entry : updatemap.entrySet()) {
 				sql.append(entry.getKey() + "=?,");
 			}
