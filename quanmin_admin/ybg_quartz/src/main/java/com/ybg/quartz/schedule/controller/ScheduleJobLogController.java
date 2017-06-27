@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.base.util.Page;
-import com.ybg.quartz.schedule.qvo.ScheduleJobLogQvo;
+import com.ybg.quartz.schedule.qvo.ScheduleJobLogQuery;
 import com.ybg.quartz.schedule.service.ScheduleJobLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -43,7 +43,7 @@ public class ScheduleJobLogController {
 	public Page list(@RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow) {
 		Page page = new Page();
 		page.setCurPage(pageNow);
-		ScheduleJobLogQvo qvo = new ScheduleJobLogQvo();
+		ScheduleJobLogQuery qvo = new ScheduleJobLogQuery();
 		page = scheduleJobLogService.queryList(page, qvo);
 		page.init();
 		return page;

@@ -2,22 +2,22 @@ package com.ybg.quartz.schedule.service;
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 import com.ybg.base.util.Page;
-import com.ybg.quartz.schedule.domain.ScheduleJobEntity;
-import com.ybg.quartz.schedule.qvo.ScheduleJobQvo;
+import com.ybg.quartz.schedule.domain.ScheduleJobDO;
+import com.ybg.quartz.schedule.qvo.ScheduleJobQuery;
 
 public interface ScheduleJobService {
 	
-	ScheduleJobEntity queryObject(Long jobId);
+	ScheduleJobDO queryObject(Long jobId);
 	
-	Page queryList(Page page, ScheduleJobQvo qvo);
+	Page queryList(Page page, ScheduleJobQuery qvo);
 	
-	List<ScheduleJobEntity> queryList(ScheduleJobQvo qvo);
-	
-	@Transactional
-	void save(ScheduleJobEntity scheduleJob) throws Exception;
+	List<ScheduleJobDO> queryList(ScheduleJobQuery qvo);
 	
 	@Transactional
-	void update(ScheduleJobEntity scheduleJob);
+	void save(ScheduleJobDO scheduleJob) throws Exception;
+	
+	@Transactional
+	void update(ScheduleJobDO scheduleJob);
 	
 	@Transactional
 	void deleteBatch(Long[] jobIds);

@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ybg.base.jdbc.util.DateUtil;
 import com.ybg.base.util.Page;
 import com.ybg.quartz.schedule.dao.ScheduleJobDao;
-import com.ybg.quartz.schedule.domain.ScheduleJobEntity;
-import com.ybg.quartz.schedule.qvo.ScheduleJobQvo;
+import com.ybg.quartz.schedule.domain.ScheduleJobDO;
+import com.ybg.quartz.schedule.qvo.ScheduleJobQuery;
 import com.ybg.quartz.schedule.util.ScheduleUtils;
 import com.ybg.quartz.schedule.util.Constant.ScheduleStatus;
 
@@ -27,8 +27,8 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 	/** 项目启动时，初始化定时器 */
 	@PostConstruct
 	public void init() {
-		List<ScheduleJobEntity> scheduleJobList = schedulerJobDao.queryList(new ScheduleJobQvo());
-		for (ScheduleJobEntity scheduleJob : scheduleJobList) {
+		List<ScheduleJobDO> scheduleJobList = schedulerJobDao.queryList(new ScheduleJobQuery());
+		for (ScheduleJobDO scheduleJob : scheduleJobList) {
 			CronTrigger cronTrigger = ScheduleUtils.getCronTrigger(scheduler, scheduleJob.getJobId());
 			// 如果不存在，则创建
 			if (cronTrigger == null) {
@@ -40,20 +40,20 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 		}
 	}
 	
-	public ScheduleJobEntity queryObject(Long jobId) {
+	public ScheduleJobDO queryObject(Long jobId) {
 		return schedulerJobDao.queryObject(jobId);
 	}
 	
-	public Page queryList(Page page, ScheduleJobQvo qvo) {
+	public Page queryList(Page page, ScheduleJobQuery qvo) {
 		return schedulerJobDao.queryList(page, qvo);
 	}
 	
-	public List<ScheduleJobEntity> queryList(ScheduleJobQvo qvo) {
+	public List<ScheduleJobDO> queryList(ScheduleJobQuery qvo) {
 		return schedulerJobDao.queryList(qvo);
 	}
 	
 	@Transactional
-	public void save(ScheduleJobEntity scheduleJob) throws Exception {
+	public void save(ScheduleJobDO scheduleJob) throws Exception {
 		scheduleJob.setCreateTime(DateUtil.getDate());
 		scheduleJob.setStatus(ScheduleStatus.NORMAL.getValue());
 		schedulerJobDao.save(scheduleJob);
@@ -61,7 +61,7 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 	}
 	
 	@Transactional
-	public void update(ScheduleJobEntity scheduleJob) {
+	public void update(ScheduleJobDO scheduleJob) {
 		ScheduleUtils.updateScheduleJob(scheduler, scheduleJob);
 		schedulerJobDao.update(scheduleJob);
 	}

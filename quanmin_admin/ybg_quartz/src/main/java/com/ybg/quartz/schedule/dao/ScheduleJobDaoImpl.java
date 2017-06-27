@@ -12,8 +12,8 @@ import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
-import com.ybg.quartz.schedule.domain.ScheduleJobEntity;
-import com.ybg.quartz.schedule.qvo.ScheduleJobQvo;
+import com.ybg.quartz.schedule.domain.ScheduleJobDO;
+import com.ybg.quartz.schedule.qvo.ScheduleJobQuery;
 
 @Repository
 public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
@@ -38,14 +38,14 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 	}
 	
 	@Override
-	public ScheduleJobEntity queryObject(Long jobId) {
+	public ScheduleJobDO queryObject(Long jobId) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select job_id,bean_name,method_name,params,cron_expression,status,remark,create_time from schedule_job where job_id = " + jobId);
-		List<ScheduleJobEntity> list = getJdbcTemplate().query(sql.toString(), new RowMapper<ScheduleJobEntity>() {
+		List<ScheduleJobDO> list = getJdbcTemplate().query(sql.toString(), new RowMapper<ScheduleJobDO>() {
 			
 			@Override
-			public ScheduleJobEntity mapRow(ResultSet rs, int index) throws SQLException {
-				ScheduleJobEntity bean = new ScheduleJobEntity();
+			public ScheduleJobDO mapRow(ResultSet rs, int index) throws SQLException {
+				ScheduleJobDO bean = new ScheduleJobDO();
 				bean.setBeanName(rs.getString("bean_name"));
 				bean.setCreateTime(rs.getString("create_time"));
 				bean.setCronExpression(rs.getString("cron_expression"));
@@ -79,7 +79,7 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 	}
 	
 	@Override
-	public void update(ScheduleJobEntity scheduleJob) {
+	public void update(ScheduleJobDO scheduleJob) {
 		BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
 		updatemap.put("bean_name", scheduleJob.getBeanName());
 		updatemap.put("create_time", scheduleJob.getCreateTime());
@@ -94,7 +94,7 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 	}
 	
 	@Override
-	public void save(ScheduleJobEntity scheduleJob) throws Exception {
+	public void save(ScheduleJobDO scheduleJob) throws Exception {
 		Map<String, Object> createmap = new LinkedHashMap<String, Object>();
 		createmap.put("bean_name", scheduleJob.getBeanName());
 		createmap.put("create_time", scheduleJob.getCreateTime());
@@ -107,15 +107,15 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 	}
 	
 	@Override
-	public Page queryList(Page page, ScheduleJobQvo qvo) {
+	public Page queryList(Page page, ScheduleJobQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select job_id,bean_name,method_name,params,cron_expression,status,remark,create_time  from schedule_job job ");
 		sqlappen(sql, "bean_name", qvo.getBeanName());
-		List<ScheduleJobEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new RowMapper<ScheduleJobEntity>() {
+		List<ScheduleJobDO> list = getJdbcTemplate().query(page.getPagesql(sql), new RowMapper<ScheduleJobDO>() {
 			
 			@Override
-			public ScheduleJobEntity mapRow(ResultSet rs, int index) throws SQLException {
-				ScheduleJobEntity bean = new ScheduleJobEntity();
+			public ScheduleJobDO mapRow(ResultSet rs, int index) throws SQLException {
+				ScheduleJobDO bean = new ScheduleJobDO();
 				bean.setBeanName(rs.getString("bean_name"));
 				bean.setCreateTime(rs.getString("create_time"));
 				bean.setCronExpression(rs.getString("cron_expression"));
@@ -133,18 +133,18 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 	}
 	
 	@Override
-	public List<ScheduleJobEntity> queryList(ScheduleJobQvo qvo) {
+	public List<ScheduleJobDO> queryList(ScheduleJobQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select job_id,bean_name,method_name,params,cron_expression,status,remark,create_time  from schedule_job job ");
 		sql.append(" where 1=1 ");
 		sqlappen(sql, "beanname", qvo.getBeanName());
 		sql.append(" and status = 0 ");
 	
-		return getJdbcTemplate().query(sql.toString(), new RowMapper<ScheduleJobEntity>() {
+		return getJdbcTemplate().query(sql.toString(), new RowMapper<ScheduleJobDO>() {
 			
 			@Override
-			public ScheduleJobEntity mapRow(ResultSet rs, int index) throws SQLException {
-				ScheduleJobEntity bean = new ScheduleJobEntity();
+			public ScheduleJobDO mapRow(ResultSet rs, int index) throws SQLException {
+				ScheduleJobDO bean = new ScheduleJobDO();
 				bean.setBeanName(rs.getString("bean_name"));
 				bean.setCreateTime(rs.getString("create_time"));
 				bean.setCronExpression(rs.getString("cron_expression"));

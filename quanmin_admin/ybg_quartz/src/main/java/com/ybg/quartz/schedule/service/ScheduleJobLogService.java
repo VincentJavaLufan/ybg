@@ -1,11 +1,11 @@
 package com.ybg.quartz.schedule.service;
 import com.ybg.base.util.Page;
-import com.ybg.quartz.schedule.domain.ScheduleJobLogEntity;
-import com.ybg.quartz.schedule.qvo.ScheduleJobLogQvo;
+import com.ybg.quartz.schedule.domain.ScheduleJobLogDO;
+import com.ybg.quartz.schedule.qvo.ScheduleJobLogQuery;
 
 public interface ScheduleJobLogService {
 	
-	ScheduleJobLogEntity queryObject(Long jobId);
+	ScheduleJobLogDO queryObject(Long jobId);
 	
 	// public List<ScheduleJobLogEntity> queryList(Map<String, Object> map) {
 	// return scheduleJobLogDao.queryList(map);
@@ -15,7 +15,7 @@ public interface ScheduleJobLogService {
 	// public int queryTotal(Map<String, Object> map) {
 	// return scheduleJobLogDao.queryTotal(map);
 	// }
-	Page queryList(Page page, ScheduleJobLogQvo qvo);
+	Page queryList(Page page, ScheduleJobLogQuery qvo);
 	
-	void save(ScheduleJobLogEntity log) throws Exception;
+	void save(ScheduleJobLogDO log) throws Exception;
 }
