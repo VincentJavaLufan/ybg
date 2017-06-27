@@ -13,10 +13,10 @@ import com.ybg.rbac.resources.domain.SysColorVO;
 import com.ybg.rbac.resources.domain.SysMenuIconVO;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
 import com.ybg.rbac.resources.mapper.ResourcesMapper;
-import com.ybg.rbac.resources.qvo.ResourcesQvo;
-import com.ybg.rbac.resources.qvo.SysButtonQvo;
-import com.ybg.rbac.resources.qvo.SysColorQvo;
-import com.ybg.rbac.resources.qvo.SysMenuIconQvo;
+import com.ybg.rbac.resources.qvo.ResourcesQuery;
+import com.ybg.rbac.resources.qvo.SysButtonQuery;
+import com.ybg.rbac.resources.qvo.SysColorQuery;
+import com.ybg.rbac.resources.qvo.SysMenuIconQuery;
 
 @Repository
 public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
@@ -50,7 +50,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		this.baseupdate(updatemap, WHEREmap, "sys_resources");
 	}
 	
-	public Page query(Page page, ResourcesQvo qvo) {
+	public Page query(Page page, ResourcesQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",color.colorclass").append(FROM).append(QUERY_TABLE_NAME).append(",sys_color color");
 		sql.append(getcondition(qvo));
@@ -59,7 +59,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		return page;
 	}
 	
-	private String getcondition(ResourcesQvo qvo) {
+	private String getcondition(ResourcesQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
 		if (QvoConditionUtil.checkInteger(qvo.getIsdelete())) {
@@ -82,7 +82,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		return sql.toString();
 	}
 	
-	public List<SysResourcesVO> query(ResourcesQvo qvo) {
+	public List<SysResourcesVO> query(ResourcesQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",color.colorclass").append(FROM).append(QUERY_TABLE_NAME).append(",sys_color color");
 		sql.append(getcondition(qvo));
@@ -108,7 +108,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		return getJdbcTemplate().query(sql.toString(), new ResourcesMapper());
 	}
 	
-	public List<SysButtonVO> querybutton(SysButtonQvo qvo) {
+	public List<SysButtonVO> querybutton(SysButtonQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(" button.id,button.name,button.description,button.button ").append(FROM).append(" sys_button button");
 		return getJdbcTemplate().query(sql.toString(), new RowMapper<SysButtonVO>() {
@@ -124,7 +124,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		});
 	}
 	
-	private String getIconCondition(SysMenuIconQvo qvo) {
+	private String getIconCondition(SysMenuIconQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
 		sqlappen(sql, "icon.id", qvo.getId());
@@ -134,7 +134,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		return sql.toString();
 	}
 	
-	public List<SysMenuIconVO> queryicon(SysMenuIconQvo qvo) {
+	public List<SysMenuIconVO> queryicon(SysMenuIconQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append("icon.id,icon.name,icon.iconclass,icon.type").append(FROM).append("sys_icon icon");
 		sql.append(getIconCondition(qvo));
@@ -151,7 +151,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		});
 	}
 	
-	public List<SysColorVO> querycolor(SysColorQvo qvo) {
+	public List<SysColorVO> querycolor(SysColorQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append("id,colorclass,description").append(FROM).append("sys_color");
 		return getJdbcTemplate().query(sql.toString(), new RowMapper<SysColorVO>() {

@@ -19,10 +19,10 @@ import com.ybg.base.util.TreeObject;
 import com.ybg.base.util.TreeUtil;
 import com.ybg.rbac.resources.domain.SysButtonVO;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
-import com.ybg.rbac.resources.qvo.ResourcesQvo;
-import com.ybg.rbac.resources.qvo.SysButtonQvo;
-import com.ybg.rbac.resources.qvo.SysColorQvo;
-import com.ybg.rbac.resources.qvo.SysMenuIconQvo;
+import com.ybg.rbac.resources.qvo.ResourcesQuery;
+import com.ybg.rbac.resources.qvo.SysButtonQuery;
+import com.ybg.rbac.resources.qvo.SysColorQuery;
+import com.ybg.rbac.resources.qvo.SysMenuIconQuery;
 import com.ybg.rbac.resources.service.ResourcesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -46,7 +46,7 @@ public class RescourcesControllor {
 	
 	@ApiOperation(value = "资源页面数据列表", notes = "需要授权才可以访问的页面", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String list(@ModelAttribute ResourcesQvo qvo, ModelMap map) {
+	public String list(@ModelAttribute ResourcesQuery qvo, ModelMap map) {
 		List<TreeObject> list = new ArrayList<TreeObject>();
 		List<SysResourcesVO> dblist = resourcesService.query(qvo);
 		for (SysResourcesVO r : dblist) {
@@ -140,9 +140,9 @@ public class RescourcesControllor {
 	@ApiOperation(value = "添加授权资源页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String toadd(ModelMap map) {
-		SysMenuIconQvo qvo = new SysMenuIconQvo();
+		SysMenuIconQuery qvo = new SysMenuIconQuery();
 		map.put("iconlist", resourcesService.queryicon(qvo));
-		SysColorQvo colorqvo = new SysColorQvo();
+		SysColorQuery colorqvo = new SysColorQuery();
 		map.put("colorlist", resourcesService.querycolor(colorqvo));
 		return "/system/resources/add";
 	}
@@ -151,9 +151,9 @@ public class RescourcesControllor {
 	@RequestMapping(value = { "toupdate.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String toupdate(@RequestParam(name = "id", required = true) String id, ModelMap map) {
 		map.addAttribute("resources", resourcesService.get(id));
-		SysMenuIconQvo qvo = new SysMenuIconQvo();
+		SysMenuIconQuery qvo = new SysMenuIconQuery();
 		map.put("iconlist", resourcesService.queryicon(qvo));
-		SysColorQvo colorqvo = new SysColorQvo();
+		SysColorQuery colorqvo = new SysColorQuery();
 		map.put("colorlist", resourcesService.querycolor(colorqvo));
 		return "/system/resources/edit";
 	}
@@ -162,7 +162,7 @@ public class RescourcesControllor {
 	@ApiOperation(value = "授权资源树结构", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "reslists.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public List<SysResourcesVO> reslists(@ModelAttribute ResourcesQvo qvo) throws Exception {
+	public List<SysResourcesVO> reslists(@ModelAttribute ResourcesQuery qvo) throws Exception {
 		List<SysResourcesVO> mps = resourcesService.query(qvo);
 		return mps;
 	}
@@ -171,7 +171,7 @@ public class RescourcesControllor {
 	@ResponseBody
 	@RequestMapping(value = { "findByButtom.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public List<SysButtonVO> findByButtom() {
-		return resourcesService.querybutton(new SysButtonQvo());
+		return resourcesService.querybutton(new SysButtonQuery());
 	}
 	
 	@ApiOperation(value = "检测授权资源是否存在", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -182,7 +182,7 @@ public class RescourcesControllor {
 		if (!QvoConditionUtil.checkString(reskey) && !QvoConditionUtil.checkString(name)) {
 			return false;
 		}
-		ResourcesQvo qvo = new ResourcesQvo();
+		ResourcesQuery qvo = new ResourcesQuery();
 		qvo.setReskey(reskey);
 		qvo.setName(name);
 		return resourcesService.query(qvo).size() > 0 ? false : true;
@@ -191,7 +191,7 @@ public class RescourcesControllor {
 	@ApiOperation(value = "权限分配页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "roleid", value = "角色ID", required = true, dataType = "java.lang.String") })
 	@RequestMapping(value = { "permissions.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String permissions(@ModelAttribute ResourcesQvo qvo, @RequestParam(name = "roleid", required = true) String roleid, ModelMap modelmap) {
+	public String permissions(@ModelAttribute ResourcesQuery qvo, @RequestParam(name = "roleid", required = true) String roleid, ModelMap modelmap) {
 		List<SysResourcesVO> mps = resourcesService.query(qvo);
 		List<TreeObject> list = new ArrayList<TreeObject>();
 		for (SysResourcesVO map : mps) {

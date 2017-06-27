@@ -10,7 +10,7 @@ import com.ybg.rbac.resources.domain.Button;
 import com.ybg.rbac.resources.domain.Directories;
 import com.ybg.rbac.resources.domain.Menu;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
-import com.ybg.rbac.resources.qvo.ResourcesQvo;
+import com.ybg.rbac.resources.qvo.ResourcesQuery;
 import com.ybg.rbac.resources.service.ResourcesService;
 
 /** 数据库转换成实体显示 ,实体转换成数据库存储 **/
@@ -24,7 +24,7 @@ public class ResourcesUtil {
 	
 	/** 获取整个菜单 数据库转换成逻辑结构 **/
 	public List<Directories> getAllResources() {
-		ResourcesQvo qvo = new ResourcesQvo();
+		ResourcesQuery qvo = new ResourcesQuery();
 		qvo.setIsdelete(0);
 		List<SysResourcesVO> alldb = resourcesService.query(qvo);
 		List<Directories> orgs = new ArrayList<Directories>();
@@ -67,7 +67,7 @@ public class ResourcesUtil {
 		if (iddbs == null) {
 			return null;
 		}
-		ResourcesQvo qvo = new ResourcesQvo();
+		ResourcesQuery qvo = new ResourcesQuery();
 		qvo.setIsdelete(0);
 		List<Directories> orgs = getAllResources();
 		if (iddbs.getType().equals("1")) {

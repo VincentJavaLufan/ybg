@@ -6,10 +6,10 @@ import com.ybg.rbac.resources.domain.SysButtonVO;
 import com.ybg.rbac.resources.domain.SysColorVO;
 import com.ybg.rbac.resources.domain.SysMenuIconVO;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
-import com.ybg.rbac.resources.qvo.ResourcesQvo;
-import com.ybg.rbac.resources.qvo.SysButtonQvo;
-import com.ybg.rbac.resources.qvo.SysColorQvo;
-import com.ybg.rbac.resources.qvo.SysMenuIconQvo;
+import com.ybg.rbac.resources.qvo.ResourcesQuery;
+import com.ybg.rbac.resources.qvo.SysButtonQuery;
+import com.ybg.rbac.resources.qvo.SysColorQuery;
+import com.ybg.rbac.resources.qvo.SysMenuIconQuery;
 
 public interface ResourcesService {
 	
@@ -31,11 +31,11 @@ public interface ResourcesService {
 	
 	/** 分页查询 **/
 	// sys_resources
-	Page query(Page page, ResourcesQvo qvo);
+	Page query(Page page, ResourcesQuery qvo);
 	
 	/** 不分页查询 **/
 	// sys_resources
-	List<SysResourcesVO> query(ResourcesQvo qvo);
+	List<SysResourcesVO> query(ResourcesQuery qvo);
 	
 	/** 角色 权限集合 **/
 	// sys_res_role
@@ -49,13 +49,13 @@ public interface ResourcesService {
 	
 	/** 授权按钮组 **/
 	// sys_button
-	List<SysButtonVO> querybutton(SysButtonQvo qvo);
+	List<SysButtonVO> querybutton(SysButtonQuery qvo);
 	
 	/** 获取菜单样式列表 **/
-	List<SysMenuIconVO> queryicon(SysMenuIconQvo qvo);
+	List<SysMenuIconVO> queryicon(SysMenuIconQuery qvo);
 	
 	/** 获取颜色列表 **/
-	List<SysColorVO> querycolor(SysColorQvo qvo);
+	List<SysColorVO> querycolor(SysColorQuery qvo);
 	
 	void removebyid(String id);
 	

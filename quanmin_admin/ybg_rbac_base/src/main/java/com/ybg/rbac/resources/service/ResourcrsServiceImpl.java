@@ -12,10 +12,10 @@ import com.ybg.rbac.resources.domain.SysButtonVO;
 import com.ybg.rbac.resources.domain.SysColorVO;
 import com.ybg.rbac.resources.domain.SysMenuIconVO;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
-import com.ybg.rbac.resources.qvo.ResourcesQvo;
-import com.ybg.rbac.resources.qvo.SysButtonQvo;
-import com.ybg.rbac.resources.qvo.SysColorQvo;
-import com.ybg.rbac.resources.qvo.SysMenuIconQvo;
+import com.ybg.rbac.resources.qvo.ResourcesQuery;
+import com.ybg.rbac.resources.qvo.SysButtonQuery;
+import com.ybg.rbac.resources.qvo.SysColorQuery;
+import com.ybg.rbac.resources.qvo.SysMenuIconQuery;
 
 @Repository
 public class ResourcrsServiceImpl implements ResourcesService {
@@ -56,7 +56,7 @@ public class ResourcrsServiceImpl implements ResourcesService {
 	/** 获取单个实体信息 **/
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]")
 	public SysResourcesVO get(String id) {
-		ResourcesQvo qvo = new ResourcesQvo();
+		ResourcesQuery qvo = new ResourcesQuery();
 		qvo.setId(id);
 		List<SysResourcesVO> list = resourcesDao.query(qvo);
 		return list != null && list.size() > 0 ? list.get(0) : null;
@@ -64,13 +64,13 @@ public class ResourcrsServiceImpl implements ResourcesService {
 	
 	/** 分页查询 **/
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]+#root.method.name+#root.args[1]")
-	public Page query(Page page, ResourcesQvo qvo) {
+	public Page query(Page page, ResourcesQuery qvo) {
 		return resourcesDao.query(page, qvo);
 	}
 	
 	/** 不分页查询 **/
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]")
-	public List<SysResourcesVO> query(ResourcesQvo qvo) {
+	public List<SysResourcesVO> query(ResourcesQuery qvo) {
 		return resourcesDao.query(qvo);
 	}
 	
@@ -88,19 +88,19 @@ public class ResourcrsServiceImpl implements ResourcesService {
 	
 	/** 授权按钮组 **/
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]")
-	public List<SysButtonVO> querybutton(SysButtonQvo qvo) {
+	public List<SysButtonVO> querybutton(SysButtonQuery qvo) {
 		return resourcesDao.querybutton(qvo);
 	}
 	
 	/*** 菜单Icon **/
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]")
-	public List<SysMenuIconVO> queryicon(SysMenuIconQvo qvo) {
+	public List<SysMenuIconVO> queryicon(SysMenuIconQuery qvo) {
 		return resourcesDao.queryicon(qvo);
 	}
 	
 	/** 获取颜色列表 **/
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]")
-	public List<SysColorVO> querycolor(SysColorQvo qvo) {
+	public List<SysColorVO> querycolor(SysColorQuery qvo) {
 		return resourcesDao.querycolor(qvo);
 	}
 }

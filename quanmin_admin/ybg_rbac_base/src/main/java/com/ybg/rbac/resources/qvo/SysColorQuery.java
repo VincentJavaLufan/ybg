@@ -3,7 +3,7 @@ import com.ybg.base.jdbc.BaseQvoInter;
 import com.ybg.rbac.resources.domain.SysColorDO;
 
 @SuppressWarnings("serial")
-public class SysColorQvo extends SysColorDO implements BaseQvoInter {
+public class SysColorQuery extends SysColorDO implements BaseQvoInter {
 	
 	private boolean blurred;
 	

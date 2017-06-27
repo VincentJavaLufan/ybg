@@ -21,7 +21,7 @@ import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.Page;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
-import com.ybg.rbac.resources.qvo.ResourcesQvo;
+import com.ybg.rbac.resources.qvo.ResourcesQuery;
 import com.ybg.rbac.resources.service.ResourcesService;
 import com.ybg.rbac.role.domain.RoleResDO;
 import com.ybg.rbac.role.domain.SysRoleVO;
@@ -142,7 +142,7 @@ public class RoleControllor  {
 	public Json addRoleRes(@RequestParam(name = "roleId", required = true) String roleId, @RequestParam(name = "resId[]", required = false) String[] resIds, ModelMap modelmap) {
 		Json j = new Json();
 		j.setSuccess(true);
-		List<SysResourcesVO> reslist = resourcesService.query(new ResourcesQvo());
+		List<SysResourcesVO> reslist = resourcesService.query(new ResourcesQuery());
 		try {
 			List<RoleResDO> list = new ArrayList<RoleResDO>();
 			for (SysResourcesVO res : reslist) {

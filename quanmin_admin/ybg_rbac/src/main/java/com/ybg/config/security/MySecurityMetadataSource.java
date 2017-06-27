@@ -17,7 +17,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
-import com.ybg.rbac.resources.qvo.ResourcesQvo;
+import com.ybg.rbac.resources.qvo.ResourcesQuery;
 import com.ybg.rbac.resources.service.ResourcesService;
 
 /** Created by Athos on 2016-10-16. */
@@ -72,7 +72,7 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
 
 	private void loadResourceDefine() {
 		/** 因为只有权限控制的资源才需要被拦截验证,所以只加载有权限控制的资源 */
-		List<SysResourcesVO> aclResourceses = aclResourcesService.query(new ResourcesQvo());
+		List<SysResourcesVO> aclResourceses = aclResourcesService.query(new ResourcesQuery());
 		aclResourceMap = new HashMap<String, Collection<ConfigAttribute>>();
 		for (SysResourcesVO aclResources : aclResourceses) {
 			ConfigAttribute ca = new SecurityConfig(aclResources.getResurl());

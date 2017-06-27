@@ -3,7 +3,7 @@ import com.ybg.base.jdbc.BaseQvoInter;
 import com.ybg.rbac.resources.domain.SysMenuIconDO;
 
 @SuppressWarnings("serial")
-public class SysMenuIconQvo extends SysMenuIconDO implements BaseQvoInter {
+public class SysMenuIconQuery extends SysMenuIconDO implements BaseQvoInter {
 	
 	private boolean blurred;
 	
