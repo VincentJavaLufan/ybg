@@ -40,7 +40,7 @@ import com.ybg.rbac.user.service.UserService;
 /*** 用Shiro登陆 **/
 @Api("平台登录操作")
 @Controller
-public class ShiroLoginComtrollor {
+public class LoginControllor {
 	
 	@Autowired
 	UserService			userService;
