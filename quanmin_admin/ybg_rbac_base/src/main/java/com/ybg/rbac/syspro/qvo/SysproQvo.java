@@ -1,9 +1,9 @@
 package com.ybg.rbac.syspro.qvo;
 
-import com.ybg.base.jdbc.BaseQvoInter;
+import com.ybg.base.jdbc.BaseQueryAble;
 import com.ybg.rbac.syspro.domain.Syspro;
 
-public class SysproQvo extends Syspro implements BaseQvoInter {
+public class SysproQvo extends Syspro implements BaseQueryAble {
 	
 	/**
 	 * 
