@@ -8,7 +8,7 @@ import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
 import com.ybg.rbac.user.dao.UserDao;
 import com.ybg.rbac.user.domain.UserVO;
-import com.ybg.rbac.user.qvo.UserQvo;
+import com.ybg.rbac.user.qvo.UserQuery;
 
 @Repository
 public class UserServiceImpl implements UserService {
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 	/** 获取单个信息 **/
 	@Cacheable(value = "userCache", key = "#root.method.name+#root.args[0]")
 	public UserVO get(String id) {
-		UserQvo qvo = new UserQvo();
+		UserQuery qvo = new UserQuery();
 		qvo.setId(id);
 		List<UserVO> list = userDao.query(qvo);
 		return list != null && list.size() > 0 ? list.get(0) : null;
@@ -57,13 +57,13 @@ public class UserServiceImpl implements UserService {
 	
 	/** 分页查询用户信息 **/
 	@Cacheable(value = "userCache", key = "#root.method.name+#root.args[0]+#root.method.name+#root.args[1]")
-	public Page query(Page page, UserQvo qvo) {
+	public Page query(Page page, UserQuery qvo) {
 		return userDao.query(page, qvo);
 	}
 	
 	/** 不分页查询用户信息 **/
 	@Cacheable(value = "userCache", key = "#root.method.name+#root.args[0]")
-	public List<UserVO> query(UserQvo qvo) {
+	public List<UserVO> query(UserQuery qvo) {
 		return userDao.query(qvo);
 	}
 	
@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public boolean checkisExist(UserQvo qvo) {
+	public boolean checkisExist(UserQuery qvo) {
 		return userDao.checkisExist(qvo);
 	}
 }

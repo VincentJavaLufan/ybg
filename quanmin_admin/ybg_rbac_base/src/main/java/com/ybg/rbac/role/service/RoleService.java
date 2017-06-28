@@ -4,7 +4,7 @@ import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
 import com.ybg.rbac.role.domain.RoleResDO;
 import com.ybg.rbac.role.domain.SysRoleVO;
-import com.ybg.rbac.role.qvo.RoleQvo;
+import com.ybg.rbac.role.qvo.RoleQuery;
 
 public interface RoleService {
 	
@@ -28,11 +28,11 @@ public interface RoleService {
 	
 	/** 分页查询 **/
 	// sys_role
-	Page query(Page page, RoleQvo qvo);
+	Page query(Page page, RoleQuery qvo);
 	
 	/** 不分页查询 **/
 	// sys_role
-	List<SysRoleVO> query(RoleQvo qvo);
+	List<SysRoleVO> query(RoleQuery qvo);
 	
 	/** 角色授权 增删改都在里面了 **/
 	// sys_res_role

@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 /** 角色查询条件 **/
 @ApiModel(value = "角色查询条件", parent = RoleDO.class)
-public class RoleQvo extends RoleDO implements BaseQueryAble {
+public class RoleQuery extends RoleDO implements BaseQueryAble {
 	
 	private static final long	serialVersionUID	= -1516990738029741157L;
 	/** 是否模糊查询 **/

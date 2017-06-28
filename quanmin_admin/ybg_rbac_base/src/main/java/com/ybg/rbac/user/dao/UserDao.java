@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
 import com.ybg.rbac.user.domain.UserVO;
-import com.ybg.rbac.user.qvo.UserQvo;
+import com.ybg.rbac.user.qvo.UserQuery;
 
 @Component
 public interface UserDao {
@@ -29,11 +29,11 @@ public interface UserDao {
 	
 	/** 分页查询 **/
 	// sys_user
-	Page query(Page page, UserQvo qvo);
+	Page query(Page page, UserQuery qvo);
 	
 	/** 不分页查询 **/
 	// sys_user
-	List<UserVO> query(UserQvo qvo);
+	List<UserVO> query(UserQuery qvo);
 	
 	/** 登陆 **/
 	// sys_user
@@ -46,5 +46,5 @@ public interface UserDao {
 	void removeExpired();
 	
 	/** 查询账户是否已存在 **/
-	boolean checkisExist(UserQvo qvo);
+	boolean checkisExist(UserQuery qvo);
 }

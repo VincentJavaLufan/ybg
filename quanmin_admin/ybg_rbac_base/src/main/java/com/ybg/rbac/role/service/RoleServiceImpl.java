@@ -10,7 +10,7 @@ import com.ybg.base.util.Page;
 import com.ybg.rbac.role.dao.RoleDao;
 import com.ybg.rbac.role.domain.RoleResDO;
 import com.ybg.rbac.role.domain.SysRoleVO;
-import com.ybg.rbac.role.qvo.RoleQvo;
+import com.ybg.rbac.role.qvo.RoleQuery;
 @Repository
 public class RoleServiceImpl implements RoleService{
 	@Autowired
@@ -50,7 +50,7 @@ public class RoleServiceImpl implements RoleService{
 	/** 获取单个实体信息 **/
 	@Cacheable(value = "roleCache", key = "#root.method.name+#root.args[0]")
 	public SysRoleVO get(String id) {
-		RoleQvo qvo = new RoleQvo();
+		RoleQuery qvo = new RoleQuery();
 		qvo.setId(id);
 		List<SysRoleVO> list = roleDao.query(qvo);
 		return list != null && list.size() > 0 ? list.get(0) : null;
@@ -58,13 +58,13 @@ public class RoleServiceImpl implements RoleService{
 	
 	/** 分页查询 **/
 	@Cacheable(value = "roleCache", key = "#root.method.name+#root.args[0]+#root.method.name+#root.args[1]")
-	public Page query(Page page, RoleQvo qvo) {
+	public Page query(Page page, RoleQuery qvo) {
 		return roleDao.query(page, qvo);
 	}
 	
 	/** 不分页查询 **/
 	@Cacheable(value = "roleCache", key = "#root.method.name+#root.args[0]")
-	public List<SysRoleVO> query(RoleQvo qvo) {
+	public List<SysRoleVO> query(RoleQuery qvo) {
 		return roleDao.query(qvo);
 	}
 	

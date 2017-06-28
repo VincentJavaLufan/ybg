@@ -12,7 +12,7 @@ import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.mapper.UserMapper;
-import com.ybg.rbac.user.qvo.UserQvo;
+import com.ybg.rbac.user.qvo.UserQuery;
 
 @Repository
 public class UserDaoImpl extends BaseDao implements UserDao {
@@ -40,7 +40,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		this.baseupdate(updatemap, WHEREmap, "sys_user");
 	}
 	
-	public Page query(Page page, UserQvo qvo) {
+	public Page query(Page page, UserQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",role.`name` rolename").append(FROM).append(QUERY_TABLE_NAME).append(LEFT).append(JOIN).append("sys_role role").append(ON).append("user.roleid=role.id");
 		sql.append(getcondition(qvo));
@@ -49,7 +49,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		return page;
 	}
 	
-	private String getcondition(UserQvo qvo) {
+	private String getcondition(UserQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1 ");
 		if (QvoConditionUtil.checkInteger(qvo.getIsdelete())) {
@@ -70,7 +70,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		return sql.toString();
 	}
 	
-	public List<UserVO> query(UserQvo qvo) {
+	public List<UserVO> query(UserQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",role.`name` rolename").append(FROM).append(QUERY_TABLE_NAME).append(LEFT).append(JOIN).append("sys_role role").append(ON).append("user.roleid=role.id");
 		sql.append(getcondition(qvo));
@@ -116,7 +116,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	}
 	
 	@Override
-	public boolean checkisExist(UserQvo qvo) {
+	public boolean checkisExist(UserQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",role.`name` rolename").append(FROM).append(QUERY_TABLE_NAME).append(LEFT).append(JOIN).append("sys_role role").append(ON).append("user.roleid=role.id");
 		sql.append(WHERE).append("1=1 ");

@@ -12,7 +12,7 @@ import com.ybg.rbac.resources.domain.SysResourcesVO;
 import com.ybg.rbac.resources.service.ResourcesService;
 import com.ybg.rbac.user.dao.UserDao;
 import com.ybg.rbac.user.domain.UserVO;
-import com.ybg.rbac.user.qvo.UserQvo;
+import com.ybg.rbac.user.qvo.UserQuery;
 
 @Repository
 public class LoginService implements UserDetailsService {
@@ -24,7 +24,7 @@ public class LoginService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserQvo qvo = new UserQvo();
+		UserQuery qvo = new UserQuery();
 		qvo.setUsername(username);
 		if (!QvoConditionUtil.checkString(username)) {
 			return null;
@@ -45,7 +45,7 @@ public class LoginService implements UserDetailsService {
 	}
 	
 	public UserVO getUserByname(String username) {
-		UserQvo qvo = new UserQvo();
+		UserQuery qvo = new UserQuery();
 		qvo.setUsername(username);
 		List<UserVO> list = userdao.query(qvo);
 		if (list != null && list.size() > 0) {

@@ -11,7 +11,7 @@ import com.ybg.base.util.Page;
 import com.ybg.rbac.role.domain.RoleResDO;
 import com.ybg.rbac.role.domain.SysRoleVO;
 import com.ybg.rbac.role.mapper.RoleMapper;
-import com.ybg.rbac.role.qvo.RoleQvo;
+import com.ybg.rbac.role.qvo.RoleQuery;
 
 @Repository
 public class RoleDaoImpl extends BaseDao implements RoleDao {
@@ -35,7 +35,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		this.baseupdate(updatemap, WHEREmap, "sys_role");
 	}
 	
-	public Page query(Page page, RoleQvo qvo) {
+	public Page query(Page page, RoleQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
@@ -44,7 +44,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		return page;
 	}
 	
-	private String getcondition(RoleQvo qvo) {
+	private String getcondition(RoleQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
 		if (QvoConditionUtil.checkInteger(qvo.getIsdelete())) {
@@ -61,7 +61,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		return sql.toString();
 	}
 	
-	public List<SysRoleVO> query(RoleQvo qvo) {
+	public List<SysRoleVO> query(RoleQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
