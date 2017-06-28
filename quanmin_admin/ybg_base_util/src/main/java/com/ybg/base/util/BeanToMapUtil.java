@@ -76,4 +76,8 @@ public class BeanToMapUtil {
 		}
 		return returnMap;
 	}
+	
+	private BeanToMapUtil() {
+		// TODO Auto-generated constructor stub
+	}
 }
