@@ -1,10 +1,10 @@
 package com.ybg.weixin.dao;
 
-import com.ybg.weixin.domain.WXuser;
+import com.ybg.weixin.domain.WXuserDO;
 
 public interface WeixinUserDao {
 
-	WXuser getByopenId(String openID);
+	WXuserDO getByopenId(String openID);
 
-	void create(WXuser bean) throws Exception;
+	void create(WXuserDO bean) throws Exception;
 }

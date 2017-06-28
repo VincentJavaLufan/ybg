@@ -1,5 +1,5 @@
 package com.ybg.weixin.domain;
-public class WXuser {
+public class WXuserDO {
 	
 	String	id;
 	String	userid;

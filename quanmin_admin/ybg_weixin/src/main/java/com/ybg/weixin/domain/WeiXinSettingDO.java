@@ -1,5 +1,5 @@
 package com.ybg.weixin.domain;
-public class WeiXinSetting {
+public class WeiXinSettingDO {
 	
 	private String	appid;			// 微信ID
 	private String	redirect_uri;

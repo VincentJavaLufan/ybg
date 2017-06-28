@@ -17,7 +17,7 @@ import com.ybg.base.util.ServletUtil;
 import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.UserService;
-import com.ybg.weixin.domain.WXuser;
+import com.ybg.weixin.domain.WXuserDO;
 import com.ybg.weixin.service.WeixinUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,7 +38,7 @@ public class WXloginControllor extends WeiXinbaseControllor {
 	@RequestMapping(value = { "login.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(HttpServletRequest request, ModelMap map) throws Exception {
 		String openID = getOpen_id(ServletUtil.getStringParamDefaultBlank(request, "code"));
-		WXuser qquser = weixinUserService.getByopenId(openID);
+		WXuserDO qquser = weixinUserService.getByopenId(openID);
 		if (qquser == null) {
 			map.put("openid", openID);
 			return "/wx/bund";
@@ -70,7 +70,7 @@ public class WXloginControllor extends WeiXinbaseControllor {
 		if (openid.equals("")) {
 			return null;
 		}
-		WXuser weibouser = weixinUserService.getByopenId(openid);
+		WXuserDO weibouser = weixinUserService.getByopenId(openid);
 		if (weibouser != null) {
 			return null;
 		}
@@ -87,7 +87,7 @@ public class WXloginControllor extends WeiXinbaseControllor {
 			token2.setDetails(new WebAuthenticationDetails(request));
 			Authentication authenticatedUser = authenticationManager.authenticate(token2);
 			SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
-			WXuser bean = new WXuser();
+			WXuserDO bean = new WXuserDO();
 			bean.setOpenid(openid);
 			bean.setUserid(user.getId());
 			weixinUserService.create(bean);

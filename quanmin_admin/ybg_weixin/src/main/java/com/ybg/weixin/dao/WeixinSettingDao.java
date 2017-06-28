@@ -1,7 +1,7 @@
 package com.ybg.weixin.dao;
-import com.ybg.weixin.domain.WeiXinSetting;
+import com.ybg.weixin.domain.WeiXinSettingDO;
 
 public interface WeixinSettingDao {
 	
-	WeiXinSetting getIsUse();
+	WeiXinSettingDO getIsUse();
 }

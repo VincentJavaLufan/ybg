@@ -2,7 +2,7 @@ package com.ybg.weixin.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.ybg.weixin.dao.WeixinSettingDao;
-import com.ybg.weixin.domain.WeiXinSetting;
+import com.ybg.weixin.domain.WeiXinSettingDO;
 
 @Repository
 public class WeixinSettingServiceImpl implements WeixinSettingService {
@@ -11,7 +11,7 @@ public class WeixinSettingServiceImpl implements WeixinSettingService {
 	WeixinSettingDao weixinSettingDao;
 	
 	@Override
-	public WeiXinSetting getIsUse() {
+	public WeiXinSettingDO getIsUse() {
 		return weixinSettingDao.getIsUse();
 	}
 }

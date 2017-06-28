@@ -1,7 +1,7 @@
 package com.ybg.weixin.service;
 
-import com.ybg.weixin.domain.WeiXinSetting;
+import com.ybg.weixin.domain.WeiXinSettingDO;
 
 public interface WeixinSettingService {
-	 WeiXinSetting getIsUse();
+	 WeiXinSettingDO getIsUse();
 }

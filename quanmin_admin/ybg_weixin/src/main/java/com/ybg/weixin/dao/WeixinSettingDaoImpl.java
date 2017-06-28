@@ -6,21 +6,21 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
-import com.ybg.weixin.domain.WeiXinSetting;
+import com.ybg.weixin.domain.WeiXinSettingDO;
 
 @ResponseBody
 public class WeixinSettingDaoImpl extends BaseDao implements WeixinSettingDao {
 	
 	@Override
-	public WeiXinSetting getIsUse() {
+	public WeiXinSettingDO getIsUse() {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select id,appid,secret,state,parentKey,notifyurl,mchid,isuse,redirecturi,scope from sys_wxsetting wx");
 		sql.append(" where isuse=1 ");
-		List<WeiXinSetting> list = getJdbcTemplate().query(sql.toString(), new RowMapper<WeiXinSetting>() {
+		List<WeiXinSettingDO> list = getJdbcTemplate().query(sql.toString(), new RowMapper<WeiXinSettingDO>() {
 			
 			@Override
-			public WeiXinSetting mapRow(ResultSet rs, int index) throws SQLException {
-				WeiXinSetting bean = new WeiXinSetting();
+			public WeiXinSettingDO mapRow(ResultSet rs, int index) throws SQLException {
+				WeiXinSettingDO bean = new WeiXinSettingDO();
 				bean.setAppid(rs.getString(rs.getString("appid")));
 				bean.setSecret(rs.getString("secret"));
 				bean.setState(rs.getString("state"));
@@ -33,6 +33,6 @@ public class WeixinSettingDaoImpl extends BaseDao implements WeixinSettingDao {
 				return bean;
 			}
 		});
-		return QvoConditionUtil.checkList(list) ? list.get(0) : new WeiXinSetting();
+		return QvoConditionUtil.checkList(list) ? list.get(0) : new WeiXinSettingDO();
 	}
 }
