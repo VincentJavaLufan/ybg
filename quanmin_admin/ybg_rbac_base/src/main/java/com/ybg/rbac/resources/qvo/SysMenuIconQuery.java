@@ -1,9 +1,9 @@
 package com.ybg.rbac.resources.qvo;
-import com.ybg.base.jdbc.BaseQvoInter;
+import com.ybg.base.jdbc.BaseQueryAble;
 import com.ybg.rbac.resources.domain.SysMenuIconDO;
 
 @SuppressWarnings("serial")
-public class SysMenuIconQuery extends SysMenuIconDO implements BaseQvoInter {
+public class SysMenuIconQuery extends SysMenuIconDO implements BaseQueryAble {
 	
 	private boolean blurred;
 	
