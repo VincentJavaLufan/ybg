@@ -643,7 +643,7 @@ public class BaseDao extends BaseSQL {
 	 * @param qvo
 	 *            查看接口的方法 是否属于模糊查询
 	 * @return sql.append( and name=/like 'value'/'%value%') ***/
-	public void sqlappen(StringBuilder sql, String name, String value, BaseQvoInter qvo) {
+	public void sqlappen(StringBuilder sql, String name, String value, BaseQueryAble qvo) {
 		sqlappen(sql, name, value, qvo.isBlurred());
 	}
 	
