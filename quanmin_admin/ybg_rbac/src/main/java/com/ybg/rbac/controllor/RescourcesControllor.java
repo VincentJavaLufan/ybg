@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Json;
-import com.ybg.base.util.TreeObject;
+import com.ybg.base.util.TreeVO;
 import com.ybg.base.util.TreeUtil;
 import com.ybg.rbac.resources.domain.SysButtonVO;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
@@ -47,10 +47,10 @@ public class RescourcesControllor {
 	@ApiOperation(value = "资源页面数据列表", notes = "需要授权才可以访问的页面", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String list(@ModelAttribute ResourcesQuery qvo, ModelMap map) {
-		List<TreeObject> list = new ArrayList<TreeObject>();
+		List<TreeVO> list = new ArrayList<TreeVO>();
 		List<SysResourcesVO> dblist = resourcesService.query(qvo);
 		for (SysResourcesVO r : dblist) {
-			TreeObject ts = new TreeObject();
+			TreeVO ts = new TreeVO();
 			ts.setDescription(r.getDescription());
 			ts.setIcon(r.getIcon());
 			ts.setId(r.getId());
@@ -64,7 +64,7 @@ public class RescourcesControllor {
 			list.add(ts);
 		}
 		TreeUtil treeUtil = new TreeUtil();
-		List<TreeObject> ns = treeUtil.getChildTreeObjects(list, "0");
+		List<TreeVO> ns = treeUtil.getChildTreeObjects(list, "0");
 		map.put("page", ns);
 		return "/system/resources/list";
 	}
@@ -193,9 +193,9 @@ public class RescourcesControllor {
 	@RequestMapping(value = { "permissions.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String permissions(@ModelAttribute ResourcesQuery qvo, @RequestParam(name = "roleid", required = true) String roleid, ModelMap modelmap) {
 		List<SysResourcesVO> mps = resourcesService.query(qvo);
-		List<TreeObject> list = new ArrayList<TreeObject>();
+		List<TreeVO> list = new ArrayList<TreeVO>();
 		for (SysResourcesVO map : mps) {
-			TreeObject ts = new TreeObject();
+			TreeVO ts = new TreeVO();
 			ts.setDescription(map.getDescription());
 			ts.setIcon(map.getIcon());
 			ts.setId(map.getId());
@@ -209,7 +209,7 @@ public class RescourcesControllor {
 			list.add(ts);
 		}
 		TreeUtil treeUtil = new TreeUtil();
-		List<TreeObject> ns = treeUtil.getChildTreeObjects(list, "0");
+		List<TreeVO> ns = treeUtil.getChildTreeObjects(list, "0");
 		modelmap.addAttribute("permissions", ns);
 		modelmap.put("roleid", roleid);
 		return "/system/resources/permissions";
