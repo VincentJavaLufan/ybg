@@ -25,7 +25,7 @@ import com.ybg.rbac.resources.qvo.ResourcesQuery;
 import com.ybg.rbac.resources.service.ResourcesService;
 import com.ybg.rbac.role.domain.RoleResDO;
 import com.ybg.rbac.role.domain.SysRoleVO;
-import com.ybg.rbac.role.qvo.RoleQvo;
+import com.ybg.rbac.role.qvo.RoleQuery;
 import com.ybg.rbac.role.service.RoleService;
 
 @Api("角色管理")
@@ -49,7 +49,7 @@ public class RoleControllor  {
 	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "RoleQvo") })
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute RoleQvo qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, ModelMap map) {
+	public Page list(@ModelAttribute RoleQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, ModelMap map) {
 		qvo.setBlurred(true);
 		Page page = new Page();
 		page.setCurPage(pageNow);

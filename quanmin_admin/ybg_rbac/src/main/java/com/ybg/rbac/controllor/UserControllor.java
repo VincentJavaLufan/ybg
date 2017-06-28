@@ -18,10 +18,10 @@ import com.ybg.base.jdbc.util.DateUtil;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.Page;
 import com.ybg.base.util.excel.ExcelUtil;
-import com.ybg.rbac.role.qvo.RoleQvo;
+import com.ybg.rbac.role.qvo.RoleQuery;
 import com.ybg.rbac.role.service.RoleService;
 import com.ybg.rbac.user.domain.UserVO;
-import com.ybg.rbac.user.qvo.UserQvo;
+import com.ybg.rbac.user.qvo.UserQuery;
 import com.ybg.rbac.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -99,7 +99,7 @@ public class UserControllor {
 	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "java.lang.Integer"), @ApiImplicitParam(name = "qvo", value = "用户查询条件", required = false, dataType = "UserQvo") })
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute UserQvo qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, @ApiIgnore ModelMap modelMap) {
+	public Page list(@ModelAttribute UserQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, @ApiIgnore ModelMap modelMap) {
 		qvo.setBlurred(true);
 		Page page = new Page();
 		page.setCurPage(pageNow);
@@ -112,7 +112,7 @@ public class UserControllor {
 	@ApiOperation(value = "添加用户页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String toadd(@ApiIgnore ModelMap map) {
-		map.put("roleselect", roleService.query(new RoleQvo()));
+		map.put("roleselect", roleService.query(new RoleQuery()));
 		return "/system/user/toadd";
 	}
 	
@@ -144,7 +144,7 @@ public class UserControllor {
 	@ApiOperation(value = "检测账号是否存在", notes = "要求传入帐号，email,手机号做检测", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "isexist.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public boolean isexist(@ModelAttribute UserQvo qvo) {
+	public boolean isexist(@ModelAttribute UserQuery qvo) {
 		return userService.checkisExist(qvo);
 	}
 	
@@ -154,7 +154,7 @@ public class UserControllor {
 	public String toupdate(@RequestParam(name = "id", required = true) String id, @ApiIgnore ModelMap map) {
 		UserVO user = userService.get(id);
 		map.put("updateuser", user);
-		map.put("roleselect", roleService.query(new RoleQvo()));
+		map.put("roleselect", roleService.query(new RoleQuery()));
 		return "/system/user/edit";
 	}
 	
@@ -205,7 +205,7 @@ public class UserControllor {
 	
 	@ApiOperation(value = "导出用户", notes = "导出用户")
 	@RequestMapping(value = { "export.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public void export(@ModelAttribute UserQvo qvo, HttpServletResponse response) throws IOException {
+	public void export(@ModelAttribute UserQuery qvo, HttpServletResponse response) throws IOException {
 		response.setContentType("application/vnd.ms-excel");
 		String filename = "用户导出" + DateUtil.getDate();
 		filename = java.net.URLEncoder.encode(filename, "UTF-8");

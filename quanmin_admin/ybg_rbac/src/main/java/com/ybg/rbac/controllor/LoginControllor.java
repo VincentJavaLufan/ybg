@@ -33,7 +33,7 @@ import com.ybg.rbac.resources.service.ResourcesService;
 import com.ybg.rbac.syspro.service.SysproService;
 import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
-import com.ybg.rbac.user.qvo.UserQvo;
+import com.ybg.rbac.user.qvo.UserQuery;
 import com.ybg.rbac.user.service.LoginService;
 import com.ybg.rbac.user.service.UserService;
 
@@ -80,7 +80,7 @@ public class LoginControllor {
 				if (pinciba instanceof UserDetails) {
 					UserDetails userDetail = ((UserDetails) pinciba);
 					model.addAttribute("username", userDetail.getUsername());
-					UserQvo qvo = new UserQvo();
+					UserQuery qvo = new UserQuery();
 					qvo.setUsername(userDetail.getUsername());
 					UserVO u = userService.query(qvo).get(0);
 					model.addAttribute("realName", u.getUsername());
@@ -97,7 +97,7 @@ public class LoginControllor {
 				if (pinciba instanceof UserDetails) {
 					UserDetails userDetail = ((UserDetails) pinciba);
 					model.addAttribute("username", userDetail.getUsername());
-					UserQvo qvo = new UserQvo();
+					UserQuery qvo = new UserQuery();
 					qvo.setUsername(userDetail.getUsername());
 					UserVO u = userService.query(qvo).get(0);
 					model.addAttribute("realName", u.getUsername());
@@ -168,7 +168,7 @@ public class LoginControllor {
 	@ApiOperation(value = "激活邮箱页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/relife.do", method = RequestMethod.GET)
 	public String relife(@RequestParam(name = "username", required = true) String username, @RequestParam(name = "salt", required = true) String salt, ModelMap map) {
-		UserQvo qvo = new UserQvo();
+		UserQuery qvo = new UserQuery();
 		qvo.setUsername(username);
 		qvo.setState(UserStateConstant.DIE);
 		List<UserVO> list = userService.query(qvo);
@@ -193,7 +193,7 @@ public class LoginControllor {
 	public Json forgetpwd(@RequestParam(name = "username", required = true) String username, Model model) throws Exception {
 		Json j = new Json();
 		j.setSuccess(true);
-		UserQvo userqvo = new UserQvo();
+		UserQuery userqvo = new UserQuery();
 		userqvo.setUsername(username);
 		List<UserVO> userlist = userService.query(userqvo);
 		if (userlist == null || userlist.size() == 0) {
@@ -328,7 +328,7 @@ public class LoginControllor {
 	@ApiOperation(value = " 检测账号是否存在", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "/common/login_do/isexist.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public boolean isexist(UserQvo qvo) {
+	public boolean isexist(UserQuery qvo) {
 		return userService.checkisExist(qvo);
 	}
 	
