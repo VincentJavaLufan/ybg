@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2016年11月28日 下午12:54:44 */
-public class ScheduleJobDO implements Serializable {
+public class ScheduleJobEntity implements Serializable {
 	
 	private static final long	serialVersionUID	= 1L;
 	/** 任务调度参数key */

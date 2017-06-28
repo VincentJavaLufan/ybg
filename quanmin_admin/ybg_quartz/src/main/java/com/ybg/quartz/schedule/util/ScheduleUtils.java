@@ -12,7 +12,7 @@ import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
-import com.ybg.quartz.schedule.domain.ScheduleJobDO;
+import com.ybg.quartz.schedule.domain.ScheduleJobEntity;
 import com.ybg.quartz.schedule.util.Constant.ScheduleStatus;
 
 
@@ -47,6 +47,7 @@ public class ScheduleUtils {
         try {
             return (CronTrigger) scheduler.getTrigger(getTriggerKey(jobId));
         } catch (SchedulerException e) {
+        	e.printStackTrace();
             throw new RRException("获取定时任务CronTrigger出现异常", e);
         }
     }
@@ -54,7 +55,7 @@ public class ScheduleUtils {
     /**
      * 创建定时任务
      */
-    public static void createScheduleJob(Scheduler scheduler, ScheduleJobDO scheduleJob) {
+    public static void createScheduleJob(Scheduler scheduler, ScheduleJobEntity scheduleJob) {
         try {
         	//构建job信息
             JobDetail jobDetail = JobBuilder.newJob(ScheduleJob.class).withIdentity(getJobKey(scheduleJob.getJobId())).build();
@@ -67,7 +68,7 @@ public class ScheduleUtils {
             CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(getTriggerKey(scheduleJob.getJobId())).withSchedule(scheduleBuilder).build();
 
             //放入参数，运行时的方法可以获取
-            jobDetail.getJobDataMap().put(ScheduleJobDO.JOB_PARAM_KEY, scheduleJob);
+            jobDetail.getJobDataMap().put(ScheduleJobEntity.JOB_PARAM_KEY, scheduleJob);
             
             scheduler.scheduleJob(jobDetail, trigger);
             
@@ -83,7 +84,7 @@ public class ScheduleUtils {
     /**
      * 更新定时任务
      */
-    public static void updateScheduleJob(Scheduler scheduler, ScheduleJobDO scheduleJob) {
+    public static void updateScheduleJob(Scheduler scheduler, ScheduleJobEntity scheduleJob) {
         try {
             TriggerKey triggerKey = getTriggerKey(scheduleJob.getJobId());
 
@@ -97,7 +98,7 @@ public class ScheduleUtils {
             trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
             
             //参数
-            trigger.getJobDataMap().put(ScheduleJobDO.JOB_PARAM_KEY, scheduleJob);
+            trigger.getJobDataMap().put(ScheduleJobEntity.JOB_PARAM_KEY, scheduleJob);
             
             scheduler.rescheduleJob(triggerKey, trigger);
             
@@ -114,11 +115,11 @@ public class ScheduleUtils {
     /**
      * 立即执行任务
      */
-    public static void run(Scheduler scheduler, ScheduleJobDO scheduleJob) {
+    public static void run(Scheduler scheduler, ScheduleJobEntity scheduleJob) {
         try {
         	//参数
         	JobDataMap dataMap = new JobDataMap();
-        	dataMap.put(ScheduleJobDO.JOB_PARAM_KEY, scheduleJob);
+        	dataMap.put(ScheduleJobEntity.JOB_PARAM_KEY, scheduleJob);
         	
             scheduler.triggerJob(getJobKey(scheduleJob.getJobId()), dataMap);
         } catch (SchedulerException e) {

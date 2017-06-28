@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import com.ybg.base.jdbc.util.DateUtil;
 import com.ybg.base.util.SpringContextUtils;
-import com.ybg.quartz.schedule.domain.ScheduleJobDO;
+import com.ybg.quartz.schedule.domain.ScheduleJobEntity;
 import com.ybg.quartz.schedule.domain.ScheduleJobLogDO;
 import com.ybg.quartz.schedule.service.ScheduleJobLogService;
 import net.sf.json.JSONObject;
@@ -27,9 +27,9 @@ public class ScheduleJob extends QuartzJobBean {
 	
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-		JSONObject json = JSONObject.fromObject(context.getMergedJobDataMap().get(ScheduleJobDO.JOB_PARAM_KEY));
+		JSONObject json = JSONObject.fromObject(context.getMergedJobDataMap().get(ScheduleJobEntity.JOB_PARAM_KEY));
 		// springboot 下会，莫名报错 ScheduleJobEntity scheduleJob = (ScheduleJobEntity) context.getMergedJobDataMap().get(ScheduleJobEntity.JOB_PARAM_KEY);
-		ScheduleJobDO scheduleJob = (ScheduleJobDO) JSONObject.toBean(json, ScheduleJobDO.class);
+		ScheduleJobEntity scheduleJob = (ScheduleJobEntity) JSONObject.toBean(json, ScheduleJobEntity.class);
 		// 获取spring bean
 		ScheduleJobLogService scheduleJobLogService = (ScheduleJobLogService) SpringContextUtils.applicationContext.getBean(ScheduleJobLogService.class);
 		// 数据库保存执行记录

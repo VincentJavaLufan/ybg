@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.Page;
-import com.ybg.quartz.schedule.domain.ScheduleJobDO;
+import com.ybg.quartz.schedule.domain.ScheduleJobEntity;
 import com.ybg.quartz.schedule.qvo.ScheduleJobQuery;
 import com.ybg.quartz.schedule.service.ScheduleJobService;
 import com.ybg.quartz.schedule.util.RRException;
@@ -56,8 +56,8 @@ public class ScheduleJobController {
 	/** 定时任务列表 */
 	@ApiOperation(value = "定时任务页面", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(value = { "info.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public ScheduleJobDO info(Long jobId) {
-		ScheduleJobDO schedule = scheduleJobService.queryObject(jobId);
+	public ScheduleJobEntity info(Long jobId) {
+		ScheduleJobEntity schedule = scheduleJobService.queryObject(jobId);
 		return schedule;
 		// return R.ok().put("schedule", schedule);
 	}
@@ -73,7 +73,7 @@ public class ScheduleJobController {
 	@ApiOperation(value = " 保存定时任务", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "create.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json save(@ModelAttribute ScheduleJobDO scheduleJob) throws Exception {
+	public Json save(@ModelAttribute ScheduleJobEntity scheduleJob) throws Exception {
 		// 数据校验
 		Json json = new Json();
 		try {
@@ -99,7 +99,7 @@ public class ScheduleJobController {
 	@ApiOperation(value = "修改定时任务", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "update.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json update(@ModelAttribute ScheduleJobDO scheduleJob) {
+	public Json update(@ModelAttribute ScheduleJobEntity scheduleJob) {
 		// 数据校验
 		Json json = new Json();
 		try {
@@ -164,7 +164,7 @@ public class ScheduleJobController {
 	}
 	
 	/** 验证参数是否正确 */
-	private void verifyForm(ScheduleJobDO scheduleJob) {
+	private void verifyForm(ScheduleJobEntity scheduleJob) {
 		if (StringUtils.isBlank(scheduleJob.getBeanName())) {
 			throw new RRException("bean名称不能为空");
 		}

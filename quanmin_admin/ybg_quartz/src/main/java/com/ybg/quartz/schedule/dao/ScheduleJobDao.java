@@ -1,7 +1,7 @@
 package com.ybg.quartz.schedule.dao;
 import java.util.List;
 import com.ybg.base.util.Page;
-import com.ybg.quartz.schedule.domain.ScheduleJobDO;
+import com.ybg.quartz.schedule.domain.ScheduleJobEntity;
 import com.ybg.quartz.schedule.qvo.ScheduleJobQuery;
 
 /** 定时任务
@@ -14,15 +14,15 @@ public interface ScheduleJobDao {
 	/** 批量更新状态 */
 	int updateBatch(int status, final Long[] job_id);
 	
-	ScheduleJobDO queryObject(Long jobId);
+	ScheduleJobEntity queryObject(Long jobId);
 	
 	void deleteBatch(Long[] jobIds);
 	
-	void update(ScheduleJobDO scheduleJob);
+	void update(ScheduleJobEntity scheduleJob);
 	
-	void save(ScheduleJobDO scheduleJob) throws Exception;
+	void save(ScheduleJobEntity scheduleJob) throws Exception;
 	
-	List<ScheduleJobDO> queryList(ScheduleJobQuery qvo);
+	List<ScheduleJobEntity> queryList(ScheduleJobQuery qvo);
 	
 	Page queryList(Page page, ScheduleJobQuery qvo);
 }
