@@ -5,7 +5,7 @@ import java.util.List;
 /** 这个是列表树形式显示的实体, 这里的字段是在前台显示所有的,可修改
  * 
  * @author lanyuan Email：mmm333zzz520@163.com date：2014-11-20 */
-public class TreeObject {
+public class TreeVO {
 	
 	private String				id;
 	private String				parentId;
@@ -19,7 +19,7 @@ public class TreeObject {
 	private String				icon;
 	private Integer				ishide;
 	private String				colorclass;
-	private List<TreeObject>	children	= new ArrayList<TreeObject>();
+	private List<TreeVO>	children	= new ArrayList<TreeVO>();
 	
 	public String getId() {
 		return id;
@@ -37,11 +37,11 @@ public class TreeObject {
 		this.parentId = parentId;
 	}
 	
-	public List<TreeObject> getChildren() {
+	public List<TreeVO> getChildren() {
 		return children;
 	}
 	
-	public void setChildren(List<TreeObject> children) {
+	public void setChildren(List<TreeVO> children) {
 		this.children = children;
 	}
 	

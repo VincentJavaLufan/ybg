@@ -13,10 +13,10 @@ public class TreeUtil {
 	 * @param typeId
 	 *            传入的父节点ID
 	 * @return String */
-	public List<TreeObject> getChildTreeObjects(List<TreeObject> list, String praentId) {
-		List<TreeObject> returnList = new ArrayList<TreeObject>();
-		for (Iterator<TreeObject> iterator = list.iterator(); iterator.hasNext();) {
-			TreeObject t = (TreeObject) iterator.next();
+	public List<TreeVO> getChildTreeObjects(List<TreeVO> list, String praentId) {
+		List<TreeVO> returnList = new ArrayList<TreeVO>();
+		for (Iterator<TreeVO> iterator = list.iterator(); iterator.hasNext();) {
+			TreeVO t = (TreeVO) iterator.next();
 			// 一、根据传入的某个父节点ID,遍历该父节点的所有子节点
 			if (t.getParentId().equals(praentId)) {
 				recursionFn(list, t);
@@ -31,16 +31,16 @@ public class TreeUtil {
 	 * @author lanyuan Email: mmm333zzz520@163.com
 	 * @date 2013-12-4 下午7:27:30
 	 * @param list
-	 * @param TreeObject */
-	private void recursionFn(List<TreeObject> list, TreeObject t) {
-		List<TreeObject> childList = getChildList(list, t);// 得到子节点列表
+	 * @param TreeVO */
+	private void recursionFn(List<TreeVO> list, TreeVO t) {
+		List<TreeVO> childList = getChildList(list, t);// 得到子节点列表
 		t.setChildren(childList);
-		for (TreeObject tChild : childList) {
+		for (TreeVO tChild : childList) {
 			if (hasChild(list, tChild)) {// 判断是否有子节点
 				// returnList.add(TreeObject);
-				Iterator<TreeObject> it = childList.iterator();
+				Iterator<TreeVO> it = childList.iterator();
 				while (it.hasNext()) {
-					TreeObject n = (TreeObject) it.next();
+					TreeVO n = (TreeVO) it.next();
 					recursionFn(list, n);
 				}
 			}
@@ -48,11 +48,11 @@ public class TreeUtil {
 	}
 	
 	// 得到子节点列表
-	private List<TreeObject> getChildList(List<TreeObject> list, TreeObject t) {
-		List<TreeObject> tlist = new ArrayList<TreeObject>();
-		Iterator<TreeObject> it = list.iterator();
+	private List<TreeVO> getChildList(List<TreeVO> list, TreeVO t) {
+		List<TreeVO> tlist = new ArrayList<TreeVO>();
+		Iterator<TreeVO> it = list.iterator();
 		while (it.hasNext()) {
-			TreeObject n = (TreeObject) it.next();
+			TreeVO n = (TreeVO) it.next();
 			if (n.getParentId().equals(t.getId())) {
 				tlist.add(n);
 			}
@@ -60,7 +60,7 @@ public class TreeUtil {
 		return tlist;
 	}
 	
-	List<TreeObject> returnList = new ArrayList<TreeObject>();
+	List<TreeVO> returnList = new ArrayList<TreeVO>();
 	// /** 根据父节点的ID获取所有子节点
 	// *
 	// * @param list
@@ -107,7 +107,7 @@ public class TreeUtil {
 	// }
 	
 	// 判断是否有子节点
-	private boolean hasChild(List<TreeObject> list, TreeObject t) {
+	private boolean hasChild(List<TreeVO> list, TreeVO t) {
 		return getChildList(list, t).size() > 0 ? true : false;
 	}
 	
