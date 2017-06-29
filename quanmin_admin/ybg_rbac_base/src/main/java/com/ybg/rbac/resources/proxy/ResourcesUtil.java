@@ -1,4 +1,5 @@
 package com.ybg.rbac.resources.proxy;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.BeanUtils;
@@ -15,13 +16,13 @@ import com.ybg.rbac.resources.service.ResourcesService;
 
 /** 数据库转换成实体显示 ,实体转换成数据库存储 **/
 public class ResourcesUtil {
-	
+
 	ResourcesService resourcesService;
-	
+
 	public ResourcesUtil(ResourcesService resourcesService) {
 		this.resourcesService = resourcesService;
 	}
-	
+
 	/** 获取整个菜单 数据库转换成逻辑结构 **/
 	public List<Directories> getAllResources() {
 		ResourcesQuery qvo = new ResourcesQuery();
@@ -57,7 +58,7 @@ public class ResourcesUtil {
 		}
 		return orgs;
 	}
-	
+
 	/** 获取某个节点 数据库转换成逻辑结构 **/
 	public Organization get(String id) {
 		if (!QvoConditionUtil.checkString(id)) {
@@ -96,7 +97,7 @@ public class ResourcesUtil {
 		}
 		return null;
 	}
-	
+
 	/** 删除操作时，删除整个下级 **/
 	public void removebyid(String id) {
 		SysResourcesVO bean = resourcesService.get(id);
@@ -126,15 +127,5 @@ public class ResourcesUtil {
 			resourcesService.removebyid(id);
 		}
 	}
-	
-	/*** 快速对菜单添加一个增删查改 操作 **/
-	public void createMenuWithButton(SysResourcesVO resources, boolean add, boolean remove, boolean update, boolean get, boolean toadd, boolean toupdate, boolean list, boolean index) {
-		SysResourcesVO bean = resourcesService.save(resources);
-		String parentid=bean.getId();
-		SysResourcesVO addbutton= new SysResourcesVO();
-		addbutton.setParentid(parentid);
-		addbutton.setResurl("");
-		addbutton.setType("3");
-		
-	}
+
 }
