@@ -8,7 +8,7 @@ public class Common {
 	 * 
 	 * @author lanyuan Email：mmm333zzz520@163.com date：2014-2-27
 	 * @param request
-	 * @return Object 返回是Object..需要转型为(Account)Object */
+	 * @return UserVO  */
 	public static UserVO findUserSession() {
 		UserVO user = null;
 		try {
