@@ -28,7 +28,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 	private static String QUERY_TABLE_NAME = "sys_resources res";
 	private static String QUERY_TABLE_COLUMN = " res.id,res.name,res.parentid,res.reskey,res.type,res.resurl,res.level,res.icon,res.ishide,res.description,res.colorid ";
 
-	public SysResourcesVO create(final SysResourcesVO bean) {
+	public SysResourcesVO save(final SysResourcesVO bean) {
 		BaseMap<String, Object> createmap = new BaseMap<String, Object>();
 		String id = null;
 		createmap.put("name", bean.getName());
@@ -55,7 +55,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		this.baseupdate(updatemap, WHEREmap, "sys_resources");
 	}
 
-	public Page query(Page page, ResourcesQuery qvo) {
+	public Page list(Page page, ResourcesQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN)
 				.append(",color.colorclass").append(FROM)
@@ -94,7 +94,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		return sql.toString();
 	}
 
-	public List<SysResourcesVO> query(ResourcesQuery qvo) {
+	public List<SysResourcesVO> list(ResourcesQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN)
 				.append(",color.colorclass").append(FROM)

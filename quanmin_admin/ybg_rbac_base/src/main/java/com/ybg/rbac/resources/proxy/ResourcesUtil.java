@@ -26,7 +26,7 @@ public class ResourcesUtil {
 	public List<Directories> getAllResources() {
 		ResourcesQuery qvo = new ResourcesQuery();
 		qvo.setIsdelete(0);
-		List<SysResourcesVO> alldb = resourcesService.query(qvo);
+		List<SysResourcesVO> alldb = resourcesService.list(qvo);
 		List<Directories> orgs = new ArrayList<Directories>();
 		List<Menu> menus = new ArrayList<Menu>();
 		for (SysResourcesVO r : alldb) {
@@ -129,7 +129,7 @@ public class ResourcesUtil {
 	
 	/*** 快速对菜单添加一个增删查改 操作 **/
 	public void createMenuWithButton(SysResourcesVO resources, boolean add, boolean remove, boolean update, boolean get, boolean toadd, boolean toupdate, boolean list, boolean index) {
-		SysResourcesVO bean = resourcesService.create(resources);
+		SysResourcesVO bean = resourcesService.save(resources);
 		String parentid=bean.getId();
 		SysResourcesVO addbutton= new SysResourcesVO();
 		addbutton.setParentid(parentid);

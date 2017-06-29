@@ -15,7 +15,7 @@ public interface ResourcesService {
 	
 	/** 返回主键的创建 **/
 	// sys_resources
-	SysResourcesVO create(SysResourcesVO bean);
+	SysResourcesVO save(SysResourcesVO bean);
 	
 	/** 更新数据，条件 和 需要更新的字段都不能为空 不限个数个条件
 	 * 
@@ -31,11 +31,11 @@ public interface ResourcesService {
 	
 	/** 分页查询 **/
 	// sys_resources
-	Page query(Page page, ResourcesQuery qvo);
+	Page list(Page page, ResourcesQuery qvo);
 	
 	/** 不分页查询 **/
 	// sys_resources
-	List<SysResourcesVO> query(ResourcesQuery qvo);
+	List<SysResourcesVO> list(ResourcesQuery qvo);
 	
 	/** 角色 权限集合 **/
 	// sys_res_role

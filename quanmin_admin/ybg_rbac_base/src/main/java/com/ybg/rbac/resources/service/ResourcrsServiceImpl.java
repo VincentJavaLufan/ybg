@@ -25,8 +25,8 @@ public class ResourcrsServiceImpl implements ResourcesService {
 	
 	/** 返回主键的创建 **/
 	@Caching(evict = { @CacheEvict(value = "resourcesCache", allEntries = true), @CacheEvict(value = "resroleCache", allEntries = true) })
-	public SysResourcesVO create(SysResourcesVO bean) {
-		return resourcesDao.create(bean);
+	public SysResourcesVO save(SysResourcesVO bean) {
+		return resourcesDao.save(bean);
 	}
 	
 	/** 根据ID删除 **/
@@ -58,20 +58,20 @@ public class ResourcrsServiceImpl implements ResourcesService {
 	public SysResourcesVO get(String id) {
 		ResourcesQuery qvo = new ResourcesQuery();
 		qvo.setId(id);
-		List<SysResourcesVO> list = resourcesDao.query(qvo);
+		List<SysResourcesVO> list = resourcesDao.list(qvo);
 		return list != null && list.size() > 0 ? list.get(0) : null;
 	}
 	
 	/** 分页查询 **/
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]+#root.method.name+#root.args[1]")
-	public Page query(Page page, ResourcesQuery qvo) {
-		return resourcesDao.query(page, qvo);
+	public Page list(Page page, ResourcesQuery qvo) {
+		return resourcesDao.list(page, qvo);
 	}
 	
 	/** 不分页查询 **/
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]")
-	public List<SysResourcesVO> query(ResourcesQuery qvo) {
-		return resourcesDao.query(qvo);
+	public List<SysResourcesVO> list(ResourcesQuery qvo) {
+		return resourcesDao.list(qvo);
 	}
 	
 	/** 角色 权限集合 **/
