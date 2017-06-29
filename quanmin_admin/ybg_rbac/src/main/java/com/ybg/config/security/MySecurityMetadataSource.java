@@ -72,7 +72,7 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
 
 	private void loadResourceDefine() {
 		/** 因为只有权限控制的资源才需要被拦截验证,所以只加载有权限控制的资源 */
-		List<SysResourcesVO> aclResourceses = aclResourcesService.query(new ResourcesQuery());
+		List<SysResourcesVO> aclResourceses = aclResourcesService.list(new ResourcesQuery());
 		aclResourceMap = new HashMap<String, Collection<ConfigAttribute>>();
 		for (SysResourcesVO aclResources : aclResourceses) {
 			ConfigAttribute ca = new SecurityConfig(aclResources.getResurl());
