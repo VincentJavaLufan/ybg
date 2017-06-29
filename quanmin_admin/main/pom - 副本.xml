@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -13,7 +11,7 @@
 	<groupId>main</groupId>
 	<artifactId>com.ybg</artifactId>
 	<version>0.0.1</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>main</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -59,8 +57,7 @@
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_mq</artifactId>
 			<version>0.0.1</version>
-		</dependency>
-		<dependency>
+		</dependency><dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_base_jar</artifactId>
 			<version>0.0.1</version>
@@ -80,11 +77,44 @@
 						<verbose />
 						<bootclasspath>${java.home}/lib/rt.jar;${java.home}/lib/jce.jar</bootclasspath>
 					</compilerArguments>
-					<!-- 打包成可直接运行的jar -->
-					<executable>true</executable>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
 
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<configuration>
+							<target>
+								<copy todir="${basedir}/src/main/webapp/WEB-INF/views/"
+									overwrite="true">
+									<fileset dir="${basedir}/src/main/resources/templates/" />
+								</copy>
+								<copy todir="${basedir}/src/main/webapp/" overwrite="true">
+									<fileset dir="${basedir}/src/main/resources/static/" />
+								</copy>
+								<copy todir="${basedir}/src/main/webapp/WEB-INF/classes/" overwrite="true">
+									<fileset dir="${basedir}/target/classes/" />
+								</copy>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<!-- The plugin rewrites your manifest -->
 				<groupId>org.springframework.boot</groupId>
@@ -117,11 +147,29 @@
 					</compilerArguments>
 				</configuration>
 			</plugin>
-
-
-
-
+			
+			<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>copy-dependencies</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>copy-dependencies</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>src/main/webapp/WEB-INF/lib</outputDirectory>
+                        <overWriteReleases>false</overWriteReleases>
+                        <overWriteSnapshots>false</overWriteSnapshots>
+                        <overWriteIfNewer>true</overWriteIfNewer>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+        
+			
 		</plugins>
-
+		
 	</build>
 </project>
