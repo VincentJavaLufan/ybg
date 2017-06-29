@@ -1,9 +1,13 @@
 package com.ybg.rbac.role.dao;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.stereotype.Repository;
+
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
@@ -15,10 +19,10 @@ import com.ybg.rbac.role.qvo.RoleQuery;
 
 @Repository
 public class RoleDaoImpl extends BaseDao implements RoleDao {
-	
-	private static String	QUERY_TABLE_NAME	= "sys_role role";
-	private static String	QUERY_TABLE_COLUMN	= " role.id,role.state,role.name,role.rolekey,role.description ,role.isdelete ";
-	
+
+	private static String QUERY_TABLE_NAME = "sys_role role";
+	private static String QUERY_TABLE_COLUMN = " role.id,role.state,role.name,role.rolekey,role.description ,role.isdelete ";
+
 	public SysRoleVO createandid(SysRoleVO role) throws Exception {
 		BaseMap<String, Object> createmap = new BaseMap<String, Object>();
 		String id = null;
@@ -30,27 +34,34 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		role.setId((String) id);
 		return role;
 	}
-	
-	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> WHEREmap) {
+
+	public void update(BaseMap<String, Object> updatemap,
+			BaseMap<String, Object> WHEREmap) {
 		this.baseupdate(updatemap, WHEREmap, "sys_role");
 	}
-	
+
 	public Page query(Page page, RoleQuery qvo) {
 		StringBuilder sql = new StringBuilder();
-		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
+				.append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
-		page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new RoleMapper()));
 		page.setTotals(queryForInt(sql));
+		if (page.getTotals() > 0) {
+			page.setResult(getJdbcTemplate().query(page.getPagesql(sql),
+					new RoleMapper()));
+		} else {
+			page.setResult(new ArrayList<SysRoleVO>());
+		}
+
 		return page;
 	}
-	
+
 	private String getcondition(RoleQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
 		if (QvoConditionUtil.checkInteger(qvo.getIsdelete())) {
 			sql.append(AND).append("role.isdelete=").append(qvo.getIsdelete());
-		}
-		else {
+		} else {
 			sql.append(AND).append("role.isdelete=0");// 默认
 		}
 		sqlappen(sql, "role.id", qvo.getId());
@@ -60,32 +71,39 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		sqlappen(sql, "role.`name`", qvo.getName(), qvo);
 		return sql.toString();
 	}
-	
+
 	public List<SysRoleVO> query(RoleQuery qvo) {
 		StringBuilder sql = new StringBuilder();
-		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
+				.append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
 		return getJdbcTemplate().query(sql.toString(), new RoleMapper());
 	}
-	
+
 	public void saveOrupdateRole_Res(final List<RoleResDO> list) {
 		StringBuilder sql = new StringBuilder();
-		sql.append(INSERT).append(INTO).append("sys_res_role (resid,roleid,state) ").append(VALUES).append("(?,?,?) ").append(ON).append(DUPLICATE).append(KEY).append(UPDATE).append("resid=?,roleid=?, state=? ");
-		getJdbcTemplate().batchUpdate(sql.toString(), new BatchPreparedStatementSetter() {
-			
-			public void setValues(PreparedStatement ps, int index) throws SQLException {
-				int count = 1;
-				ps.setString(count++, list.get(index).getResid());
-				ps.setString(count++, list.get(index).getRoleid());
-				ps.setInt(count++, list.get(index).getState());
-				ps.setString(count++, list.get(index).getResid());
-				ps.setString(count++, list.get(index).getRoleid());
-				ps.setInt(count++, list.get(index).getState());
-			}
-			
-			public int getBatchSize() {
-				return list.size();
-			}
-		});
+		sql.append(INSERT).append(INTO)
+				.append("sys_res_role (resid,roleid,state) ").append(VALUES)
+				.append("(?,?,?) ").append(ON).append(DUPLICATE).append(KEY)
+				.append(UPDATE).append("resid=?,roleid=?, state=? ");
+		getJdbcTemplate().batchUpdate(sql.toString(),
+				new BatchPreparedStatementSetter() {
+					@Override
+					public void setValues(PreparedStatement ps, int index)
+							throws SQLException {
+						int count = 1;
+						ps.setString(count++, list.get(index).getResid());
+						ps.setString(count++, list.get(index).getRoleid());
+						ps.setInt(count++, list.get(index).getState());
+						ps.setString(count++, list.get(index).getResid());
+						ps.setString(count++, list.get(index).getRoleid());
+						ps.setInt(count++, list.get(index).getState());
+					}
+
+					@Override
+					public int getBatchSize() {
+						return list.size();
+					}
+				});
 	}
 }
