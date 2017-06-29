@@ -86,7 +86,7 @@ public class LoginControllor {
 					model.addAttribute("username", userDetail.getUsername());
 					UserQuery qvo = new UserQuery();
 					qvo.setUsername(userDetail.getUsername());
-					UserVO u = userService.query(qvo).get(0);
+					UserVO u = userService.list(qvo).get(0);
 					model.addAttribute("realName", u.getUsername());
 					return "redirect:/common/login_do/index.do";
 				}
@@ -101,7 +101,7 @@ public class LoginControllor {
 					model.addAttribute("username", userDetail.getUsername());
 					UserQuery qvo = new UserQuery();
 					qvo.setUsername(userDetail.getUsername());
-					UserVO u = userService.query(qvo).get(0);
+					UserVO u = userService.list(qvo).get(0);
 					model.addAttribute("realName", u.getUsername());
 				}
 				// 登录成功跳到主页
@@ -154,7 +154,7 @@ public class LoginControllor {
 				+ "/common/login_do/relife.do?userid=" + user.getId()
 				+ "&salt=" + user.getCredentialssalt() + "'>激活</a>";
 		try {
-			userService.createandid(user);
+			userService.save(user);
 		} catch (Exception e) {
 			e.printStackTrace();
 			j.setMsg("创建失败，已存在该用户");
@@ -185,7 +185,7 @@ public class LoginControllor {
 		UserQuery qvo = new UserQuery();
 		qvo.setUsername(username);
 		qvo.setState(UserStateConstant.DIE);
-		List<UserVO> list = userService.query(qvo);
+		List<UserVO> list = userService.list(qvo);
 		if (list != null && list.size() == 1) {
 			BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
 			BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
@@ -213,7 +213,7 @@ public class LoginControllor {
 		j.setSuccess(true);
 		UserQuery userqvo = new UserQuery();
 		userqvo.setUsername(username);
-		List<UserVO> userlist = userService.query(userqvo);
+		List<UserVO> userlist = userService.list(userqvo);
 		if (userlist == null || userlist.size() == 0) {
 			j.setSuccess(false);
 			j.setMsg("无此账号");

@@ -103,7 +103,7 @@ public class UserControllor {
 		qvo.setBlurred(true);
 		Page page = new Page();
 		page.setCurPage(pageNow);
-		page = userService.query(page, qvo);
+		page = userService.list(page, qvo);
 		page.init();
 		return page;
 	}
@@ -212,6 +212,6 @@ public class UserControllor {
 		response.setHeader("Content-disposition", "attachment;filename=" + filename + ".xls");
 		ServletOutputStream out = response.getOutputStream();
 		ExcelUtil<UserVO> util = new ExcelUtil<UserVO>(UserVO.class);// 创建工具类.
-		util.exportExcel(userService.query(qvo), "用户", out, 2, null, false);// 导出
+		util.exportExcel(userService.list(qvo), "用户", out, 2, null, false);// 导出
 	}
 }
