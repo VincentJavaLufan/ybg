@@ -29,7 +29,7 @@ public class LoginService implements UserDetailsService {
 		if (!QvoConditionUtil.checkString(username)) {
 			return null;
 		}
-		List<UserVO> list = userdao.query(qvo);
+		List<UserVO> list = userdao.list(qvo);
 		if (list == null || list.size() == 0) {
 			throw new UsernameNotFoundException(username + " not found");
 		}
@@ -47,7 +47,7 @@ public class LoginService implements UserDetailsService {
 	public UserVO getUserByname(String username) {
 		UserQuery qvo = new UserQuery();
 		qvo.setUsername(username);
-		List<UserVO> list = userdao.query(qvo);
+		List<UserVO> list = userdao.list(qvo);
 		if (list != null && list.size() > 0) {
 			return list.get(0);
 		}

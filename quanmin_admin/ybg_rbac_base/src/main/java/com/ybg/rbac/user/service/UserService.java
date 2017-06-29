@@ -11,7 +11,7 @@ public interface UserService {
 	 * 
 	 * @throws Exception **/
 	// sys_user
-	UserVO createandid(UserVO user) throws Exception;
+	UserVO save(UserVO user) throws Exception;
 	
 	/** 更新数据，条件 和 需要更新的字段都不能为空 不限个数个条件
 	 * 
@@ -27,11 +27,11 @@ public interface UserService {
 	
 	/** 分页查询 **/
 	// sys_user
-	Page query(Page page, UserQuery qvo);
+	Page list(Page page, UserQuery qvo);
 	
 	/** 不分页查询 **/
 	// sys_user
-	List<UserVO> query(UserQuery qvo);
+	List<UserVO> list(UserQuery qvo);
 	
 	/** 登陆 **/
 	// sys_user

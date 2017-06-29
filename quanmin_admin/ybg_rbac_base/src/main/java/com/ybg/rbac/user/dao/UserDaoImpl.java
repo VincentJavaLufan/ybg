@@ -22,7 +22,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	private static String QUERY_TABLE_NAME = "sys_user user";
 	private static String QUERY_TABLE_COLUMN = " user.id, user.username, user.phone, user.email, user.state, user.password, user.createtime, user.isdelete, user.roleid, user.credentialssalt ";
 
-	public UserVO createandid(UserVO user) throws Exception {
+	public UserVO save(UserVO user) throws Exception {
 		BaseMap<String, Object> createmap = new BaseMap<String, Object>();
 		createmap.put("username", user.getUsername());
 		createmap.put("phone", user.getPhone());
@@ -43,7 +43,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		this.baseupdate(updatemap, WHEREmap, "sys_user");
 	}
 
-	public Page query(Page page, UserQuery qvo) {
+	public Page list(Page page, UserQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN)
 				.append(",role.`name` rolename").append(FROM)
@@ -81,7 +81,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		return sql.toString();
 	}
 
-	public List<UserVO> query(UserQuery qvo) {
+	public List<UserVO> list(UserQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN)
 				.append(",role.`name` rolename").append(FROM)

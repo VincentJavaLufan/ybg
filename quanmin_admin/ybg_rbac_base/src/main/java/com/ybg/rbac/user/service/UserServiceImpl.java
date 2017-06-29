@@ -20,8 +20,8 @@ public class UserServiceImpl implements UserService {
 	 * 
 	 * @throws Exception **/
 	@CacheEvict(value = "userCache", allEntries = true)
-	public UserVO createandid(UserVO user) throws Exception {
-		return userDao.createandid(user);
+	public UserVO save(UserVO user) throws Exception {
+		return userDao.save(user);
 	}
 	
 	/** 根据id删除 **/
@@ -51,20 +51,20 @@ public class UserServiceImpl implements UserService {
 	public UserVO get(String id) {
 		UserQuery qvo = new UserQuery();
 		qvo.setId(id);
-		List<UserVO> list = userDao.query(qvo);
+		List<UserVO> list = userDao.list(qvo);
 		return list != null && list.size() > 0 ? list.get(0) : null;
 	}
 	
 	/** 分页查询用户信息 **/
 	@Cacheable(value = "userCache", key = "#root.method.name+#root.args[0]+#root.method.name+#root.args[1]")
-	public Page query(Page page, UserQuery qvo) {
-		return userDao.query(page, qvo);
+	public Page list(Page page, UserQuery qvo) {
+		return userDao.list(page, qvo);
 	}
 	
 	/** 不分页查询用户信息 **/
 	@Cacheable(value = "userCache", key = "#root.method.name+#root.args[0]")
-	public List<UserVO> query(UserQuery qvo) {
-		return userDao.query(qvo);
+	public List<UserVO> list(UserQuery qvo) {
+		return userDao.list(qvo);
 	}
 	
 	/** 登陆 **/
