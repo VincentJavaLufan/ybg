@@ -19,8 +19,8 @@ public class RoleServiceImpl implements RoleService{
 	/** 返回主键的创建 
 	 * @throws Exception **/
 	@CacheEvict(value = "roleCache", allEntries = true)
-	public SysRoleVO createandid(SysRoleVO role) throws Exception {
-		return roleDao.createandid(role);
+	public SysRoleVO save(SysRoleVO role) throws Exception {
+		return roleDao.save(role);
 	}
 	
 	/** 更新数据，条件 和 需要更新的字段都不能为空 不限个数个条件
@@ -52,20 +52,20 @@ public class RoleServiceImpl implements RoleService{
 	public SysRoleVO get(String id) {
 		RoleQuery qvo = new RoleQuery();
 		qvo.setId(id);
-		List<SysRoleVO> list = roleDao.query(qvo);
+		List<SysRoleVO> list = roleDao.list(qvo);
 		return list != null && list.size() > 0 ? list.get(0) : null;
 	}
 	
 	/** 分页查询 **/
 	@Cacheable(value = "roleCache", key = "#root.method.name+#root.args[0]+#root.method.name+#root.args[1]")
-	public Page query(Page page, RoleQuery qvo) {
-		return roleDao.query(page, qvo);
+	public Page list(Page page, RoleQuery qvo) {
+		return roleDao.list(page, qvo);
 	}
 	
 	/** 不分页查询 **/
 	@Cacheable(value = "roleCache", key = "#root.method.name+#root.args[0]")
-	public List<SysRoleVO> query(RoleQuery qvo) {
-		return roleDao.query(qvo);
+	public List<SysRoleVO> list(RoleQuery qvo) {
+		return roleDao.list(qvo);
 	}
 	
 	/** 角色授权 增删改都在里面了 **/

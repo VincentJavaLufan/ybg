@@ -12,7 +12,7 @@ public interface RoleService {
 	 * 
 	 * @throws Exception **/
 	// sys_role
-	SysRoleVO createandid(SysRoleVO role) throws Exception;
+	SysRoleVO save(SysRoleVO role) throws Exception;
 	
 	/** 更新数据，条件 和 需要更新的字段都不能为空 不限个数个条件
 	 * 
@@ -28,11 +28,11 @@ public interface RoleService {
 	
 	/** 分页查询 **/
 	// sys_role
-	Page query(Page page, RoleQuery qvo);
+	Page list(Page page, RoleQuery qvo);
 	
 	/** 不分页查询 **/
 	// sys_role
-	List<SysRoleVO> query(RoleQuery qvo);
+	List<SysRoleVO> list(RoleQuery qvo);
 	
 	/** 角色授权 增删改都在里面了 **/
 	// sys_res_role

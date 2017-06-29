@@ -23,7 +23,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 	private static String QUERY_TABLE_NAME = "sys_role role";
 	private static String QUERY_TABLE_COLUMN = " role.id,role.state,role.name,role.rolekey,role.description ,role.isdelete ";
 
-	public SysRoleVO createandid(SysRoleVO role) throws Exception {
+	public SysRoleVO save(SysRoleVO role) throws Exception {
 		BaseMap<String, Object> createmap = new BaseMap<String, Object>();
 		String id = null;
 		createmap.put("state", role.getState());
@@ -40,7 +40,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		this.baseupdate(updatemap, WHEREmap, "sys_role");
 	}
 
-	public Page query(Page page, RoleQuery qvo) {
+	public Page list(Page page, RoleQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
 				.append(QUERY_TABLE_NAME);
@@ -72,7 +72,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		return sql.toString();
 	}
 
-	public List<SysRoleVO> query(RoleQuery qvo) {
+	public List<SysRoleVO> list(RoleQuery qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
 				.append(QUERY_TABLE_NAME);
