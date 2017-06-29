@@ -112,7 +112,7 @@ public class UserControllor {
 	@ApiOperation(value = "添加用户页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String toadd(@ApiIgnore ModelMap map) {
-		map.put("roleselect", roleService.query(new RoleQuery()));
+		map.put("roleselect", roleService.list(new RoleQuery()));
 		return "/system/user/toadd";
 	}
 	
@@ -154,7 +154,7 @@ public class UserControllor {
 	public String toupdate(@RequestParam(name = "id", required = true) String id, @ApiIgnore ModelMap map) {
 		UserVO user = userService.get(id);
 		map.put("updateuser", user);
-		map.put("roleselect", roleService.query(new RoleQuery()));
+		map.put("roleselect", roleService.list(new RoleQuery()));
 		return "/system/user/edit";
 	}
 	

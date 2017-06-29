@@ -53,7 +53,7 @@ public class RoleControllor  {
 		qvo.setBlurred(true);
 		Page page = new Page();
 		page.setCurPage(pageNow);
-		page = roleService.query(page, qvo);
+		page = roleService.list(page, qvo);
 		page.init();
 		return page;
 	}
@@ -110,7 +110,7 @@ public class RoleControllor  {
 		Json j = new Json();
 		j.setSuccess(true);
 		try {
-			roleService.createandid(bean);
+			roleService.save(bean);
 		} catch (Exception e) {
 			e.printStackTrace();
 			j.setMsg("操作失败");
