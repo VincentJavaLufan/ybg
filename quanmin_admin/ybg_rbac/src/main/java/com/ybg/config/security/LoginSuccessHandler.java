@@ -15,6 +15,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 		// 获得授权后可得到用户信息 可使用SUserService进行数据库操作
 		UserVO userDetails = (UserVO) authentication.getPrincipal();
 		request.getSession().setAttribute("userSession", userDetails);
+	
 		// super.onAuthenticationSuccess(request, response, authentication);
 	}
 	
