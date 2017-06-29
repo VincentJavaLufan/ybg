@@ -142,7 +142,7 @@ public class RoleControllor  {
 	public Json addRoleRes(@RequestParam(name = "roleId", required = true) String roleId, @RequestParam(name = "resId[]", required = false) String[] resIds, ModelMap modelmap) {
 		Json j = new Json();
 		j.setSuccess(true);
-		List<SysResourcesVO> reslist = resourcesService.query(new ResourcesQuery());
+		List<SysResourcesVO> reslist = resourcesService.list(new ResourcesQuery());
 		try {
 			List<RoleResDO> list = new ArrayList<RoleResDO>();
 			for (SysResourcesVO res : reslist) {

@@ -48,7 +48,7 @@ public class RescourcesControllor {
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String list(@ModelAttribute ResourcesQuery qvo, ModelMap map) {
 		List<TreeVO> list = new ArrayList<TreeVO>();
-		List<SysResourcesVO> dblist = resourcesService.query(qvo);
+		List<SysResourcesVO> dblist = resourcesService.list(qvo);
 		for (SysResourcesVO r : dblist) {
 			TreeVO ts = new TreeVO();
 			ts.setDescription(r.getDescription());
@@ -76,7 +76,7 @@ public class RescourcesControllor {
 		Json j = new Json();
 		j.setSuccess(true);
 		try {
-			resourcesService.create(res);
+			resourcesService.save(res);
 		} catch (Exception e) {
 			e.printStackTrace();
 			j.setMsg("操作失败");
@@ -163,7 +163,7 @@ public class RescourcesControllor {
 	@ResponseBody
 	@RequestMapping(value = { "reslists.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public List<SysResourcesVO> reslists(@ModelAttribute ResourcesQuery qvo) throws Exception {
-		List<SysResourcesVO> mps = resourcesService.query(qvo);
+		List<SysResourcesVO> mps = resourcesService.list(qvo);
 		return mps;
 	}
 	
@@ -185,14 +185,14 @@ public class RescourcesControllor {
 		ResourcesQuery qvo = new ResourcesQuery();
 		qvo.setReskey(reskey);
 		qvo.setName(name);
-		return resourcesService.query(qvo).size() > 0 ? false : true;
+		return resourcesService.list(qvo).size() > 0 ? false : true;
 	}
 	
 	@ApiOperation(value = "权限分配页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "roleid", value = "角色ID", required = true, dataType = "java.lang.String") })
 	@RequestMapping(value = { "permissions.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String permissions(@ModelAttribute ResourcesQuery qvo, @RequestParam(name = "roleid", required = true) String roleid, ModelMap modelmap) {
-		List<SysResourcesVO> mps = resourcesService.query(qvo);
+		List<SysResourcesVO> mps = resourcesService.list(qvo);
 		List<TreeVO> list = new ArrayList<TreeVO>();
 		for (SysResourcesVO map : mps) {
 			TreeVO ts = new TreeVO();
