@@ -2,7 +2,9 @@ package com.ybg.gen.service.impl;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.ybg.base.util.Page;
 import com.ybg.gen.dao.SysGeneratorDao;
+import com.ybg.gen.qvo.GeneratorQuery;
 import com.ybg.gen.service.SysGeneratorService;
 import com.ybg.gen.utils.GenUtils;
 import java.io.ByteArrayOutputStream;
@@ -17,13 +19,9 @@ public class SysGeneratorServiceImpl implements SysGeneratorService {
 	private SysGeneratorDao sysGeneratorDao;
 	
 	@Override
-	public List<Map<String, Object>> queryList(Map<String, Object> map) {
-		return sysGeneratorDao.queryList(map);
-	}
-	
-	@Override
-	public int queryTotal(Map<String, Object> map) {
-		return sysGeneratorDao.queryTotal(map);
+	public Page list(Page page, GeneratorQuery qvo) {
+		
+		return sysGeneratorDao.list(page, qvo);
 	}
 	
 	@Override
@@ -55,4 +53,6 @@ public class SysGeneratorServiceImpl implements SysGeneratorService {
 		IOUtils.closeQuietly(zip);
 		return outputStream.toByteArray();
 	}
+
+	
 }
