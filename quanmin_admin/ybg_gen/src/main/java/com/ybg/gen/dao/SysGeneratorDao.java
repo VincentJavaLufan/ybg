@@ -1,6 +1,8 @@
 package com.ybg.gen.dao;
 import java.util.List;
 import java.util.Map;
+import com.ybg.base.util.Page;
+import com.ybg.gen.qvo.GeneratorQuery;
 
 /** 代码生成器
  * 
@@ -9,9 +11,7 @@ import java.util.Map;
  * @date 2016年12月19日 下午3:32:04 */
 public interface SysGeneratorDao {
 	
-	List<Map<String, Object>> queryList(Map<String, Object> map);
-	
-	int queryTotal(Map<String, Object> map);
+	Page list(Page page, GeneratorQuery qvo);
 	
 	Map<String, String> queryTable(String tableName);
 	
