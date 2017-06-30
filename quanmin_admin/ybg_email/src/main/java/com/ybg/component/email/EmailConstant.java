@@ -1,4 +1,7 @@
 package com.ybg.component.email;
+
+import com.ybg.base.util.SystemConstant;
+
 /** 定义 邮箱常量 **/
 public class EmailConstant {
 	
@@ -19,12 +22,12 @@ public class EmailConstant {
 	
 	/*** 邮箱帐号 **/
 	public static String getEmailaccount() {
-		return "591518884@qq.com";
+		return SystemConstant.getEmailAdress();
 	}
 	
 	/** 邮箱密码 如果是QQ邮箱 请设置授权码（POP3） **/
 	public static String getEmailpwd() {
-		return "qdrwzvsucufmbchh";
+		return SystemConstant.getEmailPwd();
 	}
 	
 	private EmailConstant() {
