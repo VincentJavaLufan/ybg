@@ -1,4 +1,5 @@
 package com.ybg.gen.controller;
+
 import com.alibaba.fastjson.JSON;
 import com.ybg.base.util.Page;
 import com.ybg.gen.qvo.GeneratorQuery;
@@ -19,39 +20,55 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-/** 代码生成器
+/**
+ * 代码生成器
  * 
  * @author chenshun
  * @email sunlightcs@gmail.com
- * @date 2016年12月19日 下午9:12:58 */
+ * @date 2016年12月19日 下午9:12:58
+ */
 @Controller
 @RequestMapping("/sys/generator_do/")
 public class SysGeneratorController {
-	
+
 	@Autowired
 	private SysGeneratorService sysGeneratorService;
-	
+
+	@RequestMapping(value = "index.do", method = { RequestMethod.GET,
+			RequestMethod.POST })
+	public String index() {
+
+		return "/gen/index";
+	}
+
 	@ResponseBody
-	@RequestMapping(value = "list.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute GeneratorQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, ModelMap map) {
+	@RequestMapping(value = "list.do", method = { RequestMethod.GET,
+			RequestMethod.POST })
+	public Page list(
+			@ModelAttribute GeneratorQuery qvo,
+			@RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow,
+			ModelMap map) {
 		Page page = new Page();
 		page.setCurPage(pageNow);
 		page = sysGeneratorService.list(page, qvo);
 		page.init();
 		return page;
 	}
-	
+
 	/** 生成代码 */
-	@RequestMapping("/code")
-	public void code(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	@RequestMapping("code.do")
+	public void code(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 		String[] tableNames = new String[] {};
 		// 获取表名，不进行xss过滤
-		HttpServletRequest orgRequest = XssHttpServletRequestWrapper.getOrgRequest(request);
+		HttpServletRequest orgRequest = XssHttpServletRequestWrapper
+				.getOrgRequest(request);
 		String tables = orgRequest.getParameter("tables");
 		tableNames = JSON.parseArray(tables).toArray(tableNames);
 		byte[] data = sysGeneratorService.generatorCode(tableNames);
 		response.reset();
-		response.setHeader("Content-Disposition", "attachment; filename=\"renren.zip\"");
+		response.setHeader("Content-Disposition",
+				"attachment; filename=\"renren.zip\"");
 		response.addHeader("Content-Length", "" + data.length);
 		response.setContentType("application/octet-stream; charset=UTF-8");
 		IOUtils.write(data, response.getOutputStream());
