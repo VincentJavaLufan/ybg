@@ -12,7 +12,7 @@
 	</parent>
 	<groupId>main</groupId>
 	<artifactId>com.ybg</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<name>main</name>
 	<url>http://maven.apache.org</url>
@@ -23,52 +23,52 @@
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_rbac_base</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_jwt</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_quartz</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_company</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_login_qq</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_login_baidu</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_login_sina</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_mq</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_base_jar</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_gen</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 		</dependency>
 
 	</dependencies>
