@@ -5,7 +5,7 @@
   
   <groupId>com.ybg</groupId>
   <artifactId>ybg_mq</artifactId>
-  <version>0.0.1</version>
+  <version>1.0.0</version>
   <name>ybg_mq</name>
   <url>http://maven.apache.org</url>
   <properties>
@@ -21,21 +21,21 @@
     <dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_base_util</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_base_jdbc</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_rbac_base</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 		</dependency><dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_base_jar</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 		</dependency>
   </dependencies><build>
 		<plugins>

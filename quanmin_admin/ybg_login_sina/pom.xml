@@ -4,7 +4,7 @@
 	
 	<groupId>com.ybg</groupId>
 	<artifactId>ybg_login_sina</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 	<name>ybg_login_sina</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -14,11 +14,11 @@
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_rbac</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 		</dependency><dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_base_jar</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies><build>
 		<plugins>
