@@ -17,7 +17,8 @@ $(function() {
 
 		} ],
 		jsonUrl : rootPath + '/sys/generator_do/list.do',
-		checkbox : true
+		checkbox : true,
+        checkValue : 'tableName'
 	});
 	$("#search").click("click", function() {// 绑定查询按扭
 		var searchParams = $("#searchForm").serializeJson();// 初始化传参数
@@ -31,9 +32,9 @@ $(function() {
 	// $("#editRole").click("click", function() {
 	// editRole();
 	// });
-	// $("#delRole").click("click", function() {
-	// delRole();
-	// });
+	 $("#delRole").click("click", function() {
+	 delRole();
+	 });
 	// $("#permissions").click("click", function() {
 	// permissions();
 	// });
@@ -79,19 +80,11 @@ function addRole() {
 function delRole() {
 	var cbox = grid.getSelectedCheckbox();
 	if (cbox == "") {
-		layer.msg("请选择删除项！！");
+		layer.msg("请选择生成表！！");
 		return;
 	}
-	layer.confirm('是否删除？', function(index) {
-		var url = rootPath + '/role/role_do/remove.do';
-		var s = CommnUtil.ajax(url, {
-			ids : cbox.join(",")
-		}, "json");
-		if (s.msg == "操作成功") {
-			layer.msg('删除成功');
-			grid.loadData();
-		} else {
-			layer.msg('删除失败');
-		}
+	layer.confirm('是否生成？', function(index) {
+		location.href='/sys/generator_do/code.do?tables='+cbox.join(",");
+		
 	});
 }
