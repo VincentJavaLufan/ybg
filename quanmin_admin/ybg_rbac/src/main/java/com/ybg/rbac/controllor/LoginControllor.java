@@ -303,22 +303,15 @@ public class LoginControllor {
 	// /** 重置密码 **/
 	// // XXX 需要添加校验机制 不然是个BUG
 	@ApiOperation(value = "重置密码", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "encryptInfo", value = "加密信息", dataType = "java.lang.String", required = true),
-			@ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
+	@ApiImplicitParams({ @ApiImplicitParam(name = "encryptInfo", value = "加密信息", dataType = "java.lang.String", required = true), @ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
 	@ResponseBody
-	@RequestMapping(value = "/common/login_do/resetpassword.do", method = {
-			RequestMethod.GET, RequestMethod.POST })
-	public Json resetpassword(
-			@RequestParam(name = "encryptInfo", required = true) String encryptInfo,
-			@RequestParam(name = "password", required = true) String password,
-			Model model) throws Exception {
+	@RequestMapping(value = "/common/login_do/resetpassword.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public Json resetpassword(@RequestParam(name = "encryptInfo", required = true) String encryptInfo, @RequestParam(name = "password", required = true) String password, Model model) throws Exception {
 		Json j = new Json();
 		j.setSuccess(true);
 		j.setMsg("操作成功");
 		try {
-			JSONObject json = JSONObject.fromObject(new DesUtils()
-					.decrypt(encryptInfo));
+			JSONObject json = JSONObject.fromObject(new DesUtils().decrypt(encryptInfo));
 			String userid = json.getString("uid");
 			String dietime = json.getString("dietime");
 			if (!dietime.equals(DateUtil.getDate())) {
@@ -350,6 +343,7 @@ public class LoginControllor {
 			wheremap.put("id", user.getId());
 			userService.update(updatemap, wheremap);
 		} catch (Exception e) {
+			e.printStackTrace();
 			j.setSuccess(false);
 			j.setMsg("操作失败！");
 			return j;
