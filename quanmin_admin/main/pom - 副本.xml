@@ -62,6 +62,11 @@
 			<artifactId>ybg_base_jar</artifactId>
 			<version>0.0.1</version>
 		</dependency>
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_gen</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
