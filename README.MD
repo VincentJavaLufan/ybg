@@ -314,7 +314,7 @@ pom-副本.xml 打包成tomcat 目录的pom 如果需要这个 吧pom.xml 重命
 
 点击run即可
 
-
+可运行的webapp目录在 main模块的webapp 目录，复制到tomcat 部署目录 或者修改 tomcat server.xml指向改目录即可
 
 
 
