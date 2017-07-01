@@ -27,7 +27,10 @@ QQ群：314658875
 
 ### 本系统的特点：
 
-以Spring 为中心，模块化开发系统，用户可以随意删减除权限框架外 任意的系统模块。
+以Spring 为中心，模块化开发系统，用户可以随意删减除权限框架外 任意的系统模块。复用，组装性强。2种打包方式，传统可运行的tomcat目录
+以及直接jar 方式运行。
+
+系统需求：当前所有模块引用时，需要700M 以上的空余内存（不包含mysql).
 
 
 主要应用技术：Springboot 1.5.3 
@@ -282,13 +285,59 @@ eclipse 构建maven 环境
 
 ---------------------------------------------------------------------------------------------------------------------
 ###如何部署？
+ **
+ 本目录的pom ** 
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0701/194946_56947e5a_880593.png "在这里输入图片标题")
+
+
+pom.xml  打包方式  可执行jar 打包，本系统默认方式
+
+pom-副本.xml 打包成tomcat 目录的pom 如果需要这个 吧pom.xml 重命名为 pom2.xml ,pom-副本.xml 重命名为 pom.xml
+
+
+
+
 A.传统tomcat 服务器 的目录运行
 
+pom-副本.xml 打包成tomcat 目录的pom 如果需要这个 吧pom.xml 重命名为 pom2.xml ,pom-副本.xml 重命名为 pom.xml
+
+执行项目打包 右键quanmin_admin 模块。
+
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0701/195535_fa8cd813_880593.png "在这里输入图片标题")
+
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0701/195623_2989a7eb_880593.png "在这里输入图片标题")
+
+点击run即可
+
 编辑中..请稍后
 
-B.jar 方式运行
 
-编辑中..请稍后
+
+B.jar 方式运行，打包后
+
+同上，只是pom 用原有的即可。
+
+打包出来的项目就是可以执行的jar.
+
+
+（看不到日志？进入该run.bat的目录   用run.bat 运行，右键）
+
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0701/195819_10d77f67_880593.png "在这里输入图片标题")
+
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0701/195844_0b6975e1_880593.png "在这里输入图片标题")
+
+
+
+cmd 中文乱码解决方案 
+
+1. win+R 输入regedit 进入注册表 
+2. 找到 HKEY_CURRENT_USER\Console\%SystemRoot%_system32_cmd.exe 如果 该项下已存在CodePage项，则把值改为十进制”65001”；如果不存在，在该项下新建一个 DWORD（32位值），命名为“CodePage”，值设为“65001” 
+3. 重启cmd后生效 
+4. 对于Power shell修改同样，只需在第2步修改 
+%SystemRoot%_system32_WindowsPowerShell_v1.0_powershell.exe 下的项。
+
+
+
 
 
 
