@@ -127,26 +127,35 @@ QQ群：314658875
 
 ------------------------------------------------------------------------------------------------------------------
 
-###  **1.0 java代码规范（临时）** （参照阿里java 规范）
+###  **系统主要结构
+
+系统包图
+
+
+
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0701/170750_5ba5186a_880593.png "在这里输入图片标题")
+
+
+
 ----------------------------------------------------------------------------------------------------------------
 
 系统界面
-![登陆界面](https://git.oschina.net/uploads/images/2017/0701/080625_127ef49d_880593.png "在这里输入图片标题")
+![登陆界面](https://git.oschina.net/uploads/images/2017/0701/080625_127ef49d_880593.png "登陆界面")
 
-![账号密码错误](https://git.oschina.net/uploads/images/2017/0701/080713_12d32f30_880593.png "在这里输入图片标题")
+![账号密码错误](https://git.oschina.net/uploads/images/2017/0701/080713_12d32f30_880593.png "账号密码错误")
 
-![用户管理](https://git.oschina.net/uploads/images/2017/0701/080842_8697e8f8_880593.png "在这里输入图片标题")
+![用户管理](https://git.oschina.net/uploads/images/2017/0701/080842_8697e8f8_880593.png "用户管理")
 
-![角色管理](https://git.oschina.net/uploads/images/2017/0701/080914_4aca9b42_880593.png "在这里输入图片标题")
+![角色管理](https://git.oschina.net/uploads/images/2017/0701/080914_4aca9b42_880593.png "角色管理")
 
-![分配权限](https://git.oschina.net/uploads/images/2017/0701/081208_2af08e8d_880593.png "在这里输入图片标题")
+![分配权限](https://git.oschina.net/uploads/images/2017/0701/081208_2af08e8d_880593.png "分配权限")
 
-![需要分配权限的访问资源](https://git.oschina.net/uploads/images/2017/0701/081302_03810ec4_880593.png "在这里输入图片标题")
+![需要分配权限的访问资源](https://git.oschina.net/uploads/images/2017/0701/081302_03810ec4_880593.png "需要分配权限的访问资源")
 
-![没有权限页面](https://git.oschina.net/uploads/images/2017/0701/081542_3c94fff4_880593.png "在这里输入图片标题")
+![没有权限页面](https://git.oschina.net/uploads/images/2017/0701/081542_3c94fff4_880593.png "没有权限页面")
 
-![系统监控](https://git.oschina.net/uploads/images/2017/0701/081723_e789e73f_880593.png "在这里输入图片标题")
+![系统监控](https://git.oschina.net/uploads/images/2017/0701/081723_e789e73f_880593.png "系统监控")
 
-![系统监控](https://git.oschina.net/uploads/images/2017/0701/081745_575583b8_880593.png "在这里输入图片标题")
+![系统监控](https://git.oschina.net/uploads/images/2017/0701/081745_575583b8_880593.png "系统监控")
 
-![阿里连接池监控](https://git.oschina.net/uploads/images/2017/0701/081833_7e6aeca7_880593.png "在这里输入图片标题")
+![阿里连接池监控](https://git.oschina.net/uploads/images/2017/0701/081833_7e6aeca7_880593.png "阿里连接池监控")
