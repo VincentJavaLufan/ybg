@@ -142,3 +142,5 @@ QQ群：314658875
 ![分配权限](https://git.oschina.net/uploads/images/2017/0701/081208_2af08e8d_880593.png "在这里输入图片标题")
 
 ![需要分配权限的访问资源](https://git.oschina.net/uploads/images/2017/0701/081302_03810ec4_880593.png "在这里输入图片标题")
+
+![没有权限页面](https://git.oschina.net/uploads/images/2017/0701/081542_3c94fff4_880593.png "在这里输入图片标题")
