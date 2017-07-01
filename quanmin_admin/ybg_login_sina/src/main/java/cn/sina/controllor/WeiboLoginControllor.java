@@ -12,10 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.ServletUtil;
-import com.ybg.config.security.YcAnthencationProder;
 import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.LoginService;
@@ -32,14 +30,12 @@ import weibo4j.model.WeiboException;
 @Api("微博登陆")
 @Controller
 @RequestMapping("/common/weibo/sinalogin_do/")
-public class WeiboLoginControllor  {
+public class WeiboLoginControllor {
 	
 	@Autowired
 	WeiboUserService		weiboUserService;
 	@Autowired
 	UserService				userService;
-	@Autowired
-	YcAnthencationProder	ycAnthencationProder;
 	@Autowired
 	LoginService			loginservice;
 	@Autowired
