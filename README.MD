@@ -6,7 +6,7 @@ QQ群：314658875
 
  声明，虽然本产品是开源。但未经本人允许擅自申请专利，将公开追究法律责任。
 
-测试数据库地址：[下载地址](https://share.weiyun.com/0ee7e5d96563534816eabbee7cd5491e) 数据库更新时间-2017年6月29日 09:54:56
+
 
 
 
@@ -159,3 +159,59 @@ QQ群：314658875
 ![系统监控](https://git.oschina.net/uploads/images/2017/0701/081745_575583b8_880593.png "系统监控")
 
 ![阿里连接池监控](https://git.oschina.net/uploads/images/2017/0701/081833_7e6aeca7_880593.png "阿里连接池监控")
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 开始开发
+
+0.前期工作
+
+1.下载eclipse 本人使用![输入图片说明](https://git.oschina.net/uploads/images/2017/0701/173525_6e20cf80_880593.png "在这里输入图片标题")版本  可以下载最新的
+
+构建maven 环境 
+
+0.1 下载apache-maven-3.3.9 以上  解压 下载地址：http://maven.apache.org/download.cgi
+
+
+0.2 配置maven 环境变量
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0701/173008_ec1ba1ed_880593.png "在这里输入图片标题")
+
+JDK1.8  下载绿色版解压，请配置好环境变量或使用eclipse 自己安装jdk
+
+0.3 安装 mysql 5.6
+
+0.4 导入sql文件：测试数据库地址：[下载地址](https://share.weiyun.com/0ee7e5d96563534816eabbee7cd5491e) 数据库更新时间-2017年6月29日 09:54:56
+
+
+eclipse 构建maven 环境
+
+配置仓库路径
+
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0701/173318_115b827f_880593.png "在这里输入图片标题")
+
+
+
+
+1.用eclipse 导入项目
+
+下载zip 解压，右键导入
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0701/171946_f1e7e9b1_880593.png "在这里输入图片标题")
+
+以maven project 方式导入项目
+
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0701/172016_9d516f6b_880593.png "在这里输入图片标题")
+
+导入后如下目录
+
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0701/172120_c683210d_880593.png "在这里输入图片标题")
+
+左击![输入图片说明](https://git.oschina.net/uploads/images/2017/0701/172153_abc2baec_880593.png "在这里输入图片标题")
+
+然后输入 ALT+F5 刷新项目
+
+等待 build workplace 结束
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+
