@@ -46,7 +46,7 @@
         <dependent-module archiveName="ybg_base_jar-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ybg_base_jar/ybg_base_jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <property name="context-root" value="com.ybg"/>
         <property name="java-output-path" value="/main/target/classes"/>
+        <property name="context-root" value="main"/>
     </wb-module>
 </project-modules>
