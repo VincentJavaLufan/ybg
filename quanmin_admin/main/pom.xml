@@ -10,8 +10,8 @@
 		<relativePath />
 		<!-- lookup parent from repository -->
 	</parent>
-	<groupId>main</groupId>
-	<artifactId>com.ybg</artifactId>
+	<groupId>com.ybg</groupId>
+	<artifactId>main</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<name>main</name>
