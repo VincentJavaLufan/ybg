@@ -1,0 +1,8 @@
+package ${package}.domain;
+public class ${className}VO extends ${className}DO {
+	
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= 6992716444714136013L;
+}

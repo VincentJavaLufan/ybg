@@ -1,0 +1,88 @@
+package ${package}.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.stereotype.Repository;
+import com.ybg.base.jdbc.BaseDao;
+import com.ybg.base.jdbc.BaseMap;
+import com.ybg.base.jdbc.util.QvoConditionUtil;
+import com.ybg.base.util.Page;
+import ${package}.domain.${className}DO;
+import ${package}.domain.${className}VO;
+import ${package}.mapper.${className}Mapper;
+import ${package}.qvo.${className}Query;
+
+@Repository
+public class ${className}DaoImpl extends BaseDao implements ${className}Dao {
+
+
+
+	private static String QUERY_TABLE_NAME = "#foreach($column in $columns) #if($column.columnName != $pk.columnName)
+	  ${classname}.${column.columnName}, 	#end 	 ${classname}.${column.columnName}, 	#end ${pk.columnName}";
+	private static String QUERY_TABLE_COLUMN ="${tableName}  ${classname}";
+	@Override
+	public ${className}VO save(${className}VO ${classname}) throws Exception {
+		BaseMap<String, Object> createmap = new BaseMap<String, Object>();
+		String id = null;		
+		#foreach($column in $columns)
+		#if($column.columnName != $pk.columnName)
+	  	createmap.put("${column.columnName}", ${classname}.get${column.attrName}());
+		#end 
+		#end 
+		id = baseCreate(createmap, "${classname}", "${pk.columnName}");
+		${classname}.set${pk.attrName}((${pk.attrType}) id);
+		return ${classname};
+	}
+	@Override
+	public void update(BaseMap<String, Object> updatemap,
+			BaseMap<String, Object> WHEREmap) {
+		this.baseupdate(updatemap, WHEREmap, "${tableName}");
+	}
+@Override
+	public Page list(Page page,  ${className}Query qvo) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
+				.append(QUERY_TABLE_NAME);
+		sql.append(getcondition(qvo));
+		page.setTotals(queryForInt(sql));
+		if (page.getTotals() > 0) {
+			page.setResult(getJdbcTemplate().query(page.getPagesql(sql),
+					new ${className}Mapper()));
+		} else {
+			page.setResult(new ArrayList< ${className}VO>());
+		}
+
+		return page;
+	}
+
+	private String getcondition( ${className}Query qvo) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(WHERE).append("1=1");
+//		if (QvoConditionUtil.checkInteger(qvo.getIsdelete())) {
+//			sql.append(AND).append("${classname}.isdelete=").append(qvo.getIsdelete());
+//		} else {
+//			sql.append(AND).append("${classname}.isdelete=0");// 默认
+//		}
+        #foreach($column in $columns)
+		sqlappen(sql, "${classname}.${column.columnName}", qvo.get${column.attrName}());
+		#end	
+		return sql.toString();
+	}
+@Override
+	public List<${className}VO> list(${className}Query qvo) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
+				.append(QUERY_TABLE_NAME);
+		sql.append(getcondition(qvo));
+		return getJdbcTemplate().query(sql.toString(), new ${className}Mapper());
+	}
+	
+	@Override
+	public void remove(BaseMap<String, Object> wheremap) {
+		 baseremove(wheremap, "${tableName}");		
+	}
+	
+}
