@@ -1,0 +1,21 @@
+package ${package}.mapper;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.springframework.jdbc.core.RowMapper;
+import ${package}.domain.${className}VO;
+
+public class ${className}Mapper implements RowMapper<${className}VO> {
+	
+
+	public ${className}VO mapRow(ResultSet rs, int index) throws SQLException {
+		${className}VO bean = new ${className}VO();
+		#foreach($column in $columns)
+		#if ($column.attrType=="Integer")
+		bean.set${column.attrName}(rs.getInt("${column.attrName}"));
+		#else
+		bean.set${column.attrName}(rs.get${column.attrType}("${column.attrName}"));
+		#end
+		#end
+		return bean;
+	}
+}

@@ -1,9 +1,13 @@
 package ${package}.service;
 
-import ${package}.entity.${className}Entity;
+import ${package}.domain.${className}DO;
+import ${package}.domain.${className}VO;
+import ${package}.qvo.${className}Query;
 
 import java.util.List;
 import java.util.Map;
+import com.ybg.base.jdbc.BaseMap;
+import com.ybg.base.util.Page;
 
 /**
  * ${comments}
@@ -14,17 +18,30 @@ import java.util.Map;
  */
 public interface ${className}Service {
 	
-	${className}Entity queryObject(${pk.attrType} ${pk.attrname});
+	 /** 返回主键的创建
+	 * 
+	 * @throws Exception **/
+	${className}VO save(${className}VO bean) throws Exception;
 	
-	List<${className}Entity> queryList(Map<String, Object> map);
+	/** 更新数据，条件 和 需要更新的字段都不能为空 不限个数个条件
+	 * 
+	 * @author Deament
+	 * @param updatemap
+	 *            需要更新的字段和值
+	 * @param wheremap
+	 *            更新中的条件字段和值
+	 * @param table_name
+	 *            表的名称 **/
+	// sys_role
+	void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> wheremap);
 	
-	int queryTotal(Map<String, Object> map);
+	/** 分页查询 **/
+	// sys_role
+	Page list(Page page,${className}Query qvo);
 	
-	void save(${className}Entity ${classname});
-	
-	void update(${className}Entity ${classname});
-	
-	void delete(${pk.attrType} ${pk.attrname});
-	
-	void deleteBatch(${pk.attrType}[] ${pk.attrname}s);
+	/** 不分页查询 **/
+	// sys_role
+	List<${className}VO> list(${className}Query qvo);
+	/** 根据条件删除 **/
+	void remove(BaseMap<String, Object> wheremap);
 }

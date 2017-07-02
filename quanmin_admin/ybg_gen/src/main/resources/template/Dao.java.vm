@@ -1,7 +1,12 @@
 package ${package}.dao;
 
-import ${package}.entity.${className}Entity;
-
+import ${package}.domain.${className}DO;
+import java.util.List;
+import com.ybg.base.jdbc.BaseMap;
+import com.ybg.base.util.Page;
+import  ${package}.domain.${className}DO;
+import  ${package}.domain.${className}VO;
+import  ${package}.qvo.${className}Query;
 /**
  * ${comments}
  * 
@@ -9,6 +14,31 @@ import ${package}.entity.${className}Entity;
  * @email ${email}
  * @date ${datetime}
  */
-public interface ${className}Dao extends BaseDao<${className}Entity> {
+public interface ${className}Dao {
+	 /** 返回主键的创建
+	 * 
+	 * @throws Exception **/
+	${className}VO save(${className}VO bean) throws Exception;
 	
+	/** 更新数据，条件 和 需要更新的字段都不能为空 不限个数个条件
+	 * 
+	 * @author Deament
+	 * @param updatemap
+	 *            需要更新的字段和值
+	 * @param wheremap
+	 *            更新中的条件字段和值
+	 * @param table_name
+	 *            表的名称 **/
+	// sys_role
+	void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> wheremap);
+	
+	/** 分页查询 **/
+	// sys_role
+	Page list(Page page,${className}Query qvo);
+	
+	/** 不分页查询 **/
+	// sys_role
+	List<${className}VO> list(${className}Query qvo);
+	/** 根据条件删除 **/
+	void remove(BaseMap<String, Object> wheremap);
 }
