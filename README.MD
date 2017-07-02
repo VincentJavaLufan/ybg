@@ -77,7 +77,7 @@ quartz 自定义任务执行时间。
  
  --ybg_inter 接口
 
- --ybg_jwt   java web token 模块
+ --ybg_jwt   json web token 模块
  
  --ybg_login_baidu 百度登陆
 
@@ -131,7 +131,7 @@ quartz 自定义任务执行时间。
 
 15.Email 邮箱发送
 
-16.jwt(开发中） JAVA WEB TOKEN
+16.jwt(开发中） Json WEB TOKEN
 
 17.quartz 定时任务
 
