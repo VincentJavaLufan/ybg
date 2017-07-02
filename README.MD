@@ -292,19 +292,22 @@ eclipse 构建maven 环境
 ###如何部署？
  **
  本目录的pom ** 
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0701/194946_56947e5a_880593.png "在这里输入图片标题")
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0702/230202_c02ad6e9_880593.png "在这里输入图片标题")
 
 
 pom.xml  打包方式  可执行jar 打包，本系统默认方式
 
-pom-副本.xml 打包成tomcat 目录的pom 如果需要这个 吧pom.xml 重命名为 pom2.xml ,pom-副本.xml 重命名为 pom.xml
+pom-tomcat.xml 打包成tomcat 目录的pom 如果需要这个 吧pom.xml 重命名为 pom2.xml ,pom-副本.xml 重命名为 pom.xml
+
+pom-jar开发.xml jar形式部署的pom
 
 
+根据自己所需使用不同的pom
 
 
 A.传统tomcat 服务器 的目录运行
 
-pom-副本.xml 打包成tomcat 目录的pom 如果需要这个 吧pom.xml 重命名为 pom2.xml ,pom-副本.xml 重命名为 pom.xml
+pom-tomcat.xml 的内容替换到pom.xml即可
 
 执行项目打包 右键quanmin_admin 模块。
 
