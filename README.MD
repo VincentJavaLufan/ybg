@@ -325,7 +325,7 @@ B.jar 方式运行，打包后
 打包出来的项目就是可以执行的jar.
 
 
-（看不到日志？进入该run.bat的目录   用run.bat 运行，右键）
+（看不到日志？进入该run.bat的目录   用run.bat 运行，右键可编辑相对路径更改%cd%成自己绝对路径 ）
 
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0701/195819_10d77f67_880593.png "在这里输入图片标题")
 
@@ -342,7 +342,8 @@ cmd 中文乱码解决方案
 %SystemRoot%_system32_WindowsPowerShell_v1.0_powershell.exe 下的项。
 
 
-运行账号初始账号密码：  admin   ,   11111111
+
+### 运行账号初始账号密码：  admin   ,   11111111
 
 
 
