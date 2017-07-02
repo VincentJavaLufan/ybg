@@ -43,7 +43,7 @@
 				</div>
 			</div>
 			<div class="line line-dashed line-lg pull-in"></div>
-			<div class="form-group" id="roleid" name="roleid">
+			<div class="form-group" >
 				<label class="col-sm-3 control-label">所属角色</label>
 				<div class="col-sm-9">
 					<select class="form-control" id="roleid" name="roleid" required  lay-verify="required" >
@@ -63,6 +63,8 @@
 						</option>
 						<option value="OK">否
 						</option>
+						<option value="die">未激活
+						</option>
 					</select>
 				</div>
 			</div>
@@ -73,9 +75,9 @@
 		</footer> </section>
 	</form>
 	<script type="text/javascript">
-        onloadurl();
-        $("#state").val("'${updateuser.state}'");
-        $("#roleid").val("'${updateuser.roleid}'");
+     //   onloadurl();
+        $("#state").val("${updateuser.state!}");
+        $("#roleid").val("${updateuser.roleid!}");
     </script>
 </body>
 </html>
