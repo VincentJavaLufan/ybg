@@ -297,12 +297,12 @@ eclipse 构建maven 环境
 
 pom.xml  打包方式  可执行jar 打包，本系统默认方式
 
-pom-tomcat.xml 打包成tomcat 目录的pom 如果需要这个 吧pom.xml 重命名为 pom2.xml ,pom-副本.xml 重命名为 pom.xml
+pom-tomcat.xml 打包成tomcat 目录的pom 
 
 pom-jar开发.xml jar形式部署的pom
 
 
-根据自己所需使用不同的pom
+ **根据自己所需使用不同的pom** 
 
 
 A.传统tomcat 服务器 的目录运行
