@@ -31,15 +31,18 @@ public class GenUtils {
 	
 	public static List<String> getTemplates() {
 		List<String> templates = new ArrayList<String>();
-		templates.add("template/Entity.java.vm");
+		templates.add("template/DO.java.vm");
 		templates.add("template/Dao.java.vm");
-		templates.add("template/Dao.xml.vm");
+		templates.add("template/DaoImpl.java.vm");
 		templates.add("template/Service.java.vm");
 		templates.add("template/ServiceImpl.java.vm");
 		templates.add("template/Controller.java.vm");
 		templates.add("template/list.html.vm");
 		templates.add("template/list.js.vm");
 		templates.add("template/menu.sql.vm");
+		templates.add("template/VO.java.vm");
+		templates.add("template/Query.java.vm");
+		templates.add("template/Mapper.java.vm");
 		return templates;
 	}
 	
@@ -150,20 +153,33 @@ public class GenUtils {
 		if (StringUtils.isNotBlank(packageName)) {
 			packagePath += packageName.replace(".", File.separator) + File.separator;
 		}
-		if (template.contains("Entity.java.vm")) {
-			return packagePath + "entity" + File.separator + className + "Entity.java";
+		if (template.contains("DO.java.vm")) {
+			return packagePath + "domain" + File.separator + className + "DO.java";
+		}
+		if (template.contains("VO.java.vm")) {
+			return packagePath + "domain" + File.separator + className + "VO.java";
+		}
+		if (template.contains("Query.java.vm")) {
+			return packagePath + "qvo" + File.separator + className + "Query.java";
 		}
 		if (template.contains("Dao.java.vm")) {
 			return packagePath + "dao" + File.separator + className + "Dao.java";
 		}
-		if (template.contains("Dao.xml.vm")) {
-			return packagePath + "dao" + File.separator + className + "Dao.xml";
+		if (template.contains("DaoImpl.java.vm")) {
+			return packagePath + "dao" + File.separator + className + "DaoImpl.java";
 		}
+		if (template.contains("Mapper.java.vm")) {
+			return packagePath + "mapper" + File.separator + className + "Mapper.java";
+		}
+		
+//		if (template.contains("Dao.xml.vm")) {
+//			return packagePath + "dao" + File.separator + className + "Dao.xml";
+//		}
 		if (template.contains("Service.java.vm")) {
 			return packagePath + "service" + File.separator + className + "Service.java";
 		}
 		if (template.contains("ServiceImpl.java.vm")) {
-			return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
+			return packagePath + "service" + File.separator + className + "ServiceImpl.java";
 		}
 		if (template.contains("Controller.java.vm")) {
 			return packagePath + "controller" + File.separator + className + "Controller.java";
