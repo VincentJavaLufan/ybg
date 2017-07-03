@@ -49,7 +49,7 @@ public class RoleControllor  {
 	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "RoleQvo") })
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute RoleQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, ModelMap map) {
+	public Page list(@ModelAttribute RoleQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, ModelMap map) throws Exception {
 		qvo.setBlurred(true);
 		Page page = new Page();
 		page.setCurPage(pageNow);
@@ -129,17 +129,18 @@ public class RoleControllor  {
 	@ApiOperation(value = "更新角色页面初始化", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
 	@ApiImplicitParam(name = "id", value = "角色的ID", required = true, dataType = "java.lang.String")
 	@RequestMapping(value = { "toupdate.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toupdate(@RequestParam(name = "id", required = true) String id, ModelMap map) {
+	public String toupdate(@RequestParam(name = "id", required = true) String id, ModelMap map) throws Exception {
 		map.put("role", roleService.get(id));
 		return "/system/role/edit";
 	}
 	
-	/** 修改权限 **/
+	/** 修改权限 
+	 * @throws Exception **/
 	@ApiOperation(value = "更新角色页面初始化", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "roleId", value = "角色的ID", required = true, dataType = "java.lang.String"), @ApiImplicitParam(name = "resId[]", value = "资源ID,是个数组", required = true, dataType = "java.lang.String[]") })
 	@ResponseBody
 	@RequestMapping(value = { "addRoleRes.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json addRoleRes(@RequestParam(name = "roleId", required = true) String roleId, @RequestParam(name = "resId[]", required = false) String[] resIds, ModelMap modelmap) {
+	public Json addRoleRes(@RequestParam(name = "roleId", required = true) String roleId, @RequestParam(name = "resId[]", required = false) String[] resIds, ModelMap modelmap) throws Exception {
 		Json j = new Json();
 		j.setSuccess(true);
 		List<SysResourcesVO> reslist = resourcesService.list(new ResourcesQuery());

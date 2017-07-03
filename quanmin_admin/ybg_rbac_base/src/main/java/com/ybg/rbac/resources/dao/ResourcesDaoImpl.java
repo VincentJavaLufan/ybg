@@ -55,7 +55,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		this.baseupdate(updatemap, WHEREmap, "sys_resources");
 	}
 
-	public Page list(Page page, ResourcesQuery qvo) {
+	public Page list(Page page, ResourcesQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN)
 				.append(",color.colorclass").append(FROM)
@@ -72,7 +72,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		return page;
 	}
 
-	private String getcondition(ResourcesQuery qvo) {
+	private String getcondition(ResourcesQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
 		if (QvoConditionUtil.checkInteger(qvo.getIsdelete())) {
@@ -94,7 +94,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		return sql.toString();
 	}
 
-	public List<SysResourcesVO> list(ResourcesQuery qvo) {
+	public List<SysResourcesVO> list(ResourcesQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN)
 				.append(",color.colorclass").append(FROM)
@@ -103,7 +103,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		return getJdbcTemplate().query(sql.toString(), new ResourcesMapper());
 	}
 
-	public List<SysResourcesVO> getRolesByUserId(String roleid) {
+	public List<SysResourcesVO> getRolesByUserId(String roleid) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",sc.colorclass")
 				.append(FROM)
@@ -116,7 +116,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		return getJdbcTemplate().query(sql.toString(), new ResourcesMapper());
 	}
 
-	public List<SysResourcesVO> getOperatorButton(String roleid, String parentid) {
+	public List<SysResourcesVO> getOperatorButton(String roleid, String parentid) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN)
 				.append(",color.colorclass").append(FROM)
@@ -150,7 +150,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 				});
 	}
 
-	private String getIconCondition(SysMenuIconQuery qvo) {
+	private String getIconCondition(SysMenuIconQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
 		sqlappen(sql, "icon.id", qvo.getId());
@@ -160,7 +160,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		return sql.toString();
 	}
 
-	public List<SysMenuIconVO> queryicon(SysMenuIconQuery qvo) {
+	public List<SysMenuIconVO> queryicon(SysMenuIconQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append("icon.id,icon.name,icon.iconclass,icon.type")
 				.append(FROM).append("sys_icon icon");

@@ -40,7 +40,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		this.baseupdate(updatemap, WHEREmap, "sys_role");
 	}
 
-	public Page list(Page page, RoleQuery qvo) {
+	public Page list(Page page, RoleQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
 				.append(QUERY_TABLE_NAME);
@@ -56,7 +56,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		return page;
 	}
 
-	private String getcondition(RoleQuery qvo) {
+	private String getcondition(RoleQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
 		if (QvoConditionUtil.checkInteger(qvo.getIsdelete())) {
@@ -72,7 +72,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		return sql.toString();
 	}
 
-	public List<SysRoleVO> list(RoleQuery qvo) {
+	public List<SysRoleVO> list(RoleQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
 				.append(QUERY_TABLE_NAME);

@@ -43,7 +43,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		this.baseupdate(updatemap, WHEREmap, "sys_user");
 	}
 
-	public Page list(Page page, UserQuery qvo) {
+	public Page list(Page page, UserQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN)
 				.append(",role.`name` rolename").append(FROM)
@@ -61,7 +61,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		return page;
 	}
 
-	private String getcondition(UserQuery qvo) {
+	private String getcondition(UserQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1 ");
 		if (QvoConditionUtil.checkInteger(qvo.getIsdelete())) {
@@ -81,7 +81,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		return sql.toString();
 	}
 
-	public List<UserVO> list(UserQuery qvo) {
+	public List<UserVO> list(UserQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN)
 				.append(",role.`name` rolename").append(FROM)
@@ -125,7 +125,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		baseremove(wheremap, "sys_user");
 	}
 
-	public void removeExpired() {
+	public void removeExpired() throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(DELETE).append(FROM).append("sys_user").append(WHERE);
 		sql.append("createtime<'")

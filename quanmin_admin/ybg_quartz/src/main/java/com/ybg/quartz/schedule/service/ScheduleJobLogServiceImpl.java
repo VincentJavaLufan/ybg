@@ -11,7 +11,7 @@ public class ScheduleJobLogServiceImpl implements  ScheduleJobLogService{
 	@Autowired
 	private ScheduleJobLogDao	scheduleJobLogDao;
 	
-	public Page queryList(Page page, ScheduleJobLogQuery qvo) {
+	public Page queryList(Page page, ScheduleJobLogQuery qvo) throws Exception {
 		return scheduleJobLogDao.queryList(page, qvo);
 	}
 	

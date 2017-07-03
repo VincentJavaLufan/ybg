@@ -94,12 +94,13 @@ public class UserControllor {
 		return "/system/user/index";
 	}
 	
-	/** 列表 **/
+	/** 列表 
+	 * @throws Exception **/
 	@ApiOperation(value = "用户分页列表", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "java.lang.Integer"), @ApiImplicitParam(name = "qvo", value = "用户查询条件", required = false, dataType = "UserQvo") })
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute UserQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, @ApiIgnore ModelMap modelMap) {
+	public Page list(@ModelAttribute UserQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, @ApiIgnore ModelMap modelMap) throws Exception {
 		qvo.setBlurred(true);
 		Page page = new Page();
 		page.setCurPage(pageNow);
@@ -108,10 +109,11 @@ public class UserControllor {
 		return page;
 	}
 	
-	/** 新增初始化 **/
+	/** 新增初始化 
+	 * @throws Exception **/
 	@ApiOperation(value = "添加用户页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toadd(@ApiIgnore ModelMap map) {
+	public String toadd(@ApiIgnore ModelMap map) throws Exception {
 		map.put("roleselect", roleService.list(new RoleQuery()));
 		return "/system/user/toadd";
 	}
@@ -151,7 +153,7 @@ public class UserControllor {
 	@ApiOperation(value = "更新初始化", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "java.lang.String") })
 	@RequestMapping(value = { "toupdate.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toupdate(@RequestParam(name = "id", required = true) String id, @ApiIgnore ModelMap map) {
+	public String toupdate(@RequestParam(name = "id", required = true) String id, @ApiIgnore ModelMap map) throws Exception {
 		UserVO user = userService.get(id);
 		map.put("updateuser", user);
 		map.put("roleselect", roleService.list(new RoleQuery()));
@@ -205,7 +207,7 @@ public class UserControllor {
 	
 	@ApiOperation(value = "导出用户", notes = "导出用户")
 	@RequestMapping(value = { "export.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public void export(@ModelAttribute UserQuery qvo, HttpServletResponse response) throws IOException {
+	public void export(@ModelAttribute UserQuery qvo, HttpServletResponse response) throws Exception {
 		response.setContentType("application/vnd.ms-excel");
 		String filename = "用户导出" + DateUtil.getDate();
 		filename = java.net.URLEncoder.encode(filename, "UTF-8");

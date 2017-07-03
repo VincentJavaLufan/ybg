@@ -36,7 +36,7 @@ public class WeiboUserDaoImpl extends BaseDao implements WeiboUserDao {
 	}
 	
 	@Override
-	public List<WeiboUserVO> query(WeiboUserQuery qvo) {
+	public List<WeiboUserVO> query(WeiboUserQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
@@ -53,7 +53,7 @@ public class WeiboUserDaoImpl extends BaseDao implements WeiboUserDao {
 		});
 	}
 	
-	private String getcondition(WeiboUserQuery qvo) {
+	private String getcondition(WeiboUserQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
 		sqlappen(sql, "weibo.id", qvo.getId());

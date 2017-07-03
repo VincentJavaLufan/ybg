@@ -22,7 +22,7 @@ public interface ScheduleJobDao {
 	
 	void save(ScheduleJobEntity scheduleJob) throws Exception;
 	
-	List<ScheduleJobEntity> queryList(ScheduleJobQuery qvo);
+	List<ScheduleJobEntity> queryList(ScheduleJobQuery qvo) throws Exception;
 	
-	Page queryList(Page page, ScheduleJobQuery qvo);
+	Page queryList(Page page, ScheduleJobQuery qvo) throws Exception;
 }

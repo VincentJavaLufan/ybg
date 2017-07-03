@@ -34,7 +34,7 @@ public class QQuserDaoImpl extends BaseDao implements QQuserDao {
 	}
 	
 	@Override
-	public List<QQuserVO> query(QQuserQuery qvo) {
+	public List<QQuserVO> query(QQuserQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
@@ -51,7 +51,7 @@ public class QQuserDaoImpl extends BaseDao implements QQuserDao {
 		});
 	}
 	
-	private String getcondition(QQuserQuery qvo) {
+	private String getcondition(QQuserQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
 		sqlappen(sql, "qq.id", qvo.getId());

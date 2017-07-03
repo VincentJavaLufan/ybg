@@ -29,30 +29,35 @@ public interface ResourcesDao {
 	// sys_resources
 	void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> wheremap);
 	
-	/** 分页查询 **/
+	/** 分页查询 
+	 * @throws Exception **/
 	// sys_resources
-	Page list(Page page, ResourcesQuery qvo);
+	Page list(Page page, ResourcesQuery qvo) throws Exception;
 	
-	/** 不分页查询 **/
+	/** 不分页查询 
+	 * @throws Exception **/
 	// sys_resources
-	List<SysResourcesVO> list(ResourcesQuery qvo);
+	List<SysResourcesVO> list(ResourcesQuery qvo) throws Exception;
 	
-	/** 角色 权限集合 **/
+	/** 角色 权限集合 
+	 * @throws Exception **/
 	// sys_res_role
 	// sys_resources
-	List<SysResourcesVO> getRolesByUserId(String roleid);
+	List<SysResourcesVO> getRolesByUserId(String roleid) throws Exception;
 	
-	/** 授权的按钮操作 **/
+	/** 授权的按钮操作 
+	 * @throws Exception **/
 	// sys_res_role
 	// sys_resources
-	List<SysResourcesVO> getOperatorButton(String roleid, String parentid);
+	List<SysResourcesVO> getOperatorButton(String roleid, String parentid) throws Exception;
 	
 	/** 授权按钮组 **/
 	// sys_button
 	List<SysButtonVO> querybutton(SysButtonQuery qvo);
 	
-	/** 获取菜单样式列表 **/
-	List<SysMenuIconVO> queryicon(SysMenuIconQuery qvo);
+	/** 获取菜单样式列表 
+	 * @throws Exception **/
+	List<SysMenuIconVO> queryicon(SysMenuIconQuery qvo) throws Exception;
 	
 	/** 获取颜色列表 **/
 	List<SysColorVO> querycolor(SysColorQuery qvo);

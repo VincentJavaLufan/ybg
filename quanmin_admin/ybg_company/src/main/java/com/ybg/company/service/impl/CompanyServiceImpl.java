@@ -22,12 +22,12 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 	
 	@Override
-	public List<Company> query(CompanyQvo qvo) {
+	public List<Company> query(CompanyQvo qvo) throws Exception {
 		return company.query(qvo);
 	}
 	
 	@Override
-	public Page query(Page page, CompanyQvo qvo) {
+	public Page query(Page page, CompanyQvo qvo) throws Exception {
 		return company.query(page, qvo);
 	}
 	

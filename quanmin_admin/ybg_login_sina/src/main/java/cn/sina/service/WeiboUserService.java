@@ -13,9 +13,9 @@ public interface WeiboUserService {
 	
 	void remove(BaseMap<String, Object> wheremap);
 	
-	List<WeiboUserVO> query(WeiboUserQuery qvo);
+	List<WeiboUserVO> query(WeiboUserQuery qvo) throws Exception;
 	
-	WeiboUserVO get(String uid);
+	WeiboUserVO get(String uid) throws Exception;
 	
 	Map<String, String> getSetting();
 }

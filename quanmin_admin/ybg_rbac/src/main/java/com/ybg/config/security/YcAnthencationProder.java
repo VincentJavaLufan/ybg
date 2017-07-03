@@ -22,7 +22,12 @@ public class YcAnthencationProder implements AuthenticationProvider {
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String username = authentication.getName();
 		String password = (String) authentication.getCredentials();
-		UserVO user = userService.getUserByname(username);
+		UserVO user = null;
+		try {
+			user = userService.getUserByname(username);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		if (user == null) {
 			throw new BadCredentialsException("Username not found.");
 		}

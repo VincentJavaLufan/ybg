@@ -22,12 +22,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	
 	@Override
-	public List<Employee> query(EmployeeQvo qvo) {
+	public List<Employee> query(EmployeeQvo qvo) throws Exception {
 		return employeeDao.query(qvo);
 	}
 	
 	@Override
-	public Page query(Page page, EmployeeQvo qvo) {
+	public Page query(Page page, EmployeeQvo qvo) throws Exception {
 		return employeeDao.query(page, qvo);
 	}
 	

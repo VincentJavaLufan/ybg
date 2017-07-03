@@ -107,7 +107,7 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 	}
 	
 	@Override
-	public Page queryList(Page page, ScheduleJobQuery qvo) {
+	public Page queryList(Page page, ScheduleJobQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select job_id,bean_name,method_name,params,cron_expression,status,remark,create_time  from schedule_job job ");
 		sqlappen(sql, "bean_name", qvo.getBeanName());
@@ -133,7 +133,7 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 	}
 	
 	@Override
-	public List<ScheduleJobEntity> queryList(ScheduleJobQuery qvo) {
+	public List<ScheduleJobEntity> queryList(ScheduleJobQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select job_id,bean_name,method_name,params,cron_expression,status,remark,create_time  from schedule_job job ");
 		sql.append(" where 1=1 ");

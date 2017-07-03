@@ -26,11 +26,11 @@ public class BaiduUserServiceImpl implements BaiduUserService {
 		baiduUserDao.remove(conditionmap);
 	}
 	
-	public List<BaiduUser> query(BaiduUserQvo qvo) {
+	public List<BaiduUser> query(BaiduUserQvo qvo) throws Exception {
 		return baiduUserDao.query(qvo);
 	}
 	
-	public BaiduUser getByUid(Long uid) {
+	public BaiduUser getByUid(Long uid) throws Exception {
 		BaiduUserQvo qvo = new BaiduUserQvo();
 		qvo.setUid(uid);
 		List<BaiduUser> list = baiduUserDao.query(qvo);

@@ -47,24 +47,27 @@ public class RoleServiceImpl implements RoleService{
 		update(updatemap, wheremap);
 	}
 	
-	/** 获取单个实体信息 **/
+	/** 获取单个实体信息 
+	 * @throws Exception **/
 	@Cacheable(value = "roleCache", key = "#root.method.name+#root.args[0]")
-	public SysRoleVO get(String id) {
+	public SysRoleVO get(String id) throws Exception {
 		RoleQuery qvo = new RoleQuery();
 		qvo.setId(id);
 		List<SysRoleVO> list = roleDao.list(qvo);
 		return list != null && list.size() > 0 ? list.get(0) : null;
 	}
 	
-	/** 分页查询 **/
+	/** 分页查询 
+	 * @throws Exception **/
 	@Cacheable(value = "roleCache", key = "#root.method.name+#root.args[0]+#root.method.name+#root.args[1]")
-	public Page list(Page page, RoleQuery qvo) {
+	public Page list(Page page, RoleQuery qvo) throws Exception {
 		return roleDao.list(page, qvo);
 	}
 	
-	/** 不分页查询 **/
+	/** 不分页查询 
+	 * @throws Exception **/
 	@Cacheable(value = "roleCache", key = "#root.method.name+#root.args[0]")
-	public List<SysRoleVO> list(RoleQuery qvo) {
+	public List<SysRoleVO> list(RoleQuery qvo) throws Exception {
 		return roleDao.list(qvo);
 	}
 	

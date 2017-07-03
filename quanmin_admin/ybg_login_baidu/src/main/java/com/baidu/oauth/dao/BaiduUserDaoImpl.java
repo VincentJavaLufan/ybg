@@ -36,7 +36,7 @@ public class BaiduUserDaoImpl extends BaseDao implements BaiduUserDao {
 	}
 	
 	@Override
-	public List<BaiduUser> query(BaiduUserQvo qvo) {
+	public List<BaiduUser> query(BaiduUserQvo qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
@@ -53,7 +53,7 @@ public class BaiduUserDaoImpl extends BaseDao implements BaiduUserDao {
 		});
 	}
 	
-	private String getcondition(BaiduUserQvo qvo) {
+	private String getcondition(BaiduUserQvo qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
 		sqlappen(sql, "user.uid", qvo.getUid() + "");

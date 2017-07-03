@@ -26,13 +26,15 @@ public interface RoleDao {
 	// sys_role
 	void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> wheremap);
 	
-	/** 分页查询 **/
+	/** 分页查询 
+	 * @throws Exception **/
 	// sys_role
-	Page list(Page page, RoleQuery qvo);
+	Page list(Page page, RoleQuery qvo) throws Exception;
 	
-	/** 不分页查询 **/
+	/** 不分页查询 
+	 * @throws Exception **/
 	// sys_role
-	List<SysRoleVO> list(RoleQuery qvo);
+	List<SysRoleVO> list(RoleQuery qvo) throws Exception;
 	
 	/** 角色授权 增删改都在里面了 **/
 	// sys_res_role

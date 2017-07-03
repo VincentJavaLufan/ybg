@@ -13,7 +13,7 @@ public interface BaiduUserDao {
 	
 	void remove(BaseMap<String, Object> conditionmap);
 	
-	List<BaiduUser> query(BaiduUserQvo qvo);
+	List<BaiduUser> query(BaiduUserQvo qvo) throws Exception;
 	
 	Map<String, String> getSetting();
 }

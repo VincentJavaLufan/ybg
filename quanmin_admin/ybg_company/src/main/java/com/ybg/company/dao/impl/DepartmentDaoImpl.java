@@ -32,7 +32,12 @@ public class DepartmentDaoImpl extends BaseDao implements DepartmentDao {
 	public List<Department> query(DepartmentQvo qvo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
-		sql.append(getcondition(qvo));
+		try {
+			sql.append(getcondition(qvo));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return getJdbcTemplate().query(sql.toString(), new DepartmentMapper());
 	}
 	
@@ -46,7 +51,7 @@ public class DepartmentDaoImpl extends BaseDao implements DepartmentDao {
 		baseupdate(updatemap, wheremap, "oa_department");
 	}
 	
-	private String getcondition(DepartmentQvo qvo) {
+	private String getcondition(DepartmentQvo qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
 		sqlappen(sql, "oa_department.`id`", qvo.getId());

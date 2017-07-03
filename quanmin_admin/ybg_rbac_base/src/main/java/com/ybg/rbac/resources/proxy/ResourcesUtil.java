@@ -23,8 +23,9 @@ public class ResourcesUtil {
 		this.resourcesService = resourcesService;
 	}
 
-	/** 获取整个菜单 数据库转换成逻辑结构 **/
-	public List<Directories> getAllResources() {
+	/** 获取整个菜单 数据库转换成逻辑结构 
+	 * @throws Exception **/
+	public List<Directories> getAllResources() throws Exception {
 		ResourcesQuery qvo = new ResourcesQuery();
 		qvo.setIsdelete(0);
 		List<SysResourcesVO> alldb = resourcesService.list(qvo);
@@ -59,8 +60,9 @@ public class ResourcesUtil {
 		return orgs;
 	}
 
-	/** 获取某个节点 数据库转换成逻辑结构 **/
-	public Organization get(String id) {
+	/** 获取某个节点 数据库转换成逻辑结构 
+	 * @throws Exception **/
+	public Organization get(String id) throws Exception {
 		if (!QvoConditionUtil.checkString(id)) {
 			return null;
 		}
@@ -98,8 +100,9 @@ public class ResourcesUtil {
 		return null;
 	}
 
-	/** 删除操作时，删除整个下级 **/
-	public void removebyid(String id) {
+	/** 删除操作时，删除整个下级 
+	 * @throws Exception **/
+	public void removebyid(String id) throws Exception {
 		SysResourcesVO bean = resourcesService.get(id);
 		if (bean.getType().equals("1")) {
 			Directories dir = (Directories) get(id);

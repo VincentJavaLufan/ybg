@@ -35,12 +35,13 @@ public class ScheduleJobLogController {
 		return "/quartz/log/index";
 	}
 	
-	/** 定时任务日志列表 */
+	/** 定时任务日志列表 
+	 * @throws Exception */
 	@ApiOperation(value = "定是数据列表", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "java.lang.Integer")
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow) {
+	public Page list(@RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow) throws Exception {
 		Page page = new Page();
 		page.setCurPage(pageNow);
 		ScheduleJobLogQuery qvo = new ScheduleJobLogQuery();

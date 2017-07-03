@@ -13,7 +13,7 @@ public interface WeiboUserDao {
 	
 	void remove(BaseMap<String, Object> wheremap);
 	
-	List<WeiboUserVO> query(WeiboUserQuery qvo);
+	List<WeiboUserVO> query(WeiboUserQuery qvo) throws Exception;
 	
 	Map<String,String> getSetting();
 }

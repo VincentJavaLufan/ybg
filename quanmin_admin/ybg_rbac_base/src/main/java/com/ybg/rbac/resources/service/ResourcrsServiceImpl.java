@@ -53,36 +53,41 @@ public class ResourcrsServiceImpl implements ResourcesService {
 		resourcesDao.update(updatemap, wheremap);
 	}
 	
-	/** 获取单个实体信息 **/
+	/** 获取单个实体信息 
+	 * @throws Exception **/
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]")
-	public SysResourcesVO get(String id) {
+	public SysResourcesVO get(String id) throws Exception {
 		ResourcesQuery qvo = new ResourcesQuery();
 		qvo.setId(id);
 		List<SysResourcesVO> list = resourcesDao.list(qvo);
 		return list != null && list.size() > 0 ? list.get(0) : null;
 	}
 	
-	/** 分页查询 **/
+	/** 分页查询 
+	 * @throws Exception **/
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]+#root.method.name+#root.args[1]")
-	public Page list(Page page, ResourcesQuery qvo) {
+	public Page list(Page page, ResourcesQuery qvo) throws Exception {
 		return resourcesDao.list(page, qvo);
 	}
 	
-	/** 不分页查询 **/
+	/** 不分页查询 
+	 * @throws Exception **/
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]")
-	public List<SysResourcesVO> list(ResourcesQuery qvo) {
+	public List<SysResourcesVO> list(ResourcesQuery qvo) throws Exception {
 		return resourcesDao.list(qvo);
 	}
 	
-	/** 角色 权限集合 **/
+	/** 角色 权限集合 
+	 * @throws Exception **/
 	@Cacheable(value = "resroleCache", key = "#root.method.name+#root.args[0]")
-	public List<SysResourcesVO> getRolesByUserId(String roleid) {
+	public List<SysResourcesVO> getRolesByUserId(String roleid) throws Exception {
 		return resourcesDao.getRolesByUserId(roleid);
 	}
 	
-	/** 授权的按钮操作 **/
+	/** 授权的按钮操作 
+	 * @throws Exception **/
 	@Cacheable(value = "resroleCache", key = "#root.method.name+#root.args[0]+#root.method.name+#root.args[1]")
-	public List<SysResourcesVO> getOperatorButton(String roleid, String parentid) {
+	public List<SysResourcesVO> getOperatorButton(String roleid, String parentid) throws Exception {
 		return resourcesDao.getOperatorButton(roleid, parentid);
 	}
 	
@@ -92,9 +97,10 @@ public class ResourcrsServiceImpl implements ResourcesService {
 		return resourcesDao.querybutton(qvo);
 	}
 	
-	/*** 菜单Icon **/
+	/*** 菜单Icon 
+	 * @throws Exception **/
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]")
-	public List<SysMenuIconVO> queryicon(SysMenuIconQuery qvo) {
+	public List<SysMenuIconVO> queryicon(SysMenuIconQuery qvo) throws Exception {
 		return resourcesDao.queryicon(qvo);
 	}
 	

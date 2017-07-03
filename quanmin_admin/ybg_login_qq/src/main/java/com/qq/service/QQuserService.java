@@ -25,11 +25,11 @@ public class QQuserService {
 		qQuserDao.remove(wheremap);
 	}
 	
-	public List<QQuserVO> query(QQuserQuery qvo) {
+	public List<QQuserVO> query(QQuserQuery qvo) throws Exception {
 		return qQuserDao.query(qvo);
 	}
 	
-	public QQuserVO getByopenId(String openid) {
+	public QQuserVO getByopenId(String openid) throws Exception {
 		QQuserQuery qvo = new QQuserQuery();
 		qvo.setOpenid(openid);
 		List<QQuserVO> list = qQuserDao.query(qvo);

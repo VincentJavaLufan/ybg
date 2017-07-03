@@ -10,9 +10,9 @@ public interface EmployeeDao {
 	
 	Employee create(Employee bean) throws Exception;
 	
-	List<Employee> query(EmployeeQvo qvo);
+	List<Employee> query(EmployeeQvo qvo) throws Exception;
 	
-	Page query(Page page, EmployeeQvo qvo);
+	Page query(Page page, EmployeeQvo qvo) throws Exception;
 	
 	void remove(BaseMap<String, Object> condictionmap);
 	

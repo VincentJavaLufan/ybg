@@ -13,9 +13,9 @@ public interface BaiduUserService {
 	
 	void remove(BaseMap<String, Object> conditionmap);
 	
-	List<BaiduUser> query(BaiduUserQvo qvo);
+	List<BaiduUser> query(BaiduUserQvo qvo) throws Exception;
 	
-	BaiduUser getByUid(Long uid);
+	BaiduUser getByUid(Long uid) throws Exception;
 	
 	Map<String, String> getSetting();
 }

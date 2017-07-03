@@ -29,13 +29,23 @@ public class LoginService implements UserDetailsService {
 		if (!QvoConditionUtil.checkString(username)) {
 			return null;
 		}
-		List<UserVO> list = userdao.list(qvo);
+		List<UserVO> list = null;
+		try {
+			list = userdao.list(qvo);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		if (list == null || list.size() == 0) {
 			throw new UsernameNotFoundException(username + " not found");
 		}
 		UserVO user = list.get(0);
 		// 这里要把权限加进去 不然无法加载权限
-		List<SysResourcesVO> authlist = resourcesService.getRolesByUserId(user.getRoleid());
+		List<SysResourcesVO> authlist = null;
+		try {
+			authlist = resourcesService.getRolesByUserId(user.getRoleid());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		List<SimpleGrantedAuthority> auths = new ArrayList<SimpleGrantedAuthority>();
 		for (SysResourcesVO s : authlist) {
 			auths.add(new SimpleGrantedAuthority(s.getResurl()));
@@ -44,7 +54,7 @@ public class LoginService implements UserDetailsService {
 		return user;
 	}
 	
-	public UserVO getUserByname(String username) {
+	public UserVO getUserByname(String username) throws Exception {
 		UserQuery qvo = new UserQuery();
 		qvo.setUsername(username);
 		List<UserVO> list = userdao.list(qvo);

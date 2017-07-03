@@ -19,7 +19,7 @@ public class SysGeneratorServiceImpl implements SysGeneratorService {
 	private SysGeneratorDao sysGeneratorDao;
 	
 	@Override
-	public Page list(Page page, GeneratorQuery qvo) {
+	public Page list(Page page, GeneratorQuery qvo) throws Exception {
 		
 		return sysGeneratorDao.list(page, qvo);
 	}

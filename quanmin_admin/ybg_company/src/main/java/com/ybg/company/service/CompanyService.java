@@ -13,11 +13,13 @@ public interface CompanyService {
 	 * @throws Exception **/
 	Company create(Company org) throws Exception;
 	
-	/** 查询企业 **/
-	List<Company> query(CompanyQvo qvo);
+	/** 查询企业 
+	 * @throws Exception **/
+	List<Company> query(CompanyQvo qvo) throws Exception;
 	
-	/** 查询企业 **/
-	Page query(Page page, CompanyQvo qvo);
+	/** 查询企业 
+	 * @throws Exception **/
+	Page query(Page page, CompanyQvo qvo) throws Exception;
 	
 	void remove(BaseMap<String, Object> condictionmap);
 	

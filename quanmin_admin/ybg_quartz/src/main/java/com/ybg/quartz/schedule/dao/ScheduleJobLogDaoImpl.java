@@ -54,7 +54,7 @@ public class ScheduleJobLogDaoImpl extends BaseDao implements ScheduleJobLogDao 
 	}
 	
 	@Override
-	public Page queryList(Page page, ScheduleJobLogQuery qvo) {
+	public Page queryList(Page page, ScheduleJobLogQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select log_id,job_id,bean_name,method_name,params,status,error,times,create_time from schedule_job_log  ");
 		sqlappen(sql, " job_id ", qvo.getJobId());

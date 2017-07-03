@@ -46,7 +46,7 @@ public class RescourcesControllor {
 	
 	@ApiOperation(value = "资源页面数据列表", notes = "需要授权才可以访问的页面", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String list(@ModelAttribute ResourcesQuery qvo, ModelMap map) {
+	public String list(@ModelAttribute ResourcesQuery qvo, ModelMap map) throws Exception {
 		List<TreeVO> list = new ArrayList<TreeVO>();
 		List<SysResourcesVO> dblist = resourcesService.list(qvo);
 		for (SysResourcesVO r : dblist) {
@@ -139,7 +139,7 @@ public class RescourcesControllor {
 	
 	@ApiOperation(value = "添加授权资源页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toadd(ModelMap map) {
+	public String toadd(ModelMap map) throws Exception {
 		SysMenuIconQuery qvo = new SysMenuIconQuery();
 		map.put("iconlist", resourcesService.queryicon(qvo));
 		SysColorQuery colorqvo = new SysColorQuery();
@@ -149,7 +149,7 @@ public class RescourcesControllor {
 	
 	@ApiOperation(value = "更新授权资源页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "toupdate.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toupdate(@RequestParam(name = "id", required = true) String id, ModelMap map) {
+	public String toupdate(@RequestParam(name = "id", required = true) String id, ModelMap map) throws Exception {
 		map.addAttribute("resources", resourcesService.get(id));
 		SysMenuIconQuery qvo = new SysMenuIconQuery();
 		map.put("iconlist", resourcesService.queryicon(qvo));
@@ -178,7 +178,7 @@ public class RescourcesControllor {
 	@ApiImplicitParams({ @ApiImplicitParam(name = "reskey", value = "资源key", required = true, dataType = "java.lang.String"), @ApiImplicitParam(name = "name", value = "资源名称", required = true, dataType = "java.lang.String") })
 	@ResponseBody
 	@RequestMapping(value = { "exist.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public boolean exist(@RequestParam(name = "reskey", required = false) String reskey, @RequestParam(name = "name", required = false) String name) {
+	public boolean exist(@RequestParam(name = "reskey", required = false) String reskey, @RequestParam(name = "name", required = false) String name) throws Exception {
 		if (!QvoConditionUtil.checkString(reskey) && !QvoConditionUtil.checkString(name)) {
 			return false;
 		}
@@ -191,7 +191,7 @@ public class RescourcesControllor {
 	@ApiOperation(value = "权限分配页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "roleid", value = "角色ID", required = true, dataType = "java.lang.String") })
 	@RequestMapping(value = { "permissions.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String permissions(@ModelAttribute ResourcesQuery qvo, @RequestParam(name = "roleid", required = true) String roleid, ModelMap modelmap) {
+	public String permissions(@ModelAttribute ResourcesQuery qvo, @RequestParam(name = "roleid", required = true) String roleid, ModelMap modelmap) throws Exception {
 		List<SysResourcesVO> mps = resourcesService.list(qvo);
 		List<TreeVO> list = new ArrayList<TreeVO>();
 		for (SysResourcesVO map : mps) {
@@ -219,7 +219,7 @@ public class RescourcesControllor {
 	@ApiImplicitParam(name = "roleid", value = "角色ID", required = true, dataType = "java.lang.String")
 	@ResponseBody
 	@RequestMapping(value = { "findRes.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public List<SysResourcesVO> findUserRes(@RequestParam(name = "roleid", required = true) String roleid) {
+	public List<SysResourcesVO> findUserRes(@RequestParam(name = "roleid", required = true) String roleid) throws Exception {
 		return resourcesService.getRolesByUserId(roleid);
 	}
 	

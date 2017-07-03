@@ -30,14 +30,14 @@ public class EmployeeDaoImpl extends BaseDao implements EmployeeDao {
 	}
 	
 	@Override
-	public List<Employee> query(EmployeeQvo qvo) {
+	public List<Employee> query(EmployeeQvo qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
 		return getJdbcTemplate().query(sql.toString(), new EmployeeMapper());
 	}
 	
-	private String getcondition(EmployeeQvo qvo) {
+	private String getcondition(EmployeeQvo qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
 		sqlappen(sql, "oa_employee.`id`", qvo.getId());
@@ -48,7 +48,7 @@ public class EmployeeDaoImpl extends BaseDao implements EmployeeDao {
 	}
 	
 	@Override
-	public Page query(Page page, EmployeeQvo qvo) {
+	public Page query(Page page, EmployeeQvo qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));

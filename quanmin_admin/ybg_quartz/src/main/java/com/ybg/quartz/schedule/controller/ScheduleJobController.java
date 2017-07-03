@@ -38,11 +38,12 @@ public class ScheduleJobController {
 		return "/quartz/job/index";
 	}
 	
-	/** 定时任务列表 */
+	/** 定时任务列表 
+	 * @throws Exception */
 	@ApiOperation(value = "定时任务列表", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute ScheduleJobQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, ModelMap map) {
+	public Page list(@ModelAttribute ScheduleJobQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, ModelMap map) throws Exception {
 		Page page = new Page();
 		page.setCurPage(pageNow);
 		ScheduleJobQuery qvo2 = new ScheduleJobQuery();

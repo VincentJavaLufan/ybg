@@ -12,7 +12,7 @@ public interface ScheduleJobLogDao {
 	
 	ScheduleJobLogDO queryObject(Long jobId);
 	
-	Page queryList(Page page, ScheduleJobLogQuery qvo);
+	Page queryList(Page page, ScheduleJobLogQuery qvo) throws Exception;
 	
 	void save(ScheduleJobLogDO log) throws Exception;
 }

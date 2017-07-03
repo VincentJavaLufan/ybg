@@ -25,13 +25,15 @@ public interface UserService {
 	// sys_user
 	void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> wheremap);
 	
-	/** 分页查询 **/
+	/** 分页查询 
+	 * @throws Exception **/
 	// sys_user
-	Page list(Page page, UserQuery qvo);
+	Page list(Page page, UserQuery qvo) throws Exception;
 	
-	/** 不分页查询 **/
+	/** 不分页查询 
+	 * @throws Exception **/
 	// sys_user
-	List<UserVO> list(UserQuery qvo);
+	List<UserVO> list(UserQuery qvo) throws Exception;
 	
 	/** 登陆 **/
 	// sys_user
@@ -39,12 +41,13 @@ public interface UserService {
 	
 	void remove(BaseMap<String, Object> wheremap);
 	
-	/** 清楚注册不激活的用户 **/
-	void removeExpired();
+	/** 清楚注册不激活的用户 
+	 * @throws Exception **/
+	void removeExpired() throws Exception;
 	
 	void removebyid(String id);
 	
-	UserVO get(String id);
+	UserVO get(String id) throws Exception;
 	
 	/** 查询账户是否已存在 **/
 	boolean checkisExist(UserQuery qvo);

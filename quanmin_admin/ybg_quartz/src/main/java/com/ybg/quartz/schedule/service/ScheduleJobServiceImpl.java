@@ -24,9 +24,10 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 	@Autowired
 	private ScheduleJobDao	schedulerJobDao;
 	
-	/** 项目启动时，初始化定时器 */
+	/** 项目启动时，初始化定时器 
+	 * @throws Exception */
 	@PostConstruct
-	public void init() {
+	public void init() throws Exception {
 		List<ScheduleJobEntity> scheduleJobList = schedulerJobDao.queryList(new ScheduleJobQuery());
 		for (ScheduleJobEntity scheduleJob : scheduleJobList) {
 			CronTrigger cronTrigger = ScheduleUtils.getCronTrigger(scheduler, scheduleJob.getJobId());
@@ -44,11 +45,11 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 		return schedulerJobDao.queryObject(jobId);
 	}
 	
-	public Page queryList(Page page, ScheduleJobQuery qvo) {
+	public Page queryList(Page page, ScheduleJobQuery qvo) throws Exception {
 		return schedulerJobDao.queryList(page, qvo);
 	}
 	
-	public List<ScheduleJobEntity> queryList(ScheduleJobQuery qvo) {
+	public List<ScheduleJobEntity> queryList(ScheduleJobQuery qvo) throws Exception {
 		return schedulerJobDao.queryList(qvo);
 	}
 	

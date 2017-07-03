@@ -26,11 +26,11 @@ public class WeiboUserServiceImpl implements WeiboUserService {
 		weiboUserDao.remove(wheremap);
 	}
 	
-	public List<WeiboUserVO> query(WeiboUserQuery qvo) {
+	public List<WeiboUserVO> query(WeiboUserQuery qvo) throws Exception {
 		return weiboUserDao.query(qvo);
 	}
 	
-	public WeiboUserVO get(String uid) {
+	public WeiboUserVO get(String uid) throws Exception {
 		WeiboUserQuery qvo = new WeiboUserQuery();
 		qvo.setUid(uid);
 		List<WeiboUserVO> list = weiboUserDao.query(qvo);

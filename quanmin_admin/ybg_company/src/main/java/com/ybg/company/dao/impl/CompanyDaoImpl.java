@@ -29,7 +29,7 @@ public class CompanyDaoImpl extends BaseDao implements CompanyDao {
 	}
 	
 	@Override
-	public List<Company> query(CompanyQvo qvo) {
+	public List<Company> query(CompanyQvo qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
@@ -37,7 +37,7 @@ public class CompanyDaoImpl extends BaseDao implements CompanyDao {
 	}
 	
 	@Override
-	public Page query(Page page, CompanyQvo qvo) {
+	public Page query(Page page, CompanyQvo qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
@@ -46,7 +46,7 @@ public class CompanyDaoImpl extends BaseDao implements CompanyDao {
 		return page;
 	}
 	
-	private String getcondition(CompanyQvo qvo) {
+	private String getcondition(CompanyQvo qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
 		sqlappen(sql, "oa_company.`id`", qvo.getId());

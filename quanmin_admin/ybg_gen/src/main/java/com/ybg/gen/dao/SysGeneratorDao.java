@@ -11,7 +11,7 @@ import com.ybg.gen.qvo.GeneratorQuery;
  * @date 2016年12月19日 下午3:32:04 */
 public interface SysGeneratorDao {
 	
-	Page list(Page page, GeneratorQuery qvo);
+	Page list(Page page, GeneratorQuery qvo) throws Exception;
 	
 	Map<String, String> queryTable(String tableName);
 	

@@ -12,5 +12,5 @@ public interface QQuserDao {
 	
 	void remove(BaseMap<String, Object> wheremap);
 	
-	List<QQuserVO> query(QQuserQuery qvo);
+	List<QQuserVO> query(QQuserQuery qvo) throws Exception;
 }

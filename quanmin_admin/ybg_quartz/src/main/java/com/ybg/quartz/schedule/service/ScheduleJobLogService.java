@@ -15,7 +15,7 @@ public interface ScheduleJobLogService {
 	// public int queryTotal(Map<String, Object> map) {
 	// return scheduleJobLogDao.queryTotal(map);
 	// }
-	Page queryList(Page page, ScheduleJobLogQuery qvo);
+	Page queryList(Page page, ScheduleJobLogQuery qvo) throws Exception;
 	
 	void save(ScheduleJobLogDO log) throws Exception;
 }
