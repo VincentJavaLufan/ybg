@@ -6,7 +6,6 @@
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
 	<!--依赖spring boot -->
-	
 	<properties>
 		<java.version>1.8</java.version>
 		<druid.version>1.0.26</druid.version>
@@ -14,23 +13,42 @@
 		<httpclient.version>4.5.2</httpclient.version>
 	</properties>
 	<modules>
+		<!--** 主要入口 必须 -->
 		<module>main</module>
+		<!--** DAO封装 必须 -->
 		<module>ybg_base_jdbc</module>
+		<!--** 工具类 必须 -->
 		<module>ybg_base_util</module>
+		<!--** 公共接口 必须 -->
 		<module>ybg_inter</module>
+		<!--** 权限底层 必须 -->
 		<module>ybg_rbac_base</module>
+		<!--** 权限管理 必须 -->
 		<module>ybg_rbac</module>
+		<!-- 企业模块 可删除 -->
 		<module>ybg_company</module>
+		<!-- QQ登陆 非必须 -->
 		<module>ybg_login_qq</module>
+		<!--百度登陆，非必需 -->
 		<module>ybg_login_baidu</module>
+		<!--新浪登陆，非必需 -->
 		<module>ybg_login_sina</module>
+		<!-- 微信模块 非必需 -->
 		<module>ybg_weixin</module>
+		<!-- 阿里MQ 非必须 -->
 		<module>ybg_mq</module>
+		<!--** email 必须 -->
 		<module>ybg_email</module>
+		<!-- json web token 非必须 -->
 		<module>ybg_jwt</module>
+		<!-- 定时任务 非必须 -->
 		<module>ybg_quartz</module>
+		<!--** 基础Jar 必须 -->
 		<module>ybg_base_jar</module>
-    <module>ybg_gen</module>
-  </modules>
-	
+		<!-- 代码生成 非 必须 -->
+		<module>ybg_gen</module>
+	</modules>
+	<build>
+		<defaultGoal>compile</defaultGoal>
+	</build>
 </project>
