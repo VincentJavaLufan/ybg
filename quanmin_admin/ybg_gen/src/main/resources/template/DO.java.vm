@@ -22,7 +22,7 @@ public class ${className}DO implements Serializable {
 	
 #foreach ($column in $columns)
 	//$column.comments
-	@ApiModelProperty(name = "id", dataType = "java.lang.$column.attrType", value = "${column.comments}", hidden = false)
+	@ApiModelProperty(name = "${column.attrname}", dataType = "java.lang.$column.attrType", value = "${column.comments}", hidden = false)
 	private $column.attrType $column.attrname;
 #end
 
