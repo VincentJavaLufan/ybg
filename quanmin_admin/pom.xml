@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ybg</groupId>
 	<artifactId>quanmin_admin</artifactId>
@@ -17,7 +18,7 @@
 		<module>main</module>
 		<!--** DAO封装 必须 -->
 		<module>ybg_base_jdbc</module>
-		<!--** 工具类 必须 -->
+		<!--** 工具类 ,必须 -->
 		<module>ybg_base_util</module>
 		<!--** 公共接口 必须 -->
 		<module>ybg_inter</module>
@@ -25,15 +26,15 @@
 		<module>ybg_rbac_base</module>
 		<!--** 权限管理 必须 -->
 		<module>ybg_rbac</module>
-		<!-- 企业模块 可删除 -->
+		<!-- 企业模块 可删 -->
 		<module>ybg_company</module>
-		<!-- QQ登陆 非必须 -->
+		<!-- QQ登陆 非必�? -->
 		<module>ybg_login_qq</module>
 		<!--百度登陆，非必需 -->
 		<module>ybg_login_baidu</module>
 		<!--新浪登陆，非必需 -->
 		<module>ybg_login_sina</module>
-		<!-- 微信模块 非必需 -->
+		<!-- 微信模块 非必须 -->
 		<module>ybg_weixin</module>
 		<!-- 阿里MQ 非必须 -->
 		<module>ybg_mq</module>
@@ -45,8 +46,9 @@
 		<module>ybg_quartz</module>
 		<!--** 基础Jar 必须 -->
 		<module>ybg_base_jar</module>
-		<!-- 代码生成 非 必须 -->
+		<!-- 代码生成 必须 -->
 		<module>ybg_gen</module>
+		<module>edu</module>
 	</modules>
 	<build>
 		<defaultGoal>compile</defaultGoal>
