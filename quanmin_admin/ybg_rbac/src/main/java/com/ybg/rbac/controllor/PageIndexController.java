@@ -3,6 +3,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.ybg.base.util.Common;
@@ -69,34 +70,36 @@ public class PageIndexController {
 	/** 加载菜单 **/
 	@ApiOperation(value = "登录成功后的页面-菜单 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/menu.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String menu() {
+	public String menu(ModelMap map) {
 		UserVO user = (UserVO) Common.findUserSession();
 		if (user == null) {
 			return "";
 		}
+		map.put("userFormMap", user);
 		return "/index/admin/menu";
 	}
 	
 	/** 加载头部 **/
 	@ApiOperation(value = "登录成功后的页面 -头部", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/head.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String head() {
+	public String head(ModelMap map) {
 		UserVO user = (UserVO) Common.findUserSession();
 		if (user == null) {
 			return "";
 		}
+		map.put("userFormMap", user);
 		return "/index/admin/head";
 	}
+	
 	/** 加载欢迎页面 **/
 	@ApiOperation(value = "登录成功后的页面-欢迎页面 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/welcome.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String welcome() {
+	public String welcome(ModelMap map) {
 		UserVO user = (UserVO) Common.findUserSession();
 		if (user == null) {
 			return "";
 		}
+		map.put("userFormMap", user);
 		return "/index/admin/welcome";
 	}
-	
-	
 }
