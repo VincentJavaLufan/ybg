@@ -32,7 +32,7 @@ public class ${className}DaoImpl extends BaseDao implements ${className}Dao {
 	  	createmap.put("${column.columnName}", ${classname}.get${column.attrName}());
 		#end 
 		#end 
-		id = baseCreate(createmap, "${classname}", "${pk.columnName}");
+		id = baseCreate(createmap, "${tableName}", "${pk.columnName}");
 		${classname}.set${pk.attrName}((${pk.attrType}) id);
 		return ${classname};
 	}
@@ -42,7 +42,7 @@ public class ${className}DaoImpl extends BaseDao implements ${className}Dao {
 		this.baseupdate(updatemap, WHEREmap, "${tableName}");
 	}
 @Override
-	public Page list(Page page,  ${className}Query qvo) {
+	public Page list(Page page,  ${className}Query qvo)throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
 				.append(QUERY_TABLE_NAME);
@@ -58,7 +58,7 @@ public class ${className}DaoImpl extends BaseDao implements ${className}Dao {
 		return page;
 	}
 
-	private String getcondition( ${className}Query qvo) {
+	private String getcondition( ${className}Query qvo) throws Exception{
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
 //		if (QvoConditionUtil.checkInteger(qvo.getIsdelete())) {
@@ -72,7 +72,7 @@ public class ${className}DaoImpl extends BaseDao implements ${className}Dao {
 		return sql.toString();
 	}
 @Override
-	public List<${className}VO> list(${className}Query qvo) {
+	public List<${className}VO> list(${className}Query qvo) throws Exception{
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
 				.append(QUERY_TABLE_NAME);

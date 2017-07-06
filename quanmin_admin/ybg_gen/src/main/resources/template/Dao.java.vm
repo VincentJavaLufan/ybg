@@ -34,11 +34,11 @@ public interface ${className}Dao {
 	
 	/** 分页查询 **/
 	// sys_role
-	Page list(Page page,${className}Query qvo);
+	Page list(Page page,${className}Query qvo)throws Exception;
 	
 	/** 不分页查询 **/
 	// sys_role
-	List<${className}VO> list(${className}Query qvo);
+	List<${className}VO> list(${className}Query qvo)throws Exception;
 	/** 根据条件删除 **/
 	void remove(BaseMap<String, Object> wheremap);
 }
