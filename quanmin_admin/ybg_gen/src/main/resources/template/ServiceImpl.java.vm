@@ -43,13 +43,13 @@ public class ${className}ServiceImpl implements ${className}Service {
 	
 	/** 分页查询 **/
 	@Override
-	public	Page list(Page page,${className}Query qvo){
+	public	Page list(Page page,${className}Query qvo)throws Exception{
 		return ${classname}Dao.list(page,qvo);
 	}
 	
 	/** 不分页查询 **/
 	@Override
-	public	List<${className}VO> list(${className}Query qvo){
+	public	List<${className}VO> list(${className}Query qvo) throws Exception{
 		return ${classname}Dao.list(qvo);
 	}
 	/** 根据条件删除 **/
