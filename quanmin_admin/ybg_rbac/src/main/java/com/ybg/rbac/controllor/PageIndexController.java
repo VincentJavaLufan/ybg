@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.ybg.base.util.Common;
+import com.ybg.base.util.SystemConstant;
 import com.ybg.rbac.resources.service.ResourcesService;
 import com.ybg.rbac.user.domain.UserVO;
 import io.swagger.annotations.Api;
@@ -62,7 +63,12 @@ public class PageIndexController {
 			return "redirect:/common/login_do/tologin.do";
 		}
 		// 取消加载 菜单
+		
 		// 登陆的信息回传页面
+		model.addAttribute("systemname",SystemConstant.getValue("systemname"));
+		model.addAttribute("systemauth",SystemConstant.getValue("systemauth"));
+		model.addAttribute("icp",SystemConstant.getValue("icp"));
+		model.addAttribute("systemdomain", SystemConstant.getSystemdomain());
 		model.addAttribute("userFormMap", user);
 		return "/index/admin/index";
 	}
