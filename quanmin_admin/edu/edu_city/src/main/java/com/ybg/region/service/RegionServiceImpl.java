@@ -4,7 +4,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ybg.region.dao.RegionDao;
-
 import com.ybg.region.domain.RegionVO;
 import com.ybg.region.qvo.RegionQuery;
 
@@ -66,8 +65,15 @@ public class RegionServiceImpl implements RegionService {
 	}
 
 	/** 根据条件删除 **/
+	@Override
 	public void remove(BaseMap<String, Object> wheremap) {
 		regionDao.remove(wheremap);
+	}
+
+	@Override
+	public RegionVO get(Integer pkid) {
+
+		return regionDao.get(pkid);
 	}
 
 }

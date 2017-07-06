@@ -13,6 +13,10 @@ import com.ybg.region.qvo.RegionQuery;
  * @email sunlightcs@gmail.com
  * @date 2017-07-06
  */
+/**
+ * @author Administrator
+ *
+ */
 public interface RegionDao {
 	/**
 	 * 返回主键的创建
@@ -54,4 +58,13 @@ public interface RegionDao {
 
 	/** 根据条件删除 **/
 	void remove(BaseMap<String, Object> wheremap);
+
+	/**
+	 * 获取地区信息
+	 * 
+	 * @param pkid
+	 *            （主键）
+	 * @return
+	 */
+	RegionVO get(Integer pkid);
 }

@@ -57,4 +57,13 @@ public interface RegionService {
 
 	/** 根据条件删除 **/
 	void remove(BaseMap<String, Object> wheremap);
+
+	/**
+	 * 获取地区信息
+	 * 
+	 * @param pkid
+	 *            （主键）
+	 * @return
+	 */
+	RegionVO get(Integer pkid);
 }

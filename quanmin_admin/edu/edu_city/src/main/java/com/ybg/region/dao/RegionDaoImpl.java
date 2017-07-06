@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
-
 import com.ybg.region.domain.RegionVO;
 import com.ybg.region.mapper.RegionMapper;
 import com.ybg.region.qvo.RegionQuery;
@@ -112,6 +111,18 @@ public class RegionDaoImpl extends BaseDao implements RegionDao {
 	@Override
 	public void remove(BaseMap<String, Object> wheremap) {
 		baseremove(wheremap, "edu_region");
+	}
+
+	@Override
+	public RegionVO get(Integer pkid) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
+				.append(QUERY_TABLE_NAME);
+		sql.append(WHERE).append("1=1");
+		sql.append(AND + "region.PkId=" + pkid);
+		List<RegionVO> list = getJdbcTemplate().query(sql.toString(),
+				new RegionMapper());
+		return list.get(0);
 	}
 
 }
