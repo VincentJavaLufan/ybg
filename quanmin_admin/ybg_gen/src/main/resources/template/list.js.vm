@@ -26,7 +26,7 @@ $(function() {
 #end			
 #end
               ],
-        jsonUrl : rootPath + '/role/role_do/list.do',
+        jsonUrl : rootPath + '${pathName}list.do',
         checkbox : true
     });
     $("#search").click("click", function() {// 绑定查询按扭
@@ -60,7 +60,7 @@ function editRole() {
         maxmin : true, // 开启最大化最小化按钮
         area : [
                 "600px", "60%"],
-        content : rootPath + '/role/role_do/toupdate.do?id=' + cbox
+        content : rootPath + '${pathName}toupdate.do?id=' + cbox
     });
 }
 
@@ -71,7 +71,7 @@ function addRole() {
         maxmin : true, // 开启最大化最小化按钮
         area : [
                 "600px", "60%"],
-        content : rootPath + '/role/role_do/toadd.do'
+        content : rootPath + '${pathName}toadd.do'
     });
 }
 function delRole() {
@@ -81,7 +81,7 @@ function delRole() {
         return;
     }
     layer.confirm('是否删除？', function(index) {
-        var url = rootPath + '/role/role_do/remove.do';
+        var url = rootPath + '${pathName}remove.do';
         var s = CommnUtil.ajax(url, {
             ids : cbox.join(",")
         }, "json");
