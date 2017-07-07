@@ -1,22 +1,32 @@
 package ${package}.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.ybg.base.jdbc.BaseMap;
 
-import ${package}.entity.${className}Entity;
+import com.ybg.base.util.Json;
+import com.ybg.base.util.Page;
+import ${package}.domain.${className}VO;
 import ${package}.service.${className}Service;
-import ${package}.utils.PageUtils;
-import ${package}.utils.Query;
-import ${package}.utils.R;
+import ${package}.domain.${className}DO;
+import ${package}.qvo.${className}Query;
 
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * ${comments}
@@ -25,72 +35,121 @@ import ${package}.utils.R;
  * @email ${email}
  * @date ${datetime}
  */
-@RestController
+@Controller
 @RequestMapping("${pathName}")
 public class ${className}Controller {
 	@Autowired
 	private ${className}Service ${classname}Service;
+		
+	@ApiOperation(value = "${className}管理页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
+	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public String index( ModelMap map) {		
+		return "/system/${className}/index";
+	}
 	
-	/**
-	 * 列表
-	 */
-	@RequestMapping("/list")
-	@RequiresPermissions("${pathName}:list")
-	public R list(@RequestParam Map<String, Object> params){
-		//查询列表数据
-        Query query = new Query(params);
-
-		List<${className}Entity> ${classname}List = ${classname}Service.queryList(query);
-		int total = ${classname}Service.queryTotal(query);
-		
-		PageUtils pageUtil = new PageUtils(${classname}List, total, query.getLimit(), query.getPage());
-		
-		return R.ok().put("page", pageUtil);
+	@ApiOperation(value = "${className}分页列表", notes = "JSON ", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "${className}Qvo") })
+	@ResponseBody
+	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public Page list(@ModelAttribute ${className}Query qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, ModelMap map) throws Exception {
+		qvo.setBlurred(true);
+		Page page = new Page();
+		page.setCurPage(pageNow);
+		page = ${classname}Service.list(page, qvo);
+		page.init();
+		return page;
 	}
 	
 	
-	/**
-	 * 信息
-	 */
-	@RequestMapping("/info/{${pk.attrname}}")
-	@RequiresPermissions("${pathName}:info")
-	public R info(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}){
-		${className}Entity ${classname} = ${classname}Service.queryObject(${pk.attrname});
+	/** 新增初始化 
+	 * @throws Exception **/
+	@ApiOperation(value = "添加${className}页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
+	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public String toadd(@ApiIgnore ModelMap map) throws Exception {
 		
-		return R.ok().put("${classname}", ${classname});
+		return "/system/${className}/toadd";
 	}
 	
-	/**
-	 * 保存
-	 */
-	@RequestMapping("/save")
-	@RequiresPermissions("${pathName}:save")
-	public R save(@RequestBody ${className}Entity ${classname}){
-		${classname}Service.save(${classname});
-		
-		return R.ok();
+	@ApiOperation(value = "更新${className}", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	@RequestMapping(value = { "update.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public Json update(@ModelAttribute ${className}VO ${classname}) {
+		Json j = new Json();
+		j.setSuccess(true);
+		try {
+			BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
+			#foreach($column in $columns)
+			#if($column.columnName != $pk.columnName)
+	  		updatemap.put("${column.columnName}", ${classname}.get${column.attrName}());
+			#end 
+			#end 
+			BaseMap<String, Object> wheremap = new BaseMap<String, Object>();			
+			wheremap.put("id", ${classname}.get${pk.attrName}());
+			${classname}Service.update(updatemap, wheremap);
+		} catch (Exception e) {
+			e.printStackTrace();
+			j.setMsg("操作失败");
+			return j;
+		}
+		j.setMsg("操作成功");
+		return j;
 	}
 	
-	/**
-	 * 修改
-	 */
-	@RequestMapping("/update")
-	@RequiresPermissions("${pathName}:update")
-	public R update(@RequestBody ${className}Entity ${classname}){
-		${classname}Service.update(${classname});
-		
-		return R.ok();
+	@ApiOperation(value = "根据ID删除${classname}", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiImplicitParam(name = "ids", value = "删除${classname}", required = true, dataType = "java.lang.String")
+	@ResponseBody
+	@RequestMapping(value = { "remove.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public Json remove(@RequestParam(name = "ids", required = true) String ids2) {
+		Json j = new Json();
+		j.setSuccess(true);
+		try {
+			String[] ids = ids2.split(",");
+			for (String id : ids) {
+				BaseMap<String, Object> wheremap= new BaseMap<String, Object>();
+				wheremap.put("${pk.attrname}", id);
+				studentService.remove(wheremap);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			j.setMsg("操作失败");
+			return j;
+		}
+		j.setMsg("操作成功");
+		return j;
 	}
 	
-	/**
-	 * 删除
-	 */
-	@RequestMapping("/delete")
-	@RequiresPermissions("${pathName}:delete")
-	public R delete(@RequestBody ${pk.attrType}[] ${pk.attrname}s){
-		${classname}Service.deleteBatch(${pk.attrname}s);
-		
-		return R.ok();
+	@ApiOperation(value = "创建${classname}", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	@RequestMapping(value = { "create.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public Json create(@ModelAttribute ${className}VO bean) {
+		Json j = new Json();
+		j.setSuccess(true);
+		try {
+			${classname}Service.save(bean);
+		} catch (Exception e) {
+			e.printStackTrace();
+			j.setMsg("操作失败");
+			return j;
+		}
+		j.setMsg("操作成功");
+		return j;
 	}
+	
+	@ApiOperation(value = "创建${classname}页面初始化", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
+	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public String toadd() {
+		return "/system/${classname}/add";
+	}
+	
+	@ApiOperation(value = "更新${classname}页面初始化", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
+	@ApiImplicitParam(name = "id", value = "${classname}的ID", required = true, dataType = "java.lang.String")
+	@RequestMapping(value = { "toupdate.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public String toupdate(@RequestParam(name = "id", required = true) String id, ModelMap map) throws Exception {
+		map.put("${classname}", ${classname}Service.get(id));
+		return "/system/${classname}/edit";
+	}
+	
+	
+	
 	
 }
