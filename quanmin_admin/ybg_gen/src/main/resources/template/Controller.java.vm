@@ -35,6 +35,7 @@ import springfox.documentation.annotations.ApiIgnore;
  * @email ${email}
  * @date ${datetime}
  */
+ @Api("${className}管理")
 @Controller
 @RequestMapping("${pathName}")
 public class ${className}Controller {
