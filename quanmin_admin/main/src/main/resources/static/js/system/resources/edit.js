@@ -53,7 +53,7 @@ function but(v) {
             h += "<option value='" + data[i].id + "'>" + data[i].name + "</option>";
         }
         $("#parentid").html(h);
-        showBut();
+       // showBut();
     } else
         if (v.value == 1) {
             var url = rootPath + '/res/res_do/reslists.do?type=0';
@@ -72,18 +72,18 @@ function toBut(b) {
     $("#description").val($("#" + b.id).html());
 }
 function showBut() {
-    $("#divbut").css("display", "block");
-    var url = rootPath + '/res/res_do/findByButtom.do';
-    var data = CommnUtil.ajax(url, null, "json");
-    if (data != null) {
-        var bb = $("#but");
-        bb.html('');
-        for (var i = 0; i < data.length; i++) {
-            bb.append("<span onclick=\"toBut(this)\" id=\"span_" + data[i].id + "\">" + data[i].button + "</span>");
-        }
-    } else {
-        layer.msg("获取按扭列表失败！");
-    }
+    $("#divbut").css("display", "none");
+//    var url = rootPath + '/res/res_do/findByButtom.do';
+//    var data = CommnUtil.ajax(url, null, "json");
+//    if (data != null) {
+//        var bb = $("#but");
+//        bb.html('');
+//        for (var i = 0; i < data.length; i++) {
+//            bb.append("<span onclick=\"toBut(this)\" id=\"span_" + data[i].id + "\">" + data[i].button + "</span>");
+//        }
+//    } else {
+//        layer.msg("获取按扭列表失败！");
+//    }
 }
 function byRes(id) {
     var url = rootPath + '/res/res_do/reslists.do';
