@@ -44,9 +44,7 @@ $(function() {
     $("#delRole").click("click", function() {
         delRole();
     });
-    $("#permissions").click("click", function() {
-        permissions();
-    });
+    
 });
 function editRole() {
     var cbox = grid.getSelectedCheckbox();
