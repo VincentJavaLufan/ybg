@@ -90,9 +90,7 @@
 				<div class="btn-group">
 					<button type="button" class="btn btn-default" onclick="editFun('${s1.id}')">修改</button>
 					<button type="button" class="btn btn-default" onclick="delFun('${s1.id}')">删除</button>
-				</div>
-				图标:
-				<i class="fa ${s1.icon!} fa-3x"></i>
+				</div>				
 				<#list s1.children as s2>
 				<ul>
 					<li>
@@ -117,7 +115,7 @@
 									<button type="button" class="btn btn-default" onclick="delFun('${s3.id}')">删除</button>
 								</div>
 								<b class="bg-primary">url:${s3.resUrl!}</b>
-								${s3.description!}
+							
 							</li>
 						</ul>
 						</#list>

@@ -121,20 +121,9 @@ html>body td {
             url : rootPath + '/role/role_do/addRoleRes.do',
             dataType : 'json',
             success : function(json) {
-                if (json.msg == "操作成功") {
-                    layer.confirm('分配成功！是否关闭窗口？', {
-                        icon : 3,
-                        offset : '-100px'
-                    }, function(index) {
-                        parent.layer.close(parent.pageii);
-                        return false;
-                    });
-                } else {
-                    layer.alert(json.msg, {
-                        icon : 2,
-                        offset : '-100px'
-                    });
-                };
+                alert(json.msg);
+              //  parent.layer.close(parent.pageii);
+                
             }
         });
       
