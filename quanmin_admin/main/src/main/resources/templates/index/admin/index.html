@@ -1,6 +1,7 @@
-<html lang="en" class="app">
+<!DOCTYPE html>
+<html>
 <head>
-<#include "/common/common.ftl"/>
+  <#include "/common/common2.ftl"/>
 <script type="text/javascript">
     function modifypwd() {
         if ($("#password").val().length < 8) {
@@ -25,85 +26,249 @@
     }
 </script>
 </head>
-<body>
-	<section class="vbox">
-		<header class="bg-dark dk header navbar navbar-fixed-top-xs" id="SYSTEM_HEAD">
-			<!-- 头部 -->
-		</header>
-		<section>
-			<section class="hbox stretch">
-				<!-- .aside -->
-				<aside class="bg-dark lter aside-md hidden-print hidden-xs" id="nav">
-					<section class="vbox" id="SYSTEM_MENU">
-						<!-- 菜单 -->
-					</section>
-				</aside>
-				<!-- /.aside -->
-				<section id="content">
-					<section id="id_vbox" class="vbox bg-white">
-						<ul class="breadcrumb no-border no-radius b-b b-light" id="topli">
-							<!-- 目录条 -->
-						</ul>
-						<section class="scrollable padder" style="margin-top: 35px;">
-							<div id="loadhtml">
-								<!-- 内容加载区 -->
-							</div>
-						</section>
-					</section>
-				</section>
-				<aside class="bg-light lter b-l aside-md hide" id="notes">
-					<div class="wrapper">Notification</div>
-				</aside>
-			</section>
-		</section>
-	</section>
-	<!-- Bootstrap -->
-	<div id="flotTip" style="display: none; position: absolute;"></div>
-	<div class="modal fade" id="modal-form">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-sm-6 b-r">
-							<h3 class="m-t-none m-b">修改密码</h3>
-							<p>
-								您知道吗 ？捐助我可以申请修改更短的账号名称。
-								<a href="#" class="bg-warning">
-									开通VIP
-									<i class="fa fa-arrow-circle-right icon"></i>
-								</a>
-							</p>
-							<form id="modifypwd" onsubmit="return false;">
-								<div class="form-group">
-									<label>新密码</label>
-									<input id="password" name="password" type="password" class="form-control" placeholder="New Password">
-								</div>
-								<div class="form-group">
-									<label>确认密码</label>
-									<input id="chpassword" name="chpassword" type="password" class="form-control" placeholder="Confirm Password">
-								</div>
-								<div class="checkbox m-t-lg">
-									<button type="submit" onclick="modifypwd()" class="btn btn-sm btn-success pull-right text-uc m-t-n-xs">
-										<strong>确定</strong>
-									</button>
-								</div>
-							</form>
-						</div>
-						<div class="col-sm-6">
-							<h4>什么样的密码安全?</h4>
-							<p>1.密码长于8位</p>
-							<p>2.密码包含大小写和数字 最好有特殊符号</p>
-							<p>3.密码不要和任何平台的相同，部分网站是明文存储，有泄露风险。我平台绝对是无明文，且密码二次加密。放心使用</p>
-							<p>4.不要把密码随意告诉任何人。必须确认有相关安全常识。</p>
-							<p>5.未来添加第三方平台绑定，尽量少使用密码登陆。</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <header class="main-header" id="SYSTEM_HEAD">
+   <!-- 头部 -->
+    
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar" id="SYSTEM_MENU">
+   <!--  菜单-->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Widgets
+        <small>Preview page</small>
+      </h1>
+      <ol class="breadcrumb" id="topli">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Widgets</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content" id="loadhtml" >
+<!-- 主要内容 -->
+      
+      
+      
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 2.3.8
+    </div>
+    <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
+    reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Home tab content -->
+      <div class="tab-pane" id="control-sidebar-home-tab">
+        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                <p>Will be 23 on April 24th</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-user bg-yellow"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+
+                <p>New phone +1(800)555-1234</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+
+                <p>nora@example.com</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-file-code-o bg-green"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+
+                <p>Execution time 5 seconds</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+        <h3 class="control-sidebar-heading">Tasks Progress</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Custom Template Design
+                <span class="label label-danger pull-right">70%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Update Resume
+                <span class="label label-success pull-right">95%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Laravel Integration
+                <span class="label label-warning pull-right">50%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Back End Framework
+                <span class="label label-primary pull-right">68%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+      </div>
+      <!-- /.tab-pane -->
+      <!-- Stats tab content -->
+      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+      <!-- /.tab-pane -->
+      <!-- Settings tab content -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        <form method="post">
+          <h3 class="control-sidebar-heading">General Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Report panel usage
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Some information about this general settings option
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Allow mail redirect
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Other sets of options are available
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Expose author name in posts
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Allow the user to show his name in blog posts
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <h3 class="control-sidebar-heading">Chat Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Show me as online
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Turn off notifications
+              <input type="checkbox" class="pull-right">
+            </label>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Delete chat history
+              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+            </label>
+          </div>
+          <!-- /.form-group -->
+        </form>
+      </div>
+      <!-- /.tab-pane -->
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+
 </body>
 </html>
 <script type="text/javascript">

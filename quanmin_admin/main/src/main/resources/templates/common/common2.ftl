@@ -1,0 +1,130 @@
+ <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>云报告</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="/css/skins/_all-skins.min.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <!-- jQuery 2.2.3 -->
+<script src="/js/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<!-- Slimscroll -->
+<script src="/js/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="/js/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/js/demo.js"></script>
+
+<script type="text/javascript" src="/js/jquery/jquery.form.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery-validation/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery-validation/messages_cn.js"></script>
+<script type="text/javascript" src="/js/layer-v1.9.2/layer/layer.js"></script>
+<script type="text/javascript" src="/common/common.js"></script>
+<script type="text/javascript" src="/common/lyGrid.js"></script>
+<script type="text/javascript" src="/common/base.js"></script>
+<!--[if lt IE 9]> <script src="/js/jquery/ie/html5shiv.js"></script> <script src="/js/jquery/ie/respond.min.js"></script><![endif]-->
+<style type="text/css">
+.l_err{
+    background: none repeat scroll 0 0 #FFFCC7;
+    border: 1px solid #FFC340;
+    font-size: 12px;
+    padding: 4px 8px;
+    width: 200px;
+    display: none;
+}
+.error{
+  border: 3px solid #FFCCCC;
+}
+.form-group{
+  padding-left: 15px
+}
+.left{
+	text-align: left;
+	padding-left: 10px;
+}
+.right{
+	text-align: right;
+}
+</style>
+<!-- base end -->
+<script type="text/javascript">
+function onloadurl(){
+	$("[data-url]").each(function () {
+		var tb = $(this);
+		tb.html(CommnUtil.loadingImg());
+		tb.load(rootPath+tb.attr("data-url"));
+    });
+}
+layer.config({
+		extend : [ 'style.css' ], //加载新皮肤skin/style.css
+		fix : false, // 用于设定层是否不随滚动条而滚动，固定在可视区域。
+		skin : 'layui-layer-molv' //一旦设定，所有弹层风格都采用此主题。layui-layer-molv
+	});
+var rootPath = "";
+/**
+ * options:
+ * url : 获取select数据的路径
+ * name : input name
+ * textFiled :显示
+ * valueFiled:value
+ * data : 查询条件{}
+ * value ：默认值
+ */
+function getSelectEx(byId,options){
+	if(byId && options){
+		if(options.url && options.textFiled 
+				&& options.valueFiled && options.name){
+			$.ajax({
+				type : "post", //使用get方法访问后台
+			    dataType : "json", //json格式的数据
+			    async : true, //同步   不写的情况下 默认为true
+			    url : rootPath + options.url,
+			    data : options.data,
+			    success : function(data){
+			    	for(var i = 0; i < data.length;i++){
+				    	var selectObj = $("#"+byId).find("ul"); 
+				    	if(selectObj){
+				    		if(options.value == "" && i == 0){
+				    			$("#"+byId).append("<button data-toggle='dropdown' class='btn btn-sm btn-default dropdown-toggle'> "+
+										"<span class='dropdown-label'>"+data[i][options.textFiled]+"</span> <span class='caret'></span></button>");
+				    			$("#"+byId).find("ul").append("<li class='active'><a href='#'><input type='radio' name="+options.name+
+							    		" value="+data[i][options.valueFiled]+" checked='checked'>"+data[i][options.textFiled]+"</a></li>");
+						    }else{
+						    	 if(options.value == data[i][options.valueFiled]){
+						    		    $("#"+byId).append("<button data-toggle='dropdown' class='btn btn-sm btn-default dropdown-toggle'> "+
+												"<span class='dropdown-label'>"+data[i][options.textFiled]+"</span> <span class='caret'></span></button>");
+								    	$("#"+byId).find("ul").append("<li class='active'><a href='#'><input type='radio' name="+options.name+
+									    		" value="+data[i][options.valueFiled]+" checked='checked'>"+data[i][options.textFiled]+"</a></li>");
+								 }else{
+									 $("#"+byId).find("ul").append("<li class=''><a href='#'><input type='radio' name="+options.name+
+									    		" value="+data[i][options.valueFiled]+" >"+data[i][options.textFiled]+"</a></li>");
+								 }
+							}
+					    }	
+			    	}	
+				}
+			});
+			
+		}
+	}
+}
+</script>

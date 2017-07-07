@@ -3,6 +3,7 @@ var grid = null;
 $(function() {
     grid = lyGrid({
         pagId : 'paging',
+       
         l_column : [
                 {
                     colkey : "id",

@@ -1,22 +1,4 @@
-<title>云 报告</title>
-<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
-<META HTTP-EQUIV="Expires" CONTENT="0">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-<!-- name="viewport" 的详细用法  http://www.php100.com/html/webkaifa/HTML5/2012/0831/10979.html -->
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1">
-<link href="/favicon.ico" type="image/x-icon" rel="shortcut icon">
-<!-- 
-width - viewport的宽度 height - viewport的高度
-initial-scale - 初始的缩放比例
-minimum-scale - 允许用户缩放到的最小比例
-maximum-scale - 允许用户缩放到的最大比例
-user-scalable - 用户是否可以手动缩放
- -->
-<link rel="stylesheet" href="/notebook/notebook_files/font.css" type="text/css">
-<link rel="stylesheet" href="/notebook/notebook_files/app.v1.css" type="text/css">
+
 <link rel="stylesheet" href="/admin_files/awesome.css" type="text/css">
 <link rel="stylesheet" href="/css/lanyuan.css" type="text/css">
 	<!-- base start 重要部分不可删改-->
