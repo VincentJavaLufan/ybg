@@ -97,7 +97,7 @@ public class GenUtils {
 		map.put("pk", tableEntity.getPk());
 		map.put("className", tableEntity.getClassName());
 		map.put("classname", tableEntity.getClassname());
-		map.put("pathName", tableEntity.getClassname().toLowerCase());
+		map.put("pathName", config.getString("pathName")+  tableEntity.getClassname().toLowerCase()+"_do/");
 		map.put("columns", tableEntity.getColumns());
 		map.put("package", config.getString("package"));
 		map.put("author", config.getString("author"));
