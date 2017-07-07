@@ -107,7 +107,7 @@ public class ${className}Controller {
 			for (String id : ids) {
 				BaseMap<String, Object> wheremap= new BaseMap<String, Object>();
 				wheremap.put("${pk.attrname}", id);
-				studentService.remove(wheremap);
+				${classname}Service.remove(wheremap);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
