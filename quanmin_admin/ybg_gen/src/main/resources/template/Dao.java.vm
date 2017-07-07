@@ -41,4 +41,6 @@ public interface ${className}Dao {
 	List<${className}VO> list(${className}Query qvo)throws Exception;
 	/** 根据条件删除 **/
 	void remove(BaseMap<String, Object> wheremap);
+	
+	${className}VO get(${pk.attrType} id);
 }

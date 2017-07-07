@@ -56,5 +56,7 @@ public class ${className}ServiceImpl implements ${className}Service {
 	public void remove(BaseMap<String, Object> wheremap){
 		${classname}Dao.remove(wheremap);
 	}
-	
+	public ${className}VO get(${pk.attrType} id){
+		return 	${classname}Dao.get(id);
+	}
 }

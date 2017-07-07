@@ -84,5 +84,15 @@ public class ${className}DaoImpl extends BaseDao implements ${className}Dao {
 	public void remove(BaseMap<String, Object> wheremap) {
 		 baseremove(wheremap, "${tableName}");		
 	}
+	@Override
+	public ${className}VO get(${pk.attrType} id){
 	
+	StringBuilder sql = new StringBuilder();
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
+				.append(QUERY_TABLE_NAME);
+				sql.append(WHERE).append("1=1");
+				sql.append(AND).append("${pk.columnName}='"+id+"'");
+		List<${className}VO> list=getJdbcTemplate().query(sql.toString(), new ${className}Mapper());		
+		return QvoConditionUtil.checkList(list)?list.get(0):null;
+	}
 }
