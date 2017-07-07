@@ -89,7 +89,7 @@ public class UserControllor {
 	/** 首页 **/
 	@ApiOperation(value = "用户页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String index(HttpServletRequest request, @ApiIgnore ModelMap modelMap) {
+	public String index( @ApiIgnore ModelMap modelMap) {
 		// modelMap.addAttribute("res", findByRes(request));
 		return "/system/user/index";
 	}

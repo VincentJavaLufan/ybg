@@ -39,7 +39,7 @@ public class RescourcesControllor {
 	
 	@ApiOperation(value = "资源页面", notes = "需要授权才可以访问的页面", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String index(HttpServletRequest request, HttpServletResponse response, ModelMap map) {
+	public String index( ModelMap map) {
 		// map.addAttribute("res", findByRes(request));
 		return "/system/resources/index";
 	}
