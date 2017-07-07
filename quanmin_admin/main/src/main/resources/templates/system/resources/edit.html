@@ -85,15 +85,15 @@ label[class^="btn btn-default"] {
 					</select>
 				</div>
 			</div>
-			<div class="form-group" id="divbut" style="display: none;">
-				<label class="col-sm-3 control-label">选择</label>
+			<div class="form-group" id="divbut" style="display: none">
+				<label class="col-sm-3 control-label" style="display: none">选择</label>
 				<div class="col-sm-9">
 					<div id="but" class="doc-buttons"></div>
 					<font color="red">可自定义填入html代码</font>
 				</div>
 			</div>
-			<div class="line line-dashed line-lg pull-in"></div>
-			<div class="form-group">
+			<div class="line line-dashed line-lg pull-in" style="display: none"></div>
+			<div class="form-group" style="display: none">
 				<div class="col-sm-12">
 					<button class="btn btn-sm btn-default" onclick="showorhide()" data-toggle="class:show">
 						<i class="fa fa-plus text"></i>
@@ -111,8 +111,8 @@ label[class^="btn btn-default"] {
 					<input type="hidden" class="form-control checkacc" placeholder="请输入icon" name="icon" id="icon" value="${resources.icon!}">
 				</div>
 			</div>
-			<div class="line line-dashed line-lg pull-in"></div>
-			<div class="form-group">
+			<div class="line line-dashed line-lg pull-in" style="display: none"></div>
+			<div class="form-group" style="display: none">
 				<label class="col-sm-3 control-label">菜单颜色</label>
 				<div class="col-sm-9">
 					<select id="colorid" name="colorid" class="form-control m-b" tabindex="-1">
@@ -122,8 +122,8 @@ label[class^="btn btn-default"] {
 					</select>
 				</div>
 			</div>
-			<div class="line line-dashed line-lg pull-in"></div>
-			<div class="form-group">
+			<div class="line line-dashed line-lg pull-in" style="display: none"></div>
+			<div class="form-group" style="display: none">
 				<label class="col-sm-3 control-label">是否隐藏</label>
 				<div class="col-sm-9">
 				<select class="form-control" name="ishide" id="ishide" required  lay-verify="required" >
@@ -136,8 +136,8 @@ label[class^="btn btn-default"] {
 					
 				</div>
 			</div>
-			<div class="line line-dashed line-lg pull-in"></div>
-			<div class="form-group">
+			<div class="line line-dashed line-lg pull-in" style="display: none"></div>
+			<div class="form-group" style="display: none">
 				<label class="col-sm-3 control-label">菜单描述</label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control checkacc" placeholder="请输入菜单描述" name="description" id="description" value='${resources.description!}'>
@@ -152,9 +152,10 @@ label[class^="btn btn-default"] {
         $("#type").val("${resources.type!}");
         $("#colorid").val("${resources.colorid!}");
         $("#ishide").val("${resources.ishide!}");
-        if ("${resources.type}" == "2") {
-            showBut();
-        }
+      //  if ("${resources.type}" == "2") {
+       //     showBut();
+     //   }
+     
         byRes("${resources.parentid}");
     </script>
 </body>
