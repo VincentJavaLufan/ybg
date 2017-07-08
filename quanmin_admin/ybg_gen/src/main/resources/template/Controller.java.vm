@@ -45,7 +45,7 @@ public class ${className}Controller {
 	@ApiOperation(value = "${className}管理页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String index( ModelMap map) {		
-		return "/system/${className}/index";
+		return "/system/${classname}/index";
 	}
 	
 	@ApiOperation(value = "${className}分页列表", notes = "JSON ", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -68,7 +68,7 @@ public class ${className}Controller {
 	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String toadd(@ApiIgnore ModelMap map) throws Exception {
 		
-		return "/system/${className}/toadd";
+		return "/system/${classname}/toadd";
 	}
 	
 	@ApiOperation(value = "更新${className}", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -136,11 +136,7 @@ public class ${className}Controller {
 		return j;
 	}
 	
-	@ApiOperation(value = "创建${classname}页面初始化", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
-	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toadd() {
-		return "/system/${classname}/add";
-	}
+	
 	
 	@ApiOperation(value = "更新${classname}页面初始化", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
 	@ApiImplicitParam(name = "id", value = "${classname}的ID", required = true, dataType = "java.lang.String")
