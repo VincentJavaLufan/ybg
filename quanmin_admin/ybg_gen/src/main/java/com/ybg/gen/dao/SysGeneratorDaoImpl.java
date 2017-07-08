@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
+import com.ybg.base.jdbc.BaseQueryAble;
 import com.ybg.base.util.Page;
 import com.ybg.gen.entity.TableEntity;
 import com.ybg.gen.qvo.GeneratorQuery;
@@ -20,7 +21,14 @@ public class SysGeneratorDaoImpl extends BaseDao implements SysGeneratorDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select table_name tableName, engine, table_comment tableComment, create_time createTime from information_schema.tables ");
 		sql.append(" 	where table_schema = (select database())");
-		sqlappen(sql, "table_name", qvo.getTable_name());
+		sqlappen(sql, "table_name", qvo.getTable_name(),new BaseQueryAble() {
+			
+			@Override
+			public boolean isBlurred() {
+				
+				return true;
+			}
+		});
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
 			List<TableEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new RowMapper<TableEntity>() {
