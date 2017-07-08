@@ -133,7 +133,7 @@ JDK1.8  下载绿色版解压，请配置好环境变量或使用eclipse 自己�
 0.4 导入sql文件：测试数据库地址：
 
 ### 在附件上 请留意
- [输入链接说明](http://files.git.oschina.net/group1/M00/01/7A/PaAvDFlgaDGAKH2eAAIJiyM4PtM142.rar?token=e5072a8ebd604dab60ec70e6ce9aadcc&ts=1499490382&attname=apy_account.rar) 数据库更新时间-2017年6月29日 09:54:56
+ [点此下载](http://files.git.oschina.net/group1/M00/01/7A/PaAvDFlgaDGAKH2eAAIJiyM4PtM142.rar?token=e5072a8ebd604dab60ec70e6ce9aadcc&ts=1499490382&attname=apy_account.rar) 数据库更新时间-2017年6月29日 09:54:56
 
 
 eclipse 构建maven 环境
