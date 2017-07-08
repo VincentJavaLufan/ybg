@@ -1,0 +1,22 @@
+
+<script type="text/javascript">
+function loadoamenu(){
+    $("#otherusermenu").load('/common/login_do/menu_oa.do');
+}
+function loadedumenu(){
+  //  $("#otherusermenu").load('/common/login_do/menu_edu.do');
+  alert('未开发');
+}
+</script>
+
+<center>
+<H2>请选择子系统</H2>
+<a class="btn btn-app" onclick="loadoamenu()">
+	<i class="fa fa-child"></i>
+	企业子系统
+</a>
+<a class="btn btn-app" onclick="loadedumenu()">
+	<i class="fa fa-graduation-cap"></i>
+	教育子系统
+</a>
+</center>
