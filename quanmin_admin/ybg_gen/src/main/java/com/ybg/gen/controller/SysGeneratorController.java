@@ -1,5 +1,4 @@
 package com.ybg.gen.controller;
-import com.alibaba.fastjson.JSON;
 import com.ybg.base.util.Page;
 import com.ybg.gen.qvo.GeneratorQuery;
 import com.ybg.gen.service.SysGeneratorService;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 /** 代码生成器
  * 
