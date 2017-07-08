@@ -550,16 +550,16 @@ public class BaseDao extends BaseSQL {
 	 * 
 	 * @param table_name
 	 *            表的名称 **/
-	public void baseremove(final BaseMap<String, Object> conditionmap, String table_name) {
+	public int baseremove(final BaseMap<String, Object> conditionmap, String table_name) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(DELETE + FROM + table_name + WHERE + " 1=1 ");
 		if (conditionmap == null || conditionmap.size() == 0) {
-			return;
+			return 0;
 		}
 		for (Entry<String, Object> entry : conditionmap.entrySet()) {
 			sql.append(AND + entry.getKey() + "=? ");
 		}
-		getJdbcTemplate().update(sql.toString(), new PreparedStatementSetter() {
+		return getJdbcTemplate().update(sql.toString(), new PreparedStatementSetter() {
 			
 			public void setValues(PreparedStatement ps) throws SQLException {
 				int count = 1;
