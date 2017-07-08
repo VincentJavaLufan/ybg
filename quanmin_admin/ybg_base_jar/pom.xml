@@ -18,6 +18,9 @@
 		<druid.version>1.0.26</druid.version>
 		<commons-httpclient.version>3.1</commons-httpclient.version>
 		<httpclient.version>4.5.2</httpclient.version>
+		<qiniu-version>7.2.0</qiniu-version>
+		<aliyun-oss-version>2.5.0</aliyun-oss-version>
+		<qcloud-cos-version>4.4</qcloud-cos-version>
 	</properties>
 	<dependencies>
 	<dependency>
@@ -381,6 +384,21 @@
             	</exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+			<groupId>com.qiniu</groupId>
+			<artifactId>qiniu-java-sdk</artifactId>
+			<version>${qiniu-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aliyun.oss</groupId>
+			<artifactId>aliyun-sdk-oss</artifactId>
+			<version>${aliyun-oss-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.qcloud</groupId>
+			<artifactId>cos_api</artifactId>
+			<version>${qcloud-cos-version}</version>
+		</dependency>
 			</dependencies>
 	<build>
 		<plugins>
