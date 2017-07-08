@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 public class GeneratorQuery implements Serializable {
 	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2999652572222957636L;
 	private String table_name;
 	
 	public String getTable_name() {
