@@ -56,46 +56,7 @@ quartz 自定义任务执行时间。
 
 ### 代码结构
 
-
-
-
-
-
- -quanming_admin 项目名称
-
- --main(主要运行/打包模块）
-
- --ybg_base_jar 底层编译
- 
- --ybg_base_jdbc Dao层的jdbc 的一些封装方法和类
- 
- --ybg_base_util 工具类
- 
- --ybg_company 企业模块
-
- --ybg_email 邮箱模块
- 
- --ybg_inter 接口
-
- --ybg_jwt   json web token 模块
- 
- --ybg_login_baidu 百度登陆
-
- --ybg_login_qq QQ登陆
- 
- --ybg_login_sina 新浪登陆
-
- --ybg_mq 阿里MQ
- 
- --ybg_quartz 定时任务
- 
- --ybg_rbac 权限管理 (Controller)
- 
- --ybg_rbac_base 权限底层(Service Dao 等）
- 
- --ybg_weixin 微信模块
- 
- --ybg_gen 代码生成模块（未完成 开发中）
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0708/082322_4cd748ff_880593.png "在这里输入图片标题")
 
 -----------------------------------------------------------------------------------------------------------------
 
@@ -152,7 +113,9 @@ quartz 自定义任务执行时间。
 
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0701/170750_5ba5186a_880593.png "在这里输入图片标题")
 
+开发进度
 
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0708/082505_f70c7c6b_880593.png "在这里输入图片标题")
 
 ----------------------------------------------------------------------------------------------------------------
 
