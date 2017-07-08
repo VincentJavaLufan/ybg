@@ -24,7 +24,6 @@ import com.ybg.base.util.Page;
  * 2.数据库字段一律小写 <br>
  * 3.数据库字段不得使用下划线，表名可以。 <br>
 ***/
-
 @ComponentScan
 public class BaseDao extends BaseSQL {
 	
@@ -39,9 +38,7 @@ public class BaseDao extends BaseSQL {
 		UUID uuid = UUID.randomUUID();
 		String id = uuid.toString().replaceAll("-", "");
 		StringBuilder sql = new StringBuilder();
-		
 		sql.append(INSERT).append(INTO).append(table_name).append("(");
-		
 		if (createmap != null && createmap.size() > 0) {
 			if (id_name != null && id_name.trim().length() > 0) {
 				createmap.put(id_name, id);
@@ -427,20 +424,18 @@ public class BaseDao extends BaseSQL {
 	 *            更新中的条件字段和值
 	 * @param table_name
 	 *            表的名称 **/
-	public void baseupdate(final BaseMap<String, Object> updatemap, final BaseMap<String, Object> wheremap, String table_name) {
+	public int baseupdate(final BaseMap<String, Object> updatemap, final BaseMap<String, Object> wheremap, String table_name) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(UPDATE + table_name + SET);
 		if (updatemap != null && updatemap.size() > 0) {
 			updatemap.put("gmt_modified", DateUtil.getDateTime());
-			
-			
 			for (Entry<String, Object> entry : updatemap.entrySet()) {
 				sql.append(entry.getKey() + "=?,");
 			}
 			sql.replace(sql.length() - 1, sql.length(), "");
 		}
 		else {
-			return;
+			return 0;
 		}
 		sql.append(WHERE + " 1=1 ");
 		if (wheremap != null && wheremap.size() > 0) {
@@ -449,9 +444,9 @@ public class BaseDao extends BaseSQL {
 			}
 		}
 		else {
-			return;
+			return 0;
 		}
-		getJdbcTemplate().update(sql.toString(), new PreparedStatementSetter() {
+		return getJdbcTemplate().update(sql.toString(), new PreparedStatementSetter() {
 			
 			public void setValues(PreparedStatement ps) throws SQLException {
 				int count = 1;
@@ -621,12 +616,11 @@ public class BaseDao extends BaseSQL {
 	 * @param isblureed
 	 *            是否模糊查询（禁止左模糊）
 	 * @param name
-	 *            列的具体值 
+	 *            列的具体值
 	 * @throws Exception ***/
 	public String equalsorlike(boolean isblureed, String name) throws Exception {
-		
-		if(checkSQLinject(name)){
-			throw new Exception();//存在sql 注入
+		if (checkSQLinject(name)) {
+			throw new Exception();// 存在sql 注入
 		}
 		if (isblureed) {
 			return LIKE + " '" + name + "%'";
@@ -648,7 +642,7 @@ public class BaseDao extends BaseSQL {
 	 *            列的值
 	 * @param qvo
 	 *            查看接口的方法 是否属于模糊查询
-	 * @return sql.append( and name=/like 'value'/'%value%') 
+	 * @return sql.append( and name=/like 'value'/'%value%')
 	 * @throws Exception ***/
 	public void sqlappen(StringBuilder sql, String name, String value, BaseQueryAble qvo) throws Exception {
 		sqlappen(sql, name, value, qvo.isBlurred());
@@ -666,7 +660,7 @@ public class BaseDao extends BaseSQL {
 	 *            列的值
 	 * @param qvo
 	 *            查看接口的方法 是否属于模糊查询
-	 * @return sql.append( and name=/like 'value'/'%value%') 
+	 * @return sql.append( and name=/like 'value'/'%value%')
 	 * @throws Exception ***/
 	public void sqlappen(StringBuilder sql, String name, String value, boolean blurred) throws Exception {
 		if (QvoConditionUtil.checkString(value)) {
@@ -684,7 +678,7 @@ public class BaseDao extends BaseSQL {
 	 * @param value
 	 *            列的值
 	 * 
-	 * @return sql.append( and name= 'value') 
+	 * @return sql.append( and name= 'value')
 	 * @throws Exception ***/
 	public void sqlappen(StringBuilder sql, String name, String value) throws Exception {
 		if (QvoConditionUtil.checkString(value)) {
@@ -719,7 +713,7 @@ public class BaseDao extends BaseSQL {
 	 * @param value
 	 *            列的值
 	 * 
-	 * @return sql.append( and name= 'value') 
+	 * @return sql.append( and name= 'value')
 	 * @throws Exception ***/
 	public void sqlappen(StringBuilder sql, String name, Long value) throws Exception {
 		if (QvoConditionUtil.checkLong(value)) {
@@ -817,28 +811,23 @@ public class BaseDao extends BaseSQL {
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
+	
 	/****/
-	/**
-	 * @param sqlParm 字段
-	 * @return 真， 存在sql 注入
-	 */
-	private boolean checkSQLinject(String sqlParm){
-		if(sqlParm==null){
+	/** @param sqlParm
+	 *            字段
+	 * @return 真， 存在sql 注入 */
+	private boolean checkSQLinject(String sqlParm) {
+		if (sqlParm == null) {
 			return false;
 		}
-		sqlParm = sqlParm.toLowerCase();//统一转为小写
-        String badStr = "'|and|exec|execute|insert|select|delete|update|count|drop|*|%|chr|mid|master|truncate|" +
-                "char|declare|sitename|net user|xp_cmdshell|;|or|-|+|,|like'|and|exec|execute|insert|create|drop|" +
-                "table|from|grant|use|group_concat|column_name|" +
-                "information_schema.columns|table_schema|union|where|select|delete|update|order|by|count|*|" +
-                "chr|mid|master|truncate|char|declare|or|;|-|--|+|,|like|//|/|%|#";//过滤掉的sql关键字，可以手动添加
-        String[] badStrs = badStr.split("\\|");
-        for (int i = 0; i < badStrs.length; i++) {
-            if (sqlParm.indexOf(badStrs[i]) >= 0) {
-                return true;
-            }
-        }
-        return false;
+		sqlParm = sqlParm.toLowerCase();// 统一转为小写
+		String badStr = "'|and|exec|execute|insert|select|delete|update|count|drop|*|%|chr|mid|master|truncate|" + "char|declare|sitename|net user|xp_cmdshell|;|or|-|+|,|like'|and|exec|execute|insert|create|drop|" + "table|from|grant|use|group_concat|column_name|" + "information_schema.columns|table_schema|union|where|select|delete|update|order|by|count|*|" + "chr|mid|master|truncate|char|declare|or|;|-|--|+|,|like|//|/|%|#";// 过滤掉的sql关键字，可以手动添加
+		String[] badStrs = badStr.split("\\|");
+		for (int i = 0; i < badStrs.length; i++) {
+			if (sqlParm.indexOf(badStrs[i]) >= 0) {
+				return true;
+			}
+		}
+		return false;
 	}
-	
 }
