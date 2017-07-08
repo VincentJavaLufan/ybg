@@ -26,6 +26,7 @@ import com.ybg.base.util.Common;
 import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.SystemConstant;
+import com.ybg.base.util.UserConstant;
 import com.ybg.component.email.sendemail.SendEmailInter;
 import com.ybg.component.email.sendemail.SendQQmailImpl;
 import com.ybg.config.security.MyAuthenticationToken;
@@ -134,7 +135,7 @@ public class LoginControllor {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setCredentialssalt(new DesUtils().encrypt(user.getPassword()));
-		user.setRoleid("7");
+		user.setRoleid("10");
 		user.setPhone("");
 		user.setState(UserStateConstant.DIE);
 		user.setCreatetime(DateUtil.getDateTime());
@@ -355,7 +356,8 @@ public class LoginControllor {
 		return j;
 	}
 	
-	/** 清除过期没有激活的用户 
+	/** 清除过期没有激活的用户
+	 * 
 	 * @throws Exception **/
 	@Scheduled(cron = "0 0 */6 * * ?")
 	// XXX 好像还有点问题
