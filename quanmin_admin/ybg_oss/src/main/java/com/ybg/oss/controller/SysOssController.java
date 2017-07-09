@@ -83,7 +83,7 @@ public class SysOssController {
 	@ApiOperation(value = "保存云存储配置信息")
 	@ResponseBody
 	@RequestMapping("saveConfig.do")
-	public Json saveConfig(@RequestBody CloudStorageConfig config) throws Exception {
+	public Json saveConfig(@ModelAttribute CloudStorageConfig config) throws Exception {
 		Json j = new Json();
 		// 校验类型
 		ValidatorUtils.validateEntity(config);
@@ -100,6 +100,8 @@ public class SysOssController {
 			ValidatorUtils.validateEntity(config, QcloudGroup.class);
 		}
 		sysConfigService.updateValueByKey(KEY, JSON.toJSONString(config));
+		j.setMsg("操作成功");
+		j.setSuccess(true);
 		return j;
 	}
 	
