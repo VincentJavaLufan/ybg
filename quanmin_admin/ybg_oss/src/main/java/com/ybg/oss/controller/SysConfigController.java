@@ -10,6 +10,7 @@ import com.ybg.oss.domian.SysConfigEntity;
 import com.ybg.oss.domian.SysOssEntity;
 import com.ybg.oss.service.SysConfigService;
 import com.ybg.oss.validator.ValidatorUtils;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public class SysConfigController {
 	
 	@RequestMapping("index.do")
 	public String index(ModelMap map) {
-		SysConfigEntity bean = sysConfigService.getConfigObject(KEY, SysConfigEntity.class);
+		LinkedHashMap<String, String> bean = sysConfigService.getConfigObject(KEY, LinkedHashMap.class);
 		map.put("config", bean);
 		return "/system/ossconfig/oss_config";
 	}
