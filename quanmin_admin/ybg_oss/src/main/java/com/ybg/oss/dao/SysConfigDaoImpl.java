@@ -103,7 +103,7 @@ public class SysConfigDaoImpl extends BaseDao implements SysConfigDao {
 		});
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			List<SysConfigEntity> list = getJdbcTemplate().query(sql.toString(), new RowMapper<SysConfigEntity>() {
+			List<SysConfigEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new RowMapper<SysConfigEntity>() {
 				
 				@Override
 				public SysConfigEntity mapRow(ResultSet rs, int index) throws SQLException {

@@ -1,5 +1,6 @@
 package com.ybg.oss;
 import com.aliyun.oss.OSSClient;
+import com.ybg.base.util.webexception.RRException;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
@@ -32,8 +33,8 @@ public class AliyunCloudStorageService extends CloudStorageService {
 		try {
 			client.putObject(config.getAliyunBucketName(), path, inputStream);
 		} catch (Exception e) {
-			// throw new RRException("上传文件失败，请检查配置信息", e);
-			e.printStackTrace();
+			 throw new RRException("上传文件失败，请检查配置信息", e);
+			
 		}
 		return config.getAliyunDomain() + "/" + path;
 	}

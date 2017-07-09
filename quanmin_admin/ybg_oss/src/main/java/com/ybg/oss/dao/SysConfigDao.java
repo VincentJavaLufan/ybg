@@ -1,6 +1,4 @@
 package com.ybg.oss.dao;
-import java.util.List;
-import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import com.ybg.base.util.Page;
 import com.ybg.oss.domian.SysConfigEntity;
@@ -21,12 +19,12 @@ public interface SysConfigDao {
 	void update(SysConfigEntity config);
 	
 	void deleteBatch(Long[] ids);
-//	
-//	List<SysConfigEntity> queryList(Map<String, Object> map);
-//	
-//	int queryTotal(Map<String, Object> map);
+	//
+	// List<SysConfigEntity> queryList(Map<String, Object> map);
+	//
+	// int queryTotal(Map<String, Object> map);
 	
-	Page list(Page page,SysConfigEntity qvo) throws Exception;
+	Page list(Page page, SysConfigEntity qvo) throws Exception;
 	
 	SysConfigEntity queryObject(Long id);
 	
