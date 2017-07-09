@@ -130,11 +130,13 @@ JDK1.8  下载绿色版解压，请配置好环境变量或使用eclipse 自己�
  **0.3.1 数据库默认名称 quanmin_sys 数据库编码Utf-8** 
 
 
-0.4 导入sql文件：测试数据库地址：
+0.4 导入sql文件： ###下载数据库：
 
-### 在附件上 请留意
- [点此下载](http://files.git.oschina.net/group1/M00/01/7A/PaAvDFlgaDGAKH2eAAIJiyM4PtM142.rar?token=e5072a8ebd604dab60ec70e6ce9aadcc&ts=1499490382&attname=apy_account.rar) 数据库更新时间-2017年6月29日 09:54:56
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0710/003757_0439f1a5_880593.png "在这里输入图片标题")
 
+ 在附件上 请留意 数据库更新时间-2017年7月10日00:37:51
+  
+-------------------------------------------------------------------------------------------------------
 
 eclipse 构建maven 环境
 
