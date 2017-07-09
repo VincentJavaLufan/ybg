@@ -19,6 +19,7 @@ import com.ybg.oss.CloudStorageConfig;
 import com.ybg.oss.ConfigConstant;
 import com.ybg.oss.Constant;
 import com.ybg.oss.OSSFactory;
+import com.ybg.oss.domian.SysConfigEntity;
 import com.ybg.oss.domian.SysOssEntity;
 import com.ybg.oss.service.SysConfigService;
 import com.ybg.oss.service.SysOssService;
@@ -46,6 +47,13 @@ public class SysOssController {
 	@Autowired
 	private SysConfigService	sysConfigService;
 	private final static String	KEY	= ConfigConstant.CLOUD_STORAGE_CONFIG_KEY;
+	
+	@ApiOperation(value = "首頁")
+	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public String index(ModelMap map) {
+	
+		return "/system/ossconfig/oss";
+	}
 	
 	/** 列表 */
 	@ApiOperation(value = "列表数据")
