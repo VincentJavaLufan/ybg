@@ -67,6 +67,11 @@
 			<artifactId>ybg_gen</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_oss</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
