@@ -19,7 +19,7 @@ public class SysConfigDaoImpl extends BaseDao implements SysConfigDao {
 	@Override
 	public String queryByKey(String paramKey) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("select value from sys_config  sys_config where key=" + paramKey);
+		sql.append("select value from sys_config  sys_config where sys_config.key='" + paramKey+"'");
 		List<String> list = getJdbcTemplate().query(sql.toString(), new RowMapper<String>() {
 			
 			@Override
@@ -33,18 +33,18 @@ public class SysConfigDaoImpl extends BaseDao implements SysConfigDao {
 	@Override
 	public int updateValueByKey(String key, String value) {
 		BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
-		updatemap.put("value", value);
+		updatemap.put("`value`", value);
 		BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
-		wheremap.put("key", key);
+		wheremap.put("`key`", key);
 		return baseupdate(updatemap, wheremap, "sys_config");
 	}
 	
 	@Override
 	public void update(SysConfigEntity config) {
 		BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
-		updatemap.put("key", config.getKey());
-		updatemap.put("value", config.getValue());
-		updatemap.put("remark", config.getRemark());
+		updatemap.put("`key`", config.getKey());
+		updatemap.put("`value`", config.getValue());
+		updatemap.put("`remark`", config.getRemark());
 		BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
 		wheremap.put("id", config.getId());
 		baseupdate(updatemap, wheremap, "sys_config");
@@ -94,7 +94,7 @@ public class SysConfigDaoImpl extends BaseDao implements SysConfigDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select id,key,value,status,remark from sys_config sys_config");
 		sql.append(" where 1=1 ");
-		sqlappen(sql, "key", qvo.getKey(), new BaseQueryAble() {
+		sqlappen(sql, "sys_config.key", qvo.getKey(), new BaseQueryAble() {
 			
 			@Override
 			public boolean isBlurred() {
