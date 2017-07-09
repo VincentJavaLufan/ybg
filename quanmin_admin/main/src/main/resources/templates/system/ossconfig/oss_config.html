@@ -1,140 +1,183 @@
-<div class="panel-heading">{{title}}</div>
-		<form class="form-horizontal">
-			<div class="form-group">
-				<div class="col-sm-2 control-label">存储类型</div>
-				
-				<select id="type" class="form-control checkacc">
+
+<style type="text/css">
+#but button {
+	margin-bottom: 5px;
+	margin-right: 5px;
+}
+
+.col-sm-3 {
+	width: 15%;
+	float: left;
+}
+
+.col-sm-9 {
+	width: 85%;
+	float: left;
+}
+
+label[class^="btn btn-default"] {
+	margin-top: -4px;
+}
+</style>
+<script type="text/javascript">
+    function chooseosstype() {
+        if ($("#type").val() == "1") {
+            //  $("#type1").css("display","none");
+            $("#type2").css("display", "none");
+            $("#type3").css("display", "none");
+            $("#type1").css("display", "block");
+        }
+        if ($("#type").val() == "2") {
+            $("#type1").css("display", "none");
+            //   $("#type2").css("display","none");
+            $("#type3").css("display", "none");
+            $("#type2").css("display", "block");
+        }
+        if ($("#type").val() == "3") {
+            $("#type1").css("display", "none");
+            $("#type2").css("display", "none");
+            //  $("#type3").css("display","none");
+            $("#type3").css("display", "block");
+        }
+    }
+</script>
+<form class="form-horizontal">
+	<div class="form-group">
+		<div class="col-sm-3 control-label">存储类型</div>
+		<div class="col-sm-9">
+			<select id="type" name="type" class="form-control checkacc" onchange="chooseosstype()">
 				<option value="1">七牛</option>
 				<option value="2">阿里云</option>
 				<option value="3">腾讯云</option>
-				</select>
-				
-			</div>
-			<#if config.type == 1>
-			
-				<div class="form-group">
-					<div class="col-sm-2 control-label">&nbsp;</div>
-					<p class="form-control-static"><a href="https://portal.qiniu.com/signup?code=3l7qkr0rv847m" target="_blank">免费申请(七牛)10GB储存空间</a></p>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">域名</div>
-					<div class="col-sm-10">
-					  <input type="text" class="form-control" v-model="config.qiniuDomain" placeholder="七牛绑定的域名"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">路径前缀</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="config.qiniuPrefix" placeholder="不设置默认为空"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">AccessKey</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="config.qiniuAccessKey" placeholder="七牛AccessKey"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">SecretKey</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="config.qiniuSecretKey" placeholder="七牛SecretKey"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">空间名</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="config.qiniuBucketName" placeholder="七牛存储空间名"/>
-					</div>
-				</div>
-		
-			</#if>
-			
-			<#if config.type == 2>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">域名</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="config.aliyunDomain" placeholder="阿里云绑定的域名"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">路径前缀</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="config.aliyunPrefix" placeholder="不设置默认为空"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">EndPoint</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="config.aliyunEndPoint" placeholder="阿里云EndPoint"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">AccessKeyId</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="config.aliyunAccessKeyId" placeholder="阿里云AccessKeyId"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">AccessKeySecret</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="config.aliyunAccessKeySecret" placeholder="阿里云AccessKeySecret"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">BucketName</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="config.aliyunBucketName" placeholder="阿里云BucketName"/>
-					</div>
-				</div>
-			</#if>
-			<#if config.type == 3>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">域名</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="config.qcloudDomain" placeholder="腾讯云绑定的域名"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">路径前缀</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="config.qcloudPrefix" placeholder="不设置默认为空"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">AppId</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="config.qcloudAppId" placeholder="腾讯云AppId"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">SecretId</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="config.qcloudSecretId" placeholder="腾讯云SecretId"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">SecretKey</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="config.qcloudSecretKey" placeholder="腾讯云SecretKey"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">BucketName</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="config.qcloudBucketName" placeholder="腾讯云BucketName"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">Bucket所属地区</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="config.qcloudRegion" placeholder="如：sh（可选值 ，华南：gz 华北：tj 华东：sh）"/>
-					</div>
-				</div>
-			</#if>
-			<div class="form-group">
-				<div class="col-sm-2 control-label"></div> 
-				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
-				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
-			</div>
-		</form>
+			</select>
+		</div>
 	</div>
+	<div id="type1" style="display: none">
+		<div class="form-group">
+			<div class="col-sm-2 control-label">&nbsp;</div>
+			<p class="form-control-static">
+				<a href="https://portal.qiniu.com/signup?code=3l7qkr0rv847m" target="_blank">免费申请(七牛)10GB储存空间</a>
+			</p>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">域名</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.qiniuDomain}" placeholder="七牛绑定的域名" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">路径前缀</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.qiniuPrefix}" placeholder="不设置默认为空" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">AccessKey</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.qiniuAccessKey}" placeholder="七牛AccessKey" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">SecretKey</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.qiniuSecretKey}" placeholder="七牛SecretKey" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">空间名</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.qiniuBucketName}" placeholder="七牛存储空间名" />
+			</div>
+		</div>
+	</div>
+	<div id="type2" style="display: none">
+		<div class="form-group">
+			<div class="col-sm-2 control-label">域名</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.aliyunDomain}" placeholder="阿里云绑定的域名" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">路径前缀</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.aliyunPrefix}" placeholder="不设置默认为空" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">EndPoint</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.aliyunEndPoint}" placeholder="阿里云EndPoint" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">AccessKeyId</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.aliyunAccessKeyId}" placeholder="阿里云AccessKeyId" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">AccessKeySecret</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.aliyunAccessKeySecret}" placeholder="阿里云AccessKeySecret" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">BucketName</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.aliyunBucketName}" placeholder="阿里云BucketName" />
+			</div>
+		</div>
+	</div>
+	<div id="type3" style="display: none">
+		<div class="form-group">
+			<div class="col-sm-2 control-label">域名</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.qcloudDomain}" placeholder="腾讯云绑定的域名" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">路径前缀</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.qcloudPrefix}" placeholder="不设置默认为空" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">AppId</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.qcloudAppId}" placeholder="腾讯云AppId" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">SecretId</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.qcloudSecretId}" placeholder="腾讯云SecretId" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">SecretKey</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.qcloudSecretKey}" placeholder="腾讯云SecretKey" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">BucketName</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.qcloudBucketName}" placeholder="腾讯云BucketName" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">Bucket所属地区</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value="${config.qcloudRegion}" placeholder="如：sh（可选值 ，华南：gz 华北：tj 华东：sh）" />
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-2 control-label"></div>
+		<input type="button" class="btn btn-primary" onclick="saveOrUpdate()" value="确定" />
+	</div>
+</form>
+<script type="text/javascript">
+$("#type").val('${config.type!}');
+$("#type").change();
+</script>
