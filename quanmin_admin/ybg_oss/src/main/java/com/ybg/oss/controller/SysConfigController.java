@@ -5,6 +5,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import com.ybg.base.util.Page;
 import com.ybg.base.util.webexception.R;
+import com.ybg.oss.CloudStorageConfig;
 import com.ybg.oss.ConfigConstant;
 import com.ybg.oss.domian.SysConfigEntity;
 import com.ybg.oss.domian.SysOssEntity;
@@ -41,7 +42,7 @@ public class SysConfigController {
 	
 	@RequestMapping("index.do")
 	public String index(ModelMap map) {
-		LinkedHashMap<String, String> bean = sysConfigService.getConfigObject(KEY, LinkedHashMap.class);
+		CloudStorageConfig bean = sysConfigService.getConfigObject(KEY, CloudStorageConfig.class);
 		map.put("config", bean);
 		return "/system/ossconfig/oss_config";
 	}
