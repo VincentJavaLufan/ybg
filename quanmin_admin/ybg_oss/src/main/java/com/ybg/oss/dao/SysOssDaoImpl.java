@@ -37,8 +37,8 @@ public class SysOssDaoImpl extends BaseDao implements SysOssDao {
 	public void save(SysOssEntity sysOss) throws Exception {
 		Map<String, Object> createmap = new BaseMap<String, Object>();
 		createmap.put("url", sysOss.getUrl());
-		createmap.put("createdate", sysOss.getCreatedate());
-		basecreate(createmap, "sys_oss", true, new Long(0L));
+		createmap.put("create_date", sysOss.getCreatedate());
+		basecreate(createmap, "sys_oss", false, null);
 	}
 	
 	@Override

@@ -113,6 +113,7 @@ public class SysOssController {
 		if (file.isEmpty()) {
 			throw new RRException("上传文件不能为空");
 		}
+		System.out.println("116"+file.getBytes());
 		// 上传文件
 		String url = OSSFactory.build().upload(file.getBytes());
 		// 保存文件信息
