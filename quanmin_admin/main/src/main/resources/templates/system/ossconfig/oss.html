@@ -37,8 +37,9 @@ new AjaxUpload('#upload', {
         }
     },
     onComplete : function(file, r){
-        if(r.code == 0){
+        if(r.success){
             alert(r.url);
+            grid.loadData();
            // vm.reload();
         }else{
             alert(r.msg);
