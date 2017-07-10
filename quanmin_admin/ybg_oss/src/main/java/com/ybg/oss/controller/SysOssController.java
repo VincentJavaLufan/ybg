@@ -51,7 +51,6 @@ public class SysOssController {
 	@ApiOperation(value = "首頁")
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String index(ModelMap map) {
-	
 		return "/system/ossconfig/oss";
 	}
 	
@@ -113,7 +112,7 @@ public class SysOssController {
 		if (file.isEmpty()) {
 			throw new RRException("上传文件不能为空");
 		}
-		System.out.println("116"+file.getBytes());
+		System.out.println("116" + file.getBytes());
 		// 上传文件
 		String url = OSSFactory.build().upload(file.getBytes());
 		// 保存文件信息
@@ -127,8 +126,18 @@ public class SysOssController {
 	/** 删除 */
 	@RequestMapping("delete.do")
 	@ResponseBody
-	public R delete(@RequestBody Long[] ids) {
-		sysOssService.deleteBatch(ids);
-		return R.ok();
+	public Json delete(@RequestParam(name = "ids", required = true) String ids2) {
+		Json json= new Json();
+		String[] ids = ids2.split(",");
+		for (String id : ids) {
+			Long id3 = Long.parseLong(id);
+			Long[] id4 = new Long[1];
+			id4[0] = id3;
+			sysOssService.deleteBatch(id4);
+		}
+		json.setMsg("删除成功");
+		json.setSuccess(true);
+		
+		return json;
 	}
 }
