@@ -24,7 +24,7 @@ public class SysOssDaoImpl extends BaseDao implements SysOssDao {
 			@Override
 			public SysOssEntity mapRow(ResultSet rs, int index) throws SQLException {
 				SysOssEntity bean = new SysOssEntity();
-				bean.setCreatedate(rs.getString("createDate"));
+				bean.setCreatedate(rs.getString("create_Date"));
 				bean.setId(rs.getLong("id"));
 				bean.setUrl(rs.getString("url"));
 				return bean;
@@ -46,7 +46,7 @@ public class SysOssDaoImpl extends BaseDao implements SysOssDao {
 		BaseMap<String, Object> wheremap = new BaseMap<>();
 		BaseMap<String, Object> updatemap = new BaseMap<>();
 		updatemap.put("url", sysOss.getUrl());
-		updatemap.put("createdate", sysOss.getCreatedate());
+		updatemap.put("create_date", sysOss.getCreatedate());
 		wheremap.put("id", sysOss.getId());
 		baseupdate(updatemap, wheremap, "sys_oss");
 	}
@@ -83,7 +83,7 @@ public class SysOssDaoImpl extends BaseDao implements SysOssDao {
 				@Override
 				public SysOssEntity mapRow(ResultSet rs, int index) throws SQLException {
 					SysOssEntity bean = new SysOssEntity();
-					bean.setCreatedate(rs.getString("createDate"));
+					bean.setCreatedate(rs.getString("create_Date"));
 					bean.setId(rs.getLong("id"));
 					bean.setUrl(rs.getString("url"));
 					return bean;
