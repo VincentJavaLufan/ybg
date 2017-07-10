@@ -13,8 +13,8 @@ QQ群：314658875
 88云报告系统开发状态：
 
 
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0710/234753_6657116d_880593.png "在这里输入图片标题")
 
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0708/212801_c393cb43_880593.png "在这里输入图片标题")
 
 完成了 swagger2 的在线开放API 模块，随意随意 调试系统任意接口 http://localhost:8080/swagger-ui.html 
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0708/090800_dce0367c_880593.png "在这里输入图片标题")
