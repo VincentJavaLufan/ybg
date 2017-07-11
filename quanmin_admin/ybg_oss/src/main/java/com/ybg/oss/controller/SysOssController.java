@@ -1,9 +1,9 @@
 package com.ybg.oss.controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +19,6 @@ import com.ybg.oss.CloudStorageConfig;
 import com.ybg.oss.ConfigConstant;
 import com.ybg.oss.Constant;
 import com.ybg.oss.OSSFactory;
-import com.ybg.oss.domian.SysConfigEntity;
 import com.ybg.oss.domian.SysOssEntity;
 import com.ybg.oss.service.SysConfigService;
 import com.ybg.oss.service.SysOssService;
@@ -48,14 +47,14 @@ public class SysOssController {
 	private SysConfigService	sysConfigService;
 	private final static String	KEY	= ConfigConstant.CLOUD_STORAGE_CONFIG_KEY;
 	
-	@ApiOperation(value = "首頁")
+	@ApiOperation(value = "文件上传例子首页", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String index(ModelMap map) {
 		return "/system/ossconfig/oss";
 	}
 	
 	/** 列表 */
-	@ApiOperation(value = "列表数据")
+	@ApiOperation(value = "列表数据", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "SysOssEntity") })
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
@@ -68,9 +67,9 @@ public class SysOssController {
 	}
 	
 	/** 云存储配置信息 */
-	@ApiOperation(value = "云存储配置信息")
+	@ApiOperation(value = "云存储配置信息", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	@RequestMapping("config.do")
+	@RequestMapping(value = { "config.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public R config() {
 		CloudStorageConfig config = sysConfigService.getConfigObject(KEY, CloudStorageConfig.class);
 		return R.ok().put("config", config);
@@ -79,9 +78,9 @@ public class SysOssController {
 	/** 保存云存储配置信息
 	 * 
 	 * @throws Exception */
-	@ApiOperation(value = "保存云存储配置信息")
+	@ApiOperation(value = "保存云存储配置信息", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	@RequestMapping("saveConfig.do")
+	@RequestMapping(value = { "saveConfig.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public Json saveConfig(@ModelAttribute CloudStorageConfig config) throws Exception {
 		Json j = new Json();
 		// 校验类型
@@ -105,14 +104,13 @@ public class SysOssController {
 	}
 	
 	/** 上传文件 */
-	@ApiOperation(value = "上传文件")
+	@ApiOperation(value = "上传文件", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	@RequestMapping("upload.do")
+	@RequestMapping(value = { "upload.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public R upload(@RequestParam("file") MultipartFile file) throws Exception {
 		if (file.isEmpty()) {
 			throw new RRException("上传文件不能为空");
 		}
-		System.out.println("116" + file.getBytes());
 		// 上传文件
 		String url = OSSFactory.build().upload(file.getBytes());
 		// 保存文件信息
@@ -124,10 +122,11 @@ public class SysOssController {
 	}
 	
 	/** 删除 */
-	@RequestMapping("delete.do")
+	@ApiOperation(value = "刪除文件（图片）", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
+	@RequestMapping(value = { "delete.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public Json delete(@RequestParam(name = "ids", required = true) String ids2) {
-		Json json= new Json();
+		Json json = new Json();
 		String[] ids = ids2.split(",");
 		for (String id : ids) {
 			Long id3 = Long.parseLong(id);
@@ -137,7 +136,6 @@ public class SysOssController {
 		}
 		json.setMsg("删除成功");
 		json.setSuccess(true);
-		
 		return json;
 	}
 }
