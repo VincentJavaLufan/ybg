@@ -1,4 +1,4 @@
-package com.ybg.oa.company.controller;
+package com.ybg.oa.employee.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -21,42 +21,42 @@ import com.ybg.base.jdbc.BaseMap;
 
 import com.ybg.base.util.Json;
 import com.ybg.base.util.Page;
-import com.ybg.oa.company.domain.CompanyRegisterVO;
-import com.ybg.oa.company.service.CompanyRegisterService;
-import com.ybg.oa.company.domain.CompanyRegisterDO;
-import com.ybg.oa.company.qvo.CompanyRegisterQuery;
+import com.ybg.oa.employee.domain.EmployeeVO;
+import com.ybg.oa.employee.service.EmployeeService;
+import com.ybg.oa.employee.domain.EmployeeDO;
+import com.ybg.oa.employee.qvo.EmployeeQuery;
 
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
- * 
+ * 部门和用户之间绑定
  * 
  * @author Deament
  * @email 591518884@qq.com
- * @date 2017-07-08
+ * @date 2017-07-15
  */
- @Api("企业认证管理管理")
+ @Api("Employee管理")
 @Controller
-@RequestMapping("/oa/companyregister_do/")
-public class CompanyRegisterController {
+@RequestMapping("/oa/employee_do/")
+public class EmployeeController {
 	@Autowired
-	private CompanyRegisterService companyRegisterService;
+	private EmployeeService employeeService;
 		
-	@ApiOperation(value = "CompanyRegister管理页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
+	@ApiOperation(value = "Employee管理页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String index( ModelMap map) {		
-		return "/system/companyRegister/index";
+		return "/system/employee/index";
 	}
 	
-	@ApiOperation(value = "CompanyRegister分页列表", notes = "JSON ", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "CompanyRegisterQvo") })
+	@ApiOperation(value = "Employee分页列表", notes = "JSON ", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "EmployeeQvo") })
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute CompanyRegisterQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, ModelMap map) throws Exception {
+	public Page list(@ModelAttribute EmployeeQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, ModelMap map) throws Exception {
 		qvo.setBlurred(true);
 		Page page = new Page();
 		page.setCurPage(pageNow);
-		page = companyRegisterService.list(page, qvo);
+		page = employeeService.list(page, qvo);
 		page.init();
 		return page;
 	}
@@ -64,33 +64,30 @@ public class CompanyRegisterController {
 	
 	/** 新增初始化 
 	 * @throws Exception **/
-	@ApiOperation(value = "添加CompanyRegister页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
+	@ApiOperation(value = "添加Employee页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String toadd(@ApiIgnore ModelMap map) throws Exception {
 		
-		return "/system/companyRegister/toadd";
+		return "/system/employee/toadd";
 	}
 	
-	@ApiOperation(value = "更新CompanyRegister", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "更新Employee", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "update.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json update(@ModelAttribute CompanyRegisterVO companyRegister) {
+	public Json update(@ModelAttribute EmployeeVO employee) {
 		Json j = new Json();
 		j.setSuccess(true);
 		try {
 			BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
-													  		updatemap.put("gmt_create", companyRegister.getGmtCreate());
-										  		updatemap.put("gmt_modified", companyRegister.getGmtModified());
-										  		updatemap.put("business", companyRegister.getBusiness());
-										  		updatemap.put("companytype", companyRegister.getCompanytype());
-										  		updatemap.put("credentialspic", companyRegister.getCredentialspic());
-										  		updatemap.put("fullname", companyRegister.getFullname());
-										  		updatemap.put("shortname", companyRegister.getShortname());
-										  		updatemap.put("deal", companyRegister.getDeal());
-										  		updatemap.put("dealresult", companyRegister.getDealresult());
+													  		updatemap.put("name", employee.getName());
+										  		updatemap.put("companyid", employee.getCompanyid());
+										  		updatemap.put("deptid", employee.getDeptid());
+										  		updatemap.put("userid", employee.getUserid());
+										  		updatemap.put("manager", employee.getManager());
+										  		updatemap.put("companyname", employee.getCompanyname());
 									BaseMap<String, Object> wheremap = new BaseMap<String, Object>();			
-			wheremap.put("id", companyRegister.getId());
-			companyRegisterService.update(updatemap, wheremap);
+			wheremap.put("id", employee.getId());
+			employeeService.update(updatemap, wheremap);
 		} catch (Exception e) {
 			e.printStackTrace();
 			j.setMsg("操作失败");
@@ -100,8 +97,8 @@ public class CompanyRegisterController {
 		return j;
 	}
 	
-	@ApiOperation(value = "根据ID删除companyRegister", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiImplicitParam(name = "ids", value = "删除companyRegister", required = true, dataType = "java.lang.String")
+	@ApiOperation(value = "根据ID删除employee", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiImplicitParam(name = "ids", value = "删除employee", required = true, dataType = "java.lang.String")
 	@ResponseBody
 	@RequestMapping(value = { "remove.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public Json remove(@RequestParam(name = "ids", required = true) String ids2) {
@@ -112,7 +109,7 @@ public class CompanyRegisterController {
 			for (String id : ids) {
 				BaseMap<String, Object> wheremap= new BaseMap<String, Object>();
 				wheremap.put("id", id);
-				companyRegisterService.remove(wheremap);
+				employeeService.remove(wheremap);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -123,14 +120,14 @@ public class CompanyRegisterController {
 		return j;
 	}
 	
-	@ApiOperation(value = "创建companyRegister", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "创建employee", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "create.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json create(@ModelAttribute CompanyRegisterVO bean) {
+	public Json create(@ModelAttribute EmployeeVO bean) {
 		Json j = new Json();
 		j.setSuccess(true);
 		try {
-			companyRegisterService.save(bean);
+			employeeService.save(bean);
 		} catch (Exception e) {
 			e.printStackTrace();
 			j.setMsg("操作失败");
@@ -142,12 +139,12 @@ public class CompanyRegisterController {
 	
 	
 	
-	@ApiOperation(value = "更新companyRegister页面初始化", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
-	@ApiImplicitParam(name = "id", value = "companyRegister的ID", required = true, dataType = "java.lang.String")
+	@ApiOperation(value = "更新employee页面初始化", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
+	@ApiImplicitParam(name = "id", value = "employee的ID", required = true, dataType = "java.lang.String")
 	@RequestMapping(value = { "toupdate.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String toupdate(@RequestParam(name = "id", required = true) String id, ModelMap map) throws Exception {
-		map.put("companyRegister", companyRegisterService.get(id));
-		return "/system/companyRegister/edit";
+		map.put("employee", employeeService.get(id));
+		return "/system/employee/edit";
 	}
 	
 	
