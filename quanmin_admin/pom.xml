@@ -47,9 +47,13 @@
 		<module>ybg_base_jar</module>
 		<!-- 代码生成 必须 -->
 		<module>ybg_gen</module>
+		<!-- 教育子系统 -->
 		<module>edu</module>
+		<!-- 对象存储 -->
 		<module>ybg_oss</module>
-	</modules>
+		<!-- 支付模块 -->
+    <module>pay-java-parent</module>
+  </modules>
 	<build>
 		<defaultGoal>compile</defaultGoal>
 	</build>
