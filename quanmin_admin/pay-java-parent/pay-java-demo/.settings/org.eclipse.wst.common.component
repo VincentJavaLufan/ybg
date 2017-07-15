@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="pay-java-demo">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="pay-java-wx-2.0.4-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/pay-java-wx/pay-java-wx">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="pay-java-common-2.0.4-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/pay-java-common/pay-java-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="pay-java-ali-2.0.4-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/pay-java-ali/pay-java-ali">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="pay-java-wx-youdian-2.0.4-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/pay-java-wx-youdian/pay-java-wx-youdian">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="pay-java-fuiou-2.0.4-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/pay-java-fuiou/pay-java-fuiou">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="pay-java-demo"/>
+        <property name="java-output-path" value="/pay-java-demo/target/classes"/>
+    </wb-module>
+</project-modules>
