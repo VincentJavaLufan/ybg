@@ -1,5 +1,4 @@
 package com.ybg.clazz.controller;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -18,33 +17,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.base.jdbc.BaseMap;
-
 import com.ybg.base.util.Json;
 import com.ybg.base.util.Page;
 import com.ybg.clazz.domain.ClazzVO;
 import com.ybg.clazz.service.ClazzService;
 import com.ybg.clazz.domain.ClazzDO;
 import com.ybg.clazz.qvo.ClazzQuery;
-
 import springfox.documentation.annotations.ApiIgnore;
 
-/**
- * 
- * 
- * @author Deament
+/** @author Deament
  * @email 591518884@qq.com
- * @date 2017-07-07
- */
+ * @date 2017-07-07 */
 @Api("班级管理")
 @Controller
 @RequestMapping("clazz")
 public class ClazzController {
+	
 	@Autowired
 	private ClazzService clazzService;
-		
+	
 	@ApiOperation(value = "Clazz管理页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String index( ModelMap map) {		
+	public String index(ModelMap map) {
 		return "/system/Clazz/index";
 	}
 	
@@ -61,13 +55,12 @@ public class ClazzController {
 		return page;
 	}
 	
-	
-	/** 新增初始化 
+	/** 新增初始化
+	 * 
 	 * @throws Exception **/
 	@ApiOperation(value = "添加Clazz页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String toadd(@ApiIgnore ModelMap map) throws Exception {
-		
 		return "/system/Clazz/toadd";
 	}
 	
@@ -79,13 +72,13 @@ public class ClazzController {
 		j.setSuccess(true);
 		try {
 			BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
-													  		updatemap.put("classname", clazz.getClassname());
-										  		updatemap.put("schoolid", clazz.getSchoolid());
-										  		updatemap.put("gradeid", clazz.getGradeid());
-										  		updatemap.put("gradename", clazz.getGradename());
-										  		updatemap.put("regionid", clazz.getRegionid());
-										  		updatemap.put("schoolname", clazz.getSchoolname());
-									BaseMap<String, Object> wheremap = new BaseMap<String, Object>();			
+			updatemap.put("classname", clazz.getClassname());
+			updatemap.put("schoolid", clazz.getSchoolid());
+			updatemap.put("gradeid", clazz.getGradeid());
+			updatemap.put("gradename", clazz.getGradename());
+			updatemap.put("regionid", clazz.getRegionid());
+			updatemap.put("schoolname", clazz.getSchoolname());
+			BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
 			wheremap.put("id", clazz.getId());
 			clazzService.update(updatemap, wheremap);
 		} catch (Exception e) {
@@ -107,7 +100,7 @@ public class ClazzController {
 		try {
 			String[] ids = ids2.split(",");
 			for (String id : ids) {
-				BaseMap<String, Object> wheremap= new BaseMap<String, Object>();
+				BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
 				wheremap.put("id", id);
 				clazzService.remove(wheremap);
 			}
@@ -150,8 +143,4 @@ public class ClazzController {
 		map.put("clazz", clazzService.get(id));
 		return "/system/clazz/edit";
 	}
-	
-	
-	
-	
 }
