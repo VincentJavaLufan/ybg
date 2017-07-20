@@ -42,6 +42,7 @@
 <script type="text/javascript" src="/common/lyGrid.js"></script>
 <script type="text/javascript" src="/common/base.js"></script>
 <!--[if lt IE 9]> <script src="/js/jquery/ie/html5shiv.js"></script> <script src="/js/jquery/ie/respond.min.js"></script><![endif]-->
+<script type="text/javascript" src="/common/vue.js"></script>
 <style type="text/css">
 .l_err{
     background: none repeat scroll 0 0 #FFFCC7;
