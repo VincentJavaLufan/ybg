@@ -85,9 +85,6 @@
             });
         });
     }
-    
-   
-   
 </script>
 </head>
 <body class="">
@@ -146,10 +143,7 @@
 		<div class="text-center padder">
 			<p>
 				<small>
-					<a href="http://www.miitbeian.gov.cn/" id="SYSTEM_authinfo" >{{ SYSTEM_authinfo }} </a>
-					<div id="app">
-  {{ message }}
-</div>
+					<a href="http://www.miitbeian.gov.cn/" id="SYSTEM_authinfo">{{SYSTEM_authinfo}} </a>
 				</small>
 			</p>
 		</div>
@@ -169,12 +163,20 @@
         });
     };
     //tologin();
-     var app = new Vue({
-        el: '#app',
-        data: {
-          message: 'Hello Vue!'
-        }
-      });
-    
 </script>
-	</#if>
+	</#if> 
+	<script>
+        var app = new Vue({
+            el : '#SYSTEM_authinfo',
+            data : {
+                SYSTEM_authinfo : ''
+            },
+            created : function() {
+                var url = "/common/login_do/system_authinfo.do";
+                var _self = this;
+                $.get(url, function(data) {
+                    _self.SYSTEM_authinfo = data;
+                })
+            }
+        });
+    </script>
