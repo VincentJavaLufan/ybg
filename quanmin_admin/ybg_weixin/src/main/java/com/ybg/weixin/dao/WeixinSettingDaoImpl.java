@@ -3,12 +3,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.weixin.domain.WeiXinSettingDO;
 
-@ResponseBody
+@Repository
 public class WeixinSettingDaoImpl extends BaseDao implements WeixinSettingDao {
 	
 	@Override
