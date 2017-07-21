@@ -15,10 +15,11 @@
 <script type="text/javascript" src="/js/jquery/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="/js/layer-v1.9.2/layer/layer.js"></script>
 <script type="text/javascript" src="/common/base.js"></script>
+<script type="text/javascript" src="/common/vue.js"></script>
 <script type="text/javascript">
     layer.config({
         extend : [
-            'skin/moon/style.css'], //加载新皮肤skin/style.css
+            '/style.css'], //加载新皮肤skin/style.css
         fix : false, // 用于设定层是否不随滚动条而滚动，固定在可视区域。
         skin : 'layer-ext-moon' //一旦设定，所有弹层风格都采用此主题。layui-layer-molv
     });
@@ -84,6 +85,9 @@
             });
         });
     }
+    
+   
+   
 </script>
 </head>
 <body class="">
@@ -142,7 +146,10 @@
 		<div class="text-center padder">
 			<p>
 				<small>
-					<a href="http://www.miitbeian.gov.cn/">© 2016-2016 88ybg.com 版权所有 ICP证：粤ICP备16078942号-1</a>
+					<a href="http://www.miitbeian.gov.cn/" id="SYSTEM_authinfo" >{{ SYSTEM_authinfo }} </a>
+					<div id="app">
+  {{ message }}
+</div>
 				</small>
 			</p>
 		</div>
@@ -162,5 +169,12 @@
         });
     };
     //tologin();
+     var app = new Vue({
+        el: '#app',
+        data: {
+          message: 'Hello Vue!'
+        }
+      });
+    
 </script>
 	</#if>
