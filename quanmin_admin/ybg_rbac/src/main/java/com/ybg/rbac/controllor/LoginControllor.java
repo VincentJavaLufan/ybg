@@ -58,6 +58,14 @@ public class LoginControllor {
 		return "/login";
 	}
 	
+	@ApiOperation(value = "备案，版权声明信息", notes = "", produces = MediaType.TEXT_HTML_VALUE)
+	@ResponseBody
+	@RequestMapping(value={"/common/login_do/system_authinfo.do"}, method = { RequestMethod.GET, RequestMethod.POST })
+	public String system_authinfo(){
+		
+		return "© 2016-2016 "+SystemConstant.getSystemdomain()+" 版权所有 ICP证："+SystemConstant.getICP();
+	}
+	
 	@ApiOperation(value = "退出系统 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/loginout.do", method = RequestMethod.GET)
 	public String loginout() {
@@ -238,7 +246,7 @@ public class LoginControllor {
 	}
 	
 	// /** 重置密码初始化 **/
-	// XXX 需要添加校验机制 不然是个BUG
+	
 	@ApiOperation("重置密码页面")
 	@ApiImplicitParams({ @ApiImplicitParam(name = "encryptInfo", value = "加密信息", dataType = "java.lang.String", required = true), @ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
 	@RequestMapping(value = "/common/login_do/resetpwd.do", method = RequestMethod.GET)
@@ -273,7 +281,7 @@ public class LoginControllor {
 	}
 	
 	// /** 重置密码 **/
-	// // XXX 需要添加校验机制 不然是个BUG
+	
 	@ApiOperation(value = "重置密码", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "encryptInfo", value = "加密信息", dataType = "java.lang.String", required = true), @ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
 	@ResponseBody
