@@ -28,7 +28,7 @@ public class SystemConstant {
 		if (DEBUG) {
 			return "localhost:8080";
 		}
-		return getValue("systemdomian");
+		return getValue("systemdomain");
 	}
 	
 	/** 系统名称 **/
@@ -53,7 +53,7 @@ public class SystemConstant {
 	
 	/** 系统备案号 **/
 	public static String getICP() {
-		return getValue("icp");
+		return getValue("systemicp");
 	}
 	
 	private SystemConstant() {
