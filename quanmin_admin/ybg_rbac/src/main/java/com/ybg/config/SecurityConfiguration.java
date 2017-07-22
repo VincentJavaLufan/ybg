@@ -53,6 +53,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// http.authorizeRequests().anyRequest().authenticated();
 		http.formLogin()
 				// 默认访问页
+		.
+		// 访问成功页url
+		defaultSuccessUrl("/common/login_do/index.do", true)
 				.loginPage("/common/login_do/login.do").permitAll().and().logout().
 				//
 				logoutRequestMatcher(new AntPathRequestMatcher("/common/login_do/loginout.do"))
