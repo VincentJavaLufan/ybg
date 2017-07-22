@@ -26,7 +26,6 @@ import com.ybg.base.util.Common;
 import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.SystemConstant;
-import com.ybg.base.util.UserConstant;
 import com.ybg.component.email.sendemail.SendEmailInter;
 import com.ybg.component.email.sendemail.SendQQmailImpl;
 import com.ybg.config.security.MyAuthenticationToken;
@@ -60,18 +59,14 @@ public class LoginControllor {
 	
 	@ApiOperation(value = "备案，版权声明信息", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@ResponseBody
-	@RequestMapping(value={"/common/login_do/system_authinfo.do"}, method = { RequestMethod.GET, RequestMethod.POST })
-	public String system_authinfo(){
-		
-		return "© 2016-2016 "+SystemConstant.getSystemdomain()+" 版权所有 ICP证："+SystemConstant.getICP();
+	@RequestMapping(value = { "/common/login_do/system_authinfo.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public String system_authinfo() {
+		return "© 2016-2016 " + SystemConstant.getSystemdomain() + " 版权所有 ICP证：" + SystemConstant.getICP();
 	}
 	
 	@ApiOperation(value = "退出系统 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/loginout.do", method = RequestMethod.GET)
 	public String loginout() {
-		// 使用权限管理工具进行用户的退出，注销登录
-		// session 会销毁，在SessionListener监听session销毁，清理权限缓存
-		// SecurityUtils.getSubject().logout();
 		return "redirect:/common/login_do/tologin.do";
 	}
 	
@@ -158,8 +153,6 @@ public class LoginControllor {
 		try {
 			SendEmailInter send = new SendQQmailImpl();
 			send.sendMail(email, SystemConstant.getSystemName() + "注册", contemt);
-			// EmailUtils.sendMail(fromEmail, email, emailName, emailPassword,
-			// "aaa", contemt);
 		} catch (Exception e) {
 			e.printStackTrace();
 			BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
@@ -233,9 +226,6 @@ public class LoginControllor {
 		try {
 			SendEmailInter send = new SendQQmailImpl();
 			send.sendMail(user.getEmail(), SystemConstant.getSystemName() + "-找回密码", contemt);
-			// EmailUtils.sendMail(fromEmail, user.getEmail(), emailName,
-			// emailPassword, SystemConstant.getSystemName() + "-找回密码",
-			// contemt);
 		} catch (Exception e) {
 			e.printStackTrace();
 			j.setMsg("发送邮箱失败，可能被提供方拦截");
@@ -246,13 +236,10 @@ public class LoginControllor {
 	}
 	
 	// /** 重置密码初始化 **/
-	
 	@ApiOperation("重置密码页面")
 	@ApiImplicitParams({ @ApiImplicitParam(name = "encryptInfo", value = "加密信息", dataType = "java.lang.String", required = true), @ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
 	@RequestMapping(value = "/common/login_do/resetpwd.do", method = RequestMethod.GET)
 	public String resetpwd(@RequestParam(name = "encryptInfo", required = true) String encryptInfo, Model model) {
-		// String userid = ServletUtil.getStringParamDefaultBlank(request,
-		// "userid");
 		try {
 			JSONObject json = JSONObject.fromObject(new DesUtils().decrypt(encryptInfo));
 			String userid = json.getString("uid");
@@ -266,7 +253,7 @@ public class LoginControllor {
 					return "/die";
 				}
 				if (!user.getState().equals(UserStateConstant.OK)) {
-					return "";// XXX 返回错误的请求 比如账号封锁、未激活等状态；
+					return "";
 				}
 				model.addAttribute("encryptInfo", encryptInfo);
 				return "/reset";
@@ -281,7 +268,6 @@ public class LoginControllor {
 	}
 	
 	// /** 重置密码 **/
-	
 	@ApiOperation(value = "重置密码", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "encryptInfo", value = "加密信息", dataType = "java.lang.String", required = true), @ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
 	@ResponseBody
