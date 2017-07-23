@@ -60,7 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				//
 				logoutRequestMatcher(new AntPathRequestMatcher("/common/login_do/loginout.do"))
 				// // 注销失败跳转到登录页面
-				// .logoutSuccessUrl("/common/login_do/tologin.do")
+				 .logoutSuccessUrl("/common/login_do/tologin.do")
 				.permitAll();
 		//
 		// // 允许iframe 嵌套
