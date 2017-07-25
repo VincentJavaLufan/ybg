@@ -24,12 +24,12 @@ import com.ybg.base.util.Page;
  * 2.数据库字段一律小写 <br>
  * 3.数据库字段不得使用下划线，表名可以。 <br>
 ***/
-@ComponentScan
-public class BaseDao extends BaseSQL {
+//@ComponentScan
+public abstract class BaseDao extends BaseSQL {
 	
-	@Autowired
-	JdbcTemplate jdbcTemplate;
-	
+//	@Autowired
+//	JdbcTemplate jdbcTemplate;
+//	
 	/** 新增
 	 * 
 	 * @throws Exception **/
@@ -808,9 +808,7 @@ public class BaseDao extends BaseSQL {
 		return getJdbcTemplate().queryForObject(new Page().getCountsql(sql), Integer.class);
 	}
 	
-	public JdbcTemplate getJdbcTemplate() {
-		return jdbcTemplate;
-	}
+	public abstract JdbcTemplate getJdbcTemplate() ;
 	
 	/****/
 	/** @param sqlParm
