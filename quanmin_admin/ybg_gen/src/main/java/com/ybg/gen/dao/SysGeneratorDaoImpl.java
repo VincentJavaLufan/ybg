@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
@@ -16,16 +18,22 @@ import com.ybg.gen.qvo.GeneratorQuery;
 @Repository
 public class SysGeneratorDaoImpl extends BaseDao implements SysGeneratorDao {
 	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+	
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
+	
 	@Override
 	public Page list(Page page, GeneratorQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select table_name tableName, engine, table_comment tableComment, create_time createTime from information_schema.tables ");
 		sql.append(" 	where table_schema = (select database())");
-		sqlappen(sql, "table_name", qvo.getTable_name(),new BaseQueryAble() {
+		sqlappen(sql, "table_name", qvo.getTable_name(), new BaseQueryAble() {
 			
 			@Override
 			public boolean isBlurred() {
-				
 				return true;
 			}
 		});
