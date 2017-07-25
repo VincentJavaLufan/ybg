@@ -29,8 +29,8 @@ QQ群：314658875
 
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0708/084549_c46f2786_880593.png "在这里输入图片标题")
 
-更多信息 请移步到wiki http://git.oschina.net/SYDeament/88ybg/wikis/A1-%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E8%B4%A6%E5%8F%B7
-
+更多信息 请移步到wiki [链接地址](http://git.oschina.net/SYDeament/88ybg/wikis/A1-%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E8%B4%A6%E5%8F%B7
+)
 
 
 
