@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
@@ -16,10 +18,17 @@ import com.ybg.oss.domian.SysConfigEntity;
 @Repository
 public class SysConfigDaoImpl extends BaseDao implements SysConfigDao {
 	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+	
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
+	
 	@Override
 	public String queryByKey(String paramKey) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("select value from sys_config  sys_config where sys_config.key='" + paramKey+"'");
+		sql.append("select value from sys_config  sys_config where sys_config.key='" + paramKey + "'");
 		List<String> list = getJdbcTemplate().query(sql.toString(), new RowMapper<String>() {
 			
 			@Override
