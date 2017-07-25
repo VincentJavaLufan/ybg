@@ -1,6 +1,8 @@
 package com.ybg.oa.company.dao;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
@@ -12,6 +14,13 @@ import com.ybg.oa.company.qvo.CompanyQuery;
 
 @Repository
 public class CompanyDaoImpl extends BaseDao implements CompanyDao {
+	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+	
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
 	
 	private static String	QUERY_TABLE_NAME	= "company.name,company.create_time,company.business,company.companytype,company.credentialspic,company.fullname,company.gmt_create,company.gmt_modified, id";
 	private static String	QUERY_TABLE_COLUMN	= "oa_company  company";
