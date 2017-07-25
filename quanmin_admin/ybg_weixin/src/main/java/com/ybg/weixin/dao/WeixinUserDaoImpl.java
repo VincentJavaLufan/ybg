@@ -2,6 +2,8 @@ package com.ybg.weixin.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
@@ -11,7 +13,12 @@ import com.ybg.weixin.domain.WXuserDO;
 
 @Repository
 public class WeixinUserDaoImpl extends BaseDao implements WeixinUserDao {
+	@Autowired
+	JdbcTemplate jdbcTemplate;
 	
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
 	@Override
 	public WXuserDO getByopenId(String openID) {
 		StringBuilder sql = new StringBuilder();
