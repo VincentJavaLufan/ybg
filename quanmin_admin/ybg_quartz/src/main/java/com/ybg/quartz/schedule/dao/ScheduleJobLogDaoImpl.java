@@ -4,9 +4,13 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
+import com.ybg.base.jdbc.DataBaseConstant;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
 import com.ybg.quartz.schedule.domain.ScheduleJobLogDO;
@@ -14,6 +18,14 @@ import com.ybg.quartz.schedule.qvo.ScheduleJobLogQuery;
 
 @Repository
 public class ScheduleJobLogDaoImpl extends BaseDao implements ScheduleJobLogDao {
+	
+	@Autowired
+//	@Qualifier(DataBaseConstant.JD_OA)
+	JdbcTemplate jdbcTemplate;
+	
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
 	
 	@Override
 	public ScheduleJobLogDO queryObject(Long jobId) {
