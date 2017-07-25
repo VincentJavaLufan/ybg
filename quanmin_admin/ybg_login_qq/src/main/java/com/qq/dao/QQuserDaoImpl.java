@@ -2,6 +2,8 @@ package com.qq.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.qq.domain.QQuserVO;
@@ -11,6 +13,13 @@ import com.ybg.base.jdbc.BaseMap;
 
 @Repository
 public class QQuserDaoImpl extends BaseDao implements QQuserDao {
+	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+	
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
 	
 	private static final String	QUERY_TABLE_COLUMN	= "qq.id,qq.userid,qq.openid";
 	private static String		QUERY_TABLE_NAME	= "qq_user qq";
