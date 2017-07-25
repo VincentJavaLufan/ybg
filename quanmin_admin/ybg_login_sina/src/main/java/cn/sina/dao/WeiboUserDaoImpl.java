@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
@@ -13,6 +15,13 @@ import cn.sina.qvo.WeiboUserQuery;
 
 @Repository
 public class WeiboUserDaoImpl extends BaseDao implements WeiboUserDao {
+	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+	
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
 	
 	private static final String	QUERY_TABLE_COLUMN	= "weibo.id,weibo.userid,weibo.uid";
 	private static String		QUERY_TABLE_NAME	= "sina_user weibo";
