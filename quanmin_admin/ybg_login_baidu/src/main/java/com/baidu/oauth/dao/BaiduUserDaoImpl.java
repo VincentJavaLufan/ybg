@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.baidu.oauth.domain.BaiduUser;
@@ -13,6 +15,13 @@ import com.ybg.base.jdbc.BaseMap;
 
 @Repository
 public class BaiduUserDaoImpl extends BaseDao implements BaiduUserDao {
+	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+	
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
 	
 	private static String	QUERY_TABLE_NAME	= "baidu_user user";
 	private static String	QUERY_TABLE_COLUMN	= " user.id,user.userid,user.uid ";
