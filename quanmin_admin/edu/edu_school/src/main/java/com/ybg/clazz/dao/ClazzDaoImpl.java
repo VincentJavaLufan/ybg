@@ -1,24 +1,30 @@
 package com.ybg.clazz.dao;
-
 import java.util.ArrayList;
 import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
-
 import com.ybg.clazz.domain.ClazzVO;
 import com.ybg.clazz.mapper.ClazzMapper;
 import com.ybg.clazz.qvo.ClazzQuery;
 
 @Repository
 public class ClazzDaoImpl extends BaseDao implements ClazzDao {
-
-	private static String QUERY_TABLE_NAME = "  	 clazz.id, 	 	  clazz.classname, 	 	 clazz.classname, 	 	  clazz.schoolid, 	 	 clazz.schoolid, 	 	  clazz.gradeid, 	 	 clazz.gradeid, 	 	  clazz.gradename, 	 	 clazz.gradename, 	 	  clazz.regionid, 	 	 clazz.regionid, 	 	  clazz.schoolname, 	 	 clazz.schoolname, 	 id";
-	private static String QUERY_TABLE_COLUMN = "edu_clazz  clazz";
-
+	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+	
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
+	
+	private static String	QUERY_TABLE_NAME	= "  	 clazz.id, 	 	  clazz.classname, 	 	 clazz.classname, 	 	  clazz.schoolid, 	 	 clazz.schoolid, 	 	  clazz.gradeid, 	 	 clazz.gradeid, 	 	  clazz.gradename, 	 	 clazz.gradename, 	 	  clazz.regionid, 	 	 clazz.regionid, 	 	  clazz.schoolname, 	 	 clazz.schoolname, 	 id";
+	private static String	QUERY_TABLE_COLUMN	= "edu_clazz  clazz";
+	
 	@Override
 	public ClazzVO save(ClazzVO clazz) throws Exception {
 		BaseMap<String, Object> createmap = new BaseMap<String, Object>();
@@ -33,30 +39,27 @@ public class ClazzDaoImpl extends BaseDao implements ClazzDao {
 		clazz.setId((String) id);
 		return clazz;
 	}
-
+	
 	@Override
-	public void update(BaseMap<String, Object> updatemap,
-			BaseMap<String, Object> WHEREmap) {
+	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> WHEREmap) {
 		this.baseupdate(updatemap, WHEREmap, "edu_clazz");
 	}
-
+	
 	@Override
 	public Page list(Page page, ClazzQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
-		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
-				.append(QUERY_TABLE_NAME);
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			page.setResult(getJdbcTemplate().query(page.getPagesql(sql),
-					new ClazzMapper()));
-		} else {
+			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new ClazzMapper()));
+		}
+		else {
 			page.setResult(new ArrayList<ClazzVO>());
 		}
-
 		return page;
 	}
-
+	
 	private String getcondition(ClazzQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
@@ -74,31 +77,27 @@ public class ClazzDaoImpl extends BaseDao implements ClazzDao {
 		sqlappen(sql, "clazz.schoolname", qvo.getSchoolname());
 		return sql.toString();
 	}
-
+	
 	@Override
 	public List<ClazzVO> list(ClazzQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
-		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
-				.append(QUERY_TABLE_NAME);
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
 		return getJdbcTemplate().query(sql.toString(), new ClazzMapper());
 	}
-
+	
 	@Override
 	public void remove(BaseMap<String, Object> wheremap) {
 		baseremove(wheremap, "edu_clazz");
 	}
-
+	
 	@Override
 	public ClazzVO get(String id) {
-
 		StringBuilder sql = new StringBuilder();
-		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
-				.append(QUERY_TABLE_NAME);
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(WHERE).append("1=1");
 		sql.append(AND).append("id='" + id + "'");
-		List<ClazzVO> list = getJdbcTemplate().query(sql.toString(),
-				new ClazzMapper());
+		List<ClazzVO> list = getJdbcTemplate().query(sql.toString(), new ClazzMapper());
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
 }

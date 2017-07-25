@@ -1,24 +1,30 @@
 package com.ybg.student.dao;
-
 import java.util.ArrayList;
 import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
-
 import com.ybg.student.domain.StudentVO;
 import com.ybg.student.mapper.StudentMapper;
 import com.ybg.student.qvo.StudentQuery;
 
 @Repository
 public class StudentDaoImpl extends BaseDao implements StudentDao {
-
-	private static String QUERY_TABLE_NAME = "  	 student.id, 	 	  student.studentname, 	 	 student.studentname, 	 	  student.studentno, 	 	 student.studentno, 	 	  student.classid, 	 	 student.classid, 	 	  student.gradeid, 	 	 student.gradeid, 	 	  student.schoolid, 	 	 student.schoolid, 	 	  student.gradename, 	 	 student.gradename, 	 	  student.classname, 	 	 student.classname, 	 	  student.schoolname, 	 	 student.schoolname, 	 	  student.identitycard, 	 	 student.identitycard, 	 	  student.headurl, 	 	 student.headurl, 	 	  student.birthday, 	 	 student.birthday, 	 	  student.gmt_create, 	 	 student.gmt_create, 	 	  student.gmt_modified, 	 	 student.gmt_modified, 	 	  student.studentorign, 	 	 student.studentorign, 	 	  student.studentaddress, 	 	 student.studentaddress, 	 	  student.parentname, 	 	 student.parentname, 	 	  student.gender, 	 	 student.gender, 	 	  student.cityid, 	 	 student.cityid, 	 	  student.regionid, 	 	 student.regionid, 	 	  student.districtid, 	 	 student.districtid, 	 	  student.provinceid, 	 	 student.provinceid, 	 id";
-	private static String QUERY_TABLE_COLUMN = "edu_student  student";
-
+	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+	
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
+	
+	private static String	QUERY_TABLE_NAME	= "  	 student.id, 	 	  student.studentname, 	 	 student.studentname, 	 	  student.studentno, 	 	 student.studentno, 	 	  student.classid, 	 	 student.classid, 	 	  student.gradeid, 	 	 student.gradeid, 	 	  student.schoolid, 	 	 student.schoolid, 	 	  student.gradename, 	 	 student.gradename, 	 	  student.classname, 	 	 student.classname, 	 	  student.schoolname, 	 	 student.schoolname, 	 	  student.identitycard, 	 	 student.identitycard, 	 	  student.headurl, 	 	 student.headurl, 	 	  student.birthday, 	 	 student.birthday, 	 	  student.gmt_create, 	 	 student.gmt_create, 	 	  student.gmt_modified, 	 	 student.gmt_modified, 	 	  student.studentorign, 	 	 student.studentorign, 	 	  student.studentaddress, 	 	 student.studentaddress, 	 	  student.parentname, 	 	 student.parentname, 	 	  student.gender, 	 	 student.gender, 	 	  student.cityid, 	 	 student.cityid, 	 	  student.regionid, 	 	 student.regionid, 	 	  student.districtid, 	 	 student.districtid, 	 	  student.provinceid, 	 	 student.provinceid, 	 id";
+	private static String	QUERY_TABLE_COLUMN	= "edu_student  student";
+	
 	@Override
 	public StudentVO save(StudentVO student) throws Exception {
 		BaseMap<String, Object> createmap = new BaseMap<String, Object>();
@@ -48,30 +54,27 @@ public class StudentDaoImpl extends BaseDao implements StudentDao {
 		student.setId((String) id);
 		return student;
 	}
-
+	
 	@Override
-	public void update(BaseMap<String, Object> updatemap,
-			BaseMap<String, Object> WHEREmap) {
+	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> WHEREmap) {
 		this.baseupdate(updatemap, WHEREmap, "edu_student");
 	}
-
+	
 	@Override
 	public Page list(Page page, StudentQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
-		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
-				.append(QUERY_TABLE_NAME);
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			page.setResult(getJdbcTemplate().query(page.getPagesql(sql),
-					new StudentMapper()));
-		} else {
+			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new StudentMapper()));
+		}
+		else {
 			page.setResult(new ArrayList<StudentVO>());
 		}
-
 		return page;
 	}
-
+	
 	private String getcondition(StudentQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
@@ -104,31 +107,27 @@ public class StudentDaoImpl extends BaseDao implements StudentDao {
 		sqlappen(sql, "student.provinceid", qvo.getProvinceid());
 		return sql.toString();
 	}
-
+	
 	@Override
 	public List<StudentVO> list(StudentQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
-		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
-				.append(QUERY_TABLE_NAME);
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
 		return getJdbcTemplate().query(sql.toString(), new StudentMapper());
 	}
-
+	
 	@Override
 	public void remove(BaseMap<String, Object> wheremap) {
 		baseremove(wheremap, "edu_student");
 	}
-
+	
 	@Override
 	public StudentVO get(String id) {
-
 		StringBuilder sql = new StringBuilder();
-		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
-				.append(QUERY_TABLE_NAME);
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(WHERE).append("1=1");
 		sql.append(AND).append("id='" + id + "'");
-		List<StudentVO> list = getJdbcTemplate().query(sql.toString(),
-				new StudentMapper());
+		List<StudentVO> list = getJdbcTemplate().query(sql.toString(), new StudentMapper());
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
 }
