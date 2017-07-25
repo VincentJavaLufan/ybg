@@ -1,10 +1,9 @@
 package com.ybg.region.dao;
-
 import java.util.ArrayList;
 import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
@@ -14,10 +13,17 @@ import com.ybg.region.qvo.RegionQuery;
 
 @Repository
 public class RegionDaoImpl extends BaseDao implements RegionDao {
-
-	private static String QUERY_TABLE_NAME = "  	 region.PkId, 	 	  region.RegionName, 	 	 region.RegionName, 	 	  region.Level, 	 	 region.Level, 	 	  region.ParentId, 	 	 region.ParentId, 	 	  region.CityCode, 	 	 region.CityCode, 	 	  region.ADCode, 	 	 region.ADCode, 	 	  region.CenterLng, 	 	 region.CenterLng, 	 	  region.CenterLat, 	 	 region.CenterLat, 	 	  region.ProvinceId, 	 	 region.ProvinceId, 	 	  region.ProvinceName, 	 	 region.ProvinceName, 	 	  region.CityId, 	 	 region.CityId, 	 	  region.CityName, 	 	 region.CityName, 	 	  region.DistrictId, 	 	 region.DistrictId, 	 	  region.DistrictName, 	 	 region.DistrictName, 	 	  region.IsActive, 	 	 region.IsActive, 	 	  region.CreateBy, 	 	 region.CreateBy, 	 	  region.CreateTime, 	 	 region.CreateTime, 	 	  region.ModifyBy, 	 	 region.ModifyBy, 	 	  region.ModifyTime, 	 	 region.ModifyTime, 	 PkId";
-	private static String QUERY_TABLE_COLUMN = "edu_region  region";
-
+	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+	
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
+	
+	private static String	QUERY_TABLE_NAME	= "  	 region.PkId, 	 	  region.RegionName, 	 	 region.RegionName, 	 	  region.Level, 	 	 region.Level, 	 	  region.ParentId, 	 	 region.ParentId, 	 	  region.CityCode, 	 	 region.CityCode, 	 	  region.ADCode, 	 	 region.ADCode, 	 	  region.CenterLng, 	 	 region.CenterLng, 	 	  region.CenterLat, 	 	 region.CenterLat, 	 	  region.ProvinceId, 	 	 region.ProvinceId, 	 	  region.ProvinceName, 	 	 region.ProvinceName, 	 	  region.CityId, 	 	 region.CityId, 	 	  region.CityName, 	 	 region.CityName, 	 	  region.DistrictId, 	 	 region.DistrictId, 	 	  region.DistrictName, 	 	 region.DistrictName, 	 	  region.IsActive, 	 	 region.IsActive, 	 	  region.CreateBy, 	 	 region.CreateBy, 	 	  region.CreateTime, 	 	 region.CreateTime, 	 	  region.ModifyBy, 	 	 region.ModifyBy, 	 	  region.ModifyTime, 	 	 region.ModifyTime, 	 PkId";
+	private static String	QUERY_TABLE_COLUMN	= "edu_region  region";
+	
 	@Override
 	public RegionVO save(RegionVO region) throws Exception {
 		BaseMap<String, Object> createmap = new BaseMap<String, Object>();
@@ -41,34 +47,30 @@ public class RegionDaoImpl extends BaseDao implements RegionDao {
 		createmap.put("ModifyBy", region.getModifyby());
 		createmap.put("ModifyTime", region.getModifytime());
 		id = basecreate(createmap, "edu_region", true, new Integer(0));
-
 		region.setPkid((Integer) id);
 		return region;
 	}
-
+	
 	@Override
-	public void update(BaseMap<String, Object> updatemap,
-			BaseMap<String, Object> WHEREmap) {
+	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> WHEREmap) {
 		this.baseupdate(updatemap, WHEREmap, "edu_region");
 	}
-
+	
 	@Override
 	public Page list(Page page, RegionQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
-		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
-				.append(QUERY_TABLE_NAME);
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			page.setResult(getJdbcTemplate().query(page.getPagesql(sql),
-					new RegionMapper()));
-		} else {
+			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new RegionMapper()));
+		}
+		else {
 			page.setResult(new ArrayList<RegionVO>());
 		}
-
 		return page;
 	}
-
+	
 	private String getcondition(RegionQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
@@ -98,31 +100,27 @@ public class RegionDaoImpl extends BaseDao implements RegionDao {
 		sqlappen(sql, "region.ModifyTime", qvo.getModifytime());
 		return sql.toString();
 	}
-
+	
 	@Override
 	public List<RegionVO> list(RegionQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
-		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
-				.append(QUERY_TABLE_NAME);
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
 		return getJdbcTemplate().query(sql.toString(), new RegionMapper());
 	}
-
+	
 	@Override
 	public void remove(BaseMap<String, Object> wheremap) {
 		baseremove(wheremap, "edu_region");
 	}
-
+	
 	@Override
 	public RegionVO get(Integer pkid) {
 		StringBuilder sql = new StringBuilder();
-		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
-				.append(QUERY_TABLE_NAME);
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(WHERE).append("1=1");
 		sql.append(AND + "region.PkId=" + pkid);
-		List<RegionVO> list = getJdbcTemplate().query(sql.toString(),
-				new RegionMapper());
+		List<RegionVO> list = getJdbcTemplate().query(sql.toString(), new RegionMapper());
 		return list.get(0);
 	}
-
 }
