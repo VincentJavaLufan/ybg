@@ -1,35 +1,42 @@
 package com.ybg.rbac.resources.domain;
 import java.io.Serializable;
+import org.hibernate.validator.constraints.NotBlank;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /** 菜单类实体（ 数据库） **/
-public  class ResourcesDO implements Serializable {
+@ApiModel("菜单类实体")
+public class ResourcesDO implements Serializable {
 	
 	private static final long	serialVersionUID	= -8990353087139542849L;
-	/** 编号 **/
+	@ApiModelProperty(name = "id", dataType = "java.lang.String", value = "编号")
 	private String				id;
-	/** 菜单名称 **/
+	@ApiModelProperty(name = "name", dataType = "java.lang.String", value = "菜单名称")
+	@NotBlank(message = "菜单名称不能为空")
 	private String				name;
-	/** 父级编号 **/
+	@ApiModelProperty(name = "parentid", dataType = "java.lang.String", value = "父级编号")
 	private String				parentid;
-	/** 菜单标识 **/
+	@ApiModelProperty(name = "reskey", dataType = "java.lang.String", value = "菜单标识")
+	@NotBlank(message = "菜单标识不能为空")
 	private String				reskey;
-	/** 种类 1 目录，2菜单 ，3 按钮 **/
+	@ApiModelProperty(name = "type", dataType = "java.lang.String", value = "菜单种类 1 目录，2菜单 ，3 按钮")
+	@NotBlank(message = "菜单种类不能为空")
 	private String				type;
-	/** 菜单地址 **/
+	@ApiModelProperty(name = "type", dataType = "java.lang.String", value = "菜单地址")
 	private String				resurl;
-	/** 菜单等级 **/
+	@ApiModelProperty(name = "level", dataType = "java.lang.Integer", value = "菜单等级（暂时 没用)")
 	private Integer				level;
-	/** 菜单图标 **/
+	@ApiModelProperty(name = "icon", dataType = "java.lang.String", value = "菜单图标（暂时 没用)")
 	private String				icon;
-	/** 是否隐藏 **/
+	@ApiModelProperty(name = "ishide", dataType = "java.lang.String", value = "是否隐藏")
 	private Integer				ishide;
-	/** 描述 **/
+	@ApiModelProperty(name = "description", dataType = "java.lang.String", value = "描述")
 	private String				description;
-	/** 是否删除 **/
+	@ApiModelProperty(name = "isdelete", dataType = "java.lang.Integer", value = "描述")
 	private Integer				isdelete;
-	/** 颜色ID **/
+	@ApiModelProperty(name = "colorid", dataType = "java.lang.Integer", value = "颜色ID")
 	private Integer				colorid;
-								
+	
 	public String getId() {
 		return id;
 	}
