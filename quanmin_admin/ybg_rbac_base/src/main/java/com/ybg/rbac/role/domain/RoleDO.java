@@ -1,5 +1,6 @@
 package com.ybg.rbac.role.domain;
 import java.io.Serializable;
+import org.hibernate.validator.constraints.NotBlank;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -10,15 +11,18 @@ public class RoleDO implements Serializable {
 	private static final long	serialVersionUID	= -1911236558803130462L;
 	@ApiModelProperty(name = "id", dataType = "java.lang.String", value = "角色ID", hidden = false)
 	private String				id;
+	@NotBlank(message = "角色状态不能为空")
 	@ApiModelProperty(name = "state", dataType = "java.lang.String", value = "角色状态", hidden = false)
 	private String				state;
 	@ApiModelProperty(name = "name", dataType = "java.lang.String", value = "角色名称", hidden = false)
+	@NotBlank(message = "角色名称不能为空")
 	private String				name;
+	@NotBlank(message = "角色KEY不能为空")
 	@ApiModelProperty(name = "rolekey", dataType = "java.lang.String", value = "系统唯一标识", hidden = false)
 	private String				rolekey;
 	@ApiModelProperty(name = "description", dataType = "java.lang.String", value = "描述 ", hidden = false)
 	private String				description;
-	@ApiModelProperty(name = "isdelete", dataType = "java.lang.Integer", value = "描述 ", hidden = true)
+	@ApiModelProperty(name = "isdelete", dataType = "java.lang.Integer", value = "是否删除 ", hidden = true)
 	private Integer				isdelete;
 	
 	@Override
