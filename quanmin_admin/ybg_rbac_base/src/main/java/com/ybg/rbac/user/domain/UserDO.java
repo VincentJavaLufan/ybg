@@ -5,30 +5,31 @@ package com.ybg.rbac.user.domain;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
+import org.hibernate.validator.constraints.NotBlank;
 import com.ybg.base.util.excel.ExcelVOAttribute;
 
 @ApiModel(value = "用戶实体类(数据库)", description = "")
 /** @author yy 2016-06-21 用戶实体类(数据库) */
 public class UserDO implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long	serialVersionUID	= 8884558988237838150L;
 	@ApiModelProperty(name = "id", dataType = "java.lang.String", value = "用户编码")
 	@ExcelVOAttribute(name = "编码", column = "A")
 	private String				id;
 	@ApiModelProperty(name = "username", dataType = "java.lang.String", value = "账号")
 	@ExcelVOAttribute(name = "账号", column = "B", isExport = true)
+	@NotBlank(message = "账号不能为空")
 	private String				username;
 	@ApiModelProperty(name = "email", dataType = "java.lang.String", value = "电子邮箱")
 	@ExcelVOAttribute(name = "电子邮箱", column = "D", isExport = true)
+	@NotBlank(message = "电子邮箱不能为空")
 	private String				email;
 	@ApiModelProperty(name = "phone", dataType = "java.lang.String", value = "手机")
 	@ExcelVOAttribute(name = "手机", column = "E", isExport = true)
 	private String				phone;
 	@ApiModelProperty(name = "password", dataType = "java.lang.String", value = "密码")
 	@ExcelVOAttribute(name = "密码", column = "C", prompt = "密码保密哦!", isExport = false)
+	@NotBlank(message = "密码不能为空")
 	private String				password;
 	@ApiModelProperty(name = "state", dataType = "java.lang.String", value = "状态")
 	@ExcelVOAttribute(name = "状态", column = "F", isExport = true)
@@ -40,6 +41,7 @@ public class UserDO implements Serializable {
 	private Integer				isdelete;
 	@ApiModelProperty(name = "roleid", dataType = "java.lang.String", value = "角色编码")
 	@ExcelVOAttribute(name = "角色编码", column = "H", isExport = true)
+	@NotBlank(message = "角色编码不能为空")
 	private String				roleid;
 	@ApiModelProperty(name = "credentialssalt", dataType = "java.lang.String", value = "加密盐", hidden = true)
 	private String				credentialssalt;
