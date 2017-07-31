@@ -15,7 +15,7 @@ public class ResourcesMapper implements RowMapper<SysResourcesVO> {
 		bean.setType(rs.getString("type"));
 		bean.setResurl(rs.getString("resurl"));
 		bean.setLevel(rs.getInt("level"));
-		bean.setIcon(rs.getString("icon"));
+	//	bean.setIcon(rs.getString("icon"));
 		bean.setIshide(rs.getInt("ishide"));
 		bean.setDescription(rs.getString("description"));
 		bean.setColorid(rs.getInt("colorid"));
