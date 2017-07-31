@@ -2,10 +2,12 @@ package com.ybg.school.dao;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
+import com.ybg.base.jdbc.DataBaseConstant;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
 import com.ybg.school.domain.SchoolVO;
@@ -16,13 +18,14 @@ import com.ybg.school.qvo.SchoolQuery;
 public class SchoolDaoImpl extends BaseDao implements SchoolDao {
 	
 	@Autowired
+	@Qualifier(DataBaseConstant.JD_EDU)
 	JdbcTemplate jdbcTemplate;
 	
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
 	
-	private static String	QUERY_TABLE_NAME	= "  	 school.id, 	 	  school.schoolname, 	 	 school.schoolname, 	 	  school.schooltype, 	 	 school.schooltype, 	 	  school.info, 	 	 school.info, 	 id";
+	private static String	QUERY_TABLE_NAME	= "school.id,school.schoolname,school.schooltype,school.info,id";
 	private static String	QUERY_TABLE_COLUMN	= "edu_school  school";
 	
 	@Override

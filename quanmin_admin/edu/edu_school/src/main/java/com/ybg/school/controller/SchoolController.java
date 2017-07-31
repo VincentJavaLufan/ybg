@@ -39,7 +39,7 @@ public class SchoolController {
 	@ApiOperation(value = "School管理页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String index(ModelMap map) {
-		return "/system/School/index";
+		return "/system/school/index";
 	}
 	
 	@ApiOperation(value = "School分页列表", notes = "JSON ", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -61,7 +61,7 @@ public class SchoolController {
 	@ApiOperation(value = "添加School页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String toadd(@ApiIgnore ModelMap map) throws Exception {
-		return "/system/School/toadd";
+		return "/system/school/toadd";
 	}
 	
 	@ApiOperation(value = "更新School", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -127,11 +127,7 @@ public class SchoolController {
 		return j;
 	}
 	
-	@ApiOperation(value = "创建school页面初始化", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
-	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toadd() {
-		return "/system/school/add";
-	}
+	
 	
 	@ApiOperation(value = "更新school页面初始化", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
 	@ApiImplicitParam(name = "id", value = "school的ID", required = true, dataType = "java.lang.String")
