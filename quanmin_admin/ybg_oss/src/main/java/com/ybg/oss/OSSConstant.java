@@ -4,7 +4,7 @@ package com.ybg.oss;
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2016年11月15日 下午1:23:52 */
-public class Constant {
+public class OSSConstant {
 	
 	/** 云服务商 */
 	public enum CloudService {

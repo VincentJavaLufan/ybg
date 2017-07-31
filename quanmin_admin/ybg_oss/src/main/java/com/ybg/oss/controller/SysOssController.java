@@ -13,16 +13,16 @@ import com.alibaba.fastjson.JSON;
 import com.ybg.base.jdbc.util.DateUtil;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.Page;
+import com.ybg.base.util.ValidatorUtils;
 import com.ybg.base.util.webexception.R;
 import com.ybg.base.util.webexception.RRException;
 import com.ybg.oss.CloudStorageConfig;
 import com.ybg.oss.ConfigConstant;
-import com.ybg.oss.Constant;
+import com.ybg.oss.OSSConstant;
 import com.ybg.oss.OSSFactory;
 import com.ybg.oss.domian.SysOssEntity;
 import com.ybg.oss.service.SysConfigService;
 import com.ybg.oss.service.SysOssService;
-import com.ybg.oss.validator.ValidatorUtils;
 import com.ybg.oss.validator.group.AliyunGroup;
 import com.ybg.oss.validator.group.QcloudGroup;
 import com.ybg.oss.validator.group.QiniuGroup;
@@ -85,15 +85,15 @@ public class SysOssController {
 		Json j = new Json();
 		// 校验类型
 		ValidatorUtils.validateEntity(config);
-		if (config.getType() == Constant.CloudService.QINIU.getValue()) {
+		if (config.getType() == OSSConstant.CloudService.QINIU.getValue()) {
 			// 校验七牛数据
 			ValidatorUtils.validateEntity(config, QiniuGroup.class);
 		}
-		else if (config.getType() == Constant.CloudService.ALIYUN.getValue()) {
+		else if (config.getType() == OSSConstant.CloudService.ALIYUN.getValue()) {
 			// 校验阿里云数据
 			ValidatorUtils.validateEntity(config, AliyunGroup.class);
 		}
-		else if (config.getType() == Constant.CloudService.QCLOUD.getValue()) {
+		else if (config.getType() == OSSConstant.CloudService.QCLOUD.getValue()) {
 			// 校验腾讯云数据
 			ValidatorUtils.validateEntity(config, QcloudGroup.class);
 		}
