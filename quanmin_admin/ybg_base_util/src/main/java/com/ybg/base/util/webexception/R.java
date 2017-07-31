@@ -1,6 +1,7 @@
 package com.ybg.base.util.webexception;
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.http.HttpStatus;
 
 /** 返回数据
  * 
@@ -12,18 +13,16 @@ public class R extends HashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
 	
 	public R() {
-		put("success", true);
-		put("code", 0);
+		put("success", false);
+		put("code", HttpStatus.INTERNAL_SERVER_ERROR.value());
 	}
 	
 	public static R error() {
-		
-		return error(500, "未知异常，请联系管理员");
+		return error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "未知异常，请联系管理员");
 	}
 	
 	public static R error(String msg) {
-		
-		return error(500, msg);
+		return error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg);
 	}
 	
 	public static R error(int code, String msg) {
@@ -49,7 +48,6 @@ public class R extends HashMap<String, Object> {
 	}
 	
 	public static R ok() {
-	
 		return new R();
 	}
 	
