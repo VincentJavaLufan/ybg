@@ -14,7 +14,7 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="/css/skins/_all-skins.min.css">
-
+<link rel="stylesheet" href="/js/plugins/ztree/css/metroStyle/metroStyle.css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -34,6 +34,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/js/demo.js"></script>
 
+
+
 <script type="text/javascript" src="/js/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="/js/jquery/jquery-validation/jquery.validate.min.js"></script>
 <script type="text/javascript" src="/js/jquery/jquery-validation/messages_cn.js"></script>
@@ -41,6 +43,7 @@
 <script type="text/javascript" src="/common/common.js"></script>
 <script type="text/javascript" src="/common/lyGrid.js"></script>
 <script type="text/javascript" src="/common/base.js"></script>
+<script src="/js/plugins/ztree/jquery.ztree.all.min.js"></script>
 <!--[if lt IE 9]> <script src="/js/jquery/ie/html5shiv.js"></script> <script src="/js/jquery/ie/respond.min.js"></script><![endif]-->
 <script type="text/javascript" src="/common/vue.js"></script>
 <style type="text/css">

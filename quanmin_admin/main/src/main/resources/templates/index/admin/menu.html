@@ -1,4 +1,22 @@
 
+<script type="text/javascript">
+    function selectsystem() {
+        var select_val = $("#selectsystem_id").val();
+       
+        $("#oa_menu").css('display', 'none');
+        $("#sys_menu").css('display', 'none');
+        $("#edu_menu").css('display', 'none');
+        if (select_val == 'sys') {
+            $("#sys_menu").css('display', 'block');
+        }
+        if (select_val == 'oa') {
+            $("#oa_menu").css('display', 'block');
+        }
+        if (select_val == 'edu') {
+            $("#edu_menu").css('display', 'block');
+        }
+    }
+</script>
 <!-- sidebar: style can be found in sidebar.less -->
 <section class="sidebar">
 	<!-- Sidebar user panel -->
@@ -25,10 +43,80 @@
 			</span>
 		</div>
 	</form>
+	<font color="#ffffff"> 选择菜单</font>
+	<select class="" onchange="selectsystem()" id="selectsystem_id">
+		<option value="sys">系统</option>
+		<option value="edu">教育</option>
+		<option value="oa">企业</option>
+	</select>
 	<!-- /.search form -->
 	<!-- sidebar menu: : style can be found in sidebar.less -->
-	<ul class="sidebar-menu">
-		<li class="header">系統菜单</li>
+	<ul class="sidebar-menu" id="edu_menu" style="display: none;">
+		<li class="header">教育菜单</li>
+		<li class="treeview">
+			<a href="#">
+				<i class="fa  fa-cogs"></i>
+				<span>教育基础管理</span>
+				<span class="pull-right-container">
+					<i class="fa fa-angle-left pull-right"></i>
+				</span>
+			</a>
+			<ul class="treeview-menu">
+				<li>
+					<a href="javascript:void(0)" class="" nav-n="教育基础管理,学校管理,/role/role_do/index.do?id=3">
+						<i class="fa fa-circle-o"></i>
+						学校管理
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" class="" nav-n="教育基础管理,班级管理,/res/res_do/index.do?id=4">
+						<i class="fa fa-circle-o"></i>
+						班级管理
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" class="active" nav-n="教育基础管理,学生管理,/user/user_do/index.do?id=2">
+						<i class="fa fa-user"></i>
+						学生管理
+					</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<ul class="sidebar-menu" id="oa_menu" style="display: none;">
+		<li class="header">OA菜单</li>
+		<li class="treeview">
+			<a href="#">
+				<i class="fa  fa-cogs"></i>
+				<span>OA管理</span>
+				<span class="pull-right-container">
+					<i class="fa fa-angle-left pull-right"></i>
+				</span>
+			</a>
+			<ul class="treeview-menu">
+				<li>
+					<a href="javascript:void(0)" class="" nav-n="OA管理,企业管理,/role/role_do/index.do?id=3">
+						<i class="fa fa-circle-o"></i>
+						企业管理
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" class="" nav-n="OA管理,部门管理,/res/res_do/index.do?id=4">
+						<i class="fa fa-circle-o"></i>
+						部门管理
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" class="active" nav-n="OA管理,员工管理,/user/user_do/index.do?id=2">
+						<i class="fa fa-user"></i>
+						员工管理
+					</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<ul class="sidebar-menu" id="sys_menu" style="display: none;">
+		<li class="header">系统菜单</li>
 		<li class="treeview">
 			<a href="#">
 				<i class="fa  fa-cogs"></i>
@@ -79,10 +167,8 @@
 						API文档
 					</a>
 				</li>
-				
 			</ul>
 		</li>
-		
 		<li class="treeview">
 			<a href="#">
 				<i class="fa fa-file-image-o"></i>
@@ -106,7 +192,6 @@
 				</li>
 			</ul>
 		</li>
-		
 		<li class="treeview">
 			<a href="#">
 				<i class="fa fa-tasks"></i>
@@ -205,4 +290,5 @@
         });
     }
     SYSTERMINTT();
+    selectsystem();
 </script>
