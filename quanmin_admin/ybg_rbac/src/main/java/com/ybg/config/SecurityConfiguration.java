@@ -80,7 +80,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			}
 		});
 		// 自定义accessDecisionManager访问控制器,并开启表达式语言
-		http.exceptionHandling().accessDeniedHandler(accessDeniedHandler()).and().authorizeRequests().anyRequest().authenticated().expressionHandler(webSecurityExpressionHandler());
+	//	http.exceptionHandling().accessDeniedHandler(accessDeniedHandler()).and().authorizeRequests().anyRequest().authenticated().expressionHandler(webSecurityExpressionHandler());
 		// 自定义登录页面
 		http.csrf().disable();
 		// session管理
@@ -129,12 +129,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		return myUsernamePasswordAuthenticationFilter;
 	}
 	
-	/** 没有权限处理 **/
-	@Bean
-	AccessDeniedHandler accessDeniedHandler() {
-		MyAccessDeniedHandler accessDeniedHandler = new MyAccessDeniedHandler("/common/login_do/unauthorizedUrl.do");
-		return accessDeniedHandler;
-	}
+//	/** 没有权限处理 **/
+//	@Bean
+//	AccessDeniedHandler accessDeniedHandler() {
+//		MyAccessDeniedHandler accessDeniedHandler = new MyAccessDeniedHandler("/common/login_do/unauthorizedUrl.do");
+//		return accessDeniedHandler;
+//	}
 	
 	@Bean
 	public LoggerListener loggerListener() {
