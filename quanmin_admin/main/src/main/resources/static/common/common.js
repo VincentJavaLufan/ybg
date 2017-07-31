@@ -213,3 +213,24 @@
 		return format;
 	}
 })(jQuery);
+
+//选择一条记录
+function getSelectedRow() {
+  var cbox = grid.getSelectedCheckbox();
+  if (cbox.length > 1 || cbox == "") {
+      alert("请选择一个对象！");
+      return;
+  }
+  return cbox;
+}
+
+//选择多条记录
+function getSelectedRows() {
+    var cbox = grid.getSelectedCheckbox();
+    if (cbox.length ==0 || cbox == "") {
+        alert("请选择对象！");
+        return;
+    }
+    
+    return cbox.join(",");
+}
