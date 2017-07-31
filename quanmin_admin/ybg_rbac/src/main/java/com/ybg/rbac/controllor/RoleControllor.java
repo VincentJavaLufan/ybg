@@ -4,22 +4,26 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.base.jdbc.BaseMap;
-
 import com.ybg.base.util.Json;
 import com.ybg.base.util.Page;
+import com.ybg.base.util.ValidatorUtils;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
 import com.ybg.rbac.resources.qvo.ResourcesQuery;
 import com.ybg.rbac.resources.service.ResourcesService;
@@ -31,17 +35,17 @@ import com.ybg.rbac.role.service.RoleService;
 @Api("角色管理")
 @Controller
 @RequestMapping("/role/role_do/")
-public class RoleControllor  {
+public class RoleControllor {
 	
 	@Autowired
-	RoleService	roleService;
+	RoleService			roleService;
 	@Autowired
-	ResourcesService resourcesService;
+	ResourcesService	resourcesService;
 	
 	@ApiOperation(value = "角色管理页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String index( ModelMap map) {
-		//map.addAttribute("res", findByRes(request));
+	public String index(ModelMap map) {
+		// map.addAttribute("res", findByRes(request));
 		return "/system/role/index";
 	}
 	
@@ -60,8 +64,8 @@ public class RoleControllor  {
 	
 	@ApiOperation(value = "更新角色", notes = "只更新描述，名称，系统唯一标识,状态 ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	@RequestMapping(value = { "update.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json update(@ModelAttribute SysRoleVO role) {
+	@RequestMapping(value = { "update.do" }, method = { RequestMethod.POST })
+	public Json update(@RequestBody SysRoleVO role) {
 		Json j = new Json();
 		j.setSuccess(true);
 		try {
@@ -73,6 +77,26 @@ public class RoleControllor  {
 			BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
 			wheremap.put("id", role.getId());
 			roleService.update(updatemap, wheremap);
+			String roleId = role.getId();
+			List<SysResourcesVO> reslist = resourcesService.list(new ResourcesQuery());
+			List<RoleResDO> list = new ArrayList<RoleResDO>();
+			for (SysResourcesVO res : reslist) {
+				RoleResDO rr = new RoleResDO();
+				rr.setResid(res.getId());
+				rr.setRoleid(roleId);
+				rr.setState(1);// 禁止使用
+				list.add(rr);
+			}
+			if (role.getMenuIdList() != null && role.getMenuIdList().size() > 0) {
+				for (String resid : role.getMenuIdList()) {
+					for (RoleResDO rr : list) {
+						if (rr.getResid().equals(resid)) {
+							rr.setState(0);
+						}
+					}
+				}
+			}
+			roleService.saveOrupdateRole_Res(list);
 		} catch (Exception e) {
 			e.printStackTrace();
 			j.setMsg("操作失败");
@@ -85,7 +109,7 @@ public class RoleControllor  {
 	@ApiOperation(value = "根据ID删除角色", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiImplicitParam(name = "ids", value = "删除角色的ID", required = true, dataType = "java.lang.String")
 	@ResponseBody
-	@RequestMapping(value = { "remove.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = { "remove.do" }, method = { RequestMethod.POST })
 	public Json remove(@RequestParam(name = "ids", required = true) String ids2) {
 		Json j = new Json();
 		j.setSuccess(true);
@@ -105,46 +129,15 @@ public class RoleControllor  {
 	
 	@ApiOperation(value = "创建角色", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	@RequestMapping(value = { "create.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json create(@ModelAttribute SysRoleVO bean) {
+	@RequestMapping(value = { "create.do" }, method = { RequestMethod.POST })
+	public Json create(@RequestBody SysRoleVO bean) {
 		Json j = new Json();
 		j.setSuccess(true);
+		ValidatorUtils.validateEntity(bean);
 		try {
 			roleService.save(bean);
-		} catch (Exception e) {
-			e.printStackTrace();
-			j.setMsg("操作失败");
-			return j;
-		}
-		j.setMsg("操作成功");
-		return j;
-	}
-	
-	@ApiOperation(value = "创建角色页面初始化", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
-	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toadd() {
-		return "/system/role/add";
-	}
-	
-	@ApiOperation(value = "更新角色页面初始化", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
-	@ApiImplicitParam(name = "id", value = "角色的ID", required = true, dataType = "java.lang.String")
-	@RequestMapping(value = { "toupdate.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toupdate(@RequestParam(name = "id", required = true) String id, ModelMap map) throws Exception {
-		map.put("role", roleService.get(id));
-		return "/system/role/edit";
-	}
-	
-	/** 修改权限 
-	 * @throws Exception **/
-	@ApiOperation(value = "更新角色页面初始化", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
-	@ApiImplicitParams({ @ApiImplicitParam(name = "roleId", value = "角色的ID", required = true, dataType = "java.lang.String"), @ApiImplicitParam(name = "resId[]", value = "资源ID,是个数组", required = true, dataType = "java.lang.String[]") })
-	@ResponseBody
-	@RequestMapping(value = { "addRoleRes.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json addRoleRes(@RequestParam(name = "roleId", required = true) String roleId, @RequestParam(name = "resId[]", required = false) String[] resIds, ModelMap modelmap) throws Exception {
-		Json j = new Json();
-		j.setSuccess(true);
-		List<SysResourcesVO> reslist = resourcesService.list(new ResourcesQuery());
-		try {
+			String roleId = bean.getId();
+			List<SysResourcesVO> reslist = resourcesService.list(new ResourcesQuery());
 			List<RoleResDO> list = new ArrayList<RoleResDO>();
 			for (SysResourcesVO res : reslist) {
 				RoleResDO rr = new RoleResDO();
@@ -153,8 +146,8 @@ public class RoleControllor  {
 				rr.setState(1);// 禁止使用
 				list.add(rr);
 			}
-			if (resIds != null && resIds.length > 0) {
-				for (String resid : resIds) {
+			if (bean.getMenuIdList() != null && bean.getMenuIdList().size() > 0) {
+				for (String resid : bean.getMenuIdList()) {
 					for (RoleResDO rr : list) {
 						if (rr.getResid().equals(resid)) {
 							rr.setState(0);
@@ -163,6 +156,10 @@ public class RoleControllor  {
 				}
 			}
 			roleService.saveOrupdateRole_Res(list);
+		} catch (DuplicateKeyException e) {
+			e.printStackTrace();
+			j.setMsg("操作失败,已存在该记录");
+			return j;
 		} catch (Exception e) {
 			e.printStackTrace();
 			j.setMsg("操作失败");
@@ -171,4 +168,23 @@ public class RoleControllor  {
 		j.setMsg("操作成功");
 		return j;
 	}
+	
+	@ApiOperation(value = "获取单个ROLE", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
+	@ApiImplicitParam(name = "id", value = "角色的ID", required = true, dataType = "java.lang.String")
+	@ResponseBody
+	@RequestMapping(value = { "get.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public ResponseEntity<Map<String, Object>> get(@RequestParam(name = "id", required = true) String id, ModelMap map) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		SysRoleVO role = roleService.get(id);
+		List<SysResourcesVO> menusvo = resourcesService.getRolesByUserId(id);
+		List<String> list = new ArrayList<String>();
+		for (SysResourcesVO r : menusvo) {
+			list.add(r.getId());
+		}
+		role.setMenuIdList(list);
+		result.put("role", role);
+		ResponseEntity<Map<String, Object>> bean = new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
+		return bean;
+	}
+	
 }

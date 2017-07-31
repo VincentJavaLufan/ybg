@@ -1,6 +1,8 @@
 package com.ybg.rbac.controllor;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +37,11 @@ import io.swagger.annotations.ApiOperation;
 public class RescourcesControllor {
 	
 	@Autowired
-	ResourcesService	resourcesService;
+	ResourcesService resourcesService;
 	
 	@ApiOperation(value = "资源页面", notes = "需要授权才可以访问的页面", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String index( ModelMap map) {
-		// map.addAttribute("res", findByRes(request));
+	public String index(ModelMap map) {
 		return "/system/resources/index";
 	}
 	
@@ -158,13 +159,24 @@ public class RescourcesControllor {
 		return "/system/resources/edit";
 	}
 	
+//	/** 树 **/
+//	@ApiOperation(value = "授权资源树结构", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
+//	@ResponseBody
+//	@RequestMapping(value = { "reslists.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+//	public List<SysResourcesVO> reslists(@ModelAttribute ResourcesQuery qvo) throws Exception {
+//		List<SysResourcesVO> mps = resourcesService.list(qvo);
+//		return mps;
+//	}
+	
 	/** 树 **/
 	@ApiOperation(value = "授权资源树结构", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "reslists.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public List<SysResourcesVO> reslists(@ModelAttribute ResourcesQuery qvo) throws Exception {
-		List<SysResourcesVO> mps = resourcesService.list(qvo);
-		return mps;
+	public Map<String,Object> reslists(@ModelAttribute ResourcesQuery qvo) throws Exception {
+		Map<String,Object> maps= new HashMap<String,Object>();
+		List<SysResourcesVO> list = resourcesService.list(qvo);
+		maps.put("menuList", list);
+		return maps;
 	}
 	
 	@ApiOperation(value = "授权资源 按钮列表", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
