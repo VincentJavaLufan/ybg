@@ -88,14 +88,7 @@ var vm = new Vue({
                 data : JSON.stringify(vm.role),
                 success : function(data) {
                     alert(data.msg);
-                },error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                    if(XMLHttpRequest.status=="403"){
-                        alert("您无权限访问")
-                    }
-//                    alert(XMLHttpRequest.status); 
-//                    alert(XMLHttpRequest.readyState); 
-//                    alert(textStatus); 
-                    }
+                }
             });
         },
         reload : function() {
