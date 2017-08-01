@@ -214,7 +214,7 @@
 	}
 })(jQuery);
 
-//选择一条记录
+// 选择一条记录
 function getSelectedRow() {
   var cbox = grid.getSelectedCheckbox();
   if (cbox.length > 1 || cbox == "") {
@@ -224,7 +224,7 @@ function getSelectedRow() {
   return cbox;
 }
 
-//选择多条记录
+// 选择多条记录
 function getSelectedRows() {
     var cbox = grid.getSelectedCheckbox();
     if (cbox.length ==0 || cbox == "") {
@@ -234,3 +234,13 @@ function getSelectedRows() {
     
     return cbox.join(",");
 }
+
+
+$.ajaxSetup({error: function(XMLHttpRequest, textStatus, errorThrown) { 
+    if(XMLHttpRequest.status=="403"){
+        alert("您无权限访问")
+    }
+// alert(XMLHttpRequest.status);
+// alert(XMLHttpRequest.readyState);
+// alert(textStatus);
+    }});
