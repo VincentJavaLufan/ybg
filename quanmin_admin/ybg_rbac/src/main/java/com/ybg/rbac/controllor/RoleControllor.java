@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,20 @@ public class RoleControllor {
 		page.init();
 		return page;
 	}
+	
+	
+	/** 角色下拉列表
+	 * 
+	 * @throws Exception **/
+	@ResponseBody
+	@RequestMapping(value={"select.do"},method= { RequestMethod.GET, RequestMethod.POST })
+	public Map<String,Object> select() throws Exception{
+		Map<String,Object> map= new LinkedHashMap<String,Object>();
+		map.put("roleselect",roleService.list(new RoleQuery()) );
+		return map ;
+	}
+	
+	
 	
 	@ApiOperation(value = "更新角色", notes = "只更新描述，名称，系统唯一标识,状态 ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody

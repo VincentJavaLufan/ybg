@@ -1,13 +1,17 @@
 package com.ybg.rbac.controllor;
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +22,6 @@ import com.ybg.base.jdbc.util.DateUtil;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.Page;
 import com.ybg.base.util.excel.ExcelUtil;
-import com.ybg.rbac.role.qvo.RoleQuery;
 import com.ybg.rbac.role.service.RoleService;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.qvo.UserQuery;
@@ -89,12 +92,13 @@ public class UserControllor {
 	/** 首页 **/
 	@ApiOperation(value = "用户页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String index( @ApiIgnore ModelMap modelMap) {
+	public String index(@ApiIgnore ModelMap modelMap) {
 		// modelMap.addAttribute("res", findByRes(request));
 		return "/system/user/index";
 	}
 	
-	/** 列表 
+	/** 列表
+	 * 
 	 * @throws Exception **/
 	@ApiOperation(value = "用户分页列表", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "java.lang.Integer"), @ApiImplicitParam(name = "qvo", value = "用户查询条件", required = false, dataType = "UserQvo") })
@@ -105,17 +109,13 @@ public class UserControllor {
 		Page page = new Page();
 		page.setCurPage(pageNow);
 		page = userService.list(page, qvo);
+		List<UserVO> list = (List<UserVO>) page.getResult();
+		for (UserVO user : list) {
+			user.setPassword("");// 禁止泄露
+			user.setCredentialssalt("");// 禁止泄露
+		}
 		page.init();
 		return page;
-	}
-	
-	/** 新增初始化 
-	 * @throws Exception **/
-	@ApiOperation(value = "添加用户页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
-	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toadd(@ApiIgnore ModelMap map) throws Exception {
-		map.put("roleselect", roleService.list(new RoleQuery()));
-		return "/system/user/toadd";
 	}
 	
 	//
@@ -150,21 +150,24 @@ public class UserControllor {
 		return userService.checkisExist(qvo);
 	}
 	
-	@ApiOperation(value = "更新初始化", notes = "", produces = MediaType.TEXT_HTML_VALUE)
+	@ApiOperation(value = "获取单个用户", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "java.lang.String") })
-	@RequestMapping(value = { "toupdate.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toupdate(@RequestParam(name = "id", required = true) String id, @ApiIgnore ModelMap map) throws Exception {
-		UserVO user = userService.get(id);
-		map.put("updateuser", user);
-		map.put("roleselect", roleService.list(new RoleQuery()));
-		return "/system/user/edit";
+	@RequestMapping(value = { "get.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public ResponseEntity<Map<String, Object>> get(@RequestParam(name = "id", required = true) String id) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		UserVO bean = userService.get(id);
+		bean.setPassword("");
+		bean.setCredentialssalt("");// 敏感信息禁止泄露
+		result.put("user", bean);
+		ResponseEntity<Map<String, Object>> map = new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
+		return map;
 	}
 	
 	/** 更新用户信息 **/
 	@ApiOperation(value = "更新用户信息", notes = "只更新角色，用户状态(封号等)，email ,手机号", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "update.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json update(@ModelAttribute UserVO user) {
+	public Json update(@RequestBody UserVO user) {
 		Json j = new Json();
 		j.setSuccess(true);
 		BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
