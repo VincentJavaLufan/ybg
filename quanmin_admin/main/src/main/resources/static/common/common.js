@@ -240,7 +240,11 @@ $.ajaxSetup({error: function(XMLHttpRequest, textStatus, errorThrown) {
     if(XMLHttpRequest.status=="403"){
         alert("您无权限访问")
     }
+    if(XMLHttpRequest.status=="500"){
+        alert("系统错误")
+    }
 // alert(XMLHttpRequest.status);
 // alert(XMLHttpRequest.readyState);
 // alert(textStatus);
     }});
+//jqGrid的配置信息
