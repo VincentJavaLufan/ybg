@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +44,7 @@ public class RoleControllor {
 	
 	@ApiOperation(value = "角色管理页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String index(ModelMap map) {
+	public String index() {
 		// map.addAttribute("res", findByRes(request));
 		return "/system/role/index";
 	}
@@ -54,7 +53,7 @@ public class RoleControllor {
 	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "RoleQvo") })
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute RoleQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, ModelMap map) throws Exception {
+	public Page list(@ModelAttribute RoleQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow) throws Exception {
 		qvo.setBlurred(true);
 		Page page = new Page();
 		page.setCurPage(pageNow);
@@ -63,19 +62,16 @@ public class RoleControllor {
 		return page;
 	}
 	
-	
 	/** 角色下拉列表
 	 * 
 	 * @throws Exception **/
 	@ResponseBody
-	@RequestMapping(value={"select.do"},method= { RequestMethod.GET, RequestMethod.POST })
-	public Map<String,Object> select() throws Exception{
-		Map<String,Object> map= new LinkedHashMap<String,Object>();
-		map.put("roleselect",roleService.list(new RoleQuery()) );
-		return map ;
+	@RequestMapping(value = { "select.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public Map<String, Object> select() throws Exception {
+		Map<String, Object> map = new LinkedHashMap<String, Object>();
+		map.put("roleselect", roleService.list(new RoleQuery()));
+		return map;
 	}
-	
-	
 	
 	@ApiOperation(value = "更新角色", notes = "只更新描述，名称，系统唯一标识,状态 ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -188,7 +184,7 @@ public class RoleControllor {
 	@ApiImplicitParam(name = "id", value = "角色的ID", required = true, dataType = "java.lang.String")
 	@ResponseBody
 	@RequestMapping(value = { "get.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public ResponseEntity<Map<String, Object>> get(@RequestParam(name = "id", required = true) String id, ModelMap map) throws Exception {
+	public ResponseEntity<Map<String, Object>> get(@RequestParam(name = "id", required = true) String id) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 		SysRoleVO role = roleService.get(id);
 		List<SysResourcesVO> menusvo = resourcesService.getRolesByUserId(id);
@@ -201,5 +197,4 @@ public class RoleControllor {
 		ResponseEntity<Map<String, Object>> bean = new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
 		return bean;
 	}
-	
 }
