@@ -15,6 +15,7 @@ public class ResourcesDO implements Serializable {
 	@NotBlank(message = "菜单名称不能为空")
 	private String				name;
 	@ApiModelProperty(name = "parentid", dataType = "java.lang.String", value = "父级编号")
+	@NotBlank(message = "父级编号不能为空")
 	private String				parentid;
 	@ApiModelProperty(name = "reskey", dataType = "java.lang.String", value = "菜单标识")
 	@NotBlank(message = "菜单标识不能为空")
@@ -23,6 +24,7 @@ public class ResourcesDO implements Serializable {
 	@NotBlank(message = "菜单种类不能为空")
 	private String				type;
 	@ApiModelProperty(name = "type", dataType = "java.lang.String", value = "菜单地址")
+	@NotBlank(message = "菜单URL不能为空")
 	private String				resurl;
 	@ApiModelProperty(name = "level", dataType = "java.lang.Integer", value = "菜单等级（暂时 没用)")
 	private Integer				level;
