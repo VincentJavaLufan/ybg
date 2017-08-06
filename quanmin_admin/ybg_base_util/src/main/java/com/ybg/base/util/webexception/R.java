@@ -1,4 +1,5 @@
 package com.ybg.base.util.webexception;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.http.HttpStatus;
@@ -8,7 +9,7 @@ import org.springframework.http.HttpStatus;
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2016年10月27日 下午9:59:27 */
-public class R extends HashMap<String, Object> {
+public class R extends HashMap<String, Object> implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
