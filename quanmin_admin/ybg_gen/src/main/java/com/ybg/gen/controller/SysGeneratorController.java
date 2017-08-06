@@ -54,7 +54,6 @@ public class SysGeneratorController {
 	
 	/** 生成代码 */
 	@ApiOperation(value = "生成代码", notes = "只能页面传输，参数是tables 用英文逗号分隔", produces = MediaType.APPLICATION_JSON_VALUE)
-	
 	@RequestMapping(value = { "code.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public void code(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String[] tableNames = new String[] {};
