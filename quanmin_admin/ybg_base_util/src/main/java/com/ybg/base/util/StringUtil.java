@@ -3,9 +3,7 @@ import java.util.Iterator;
 import java.util.Map;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
-/** 字符串实用方法类。
- * 
- * @author 马必强 */
+/** 字符串实用方法类。 **/
 public class StringUtil {
 	
 	/** 把对象转换成String */

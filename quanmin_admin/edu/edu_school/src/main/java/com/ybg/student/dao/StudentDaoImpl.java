@@ -2,10 +2,12 @@ package com.ybg.student.dao;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
+import com.ybg.base.jdbc.DataBaseConstant;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
 import com.ybg.student.domain.StudentVO;
@@ -16,6 +18,7 @@ import com.ybg.student.qvo.StudentQuery;
 public class StudentDaoImpl extends BaseDao implements StudentDao {
 	
 	@Autowired
+	@Qualifier(DataBaseConstant.DB_EDU)
 	JdbcTemplate jdbcTemplate;
 	
 	public JdbcTemplate getJdbcTemplate() {

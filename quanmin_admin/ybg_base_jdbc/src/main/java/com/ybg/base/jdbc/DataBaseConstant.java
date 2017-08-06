@@ -8,6 +8,8 @@ public class DataBaseConstant {
 	public static final String	DB_OA	= "dataSourceOa";
 	/** 数据源-教育管理 **/
 	public static final String	DB_EDU	= "dataSourceEdu";
+	/**数据源-定时任务框架**/
+	public static final String	DB_QUARTZ	= "dataSourceQuartz";
 	// 分隔线-----------------------------------------------
 	/** JDBC模板方法-使用系统数据库  (默认)**/
 	public static final String	JD_SYS	= "sysJdbcTemplate";
@@ -15,4 +17,6 @@ public class DataBaseConstant {
 	public static final String	JD_OA	= "oaJdbcTemplate";
 	/** JDBC模板方法-使用教育数据库 **/
 	public static final String	JD_EDU	= "eduJdbcTemplate";
+	/** JDBC模板方法-使用定时任务数据库 **/
+	public static final String	JD_QUARTZ	= "quartzJdbcTemplate";
 }

@@ -6,8 +6,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
+//标注启动了缓存
+/** 缓存配置，使用Ehcache <br>
+ * ehcache.xml 在 main模块 的src/ resources 文件夹中 <br>
+ * 
+ * @Configuration
+ * @EnableCaching 这两个注释取消则 缓存配置失效 ，缓存的方法 将无作用 **/
 @Configuration
-// 标注启动了缓存
 @EnableCaching
 public class CacheConfiguration {
 	

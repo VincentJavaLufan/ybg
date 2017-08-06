@@ -11,9 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-/** @author 林子龙
- * 
- *         Servlet的工具类。 */
+/** Servlet的工具类。 */
 public class ServletUtil {
 	
 	public static Log		log				= LogFactory.getLog(ServletUtil.class);

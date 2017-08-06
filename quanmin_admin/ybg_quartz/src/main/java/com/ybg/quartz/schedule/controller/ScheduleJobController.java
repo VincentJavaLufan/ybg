@@ -1,7 +1,11 @@
 package com.ybg.quartz.schedule.controller;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -38,7 +42,8 @@ public class ScheduleJobController {
 		return "/quartz/job/index";
 	}
 	
-	/** 定时任务列表 
+	/** 定时任务列表
+	 * 
 	 * @throws Exception */
 	@ApiOperation(value = "定时任务列表", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -56,16 +61,14 @@ public class ScheduleJobController {
 	/** 定时任务信息 */
 	/** 定时任务列表 */
 	@ApiOperation(value = "定时任务页面", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
 	@RequestMapping(value = { "info.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public ScheduleJobEntity info(Long jobId) {
+	public ResponseEntity<Map<String, Object>> info(Long jobId) {
+		Map<String, Object> result = new HashMap<String, Object>();
 		ScheduleJobEntity schedule = scheduleJobService.queryObject(jobId);
-		return schedule;
-		// return R.ok().put("schedule", schedule);
-	}
-	
-	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toadd() {
-		return "/quartz/job/toadd";
+		result.put("schedule", schedule);
+		ResponseEntity<Map<String, Object>> bean = new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
+		return bean;
 	}
 	
 	/** 保存定时任务
@@ -74,13 +77,14 @@ public class ScheduleJobController {
 	@ApiOperation(value = " 保存定时任务", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "create.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json save(@ModelAttribute ScheduleJobEntity scheduleJob) throws Exception {
+	public Json save(@RequestBody ScheduleJobEntity scheduleJob) throws Exception {
 		// 数据校验
 		Json json = new Json();
 		try {
 			verifyForm(scheduleJob);
 			scheduleJobService.save(scheduleJob);
 		} catch (Exception e) {
+			e.printStackTrace();
 			json.setMsg("操作失败");
 			json.setSuccess(false);
 			return json;
@@ -90,17 +94,16 @@ public class ScheduleJobController {
 		return json;
 	}
 	
-	@RequestMapping(value = { "toupdate.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toupdate(Long jobId, ModelMap map) {
-		map.put("bean", scheduleJobService.queryObject(jobId));
-		return "/quartz/job/toupdate";
-	}
-	
+	// @RequestMapping(value = { "toupdate.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	// public String toupdate(Long jobId, ModelMap map) {
+	// map.put("bean", scheduleJobService.queryObject(jobId));
+	// return "/quartz/job/toupdate";
+	// }
 	/** 修改定时任务 */
 	@ApiOperation(value = "修改定时任务", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "update.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json update(@ModelAttribute ScheduleJobEntity scheduleJob) {
+	public Json update(@RequestBody ScheduleJobEntity scheduleJob) {
 		// 数据校验
 		Json json = new Json();
 		try {
@@ -120,9 +123,18 @@ public class ScheduleJobController {
 	@ApiOperation(value = "删除定时任务", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "delete.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json delete(Long[] jobIds) {
+	public Json delete(String jobIds) {
+		String[] ids = jobIds.split(",");
+		for (String idstr : ids) {
+			Long[] longid = new Long[1];
+			try {
+				longid[0] = Long.parseLong(idstr);
+			} catch (Exception e) {
+				continue;
+			}
+			scheduleJobService.deleteBatch(longid);
+		}
 		Json json = new Json();
-		scheduleJobService.deleteBatch(jobIds);
 		json.setMsg("操作成功");
 		json.setSuccess(true);
 		return json;
@@ -132,9 +144,18 @@ public class ScheduleJobController {
 	@ApiOperation(value = "立即执行任务", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "run.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json run(@RequestParam(name = "jobIds[]", required = true) Long jobIds) {
+	public Json run(String jobIds) {
 		Json json = new Json();
-		scheduleJobService.run(jobIds);
+		String[] ids = jobIds.split(",");
+		for (String idstr : ids) {
+			Long[] longid = new Long[1];
+			try {
+				longid[0] = Long.parseLong(idstr);
+			} catch (Exception e) {
+				continue;
+			}
+			scheduleJobService.run(longid);
+		}
 		json.setMsg("操作成功");
 		json.setSuccess(true);
 		return json;
@@ -144,9 +165,18 @@ public class ScheduleJobController {
 	@ApiOperation(value = "暂停定时任务", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "pause.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json pause(@RequestParam(name = "jobIds[]", required = true) Long jobIds) {
+	public Json pause(String jobIds) {
 		Json json = new Json();
-		scheduleJobService.pause(jobIds);
+		String[] ids = jobIds.split(",");
+		for (String idstr : ids) {
+			Long[] longid = new Long[1];
+			try {
+				longid[0] = Long.parseLong(idstr);
+			} catch (Exception e) {
+				continue;
+			}
+			scheduleJobService.pause(longid);
+		}
 		json.setMsg("操作成功");
 		json.setSuccess(true);
 		return json;
@@ -156,9 +186,18 @@ public class ScheduleJobController {
 	@ApiOperation(value = "恢复定时任务", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "resume.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json resume(@RequestParam(name = "jobIds[]", required = true) Long jobIds) {
+	public Json resume(String jobIds) {
 		Json json = new Json();
-		scheduleJobService.resume(jobIds);
+		String[] ids = jobIds.split(",");
+		for (String idstr : ids) {
+			Long[] longid = new Long[1];
+			try {
+				longid[0] = Long.parseLong(idstr);
+			} catch (Exception e) {
+				continue;
+			}
+			scheduleJobService.resume(longid);
+		}
 		json.setMsg("操作成功");
 		json.setSuccess(true);
 		return json;

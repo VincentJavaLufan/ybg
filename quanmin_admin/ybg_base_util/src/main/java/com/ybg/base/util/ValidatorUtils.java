@@ -5,8 +5,7 @@ import javax.validation.Validator;
 import com.ybg.base.util.webexception.RRException;
 import java.util.Set;
 
-/** hibernate-validator校验工具类
- * 主要校验bean
+/** hibernate-validator校验工具类 主要校验bean
  *
  * 参考文档：http://docs.jboss.org/hibernate/validator/5.4/reference/en-US/html_single/
  *

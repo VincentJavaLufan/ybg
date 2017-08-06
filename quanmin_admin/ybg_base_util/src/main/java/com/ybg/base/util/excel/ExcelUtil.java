@@ -21,22 +21,21 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.util.CellRangeAddressList;
 
-/* 
- * ExcelUtil工具类实现功能: 
- * 导出时传入list<T>,即可实现导出为一个excel,其中每个对象Ｔ为Excel中的一条记录. 
- * 导入时读取excel,得到的结果是一个list<T>.T是自己定义的对象. 
- * 需要导出的实体对象只需简单配置注解就能实现灵活导出,通过注解您可以方便实现下面功能: 
- * 1.实体属性配置了注解就能导出到excel中,每个属性都对应一列. 
- * 2.列名称可以通过注解配置. 
- * 3.导出到哪一列可以通过注解配置. 
- * 4.鼠标移动到该列时提示信息可以通过注解配置. 
- * 5.用注解设置只能下拉选择不能随意填写功能. 
- * 6.用注解设置是否只导出标题而不导出内容,这在导出内容作为模板以供用户填写时比较实用. 
- * 本工具类以后可能还会加功能,请关注我的博客: http://blog.csdn.net/lk_blog 
- */
+/** ExcelUtil工具类实现功能: <br>
+ * 导出时传入list<T>,即可实现导出为一个excel,其中每个对象Ｔ为Excel中的一条记录. <br>
+ * 导入时读取excel,得到的结果是一个list<T>.T是自己定义的对象. <br>
+ * 需要导出的实体对象只需简单配置注解就能实现灵活导出,通过注解您可以方便实现下面功能: <br>
+ * 1.实体属性配置了注解就能导出到excel中,每个属性都对应一列. <br>
+ * 2.列名称可以通过注解配置. <br>
+ * 3.导出到哪一列可以通过注解配置. <br>
+ * 4.鼠标移动到该列时提示信息可以通过注解配置. <br>
+ * 5.用注解设置只能下拉选择不能随意填写功能. <br>
+ * 6.用注解设置是否只导出标题而不导出内容,这在导出内容作为模板以供用户填写时比较实用. <br>
+ * 本工具类以后可能还会加功能,请关注我的博客: http://blog.csdn.net/lk_blog <br>
+*/
 public class ExcelUtil<T> {
 	
-	Class<T>	clazz;
+	Class<T> clazz;
 	
 	public ExcelUtil(Class<T> clazz) {
 		this.clazz = clazz;

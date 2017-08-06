@@ -1,5 +1,4 @@
 package com.ybg.config;
-
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -10,6 +9,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.ybg.base.jdbc.DataBaseConstant;
 
+/** 数据源配置， DataSource 返回的数据源 @Primary 表示 如果不适用@Qualifier 注解时候，则使用默认<br>
+ * JdbcTemplate 是springjdbc 配置，一般是，一个数据源配置一个JdbcTemplate 模板，<br>
+ * 通过@Bean(name = DataBaseConstant.DB_QUARTZ)的方式指定数据源 **/
 @Configuration
 public class DataBaseConfiguration {
 	
@@ -32,6 +34,12 @@ public class DataBaseConfiguration {
 		return DruidDataSourceBuilder.create().build();
 	}
 	
+	@Bean(name = DataBaseConstant.DB_QUARTZ)
+	@ConfigurationProperties("spring.datasource.druid.quartz")
+	public DataSource dataSourceQuartz() {
+		return DruidDataSourceBuilder.create().build();
+	}
+	
 	@Primary
 	@Bean(name = DataBaseConstant.JD_SYS)
 	public JdbcTemplate sysJdbcTemplate(@Qualifier(DataBaseConstant.DB_SYS) DataSource dataSource) {
@@ -45,6 +53,11 @@ public class DataBaseConfiguration {
 	
 	@Bean(name = DataBaseConstant.JD_EDU)
 	public JdbcTemplate eduJdbcTemplate(@Qualifier(DataBaseConstant.DB_EDU) DataSource dataSource) {
+		return new JdbcTemplate(dataSource);
+	}
+	
+	@Bean(name = DataBaseConstant.JD_QUARTZ)
+	public JdbcTemplate quertzJdbcTemplate(@Qualifier(DataBaseConstant.DB_QUARTZ) DataSource dataSource) {
 		return new JdbcTemplate(dataSource);
 	}
 }

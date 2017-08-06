@@ -9,8 +9,6 @@ import java.sql.Timestamp;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementSetter;
@@ -24,14 +22,16 @@ import com.ybg.base.util.Page;
  * 2.数据库字段一律小写 <br>
  * 3.数据库字段不得使用下划线，表名可以。 <br>
 ***/
-//@ComponentScan
 public abstract class BaseDao extends BaseSQL {
 	
-//	@Autowired
-//	JdbcTemplate jdbcTemplate;
-//	
-	/** 新增
+	/** 新增 只适用于UUID
 	 * 
+	 * @param createmap
+	 *            新增的map key 为数据库的列，value 为数据库列的值,表中一定要有 gmt_modified,gmt_create 两列，都为dataTime类型
+	 * 
+	 *            <br>
+	 *            createmap 为空则过滤掉该列，空map传递 则取消指向。
+	 * @return 返回 UUID主键
 	 * @throws Exception **/
 	@SuppressWarnings("unused")
 	public String baseCreate(BaseMap<String, Object> createmap, String table_name, String id_name) throws Exception {
@@ -115,14 +115,18 @@ public abstract class BaseDao extends BaseSQL {
 		return id;
 	}
 	
-	/** 新增数据（单个） 不推荐使用
+	/** 新增数据（单个） 不推荐使用 适用于int long 类型的主键的表
 	 * 
 	 * @param createmap
-	 *            数据集合
+	 *            新增的map key 为数据库的列，value 为数据库列的值,表中一定要有 gmt_modified,gmt_create 两列，都为dataTime类型
+	 * 
+	 *            <br>
+	 *            createmap 为空则过滤掉该列，空map传递 则取消指向。
 	 * @param 表名称
 	 * @return id 是否返回id
 	 * @param T
 	 *            返回的类型
+	 * @return 主键
 	 * @throws Exception **/
 	@SuppressWarnings("unused")
 	@Deprecated
@@ -273,6 +277,19 @@ public abstract class BaseDao extends BaseSQL {
 	}
 	
 	// 无法确定更新还是增加。这个方法需要提供 主码map
+	/** 新增或增加
+	 * 
+	 * @param createmap
+	 *            新增的map key 为数据库的列，value 为数据库列的值,表中一定要有 gmt_modified,gmt_create 两列，都为dataTime类型
+	 * 
+	 *            <br>
+	 *            createmap 为空则过滤掉该列，空map传递 则取消指向。
+	 * @param table_name
+	 *            表名称
+	 * @param id_name
+	 *            主键列名称
+	 * @param unionkey
+	 *            主码 ，该表的唯一唯一索引(必须有) 若是新增 则返回ID **/
 	@SuppressWarnings("unused")
 	public String saveOrUpdate(BaseMap<String, Object> createmap, String table_name, String id_name, String[] unionkey) throws Exception {
 		UUID uuid = UUID.randomUUID();
@@ -808,7 +825,7 @@ public abstract class BaseDao extends BaseSQL {
 		return getJdbcTemplate().queryForObject(new Page().getCountsql(sql), Integer.class);
 	}
 	
-	public abstract JdbcTemplate getJdbcTemplate() ;
+	public abstract JdbcTemplate getJdbcTemplate();
 	
 	/****/
 	/** @param sqlParm

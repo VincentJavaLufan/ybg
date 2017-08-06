@@ -1,3 +1,69 @@
+var vm = new Vue({
+    el : '#rrapp',
+    data : {
+        showList : true,
+        title : null,
+        config : {}
+    },
+    created : function() {
+        this.getConfig();
+    },
+    methods : {
+        query : function() {
+            vm.reload();
+        },
+        getConfig : function() {
+            $.getJSON(rootPath + "/sys/oss_do/config.do", function(r) {
+                vm.config = r.config;
+            });
+        },
+        addConfig : function() {
+            vm.showList = false;
+            vm.title = "云存储配置";
+        },
+        saveOrUpdate : function() {
+            var url = rootPath + "/sys/oss_do/saveConfig.do";
+            $.ajax({
+                type : "POST",
+                url : url,
+                contentType : "application/json",
+                data : JSON.stringify(vm.config),
+                success : function(r) {
+                    if (r.code === 0) {
+                        alert('操作成功', function() {
+                            vm.reload();
+                        });
+                    } else {
+                        alert(r.msg);
+                    }
+                }
+            });
+        },
+        del : function() {
+            var ossIds = getSelectedRows();
+            if (ossIds == null) {
+                return;
+            }
+            confirm('确定要删除选中的记录？', function() {
+                $.ajax({
+                    type : "POST",
+                    url : rootPath + "/sys/oss_do/delete.do",
+                    data : {
+                        ids : ossIds
+                    },
+                    success : function(r) {
+                        alert(r.msg);
+                        vm.reload();
+                    }
+                });
+            });
+        },
+        reload : function() {
+            vm.showList = true;
+            grid.loadData();
+        }
+    }
+});
 var pageii = null;
 var grid = null;
 $(function() {
@@ -23,34 +89,5 @@ $(function() {
         checkbox : true
     });
     
-    /****/
-    
-    
-    
-    // $("#search").click("click", function() {// 绑定查询按扭
-    // var searchParams = $("#searchForm").serializeJson();// 初始化传参数
-    // grid.setOptions({
-    // data : searchParams
-    // });
-    // });
 });
 
-function del(){
-    var cbox = grid.getSelectedCheckbox();
-    if (cbox == "") {
-        layer.msg("请选择删除项！！");
-        return;
-    }
-    layer.confirm('是否删除？', function(index) {
-        var url = rootPath + "/sys/oss_do/delete.do";
-        var s = CommnUtil.ajax(url, {
-            ids : cbox.join(",")
-        }, "json");
-        if (s.success ) {
-            alert('删除成功');
-            grid.loadData();
-        } else {
-            alert('删除失败');
-        }
-    });
-}

@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import com.ybg.component.jwt.HTTPBasicAuthorizeAttribute;
 import com.ybg.component.jwt.HTTPBearerAuthorizeAttribute;
 import com.ybg.rbac.user.service.LoginService;
-
+/**springmvc 配置，虽然没没有怎么生效**/
 @ComponentScan(basePackages = { "com.qq", "com.baidu", "com.ybg", "cn", "weibo4j", "org.mybatis" }) // 扫描注解
 @ServletComponentScan({ "com.qq", "com.baidu", "com.ybg", "cn", "weibo4j", "org.mybatis" }) // 扫描servlet
 

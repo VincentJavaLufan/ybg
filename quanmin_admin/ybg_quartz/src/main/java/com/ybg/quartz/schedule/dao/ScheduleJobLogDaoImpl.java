@@ -20,7 +20,7 @@ import com.ybg.quartz.schedule.qvo.ScheduleJobLogQuery;
 public class ScheduleJobLogDaoImpl extends BaseDao implements ScheduleJobLogDao {
 	
 	@Autowired
-//	@Qualifier(DataBaseConstant.JD_OA)
+	@Qualifier(DataBaseConstant.JD_QUARTZ)
 	JdbcTemplate jdbcTemplate;
 	
 	public JdbcTemplate getJdbcTemplate() {

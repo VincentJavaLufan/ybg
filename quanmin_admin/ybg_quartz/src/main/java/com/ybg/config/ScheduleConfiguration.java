@@ -14,7 +14,7 @@ import com.ybg.base.jdbc.DataBaseConstant;
 public class ScheduleConfiguration {
 	
 	@Autowired
-	//@Qualifier(DataBaseConstant.DB_OA)
+	@Qualifier(DataBaseConstant.DB_QUARTZ)
 	DataSource dataSource;
 	
 	@Bean

@@ -1,9 +1,13 @@
 package com.ybg.oss.controller;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,7 +53,7 @@ public class SysOssController {
 	
 	@ApiOperation(value = "文件上传例子首页", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String index(ModelMap map) {
+	public String index() {
 		return "/system/ossconfig/oss";
 	}
 	
@@ -58,7 +62,7 @@ public class SysOssController {
 	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "SysOssEntity") })
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute SysOssEntity qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, ModelMap map) {
+	public Page list(@ModelAttribute SysOssEntity qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow) {
 		Page page = new Page();
 		page.setCurPage(pageNow);
 		page = sysOssService.list(page, qvo);
@@ -81,7 +85,7 @@ public class SysOssController {
 	@ApiOperation(value = "保存云存储配置信息", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "saveConfig.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json saveConfig(@ModelAttribute CloudStorageConfig config) throws Exception {
+	public Json saveConfig(@RequestBody CloudStorageConfig config) throws Exception {
 		Json j = new Json();
 		// 校验类型
 		ValidatorUtils.validateEntity(config);
@@ -107,10 +111,11 @@ public class SysOssController {
 	@ApiOperation(value = "上传文件", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "upload.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public R upload(@RequestParam("file") MultipartFile file) throws Exception {
+	public ResponseEntity<Map<String, Object>> upload(@RequestParam("file") MultipartFile file) throws Exception {
 		if (file.isEmpty()) {
 			throw new RRException("上传文件不能为空");
 		}
+		Map<String, Object> result = new HashMap<String, Object>();
 		// 上传文件
 		String url = OSSFactory.build().upload(file.getBytes());
 		// 保存文件信息
@@ -118,7 +123,10 @@ public class SysOssController {
 		ossEntity.setUrl(url);
 		ossEntity.setCreatedate(DateUtil.getDateTime());
 		sysOssService.save(ossEntity);
-		return R.ok().put("url", url);
+		result.put("url", url);
+		result.put("success", true);
+		ResponseEntity<Map<String, Object>> bean = new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
+		return bean;
 	}
 	
 	/** 删除 */

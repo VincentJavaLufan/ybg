@@ -4,11 +4,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
+import com.ybg.base.jdbc.DataBaseConstant;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
 import com.ybg.oa.department.domain.DepartmentDO;
@@ -20,6 +22,7 @@ import com.ybg.oa.department.qvo.DepartmentQuery;
 public class DepartmentDaoImpl extends BaseDao implements DepartmentDao {
 	
 	@Autowired
+	@Qualifier(DataBaseConstant.JD_OA)
 	JdbcTemplate jdbcTemplate;
 	
 	public JdbcTemplate getJdbcTemplate() {
