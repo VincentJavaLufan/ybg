@@ -1,5 +1,6 @@
 package ${package}.controller;
-
+import java.util.HashMap;
+import java.util.Map;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -18,14 +19,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.base.jdbc.BaseMap;
-
+import org.springframework.web.bind.annotation.RequestBody;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.Page;
 import ${package}.domain.${className}VO;
 import ${package}.service.${className}Service;
 import ${package}.domain.${className}DO;
 import ${package}.qvo.${className}Query;
-
+import com.ybg.base.util.ValidatorUtils;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
@@ -44,7 +47,7 @@ public class ${className}Controller {
 		
 	@ApiOperation(value = "${className}管理页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String index( ModelMap map) {		
+	public String index() {		
 		return "/system/${classname}/index";
 	}
 	
@@ -60,23 +63,14 @@ public class ${className}Controller {
 		page.init();
 		return page;
 	}
-	
-	
-	/** 新增初始化 
-	 * @throws Exception **/
-	@ApiOperation(value = "添加${className}页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
-	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toadd(@ApiIgnore ModelMap map) throws Exception {
 		
-		return "/system/${classname}/toadd";
-	}
-	
 	@ApiOperation(value = "更新${className}", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "update.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json update(@ModelAttribute ${className}VO ${classname}) {
+	public Json update(@RequestBody ${className}VO ${classname}) {
 		Json j = new Json();
 		j.setSuccess(true);
+		ValidatorUtils.validateEntity(${classname});
 		try {
 			BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
 			#foreach($column in $columns)
@@ -85,7 +79,7 @@ public class ${className}Controller {
 			#end 
 			#end 
 			BaseMap<String, Object> wheremap = new BaseMap<String, Object>();			
-			wheremap.put("id", ${classname}.get${pk.attrName}());
+			wheremap.put("id", ${classname}.get${pk.attrName}());			
 			${classname}Service.update(updatemap, wheremap);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -122,9 +116,10 @@ public class ${className}Controller {
 	@ApiOperation(value = "创建${classname}", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "create.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json create(@ModelAttribute ${className}VO bean) {
+	public Json create(@RequestBody ${className}VO bean) {
 		Json j = new Json();
 		j.setSuccess(true);
+		ValidatorUtils.validateEntity(bean);
 		try {
 			${classname}Service.save(bean);
 		} catch (Exception e) {
@@ -136,17 +131,16 @@ public class ${className}Controller {
 		return j;
 	}
 	
-	
-	
-	@ApiOperation(value = "更新${classname}页面初始化", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
-	@ApiImplicitParam(name = "id", value = "${classname}的ID", required = true, dataType = "java.lang.String")
-	@RequestMapping(value = { "toupdate.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toupdate(@RequestParam(name = "id", required = true) String id, ModelMap map) throws Exception {
-		map.put("${classname}", ${classname}Service.get(id));
-		return "/system/${classname}/edit";
+	@ApiOperation(value = "获取单个${className}", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiImplicitParams({ @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "java.lang.String") })
+	@RequestMapping(value = { "get.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public ResponseEntity<Map<String, Object>> get(@RequestParam(name = "id", required = true) String id) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		${className}VO bean = ${classname}Service.get(id);		
+		result.put("${classname}", bean);
+		ResponseEntity<Map<String, Object>> map = new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
+		return map;
 	}
-	
-	
 	
 	
 }

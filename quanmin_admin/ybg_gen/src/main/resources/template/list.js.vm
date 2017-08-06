@@ -1,90 +1,107 @@
+var vm = new Vue({
+	el:'#rrapp',
+	data:{
+		showList: true,
+		title: null,
+		${classname}: {}
+	},
+	methods: {
+		query: function () {
+			vm.reload();
+		},
+		add: function(){
+			vm.showList = false;
+			vm.title = "新增";
+			vm.${classname} = {};
+		},
+		update: function (event) {
+			var $pk.attrname = getSelectedRow();
+			if($pk.attrname == null){
+				return ;
+			}
+			vm.showList = false;
+            vm.title = "修改";
+            
+            vm.getInfo(${pk.attrname})
+		},
+		saveOrUpdate: function (event) {
+			var url = vm.${classname}.${pk.attrname} == null ? "${pathName}/create.do" : "${pathName}/update.do";
+			$.ajax({
+				type: "POST",
+			    url: rootPath + url,
+                contentType: "application/json",
+			    data: JSON.stringify(vm.${classname}),
+			    success: function(r){
+				vm.reload();
+				alert(r.msg);
+			    	
+				}
+			});
+		},
+		del: function (event) {
+			var ${pk.attrname}s = getSelectedRows();
+			if(${pk.attrname}s == null){
+				return ;
+			}			
+			confirm('确定要删除选中的记录？', function(){
+				$.ajax({
+					type: "POST",
+				    url: rootPath + "${pathName}/remove.do",
+				    data : {
+                        ids : ${pk.attrname}s
+                    },				   
+				    success: function(r){
+						if(r.code == 0){
+							alert('操作成功', function(index){
+								$("#jqGrid").trigger("reloadGrid");
+							});
+						}else{
+							alert(r.msg);
+						}
+					}
+				});
+			});
+		},
+		getInfo: function(${pk.attrname}){
+			$.get(rootPath + "${pathName}/get.do?id="+${pk.attrname}, function(r){
+                vm.${classname} = r.${classname};
+            });
+		},
+		reload: function (event) {
+			 var searchParams = $("#searchForm").serializeJson();// 初始化传参数
+	            grid.setOptions({
+	                data : searchParams
+	            });
+	            vm.showList = true;
+	            grid.loadData();
+		}
+	}
+});
+
 var pageii = null;
 var grid = null;
 $(function() {
     grid = lyGrid({
         id : 'paging',
-        l_column : [
-        
-        #foreach($column in $columns)
-       
-        
-#if($column.columnName != $pk.columnName)
+        l_column : [        
+        #foreach($column in $columns)               
+        #if($column.columnName != $pk.columnName)
 			{
                     colkey : "${column.attrname}",
-                    name : "${column.comments}"
-                 
-                }#if($velocityCount != $columns.size()),#end 
-#else
-			
+                    name : "${column.comments}"                 
+            }#if($velocityCount != $columns.size()),#end 
+			#else			
 				{
                     colkey : "${column.attrname}",
                     name : "${column.comments}",
                     width : "50px",
                     hide : true
-                }#if($velocityCount != $columns.size()),#end 
-			
-#end			
-#end
+                }
+            #if($velocityCount != $columns.size()),#end 			
+				#end			
+				#end
               ],
         jsonUrl : rootPath + '${pathName}list.do',
         checkbox : true
-    });
-    $("#search").click("click", function() {// 绑定查询按扭
-        var searchParams = $("#searchForm").serializeJson();// 初始化传参数
-        grid.setOptions({
-            data : searchParams
-        });
-    });
-    $("#addRole").click("click", function() {
-        addRole();
-    });
-    $("#editRole").click("click", function() {
-        editRole();
-    });
-    $("#delRole").click("click", function() {
-        delRole();
-    });
-    
+    });   
 });
-function editRole() {
-    var cbox = grid.getSelectedCheckbox();
-    if (cbox.length > 1 || cbox == "") {
-        layer.msg("只能选中一个");
-        return;
-    }
-    pageii = layer.open({
-        title : "编辑",
-        type : 2,
-        maxmin : true, // 开启最大化最小化按钮
-        area : [
-                "600px", "60%"],
-        content : rootPath + '${pathName}toupdate.do?id=' + cbox
-    });
-}
-
-function addRole() {
-    pageii = layer.open({
-        title : "新增",
-        type : 2,
-        maxmin : true, // 开启最大化最小化按钮
-        area : [
-                "600px", "60%"],
-        content : rootPath + '${pathName}toadd.do'
-    });
-}
-function delRole() {
-    var cbox = grid.getSelectedCheckbox();
-    if (cbox == "") {
-        layer.msg("请选择删除项！！");
-        return;
-    }
-    layer.confirm('是否删除？', function(index) {
-        var url = rootPath + '${pathName}remove.do';
-        var s = CommnUtil.ajax(url, {
-            ids : cbox.join(",")
-        }, "json");
-       
-         layer.msg(s.msg );
-            grid.loadData();
-    });
-}

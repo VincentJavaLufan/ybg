@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>${comments}</title>
-#set($header='#parse("sys/header.html")')
-#set($save='#if($shiro.hasPermission("'+${pathName}+':save"))')
-#set($update='#if($shiro.hasPermission("'+${pathName}+':update"))')
-#set($delete='#if($shiro.hasPermission("'+${pathName}+':delete"))')
-#set($end='#end')
-$header
-</head>
-<body>
+
+<script src="${rc.contextPath}/js/generator/${pathName}.js"></script>
 <div id="rrapp" v-cloak>
 	<div v-show="showList">
 		<div class="grid-btn">
@@ -23,8 +13,9 @@ $header
 			<a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
 			$end
 		</div>
-	    <table id="jqGrid"></table>
-	    <div id="jqGridPager"></div>
+	    <div class="table-responsive">
+			<div id="paging" class="pagclass"></div>
+		</div>
     </div>
     
     <div v-show="!showList" class="panel panel-default">
@@ -49,6 +40,4 @@ $header
 	</div>
 </div>
 
-<script src="${rc.contextPath}/js/generator/${pathName}.js?_${date.systemTime}"></script>
-</body>
-</html>
+

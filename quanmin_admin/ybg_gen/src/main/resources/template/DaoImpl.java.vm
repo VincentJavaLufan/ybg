@@ -17,6 +17,7 @@ import ${package}.qvo.${className}Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
+import com.ybg.base.jdbc.DataBaseConstant;
 @Repository
 public class ${className}DaoImpl extends BaseDao implements ${className}Dao {
 @Autowired
