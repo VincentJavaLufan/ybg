@@ -30,7 +30,7 @@ import springfox.documentation.annotations.ApiIgnore;
  * @date 2017-07-07 */
 @Api("班级管理")
 @Controller
-@RequestMapping("clazz")
+@RequestMapping("/edu/clazz_do/")
 public class ClazzController {
 	
 	@Autowired
@@ -55,14 +55,7 @@ public class ClazzController {
 		return page;
 	}
 	
-	/** 新增初始化
-	 * 
-	 * @throws Exception **/
-	@ApiOperation(value = "添加Clazz页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
-	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toadd(@ApiIgnore ModelMap map) throws Exception {
-		return "/system/Clazz/toadd";
-	}
+	
 	
 	@ApiOperation(value = "更新Clazz", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -130,17 +123,5 @@ public class ClazzController {
 		return j;
 	}
 	
-	@ApiOperation(value = "创建clazz页面初始化", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
-	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toadd() {
-		return "/system/clazz/add";
-	}
 	
-	@ApiOperation(value = "更新clazz页面初始化", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
-	@ApiImplicitParam(name = "id", value = "clazz的ID", required = true, dataType = "java.lang.String")
-	@RequestMapping(value = { "toupdate.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toupdate(@RequestParam(name = "id", required = true) String id, ModelMap map) throws Exception {
-		map.put("clazz", clazzService.get(id));
-		return "/system/clazz/edit";
-	}
 }

@@ -30,7 +30,7 @@ import springfox.documentation.annotations.ApiIgnore;
  * @date 2017-07-07 */
 @Api("学校管理")
 @Controller
-@RequestMapping("school")
+@RequestMapping("/edu/school.do/")
 public class SchoolController {
 	
 	@Autowired
@@ -39,6 +39,7 @@ public class SchoolController {
 	@ApiOperation(value = "School管理页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String index(ModelMap map) {
+		System.out.println("我进来School管理页面");
 		return "/system/school/index";
 	}
 	
@@ -55,14 +56,7 @@ public class SchoolController {
 		return page;
 	}
 	
-	/** 新增初始化
-	 * 
-	 * @throws Exception **/
-	@ApiOperation(value = "添加School页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
-	@RequestMapping(value = { "toadd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toadd(@ApiIgnore ModelMap map) throws Exception {
-		return "/system/school/toadd";
-	}
+	
 	
 	@ApiOperation(value = "更新School", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -129,11 +123,5 @@ public class SchoolController {
 	
 	
 	
-	@ApiOperation(value = "更新school页面初始化", notes = " ", produces = MediaType.TEXT_HTML_VALUE)
-	@ApiImplicitParam(name = "id", value = "school的ID", required = true, dataType = "java.lang.String")
-	@RequestMapping(value = { "toupdate.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String toupdate(@RequestParam(name = "id", required = true) String id, ModelMap map) throws Exception {
-		map.put("school", schoolService.get(id));
-		return "/system/school/edit";
-	}
+	
 }

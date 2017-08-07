@@ -18,7 +18,7 @@ import com.ybg.student.qvo.StudentQuery;
 public class StudentDaoImpl extends BaseDao implements StudentDao {
 	
 	@Autowired
-	@Qualifier(DataBaseConstant.DB_EDU)
+	@Qualifier(DataBaseConstant.JD_EDU)
 	JdbcTemplate jdbcTemplate;
 	
 	public JdbcTemplate getJdbcTemplate() {
