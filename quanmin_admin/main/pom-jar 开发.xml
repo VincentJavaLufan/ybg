@@ -16,6 +16,7 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<pay-java.version>2.0.4-SNAPSHOT</pay-java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -33,7 +34,7 @@
 			<artifactId>ybg_quartz</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- -->
+		<!--OA模块 -->
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_company</artifactId>
@@ -73,11 +74,57 @@
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_oss</artifactId>
 			<version>1.0.0</version>
-		</dependency><dependency>
+		</dependency>
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_weixin</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_base_jdbc</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<!-- 教育模块 -->
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>edu_school</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>edu_city</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<!-- 教育模块 end-->
+		<!-- 支付模块 -->
+		<dependency>
+			<groupId>com.egzosn</groupId>
+			<artifactId>pay-java-common</artifactId>
+			<version>${pay-java.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.egzosn</groupId>
+			<artifactId>pay-java-ali</artifactId>
+			<version>${pay-java.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.egzosn</groupId>
+			 <artifactId>pay-java-fuiou</artifactId>
+			<version>${pay-java.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.egzosn</groupId>
+			<artifactId>pay-java-wx</artifactId>
+			<version>${pay-java.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.egzosn</groupId>
+			<artifactId>pay-java-wx-youdian</artifactId>
+			<version>${pay-java.version}</version>
+		</dependency>
+		<!-- 支付模块结束 -->
+		
 	</dependencies>
 	<build>
 		<plugins>
