@@ -17,7 +17,7 @@ import com.ybg.region.qvo.RegionQuery;
 public class RegionDaoImpl extends BaseDao implements RegionDao {
 	
 	@Autowired
-	@Qualifier(DataBaseConstant.DB_EDU)
+	@Qualifier(DataBaseConstant.JD_EDU)
 	JdbcTemplate jdbcTemplate;
 	
 	public JdbcTemplate getJdbcTemplate() {
