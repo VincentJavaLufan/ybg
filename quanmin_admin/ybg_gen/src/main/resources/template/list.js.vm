@@ -46,7 +46,7 @@ var vm = new Vue({
 			confirm('确定要删除选中的记录？', function(){
 				$.ajax({
 					type: "POST",
-				    url: rootPath + "${pathName}/remove.do",
+				    url: rootPath + "${pathName}remove.do",
 				    data : {
                         ids : ${pk.attrname}s
                     },				   
@@ -63,7 +63,7 @@ var vm = new Vue({
 			});
 		},
 		getInfo: function(${pk.attrname}){
-			$.get(rootPath + "${pathName}/get.do?id="+${pk.attrname}, function(r){
+			$.get(rootPath + "${pathName}get.do?id="+${pk.attrname}, function(r){
                 vm.${classname} = r.${classname};
             });
 		},
