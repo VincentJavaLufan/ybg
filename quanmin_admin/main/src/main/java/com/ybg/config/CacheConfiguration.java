@@ -31,8 +31,6 @@ public class CacheConfiguration {
 	 * Spring分别通过CacheManager.create()
 	 * 
 	 * 或new CacheManager()方式来创建一个ehcache基地.
-	 *
-	 * 
 	 * 
 	 * 也说是说通过这个来设置cache的基地是这里的Spring独用,还是跟别的(如hibernate的Ehcache共享) */
 	@Bean
