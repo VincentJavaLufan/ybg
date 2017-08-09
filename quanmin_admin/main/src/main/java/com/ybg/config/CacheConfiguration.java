@@ -26,9 +26,7 @@ public class CacheConfiguration {
 		return new EhCacheCacheManager(bean.getObject());
 	}
 	
-	/*
-	 * 
-	 * 据shared与否的设置,
+	/** 据shared与否的设置,
 	 * 
 	 * Spring分别通过CacheManager.create()
 	 * 
@@ -36,11 +34,7 @@ public class CacheConfiguration {
 	 *
 	 * 
 	 * 
-	 * 也说是说通过这个来设置cache的基地是这里的Spring独用,还是跟别的(如hibernate的Ehcache共享)
-	 *
-	 * 
-	 * 
-	 */
+	 * 也说是说通过这个来设置cache的基地是这里的Spring独用,还是跟别的(如hibernate的Ehcache共享) */
 	@Bean
 	public EhCacheManagerFactoryBean ehCacheManagerFactoryBean() {
 		EhCacheManagerFactoryBean cacheManagerFactoryBean = new EhCacheManagerFactoryBean();
