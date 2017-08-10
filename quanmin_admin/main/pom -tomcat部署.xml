@@ -96,7 +96,7 @@
 			<version>1.0.0</version>
 		</dependency>
 		<!-- 教育模块 end-->
-		<!-- 支付模块 -->
+		<!-- 支付模块 
 		<dependency>
 			<groupId>com.egzosn</groupId>
 			<artifactId>pay-java-common</artifactId>
@@ -122,6 +122,7 @@
 			<artifactId>pay-java-wx-youdian</artifactId>
 			<version>${pay-java.version}</version>
 		</dependency>
+		-->
 		<!-- 支付模块结束 -->
 		
 	</dependencies>
