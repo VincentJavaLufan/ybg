@@ -265,12 +265,13 @@
 			<artifactId>javamelody-spring-boot-starter</artifactId>
 			<version>1.65.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.lowagie/itext -->
+		<!-- https://mvnrepository.com/artifact/com.lowagie/itext 屏蔽吧，好像太多人没法下载 
 		<dependency>
 			<groupId>com.lowagie</groupId>
 			<artifactId>itext</artifactId>
 			<version>2.1.7</version>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
