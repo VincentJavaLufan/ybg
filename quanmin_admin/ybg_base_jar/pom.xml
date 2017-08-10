@@ -265,7 +265,7 @@
 			<artifactId>javamelody-spring-boot-starter</artifactId>
 			<version>1.65.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.lowagie/itext 屏蔽吧，好像太多人没法下载 
+		<!-- https://mvnrepository.com/artifact/com.lowagie/itext PDF的操作  屏蔽吧，好像太多人没法下载 
 		<dependency>
 			<groupId>com.lowagie</groupId>
 			<artifactId>itext</artifactId>
