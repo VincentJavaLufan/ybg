@@ -1,9 +1,5 @@
 package com.ybg.base.util.excel;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -19,7 +15,15 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddressList;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /** ExcelUtil工具类实现功能: <br>
  * 导出时传入list<T>,即可实现导出为一个excel,其中每个对象Ｔ为Excel中的一条记录. <br>
@@ -31,11 +35,10 @@ import org.apache.poi.ss.util.CellRangeAddressList;
  * 4.鼠标移动到该列时提示信息可以通过注解配置. <br>
  * 5.用注解设置只能下拉选择不能随意填写功能. <br>
  * 6.用注解设置是否只导出标题而不导出内容,这在导出内容作为模板以供用户填写时比较实用. <br>
- * 本工具类以后可能还会加功能,请关注我的博客: http://blog.csdn.net/lk_blog <br>
-*/
+ * 本工具类以后可能还会加功能,请关注我的博客: http://blog.csdn.net/lk_blog <br> */
 public class ExcelUtil<T> {
 	
-	Class<T> clazz;
+	Class<T>	clazz;
 	
 	public ExcelUtil(Class<T> clazz) {
 		this.clazz = clazz;
@@ -47,12 +50,18 @@ public class ExcelUtil<T> {
 	 *            输入流
 	 * @param startrow
 	 *            第几行开始读取数字 0表示第一行 ； **/
-	public List<T> importExcel(String sheetName, InputStream input, int startrow) throws Exception {
+	public List<T> importExcel(String sheetName, InputStream input, int startrow, String name) throws Exception {
 		int maxCol = 0;
 		List<T> list = new ArrayList<T>();
 		try {
-			HSSFWorkbook workbook = new HSSFWorkbook(input);
-			HSSFSheet sheet = workbook.getSheet(sheetName);
+			Workbook workbook = null;
+			if (name.endsWith("xls")) {
+				workbook = new HSSFWorkbook(input);
+			}
+			else if (name.endsWith("xlsx")) {
+				workbook = new XSSFWorkbook(input);
+			}
+			Sheet sheet = workbook.getSheet(sheetName);
 			if (!sheetName.trim().equals("")) {
 				sheet = workbook.getSheet(sheetName);// 如果指定sheet名,则取指定sheet中的内容.
 			}
@@ -75,14 +84,14 @@ public class ExcelUtil<T> {
 					}
 				}
 				for (int i = startrow; i <= rows; i++) {// 从第2行开始取数据,默认第一行是表头.
-					HSSFRow row = sheet.getRow(i);
+					Row row = sheet.getRow(i);
 					int cellNum = maxCol;
 					T entity = null;
 					for (int j = 0; j <= cellNum; j++) {
 						if (row == null) {
 							row = sheet.createRow(i);
 						}
-						HSSFCell cell = row.getCell(j);
+						Cell cell = row.getCell(j);
 						if (cell == null) {
 							continue;
 						}
@@ -93,15 +102,134 @@ public class ExcelUtil<T> {
 						Class<?> fieldType = field.getType();
 						int cellType = cell.getCellType();
 						String c = "";
-						if (cellType == HSSFCell.CELL_TYPE_NUMERIC) {
+						if (cellType == XSSFCell.CELL_TYPE_NUMERIC) {
 							c = String.valueOf(cell.getNumericCellValue());
 							if (String.class == fieldType) {//
 								DecimalFormat df = new DecimalFormat("#");
 								c = df.format(cell.getNumericCellValue());
 							}
 						}
-						else if (cellType == HSSFCell.CELL_TYPE_BOOLEAN) {
+						else if (cellType == XSSFCell.CELL_TYPE_BOOLEAN) {
 							c = String.valueOf(cell.getBooleanCellValue());
+						}
+						else if (cellType == XSSFCell.CELL_TYPE_FORMULA) {
+							c = String.valueOf(cell.getNumericCellValue());
+						}
+						else {
+							c = cell.getStringCellValue();
+						}
+						if (c == null || c.equals("")) {
+							continue;
+						}
+						entity = (entity == null ? clazz.newInstance() : entity);// 如果不存在实例则新建.
+						// 取得类型,并根据对象类型设置值.
+						if (String.class == fieldType) {
+							field.set(entity, String.valueOf(c));
+						}
+						else if (Integer.TYPE == fieldType || Integer.class == fieldType) {
+							if (String.class == fieldType) {//
+								DecimalFormat df = new DecimalFormat("#");
+								c = df.format(cell.getNumericCellValue());
+							}
+							field.set(entity, Double.valueOf(c).intValue());
+						}
+						else if (Long.TYPE == fieldType || Long.class == fieldType) {
+							field.set(entity, Long.valueOf(c));
+						}
+						else if (Float.TYPE == fieldType || Float.class == fieldType) {
+							field.set(entity, Float.valueOf(c));
+						}
+						else if (Short.TYPE == fieldType || Short.class == fieldType) {
+							field.set(entity, Short.valueOf(c));
+						}
+						else if (Double.TYPE == fieldType || Double.class == fieldType) {
+							field.set(entity, Double.valueOf(c));
+						}
+						else if (Character.TYPE == fieldType && c != null && c.length() > 0) {
+							field.set(entity, Character.valueOf(c.charAt(0)));
+						}
+					}
+					if (entity != null) {
+						list.add(entity);
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	/** @param sheetName
+	 *            sheet 名 不填默认第一个
+	 * @param input
+	 *            输入流
+	 * @param startrow
+	 *            第几行开始读取数字 0表示第一行 ； **/
+	public List<T> importExcelxlsx(String sheetName, InputStream input, int startrow) throws Exception {
+		int maxCol = 0;
+		List<T> list = new ArrayList<T>();
+		try {
+			XSSFWorkbook workbook = new XSSFWorkbook(input);
+			XSSFSheet sheet = workbook.getSheet(sheetName);
+			if (!sheetName.trim().equals("")) {
+				sheet = workbook.getSheet(sheetName);// 如果指定sheet名,则取指定sheet中的内容.
+			}
+			if (sheet == null) {
+				sheet = workbook.getSheetAt(0); // 如果传入的sheet名不存在则默认指向第1个sheet.
+			}
+			int rows = sheet.getLastRowNum();
+			if (rows > 0) {// 有数据时才处理
+				// Field[] allFields = clazz.getDeclaredFields();// 得到类的所有field.
+				List<Field> allFields = getMappedFiled(clazz, null);
+				Map<Integer, Field> fieldsMap = new HashMap<Integer, Field>();// 定义一个map用于存放列的序号和field.
+				for (Field field : allFields) {
+					// 将有注解的field存放到map中.
+					if (field.isAnnotationPresent(ExcelVOAttribute.class)) {
+						ExcelVOAttribute attr = field.getAnnotation(ExcelVOAttribute.class);
+						int col = getExcelCol(attr.column());// 获得列号
+						maxCol = Math.max(col, maxCol);
+						field.setAccessible(true);// 设置类的私有字段属性可访问.
+						fieldsMap.put(col, field);
+					}
+				}
+				for (int i = startrow; i <= rows; i++) {// 从第2行开始取数据,默认第一行是表头.
+					XSSFRow row = sheet.getRow(i);
+					int cellNum = maxCol;
+					T entity = null;
+					for (int j = 0; j <= cellNum; j++) {
+						if (row == null) {
+							row = sheet.createRow(i);
+						}
+						XSSFCell cell = row.getCell(j);
+						if (cell == null) {
+							continue;
+						}
+						Field field = fieldsMap.get(j);// 从map中得到对应列的field.
+						if (field == null) {
+							continue;
+						}
+						Class<?> fieldType = field.getType();
+						int cellType = cell.getCellType();
+						String c = "";
+						if (cellType == XSSFCell.CELL_TYPE_NUMERIC) {
+							c = String.valueOf(cell.getNumericCellValue());
+							if (String.class == fieldType) {//
+								DecimalFormat df = new DecimalFormat("#");
+								c = df.format(cell.getNumericCellValue());
+							}
+						}
+						else if (cellType == XSSFCell.CELL_TYPE_BOOLEAN) {
+							c = String.valueOf(cell.getBooleanCellValue());
+						}
+						else if (cellType == XSSFCell.CELL_TYPE_FORMULA) {
+							c = String.valueOf(cell.getNumericCellValue());
 						}
 						else {
 							c = cell.getStringCellValue();
@@ -155,7 +283,7 @@ public class ExcelUtil<T> {
 	}
 	
 	/** 对list数据源将其里面的数据导入到excel表单
-	 * 
+	 *
 	 * @param sheetName
 	 *            工作表的名称
 	 * @param output
@@ -163,16 +291,14 @@ public class ExcelUtil<T> {
 	 * @param startrow
 	 *            数据开始的行数 ， 0表示第一行 最少是1 */
 	/** 对list数据源将其里面的数据导入到excel表单
-	 * 
-	 * @param sheetName
-	 *            工作表的名称
+	 *
+	 * @param
 	 * @param output
 	 *            java输出流
 	 * @param startrow
 	 *            数据开始的行数 ， 0表示第一行 最少是1
 	 * @param map
 	 *            自定义修改列名 键值对满足 map.put("A","学生姓名") 类行 ，第一个是列的编号,第二个是列的名称
-	 * 
 	 * @param ismodifytablehead
 	 *            是否修改表头名称 ，false 不修改 ，map参数也视为无效 */
 	private boolean exportExcel(List<T> lists[], String sheetNames[], OutputStream output, int startrow, Map<String, String> map, boolean ismodifytablehead) {
@@ -259,16 +385,14 @@ public class ExcelUtil<T> {
 	}
 	
 	/** 对list数据源将其里面的数据导入到excel表单
-	 * 
-	 * @param sheetName
-	 *            工作表的名称
+	 *
+	 * @param
 	 * @param output
 	 *            java输出流
 	 * @param templatePath
 	 *            文件路径
 	 * @param startrow
 	 *            数据开始的行数 0表示第一行 至少为1 * @param map 自定义修改列名 键值对满足 map.put("A","学生姓名") 类行 ，第一个是列的编号,第二个是列的名称
-	 * 
 	 * @param ismodifytablehead
 	 *            是否修改表头名称 ，false 不修改 ，map参数也视为无效
 	 * @throws IOException
@@ -369,17 +493,14 @@ public class ExcelUtil<T> {
 	}
 	
 	/** 对list数据源将其里面的数据导入到excel表单
-	 * 
-	 * @param sheetName
-	 *            工作表的名称
-	 * @param sheetSize
-	 *            每个sheet中数据的行数,此数值必须小于65536
+	 *
+	 * @param
+	 * @param
 	 * @param templatePath
 	 *            模版文件路径
 	 * @param output
 	 *            java输出流
-	 * @param ismodifytablehead
-	 *            是否修改表头名称 ，false 不修改 ，map参数也视为无效
+	 * @param
 	 * @throws IOException
 	 * @throws FileNotFoundException */
 	public boolean exportExcel(List<T> list, OutputStream output, String templatePath, int startrow, Map<String, String> map, boolean ishead) throws FileNotFoundException, IOException {
@@ -394,7 +515,7 @@ public class ExcelUtil<T> {
 	}
 	
 	/** 将EXCEL中A,B,C,D,E列映射成0,1,2,3
-	 * 
+	 *
 	 * @param col */
 	private static short getExcelCol(String col) {
 		col = col.toUpperCase();
@@ -408,7 +529,7 @@ public class ExcelUtil<T> {
 	}
 	
 	/** 设置单元格上提示
-	 * 
+	 *
 	 * @param sheet
 	 *            要设置的sheet.
 	 * @param promptTitle
@@ -437,7 +558,7 @@ public class ExcelUtil<T> {
 	}
 	
 	/** 设置某些列的值只能输入预制的数据,显示下拉框.
-	 * 
+	 *
 	 * @param sheet
 	 *            要设置的sheet.
 	 * @param textlist
@@ -463,8 +584,8 @@ public class ExcelUtil<T> {
 	}
 	
 	/** 得到实体类所有通过注解映射了数据表的字段
-	 * 
-	 * @param map
+	 *
+	 * @param
 	 * @return */
 	@SuppressWarnings("rawtypes")
 	private List<Field> getMappedFiled(Class clazz, List<Field> fields) {
