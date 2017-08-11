@@ -23,7 +23,7 @@
 		<qcloud-cos-version>4.4</qcloud-cos-version>
 	</properties>
 	<dependencies>
-	<dependency>
+		<dependency>
 			<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
 			<version>1.10</version>
@@ -102,10 +102,10 @@
 		</dependency>
 		<!-- 阿里云数据池 -->
 		<dependency>
-   <groupId>com.alibaba</groupId>
-   <artifactId>druid-spring-boot-starter</artifactId>
-   <version>1.1.2</version>
-</dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>1.1.2</version>
+		</dependency>
 		<!-- 七牛 -->
 		<dependency>
 			<groupId>com.qiniu</groupId>
@@ -154,12 +154,12 @@
 			<artifactId>poi</artifactId>
 			<version>3.9</version>
 		</dependency>
-		 <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>3.9</version>
-        </dependency>
-        <!-- excel工具 end --> 
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.9</version>
+		</dependency>
+		<!-- excel工具 end -->
 		<dependency>
 			<groupId>com.whalin</groupId>
 			<artifactId>Memcached-Java-Client</artifactId>
@@ -218,12 +218,7 @@
 			<artifactId>javacsv</artifactId>
 			<version>2.0</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/net.sourceforge.javydreamercsw/JasperReport PDF 报表生成
-		<dependency>
-			<groupId>net.sourceforge.javydreamercsw</groupId>
-			<artifactId>JasperReport</artifactId>
-			<version>0.1</version>
-		</dependency>-->
+		<!-- https://mvnrepository.com/artifact/net.sourceforge.javydreamercsw/JasperReport PDF 报表生成 <dependency> <groupId>net.sourceforge.javydreamercsw</groupId> <artifactId>JasperReport</artifactId> <version>0.1</version> </dependency> -->
 		<!-- 定时任务 https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
@@ -271,13 +266,7 @@
 			<artifactId>javamelody-spring-boot-starter</artifactId>
 			<version>1.65.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.lowagie/itext PDF的操作  屏蔽吧，好像太多人没法下载 
-		<dependency>
-			<groupId>com.lowagie</groupId>
-			<artifactId>itext</artifactId>
-			<version>2.1.7</version>
-		</dependency>
-		-->
+		<!-- https://mvnrepository.com/artifact/com.lowagie/itext PDF的操作 屏蔽吧，好像太多人没法下载 <dependency> <groupId>com.lowagie</groupId> <artifactId>itext</artifactId> <version>2.1.7</version> </dependency> -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
@@ -341,57 +330,57 @@
 		</dependency>
 		<dependency>
 			<artifactId>velocity</artifactId>
-            <groupId>org.apache.velocity</groupId>
+			<groupId>org.apache.velocity</groupId>
 			<version>1.7</version>
 		</dependency>
-        <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity-tools</artifactId>
-            <version>2.0</version>
-            <exclusions>
-            	<exclusion>
-            		<artifactId>dom4j</artifactId>
-            		<groupId>dom4j</groupId>
-            	</exclusion>
-            	<exclusion>
-            		<artifactId>oro</artifactId>
-            		<groupId>oro</groupId>
-            	</exclusion>
-            	<exclusion>
-            		<artifactId>sslext</artifactId>
-            		<groupId>sslext</groupId>
-            	</exclusion>
-            	<exclusion>
-            		<artifactId>struts-core</artifactId>
-            		<groupId>org.apache.struts</groupId>
-            	</exclusion>
-            	<exclusion>
-            		<artifactId>struts-taglib</artifactId>
-            		<groupId>org.apache.struts</groupId>
-            	</exclusion>
-            	<exclusion>
-            		<artifactId>struts-tiles</artifactId>
-            		<groupId>org.apache.struts</groupId>
-            	</exclusion>
-            	<exclusion>
-            		<artifactId>commons-validator</artifactId>
-            		<groupId>commons-validator</groupId>
-            	</exclusion>
-            	<exclusion>
-            		<artifactId>commons-beanutils</artifactId>
-            		<groupId>commons-beanutils</groupId>
-            	</exclusion>
-            	<exclusion>
-            		<artifactId>commons-chain</artifactId>
-            		<groupId>commons-chain</groupId>
-            	</exclusion>
-            	<exclusion>
-            		<artifactId>commons-collections</artifactId>
-            		<groupId>commons-collections</groupId>
-            	</exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-tools</artifactId>
+			<version>2.0</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>dom4j</artifactId>
+					<groupId>dom4j</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>oro</artifactId>
+					<groupId>oro</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>sslext</artifactId>
+					<groupId>sslext</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>struts-core</artifactId>
+					<groupId>org.apache.struts</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>struts-taglib</artifactId>
+					<groupId>org.apache.struts</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>struts-tiles</artifactId>
+					<groupId>org.apache.struts</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-validator</artifactId>
+					<groupId>commons-validator</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-beanutils</artifactId>
+					<groupId>commons-beanutils</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-chain</artifactId>
+					<groupId>commons-chain</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-collections</artifactId>
+					<groupId>commons-collections</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
 			<groupId>com.qiniu</groupId>
 			<artifactId>qiniu-java-sdk</artifactId>
 			<version>${qiniu-version}</version>
@@ -406,7 +395,57 @@
 			<artifactId>cos_api</artifactId>
 			<version>${qcloud-cos-version}</version>
 		</dependency>
-			</dependencies>
+		
+		<!-- 阿里云 短信 -->
+		
+         <dependency>
+	        <groupId>javax.servlet</groupId>
+	        <artifactId>servlet-api</artifactId>
+	        <version>2.5</version>
+	    </dependency>
+		<dependency>
+			<groupId>com.aliyun</groupId>
+			<artifactId>sdk-dysmsapi</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/lib/aliyun-java-sdk-dysmsapi-1.0.0-SANPSHOT.jar</systemPath>
+		</dependency>
+		
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>sdk-core</artifactId>
+            <version>3.2.3</version>
+            <scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/lib/aliyun-java-sdk-core-3.2.3.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+			<groupId>com.aliyun.alicom</groupId>
+			<artifactId>alicom-mns-receive-sdk</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/lib/alicom-mns-receive-sdk-0.0.1-SNAPSHOT.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.aliyun.mns</groupId>
+			<artifactId>aliyun-sdk-mns</artifactId>
+			<version>1.1.8</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/lib/aliyun-sdk-mns-1.1.8.jar</systemPath>
+		</dependency>
+        
+		<!-- 阿里云 短信 end -->
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
