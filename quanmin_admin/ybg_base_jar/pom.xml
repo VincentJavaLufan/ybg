@@ -98,7 +98,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.14</version>
+			<version>1.2.35</version>
 		</dependency>
 		<!-- 阿里云数据池 -->
 		<dependency>
@@ -106,22 +106,18 @@
 			<artifactId>druid-spring-boot-starter</artifactId>
 			<version>1.1.2</version>
 		</dependency>
-		<!-- 七牛 -->
-		<dependency>
-			<groupId>com.qiniu</groupId>
-			<artifactId>qiniu-java-sdk</artifactId>
-			<version>7.0.1</version>
-		</dependency>
+		
+		
 		<!-- -->
 		<dependency>
 			<groupId>com.squareup.okio</groupId>
 			<artifactId>okio</artifactId>
-			<version>1.11.0</version>
+			<version>1.13.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.squareup.okhttp3</groupId>
 			<artifactId>okhttp</artifactId>
-			<version>3.3.0</version>
+			<version>3.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
@@ -247,24 +243,24 @@
 		<dependency>
 			<groupId>com.xiaoleilu</groupId>
 			<artifactId>hutool-all</artifactId>
-			<version>3.0.1</version>
+			<version>3.0.9</version>
 		</dependency>
 		<!-- 生成文档注释 -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
-			<version>2.2.2</version>
+			<version>2.7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
-			<version>2.2.2</version>
+			<version>2.7.0</version>
 		</dependency>
 		<!-- 系统监控 -->
 		<dependency>
 			<groupId>net.bull.javamelody</groupId>
 			<artifactId>javamelody-spring-boot-starter</artifactId>
-			<version>1.65.1</version>
+			<version>1.68.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.lowagie/itext PDF的操作 屏蔽吧，好像太多人没法下载 <dependency> <groupId>com.lowagie</groupId> <artifactId>itext</artifactId> <version>2.1.7</version> </dependency> -->
 		<dependency>
@@ -380,6 +376,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!-- 云存儲 -->
 		<dependency>
 			<groupId>com.qiniu</groupId>
 			<artifactId>qiniu-java-sdk</artifactId>
@@ -395,10 +392,8 @@
 			<artifactId>cos_api</artifactId>
 			<version>${qcloud-cos-version}</version>
 		</dependency>
-		
+		<!-- 云存儲 end -->
 		<!-- 阿里云 短信 -->
-		
-       
 		<dependency>
 			<groupId>com.aliyun</groupId>
 			<artifactId>sdk-dysmsapi</artifactId>
@@ -406,26 +401,24 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/src/main/resources/lib/aliyun-java-sdk-dysmsapi-1.0.0-SANPSHOT.jar</systemPath>
 		</dependency>
-		
-        <dependency>
-            <groupId>com.aliyun</groupId>
-            <artifactId>sdk-core</artifactId>
-            <version>3.2.3</version>
-            <scope>system</scope>
+		<dependency>
+			<groupId>com.aliyun</groupId>
+			<artifactId>sdk-core</artifactId>
+			<version>3.2.3</version>
+			<scope>system</scope>
 			<systemPath>${project.basedir}/src/main/resources/lib/aliyun-java-sdk-core-3.2.3.jar</systemPath>
-        </dependency>
-        
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.3.1</version>
-        </dependency>
-        <dependency>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
 			<groupId>com.aliyun.alicom</groupId>
 			<artifactId>alicom-mns-receive-sdk</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
@@ -439,7 +432,6 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/src/main/resources/lib/aliyun-sdk-mns-1.1.8.jar</systemPath>
 		</dependency>
-        
 		<!-- 阿里云 短信 end -->
 	</dependencies>
 	<build>
