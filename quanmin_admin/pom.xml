@@ -53,7 +53,8 @@
 		<module>ybg_oss</module>
 		<!-- 支付模块 -->
     <module>pay-java-parent</module>
-  </modules>
+    <module>ybg_sms</module>
+	</modules>
 	<build>
 		<defaultGoal>compile</defaultGoal>
 	</build>
