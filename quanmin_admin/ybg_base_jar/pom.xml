@@ -154,6 +154,12 @@
 			<artifactId>poi</artifactId>
 			<version>3.9</version>
 		</dependency>
+		 <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <!-- excel工具 end --> 
 		<dependency>
 			<groupId>com.whalin</groupId>
 			<artifactId>Memcached-Java-Client</artifactId>
