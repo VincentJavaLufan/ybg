@@ -161,7 +161,7 @@ public abstract class BaseDao extends BaseSQL {
 				
 				@Override
 				public PreparedStatement createPreparedStatement(Connection conn) throws SQLException {
-					PreparedStatement ps = conn.prepareStatement(sql.toString());
+					PreparedStatement ps = conn.prepareStatement(sql.toString(),PreparedStatement.RETURN_GENERATED_KEYS);
 					int count = 1;
 					for (Entry<String, Object> entry : basemap.entrySet()) {
 						if (entry.getValue() instanceof Integer) {
@@ -210,11 +210,13 @@ public abstract class BaseDao extends BaseSQL {
 					return ps;
 				}
 			}, idkey);
+			
+			
 			if (idtype instanceof Integer) {
 				return idkey.getKey().intValue();
 			}
 			else if (idtype instanceof Long) {
-				return idkey.getKey().longValue();
+				return  idkey.getKey().longValue();
 			}
 			else {
 				return idkey.getKey().toString();
