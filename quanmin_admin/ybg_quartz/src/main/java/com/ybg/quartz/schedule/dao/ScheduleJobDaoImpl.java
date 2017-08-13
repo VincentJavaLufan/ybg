@@ -115,7 +115,7 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 		createmap.put("params", scheduleJob.getParams());
 		createmap.put("remark", scheduleJob.getRemark());
 		createmap.put("status", scheduleJob.getStatus());
-		Object id = basecreate(createmap, "schedule_job", false, new Long(0));
+		Object id = basecreate(createmap, "schedule_job", true, new Long(0));
 		scheduleJob.setJobId(new Long((long) id));
 	}
 	
