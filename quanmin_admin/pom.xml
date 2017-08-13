@@ -27,12 +27,6 @@
 		<module>ybg_rbac</module>
 		<!-- 企业模块 可删 -->
 		<module>ybg_company</module>
-		<!-- QQ登陆 非必�? -->
-		<module>ybg_login_qq</module>
-		<!--百度登陆，非必需 -->
-		<module>ybg_login_baidu</module>
-		<!--新浪登陆，非必需 -->
-		<module>ybg_login_sina</module>
 		<!-- 微信模块 非必须 -->
 		<module>ybg_weixin</module>
 		<!-- 阿里MQ 非必须 -->
@@ -52,8 +46,9 @@
 		<!-- 对象存储 -->
 		<module>ybg_oss</module>
 		<!-- 支付模块 -->
-    <module>pay-java-parent</module>
-    <module>ybg_sms</module>
+		<module>pay-java-parent</module>
+		<module>ybg_sms</module>
+		<module>ybg_thirdpartlogin</module>
 	</modules>
 	<build>
 		<defaultGoal>compile</defaultGoal>

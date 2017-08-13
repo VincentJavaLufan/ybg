@@ -39,7 +39,6 @@ public class SchoolController {
 	@ApiOperation(value = "School管理页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String index(ModelMap map) {
-		System.out.println("我进来School管理页面");
 		return "/system/school/index";
 	}
 	
@@ -55,8 +54,6 @@ public class SchoolController {
 		page.init();
 		return page;
 	}
-	
-	
 	
 	@ApiOperation(value = "更新School", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -120,8 +117,4 @@ public class SchoolController {
 		j.setMsg("操作成功");
 		return j;
 	}
-	
-	
-	
-	
 }
