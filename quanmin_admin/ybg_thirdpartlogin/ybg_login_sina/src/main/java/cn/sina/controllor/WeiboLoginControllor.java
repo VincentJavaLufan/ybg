@@ -58,7 +58,7 @@ public class WeiboLoginControllor {
 		WeiboUserVO weibouser = weiboUserService.get(token.getUid());
 		if (weibouser == null) {
 			map.put("uid", token.getUid());
-			return "/weibo/weibobund";
+			return "/thirdpartlogin/weibo/weibobund";
 		}
 		UserVO user = userService.get(weibouser.getUserid());
 		if (user.getState().equals(UserStateConstant.LOCK)) {
@@ -97,7 +97,7 @@ public class WeiboLoginControllor {
 		if (!(user.isAccountNonLocked())) {
 			request.setAttribute("error", "用户已经被锁定不能绑定，请与管理员联系！");
 		}
-		if (user.isAccountNonExpired()) {
+		if (!user.isAccountNonExpired()) {
 			request.setAttribute("error", "账号未激活！");
 		}
 		if (new DesUtils().encrypt(password).equals(user.getPassword())) {

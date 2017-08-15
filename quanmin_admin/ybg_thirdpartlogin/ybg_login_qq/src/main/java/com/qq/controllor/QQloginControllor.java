@@ -60,7 +60,7 @@ public class QQloginControllor {
 			QQuserVO qquser = qQuserService.getByopenId(openID);
 			if (qquser == null) {
 				map.put("openid", openID);
-				return "/qq/qqbund";
+				return "/thirdpartlogin/qq/qqbund";
 			}
 			UserVO user = userService.get(qquser.getUserid());
 			if (user.getState().equals(UserStateConstant.LOCK)) {
@@ -100,7 +100,7 @@ public class QQloginControllor {
 		if (!(user.isAccountNonLocked())) {
 			request.setAttribute("error", "用户已经被锁定不能绑定，请与管理员联系！");
 		}
-		if (user.isAccountNonExpired()) {
+		if (!user.isAccountNonExpired()) {
 			request.setAttribute("error", "账号未激活！");
 		}
 		if (new DesUtils().encrypt(password).equals(user.getPassword())) {

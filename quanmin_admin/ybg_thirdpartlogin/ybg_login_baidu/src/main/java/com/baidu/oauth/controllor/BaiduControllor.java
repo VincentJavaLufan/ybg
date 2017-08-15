@@ -111,7 +111,7 @@ public class BaiduControllor {
 		BaiduUser weibouser = baiduUserService.getByUid(loggedInUser.getUid());
 		if (weibouser == null) {
 			map.put("uid", loggedInUser.getUid());
-			return "/baidu/baidubund";
+			return "/thirdpartlogin/baidu/baidubund";
 		}
 		UserVO user = this.userService.get(weibouser.getUserid());
 		//XXX 可能綁定的用戶已刪除
@@ -164,7 +164,7 @@ public class BaiduControllor {
 		if (!(user.isAccountNonLocked())) {
 			map.put("error", "用户已经被锁定不能绑定，请与管理员联系！");
 		}
-		if (user.isAccountNonExpired()) {
+		if (!user.isAccountNonExpired()) {
 			map.put("error", "账号未激活！");
 		}
 		if (new DesUtils().encrypt(password).equals(user.getCredentialssalt())) {

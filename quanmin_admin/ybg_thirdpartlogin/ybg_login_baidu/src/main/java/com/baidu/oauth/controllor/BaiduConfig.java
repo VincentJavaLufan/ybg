@@ -5,7 +5,7 @@ import com.ybg.base.util.SpringContextUtils;
 
 public class BaiduConfig {
 	
-	public BaiduConfig() {
+	private BaiduConfig() {
 	}
 	
 	private static Properties props = new Properties();
