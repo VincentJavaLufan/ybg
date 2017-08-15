@@ -15,11 +15,10 @@
 <script type="text/javascript" src="/js/jquery/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="/js/layer-v1.9.2/layer/layer.js"></script>
 <script type="text/javascript" src="/common/base.js"></script>
-<script type="text/javascript" src="/common/vue.js"></script>
 <script type="text/javascript">
     layer.config({
         extend : [
-            '/style.css'], //加载新皮肤skin/style.css
+            'skin/moon/style.css'], //加载新皮肤skin/style.css
         fix : false, // 用于设定层是否不随滚动条而滚动，固定在可视区域。
         skin : 'layer-ext-moon' //一旦设定，所有弹层风格都采用此主题。layui-layer-molv
     });
@@ -95,9 +94,10 @@
 			</div>
 			<section class="panel panel-default bg-white m-t-lg">
 				<header class="panel-heading text-center">
-					<strong>登陆</strong>
+					<strong>绑定新浪微博</strong>
 				</header>
-				<form action="/common/login_do/login.do" method="post" class="panel-body wrapper-lg">
+				<form action="/common/weibo/sinalogin_do/bund.do" method="post" class="panel-body wrapper-lg">
+					<input type="hidden" name="uid" id="uid" value="${uid!}">
 					<div class="form-group">
 						<label class="control-label">账号</label>
 						<input type="text" placeholder="请输入账号" id="username" name="username" class="form-control input-lg">
@@ -106,33 +106,10 @@
 						<label class="control-label">密码</label>
 						<input type="password" placeholder="请输入密码" id="password" name="password" class="form-control input-lg">
 					</div>
-					<div class="checkbox">
-						<label>
-							<input type="checkbox" name="rememberMe" checked="checked" value="true">
-							记住我
-						</label>
-					</div>
 					<a href="javascript:forgetpwd()" class="pull-right m-t-xs">
 						<small>忘记密码?</small>
 					</a>
-					<button type="submit" class="btn btn-primary" onclick="javascript:wait()">登陆</button>
-					<div class="line line-dashed"></div>
-					<a href="/common/weibo/sinalogin_do/tologin.do" class="btn btn-facebook btn-block m-b-sm">
-						<i class="fa fa-weibo pull-left"></i>
-						微博账号登陆
-					</a>
-					<a href="/common/qq/login_do/index.do" class="btn btn-twitter btn-block">
-						<i class="fa fa-qq pull-left"></i>
-						QQ账号登陆
-					</a>
-					<a href="/common/baidu_do/tologin.do" class="btn btn-gplus btn-block">
-						<i class="fa fa-baidu pull-left"></i>
-						百度账号登陆
-					</a>
-					<a href="/commom/mayun_do/tologin.do" class="btn btn-success btn-block">
-						<i class="fa fa-baidu pull-left"></i>
-						码云账号登陆
-					</a>
+					<button type="submit" class="btn btn-primary" onclick="javascript:wait()">绑定</button>
 					<div class="line line-dashed"></div>
 					<p class="text-muted text-center">
 						<small>还没有账号?</small>
@@ -147,7 +124,7 @@
 		<div class="text-center padder">
 			<p>
 				<small>
-					<a href="http://www.miitbeian.gov.cn/" id="SYSTEM_authinfo">{{SYSTEM_authinfo}} </a>
+					<a href="http://www.miitbeian.gov.cn/">© 2016-2016 88ybg.com 版权所有 ICP证：粤ICP备16078942号-1</a>
 				</small>
 			</p>
 		</div>
@@ -168,19 +145,4 @@
     };
     //tologin();
 </script>
-	</#if> 
-	<script>
-        var app = new Vue({
-            el : '#SYSTEM_authinfo',
-            data : {
-                SYSTEM_authinfo : ''
-            },
-            created : function() {
-                var url = "/common/login_do/system_authinfo.do";
-                var _self = this;
-                $.get(url, function(data) {
-                    _self.SYSTEM_authinfo = data;
-                })
-            }
-        });
-    </script>
+</#if>

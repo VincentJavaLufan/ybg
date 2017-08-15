@@ -94,10 +94,10 @@
 			</div>
 			<section class="panel panel-default bg-white m-t-lg">
 				<header class="panel-heading text-center">
-					<strong>绑定新浪微博</strong>
+					<strong>绑定QQ账号</strong>
 				</header>
-				<form action="/common/weibo/sinalogin_do/bund.do" method="post" class="panel-body wrapper-lg">
-					<input type="hidden" name="uid" id="uid" value="${uid!}">
+				<form action="/common/qq/login_do/bund.do" method="post" class="panel-body wrapper-lg">
+					<input type="hidden" name="openid" id="openid" value="${openid!}">
 					<div class="form-group">
 						<label class="control-label">账号</label>
 						<input type="text" placeholder="请输入账号" id="username" name="username" class="form-control input-lg">
@@ -134,7 +134,7 @@
 	<!-- App -->
 </body>
 </html>
-<#iferror??>
+<#if error??>
 <script type="text/javascript">
     if ("${error!}" != "") {
         layer.tips('${error!}', '#username', {
