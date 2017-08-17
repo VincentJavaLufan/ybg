@@ -27,7 +27,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/js/demo.js"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/libs/bootstrap.min.js"></script>
 <script src="/js/libs/bootstrap-table.min.js"></script>
 <script type="text/javascript" src="/common/vue.js"></script>
 <!-- Slimscroll -->
