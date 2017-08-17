@@ -1,5 +1,6 @@
 package com.ybg.mayun.api;
 import javax.servlet.http.HttpServletRequest;
+import com.ybg.base.util.ReplaceDomainUtil;
 
 public class Mayun {
 	
@@ -16,9 +17,9 @@ public class Mayun {
 		this.redirectUri = redirectUri;
 	}
 	
-	/** 获取登陆地址 **/
+	/** 获取登陆地址 会强制替换系统域名 请在systemconstant.properties 中设置正式域名**/
 	public String getLoginURL() {
-		return LoggedInUser_URL + "?client_id=" + getClientId() + "&redirect_uri=" + getRedirectUri() + "&response_type=code";
+		return LoggedInUser_URL + "?client_id=" + getClientId() + "&redirect_uri=" + ReplaceDomainUtil.replacedomain(getRedirectUri())  + "&response_type=code";
 	}
 	
 	public String getClientId() {

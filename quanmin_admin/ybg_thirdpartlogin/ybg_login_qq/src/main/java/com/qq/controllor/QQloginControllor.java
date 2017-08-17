@@ -103,7 +103,7 @@ public class QQloginControllor {
 		if (!user.isAccountNonExpired()) {
 			request.setAttribute("error", "账号未激活！");
 		}
-		if (new DesUtils().encrypt(password).equals(user.getPassword())) {
+		if (new DesUtils().encrypt(password).equals(user.getCredentialssalt())) {
 			UsernamePasswordAuthenticationToken token2 = new UsernamePasswordAuthenticationToken(user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()));
 			token2.setDetails(new WebAuthenticationDetails(request));
 			Authentication authenticatedUser = authenticationManager.authenticate(token2);

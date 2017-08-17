@@ -79,7 +79,7 @@ import io.swagger.annotations.ApiOperation;
 //      q参数为媒体类型的质量因子，越大则优先权越高(从0到1)
 //③Accept：*/*,text/*,text/html
 //      将按照如下顺序进行produces的匹配 ①text/html ②text/* ③*/* 
-@Api("用户管理接口")
+@Api(value="用户管理接口",tags="用户管理接口")
 @Controller
 @RequestMapping("/user/user_do/")
 public class UserControllor {

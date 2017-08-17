@@ -17,5 +17,6 @@
   	<module>ybg_login_baidu</module>
   	<module>ybg_login_sina</module>
     <module>ybg_login_mayun</module>
+    <module>ybg_login_weixin</module>
   </modules>
 </project>
