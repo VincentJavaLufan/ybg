@@ -26,7 +26,7 @@ import java.io.IOException;
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2016年12月19日 下午9:12:58 */
-@Api("代码生成器")
+@Api(tags="代码生成器")
 @Controller
 @RequestMapping("/sys/generator_do/")
 public class SysGeneratorController {

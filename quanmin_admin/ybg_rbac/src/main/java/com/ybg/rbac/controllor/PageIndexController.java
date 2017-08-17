@@ -14,7 +14,7 @@ import com.ybg.rbac.user.domain.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api("平台角色首页加载API")
+@Api(tags="平台角色首页加载API")
 @Controller
 public class PageIndexController {
 	

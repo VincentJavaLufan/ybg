@@ -23,7 +23,7 @@ import springfox.documentation.annotations.ApiIgnore;
 /** @author Deament
  * @email 591518884@qq.com
  * @date 2017-07-08 */
-@Api("Company管理")
+@Api(value="企业管理",tags="企业管理")
 @Controller
 @RequestMapping("/oa/company_do/")
 public class CompanyController {

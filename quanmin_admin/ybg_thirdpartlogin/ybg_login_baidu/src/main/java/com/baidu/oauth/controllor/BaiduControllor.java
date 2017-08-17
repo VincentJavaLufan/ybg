@@ -34,7 +34,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /** 百度授权认证 **/
-@Api("百度登陆接口")
+@Api(tags="百度登陆接口")
 @Controller
 @RequestMapping(value = { "/common/baidu_do/" })
 public class BaiduControllor {

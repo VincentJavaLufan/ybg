@@ -26,7 +26,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
-@Api("用户访问资源管理接口")
+@Api(tags="用户访问资源管理接口")
 @Controller
 @RequestMapping("/res/res_do/")
 public class RescourcesControllor {

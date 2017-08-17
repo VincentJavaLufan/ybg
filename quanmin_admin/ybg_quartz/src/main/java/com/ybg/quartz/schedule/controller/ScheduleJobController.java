@@ -28,7 +28,7 @@ import io.swagger.annotations.ApiOperation;
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2016年11月28日 下午2:16:40 */
-@Api("定时任务API")
+@Api(tags="定时任务API")
 @Controller
 @RequestMapping(value = { "/sys/schedule_do/" })
 public class ScheduleJobController {

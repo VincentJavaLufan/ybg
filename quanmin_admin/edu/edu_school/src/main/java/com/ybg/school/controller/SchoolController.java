@@ -28,7 +28,7 @@ import springfox.documentation.annotations.ApiIgnore;
 /** @author Deament
  * @email 591518884@qq.com
  * @date 2017-07-07 */
-@Api("学校管理")
+@Api(value="学校管理",tags="学校管理")
 @Controller
 @RequestMapping("/edu/school.do/")
 public class SchoolController {

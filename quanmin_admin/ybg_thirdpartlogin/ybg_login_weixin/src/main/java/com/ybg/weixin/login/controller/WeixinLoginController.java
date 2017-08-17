@@ -26,7 +26,7 @@ import com.ybg.weixin.login.service.WeixinUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api("微信登陆接口")
+@Api(tags="微信登陆接口")
 @Controller
 @RequestMapping("/common/weixin_do/")
 public class WeixinLoginController {

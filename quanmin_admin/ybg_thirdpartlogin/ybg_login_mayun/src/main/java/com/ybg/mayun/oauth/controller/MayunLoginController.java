@@ -1,7 +1,4 @@
 package com.ybg.mayun.oauth.controller;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +21,10 @@ import com.ybg.mayun.oauth.service.MayunUserService;
 import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.UserService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+@Api(tags = "码云登陆API")
 @Controller
 @RequestMapping("/commom/mayun_do/")
 public class MayunLoginController {

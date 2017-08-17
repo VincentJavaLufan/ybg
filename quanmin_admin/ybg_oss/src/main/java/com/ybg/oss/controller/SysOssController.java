@@ -40,7 +40,7 @@ import io.swagger.annotations.ApiOperation;
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2017-03-25 12:13:26 */
-@Api("文件上传")
+@Api(tags="文件上传")
 @Controller
 @RequestMapping("/sys/oss_do/")
 public class SysOssController {

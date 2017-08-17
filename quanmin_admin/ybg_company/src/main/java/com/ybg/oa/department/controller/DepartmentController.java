@@ -28,7 +28,7 @@ import springfox.documentation.annotations.ApiIgnore;
 /** @author Deament
  * @email 591518884@qq.com
  * @date 2017-07-15 */
-@Api("Department管理")
+@Api(tags="Department管理")
 @Controller
 @RequestMapping("/oa/department_do/")
 public class DepartmentController {

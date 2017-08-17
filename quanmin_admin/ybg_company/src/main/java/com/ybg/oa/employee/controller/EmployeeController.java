@@ -35,7 +35,7 @@ import springfox.documentation.annotations.ApiIgnore;
  * @email 591518884@qq.com
  * @date 2017-07-15
  */
- @Api("Employee管理")
+ @Api(tags="Employee管理")
 @Controller
 @RequestMapping("/oa/employee_do/")
 public class EmployeeController {

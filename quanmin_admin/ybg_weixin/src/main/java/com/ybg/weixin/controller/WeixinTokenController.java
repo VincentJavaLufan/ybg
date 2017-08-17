@@ -13,7 +13,7 @@ import com.ybg.weixinMenu.MessageUtil;
 import com.ybg.weixinMenu.SignUtil;
 import com.ybg.weixinMenu.resp.TextMessage;
 import io.swagger.annotations.Api;
-@Api("用于验证微信服务器")
+@Api(tags="用于验证微信服务器")
 @Controller
 public class WeixinTokenController {
 	

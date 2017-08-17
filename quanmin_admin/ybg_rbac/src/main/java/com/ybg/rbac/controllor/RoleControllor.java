@@ -32,7 +32,7 @@ import com.ybg.rbac.role.domain.SysRoleVO;
 import com.ybg.rbac.role.qvo.RoleQuery;
 import com.ybg.rbac.role.service.RoleService;
 
-@Api("角色管理")
+@Api(tags="角色管理")
 @Controller
 @RequestMapping("/role/role_do/")
 public class RoleControllor {

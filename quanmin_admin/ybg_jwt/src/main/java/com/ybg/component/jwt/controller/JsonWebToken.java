@@ -17,7 +17,7 @@ import com.ybg.rbac.user.service.LoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api("jwt校验API")
+@Api(tags="jwt校验API")
 @RestController
 public class JsonWebToken {
 	

@@ -28,7 +28,7 @@ import springfox.documentation.annotations.ApiIgnore;
 /** @author Deament
  * @email 591518884@qq.com
  * @date 2017-07-07 */
-@Api("班级管理")
+@Api(value="班级管理",tags="班级管理")
 @Controller
 @RequestMapping("/edu/clazz_do/")
 public class ClazzController {
