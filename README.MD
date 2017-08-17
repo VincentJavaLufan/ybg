@@ -34,7 +34,7 @@ QQ群：314658875
 
 ### 所用技术
 
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0708/084549_c46f2786_880593.png "在这里输入图片标题")
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0817/233621_68c6fa20_880593.png "ybg-spring-fast技术选型.png")
 
 
 
