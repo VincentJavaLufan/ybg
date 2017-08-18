@@ -50,6 +50,7 @@
 		<module>ybg_sms</module>
 		<module>ybg_thirdpartlogin</module>
     <module>ybg_weixin_api</module>
+    <module>ybg_kaptcha</module>
   </modules>
 	<build>
 		<defaultGoal>compile</defaultGoal>

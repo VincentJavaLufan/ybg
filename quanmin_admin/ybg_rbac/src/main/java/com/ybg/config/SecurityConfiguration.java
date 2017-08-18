@@ -18,16 +18,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.access.expression.WebExpressionVoter;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.ybg.config.security.LoginSuccessHandler;
 import com.ybg.config.security.MyAccessDecisionManager;
-import com.ybg.config.security.MyAccessDeniedHandler;
 import com.ybg.config.security.MySecurityMetadataSource;
 import com.ybg.config.security.YcAnthencationProder;
 import com.ybg.rbac.user.service.LoginService;
@@ -51,24 +47,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/", "/upload/**", "/css/**", "/js/**", "/images/**", "/resources/**", "/lib/**", "/skin/**", "/template/**", "/common/**", "/404/**", "/admin_files/**", "/echarts/**", "/fonts/**", "/notebook/**").permitAll();
 		// // 所有的访问都需要权限验证
 		// http.authorizeRequests().anyRequest().authenticated();
-		http.formLogin()
-				// 默认访问页
-		.
-		// 访问成功页url
-		defaultSuccessUrl("/common/login_do/index.do", true)
-				.loginPage("/common/login_do/login.do").permitAll().and().logout().
-				//
-				logoutRequestMatcher(new AntPathRequestMatcher("/common/login_do/loginout.do"))
-				// // 注销失败跳转到登录页面
-				 .logoutSuccessUrl("/common/login_do/tologin.do")
-				.permitAll();
 		//
 		// // 允许iframe 嵌套
 		http.headers().frameOptions().disable();
 		// // 关闭csrf 防止循环定向
 		// http.csrf().disable();
 		// / ************分隔***/
-		http.addFilterAfter(MyUsernamePasswordAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+		// http.addFilterAfter(MyUsernamePasswordAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 		// 开启默认登录页面
 		http.authorizeRequests().anyRequest().authenticated().withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
 			
@@ -80,7 +65,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			}
 		});
 		// 自定义accessDecisionManager访问控制器,并开启表达式语言
-	//	http.exceptionHandling().accessDeniedHandler(accessDeniedHandler()).and().authorizeRequests().anyRequest().authenticated().expressionHandler(webSecurityExpressionHandler());
+		// http.exceptionHandling().accessDeniedHandler(accessDeniedHandler()).and().authorizeRequests().anyRequest().authenticated().expressionHandler(webSecurityExpressionHandler());
 		// 自定义登录页面
 		http.csrf().disable();
 		// session管理
@@ -113,28 +98,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public LoginSuccessHandler loginSuccessHandler() {
 		return new LoginSuccessHandler();
 	}
-	
-	/** 帐号密码 校验
-	 * 
-	 * 传进的参数帐号必须是username 区分大小写 传进的密码参数名必须是password 区分大小写 **/
-	@Bean
-	UsernamePasswordAuthenticationFilter MyUsernamePasswordAuthenticationFilter() {
-		UsernamePasswordAuthenticationFilter myUsernamePasswordAuthenticationFilter = new UsernamePasswordAuthenticationFilter();
-		myUsernamePasswordAuthenticationFilter.setPostOnly(true);
-		myUsernamePasswordAuthenticationFilter.setAuthenticationManager(authenticationManagerBean());
-		myUsernamePasswordAuthenticationFilter.setUsernameParameter("username");
-		myUsernamePasswordAuthenticationFilter.setPasswordParameter("password");
-		myUsernamePasswordAuthenticationFilter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/common/login_do/unauthorizedUrl.do", "POST"));
-		myUsernamePasswordAuthenticationFilter.setAuthenticationFailureHandler(simpleUrlAuthenticationFailureHandler());
-		return myUsernamePasswordAuthenticationFilter;
-	}
-	
-//	/** 没有权限处理 **/
-//	@Bean
-//	AccessDeniedHandler accessDeniedHandler() {
-//		MyAccessDeniedHandler accessDeniedHandler = new MyAccessDeniedHandler("/common/login_do/unauthorizedUrl.do");
-//		return accessDeniedHandler;
-//	}
 	
 	@Bean
 	public LoggerListener loggerListener() {

@@ -57,6 +57,16 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ybg</groupId>
+			<artifactId>ybg_login_mayun</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_login_weixin</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ybg</groupId>
 			<artifactId>ybg_mq</artifactId>
 			<version>1.0.0</version>
 		</dependency>
@@ -75,11 +85,7 @@
 			<artifactId>ybg_oss</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_weixin</artifactId>
-			<version>1.0.0</version>
-		</dependency>
+		<!-- <dependency> <groupId>com.ybg</groupId> <artifactId>ybg_weixin</artifactId> <version>1.0.0</version> </dependency> -->
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_base_jdbc</artifactId>
@@ -96,7 +102,7 @@
 			<artifactId>edu_city</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- 教育模块 end-->
+		<!-- 教育模块 end -->
 		<!-- 支付模块 -->
 		<dependency>
 			<groupId>com.egzosn</groupId>
@@ -110,7 +116,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.egzosn</groupId>
-			 <artifactId>pay-java-fuiou</artifactId>
+			<artifactId>pay-java-fuiou</artifactId>
 			<version>${pay-java.version}</version>
 		</dependency>
 		<dependency>
@@ -124,7 +130,13 @@
 			<version>${pay-java.version}</version>
 		</dependency>
 		<!-- 支付模块结束 -->
-		
+		<!-- 验证码 -->
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_kaptcha</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<!--验证码end -->
 	</dependencies>
 	<build>
 		<plugins>

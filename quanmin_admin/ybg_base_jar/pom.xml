@@ -106,8 +106,6 @@
 			<artifactId>druid-spring-boot-starter</artifactId>
 			<version>1.1.2</version>
 		</dependency>
-		
-		
 		<!-- -->
 		<dependency>
 			<groupId>com.squareup.okio</groupId>
@@ -433,6 +431,13 @@
 			<systemPath>${project.basedir}/src/main/resources/lib/aliyun-sdk-mns-1.1.8.jar</systemPath>
 		</dependency>
 		<!-- 阿里云 短信 end -->
+		<!-- 验证码 -->
+		<dependency>
+			<groupId>com.github.penggle</groupId>
+			<artifactId>kaptcha</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<!-- 验证码 end -->
 	</dependencies>
 	<build>
 		<plugins>

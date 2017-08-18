@@ -85,12 +85,7 @@
 			<artifactId>ybg_oss</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- 
-		<dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_weixin</artifactId>
-			<version>1.0.0</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.ybg</groupId> <artifactId>ybg_weixin</artifactId> <version>1.0.0</version> </dependency> -->
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_base_jdbc</artifactId>
@@ -135,6 +130,13 @@
 			<version>${pay-java.version}</version>
 		</dependency>
 		<!-- 支付模块结束 -->
+		<!-- 验证码 -->
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_kaptcha</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<!--验证码end -->
 	</dependencies>
 	<build>
 		<plugins>

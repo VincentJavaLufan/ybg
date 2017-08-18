@@ -5,14 +5,21 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONObject;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -25,6 +32,7 @@ import com.ybg.base.jdbc.util.DateUtil;
 import com.ybg.base.util.Common;
 import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.Json;
+import com.ybg.base.util.ServletUtil;
 import com.ybg.base.util.SystemConstant;
 import com.ybg.component.email.sendemail.SendEmailInter;
 import com.ybg.component.email.sendemail.SendQQmailImpl;
@@ -37,16 +45,18 @@ import com.ybg.rbac.user.service.LoginService;
 import com.ybg.rbac.user.service.UserService;
 
 /*** 用Shiro登陆 **/
-@Api(tags="平台登录操作")
+@Api(tags = "平台登录操作")
 @Controller
 public class LoginControllor {
 	
 	@Autowired
-	UserService			userService;
+	UserService				userService;
 	@Autowired
-	ResourcesService	resourcesService;
+	ResourcesService		resourcesService;
 	@Autowired
-	LoginService		loginService;
+	LoginService			loginService;
+	@Autowired
+	AuthenticationManager	authenticationManager;
 	
 	@ApiOperation(value = "登录页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "/common/login_do/tologin.do", "/" }, method = { RequestMethod.GET, RequestMethod.POST })
@@ -66,51 +76,58 @@ public class LoginControllor {
 	
 	@ApiOperation(value = "退出系统 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/loginout.do", method = RequestMethod.GET)
-	public String loginout() {
+	public String loginout(HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
 		return "redirect:/common/login_do/tologin.do";
+	}
+	
+	/** 验证码校验逻辑，不要可以去掉 */
+	private boolean checkvrifyCode(HttpServletRequest httpServletRequest, ModelMap model) {
+		String captchaId = (String) httpServletRequest.getSession().getAttribute("vrifyCode");
+		String parameter = httpServletRequest.getParameter("vrifyCode");
+		System.out.println("Session  vrifyCode " + captchaId + " form vrifyCode " + parameter);
+		System.out.println(!captchaId.equals(parameter));
+		if (!captchaId.equals(parameter)) {
+			model.addAttribute("error", "验证码不正确！");
+			return false;
+		}
+		return true;
 	}
 	
 	@ApiOperation(value = "登录系统 ", notes = "", produces = MediaType.ALL_VALUE)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "username", value = "帐号", dataType = "java.lang.String", required = true), @ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
 	@RequestMapping(value = "/common/login_do/login.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String login(Model model) {
-		try {
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			if (auth instanceof MyAuthenticationToken) {
-				Object pinciba = auth.getPrincipal();
-				if (pinciba instanceof UserDetails) {
-					UserDetails userDetail = ((UserDetails) pinciba);
-					model.addAttribute("username", userDetail.getUsername());
-					UserQuery qvo = new UserQuery();
-					qvo.setUsername(userDetail.getUsername());
-					UserVO u = userService.list(qvo).get(0);
-					model.addAttribute("realName", u.getUsername());
-					return "redirect:/common/login_do/index.do";
-				}
-			}
-			else if (auth instanceof AnonymousAuthenticationToken) {
-				model.addAttribute("error", "用户或密码不正确！");
-				return "/login";
-			}
-			else {
-				// 获取用户登录权限详细
-				Object pinciba = auth.getPrincipal();
-				if (pinciba instanceof UserDetails) {
-					UserDetails userDetail = ((UserDetails) pinciba);
-					model.addAttribute("username", userDetail.getUsername());
-					UserQuery qvo = new UserQuery();
-					qvo.setUsername(userDetail.getUsername());
-					UserVO u = userService.list(qvo).get(0);
-					model.addAttribute("realName", u.getUsername());
-				}
-				// 登录成功跳到主页
-				return "redirect:/common/login_do/index.do";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+	public String login(HttpServletRequest httpServletRequest, ModelMap map) throws Exception {
+		// 首先检测验证码
+		String username = ServletUtil.getStringParamDefaultBlank(httpServletRequest, "username");
+		String password = ServletUtil.getStringParamDefaultBlank(httpServletRequest, "password");
+		if (!checkvrifyCode(httpServletRequest, map)) {
+			map.addAttribute("error", "验证码不正确！");
 			return "/login";
 		}
-		return "/login";
+		UserVO user = userService.login(username);
+		// BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		if (!(user.isAccountNonLocked())) {
+			map.put("error", "用户已经被锁定不能绑定，请与管理员联系！");
+		}
+		if (!user.isAccountNonExpired()) {
+			map.put("error", "账号未激活！");
+		}
+		if (new DesUtils().encrypt(password).equals(user.getCredentialssalt())) {
+			UsernamePasswordAuthenticationToken token2 = new UsernamePasswordAuthenticationToken(user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()));
+			token2.setDetails(new WebAuthenticationDetails(httpServletRequest));
+			Authentication authenticatedUser = authenticationManager.authenticate(token2);
+			SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
+			System.out.println("118:");
+			return "redirect:/common/login_do/index.do";
+		}
+		else {
+			map.put("error", "用户或密码不正确！");
+			return "/login";
+		}
 	}
 	
 	@ApiOperation(value = "无权限提示页面 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
