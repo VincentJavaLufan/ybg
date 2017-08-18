@@ -11,7 +11,9 @@ public class ReplaceDomainUtil {
 		try {
 			java.net.URL url = new URL(oldurl);
 			String host = url.getHost();// 获取主机名
-			return oldurl.replace(host, SystemConstant.getSystemdomain());
+			java.net.URL url2 = new URL(SystemConstant.getSystemdomain());
+			String host2 = url2.getHost();// 获取主机名
+			return oldurl.replace(host,host2 );
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
