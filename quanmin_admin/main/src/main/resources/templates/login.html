@@ -19,12 +19,7 @@
 <!-- 微信登陸 -->
 <script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 <script type="text/javascript">
-    layer.config({
-        extend : [
-            '/style.css'], //加载新皮肤skin/style.css
-        fix : false, // 用于设定层是否不随滚动条而滚动，固定在可视区域。
-        skin : 'layer-ext-moon' //一旦设定，所有弹层风格都采用此主题。layui-layer-molv
-    });
+    
     function getCookie(cookie_name) {
         var allcookies = document.cookie;
         var cookie_pos = allcookies.indexOf(cookie_name); //索引的长度
@@ -102,22 +97,30 @@
 				<form action="/common/login_do/login.do" id="loginform" method="post" class="panel-body wrapper-lg">
 					<div class="form-group">
 						<label class="control-label">账号</label>
-						<input type="text" placeholder="请输入账号" id="username" name="username" class="form-control input-lg">
+						<input type="text" placeholder="请输入账号" required="required" id="username" name="username" class="form-control input-lg">
 					</div>
 					<div class="form-group">
 						<label class="control-label">密码</label>
-						<input type="password" placeholder="请输入密码" id="password" name="password" class="form-control input-lg">
+						<input type="password" placeholder="请输入密码" required="required" id="password" name="password" class="form-control input-lg">
 					</div>
-					<div class="checkbox">
-						<label>
-							<input type="checkbox" name="rememberMe" checked="checked" value="true">
-							记住我
-						</label>
+					
+					
+					<div class="form-group">
+						<label class="control-label">验证码</label><label><img alt="验证码" onclick = "this.src='/defaultKaptcha?d='+new Date()*1" src="/defaultKaptcha" />  </label>
+						<input type="text" placeholder="请输入验证码" required="required" id="vrifyCode" name="vrifyCode" class="form-control input-sm" style="width: 30%;display: inline;">
 					</div>
+					
 					<a href="javascript:forgetpwd()" class="pull-right m-t-xs">
 						<small>忘记密码?</small>
 					</a>
-					<button type="submit" class="btn btn-primary" onclick="javascript:wait()">登陆</button>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" name="rememberMe" checked="checked" value="true">
+							记住账号
+						</label>
+						
+					</div>
+					<button type="submit" class="btn btn-primary" onclick="javascript:layer.msg('登陆中')">登陆</button>
 					<div class="line line-dashed"></div>
 					<a href="/common/weibo/sinalogin_do/tologin.do" class="btn btn-facebook btn-block m-b-sm">
 						<i class="fa fa-weibo pull-left"></i>
