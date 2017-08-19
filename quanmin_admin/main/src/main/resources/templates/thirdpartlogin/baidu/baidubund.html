@@ -112,6 +112,10 @@
 						<input type="password" placeholder="请输入密码" id="password"
 							name="password" class="form-control input-lg">
 					</div>
+					<div class="form-group">
+						<label class="control-label">验证码</label><label><img alt="验证码" onclick = "this.src='/defaultKaptcha?d='+new Date()*1" src="/defaultKaptcha" />  </label>
+						<input type="text" placeholder="请输入验证码" required="required" id="vrifyCode" name="vrifyCode" class="form-control input-sm" style="width: 30%;display: inline;">
+					</div>
 					<a href="javascript:forgetpwd()" class="pull-right m-t-xs">
 						<small>忘记密码?</small>
 					</a>
