@@ -47,24 +47,7 @@
         if (username != undefined && password != undefined)
             $("#loginform").submit();
     }
-    function forgetpwd() {
-        $.ajax({
-            async : false,
-            url : "/common/login_do/reset.do",
-            data : {
-                "key" : key,
-                "value" : $("#" + key).val()
-            },
-            dataType : "json",
-            success : function(data) {
-                if (data.flag) {
-                    alert("更新成功！");
-                } else {
-                    alert("更新失败！");
-                }
-            }
-        });
-    }
+   
     function forgetpwd() {
         layer.prompt({
             title : '输入您的账号',
@@ -110,7 +93,7 @@
 						<input type="text" placeholder="请输入验证码" required="required" id="vrifyCode" name="vrifyCode" class="form-control input-sm" style="width: 30%;display: inline;">
 					</div>
 					
-					<a href="javascript:forgetpwd()" class="pull-right m-t-xs">
+					<a  href="javascript:forgetpwd()" class="pull-right m-t-xs btn">
 						<small>忘记密码?</small>
 					</a>
 					<div class="checkbox">
