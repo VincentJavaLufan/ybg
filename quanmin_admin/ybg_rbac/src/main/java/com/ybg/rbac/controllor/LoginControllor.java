@@ -32,7 +32,6 @@ import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.ServletUtil;
 import com.ybg.base.util.SystemConstant;
-import com.ybg.base.util.ValidatorUtils;
 import com.ybg.base.util.VrifyCodeUtil;
 import com.ybg.component.email.sendemail.SendEmailInter;
 import com.ybg.component.email.sendemail.SendQQmailImpl;
@@ -132,14 +131,13 @@ public class LoginControllor {
 	@ApiOperation(value = "注册", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = "/common/login_do/register.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public Json register(UserVO user, @RequestParam(name = "email", required = true) String email, @RequestParam(name = VrifyCodeUtil.parametername, required = true) String vrifyCode ,HttpSession session) throws Exception {
+	public Json register(UserVO user, @RequestParam(name = "email", required = true) String email, @RequestParam(name = VrifyCodeUtil.PARAMETERNAME, required = true) String vrifyCode, HttpSession session) throws Exception {
 		Json j = new Json();
 		if (!VrifyCodeUtil.checkvrifyCode(vrifyCode, session)) {
 			j.setSuccess(true);
 			j.setMsg("验证码不正确！");
 			return j;
 		}
-		
 		j.setSuccess(true);
 		j.setMsg("我们将发送邮箱到您的邮箱中进行验证，大约3小时左右不验证将删除注册信息");
 		String now = DateUtil.getDateTime();
@@ -196,7 +194,7 @@ public class LoginControllor {
 	@ApiImplicitParams({ @ApiImplicitParam(name = "username", value = "帐号", dataType = "java.lang.String", required = true), @ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
 	@ResponseBody
 	@RequestMapping(value = "/common/login_do/forgetpwd.do", method = RequestMethod.GET)
-	public Json forgetpwd(@RequestParam(name = "username", required = true) String username, Model model, @RequestParam(name = VrifyCodeUtil.parametername, required = true) String vrifyCode ,HttpSession session) throws Exception {
+	public Json forgetpwd(@RequestParam(name = "username", required = true) String username, Model model, @RequestParam(name = VrifyCodeUtil.PARAMETERNAME, required = true) String vrifyCode, HttpSession session) throws Exception {
 		Json j = new Json();
 		if (!VrifyCodeUtil.checkvrifyCode(vrifyCode, session)) {
 			j.setSuccess(true);
