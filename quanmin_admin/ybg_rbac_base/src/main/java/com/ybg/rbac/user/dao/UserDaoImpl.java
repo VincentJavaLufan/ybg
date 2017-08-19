@@ -13,6 +13,7 @@ import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.jdbc.util.DateUtil;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
+import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.mapper.UserMapper;
 import com.ybg.rbac.user.qvo.UserQuery;
@@ -126,7 +127,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append(DELETE).append(FROM).append("sys_user").append(WHERE);
 		sql.append("createtime<'").append(DateUtil.convertToStrwithformat(DateUtil.setDate(new Date(), 0, 0, 0, -3), "yyyy-MM-dd hh:mm:ss")).append("'");
-		sqlappen(sql, "state", "die");
+		sqlappen(sql, "state", UserStateConstant.DIE);
 		getJdbcTemplate().update(sql.toString());
 	}
 	
