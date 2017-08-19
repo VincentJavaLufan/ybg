@@ -20,6 +20,7 @@ import com.qq.domain.QQuserVO;
 import com.qq.service.QQuserService;
 import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.ServletUtil;
+import com.ybg.base.util.VrifyCodeUtil;
 import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.UserService;
@@ -84,7 +85,10 @@ public class QQloginControllor {
 	
 	@ApiOperation(value = "绑定QQ账号页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "bund.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String weibobund(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String weibobund(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
+		if (!VrifyCodeUtil.checkvrifyCode(request, map)) {
+			return "/login";
+		}
 		String username = ServletUtil.getStringParamDefaultBlank(request, "username");
 		String password = ServletUtil.getStringParamDefaultBlank(request, "password");
 		String openid = ServletUtil.getStringParamDefaultBlank(request, "openid");
@@ -95,13 +99,15 @@ public class QQloginControllor {
 		if (weibouser != null) {
 			return null;
 		}
-		request.removeAttribute("error");
+		map.remove("error");
 		UserVO user = userService.login(username);
 		if (!(user.isAccountNonLocked())) {
-			request.setAttribute("error", "用户已经被锁定不能绑定，请与管理员联系！");
+			map.put("error", "用户已经被锁定不能绑定，请与管理员联系！");
+			return "/login";
 		}
 		if (!user.isAccountNonExpired()) {
-			request.setAttribute("error", "账号未激活！");
+			map.put("error", "账号未激活！");
+			return "/login";
 		}
 		if (new DesUtils().encrypt(password).equals(user.getCredentialssalt())) {
 			UsernamePasswordAuthenticationToken token2 = new UsernamePasswordAuthenticationToken(user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()));
@@ -115,7 +121,7 @@ public class QQloginControllor {
 			return "redirect:/common/login_do/index.do";
 		}
 		else {
-			request.setAttribute("error", "用户或密码不正确！");
+			map.put("error", "用户或密码不正确！");
 			return "/login";
 		}
 	}

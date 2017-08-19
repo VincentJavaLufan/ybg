@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.ServletUtil;
+import com.ybg.base.util.VrifyCodeUtil;
 import com.ybg.mayun.api.Mayun;
 import com.ybg.mayun.oauth.domain.MayunUserVO;
 import com.ybg.mayun.oauth.service.MayunUserService;
@@ -84,6 +85,9 @@ public class MayunLoginController {
 	@ApiOperation(value = "无绑定账号。申请一个绑定账号", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "bund.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String weibobund(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
+		if (!VrifyCodeUtil.checkvrifyCode(request, map)) {
+			return "/login";
+		}
 		String username = ServletUtil.getStringParamDefaultBlank(request, "username");
 		String password = ServletUtil.getStringParamDefaultBlank(request, "password");
 		String mayunid = ServletUtil.getStringParamDefaultBlank(request, "mayunid").replaceAll(",", "");
@@ -99,9 +103,11 @@ public class MayunLoginController {
 		// BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		if (!(user.isAccountNonLocked())) {
 			map.put("error", "用户已经被锁定不能绑定，请与管理员联系！");
+			return "/login";
 		}
 		if (!user.isAccountNonExpired()) {
 			map.put("error", "账号未激活！");
+			return "/login";
 		}
 		if (new DesUtils().encrypt(password).equals(user.getCredentialssalt())) {
 			UsernamePasswordAuthenticationToken token2 = new UsernamePasswordAuthenticationToken(user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()));
@@ -114,7 +120,7 @@ public class MayunLoginController {
 			return "redirect:/common/login_do/index.do";
 		}
 		else {
-			request.setAttribute("error", "用户或密码不正确！");
+			map.put("error", "用户或密码不正确！");
 			return "/login";
 		}
 	}

@@ -7,18 +7,17 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.api.domain.WeixinOAuthConfig;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.ServletUtil;
 import com.ybg.base.util.SystemConstant;
+import com.ybg.base.util.VrifyCodeUtil;
 import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.UserService;
@@ -48,7 +47,6 @@ public class WeixinLoginController {
 		String domain = SystemConstant.getSystemdomain();
 		String lastUrl = "&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
 		String url = preUrl + domain + "/common/weixin_do/login.do" + lastUrl;
-		System.out.println(url);
 		return "redirect:" + url;
 	}
 	
@@ -85,11 +83,13 @@ public class WeixinLoginController {
 	
 	@ApiOperation(value = "绑定微信账号页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "bund.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String weibobund(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String weibobund(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
+		if (!VrifyCodeUtil.checkvrifyCode(request, map)) {
+			return "/login";
+		}
 		String username = ServletUtil.getStringParamDefaultBlank(request, "username");
 		String password = ServletUtil.getStringParamDefaultBlank(request, "password");
 		String openid = ServletUtil.getStringParamDefaultBlank(request, "openid");
-		System.out.println(openid);
 		if (openid.equals("")) {
 			return null;
 		}
@@ -100,10 +100,12 @@ public class WeixinLoginController {
 		request.removeAttribute("error");
 		UserVO user = userService.login(username);
 		if (!(user.isAccountNonLocked())) {
-			request.setAttribute("error", "用户已经被锁定不能绑定，请与管理员联系！");
+			map.put("error", "用户已经被锁定不能绑定，请与管理员联系！");
+			return "/login";
 		}
 		if (!user.isAccountNonExpired()) {
-			request.setAttribute("error", "账号未激活！");
+			map.put("error", "账号未激活！");
+			return "/login";
 		}
 		if (new DesUtils().encrypt(password).equals(user.getCredentialssalt())) {
 			UsernamePasswordAuthenticationToken token2 = new UsernamePasswordAuthenticationToken(user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()));
@@ -117,7 +119,7 @@ public class WeixinLoginController {
 			return "redirect:/common/login_do/index.do";
 		}
 		else {
-			request.setAttribute("error", "用户或密码不正确！");
+			map.put("error", "用户或密码不正确！");
 			return "/login";
 		}
 	}
