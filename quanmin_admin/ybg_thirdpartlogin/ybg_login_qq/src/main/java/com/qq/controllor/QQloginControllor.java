@@ -26,7 +26,7 @@ import com.ybg.rbac.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(tags="QQ登陆接口")
+@Api(tags = "QQ登陆接口")
 @Controller
 @RequestMapping(value = { "/common/qq/login_do/" })
 public class QQloginControllor {

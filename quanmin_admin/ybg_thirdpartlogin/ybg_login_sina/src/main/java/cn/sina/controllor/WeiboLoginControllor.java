@@ -27,7 +27,7 @@ import weibo4j.http.AccessToken;
 import weibo4j.model.WeiboException;
 
 /** 微博登陆 **/
-@Api(tags="微博登陆")
+@Api(tags = "微博登陆")
 @Controller
 @RequestMapping("/common/weibo/sinalogin_do/")
 public class WeiboLoginControllor {
