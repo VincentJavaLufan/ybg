@@ -10,13 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -36,7 +33,6 @@ import com.ybg.base.util.ServletUtil;
 import com.ybg.base.util.SystemConstant;
 import com.ybg.component.email.sendemail.SendEmailInter;
 import com.ybg.component.email.sendemail.SendQQmailImpl;
-import com.ybg.config.security.MyAuthenticationToken;
 import com.ybg.rbac.resources.service.ResourcesService;
 import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
@@ -88,8 +84,6 @@ public class LoginControllor {
 	private boolean checkvrifyCode(HttpServletRequest httpServletRequest, ModelMap model) {
 		String captchaId = (String) httpServletRequest.getSession().getAttribute("vrifyCode");
 		String parameter = httpServletRequest.getParameter("vrifyCode");
-		System.out.println("Session  vrifyCode " + captchaId + " form vrifyCode " + parameter);
-		System.out.println(!captchaId.equals(parameter));
 		if (!captchaId.equals(parameter)) {
 			model.addAttribute("error", "验证码不正确！");
 			return false;
@@ -121,7 +115,6 @@ public class LoginControllor {
 			token2.setDetails(new WebAuthenticationDetails(httpServletRequest));
 			Authentication authenticatedUser = authenticationManager.authenticate(token2);
 			SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
-			System.out.println("118:");
 			return "redirect:/common/login_do/index.do";
 		}
 		else {
@@ -152,14 +145,13 @@ public class LoginControllor {
 		Json j = new Json();
 		j.setSuccess(true);
 		j.setMsg("我们将发送邮箱到您的邮箱中进行验证，大约3小时左右不验证将删除注册信息");
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		String now = DateUtil.getDateTime();
+		user.setPassword(new DesUtils(user.getUsername() + now).encrypt(user.getPassword()));
 		user.setCredentialssalt(new DesUtils().encrypt(user.getPassword()));
 		user.setRoleid("10");
 		user.setPhone("");
 		user.setState(UserStateConstant.DIE);
-		user.setCreatetime(DateUtil.getDateTime());
-		String contemt = "<a href='http://" + SystemConstant.getSystemdomain() + "/common/login_do/relife.do?userid=" + user.getId() + "&salt=" + user.getCredentialssalt() + "'>激活</a>";
+		user.setCreatetime(now);
 		try {
 			userService.save(user);
 		} catch (Exception e) {
@@ -167,6 +159,7 @@ public class LoginControllor {
 			j.setMsg("创建失败，已存在该用户");
 			return j;
 		}
+		String contemt = "<a href='" + SystemConstant.getSystemdomain() + "/common/login_do/relife.do?userid=" + user.getId() + "&salt=" + user.getCredentialssalt() + "'>激活</a>";
 		try {
 			SendEmailInter send = new SendQQmailImpl();
 			send.sendMail(email, SystemConstant.getSystemName() + "注册", contemt);
@@ -239,7 +232,7 @@ public class LoginControllor {
 		json.put("dietime", DateUtil.getDate());
 		String encryptInfo = json.toString();
 		encryptInfo = "encryptInfo=" + new DesUtils().encrypt(encryptInfo);
-		String contemt = "<a href='http://" + SystemConstant.getSystemdomain() + "/common/login_do/resetpwd.do?" + encryptInfo + "'>重置密码，有效期截止到当天晚上24：00</a>";
+		String contemt = "<a href='" + SystemConstant.getSystemdomain() + "/common/login_do/resetpwd.do?" + encryptInfo + "'>重置密码，有效期截止到当天晚上24：00</a>";
 		try {
 			SendEmailInter send = new SendQQmailImpl();
 			send.sendMail(user.getEmail(), SystemConstant.getSystemName() + "-找回密码", contemt);
@@ -357,10 +350,9 @@ public class LoginControllor {
 			j.setMsg("您尚未登陆");
 			return j;
 		}
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
 		BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
-		updatemap.put("password", passwordEncoder.encode(password));
+		updatemap.put("password", new DesUtils(user.getUsername() + user.getCreatetime()).encrypt(user.getPassword()));
 		updatemap.put("credentialssalt", new DesUtils().encrypt(password));
 		wheremap.put("id", user.getId());
 		userService.update(updatemap, wheremap);
