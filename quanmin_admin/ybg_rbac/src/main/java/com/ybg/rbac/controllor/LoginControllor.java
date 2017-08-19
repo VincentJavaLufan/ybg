@@ -7,6 +7,7 @@ import net.sf.json.JSONObject;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -31,6 +32,7 @@ import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.ServletUtil;
 import com.ybg.base.util.SystemConstant;
+import com.ybg.base.util.ValidatorUtils;
 import com.ybg.base.util.VrifyCodeUtil;
 import com.ybg.component.email.sendemail.SendEmailInter;
 import com.ybg.component.email.sendemail.SendQQmailImpl;
@@ -86,11 +88,11 @@ public class LoginControllor {
 	@RequestMapping(value = "/common/login_do/login.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(HttpServletRequest httpServletRequest, ModelMap map) throws Exception {
 		// 首先检测验证码
-		String username = ServletUtil.getStringParamDefaultBlank(httpServletRequest, "username");
-		String password = ServletUtil.getStringParamDefaultBlank(httpServletRequest, "password");
 		if (!VrifyCodeUtil.checkvrifyCode(httpServletRequest, map)) {
 			return "/login";
 		}
+		String username = ServletUtil.getStringParamDefaultBlank(httpServletRequest, "username");
+		String password = ServletUtil.getStringParamDefaultBlank(httpServletRequest, "password");
 		UserVO user = userService.login(username);
 		// BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		if (!(user.isAccountNonLocked())) {
@@ -130,8 +132,14 @@ public class LoginControllor {
 	@ApiOperation(value = "注册", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = "/common/login_do/register.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public Json register(UserVO user, @RequestParam(name = "email", required = true) String email) throws Exception {
+	public Json register(UserVO user, @RequestParam(name = "email", required = true) String email, @RequestParam(name = VrifyCodeUtil.parametername, required = true) String vrifyCode ,HttpSession session) throws Exception {
 		Json j = new Json();
+		if (!VrifyCodeUtil.checkvrifyCode(vrifyCode, session)) {
+			j.setSuccess(true);
+			j.setMsg("验证码不正确！");
+			return j;
+		}
+		
 		j.setSuccess(true);
 		j.setMsg("我们将发送邮箱到您的邮箱中进行验证，大约3小时左右不验证将删除注册信息");
 		String now = DateUtil.getDateTime();
@@ -188,8 +196,13 @@ public class LoginControllor {
 	@ApiImplicitParams({ @ApiImplicitParam(name = "username", value = "帐号", dataType = "java.lang.String", required = true), @ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
 	@ResponseBody
 	@RequestMapping(value = "/common/login_do/forgetpwd.do", method = RequestMethod.GET)
-	public Json forgetpwd(@RequestParam(name = "username", required = true) String username, Model model) throws Exception {
+	public Json forgetpwd(@RequestParam(name = "username", required = true) String username, Model model, @RequestParam(name = VrifyCodeUtil.parametername, required = true) String vrifyCode ,HttpSession session) throws Exception {
 		Json j = new Json();
+		if (!VrifyCodeUtil.checkvrifyCode(vrifyCode, session)) {
+			j.setSuccess(true);
+			j.setMsg("验证码不正确！");
+			return j;
+		}
 		j.setSuccess(true);
 		UserQuery userqvo = new UserQuery();
 		userqvo.setUsername(username);

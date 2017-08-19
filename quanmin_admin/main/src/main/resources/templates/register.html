@@ -204,6 +204,10 @@
 						<input type="password" id="inputPassword"required lay-verify="required" name="inputPassword" onblur="checkpassword()" placeholder="确认密码" class="form-control input-lg">
 						<i id="checkpwd2"></i>
 					</div>
+					<div class="form-group">
+						<label class="control-label">验证码</label><label><img alt="验证码" onclick = "this.src='/defaultKaptcha?d='+new Date()*1" src="/defaultKaptcha" />  </label>
+						<input type="text" placeholder="请输入验证码" required="required" id="vrifyCode" name="vrifyCode" class="form-control input-sm" style="width: 30%;display: inline;">
+					</div>
 					<div class="checkbox">
 						<label>
 							<input type="checkbox">
