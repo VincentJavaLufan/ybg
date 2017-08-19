@@ -31,6 +31,7 @@ import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.ServletUtil;
 import com.ybg.base.util.SystemConstant;
+import com.ybg.base.util.VrifyCodeUtil;
 import com.ybg.component.email.sendemail.SendEmailInter;
 import com.ybg.component.email.sendemail.SendQQmailImpl;
 import com.ybg.rbac.resources.service.ResourcesService;
@@ -80,17 +81,6 @@ public class LoginControllor {
 		return "redirect:/common/login_do/tologin.do";
 	}
 	
-	/** 验证码校验逻辑，不要可以去掉 */
-	private boolean checkvrifyCode(HttpServletRequest httpServletRequest, ModelMap model) {
-		String captchaId = (String) httpServletRequest.getSession().getAttribute("vrifyCode");
-		String parameter = httpServletRequest.getParameter("vrifyCode");
-		if (!captchaId.equals(parameter)) {
-			model.addAttribute("error", "验证码不正确！");
-			return false;
-		}
-		return true;
-	}
-	
 	@ApiOperation(value = "登录系统 ", notes = "", produces = MediaType.ALL_VALUE)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "username", value = "帐号", dataType = "java.lang.String", required = true), @ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
 	@RequestMapping(value = "/common/login_do/login.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -98,8 +88,7 @@ public class LoginControllor {
 		// 首先检测验证码
 		String username = ServletUtil.getStringParamDefaultBlank(httpServletRequest, "username");
 		String password = ServletUtil.getStringParamDefaultBlank(httpServletRequest, "password");
-		if (!checkvrifyCode(httpServletRequest, map)) {
-			map.addAttribute("error", "验证码不正确！");
+		if (!VrifyCodeUtil.checkvrifyCode(httpServletRequest, map)) {
 			return "/login";
 		}
 		UserVO user = userService.login(username);
