@@ -51,6 +51,7 @@
 		<module>ybg_thirdpartlogin</module>
     <module>ybg_weixin_api</module>
     <module>ybg_kaptcha</module>
+    <module>ybg_activiti</module>
   </modules>
 	<build>
 		<defaultGoal>compile</defaultGoal>

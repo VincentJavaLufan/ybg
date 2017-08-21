@@ -5,7 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@ComponentScan(basePackages = { "com.qq", "com.baidu", "com.ybg", "cn", "weibo4j", "org.mybatis" }) // 扫描注解
+@ComponentScan(basePackages = { "org.activiti.rest.diagram","com.qq", "com.baidu", "com.ybg", "cn", "weibo4j", "org.mybatis" }) // 扫描注解
 public class Application {
 
 	public static void main(String[] args) {

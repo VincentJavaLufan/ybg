@@ -19,4 +19,13 @@ public class DataBaseConstant {
 	public static final String	JD_EDU	= "eduJdbcTemplate";
 	/** JDBC模板方法-使用定时任务数据库 **/
 	public static final String	JD_QUARTZ	= "quartzJdbcTemplate";
+	//分割线
+	/****事务*********/
+	public static final String	TM_SYS	= "sysTransactionManager";
+	/** 数据库事务-使用OA数据库- **/
+	public static final String	TM_OA	= "oaTransactionManager";
+	/** 数据库事务-使用教育数据库 **/
+	public static final String	TM_EDU	= "eduTransactionManager";
+	/** 数据库事务-使用定时任务数据库 **/
+	public static final String	TM_QUARTZ	= "quartzTransactionManager";
 }

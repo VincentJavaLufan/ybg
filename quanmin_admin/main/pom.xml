@@ -40,6 +40,7 @@
 			<artifactId>ybg_company</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<!-- 第三方登陆 -->
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_login_qq</artifactId>
@@ -65,6 +66,7 @@
 			<artifactId>ybg_login_weixin</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<!-- 第三方登陆 end-->
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_mq</artifactId>
@@ -75,22 +77,28 @@
 			<artifactId>ybg_base_jar</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<!-- 代码生成 -->
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_gen</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<!-- 代码生成 end-->
+		<!--云存储  -->
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_oss</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<!--云存储  end-->
 		<!-- <dependency> <groupId>com.ybg</groupId> <artifactId>ybg_weixin</artifactId> <version>1.0.0</version> </dependency> -->
+		<!-- 数据库 jdbc -->
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_base_jdbc</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<!-- 数据库 end-->
 		<!-- 教育模块 -->
 		<dependency>
 			<groupId>com.ybg</groupId>
@@ -137,6 +145,13 @@
 			<version>1.0.0</version>
 		</dependency>
 		<!--验证码end -->
+		<!-- 工作流 -->
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_activiti</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<!-- 工作流 end-->
 	</dependencies>
 	<build>
 		<plugins>
