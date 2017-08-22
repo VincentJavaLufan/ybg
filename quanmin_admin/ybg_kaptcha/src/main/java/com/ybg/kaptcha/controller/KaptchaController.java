@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.ybg.base.util.VrifyCodeUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @Api(tags = "验证码API")
 @Controller
@@ -19,7 +21,8 @@ public class KaptchaController {
 	@Autowired
 	DefaultKaptcha defaultKaptcha;
 	
-	@RequestMapping("/defaultKaptcha")
+	@ApiOperation(value = "获取验证码图片")
+	@RequestMapping(value = { "/defaultKaptcha" }, method = { RequestMethod.GET })
 	public void defaultKaptcha(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
 		byte[] captchaChallengeAsJpeg = null;
 		ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
