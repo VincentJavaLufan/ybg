@@ -145,12 +145,12 @@
 			<version>1.0.0</version>
 		</dependency>
 		<!--验证码end -->
-		<!-- 工作流 
+		<!-- 工作流 -->
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_activiti</artifactId>
 			<version>1.0.0</version>
-		</dependency>-->
+		</dependency>
 		<!-- 工作流 end-->
 	</dependencies>
 	<build>

@@ -4,13 +4,12 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
-@EnableAutoConfiguration    //这个注解可以根据你依赖的包自动生成相关配置
-@ComponentScan(basePackages = { "com.qq", "com.baidu", "com.ybg", "cn", "weibo4j", "org.mybatis" }) // 扫描注解
-//@EnableAutoConfiguration(exclude = {
-//org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class,
-//org.activiti.spring.boot.SecurityAutoConfiguration.class,
-//org.springframework.boot.actuate.autoconfigure.ManagementWebSecurityAutoConfiguration.class
-//})
+//@EnableAutoConfiguration    //这个注解可以根据你依赖的包自动生成相关配置
+@ComponentScan(basePackages = { "org.activiti.rest.diagram","com.qq", "com.baidu", "com.ybg", "cn", "weibo4j", "org.mybatis" }) // 扫描注解
+@EnableAutoConfiguration(exclude = {
+org.activiti.spring.boot.SecurityAutoConfiguration.class,
+org.springframework.boot.actuate.autoconfigure.ManagementWebSecurityAutoConfiguration.class
+})
 public class App extends SpringBootServletInitializer
 {  
     public static void main( String[] args )  
