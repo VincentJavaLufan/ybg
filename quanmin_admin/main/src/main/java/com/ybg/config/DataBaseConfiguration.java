@@ -72,21 +72,21 @@ public class DataBaseConfiguration {
 	
 	// 事务管理器
 	@Bean(name = DataBaseConstant.TM_OA)
-	@Primary
+	
 	public PlatformTransactionManager oaTransactionManager(@Qualifier(DataBaseConstant.DB_OA) DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}
 	
 	// 事务管理器
 	@Bean(name = DataBaseConstant.TM_QUARTZ)
-	@Primary
+	
 	public PlatformTransactionManager quartzTransactionManager(@Qualifier(DataBaseConstant.DB_QUARTZ) DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}
 	
 	// 事务管理器
 	@Bean(name = DataBaseConstant.TM_EDU)
-	@Primary
+	
 	public PlatformTransactionManager eduTransactionManager(@Qualifier(DataBaseConstant.DB_EDU) DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}
