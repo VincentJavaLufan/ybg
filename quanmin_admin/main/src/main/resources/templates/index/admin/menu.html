@@ -2,7 +2,6 @@
 <script type="text/javascript">
     function selectsystem() {
         var select_val = $("#selectsystem_id").val();
-       
         $("#oa_menu").css('display', 'none');
         $("#sys_menu").css('display', 'none');
         $("#edu_menu").css('display', 'none');
@@ -178,7 +177,6 @@
 				</span>
 			</a>
 			<ul class="treeview-menu">
-				
 				<li>
 					<a href="javascript:void(0)" class="active" nav-n="OSS管理,OSS设置,/sys/oss_do/index.do">
 						<i class="fa fa-circle-o"></i>
@@ -246,6 +244,23 @@
 					<a target="_blank" href="/monitoring">
 						<i class="fa fa-eye"></i>
 						服务器监控
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li class="treeview">
+			<a href="#">
+				<i class="fa fa-television"></i>
+				<span>工作流管理</span>
+				<span class="pull-right-container">
+					<i class="fa fa-angle-left pull-right"></i>
+				</span>
+			</a>
+			<ul class="treeview-menu">
+				<li>
+					<a href="javascript:void(0)" class="active" nav-n="工作流管理,流程设计模型管理,/models/model_do/index.do">
+						<i class="fa fa-eye"></i>
+						流程设计模型管理
 					</a>
 				</li>
 			</ul>
