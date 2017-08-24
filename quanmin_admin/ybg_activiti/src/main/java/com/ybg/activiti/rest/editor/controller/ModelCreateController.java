@@ -6,6 +6,8 @@ import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.Page;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.constants.ModelDataJsonConstants;
@@ -16,6 +18,7 @@ import org.activiti.engine.impl.persistence.entity.ModelEntity;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.Model;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.io.UnsupportedEncodingException;
@@ -101,43 +104,63 @@ public class ModelCreateController {
 		page.init();
 		return page;
 	}
-	//
-	// /** 删除模型
-	// *
-	// * @param id
-	// * @return */
-	// @DeleteMapping("{id}")
-	// public String deleteModel(@PathVariable("id") String id) {
-	// RepositoryService repositoryService = processEngine.getRepositoryService();
-	// repositoryService.deleteModel(id);
-	// return "success";
-	// }
-	//
-	// /** 发布模型为流程定义
-	// *
-	// * @param id
-	// * @return
-	// * @throws Exception */
-	// @PostMapping("{id}/deployment")
-	// public String deploy(@PathVariable("id") String id) throws Exception {
-	// // 获取模型
-	// RepositoryService repositoryService = processEngine.getRepositoryService();
-	// Model modelData = repositoryService.getModel(id);
-	// byte[] bytes = repositoryService.getModelEditorSource(modelData.getId());
-	// if (bytes == null) {
-	// return ("模型数据为空，请先设计流程并成功保存，再进行发布。");
-	// }
-	// JsonNode modelNode = new ObjectMapper().readTree(bytes);
-	// BpmnModel model = new BpmnJsonConverter().convertToBpmnModel(modelNode);
-	// if (model.getProcesses().size() == 0) {
-	// return ("数据模型不符要求，请至少设计一条主线流程。");
-	// }
-	// byte[] bpmnBytes = new BpmnXMLConverter().convertToXML(model);
-	// // 发布流程
-	// String processName = modelData.getName() + ".bpmn20.xml";
-	// Deployment deployment = repositoryService.createDeployment().name(modelData.getName()).addString(processName, new String(bpmnBytes, "UTF-8")).deploy();
-	// modelData.setDeploymentId(deployment.getId());
-	// repositoryService.saveModel(modelData);
-	// return "success";
-	// }
+	
+	@ApiOperation(value = "根据ID删除模型", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiImplicitParam(name = "ids", value = "删除模型的ID", required = true, dataType = "java.lang.String")
+	@ResponseBody
+	@RequestMapping(value = { "remove.do" }, method = { RequestMethod.POST })
+	public Json remove(@RequestParam(name = "ids", required = true) String ids2) {
+		Json j = new Json();
+		j.setSuccess(true);
+		try {
+			String[] ids = ids2.split(",");
+			for (String id : ids) {
+				RepositoryService repositoryService = processEngine.getRepositoryService();
+				repositoryService.deleteModel(id);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			j.setMsg("操作失败");
+			return j;
+		}
+		j.setMsg("操作成功");
+		return j;
+	}
+	
+	/** 发布模型为流程定义
+	 *
+	 * @param id
+	 * @return
+	 * @throws Exception */
+	@ResponseBody
+	@PostMapping("deployment.do")
+	public Json deploy(@RequestParam(name = "id[]", required = true) String id) throws Exception {
+		Json j = new Json();
+		// 获取模型
+		RepositoryService repositoryService = processEngine.getRepositoryService();
+		Model modelData = repositoryService.getModel(id);
+		byte[] bytes = repositoryService.getModelEditorSource(modelData.getId());
+		if (bytes == null) {
+			j.setSuccess(false);
+			j.setMsg("模型数据为空，请先设计流程并成功保存，再进行发布。");
+			return j;
+		}
+		JsonNode modelNode = new ObjectMapper().readTree(bytes);
+		BpmnModel model = new BpmnJsonConverter().convertToBpmnModel(modelNode);
+		if (model.getProcesses().size() == 0) {
+			j.setSuccess(false);
+			j.setMsg("数据模型不符要求，请至少设计一条主线流程。");
+			return j;
+			
+		}
+		byte[] bpmnBytes = new BpmnXMLConverter().convertToXML(model);
+		// 发布流程
+		String processName = modelData.getName() + ".bpmn20.xml";
+		Deployment deployment = repositoryService.createDeployment().name(modelData.getName()).addString(processName, new String(bpmnBytes, "UTF-8")).deploy();
+		modelData.setDeploymentId(deployment.getId());
+		repositoryService.saveModel(modelData);
+		j.setSuccess(true);
+		j.setMsg("操作成功");
+		return j;
+	}
 }

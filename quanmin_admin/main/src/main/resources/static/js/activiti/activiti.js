@@ -38,18 +38,38 @@ var vm = new Vue({
                 }
             });
         },
+        deployment:function(){
+            var id = getSelectedRow();
+            if (id == null) {
+                return;
+            }
+            
+            $.ajax({
+                type : "POST",
+                url : rootPath + "/models/model_do/deployment.do",
+                // contentType : "application/json",
+                data : {
+                    'id' : id
+                },
+                
+                success : function(r) {
+                    vm.reload();
+                    alert(r.msg);
+                }
+            });
+        },
         del : function() {
-            var jobIds = getSelectedRows();
-            if (jobIds == null) {
+            var id = getSelectedRows();
+            if (id == null) {
                 return;
             }
             confirm('确定要删除选中的记录？', function() {
                 $.ajax({
                     type : "POST",
-                    url : rootPath + "/models/model_do/delete.do",
+                    url : rootPath + "/models/model_do/remove.do",
                     // contentType : "application/json",
                     data : {
-                        jobIds : jobIds
+                        ids : id
                     },
                     success : function(r) {
                         vm.reload();
