@@ -494,6 +494,7 @@
 			<artifactId>activiti-spring</artifactId>
 			<version>${activiti.version}</version>
 		</dependency>
+		<!-- 工作流结束 -->
 	</dependencies>
 	<build>
 		<plugins>

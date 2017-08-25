@@ -1,0 +1,14 @@
+
+<script type="text/javascript">
+    function genqrcode() {
+        var link = $("#link").val();
+        var link2=encodeURIComponent(link)
+        $("#qrcodegen").attr("src", "/common/qrcode/gen.do?url=" + link2 + "&width=200&height=200")
+    }
+   
+</script>
+<input type="text" id="link" value="www.baidu.com&code=1">
+<button onclick="genqrcode()">生成二维码</button>
+
+<br>
+<img src="" id="qrcodegen">

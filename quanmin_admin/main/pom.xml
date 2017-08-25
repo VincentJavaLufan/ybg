@@ -66,7 +66,7 @@
 			<artifactId>ybg_login_weixin</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- 第三方登陆 end-->
+		<!-- 第三方登陆 end -->
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_mq</artifactId>
@@ -83,14 +83,14 @@
 			<artifactId>ybg_gen</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- 代码生成 end-->
-		<!--云存储  -->
+		<!-- 代码生成 end -->
+		<!--云存储 -->
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_oss</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!--云存储  end-->
+		<!--云存储 end -->
 		<!-- <dependency> <groupId>com.ybg</groupId> <artifactId>ybg_weixin</artifactId> <version>1.0.0</version> </dependency> -->
 		<!-- 数据库 jdbc -->
 		<dependency>
@@ -98,7 +98,7 @@
 			<artifactId>ybg_base_jdbc</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- 数据库 end-->
+		<!-- 数据库 end -->
 		<!-- 教育模块 -->
 		<dependency>
 			<groupId>com.ybg</groupId>
@@ -151,7 +151,14 @@
 			<artifactId>ybg_activiti</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- 工作流 end-->
+		<!-- 工作流 end -->
+		<!-- 二维码 -->
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_qrcode</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<!-- 二维码 end-->
 	</dependencies>
 	<build>
 		<plugins>
