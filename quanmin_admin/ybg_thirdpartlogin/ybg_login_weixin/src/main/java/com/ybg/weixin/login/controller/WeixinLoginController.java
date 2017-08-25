@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.api.domain.WeixinOAuthConfig;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.DesUtils;
@@ -48,6 +49,12 @@ public class WeixinLoginController {
 		String lastUrl = "&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
 		String url = preUrl + domain + "/common/weixin_do/login.do" + lastUrl;
 		return "redirect:" + url;
+	}
+	@ApiOperation(value = "微信APPid", notes = "", produces = MediaType.TEXT_HTML_VALUE)
+	@ResponseBody
+	@RequestMapping(value = "getAppid", method = { RequestMethod.GET, RequestMethod.POST })
+	public String getAppid() {
+		return WeixinOAuthConfig.getValue(WeixinOAuthConfig.APPID);
 	}
 	
 	@ApiOperation(value = "微信登陆", notes = "", produces = MediaType.TEXT_HTML_VALUE)

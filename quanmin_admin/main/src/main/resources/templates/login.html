@@ -19,7 +19,6 @@
 <!-- 微信登陸 -->
 <script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 <script type="text/javascript">
-    
     function getCookie(cookie_name) {
         var allcookies = document.cookie;
         var cookie_pos = allcookies.indexOf(cookie_name); //索引的长度
@@ -47,7 +46,6 @@
         if (username != undefined && password != undefined)
             $("#loginform").submit();
     }
-   
     function forgetpwd() {
         layer.prompt({
             title : '输入您的账号',
@@ -86,14 +84,14 @@
 						<label class="control-label">密码</label>
 						<input type="password" placeholder="请输入密码" required="required" id="password" name="password" class="form-control input-lg">
 					</div>
-					
-					
 					<div class="form-group">
-						<label class="control-label">验证码</label><label><img alt="验证码" onclick = "this.src='/defaultKaptcha?d='+new Date()*1" src="/defaultKaptcha" />  </label>
-						<input type="text" placeholder="请输入验证码" required="required" id="vrifyCode" name="vrifyCode" class="form-control input-sm" style="width: 30%;display: inline;">
+						<label class="control-label">验证码</label>
+						<label>
+							<img alt="验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1" src="/defaultKaptcha" />
+						</label>
+						<input type="text" placeholder="请输入验证码" required="required" id="vrifyCode" name="vrifyCode" class="form-control input-sm" style="width: 30%; display: inline;">
 					</div>
-					
-					<a  href="javascript:forgetpwd()" class="pull-right m-t-xs btn">
+					<a href="javascript:forgetpwd()" class="pull-right m-t-xs btn">
 						<small>忘记密码?</small>
 					</a>
 					<div class="checkbox">
@@ -101,7 +99,6 @@
 							<input type="checkbox" name="rememberMe" checked="checked" value="true">
 							记住账号
 						</label>
-						
 					</div>
 					<button type="submit" class="btn btn-primary" onclick="javascript:layer.msg('登陆中')">登陆</button>
 					<div class="line line-dashed"></div>
@@ -133,6 +130,7 @@
 				</form>
 			</section>
 		</div>
+		<div id="login_container"></div>
 	</section>
 	<!-- footer -->
 	<footer id="footer">
@@ -149,6 +147,44 @@
 	<!-- App -->
 </body>
 </html>
+<script>
+    var app2 = new Vue({
+        el : '#SYSTEM_authinfo',
+        data : {
+            SYSTEM_authinfo : ''
+        },
+        created : function() {
+            var url = "/common/login_do/system_authinfo.do";
+            var _self = this;
+            $.get(url, function(data) {
+                _self.SYSTEM_authinfo = data;
+            })
+        }
+    });
+    var app = new Vue({
+        el : '#loginform',
+        data : {},
+        methods : {
+            weixinlogin : function() {
+                location.href = '/common/weixin_do/tologin.do';
+            }
+        }
+    });
+    
+    //如果申请了 微信网站 扫码登陆 请打开以下注解
+ //   var obj = null;
+   // $.get("/common/weixin_do/getAppid", function(data) {
+  //      obj = new WxLogin({
+   //         id : "login_container",
+  //          appid : data,
+  //          scope : "snsapi_login",
+  //          redirect_uri : "/common/weixin_do/login.do",
+  //          state : "",
+ //           style : "black",
+ //           href : ""
+  //      });
+ //   })
+</script>
 <#if error??>
 <script type="text/javascript">
     if ("${error!}" != "") {
@@ -160,27 +196,4 @@
     };
     //tologin();
 </script>
-	</#if> <script>
-        var app2 = new Vue({
-            el : '#SYSTEM_authinfo',
-            data : {
-                SYSTEM_authinfo : ''
-            },
-            created : function() {
-                var url = "/common/login_do/system_authinfo.do";
-                var _self = this;
-                $.get(url, function(data) {
-                    _self.SYSTEM_authinfo = data;
-                })
-            }
-        });
-        var app = new Vue({
-            el : '#loginform',
-            data : {},
-            methods : {
-                weixinlogin : function() {
-                    location.href = '/common/weixin_do/tologin.do';
-                }
-            }
-        });
-    </script>
+	</#if>
