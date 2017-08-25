@@ -122,6 +122,7 @@
 						<i class="fa fa-weixin pull-left"></i>
 						微信账号登陆(限手机)
 					</a>
+					<div id="login_container"></div>
 					<div class="line line-dashed"></div>
 					<p class="text-muted text-center">
 						<small>还没有账号?</small>
@@ -130,7 +131,7 @@
 				</form>
 			</section>
 		</div>
-		<div id="login_container"></div>
+		
 	</section>
 	<!-- footer -->
 	<footer id="footer">
@@ -172,18 +173,13 @@
     });
     
     //如果申请了 微信网站 扫码登陆 请打开以下注解
- //   var obj = null;
-   // $.get("/common/weixin_do/getAppid", function(data) {
-  //      obj = new WxLogin({
-   //         id : "login_container",
-  //          appid : data,
-  //          scope : "snsapi_login",
-  //          redirect_uri : "/common/weixin_do/login.do",
-  //          state : "",
- //           style : "black",
- //           href : ""
+  //  var obj = null;
+  //  $.get("/common/weixin_do/getAppid", function(data) {
+  //     obj = new WxLogin({
+  //          id : "login_container",appid : data, scope : "snsapi_login",
+  //          redirect_uri : "/common/weixin_do/login.do", state : "", style : "black", href : ""
   //      });
- //   })
+  //  })
 </script>
 <#if error??>
 <script type="text/javascript">
