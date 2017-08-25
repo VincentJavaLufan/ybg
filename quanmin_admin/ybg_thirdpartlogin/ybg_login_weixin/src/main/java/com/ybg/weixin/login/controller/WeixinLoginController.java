@@ -1,4 +1,6 @@
 package com.ybg.weixin.login.controller;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +55,11 @@ public class WeixinLoginController {
 	@ApiOperation(value = "微信APPid", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@ResponseBody
 	@RequestMapping(value = "getAppid", method = { RequestMethod.GET, RequestMethod.POST })
-	public String getAppid() {
-		return WeixinOAuthConfig.getValue(WeixinOAuthConfig.APPID);
+	public Map<String,Object> getAppid() {
+		Map<String,Object> map= new LinkedHashMap<>();
+		map.put("domain", SystemConstant.getSystemdomain());
+		map.put("appid", WeixinOAuthConfig.getValue(WeixinOAuthConfig.APPID)) ;
+		 return map;
 	}
 	
 	@ApiOperation(value = "微信登陆", notes = "", produces = MediaType.TEXT_HTML_VALUE)

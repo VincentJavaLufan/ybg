@@ -172,14 +172,20 @@
         }
     });
     
-    //如果申请了 微信网站 扫码登陆 请打开以下注解
-  //  var obj = null;
-  //  $.get("/common/weixin_do/getAppid", function(data) {
-  //     obj = new WxLogin({
-  //          id : "login_container",appid : data, scope : "snsapi_login",
-  //          redirect_uri : "/common/weixin_do/login.do", state : "", style : "black", href : ""
-  //      });
-  //  })
+   
+    var obj = null;
+    //如果申请了 微信网站 扫码登陆 请把取消 注释
+   // $.get("/common/weixin_do/getAppid", function(data) {
+   //     var weixinurl=encodeURIComponent(data.weixinurl+"/common/weixin_do/login.do");
+   //    obj = new WxLogin({
+   //         id : "login_container", scope : "snsapi_login" ,state : "", style : "black", href : "",
+    //        appid : data.appid,//别人的用于测试     wxbdc5610cc59c1631
+    //        redirect_uri : weixinurl//别人的用于测试  https%3A%2F%2Fpassport.yhd.com%2Fwechat%2Fcallback.do           
+    //    });
+       
+
+  //  });
+   
 </script>
 <#if error??>
 <script type="text/javascript">
