@@ -280,6 +280,8 @@ public interface WeixinApiService {
 	 * @return **/
 	WeixinJson datacube_getinterfacesummaryhour(String access_token, String begin_date, String end_date);
 	
+	
+	//https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140547
 	/** 客服帐号管理- 添加客服帐号 */
 	WeixinJson kfaccount_add(String token, String kf_account, String nickname, String password);
 	

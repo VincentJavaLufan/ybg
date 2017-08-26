@@ -425,130 +425,225 @@ public class WeixinApiServiceImpl implements WeixinApiService {
 		String result = HttpUtil.post(uri.toString(), json.toString());
 		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson kfaccount_add(String token, String kf_account, String nickname, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/customservice/kfaccount/add?access_token=" + token);
+		JSONObject json = new JSONObject();
+		json.put("kf_account", kf_account);
+		json.put("nickname", nickname);
+		json.put("password", password);
+		String result = HttpUtil.post(uri.toString(), json.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson kfaccount_update(String token, String kf_account, String nickname, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/customservice/kfaccount/update?access_token=" + token);
+		JSONObject json = new JSONObject();
+		json.put("kf_account", kf_account);
+		json.put("nickname", nickname);
+		json.put("password", password);
+		String result = HttpUtil.post(uri.toString(), json.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson kfaccount_del(String token, String kf_account, String nickname, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/customservice/kfaccount/del?access_token=" + token);
+		JSONObject json = new JSONObject();
+		json.put("kf_account", kf_account);
+		json.put("nickname", nickname);
+		json.put("password", password);
+		String result = HttpUtil.post(uri.toString(), json.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson kfaccount_uploadheadimg(String token, String kf_account, String imgpath) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public WeixinJson kfaccount_getkflist(String token) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/cgi-bin/customservice/getkflist?access_token=" + token);
+		String result = HttpUtil.get(uri.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson message_custom_send(String token, String touser, String msgtype, JSONObject msgjson) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=" + token);
+		JSONObject json = new JSONObject();
+		json.put("touser", touser);
+		json.put("msgtype", msgtype);
+		json.putAll(msgjson);
+		String result = HttpUtil.post(uri.toString(), json.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson message_custom_typing(String token, String touser, String command) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/cgi-bin/message/custom/typing?access_token=" + token);
+		JSONObject json = new JSONObject();
+		json.put("touser", touser);
+		json.put("command", command);
+		String result = HttpUtil.post(uri.toString(), json.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson media_uploadimg(String token, Media media) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public WeixinJson media_uploadnews(String token, JsonObject articles) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/cgi-bin/media/uploadnews?access_token=" + token);
+		JSONObject json = new JSONObject();
+		json.put("articles", articles);
+		String result = HttpUtil.post(uri.toString(), json.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson message_mass_sendall(String token, String clientmsgid) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=" + token);
+		JSONObject json = new JSONObject();
+		// json.put("articles", articles);
+		// XXX
+		String result = HttpUtil.post(uri.toString(), json.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson message_mass_send(String token, List<String> touser, String msgtype, String clientmsgid) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=" + token);
+		JSONObject json = new JSONObject();
+		json.put("touser", touser);
+		json.put("msgtype", msgtype);
+		json.put("clientmsgid", clientmsgid);
+		// XXX
+		String result = HttpUtil.post(uri.toString(), json.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson message_mass_delete(String token, int msg_id, int article_idx) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/cgi-bin/message/mass/delete?access_token=" + token);
+		JSONObject json = new JSONObject();
+		json.put("msg_id", msg_id);
+		json.put("article_idx", article_idx);
+		String result = HttpUtil.post(uri.toString(), json.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson message_mass_preview(String token, int touser, String msgtype, JSONObject media) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token=" + token);
+		JSONObject json = new JSONObject();
+		json.put("touser", touser);
+		json.put("mpnews", media);
+		json.put("msgtype", msgtype);
+		String result = HttpUtil.post(uri.toString(), json.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson message_mass_get(String token, int touser, String msg_id) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/cgi-bin/message/mass/get?access_token=" + token);
+		JSONObject json = new JSONObject();
+		json.put("msg_id", msg_id);
+		String result = HttpUtil.post(uri.toString(), json.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson template_api_set_industry(String token, String industry_id1, String industry_id2) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/cgi-bin/template/api_set_industry?access_token=" + token);
+		JSONObject json = new JSONObject();
+		json.put("industry_id1", industry_id1);
+		json.put("industry_id2", industry_id2);
+		String result = HttpUtil.post(uri.toString(), json.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson template_api_get_industry(String token) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/cgi-bin/template/get_industry?access_token=" + token);
+		String result = HttpUtil.get(uri.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson template_api_add_template(String token, String template_id_short) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/cgi-bin/template/api_add_template?access_token=" + token);
+		JSONObject json = new JSONObject();
+		json.put("template_id_short", template_id_short);
+		String result = HttpUtil.post(uri.toString(), json.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson template_get_all_private_template(String token) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/cgi-bin/template/get_all_private_template?access_token=" + token);
+		String result = HttpUtil.get(uri.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson template_del_private_template(String token, String template_id) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/cgi-bin/template/del_private_template?access_token=" + token);
+		JSONObject json = new JSONObject();
+		json.put("template_id", template_id);
+		String result = HttpUtil.post(uri.toString(), json.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson template_send(String token, String template_id, String touser, String url, String miniprogram, String appid, String pagepath, String data, String color) {
 		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + token);
+		JSONObject json = new JSONObject();
+		json.put("template_id", template_id);
+		json.put("touser", touser);
+		json.put("url", url);
+		json.put("miniprogram", miniprogram);
+		json.put("appid", appid);
+		json.put("pagepath", pagepath);
+		json.put("data", data);
+		json.put("color", color);
+		String result = HttpUtil.post(uri.toString(), json.toString());
+		return new WeixinJson(result);
 	}
-
+	
 	@Override
 	public WeixinJson get_current_autoreply_info(String token) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder uri = new StringBuilder();
+		uri.append("https://api.weixin.qq.com/cgi-bin/get_current_autoreply_info?access_token=" + token);
+		JSONObject json = new JSONObject();
+		// XXX
+		String result = HttpUtil.get(uri.toString(), json.toString());
+		return new WeixinJson(result);
 	}
 }
