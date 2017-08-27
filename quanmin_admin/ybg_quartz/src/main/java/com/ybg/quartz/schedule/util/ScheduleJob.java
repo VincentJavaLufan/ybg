@@ -27,8 +27,12 @@ public class ScheduleJob extends QuartzJobBean {
 	
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-		JSONObject json = JSONObject.fromObject(context.getMergedJobDataMap().get(ScheduleJobEntity.JOB_PARAM_KEY));
-		// springboot 下会，莫名报错 ScheduleJobEntity scheduleJob = (ScheduleJobEntity) context.getMergedJobDataMap().get(ScheduleJobEntity.JOB_PARAM_KEY);
+		JSONObject json = null;
+		try {
+			json = JSONObject.fromObject(context.getMergedJobDataMap().get(ScheduleJobEntity.JOB_PARAM_KEY));
+		} catch (Exception e) {
+			return;
+		} // springboot 下会，莫名报错 ScheduleJobEntity scheduleJob = (ScheduleJobEntity) context.getMergedJobDataMap().get(ScheduleJobEntity.JOB_PARAM_KEY);
 		ScheduleJobEntity scheduleJob = (ScheduleJobEntity) JSONObject.toBean(json, ScheduleJobEntity.class);
 		// 获取spring bean
 		ScheduleJobLogService scheduleJobLogService = (ScheduleJobLogService) SpringContextUtils.applicationContext.getBean(ScheduleJobLogService.class);
