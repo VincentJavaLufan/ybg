@@ -432,6 +432,15 @@
 			<systemPath>${project.basedir}/src/main/resources/lib/aliyun-sdk-mns-1.1.8.jar</systemPath>
 		</dependency>
 		<!-- 阿里云 短信 end -->
+		<!-- 支付宝登陆 -->
+		<dependency>
+			<groupId>com.aliyun.jdk</groupId>
+			<artifactId>aliyun-java-jdk</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/lib/alipay-sdk-java20170818173712.jar</systemPath>
+		</dependency>
+		<!-- 支付宝登陆 end -->
 		<!-- 验证码 -->
 		<dependency>
 			<groupId>com.github.penggle</groupId>
