@@ -164,6 +164,14 @@
 			<version>1.0.0</version>
 		</dependency>
 		<!-- 二维码 end -->
+		<!-- https 按需引入
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_https</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		-->
+		<!--https end -->
 	</dependencies>
 	<build>
 		<plugins>
