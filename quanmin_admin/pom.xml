@@ -53,6 +53,7 @@
     <module>ybg_kaptcha</module>
     <module>ybg_activiti</module>
     <module>ybg_qrcode</module>
+    <module>ybg_https</module>
   </modules>
 	<build>
 		<defaultGoal>compile</defaultGoal>
