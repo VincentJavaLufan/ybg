@@ -179,11 +179,12 @@
 			<artifactId>Sdk4J</artifactId>
 			<version>2.0</version>
 		</dependency>
-		<!-- rabbit -->
+		<!-- rabbit 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-amqp</artifactId>
 		</dependency>
+		-->
 		<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
@@ -504,6 +505,26 @@
 			<version>${activiti.version}</version>
 		</dependency>
 		<!-- 工作流结束 -->
+		<dependency>
+    <groupId>de.codecentric</groupId>
+    <artifactId>spring-boot-admin-server</artifactId>
+    <version>1.5.3</version>
+</dependency>
+<dependency>
+    <groupId>de.codecentric</groupId>
+    <artifactId>spring-boot-admin-server-ui</artifactId>
+    <version>1.5.3</version>
+</dependency>
+<dependency>
+ <groupId>org.springframework.boot</groupId>
+ <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+<!--  -->
+<dependency>
+   <groupId>de.codecentric</groupId>
+   <artifactId>spring-boot-admin-starter-client</artifactId>
+   <version>1.5.3</version>
+</dependency>
 	</dependencies>
 	<build>
 		<plugins>
