@@ -18,5 +18,6 @@
   	<module>ybg_login_sina</module>
     <module>ybg_login_mayun</module>
     <module>ybg_login_weixin</module>
+     <module>ybg_login_ali</module>
   </modules>
 </project>
