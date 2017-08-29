@@ -2,7 +2,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
-
+import de.codecentric.boot.admin.config.EnableAdminServer;
+@EnableAdminServer
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {
 		org.activiti.spring.boot.SecurityAutoConfiguration.class, org.springframework.boot.actuate.autoconfigure.ManagementWebSecurityAutoConfiguration.class })

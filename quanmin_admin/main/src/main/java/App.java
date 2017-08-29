@@ -3,7 +3,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
-//import de.codecentric.boot.admin.config.EnableAdminServer;
+import de.codecentric.boot.admin.config.EnableAdminServer;
 
 //@EnableAutoConfiguration    //这个注解可以根据你依赖的包自动生成相关配置
 @ComponentScan(basePackages = { "org.activiti.rest.diagram","com.qq", "com.baidu", "com.ybg", "cn", "weibo4j", "org.mybatis" }) // 扫描注解
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 org.activiti.spring.boot.SecurityAutoConfiguration.class,
 org.springframework.boot.actuate.autoconfigure.ManagementWebSecurityAutoConfiguration.class
 })
-//@EnableAdminServer
+@EnableAdminServer
 public class App extends SpringBootServletInitializer
 {  
     public static void main( String[] args )  
