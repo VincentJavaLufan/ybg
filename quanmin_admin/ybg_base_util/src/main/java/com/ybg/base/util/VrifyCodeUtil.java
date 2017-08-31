@@ -19,6 +19,9 @@ public class VrifyCodeUtil {
 	public static boolean checkvrifyCode(HttpServletRequest httpServletRequest, ModelMap model) {
 		String captchaId = (String) httpServletRequest.getSession().getAttribute(PARAMETERNAME);
 		String parameter = httpServletRequest.getParameter(PARAMETERNAME);
+		if(parameter==null){
+			return false;
+		}
 		if (!captchaId.equals(parameter)) {
 			model.addAttribute("error", "验证码不正确！");
 			return false;
@@ -32,6 +35,9 @@ public class VrifyCodeUtil {
 	 * @return */
 	public static boolean checkvrifyCode(String vrifyCode, HttpServletRequest httpServletRequest) {
 		String captchaId = (String) httpServletRequest.getSession().getAttribute(PARAMETERNAME);
+		if(vrifyCode==null){
+			return false;
+		}
 		if (!captchaId.equals(vrifyCode)) {
 			return false;
 		}
@@ -44,6 +50,9 @@ public class VrifyCodeUtil {
 	 * @return */
 	public static boolean checkvrifyCode(String vrifyCode, HttpSession session) {
 		String captchaId = (String) session.getAttribute(PARAMETERNAME);
+		if(vrifyCode==null){
+			return false;
+		}
 		if (!captchaId.equals(vrifyCode)) {
 			return false;
 		}
