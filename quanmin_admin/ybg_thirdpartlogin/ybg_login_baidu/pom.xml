@@ -19,7 +19,7 @@
   <dependencies>
 		<dependency>
 			<groupId>com.ybg</groupId>
-			<artifactId>ybg_rbac_base</artifactId>
+			<artifactId>ybg_rbac</artifactId>
 			<version>1.0.0</version>
 		</dependency><dependency>
 			<groupId>com.ybg</groupId>

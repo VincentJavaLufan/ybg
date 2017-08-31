@@ -1,4 +1,5 @@
 package com.baidu.oauth.controllor;
+
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,9 @@ import com.baidu.oauth.service.BaiduUserService;
 import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.ServletUtil;
 import com.ybg.base.util.VrifyCodeUtil;
+
+import com.ybg.rbac.controllor.LoginProxyController;
+import com.ybg.rbac.domain.Loginproxy;
 import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.UserService;
@@ -39,15 +43,15 @@ import io.swagger.annotations.ApiOperation;
 @Controller
 @RequestMapping(value = { "/common/baidu_do/" })
 public class BaiduControllor {
-	
-	private Logger			logger	= Logger.getLogger(getClass());
+
+	private Logger logger = Logger.getLogger(getClass());
 	@Autowired
-	UserService				userService;
+	UserService userService;
 	@Autowired
-	BaiduUserService		baiduUserService;
+	BaiduUserService baiduUserService;
 	@Autowired
-	AuthenticationManager	authenticationManager;
-	
+	AuthenticationManager authenticationManager;
+
 	@ApiOperation(value = "百度登陆跳转", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "tologin.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String tologin(HttpServletRequest request, HttpServletResponse response) {
@@ -70,7 +74,7 @@ public class BaiduControllor {
 		}
 		return null;
 	}
-	
+
 	@ApiOperation(value = "百度账号登陆", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "login.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -115,23 +119,20 @@ public class BaiduControllor {
 			return "/thirdpartlogin/baidu/baidubund";
 		}
 		UserVO user = this.userService.get(weibouser.getUserid());
-		// XXX 可能綁定的用戶已刪除
-		if (user.getState().equals(UserStateConstant.LOCK)) {
-			return "/lock";
+		if(user==null){
+			user=new UserVO();
 		}
-		if (user.getState().equals(UserStateConstant.DIE)) {
-			return "/die";
+		Loginproxy proxy = LoginProxyController.login(request,user.getUsername(),
+				new DesUtils().decrypt(user.getCredentialssalt()), null);
+		if (proxy.isSuccess()) {
+			
+			return "redirect:" + proxy.getRedirecturl();
+		} else {
+			map.put("error", proxy.getResult());
+			return "/login";
 		}
-		if (!user.getState().equals(UserStateConstant.OK)) {
-			return "";// 返回错误的请求 比如账号封锁、未激活等状态；
-		}
-		UsernamePasswordAuthenticationToken token2 = new UsernamePasswordAuthenticationToken(user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()));
-		token2.setDetails(new WebAuthenticationDetails(request));
-		Authentication authenticatedUser = authenticationManager.authenticate(token2);
-		SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
-		return "redirect:/common/login_do/index.do";
 	}
-	
+
 	private String getAccessToken(HttpServletResponse response, HttpServletRequest request) {
 		BaiduStore store = new BaiduCookieStore(Oauth.getClientID(), request, response);
 		com.baidu.api.domain.Session session = store.getSession();
@@ -145,7 +146,7 @@ public class BaiduControllor {
 		}
 		return session.getToken().getAccessToken();
 	}
-	
+
 	@ApiOperation(value = "无绑定账号。申请一个绑定账号", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "bund.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String weibobund(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -164,28 +165,17 @@ public class BaiduControllor {
 		}
 		baiduuser = new BaiduUser();
 		UserVO user = userService.login(username);
-		// BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		if (!(user.isAccountNonLocked())) {
-			map.put("error", "用户已经被锁定不能绑定，请与管理员联系！");
-			return "/login";
-		}
-		if (!user.isAccountNonExpired()) {
-			map.put("error", "账号未激活！");
-			return "/login";
-		}
-		if (new DesUtils().encrypt(password).equals(user.getCredentialssalt())) {
-			UsernamePasswordAuthenticationToken token2 = new UsernamePasswordAuthenticationToken(user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()));
-			token2.setDetails(new WebAuthenticationDetails(request));
-			Authentication authenticatedUser = authenticationManager.authenticate(token2);
-			SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
+
+		Loginproxy proxy = LoginProxyController.login(request, username, password, null);
+		if (proxy.isSuccess()) {
 			baiduuser.setUid(Long.parseLong(uid));
 			baiduuser.setUserid(user.getId());
 			baiduUserService.create(baiduuser);
-			return "redirect:/common/login_do/index.do";
-		}
-		else {
-			map.put("error", "用户或密码不正确！");
+			return "redirect:" + proxy.getRedirecturl();
+		} else {
+			map.put("error", proxy.getResult());
 			return "/login";
 		}
+
 	}
 }

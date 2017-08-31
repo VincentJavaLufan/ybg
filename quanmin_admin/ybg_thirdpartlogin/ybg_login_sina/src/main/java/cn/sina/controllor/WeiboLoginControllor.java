@@ -1,4 +1,5 @@
 package cn.sina.controllor;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.ServletUtil;
 import com.ybg.base.util.VrifyCodeUtil;
+import com.ybg.rbac.controllor.LoginProxyController;
+import com.ybg.rbac.domain.Loginproxy;
 import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.LoginService;
 import com.ybg.rbac.user.service.UserService;
+
 import cn.sina.domain.WeiboUserVO;
 import cn.sina.service.WeiboUserService;
 import io.swagger.annotations.Api;
@@ -32,23 +36,23 @@ import weibo4j.model.WeiboException;
 @Controller
 @RequestMapping("/common/weibo/sinalogin_do/")
 public class WeiboLoginControllor {
-	
+
 	@Autowired
-	WeiboUserService		weiboUserService;
+	WeiboUserService weiboUserService;
 	@Autowired
-	UserService				userService;
+	UserService userService;
 	@Autowired
-	LoginService			loginservice;
+	LoginService loginservice;
 	@Autowired
-	AuthenticationManager	authenticationManager;
-	
+	AuthenticationManager authenticationManager;
+
 	@ApiOperation(value = "微博登陆页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "tologin.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String tologin(HttpServletRequest request, HttpServletResponse response) throws WeiboException {
 		Oauth oauth = new Oauth();
 		return "redirect:" + oauth.authorize("code");
 	}
-	
+
 	@ApiOperation(value = "微博登陆", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "login.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -62,25 +66,19 @@ public class WeiboLoginControllor {
 			return "/thirdpartlogin/weibo/weibobund";
 		}
 		UserVO user = userService.get(weibouser.getUserid());
-		if (user.getState().equals(UserStateConstant.LOCK)) {
-			return "/lock";
+		if(user==null){
+			user=new UserVO();
 		}
-		if (user.getState().equals(UserStateConstant.DIE)) {
-			return "/die";
+		Loginproxy proxy = LoginProxyController.login(request, user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()), null);
+		if (proxy.isSuccess()) {
+
+			return "redirect:" + proxy.getRedirecturl();
+		} else {
+			map.put("error", proxy.getResult());
+			return "/login";
 		}
-		if (!user.getState().equals(UserStateConstant.OK)) {
-			return "";// XXX 返回错误的请求 比如账号封锁、未激活等状态；
-		}
-		/***/
-		UsernamePasswordAuthenticationToken token2 = new UsernamePasswordAuthenticationToken(user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()));
-		token2.setDetails(new WebAuthenticationDetails(request));
-		Authentication authenticatedUser = authenticationManager.authenticate(token2);
-		SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
-		/****/
-		// ycAnthencationProder.authenticate(authentication);
-		return "redirect:/common/login_do/index.do";
 	}
-	
+
 	@ApiOperation(value = "微博绑定账号页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "bund.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String weibobund(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -98,28 +96,17 @@ public class WeiboLoginControllor {
 			return null;
 		}
 		UserVO user = userService.login(username);
-		if (!(user.isAccountNonLocked())) {
-			map.put("error", "用户已经被锁定不能绑定，请与管理员联系！");
-			return "/login";
-		}
-		if (!user.isAccountNonExpired()) {
-			map.put("error", "账号未激活！");
-			return "/login";
-		}
-		if (new DesUtils().encrypt(password).equals(user.getCredentialssalt())) {
-			UsernamePasswordAuthenticationToken token2 = new UsernamePasswordAuthenticationToken(user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()));
-			token2.setDetails(new WebAuthenticationDetails(request));
-			Authentication authenticatedUser = authenticationManager.authenticate(token2);
-			SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
+		Loginproxy proxy = LoginProxyController.login(request, username, password, null);
+		if (proxy.isSuccess()) {
 			WeiboUserVO bean = new WeiboUserVO();
 			bean.setUid(uid);
 			bean.setUserid(user.getId());
 			weiboUserService.create(bean);
-			return "redirect:/common/login_do/index.do";
-		}
-		else {
-			map.put("error", "用户或密码不正确！");
+			return "redirect:" + proxy.getRedirecturl();
+		} else {
+			map.put("error", proxy.getResult());
 			return "/login";
 		}
+
 	}
 }

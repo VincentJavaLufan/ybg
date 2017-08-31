@@ -1,4 +1,5 @@
 package com.qq.controllor;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,13 @@ import com.qq.service.QQuserService;
 import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.ServletUtil;
 import com.ybg.base.util.VrifyCodeUtil;
+import com.ybg.rbac.controllor.LoginProxyController;
+import com.ybg.rbac.domain.Loginproxy;
 import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.UserService;
+
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -31,14 +36,14 @@ import io.swagger.annotations.ApiOperation;
 @Controller
 @RequestMapping(value = { "/common/qq/login_do/" })
 public class QQloginControllor {
-	
+
 	@Autowired
-	QQuserService			qQuserService;
+	QQuserService qQuserService;
 	@Autowired
-	UserService				userService;
+	UserService userService;
 	@Autowired
-	AuthenticationManager	authenticationManager;
-	
+	AuthenticationManager authenticationManager;
+
 	@ApiOperation(value = "QQ登陆", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "login.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -49,8 +54,7 @@ public class QQloginControllor {
 			// 我们的网站被CSRF攻击了或者用户取消了授权
 			// 做一些数据统计工作
 			System.out.print("没有获取到响应参数");
-		}
-		else {
+		} else {
 			accessToken = accessTokenObj.getAccessToken();
 			tokenExpireIn = accessTokenObj.getExpireIn();
 			request.getSession().setAttribute("demo_access_token", accessToken);
@@ -64,25 +68,21 @@ public class QQloginControllor {
 				return "/thirdpartlogin/qq/qqbund";
 			}
 			UserVO user = userService.get(qquser.getUserid());
-			if (user.getState().equals(UserStateConstant.LOCK)) {
-				return "/lock";
+			if(user==null){
+				user=new UserVO();
 			}
-			if (user.getState().equals(UserStateConstant.DIE)) {
-				return "/die";
+			Loginproxy proxy = LoginProxyController.login(request, user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()), null);
+			if (proxy.isSuccess()) {
+				
+				return "redirect:" + proxy.getRedirecturl();
+			} else {
+				map.put("error", proxy.getResult());
+				return "/login";
 			}
-			if (!user.getState().equals(UserStateConstant.OK)) {
-				return "";// XXX 返回错误的请求 比如账号封锁、未激活等状态；
-			}
-			/***/
-			UsernamePasswordAuthenticationToken token2 = new UsernamePasswordAuthenticationToken(user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()));
-			token2.setDetails(new WebAuthenticationDetails(request));
-			Authentication authenticatedUser = authenticationManager.authenticate(token2);
-			SecurityContextHolder.getContext().setAuthentication(authenticatedUser);/****/
-			return "redirect:/common/login_do/index.do";
 		}
 		return null;
 	}
-	
+
 	@ApiOperation(value = "绑定QQ账号页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "bund.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String weibobund(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -100,35 +100,26 @@ public class QQloginControllor {
 			return null;
 		}
 		map.remove("error");
+
 		UserVO user = userService.login(username);
-		if (!(user.isAccountNonLocked())) {
-			map.put("error", "用户已经被锁定不能绑定，请与管理员联系！");
-			return "/login";
-		}
-		if (!user.isAccountNonExpired()) {
-			map.put("error", "账号未激活！");
-			return "/login";
-		}
-		if (new DesUtils().encrypt(password).equals(user.getCredentialssalt())) {
-			UsernamePasswordAuthenticationToken token2 = new UsernamePasswordAuthenticationToken(user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()));
-			token2.setDetails(new WebAuthenticationDetails(request));
-			Authentication authenticatedUser = authenticationManager.authenticate(token2);
-			SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
+		Loginproxy proxy = LoginProxyController.login(request, username, password, null);
+		if (proxy.isSuccess()) {
 			QQuserVO bean = new QQuserVO();
 			bean.setOpenid(openid);
 			bean.setUserid(user.getId());
 			qQuserService.create(bean);
-			return "redirect:/common/login_do/index.do";
-		}
-		else {
-			map.put("error", "用户或密码不正确！");
+			return "redirect:" + proxy.getRedirecturl();
+		} else {
+			map.put("error", proxy.getResult());
 			return "/login";
 		}
+
 	}
-	
+
 	@ApiOperation(value = "QQ登陆页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String index(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws QQConnectException {
+	public String index(HttpServletRequest request, HttpServletResponse response, ModelMap map)
+			throws QQConnectException {
 		return "redirect:" + new Oauth().getAuthorizeURL(request);
 	}
 }

@@ -1,4 +1,5 @@
 package com.ybg.weixin.login.controller;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,8 @@ import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.ServletUtil;
 import com.ybg.base.util.SystemConstant;
 import com.ybg.base.util.VrifyCodeUtil;
+import com.ybg.rbac.controllor.LoginProxyController;
+import com.ybg.rbac.domain.Loginproxy;
 import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.UserService;
@@ -33,14 +36,14 @@ import io.swagger.annotations.ApiOperation;
 @Controller
 @RequestMapping("/common/weixin_do/")
 public class WeixinLoginController {
-	
+
 	@Autowired
-	WeixinUserService		weixinUserService;
+	WeixinUserService weixinUserService;
 	@Autowired
-	UserService				userService;
+	UserService userService;
 	@Autowired
-	AuthenticationManager	authenticationManager;
-	
+	AuthenticationManager authenticationManager;
+
 	/** 此链接只能在微信中点击 **/
 	@ApiOperation(value = "微信登陆鏈接", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "tologin.do" }, method = { RequestMethod.GET, RequestMethod.POST })
@@ -52,16 +55,17 @@ public class WeixinLoginController {
 		String url = preUrl + domain + "/common/weixin_do/login.do" + lastUrl;
 		return "redirect:" + url;
 	}
+
 	@ApiOperation(value = "微信APPid", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@ResponseBody
 	@RequestMapping(value = "getAppid", method = { RequestMethod.GET, RequestMethod.POST })
-	public Map<String,Object> getAppid() {
-		Map<String,Object> map= new LinkedHashMap<>();
+	public Map<String, Object> getAppid() {
+		Map<String, Object> map = new LinkedHashMap<>();
 		map.put("domain", SystemConstant.getSystemdomain());
-		map.put("appid", WeixinOAuthConfig.getValue(WeixinOAuthConfig.APPID)) ;
-		 return map;
+		map.put("appid", WeixinOAuthConfig.getValue(WeixinOAuthConfig.APPID));
+		return map;
 	}
-	
+
 	@ApiOperation(value = "微信登陆", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "login.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -76,23 +80,20 @@ public class WeixinLoginController {
 			return "/thirdpartlogin/weixin/weixinbund";
 		}
 		UserVO user = userService.get(qquser.getUserid());
-		if (user.getState().equals(UserStateConstant.LOCK)) {
-			return "/lock";
+		if(user==null){
+			user=new UserVO();
 		}
-		if (user.getState().equals(UserStateConstant.DIE)) {
-			return "/die";
+		Loginproxy proxy = LoginProxyController.login(request, user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()), null);
+		if (proxy.isSuccess()) {
+
+			return "redirect:" + proxy.getRedirecturl();
+		} else {
+			map.put("error", proxy.getResult());
+			return "/login";
 		}
-		if (!user.getState().equals(UserStateConstant.OK)) {
-			return "";// XXX 返回错误的请求 比如账号封锁、未激活等状态；
-		}
-		/***/
-		UsernamePasswordAuthenticationToken token2 = new UsernamePasswordAuthenticationToken(user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()));
-		token2.setDetails(new WebAuthenticationDetails(request));
-		Authentication authenticatedUser = authenticationManager.authenticate(token2);
-		SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
-		return "redirect:/common/login_do/index.do";
+
 	}
-	
+
 	@ApiOperation(value = "绑定微信账号页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "bund.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String weibobund(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -109,30 +110,19 @@ public class WeixinLoginController {
 		if (weibouser != null) {
 			return null;
 		}
-		request.removeAttribute("error");
+
 		UserVO user = userService.login(username);
-		if (!(user.isAccountNonLocked())) {
-			map.put("error", "用户已经被锁定不能绑定，请与管理员联系！");
-			return "/login";
-		}
-		if (!user.isAccountNonExpired()) {
-			map.put("error", "账号未激活！");
-			return "/login";
-		}
-		if (new DesUtils().encrypt(password).equals(user.getCredentialssalt())) {
-			UsernamePasswordAuthenticationToken token2 = new UsernamePasswordAuthenticationToken(user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()));
-			token2.setDetails(new WebAuthenticationDetails(request));
-			Authentication authenticatedUser = authenticationManager.authenticate(token2);
-			SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
+		Loginproxy proxy = LoginProxyController.login(request, username, password, null);
+		if (proxy.isSuccess()) {
 			WeixinUserVO bean = new WeixinUserVO();
 			bean.setOpenid(openid);
 			bean.setUserid(user.getId());
 			weixinUserService.create(bean);
-			return "redirect:/common/login_do/index.do";
-		}
-		else {
-			map.put("error", "用户或密码不正确！");
+			return "redirect:" + proxy.getRedirecturl();
+		} else {
+			map.put("error", proxy.getResult());
 			return "/login";
 		}
+
 	}
 }

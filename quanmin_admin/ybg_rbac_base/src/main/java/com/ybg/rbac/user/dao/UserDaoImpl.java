@@ -97,7 +97,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(WHERE).append("username='").append(loginname).append("'");
-		sql.append(OR).append("password='").append(loginname).append("'");
+		sql.append(OR).append("email='").append(loginname).append("'");
 		sql.append(OR).append("phone='").append(loginname).append("'");
 		List<UserVO> list = getJdbcTemplate().query(sql.toString(), new RowMapper<UserVO>() {
 			
