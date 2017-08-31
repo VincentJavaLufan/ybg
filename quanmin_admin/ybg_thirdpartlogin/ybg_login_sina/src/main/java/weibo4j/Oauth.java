@@ -83,8 +83,8 @@ public class Oauth extends Weibo {
 		return new AccessToken(client.post(
 				WeiboConfig.getValue("accessTokenURL"),
 				new PostParameter[] {
-						new PostParameter("client_id", WeiboConfig
-								.getValue("client_ID")),
+						new PostParameter("client_id", Float.valueOf(WeiboConfig
+								.getValue("client_ID"))),
 						new PostParameter("client_secret", WeiboConfig
 								.getValue("client_SERCRET")),
 						new PostParameter("grant_type", "authorization_code"),
