@@ -1,5 +1,4 @@
 package com.ybg.rbac.controllor;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -13,11 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,16 +45,16 @@ import com.ybg.rbac.user.service.UserService;
 @Api(tags = "平台登录操作")
 @Controller
 public class LoginControllor {
-
+	
 	@Autowired
-	UserService userService;
+	UserService				userService;
 	@Autowired
-	ResourcesService resourcesService;
+	ResourcesService		resourcesService;
 	@Autowired
-	LoginService loginService;
+	LoginService			loginService;
 	@Autowired
-	AuthenticationManager authenticationManager;
-
+	AuthenticationManager	authenticationManager;
+	
 	@ApiOperation(value = "登录页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "/common/login_do/tologin.do", "/" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String tologin(ModelMap map) {
@@ -66,15 +63,14 @@ public class LoginControllor {
 		map.put("systemdomain", SystemConstant.getSystemdomain());
 		return "/login";
 	}
-
+	
 	@ApiOperation(value = "备案，版权声明信息", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@ResponseBody
-	@RequestMapping(value = { "/common/login_do/system_authinfo.do" }, method = { RequestMethod.GET,
-			RequestMethod.POST })
+	@RequestMapping(value = { "/common/login_do/system_authinfo.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String system_authinfo() {
 		return "© 2016-2016 " + SystemConstant.getSystemdomain() + " 版权所有 ICP证：" + SystemConstant.getICP();
 	}
-
+	
 	@ApiOperation(value = "退出系统 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/loginout.do", method = RequestMethod.GET)
 	public String loginout(HttpServletRequest request, HttpServletResponse response) {
@@ -84,11 +80,9 @@ public class LoginControllor {
 		}
 		return "redirect:/common/login_do/tologin.do";
 	}
-
+	
 	@ApiOperation(value = "登录系统 ", notes = "", produces = MediaType.ALL_VALUE)
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "username", value = "帐号", dataType = "java.lang.String", required = true),
-			@ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
+	@ApiImplicitParams({ @ApiImplicitParam(name = "username", value = "帐号", dataType = "java.lang.String", required = true), @ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
 	@RequestMapping(value = "/common/login_do/login.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(HttpServletRequest httpServletRequest, ModelMap map) throws Exception {
 		// 首先检测验证码
@@ -100,37 +94,32 @@ public class LoginControllor {
 		Loginproxy proxy = LoginProxyController.login(httpServletRequest, username, password, null);
 		if (proxy.isSuccess()) {
 			return "redirect:" + proxy.getRedirecturl();
-		} else {
+		}
+		else {
 			map.put("error", proxy.getResult());
-
 		}
 		return "login";
 	}
-
+	
 	@ApiOperation(value = "无权限提示页面 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
-	@RequestMapping(value = { "/common/login_do/unauthorizedUrl.do" }, method = { RequestMethod.GET,
-			RequestMethod.POST })
+	@RequestMapping(value = { "/common/login_do/unauthorizedUrl.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String unauthorizedUrl() throws Exception {
 		return "/denied";
 	}
-
+	
 	@ApiOperation(value = "注册页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "/common/login_do/toregister.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String toregister() {
 		return "/register";
 	}
-
-	/**
-	 * 注册
+	
+	/** 注册
 	 *
-	 * @throws Exception
-	 **/
+	 * @throws Exception **/
 	@ApiOperation(value = "注册", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = "/common/login_do/register.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public Json register(UserVO user, @RequestParam(name = "email", required = true) String email,
-			@RequestParam(name = VrifyCodeUtil.PARAMETERNAME, required = true) String vrifyCode, HttpSession session)
-			throws Exception {
+	public Json register(UserVO user, @RequestParam(name = "email", required = true) String email, @RequestParam(name = VrifyCodeUtil.PARAMETERNAME, required = true) String vrifyCode, HttpSession session) throws Exception {
 		Json j = new Json();
 		if (!VrifyCodeUtil.checkvrifyCode(vrifyCode, session)) {
 			j.setSuccess(true);
@@ -153,8 +142,7 @@ public class LoginControllor {
 			j.setMsg("创建失败，已存在该用户");
 			return j;
 		}
-		String contemt = "<a href='" + SystemConstant.getSystemdomain() + "/common/login_do/relife.do?userid="
-				+ user.getId() + "&salt=" + user.getCredentialssalt() + "'>激活</a>";
+		String contemt = "<a href='" + SystemConstant.getSystemdomain() + "/common/login_do/relife.do?userid=" + user.getId() + "&salt=" + user.getCredentialssalt() + "'>激活</a>";
 		try {
 			SendEmailInter send = new SendQQmailImpl();
 			send.sendMail(email, SystemConstant.getSystemName() + "注册", contemt);
@@ -168,11 +156,10 @@ public class LoginControllor {
 		}
 		return j;
 	}
-
+	
 	@ApiOperation(value = "激活邮箱页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/relife.do", method = RequestMethod.GET)
-	public String relife(@RequestParam(name = "username", required = true) String username,
-			@RequestParam(name = "salt", required = true) String salt, ModelMap map) throws Exception {
+	public String relife(@RequestParam(name = "username", required = true) String username, @RequestParam(name = "salt", required = true) String salt, ModelMap map) throws Exception {
 		UserQuery qvo = new UserQuery();
 		qvo.setUsername(username);
 		qvo.setState(UserStateConstant.DIE);
@@ -189,23 +176,14 @@ public class LoginControllor {
 		map.put("error", "该链接已经失效");
 		return "/login";
 	}
-
+	
 	// /** 忘记密码 **/
 	@ApiOperation(value = "忘记密码", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "username", value = "帐号", dataType = "java.lang.String", required = true),
-			@ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
+	@ApiImplicitParams({ @ApiImplicitParam(name = "username", value = "帐号", dataType = "java.lang.String", required = true), @ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
 	@ResponseBody
 	@RequestMapping(value = "/common/login_do/forgetpwd.do", method = RequestMethod.GET)
-	public Json forgetpwd(@RequestParam(name = "username", required = true) String username, Model model,
-			@RequestParam(name = VrifyCodeUtil.PARAMETERNAME, required = true) String vrifyCode, HttpSession session)
-			throws Exception {
+	public Json forgetpwd(@RequestParam(name = "username", required = true) String username) throws Exception {
 		Json j = new Json();
-		if (!VrifyCodeUtil.checkvrifyCode(vrifyCode, session)) {
-			j.setSuccess(true);
-			j.setMsg("验证码不正确！");
-			return j;
-		}
 		j.setSuccess(true);
 		UserQuery userqvo = new UserQuery();
 		userqvo.setUsername(username);
@@ -237,8 +215,7 @@ public class LoginControllor {
 		json.put("dietime", DateUtil.getDate());
 		String encryptInfo = json.toString();
 		encryptInfo = "encryptInfo=" + new DesUtils().encrypt(encryptInfo);
-		String contemt = "<a href='" + SystemConstant.getSystemdomain() + "/common/login_do/resetpwd.do?" + encryptInfo
-				+ "'>重置密码，有效期截止到当天晚上24：00</a>";
+		String contemt = "<a href='" + SystemConstant.getSystemdomain() + "/common/login_do/resetpwd.do?" + encryptInfo + "'>重置密码，有效期截止到当天晚上24：00</a>";
 		try {
 			SendEmailInter send = new SendQQmailImpl();
 			send.sendMail(user.getEmail(), SystemConstant.getSystemName() + "-找回密码", contemt);
@@ -250,12 +227,10 @@ public class LoginControllor {
 		j.setMsg("发送邮箱成功，请到邮箱重置密码");
 		return j;
 	}
-
+	
 	// /** 重置密码初始化 **/
 	@ApiOperation("重置密码页面")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "encryptInfo", value = "加密信息", dataType = "java.lang.String", required = true),
-			@ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
+	@ApiImplicitParams({ @ApiImplicitParam(name = "encryptInfo", value = "加密信息", dataType = "java.lang.String", required = true), @ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
 	@RequestMapping(value = "/common/login_do/resetpwd.do", method = RequestMethod.GET)
 	public String resetpwd(@RequestParam(name = "encryptInfo", required = true) String encryptInfo, Model model) {
 		try {
@@ -284,16 +259,13 @@ public class LoginControllor {
 		model.addAttribute("msg", "该链接已过期");
 		return "/fail";
 	}
-
+	
 	// /** 重置密码 **/
 	@ApiOperation(value = "重置密码", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "encryptInfo", value = "加密信息", dataType = "java.lang.String", required = true),
-			@ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
+	@ApiImplicitParams({ @ApiImplicitParam(name = "encryptInfo", value = "加密信息", dataType = "java.lang.String", required = true), @ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
 	@ResponseBody
 	@RequestMapping(value = "/common/login_do/resetpassword.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public Json resetpassword(@RequestParam(name = "encryptInfo", required = true) String encryptInfo,
-			@RequestParam(name = "password", required = true) String password, Model model) throws Exception {
+	public Json resetpassword(@RequestParam(name = "encryptInfo", required = true) String encryptInfo, @RequestParam(name = "password", required = true) String password, Model model) throws Exception {
 		Json j = new Json();
 		j.setSuccess(true);
 		j.setMsg("操作成功");
@@ -307,7 +279,7 @@ public class LoginControllor {
 				return j;
 			}
 			UserVO user = userService.get(userid + "");
-			if(user==null){
+			if (user == null) {
 				return null;
 			}
 			if (user.getState().equals(UserStateConstant.LOCK)) {
@@ -340,7 +312,7 @@ public class LoginControllor {
 		}
 		return j;
 	}
-
+	
 	/** 检测账号是否存在 **/
 	@ApiOperation(value = " 检测账号是否存在", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -348,12 +320,10 @@ public class LoginControllor {
 	public boolean isexist(UserQuery qvo) {
 		return userService.checkisExist(qvo);
 	}
-
-	/**
-	 * 修改密码
+	
+	/** 修改密码
 	 * 
-	 * @throws Exception
-	 **/
+	 * @throws Exception **/
 	@ApiOperation(value = "修改密码", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "/common/login_do/modifypwd" }, method = { RequestMethod.GET, RequestMethod.POST })
@@ -374,12 +344,10 @@ public class LoginControllor {
 		userService.update(updatemap, wheremap);
 		return j;
 	}
-
-	/**
-	 * 清除过期没有激活的用户
+	
+	/** 清除过期没有激活的用户
 	 * 
-	 * @throws Exception
-	 **/
+	 * @throws Exception **/
 	@Scheduled(cron = "0 0 */6 * * ?")
 	// XXX 好像还有点问题
 	// @Scheduled(cron = "1 * * * * ? ")
