@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.Page;
@@ -30,6 +31,9 @@ public class WeixinTagsController {
 	public Page list() {
 		Page page = new Page();
 		List<WeixinTagsVO> list = weixinTagsService.list();
+		for (WeixinTagsVO bean : list) {
+			System.out.println(bean.getName());
+		}
 		page.setCurPage(1);
 		page.setResult(list);
 		page.setTotals(list.size());
@@ -67,10 +71,18 @@ public class WeixinTagsController {
 	// 根据ID 删除
 	@ResponseBody
 	@RequestMapping(value = { "remove.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json remove(Integer id) {
+	public Json remove(@RequestParam(name = "ids", required = true) String ids2) {
 		Json j = new Json();
-		
-		weixinTagsService.remove(id);
+		String[] ids = ids2.trim().split(",");
+		try {
+			for (String id : ids) {
+				weixinTagsService.remove(Integer.parseInt(id));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			j.setMsg("操作失败");
+			return j;
+		}
 		j.setMsg("操作成功");
 		j.setSuccess(true);
 		return j;

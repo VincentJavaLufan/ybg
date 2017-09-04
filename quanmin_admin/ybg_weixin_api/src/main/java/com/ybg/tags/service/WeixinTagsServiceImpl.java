@@ -9,6 +9,7 @@ import com.ybg.api.network.WeixinNW;
 import com.ybg.api.service.WeixinApiService;
 import com.ybg.tags.domain.WeixinTagsVO;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Repository
 public class WeixinTagsServiceImpl implements WeixinTagsService {
@@ -30,9 +31,11 @@ public class WeixinTagsServiceImpl implements WeixinTagsService {
 	@Override
 	public List<WeixinTagsVO> list() {
 		WeixinJson wj = weixinNW.tags_get(getAccessToken());
+		System.out.println(wj.getErrorMsg());
 		if (wj.isSuccess()) {
 			String json = wj.getJson();
-			JSONArray jsonArray = JSONArray.fromObject(json);
+			;
+			JSONArray jsonArray = JSONArray.fromObject(JSONObject.fromObject(json).get("tags"));
 			// JSONArray.toList(jsonArray,WeixinTagsVO.class);
 			return (List<WeixinTagsVO>) JSONArray.toCollection(jsonArray, WeixinTagsVO.class);
 		}
