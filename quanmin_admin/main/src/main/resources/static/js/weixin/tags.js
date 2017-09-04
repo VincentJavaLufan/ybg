@@ -22,14 +22,19 @@ var vm = new Vue({
             if (jobId == null) {
                 return;
             }
-            $.get(rootPath + "/weixin/tags/info.do?jobId=" + jobId, function(r) {
-                vm.showList = false;
-                vm.title = "修改";
-                vm.tags = r.tags;
-            });
+            vm.title = "修改";
+            vm.showList = false;
+         
+            vm.tags.id = grid.selectRow()[0].id;
+            vm.tags.name = grid.selectRow()[0].name;
+//            $.get(rootPath + "/weixin/tags/info.do?jobId=" + jobId, function(r) {
+//                vm.showList = false;
+//                vm.title = "修改";
+//                vm.tags = r.tags;
+//            });
         },
         saveOrUpdate : function(event) {
-            var url = vm.tags.jobId == null ? rootPath + '/weixin/tags/create.do' : rootPath + '/weixin/tags/update.do';
+            var url = vm.tags.id == null ? rootPath + '/weixin/tags/create.do' : rootPath + '/weixin/tags/update.do';
             $.ajax({
                 type : "POST",
                 url : rootPath + url,
@@ -61,66 +66,7 @@ var vm = new Vue({
                 });
             });
         },
-        pause : function() {
-            var jobIds = getSelectedRows();
-            if (jobIds == null) {
-                return;
-            }
-            confirm('确定要暂停选中的记录？', function() {
-                $.ajax({
-                    type : "POST",
-                    url : rootPath + "/weixin/tags/pause.do",
-                    // contentType : "application/json",
-                    data : {
-                        jobIds : jobIds
-                    },
-                    success : function(r) {
-                        vm.reload();
-                        alert(r.msg);
-                    }
-                });
-            });
-        },
-        resume : function() {
-            var jobIds = getSelectedRows();
-            if (jobIds == null) {
-                return;
-            }
-            confirm('确定要恢复选中的记录？', function() {
-                $.ajax({
-                    type : "POST",
-                    url : rootPath + "/weixin/tags/resume.do",
-                    // contentType : "application/json",
-                    data : {
-                        jobIds : jobIds
-                    },
-                    success : function(r) {
-                        vm.reload();
-                        alert(r.msg);
-                    }
-                });
-            });
-        },
-        runOnce : function() {
-            var jobIds = getSelectedRows();
-            if (jobIds == null) {
-                return;
-            }
-            confirm('确定要立即执行选中的记录？', function() {
-                $.ajax({
-                    type : "POST",
-                    url : rootPath + "/weixin/tags/run.do",
-                    // contentType : "application/json",
-                    data : {
-                        jobIds : jobIds
-                    },
-                    success : function(r) {
-                        vm.reload();
-                        alert(r.msg);
-                    }
-                });
-            });
-        },
+        
         reload : function(event) {
             vm.showList = true;
             grid.loadData();
