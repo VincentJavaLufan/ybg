@@ -2,12 +2,16 @@ package com.ybg.component.email.sendemail;
 import java.util.Date;
 import java.util.Properties;
 import javax.mail.Authenticator;
+import javax.mail.BodyPart;
 import javax.mail.Message;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import com.ybg.component.email.EmailConstant;
 
 public class Send163EmailImpl implements SendEmailInter {
@@ -31,8 +35,13 @@ public class Send163EmailImpl implements SendEmailInter {
 		message.setFrom(new InternetAddress(EmailConstant.getEmailaccount()));
 		message.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));// 设置收信邮箱
 		// 指定邮箱内容及ContentType和编码方式
-		message.setContent(centent, "text/html;charset=utf-8");
+		// message.setContent(centent, "text/html;charset=utf-8");
 		message.setSubject(title);// 设置主题
+		Multipart mul = new MimeMultipart(); // 新建一个MimeMultipart对象来存放多个BodyPart 对象
+		BodyPart mdp = new MimeBodyPart(); // 新建一个存放信件内容的BodyPart对象
+		mdp.setContent(centent, "text/html;charset=UTF-8");
+		mul.addBodyPart(mdp); // 将含有信件内容的BodyPart加入到MimeMulitipart对象中
+		message.setContent(mul);
 		message.setSentDate(new Date());// 设置发信时间
 		Transport.send(message);// 发送
 		System.out.println("发送完毕！");

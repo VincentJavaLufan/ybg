@@ -1,11 +1,15 @@
 package com.ybg.component.email.sendemail;
 import java.util.Properties;
 import javax.mail.Address;
+import javax.mail.BodyPart;
 import javax.mail.Message;
+import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import com.ybg.component.email.EmailConstant;
 
 /** QQ发送邮件 **/
@@ -24,7 +28,12 @@ public class SendQQmailImpl implements SendEmailInter {
 		// session.setDebug(true);
 		Message msg = new MimeMessage(session);
 		msg.setSubject(title);
-		msg.setText(centent);
+		Multipart mul = new MimeMultipart(); // 新建一个MimeMultipart对象来存放多个BodyPart 对象
+		BodyPart mdp = new MimeBodyPart(); // 新建一个存放信件内容的BodyPart对象
+		mdp.setContent(centent, "text/html;charset=UTF-8");
+		mul.addBodyPart(mdp); // 将含有信件内容的BodyPart加入到MimeMulitipart对象中
+		msg.setContent(mul);
+		// msg.setText(centent);
 		msg.setFrom(new InternetAddress(EmailConstant.getEmailaccount()));
 		String[] allemail = toEmail.replaceAll("；", ";").split(";");
 		Address[] address = new Address[allemail.length];
