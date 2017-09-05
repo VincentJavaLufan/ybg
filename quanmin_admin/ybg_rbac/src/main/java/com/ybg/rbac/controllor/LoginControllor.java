@@ -1,9 +1,4 @@
 package com.ybg.rbac.controllor;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import net.sf.json.JSONObject;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,6 +35,11 @@ import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.qvo.UserQuery;
 import com.ybg.rbac.user.service.LoginService;
 import com.ybg.rbac.user.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import net.sf.json.JSONObject;
 
 /*** 用Shiro登陆 **/
 @Api(tags = "平台登录操作")
@@ -142,7 +142,9 @@ public class LoginControllor {
 			j.setMsg("创建失败，已存在该用户");
 			return j;
 		}
-		String contemt = "<a href='" + SystemConstant.getSystemdomain() + "/common/login_do/relife.do?userid=" + user.getId() + "&salt=" + user.getCredentialssalt() + "'>激活</a>";
+		String url = SystemConstant.getSystemdomain() + "/common/login_do/relife.do?userid=" + user.getId() + "&username="+user.getUsername()+"&salt=" + user.getCredentialssalt();
+		String contemt =this.getActiveContent(url,user.getUsername()); //获取激活邮件的hmtl内容
+		//String contemt = "<a href='" + SystemConstant.getSystemdomain() + "/common/login_do/relife.do?userid=" + user.getId() + "&username="+user.getUsername()+"&salt=" + user.getCredentialssalt() + "'>激活</a>";
 		try {
 			SendEmailInter send = new SendQQmailImpl();
 			send.sendMail(email, SystemConstant.getSystemName() + "注册", contemt);
@@ -353,5 +355,31 @@ public class LoginControllor {
 	// @Scheduled(cron = "1 * * * * ? ")
 	public void cleanuser() throws Exception {
 		userService.removeExpired();
+	}
+	
+	/** 获取拼接的激活邮件的内容
+	 * 
+	 * @param url
+	 *            激活链接
+	 * @param username
+	 *            用户名
+	 * @return 字符串形的邮件内容 */
+	private String getActiveContent(String activeurl, String username) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("<html><head>");
+		buffer.append("<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">");
+		buffer.append("<base target=\"_blank\" />");
+		buffer.append("</head>");
+		buffer.append("<body>尊敬的 ，");
+		buffer.append(username);
+		buffer.append(" 您好！<br>");
+		buffer.append("请点击");
+		buffer.append("<a href=" + activeurl + ">激活</a>");
+		buffer.append("激活您的账号,<br>");
+		buffer.append("为保障您的帐号安全，请在3小时内点击该链接<br>");
+		buffer.append("如无法点击请您将下面链接<br><span style=\"color:blue\"" + activeurl + "</span><br>复制到浏览器地址栏访问。 若如果您已激活，请忽略本邮件，由此给您带来的不便请谅解。<br><br><br>");
+		buffer.append("本邮件由系统自动发出，请勿直接回复！ ");
+		buffer.append("</body></html>");
+		return buffer.toString();
 	}
 }
