@@ -14,10 +14,9 @@ import net.sf.json.JSONObject;
 public class WeixinApiServiceImpl implements WeixinApiService {
 	
 	@Autowired
-	WeixinApiDao weixinApiDao;
-	
+	WeixinApiDao	weixinApiDao;
 	@Autowired
-	WeixinNW weixinNW;
+	WeixinNW		weixinNW;
 	
 	@Override
 	public Map<String, String> getSetting() {
@@ -45,7 +44,9 @@ public class WeixinApiServiceImpl implements WeixinApiService {
 	@Override
 	public String getAccessToken() {
 		StringBuilder uri = new StringBuilder();
-		uri.append("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=").append(WeixinOAuthConfig.getValue(WeixinOAuthConfig.APPID)).append("&secret=").append(WeixinOAuthConfig.getValue(WeixinOAuthConfig.SECRET));
+		uri.append("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=");
+		uri.append(WeixinOAuthConfig.getValue(WeixinOAuthConfig.APPID));
+		uri.append("&secret=").append(WeixinOAuthConfig.getValue(WeixinOAuthConfig.SECRET));
 		String result = HttpUtil.get(uri.toString());
 		WeixinJson json = new WeixinJson(result);
 		if (json.isSuccess()) {
@@ -53,5 +54,5 @@ public class WeixinApiServiceImpl implements WeixinApiService {
 		}
 		return null;
 	}
-	// 微信访问的接口解析成VO类  还没写
+	// 微信访问的接口解析成VO类 还没写
 }
