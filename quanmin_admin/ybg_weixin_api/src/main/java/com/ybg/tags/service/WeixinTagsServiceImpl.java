@@ -31,7 +31,7 @@ public class WeixinTagsServiceImpl implements WeixinTagsService {
 	@Override
 	public List<WeixinTagsVO> list() {
 		WeixinJson wj = weixinNW.tags_get(getAccessToken());
-		System.out.println(wj.getErrorMsg());
+		
 		if (wj.isSuccess()) {
 			String json = wj.getJson();
 			;

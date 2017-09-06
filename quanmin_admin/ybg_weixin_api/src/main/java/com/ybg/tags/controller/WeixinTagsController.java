@@ -31,9 +31,6 @@ public class WeixinTagsController {
 	public Page list() {
 		Page page = new Page();
 		List<WeixinTagsVO> list = weixinTagsService.list();
-		for (WeixinTagsVO bean : list) {
-			System.out.println(bean.getName());
-		}
 		page.setCurPage(1);
 		page.setResult(list);
 		page.setTotals(list.size());
