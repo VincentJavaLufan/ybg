@@ -8,6 +8,7 @@ public class WeixinJson {
 	
 	public WeixinJson(String json) {
 		setJson(json);
+		System.out.println(json);
 	}
 	
 	public JSONObject getJsonObject() {
