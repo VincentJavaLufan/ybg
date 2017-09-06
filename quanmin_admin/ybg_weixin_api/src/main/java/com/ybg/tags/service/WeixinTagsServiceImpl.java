@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ybg.api.domain.menu.WeixinJson;
+import com.ybg.api.domain.WeixinJson;
 import com.ybg.api.network.WeixinNW;
 import com.ybg.api.service.WeixinApiService;
 import com.ybg.tags.domain.WeixinTagsVO;

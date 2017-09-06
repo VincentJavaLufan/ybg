@@ -5,8 +5,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import com.xiaoleilu.hutool.http.HttpUtil;
 import com.ybg.api.dao.WeixinApiDao;
+import com.ybg.api.domain.WeixinJson;
 import com.ybg.api.domain.WeixinOAuthConfig;
-import com.ybg.api.domain.menu.WeixinJson;
 import com.ybg.api.network.WeixinNW;
 import net.sf.json.JSONObject;
 

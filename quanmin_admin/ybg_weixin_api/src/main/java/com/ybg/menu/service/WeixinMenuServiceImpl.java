@@ -1,13 +1,13 @@
-package com.ybg.member.service;
-import java.util.List;
+package com.ybg.menu.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.api.network.WeixinNW;
 import com.ybg.api.service.WeixinApiService;
-import com.ybg.member.domain.WeixinUserVO;
+import com.ybg.menu.domain.WeixintMenuDO;
 
 @Repository
-public class WeixinUserServiveImpl implements WeixinUserService {
+public class WeixinMenuServiceImpl implements WeixinMenuService {
 	
 	@Autowired
 	WeixinNW			weixinNW;
@@ -19,14 +19,7 @@ public class WeixinUserServiveImpl implements WeixinUserService {
 	}
 	
 	@Override
-	public WeixinUserVO get(String openid) {
-		weixinNW.user_info(getAccessToken(), openid);
-		return null;
-	}
-	
-	@Override
-	public List<WeixinUserVO> batchget(String openid) {
-		//XXX 不打算做。。。。
-		return null;
+	public void create(WeixintMenuDO bean) {
+		weixinNW.menu_create(bean, getAccessToken());
 	}
 }

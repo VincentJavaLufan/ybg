@@ -4,9 +4,9 @@ import javax.print.attribute.standard.Media;
 import org.springframework.stereotype.Repository;
 import com.google.gson.JsonObject;
 import com.xiaoleilu.hutool.http.HttpUtil;
+import com.ybg.api.domain.WeixinJson;
 import com.ybg.api.domain.WeixinOAuthConfig;
-import com.ybg.api.domain.menu.Menu;
-import com.ybg.api.domain.menu.WeixinJson;
+import com.ybg.menu.domain.WeixintMenuDO;
 import net.sf.json.JSONObject;
 
 @Repository
@@ -21,7 +21,7 @@ public class WeixinNWImpl implements WeixinNW {
 	}
 	
 	@Override
-	public WeixinJson menu_create(Menu menu, String token) {
+	public WeixinJson menu_create(WeixintMenuDO menu, String token) {
 		String jsonMenu = JSONObject.fromObject(menu).toString();
 		String result = HttpUtil.post("https://api.weixin.qq.com/cgi-bin/menu/create?access_token=" + token, jsonMenu);
 		return new WeixinJson(result);
@@ -597,5 +597,11 @@ public class WeixinNWImpl implements WeixinNW {
 		// XXX
 		String result = HttpUtil.get(uri.toString(), json.toString());
 		return new WeixinJson(result);
+	}
+
+	@Override
+	public WeixinJson user_infobatchget(String token, List<String> openids) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

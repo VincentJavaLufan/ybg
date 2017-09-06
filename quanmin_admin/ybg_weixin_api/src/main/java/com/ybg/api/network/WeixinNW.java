@@ -2,11 +2,11 @@ package com.ybg.api.network;
 import java.util.List;
 import javax.print.attribute.standard.Media;
 import com.google.gson.JsonObject;
-import com.ybg.api.domain.menu.Menu;
-import com.ybg.api.domain.menu.WeixinJson;
+import com.ybg.api.domain.WeixinJson;
+import com.ybg.menu.domain.WeixintMenuDO;
 import net.sf.json.JSONObject;
 
-/** 都是些根据 token 访问的接口  并不是最全**/
+/** 都是些根据 token 访问的接口 并不是最全 **/
 public interface WeixinNW {
 	
 	/** 获取微信服务器IP地址 **/
@@ -14,7 +14,7 @@ public interface WeixinNW {
 	
 	////////////
 	/** 自定义菜单创建接口 **/
-	WeixinJson menu_create(Menu menu, String token);
+	WeixinJson menu_create(WeixintMenuDO menu, String token);
 	
 	/** 自定义菜单查询接口 **/
 	WeixinJson menu_get(String token);
@@ -55,6 +55,9 @@ public interface WeixinNW {
 	
 	/** 获取用户基本信息 **/
 	WeixinJson user_info(String token, String openid);
+	
+	/*** 批量获取用户基本信息 **/
+	WeixinJson user_infobatchget(String token, List<String> openids);
 	
 	/** 获取用户列表
 	 * 

@@ -1,4 +1,4 @@
-package com.ybg.api.domain.menu;
+package com.ybg.api.domain;
 import com.ybg.api.WeiXinErrorCodeConstant;
 import net.sf.json.JSONObject;
 
