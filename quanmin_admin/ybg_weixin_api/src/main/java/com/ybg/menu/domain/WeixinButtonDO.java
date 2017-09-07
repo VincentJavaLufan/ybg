@@ -3,29 +3,38 @@ import java.io.Serializable;
 
 public class WeixinButtonDO implements Serializable {
 	
-	// 二级菜单数组，个数应为1~5个
-	WeixinButtonDO	sub_button[];
+	String	id;
 	// 菜单的响应动作类型，view表示网页类型，click表示点击类型，miniprogram表示小程序类型
-	String			type;
+	String	type;
 	// 菜单标题，不超过16个字节，子菜单不超过60个字节
-	String			name;
+	String	name;
 	// 菜单KEY值，用于消息接口推送，不超过128字节
-	String			key;
+	String	key;
 	// 网页链接，用户点击菜单可打开链接，不超过1024字节。type为miniprogram时，不支持小程序的老版本客户端将打开本url。
-	String			url;
+	String	url;
 	// 调用新增永久素材接口返回的合法media_id
-	String			media_id;
+	String	media_id;
 	// 小程序的appid（仅认证公众号可配置）
-	String			appid;
+	String	appid;
 	// 小程序的页面路径
-	String			pagepath;
+	String	pagepath;
+	//
+	String	parentid;
 	
-	public WeixinButtonDO[] getSub_button() {
-		return sub_button;
+	public String getId() {
+		return id;
 	}
 	
-	public void setSub_button(WeixinButtonDO[] sub_button) {
-		this.sub_button = sub_button;
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public String getParentid() {
+		return parentid;
+	}
+	
+	public void setParentid(String parentid) {
+		this.parentid = parentid;
 	}
 	
 	public String getType() {

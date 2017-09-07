@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.base.util.Json;
-import com.ybg.menu.domain.WeixintMenuDO;
+import com.ybg.menu.domain.WeixinButtonDO;
 import com.ybg.menu.service.WeixinMenuService;
 import io.swagger.annotations.Api;
 
@@ -25,10 +25,15 @@ public class WeixinMenuController {
 	
 	@ResponseBody
 	@RequestMapping(value = { "create.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json create(@RequestBody WeixintMenuDO weixinmenu) {
+	public Json create(@RequestBody WeixinButtonDO weixinmenu) {
 		Json j = new Json();
 		j.setSuccess(true);
-		weixinMenuService.create(weixinmenu);
+		try {
+			weixinMenuService.create(weixinmenu);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		j.setMsg("操作成功");
 		return j;
 	}
