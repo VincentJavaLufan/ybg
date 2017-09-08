@@ -377,7 +377,7 @@ public class LoginControllor {
 		buffer.append("<a href=" + activeurl + ">激活</a>");
 		buffer.append("激活您的账号,<br>");
 		buffer.append("为保障您的帐号安全，请在3小时内点击该链接<br>");
-		buffer.append("如无法点击请您将下面链接<br><span style=\"color:blue\"" + activeurl + "</span><br>复制到浏览器地址栏访问。 若如果您已激活，请忽略本邮件，由此给您带来的不便请谅解。<br><br><br>");
+		buffer.append("如无法点击请您将下面链接<br><span style=\"color:blue\">" + activeurl + "</span><br>复制到浏览器地址栏访问。 若如果您已激活，请忽略本邮件，由此给您带来的不便请谅解。<br><br><br>");
 		buffer.append("本邮件由系统自动发出，请勿直接回复！ ");
 		buffer.append("</body></html>");
 		return buffer.toString();
