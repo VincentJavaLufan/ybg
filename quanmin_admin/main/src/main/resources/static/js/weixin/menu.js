@@ -117,7 +117,18 @@ var vm = new Vue({
         reload : function() {
             vm.showList = true;
             Menu.table.refresh();
-        }
+        },
+        save : function() {
+            var url = "/weixin/menu_do/save.do";
+            $.ajax({
+                type : "POST",
+                url : rootPath + url,
+                success : function(r) {
+                    alert(r.msg);
+                    vm.reload();
+                }
+            });
+        },
     }
 });
 var Menu = {
