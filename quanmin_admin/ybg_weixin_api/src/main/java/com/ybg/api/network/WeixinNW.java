@@ -14,7 +14,7 @@ public interface WeixinNW {
 	
 	////////////
 	/** 自定义菜单创建接口 **/
-	WeixinJson menu_create(WeixinMenuVO menu, String token);
+	WeixinJson menu_create(JSONObject menu, String token);
 	
 	/** 自定义菜单查询接口 **/
 	WeixinJson menu_get(String token);

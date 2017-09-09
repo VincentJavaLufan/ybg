@@ -1,4 +1,5 @@
 package com.ybg.menu.controller;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.ybg.api.domain.WeixinJson;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Json;
@@ -145,7 +147,9 @@ public class WeixinMenuController {
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public List<WeixinButtonVO> list() {
-		return weixinMenuService.list();
+		List<WeixinButtonVO> list = weixinMenuService.list();
+		Collections.sort(list);
+		return list;
 	}
 	
 	@ApiOperation(value = "选择列表", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -250,5 +254,15 @@ public class WeixinMenuController {
 		updatemap.put("buttonorder", weixinmenu.getButtonorder());
 		wheremap.put("id", weixinmenu.getId());
 		weixinMenuService.update(updatemap, wheremap);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "save.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public Json save() {
+		Json j = new Json();
+		WeixinJson json = weixinMenuService.save(weixinMenuService.list());
+		j.setSuccess(json.isSuccess());
+		j.setMsg(json.getErrorMsg());
+		return j;
 	}
 }

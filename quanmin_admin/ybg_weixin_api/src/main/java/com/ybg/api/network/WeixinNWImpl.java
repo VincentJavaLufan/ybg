@@ -21,7 +21,7 @@ public class WeixinNWImpl implements WeixinNW {
 	}
 	
 	@Override
-	public WeixinJson menu_create(WeixinMenuVO menu, String token) {
+	public WeixinJson menu_create(JSONObject menu, String token) {
 		String jsonMenu = JSONObject.fromObject(menu).toString();
 		String result = HttpUtil.post("https://api.weixin.qq.com/cgi-bin/menu/create?access_token=" + token, jsonMenu);
 		return new WeixinJson(result);
