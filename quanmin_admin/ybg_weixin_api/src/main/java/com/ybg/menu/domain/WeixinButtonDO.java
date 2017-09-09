@@ -1,5 +1,6 @@
 package com.ybg.menu.domain;
 import java.io.Serializable;
+import com.ybg.menu.WeixinButtonConstant;
 
 public class WeixinButtonDO implements Serializable {
 	
@@ -18,8 +19,38 @@ public class WeixinButtonDO implements Serializable {
 	String	appid;
 	// 小程序的页面路径
 	String	pagepath;
-	//
+	// 父级ID
 	String	parentid;
+	// 按钮类型，含子按钮/不含子按钮
+	Integer	ifsub		= WeixinButtonConstant.IFSUBNO;	//
+	// 菜单顺序
+	Integer	menuorder	= 3;
+	// 按钮顺序
+	Integer	buttonorder	= 5;
+	
+	public Integer getMenuorder() {
+		return menuorder;
+	}
+	
+	public void setMenuorder(Integer menuorder) {
+		this.menuorder = menuorder;
+	}
+	
+	public Integer getButtonorder() {
+		return buttonorder;
+	}
+	
+	public void setButtonorder(Integer buttonorder) {
+		this.buttonorder = buttonorder;
+	}
+	
+	public Integer getIfsub() {
+		return ifsub;
+	}
+	
+	public void setIfsub(Integer ifsub) {
+		this.ifsub = ifsub;
+	}
 	
 	public String getId() {
 		return id;

@@ -6,7 +6,7 @@ import com.ybg.api.network.WeixinNW;
 import com.ybg.api.service.WeixinApiService;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.menu.dao.WeixinButtonDao;
-import com.ybg.menu.domain.WeixinButtonDO;
+import com.ybg.menu.domain.WeixinButtonVO;
 
 @Repository
 public class WeixinMenuServiceImpl implements WeixinMenuService {
@@ -23,7 +23,7 @@ public class WeixinMenuServiceImpl implements WeixinMenuService {
 	}
 	
 	@Override
-	public void create(WeixinButtonDO bean) throws Exception {
+	public void create(WeixinButtonVO bean) throws Exception {
 		weixinButtonDao.create(bean);
 	}
 	
@@ -38,12 +38,22 @@ public class WeixinMenuServiceImpl implements WeixinMenuService {
 	}
 	
 	@Override
-	public List<WeixinButtonDO> list() {
+	public List<WeixinButtonVO> list() {
 		return weixinButtonDao.list();
 	}
 	
 	@Override
-	public WeixinButtonDO get(String id) {
+	public WeixinButtonVO get(String id) {
 		return weixinButtonDao.get(id);
+	}
+	
+	@Override
+	public List<WeixinButtonVO> menulist() {
+		return weixinButtonDao.menulist();
+	}
+	
+	@Override
+	public List<WeixinButtonVO> buttonlist(String parentid) throws Exception {
+		return weixinButtonDao.buttonlist(parentid);
 	}
 }

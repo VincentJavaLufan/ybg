@@ -21,4 +21,16 @@ public class WeixinButtonConstant {
 	public static final String	TYPE_MEDIA_ID			= "media_id";
 	/** 跳转图文消息URL用户点击view_limited类型按钮后，微信客户端将打开开发者在按钮中填写的永久素材id对应的图文消息URL，永久素材类型只支持图文消息。请注意：永久素材id必须是在“素材管理/新增永久素材”接口上传后获得的合法id。 **/
 	public static final String	TYPE_VIEW_LIMITED		= "view_limited";
+	/** 小程序 **/
+	public static final String	TYPE_MINIPROGRAM		= "miniprogram";
+	//////////////// 分割线//////////////////////////////////////
+	/** button 是否是子按钮 */
+	public static final int		IFSUBYES				= 1;
+	/** button 是否是子按钮 */
+	public static final int		IFSUBNO					= 2;
+	// 分割线
+	/** 单个菜单最多按钮数 **/
+	public static final int		MAXBUTTON				= 5;
+	/** 一个微信最多菜单数 **/
+	public static final int		MAXMENU					= 3;
 }
