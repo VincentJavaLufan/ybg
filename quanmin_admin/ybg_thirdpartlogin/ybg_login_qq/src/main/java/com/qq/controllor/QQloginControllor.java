@@ -1,14 +1,9 @@
 package com.qq.controllor;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,11 +19,8 @@ import com.ybg.base.util.ServletUtil;
 import com.ybg.base.util.VrifyCodeUtil;
 import com.ybg.rbac.controllor.LoginProxyController;
 import com.ybg.rbac.domain.Loginproxy;
-import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.UserService;
-
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -36,14 +28,14 @@ import io.swagger.annotations.ApiOperation;
 @Controller
 @RequestMapping(value = { "/common/qq/login_do/" })
 public class QQloginControllor {
-
+	
 	@Autowired
-	QQuserService qQuserService;
+	QQuserService			qQuserService;
 	@Autowired
-	UserService userService;
+	UserService				userService;
 	@Autowired
-	AuthenticationManager authenticationManager;
-
+	AuthenticationManager	authenticationManager;
+	
 	@ApiOperation(value = "QQ登陆", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "login.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -54,7 +46,8 @@ public class QQloginControllor {
 			// 我们的网站被CSRF攻击了或者用户取消了授权
 			// 做一些数据统计工作
 			System.out.print("没有获取到响应参数");
-		} else {
+		}
+		else {
 			accessToken = accessTokenObj.getAccessToken();
 			tokenExpireIn = accessTokenObj.getExpireIn();
 			request.getSession().setAttribute("demo_access_token", accessToken);
@@ -68,21 +61,21 @@ public class QQloginControllor {
 				return "/thirdpartlogin/qq/qqbund";
 			}
 			UserVO user = userService.get(qquser.getUserid());
-			if(user==null){
-				user=new UserVO();
+			if (user == null) {
+				user = new UserVO();
 			}
 			Loginproxy proxy = LoginProxyController.login(request, user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()), null);
 			if (proxy.isSuccess()) {
-				
 				return "redirect:" + proxy.getRedirecturl();
-			} else {
+			}
+			else {
 				map.put("error", proxy.getResult());
 				return "/login";
 			}
 		}
 		return null;
 	}
-
+	
 	@ApiOperation(value = "绑定QQ账号页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "bund.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String weibobund(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -100,7 +93,6 @@ public class QQloginControllor {
 			return null;
 		}
 		map.remove("error");
-
 		UserVO user = userService.login(username);
 		Loginproxy proxy = LoginProxyController.login(request, username, password, null);
 		if (proxy.isSuccess()) {
@@ -109,17 +101,16 @@ public class QQloginControllor {
 			bean.setUserid(user.getId());
 			qQuserService.create(bean);
 			return "redirect:" + proxy.getRedirecturl();
-		} else {
+		}
+		else {
 			map.put("error", proxy.getResult());
 			return "/login";
 		}
-
 	}
-
+	
 	@ApiOperation(value = "QQ登陆页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String index(HttpServletRequest request, HttpServletResponse response, ModelMap map)
-			throws QQConnectException {
+	public String index(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws QQConnectException {
 		return "redirect:" + new Oauth().getAuthorizeURL(request);
 	}
 }

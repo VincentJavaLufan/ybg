@@ -1,5 +1,4 @@
 package com.baidu.oauth.controllor;
-
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -8,10 +7,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +24,8 @@ import com.baidu.oauth.service.BaiduUserService;
 import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.ServletUtil;
 import com.ybg.base.util.VrifyCodeUtil;
-
 import com.ybg.rbac.controllor.LoginProxyController;
 import com.ybg.rbac.domain.Loginproxy;
-import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.UserService;
 import io.swagger.annotations.Api;
@@ -43,15 +36,15 @@ import io.swagger.annotations.ApiOperation;
 @Controller
 @RequestMapping(value = { "/common/baidu_do/" })
 public class BaiduControllor {
-
-	private Logger logger = Logger.getLogger(getClass());
+	
+	private Logger			logger	= Logger.getLogger(getClass());
 	@Autowired
-	UserService userService;
+	UserService				userService;
 	@Autowired
-	BaiduUserService baiduUserService;
+	BaiduUserService		baiduUserService;
 	@Autowired
-	AuthenticationManager authenticationManager;
-
+	AuthenticationManager	authenticationManager;
+	
 	@ApiOperation(value = "百度登陆跳转", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "tologin.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String tologin(HttpServletRequest request, HttpServletResponse response) {
@@ -74,7 +67,7 @@ public class BaiduControllor {
 		}
 		return null;
 	}
-
+	
 	@ApiOperation(value = "百度账号登陆", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "login.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -119,20 +112,19 @@ public class BaiduControllor {
 			return "/thirdpartlogin/baidu/baidubund";
 		}
 		UserVO user = this.userService.get(weibouser.getUserid());
-		if(user==null){
-			user=new UserVO();
+		if (user == null) {
+			user = new UserVO();
 		}
-		Loginproxy proxy = LoginProxyController.login(request,user.getUsername(),
-				new DesUtils().decrypt(user.getCredentialssalt()), null);
+		Loginproxy proxy = LoginProxyController.login(request, user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()), null);
 		if (proxy.isSuccess()) {
-			
 			return "redirect:" + proxy.getRedirecturl();
-		} else {
+		}
+		else {
 			map.put("error", proxy.getResult());
 			return "/login";
 		}
 	}
-
+	
 	private String getAccessToken(HttpServletResponse response, HttpServletRequest request) {
 		BaiduStore store = new BaiduCookieStore(Oauth.getClientID(), request, response);
 		com.baidu.api.domain.Session session = store.getSession();
@@ -146,7 +138,7 @@ public class BaiduControllor {
 		}
 		return session.getToken().getAccessToken();
 	}
-
+	
 	@ApiOperation(value = "无绑定账号。申请一个绑定账号", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "bund.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String weibobund(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -165,17 +157,16 @@ public class BaiduControllor {
 		}
 		baiduuser = new BaiduUser();
 		UserVO user = userService.login(username);
-
 		Loginproxy proxy = LoginProxyController.login(request, username, password, null);
 		if (proxy.isSuccess()) {
 			baiduuser.setUid(Long.parseLong(uid));
 			baiduuser.setUserid(user.getId());
 			baiduUserService.create(baiduuser);
 			return "redirect:" + proxy.getRedirecturl();
-		} else {
+		}
+		else {
 			map.put("error", proxy.getResult());
 			return "/login";
 		}
-
 	}
 }

@@ -1,16 +1,13 @@
 package com.ybg.mayun.oauth.controller;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.ServletUtil;
@@ -20,7 +17,6 @@ import com.ybg.mayun.oauth.domain.MayunUserVO;
 import com.ybg.mayun.oauth.service.MayunUserService;
 import com.ybg.rbac.controllor.LoginProxyController;
 import com.ybg.rbac.domain.Loginproxy;
-
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.UserService;
 import io.swagger.annotations.Api;
@@ -30,23 +26,22 @@ import io.swagger.annotations.ApiOperation;
 @Controller
 @RequestMapping("/commom/mayun_do/")
 public class MayunLoginController {
-
+	
 	@Autowired
-	MayunUserService mayunUserService;
+	MayunUserService		mayunUserService;
 	@Autowired
-	UserService userService;
+	UserService				userService;
 	@Autowired
-	AuthenticationManager authenticationManager;
-
+	AuthenticationManager	authenticationManager;
+	
 	@ApiOperation(value = "码云登陆跳转", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "tologin.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String tologin(HttpServletRequest request, HttpServletResponse response) {
-		Mayun mayun = new Mayun(MayunConfig.getValue(MayunConfig.client_ID),
-				MayunConfig.getValue(MayunConfig.client_SERCRET), MayunConfig.getValue(MayunConfig.redirect_URI));
+		Mayun mayun = new Mayun(MayunConfig.getValue(MayunConfig.client_ID), MayunConfig.getValue(MayunConfig.client_SERCRET), MayunConfig.getValue(MayunConfig.redirect_URI));
 		String authorizeUrl = mayun.getLoginURL();
 		return "redirect:" + authorizeUrl;
 	}
-
+	
 	@ApiOperation(value = "码云账号登陆", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "login.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -57,7 +52,6 @@ public class MayunLoginController {
 		}
 		Long id = mayunUserService.getMayunUserIdByToken(access_token);
 		if (QvoConditionUtil.checkLong(id)) {
-
 			MayunUserVO qvo = new MayunUserVO();
 			qvo.setMayunid(id + "");
 			MayunUserVO mayunuser = mayunUserService.getUserByMayunId(id + "");
@@ -66,23 +60,21 @@ public class MayunLoginController {
 				return "/thirdpartlogin/mayun/mayunbund";
 			}
 			UserVO user = this.userService.get(mayunuser.getUserid());
-			if(user==null){
-				user=new UserVO();
+			if (user == null) {
+				user = new UserVO();
 			}
-			Loginproxy proxy = LoginProxyController.login(request, user.getUsername(),
-					new DesUtils().decrypt(user.getCredentialssalt()), null);
+			Loginproxy proxy = LoginProxyController.login(request, user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()), null);
 			if (proxy.isSuccess()) {
-
 				return "redirect:" + proxy.getRedirecturl();
-			} else {
+			}
+			else {
 				map.put("error", proxy.getResult());
 				return "/login";
 			}
-
 		}
 		return "";
 	}
-
+	
 	@ApiOperation(value = "无绑定账号。申请一个绑定账号", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "bund.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String weibobund(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -99,9 +91,7 @@ public class MayunLoginController {
 		if (mayunuser != null) {
 			return null;
 		}
-
 		UserVO user = userService.login(username);
-
 		Loginproxy proxy = LoginProxyController.login(request, username, password, null);
 		if (proxy.isSuccess()) {
 			mayunuser = new MayunUserVO();
@@ -109,10 +99,10 @@ public class MayunLoginController {
 			mayunuser.setUserid(user.getId());
 			mayunUserService.create(mayunuser);
 			return "redirect:" + proxy.getRedirecturl();
-		} else {
+		}
+		else {
 			map.put("error", proxy.getResult());
 			return "/login";
 		}
-
 	}
 }

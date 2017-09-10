@@ -1,5 +1,4 @@
 package com.ybg.weixin.login.controller;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -7,10 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +19,6 @@ import com.ybg.base.util.SystemConstant;
 import com.ybg.base.util.VrifyCodeUtil;
 import com.ybg.rbac.controllor.LoginProxyController;
 import com.ybg.rbac.domain.Loginproxy;
-import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.UserService;
 import com.ybg.weixin.login.domain.WeixinUserVO;
@@ -36,14 +30,14 @@ import io.swagger.annotations.ApiOperation;
 @Controller
 @RequestMapping("/common/weixin_do/")
 public class WeixinLoginController {
-
+	
 	@Autowired
-	WeixinUserService weixinUserService;
+	WeixinUserService		weixinUserService;
 	@Autowired
-	UserService userService;
+	UserService				userService;
 	@Autowired
-	AuthenticationManager authenticationManager;
-
+	AuthenticationManager	authenticationManager;
+	
 	/** 此链接只能在微信中点击 **/
 	@ApiOperation(value = "微信登陆鏈接", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "tologin.do" }, method = { RequestMethod.GET, RequestMethod.POST })
@@ -55,7 +49,7 @@ public class WeixinLoginController {
 		String url = preUrl + domain + "/common/weixin_do/login.do" + lastUrl;
 		return "redirect:" + url;
 	}
-
+	
 	@ApiOperation(value = "微信APPid", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@ResponseBody
 	@RequestMapping(value = "getAppid", method = { RequestMethod.GET, RequestMethod.POST })
@@ -65,7 +59,7 @@ public class WeixinLoginController {
 		map.put("appid", WeixinOAuthConfig.getValue(WeixinOAuthConfig.APPID));
 		return map;
 	}
-
+	
 	@ApiOperation(value = "微信登陆", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "login.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -80,20 +74,19 @@ public class WeixinLoginController {
 			return "/thirdpartlogin/weixin/weixinbund";
 		}
 		UserVO user = userService.get(qquser.getUserid());
-		if(user==null){
-			user=new UserVO();
+		if (user == null) {
+			user = new UserVO();
 		}
 		Loginproxy proxy = LoginProxyController.login(request, user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()), null);
 		if (proxy.isSuccess()) {
-
 			return "redirect:" + proxy.getRedirecturl();
-		} else {
+		}
+		else {
 			map.put("error", proxy.getResult());
 			return "/login";
 		}
-
 	}
-
+	
 	@ApiOperation(value = "绑定微信账号页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "bund.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String weibobund(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -110,7 +103,6 @@ public class WeixinLoginController {
 		if (weibouser != null) {
 			return null;
 		}
-
 		UserVO user = userService.login(username);
 		Loginproxy proxy = LoginProxyController.login(request, username, password, null);
 		if (proxy.isSuccess()) {
@@ -119,10 +111,10 @@ public class WeixinLoginController {
 			bean.setUserid(user.getId());
 			weixinUserService.create(bean);
 			return "redirect:" + proxy.getRedirecturl();
-		} else {
+		}
+		else {
 			map.put("error", proxy.getResult());
 			return "/login";
 		}
-
 	}
 }

@@ -30,12 +30,14 @@ public class WeixinMenuController {
 	@Autowired
 	WeixinMenuService weixinMenuService;
 	
-	@RequestMapping("index.do")
+	@ApiOperation(value = "用户页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
+	@RequestMapping(value={"index.do"}, method = { RequestMethod.GET, RequestMethod.POST })
 	public String index() {
 		return "/weixin/menu";
 	}
 	
 	// 这个要判断很多东西，
+	@ApiOperation(value = "创建菜单", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "create.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public Json create(@RequestBody WeixinButtonVO weixinmenu) throws Exception {
@@ -129,6 +131,7 @@ public class WeixinMenuController {
 		return j;
 	}
 	
+	@ApiOperation(value = "删除菜单", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "remove.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public Json remove(String id) {
@@ -144,6 +147,7 @@ public class WeixinMenuController {
 		return j;
 	}
 	
+	@ApiOperation(value = "菜单列表", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public List<WeixinButtonVO> list() {
@@ -162,6 +166,7 @@ public class WeixinMenuController {
 		return map;
 	}
 	
+	@ApiOperation(value = "单个菜单信息", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "get.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<Map<String, Object>> get(String id) throws Exception {
@@ -171,6 +176,7 @@ public class WeixinMenuController {
 		return map;
 	}
 	
+	@ApiOperation(value = "更新菜单", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "update.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public Json update(@RequestBody WeixinButtonVO weixinmenu) throws Exception {
@@ -256,6 +262,7 @@ public class WeixinMenuController {
 		weixinMenuService.update(updatemap, wheremap);
 	}
 	
+	@ApiOperation(value = "同步到菜单", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "save.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public Json save() {

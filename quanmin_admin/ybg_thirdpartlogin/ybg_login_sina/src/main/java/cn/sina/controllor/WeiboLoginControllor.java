@@ -1,14 +1,9 @@
 package cn.sina.controllor;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +13,9 @@ import com.ybg.base.util.ServletUtil;
 import com.ybg.base.util.VrifyCodeUtil;
 import com.ybg.rbac.controllor.LoginProxyController;
 import com.ybg.rbac.domain.Loginproxy;
-import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.LoginService;
 import com.ybg.rbac.user.service.UserService;
-
 import cn.sina.domain.WeiboUserVO;
 import cn.sina.service.WeiboUserService;
 import io.swagger.annotations.Api;
@@ -36,23 +29,23 @@ import weibo4j.model.WeiboException;
 @Controller
 @RequestMapping("/common/weibo/sinalogin_do/")
 public class WeiboLoginControllor {
-
+	
 	@Autowired
-	WeiboUserService weiboUserService;
+	WeiboUserService		weiboUserService;
 	@Autowired
-	UserService userService;
+	UserService				userService;
 	@Autowired
-	LoginService loginservice;
+	LoginService			loginservice;
 	@Autowired
-	AuthenticationManager authenticationManager;
-
+	AuthenticationManager	authenticationManager;
+	
 	@ApiOperation(value = "微博登陆页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "tologin.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String tologin(HttpServletRequest request, HttpServletResponse response) throws WeiboException {
 		Oauth oauth = new Oauth();
 		return "redirect:" + oauth.authorize("code");
 	}
-
+	
 	@ApiOperation(value = "微博登陆", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "login.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -66,19 +59,19 @@ public class WeiboLoginControllor {
 			return "/thirdpartlogin/weibo/weibobund";
 		}
 		UserVO user = userService.get(weibouser.getUserid());
-		if(user==null){
-			user=new UserVO();
+		if (user == null) {
+			user = new UserVO();
 		}
 		Loginproxy proxy = LoginProxyController.login(request, user.getUsername(), new DesUtils().decrypt(user.getCredentialssalt()), null);
 		if (proxy.isSuccess()) {
-
 			return "redirect:" + proxy.getRedirecturl();
-		} else {
+		}
+		else {
 			map.put("error", proxy.getResult());
 			return "/login";
 		}
 	}
-
+	
 	@ApiOperation(value = "微博绑定账号页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "bund.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String weibobund(HttpServletRequest request, HttpServletResponse response, ModelMap map) throws Exception {
@@ -103,10 +96,10 @@ public class WeiboLoginControllor {
 			bean.setUserid(user.getId());
 			weiboUserService.create(bean);
 			return "redirect:" + proxy.getRedirecturl();
-		} else {
+		}
+		else {
 			map.put("error", proxy.getResult());
 			return "/login";
 		}
-
 	}
 }

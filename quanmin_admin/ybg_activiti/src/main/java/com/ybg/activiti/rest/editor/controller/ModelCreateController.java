@@ -7,6 +7,7 @@ import com.ybg.base.util.Json;
 import com.ybg.base.util.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
@@ -36,6 +37,7 @@ public class ModelCreateController {
 	ObjectMapper	objectMapper;
 	
 	/*** 首页 **/
+	@ApiOperation(value = "首页", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@GetMapping(value = { "index.do" })
 	public String index() {
 		return "/activiti/activiti";
@@ -45,6 +47,8 @@ public class ModelCreateController {
 	 * 
 	 * @return
 	 * @throws UnsupportedEncodingException */
+	@ApiOperation(value = "创建模型", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiImplicitParams({ @ApiImplicitParam(name = "ModelEntity", value = "模型实体", required = true, dataType = "org.activiti.engine.impl.persistence.entity.ModelEntity") })
 	@ResponseBody
 	@PostMapping("create.do")
 	public Json newModel(@RequestBody ModelEntity m) throws UnsupportedEncodingException {
@@ -92,6 +96,7 @@ public class ModelCreateController {
 	/** 获取所有模型
 	 * 
 	 * @return */
+	@ApiOperation(value = "模型列表", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@PostMapping("list.do")
 	public Page modelList() {
@@ -132,6 +137,8 @@ public class ModelCreateController {
 	 * @param id
 	 * @return
 	 * @throws Exception */
+	@ApiOperation(value = "发布模型", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiImplicitParam(name = "id[]", value = "发布模型的ID", required = true, dataType = "java.lang.String")
 	@ResponseBody
 	@PostMapping("deployment.do")
 	public Json deploy(@RequestParam(name = "id[]", required = true) String id) throws Exception {
@@ -151,7 +158,6 @@ public class ModelCreateController {
 			j.setSuccess(false);
 			j.setMsg("数据模型不符要求，请至少设计一条主线流程。");
 			return j;
-			
 		}
 		byte[] bpmnBytes = new BpmnXMLConverter().convertToXML(model);
 		// 发布流程
