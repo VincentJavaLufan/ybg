@@ -3,7 +3,6 @@ import java.util.List;
 import javax.print.attribute.standard.Media;
 import com.google.gson.JsonObject;
 import com.ybg.api.domain.WeixinJson;
-import com.ybg.menu.domain.WeixinMenuVO;
 import net.sf.json.JSONObject;
 
 /** 都是些根据 token 访问的接口 并不是最全 **/

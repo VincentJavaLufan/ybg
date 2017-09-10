@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import com.xiaoleilu.hutool.http.HttpUtil;
 import com.ybg.api.domain.WeixinJson;
 import com.ybg.api.domain.WeixinOAuthConfig;
-import com.ybg.menu.domain.WeixinMenuVO;
 import net.sf.json.JSONObject;
 
 @Repository
