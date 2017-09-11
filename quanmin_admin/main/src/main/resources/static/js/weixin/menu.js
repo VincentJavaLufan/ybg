@@ -128,7 +128,17 @@ var vm = new Vue({
                     vm.reload();
                 }
             });
-        },
+        },cleanmenu:function(){
+            var url = "/weixin/menu_do/cleanmenu.do";
+            $.ajax({
+                type : "POST",
+                url : rootPath + url,
+                success : function(r) {
+                    alert(r.msg);
+                    vm.reload();
+                }
+            });
+        }
     }
 });
 var Menu = {
