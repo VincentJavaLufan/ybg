@@ -85,4 +85,9 @@ public class WeixinMenuServiceImpl implements WeixinMenuService {
 		menu.put("button", menuList);
 		return weixinNW.menu_create(menu, getAccessToken());
 	}
+	
+	@Override
+	public WeixinJson cleanmenu() {
+		return weixinNW.menu_delete(getAccessToken());
+	}
 }

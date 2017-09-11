@@ -272,4 +272,15 @@ public class WeixinMenuController {
 		j.setMsg(json.getErrorMsg());
 		return j;
 	}
+	/**清空微信菜单**/
+	@ResponseBody
+	@RequestMapping(value={"cleanmenu.do"}, method = { RequestMethod.GET, RequestMethod.POST })
+	public Json cleanmenu(){
+		Json j = new Json();
+		WeixinJson json = weixinMenuService.cleanmenu();
+		j.setSuccess(json.isSuccess());
+		j.setMsg(json.getErrorMsg());
+		return j;
+	}
+	
 }

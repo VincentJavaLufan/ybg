@@ -20,6 +20,8 @@ public interface WeixinMenuService {
 	
 	List<WeixinButtonVO> buttonlist(String parentid) throws Exception;
 	
-	/**生成菜单到微信服务器**/
+	/** 生成菜单到微信服务器 **/
 	WeixinJson save(List<WeixinButtonVO> list);
+	/** 清除微信服务器的菜单 **/
+	WeixinJson cleanmenu();
 }
