@@ -238,7 +238,7 @@
 		<dependency>
 			<groupId>com.xiaoleilu</groupId>
 			<artifactId>hutool-all</artifactId>
-			<version>3.0.9</version>
+			<version>3.1.1</version>
 		</dependency>
 		<!-- 生成文档注释 -->
 		<dependency>
@@ -517,6 +517,7 @@
 			<version>1.5.3</version>
 		</dependency>
 		<!--springbootadmin end -->
+		
 	</dependencies>
 	<build>
 		<plugins>
