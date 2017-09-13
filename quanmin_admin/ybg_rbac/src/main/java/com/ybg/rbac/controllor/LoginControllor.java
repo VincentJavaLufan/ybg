@@ -9,7 +9,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +24,7 @@ import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.ServletUtil;
 import com.ybg.base.util.SystemConstant;
+import com.ybg.base.util.UserConstant;
 import com.ybg.base.util.VrifyCodeUtil;
 import com.ybg.component.email.sendemail.SendEmailInter;
 import com.ybg.component.email.sendemail.SendQQmailImpl;
@@ -129,8 +129,8 @@ public class LoginControllor {
 		j.setSuccess(true);
 		j.setMsg("我们将发送邮箱到您的邮箱中进行验证，大约3小时左右不验证将删除注册信息");
 		String now = DateUtil.getDateTime();
-		user.setPassword(new DesUtils(user.getUsername() + now).encrypt(user.getPassword()));
 		user.setCredentialssalt(new DesUtils().encrypt(user.getPassword()));
+		user.setPassword(UserConstant.getpwd(user.getPassword()));
 		user.setRoleid("10");
 		user.setPhone("");
 		user.setState(UserStateConstant.DIE);
@@ -142,9 +142,8 @@ public class LoginControllor {
 			j.setMsg("创建失败，已存在该用户");
 			return j;
 		}
-		String url = SystemConstant.getSystemdomain() + "/common/login_do/relife.do?userid=" + user.getId() + "&username="+user.getUsername()+"&salt=" + user.getCredentialssalt();
-		String contemt =this.getActiveContent(url,user.getUsername()); //获取激活邮件的hmtl内容
-		//String contemt = "<a href='" + SystemConstant.getSystemdomain() + "/common/login_do/relife.do?userid=" + user.getId() + "&username="+user.getUsername()+"&salt=" + user.getCredentialssalt() + "'>激活</a>";
+		String url = SystemConstant.getSystemdomain() + "/common/login_do/relife.do?userid=" + user.getId() + "&username=" + user.getUsername() + "&salt=" + user.getCredentialssalt();
+		String contemt = this.getActiveContent(url, user.getUsername()); // 获取激活邮件的hmtl内容
 		try {
 			SendEmailInter send = new SendQQmailImpl();
 			send.sendMail(email, SystemConstant.getSystemName() + "注册", contemt);
@@ -299,10 +298,9 @@ public class LoginControllor {
 				j.setMsg("未知原因 ，无法使用");
 				return j;
 			}
-			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
 			BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
-			updatemap.put("password", passwordEncoder.encode(password));
+			updatemap.put("password", UserConstant.getpwd(password));
 			updatemap.put("credentialssalt", new DesUtils().encrypt(password));
 			wheremap.put("id", user.getId());
 			userService.update(updatemap, wheremap);
@@ -340,7 +338,7 @@ public class LoginControllor {
 		}
 		BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
 		BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
-		updatemap.put("password", new DesUtils(user.getUsername() + user.getCreatetime()).encrypt(user.getPassword()));
+		updatemap.put("password", UserConstant.getpwd(password));
 		updatemap.put("credentialssalt", new DesUtils().encrypt(password));
 		wheremap.put("id", user.getId());
 		userService.update(updatemap, wheremap);
