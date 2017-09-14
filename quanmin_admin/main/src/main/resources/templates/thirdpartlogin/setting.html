@@ -1,0 +1,81 @@
+
+<script type="text/javascript" src="/js/system/thirdpart/thirdpart.js">
+    
+</script>
+<div id="rrapp">
+	<div class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal">
+			<div class="form-group">
+				<div class="col-sm-2 control-label">码云APPid</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="mayun.client_ID" placeholder="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">码云密钥</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="mayun.client_SERCRET" placeholder="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">码云回调地址</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="mayun.redirect_URI" placeholder="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">新浪APPid</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="sina.client_ID" placeholder="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">新浪密钥</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="sina.client_SERCRET" placeholder="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">新浪回调地址</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="sina.redirect_URI" placeholder="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">百度APPid</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="baidu.client_ID" placeholder="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">百度密钥</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="baidu.client_SERCRET" placeholder="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">百度回调地址</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="baidu.redirect_URI" placeholder="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">微信APPid</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="weixin.appId" placeholder="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">微信密钥</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="weixin.secret" placeholder="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div>
+				<input type="button" class="btn btn-primary" @click="update" value="确定" />
+			</div>
+		</form>
+	</div>
+</div>
