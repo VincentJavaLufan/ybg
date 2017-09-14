@@ -86,4 +86,10 @@ public class MayunUserServiceImpl implements MayunUserService {
 		List<MayunUserVO> list = mayunUserDao.query(qvo);
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
+
+	@Override
+	public void updateSetting(String appid, String value, String url) {
+		mayunUserDao.updateSetting(appid, value, url);
+		
+	}
 }

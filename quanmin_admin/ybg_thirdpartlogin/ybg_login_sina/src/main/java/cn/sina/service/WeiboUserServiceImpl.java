@@ -40,4 +40,9 @@ public class WeiboUserServiceImpl implements WeiboUserService {
 	public Map<String, String> getSetting() {
 		return weiboUserDao.getSetting();
 	}
+	
+	@Override
+	public void updateSetting(String appid, String value, String url) {
+		weiboUserDao.updateSetting(appid, value, url);
+	}
 }

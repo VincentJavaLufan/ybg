@@ -7,10 +7,11 @@ public class MayunConfig {
 	
 	private MayunConfig() {
 	}
-	public static final String client_ID="client_ID";
-	public static final String client_SERCRET="client_SERCRET";
-	public static final String redirect_URI="redirect_URI";
-	private static Properties props = new Properties();
+	
+	public static final String	client_ID		= "client_ID";
+	public static final String	client_SERCRET	= "client_SERCRET";
+	public static final String	redirect_URI	= "redirect_URI";
+	private static Properties	props			= new Properties();
 	static {
 		MayunUserService service = (MayunUserService) SpringContextUtils.getBean(MayunUserService.class);
 		props.putAll(service.getSetting());
@@ -22,5 +23,10 @@ public class MayunConfig {
 	
 	public static void updateProperties(String key, String value) {
 		props.setProperty(key, value);
+	}
+	
+	public static void reflushProperties() {
+		MayunUserService service = (MayunUserService) SpringContextUtils.getBean(MayunUserService.class);
+		props.putAll(service.getSetting());
 	}
 }

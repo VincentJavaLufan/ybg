@@ -26,4 +26,10 @@ public class WeiboConfig {
 	public static void updateProperties(String key, String value) {
 		props.setProperty(key, value);
 	}
+	public static void reflushProperties() {
+		WeiboUserService service = (WeiboUserService) SpringContextUtils.getBean(WeiboUserService.class);
+		Map<String, String> map=	service.getSetting();
+		map.put("redirect_URI", ReplaceDomainUtil.replacedomain(map.get(redirect_URI)) );
+		props.putAll(map);
+	}
 }

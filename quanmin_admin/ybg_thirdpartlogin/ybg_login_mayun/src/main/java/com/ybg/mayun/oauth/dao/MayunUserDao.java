@@ -16,4 +16,6 @@ public interface MayunUserDao {
 	List<MayunUserVO> query(MayunUserQuery qvo) throws Exception;
 	
 	Map<String, String> getSetting();
+
+	void updateSetting(String appid, String value, String url);
 }

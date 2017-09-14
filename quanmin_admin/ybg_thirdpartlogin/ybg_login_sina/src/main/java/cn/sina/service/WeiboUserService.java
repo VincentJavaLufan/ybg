@@ -18,4 +18,9 @@ public interface WeiboUserService {
 	WeiboUserVO get(String uid) throws Exception;
 	
 	Map<String, String> getSetting();
+	
+	/** @param appid
+	 * @param value
+	 * @param url */
+	void updateSetting(String appid, String value, String url);
 }

@@ -18,4 +18,5 @@ public interface WeixinUserService {
 	
 	/** 获取微信ID **/
 	String getOpen_id(String code);
+	
 }

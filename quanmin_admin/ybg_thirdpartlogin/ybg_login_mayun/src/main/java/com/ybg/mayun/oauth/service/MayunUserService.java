@@ -25,4 +25,9 @@ public interface MayunUserService {
 	
 	MayunUserVO getUserByMayunId(String id) throws Exception;
 	
+	/** @param appid 
+	 * @param value
+	 * @param url */
+	void updateSetting(String appid, String value, String url);
+	
 }

@@ -15,5 +15,10 @@ public interface WeiboUserDao {
 	
 	List<WeiboUserVO> query(WeiboUserQuery qvo) throws Exception;
 	
-	Map<String,String> getSetting();
+	Map<String, String> getSetting();
+	
+	/** @param appid 
+	 * @param value
+	 * @param url */
+	void updateSetting(String appid, String value, String url);
 }

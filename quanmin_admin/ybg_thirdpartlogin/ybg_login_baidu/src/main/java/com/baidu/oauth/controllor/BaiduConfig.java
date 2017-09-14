@@ -26,4 +26,11 @@ public class BaiduConfig {
 	public static void updateProperties(String key, String value) {
 		props.setProperty(key, value);
 	}
+	
+	public static void reflushProperties() {
+		BaiduUserService service = (BaiduUserService) SpringContextUtils.getBean(BaiduUserService.class);
+		Map<String, String> map = service.getSetting();
+		map.put("redirect_URI", ReplaceDomainUtil.replacedomain(map.get(redirect_URI)));
+		props.putAll(map);
+	}
 }

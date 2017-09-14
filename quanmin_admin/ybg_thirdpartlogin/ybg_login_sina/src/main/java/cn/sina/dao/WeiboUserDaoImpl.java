@@ -86,4 +86,21 @@ public class WeiboUserDaoImpl extends BaseDao implements WeiboUserDao {
 		});
 		return map;
 	}
+	
+	@Override
+	public void updateSetting(String appid, String value, String url) {
+		String tablename = "sina_login_setting_1";
+		StringBuilder sql = new StringBuilder();
+		sql.append(UPDATE).append(tablename).append(SET).append(" `value` ='").append(appid).append("'");
+		sql.append(WHERE).append("`key`='client_ID'");
+		getJdbcTemplate().update(sql.toString());
+		sql = new StringBuilder();
+		sql.append(UPDATE).append(tablename).append(SET).append(" `value` ='").append(value).append("'");
+		sql.append(WHERE).append("`key`='client_SERCRET'");
+		getJdbcTemplate().update(sql.toString());
+		sql = new StringBuilder();
+		sql.append(UPDATE).append(tablename).append(SET).append(" `value` ='").append(url).append("'");
+		sql.append(WHERE).append("`key`='redirect_URI'");
+		getJdbcTemplate().update(sql.toString());
+	}
 }

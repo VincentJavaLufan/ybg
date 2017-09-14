@@ -41,4 +41,11 @@ public class BaiduUserServiceImpl implements BaiduUserService {
 	public Map<String, String> getSetting() {
 		return baiduUserDao.getSetting();
 	}
+
+	@Override
+	public void updateSetting(String appid, String value, String url) {
+		baiduUserDao.updateSetting(appid, value, url);
+		
+		
+	}
 }
