@@ -35,4 +35,17 @@ public class WeixinApiDaoImpl extends BaseDao implements WeixinApiDao {
 		});
 		return map;
 	}
+	
+	@Override
+	public void updateSetting(String appid, String value) {
+		String tablename = "weixin_login_setting_1";
+		StringBuilder sql = new StringBuilder();
+		sql.append(UPDATE).append(tablename).append(SET).append(" `value` ='").append(appid).append("'");
+		sql.append(WHERE).append("`key`='appId'");
+		getJdbcTemplate().update(sql.toString());
+		sql = new StringBuilder();
+		sql.append(UPDATE).append(tablename).append(SET).append(" `value` ='").append(value).append("'");
+		sql.append(WHERE).append("`key`='secret'");
+		getJdbcTemplate().update(sql.toString());
+	}
 }

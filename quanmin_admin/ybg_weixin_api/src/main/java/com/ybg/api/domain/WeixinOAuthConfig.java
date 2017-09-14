@@ -24,4 +24,9 @@ public class WeixinOAuthConfig {
 	public static void updateProperties(String key, String value) {
 		props.setProperty(key, value);
 	}
+	
+	public static void reflushProperties() {
+		WeixinApiService service = (WeixinApiService) SpringContextUtils.getBean(WeixinApiService.class);
+		props.putAll(service.getSetting());
+	}
 }

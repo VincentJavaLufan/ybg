@@ -55,4 +55,9 @@ public class WeixinApiServiceImpl implements WeixinApiService {
 		return null;
 	}
 	// 微信访问的接口解析成VO类 还没写
+	
+	@Override
+	public void updateSetting(String appid, String value) {
+		weixinApiDao.updateSetting(appid, value);
+	}
 }

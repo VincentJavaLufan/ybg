@@ -15,4 +15,9 @@ public interface WeixinApiService {
 	
 	/** 获取accesstoken 有效期两小时 要缓存 **/
 	String getAccessToken();
+	
+	/** @param appid
+	 * @param value
+	 * @param url */
+	void updateSetting(String appid, String value);
 }
