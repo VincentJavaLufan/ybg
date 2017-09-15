@@ -13,8 +13,7 @@ public class WeixinOAuthConfig {
 	
 	private static Properties props = new Properties();
 	static {
-		WeixinApiService service = (WeixinApiService) SpringContextUtils.getBean(WeixinApiService.class);
-		props.putAll(service.getSetting());
+		reflushProperties();
 	}
 	
 	public static String getValue(String key) {
