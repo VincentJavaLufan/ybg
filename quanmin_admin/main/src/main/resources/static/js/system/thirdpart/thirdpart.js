@@ -5,7 +5,8 @@ var vm = new Vue({
         mayun : null,
         sina : null,
         baidu : null,
-        weixin : null
+        weixin : null,
+        thirdpart:1,
     },
     methods : {
         query : function() {
