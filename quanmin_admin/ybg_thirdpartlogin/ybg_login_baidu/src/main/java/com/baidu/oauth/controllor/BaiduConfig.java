@@ -13,10 +13,7 @@ public class BaiduConfig {
 	private static final String	redirect_URI	= "redirect_URI";
 	private static Properties	props			= new Properties();
 	static {
-		BaiduUserService service = (BaiduUserService) SpringContextUtils.getBean(BaiduUserService.class);
-		Map<String, String> map = service.getSetting();
-		map.put("redirect_URI", ReplaceDomainUtil.replacedomain(map.get(redirect_URI)));
-		props.putAll(map);
+		reflushProperties();
 	}
 	
 	public static String getValue(String key) {

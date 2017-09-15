@@ -13,10 +13,7 @@ public class WeiboConfig {
 	
 	private static Properties props = new Properties();
 	static {
-		WeiboUserService service = (WeiboUserService) SpringContextUtils.getBean(WeiboUserService.class);
-		Map<String, String> map=	service.getSetting();
-		map.put("redirect_URI", ReplaceDomainUtil.replacedomain(map.get(redirect_URI)) );
-		props.putAll(map);
+		reflushProperties();
 	}
 	
 	public static String getValue(String key) {

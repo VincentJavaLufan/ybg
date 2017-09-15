@@ -13,8 +13,7 @@ public class MayunConfig {
 	public static final String	redirect_URI	= "redirect_URI";
 	private static Properties	props			= new Properties();
 	static {
-		MayunUserService service = (MayunUserService) SpringContextUtils.getBean(MayunUserService.class);
-		props.putAll(service.getSetting());
+		reflushProperties();
 	}
 	
 	public static String getValue(String key) {
