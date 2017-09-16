@@ -355,6 +355,12 @@ public class LoginControllor {
 		userService.removeExpired();
 	}
 	
+	/** 个人账号设置首页 **/
+	@RequestMapping(value = { "/common/accountsetting.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public String accountsetting() {
+		return "/index/account";
+	}
+	
 	/** 获取拼接的激活邮件的内容
 	 * 
 	 * @param url
