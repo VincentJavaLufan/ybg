@@ -871,7 +871,7 @@ public class JSONObject {
 			throw new JSONException("Null key.");
 		}
 		if (value != null) {
-			testValidity(value);
+			//testValidity(value);
 			this.map.put(key, value);
 		}
 		else {
