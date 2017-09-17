@@ -50,7 +50,7 @@ public class WeiboUserDaoImpl extends BaseDao implements WeiboUserDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<WeiboUserVO>());
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<WeiboUserVO>(WeiboUserVO.class));
 	}
 	
 	private String getcondition(WeiboUserQuery qvo) throws Exception {

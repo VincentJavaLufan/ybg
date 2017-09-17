@@ -51,7 +51,7 @@ public class MayunUserDaoImpl extends BaseDao implements MayunUserDao {
 	public List<MayunUserVO> query(MayunUserQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
-		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<MayunUserVO>());
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<MayunUserVO>(MayunUserVO.class));
 	}
 	
 	@Override

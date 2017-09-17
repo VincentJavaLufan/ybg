@@ -26,7 +26,7 @@ public class SysOssDaoImpl extends BaseDao implements SysOssDao {
 	public SysOssEntity queryObject(Long id) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("	select id,url,create_date from sys_oss oss where id = " + id);
-		List<SysOssEntity> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<SysOssEntity>());
+		List<SysOssEntity> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<SysOssEntity>(SysOssEntity.class));
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
 	
@@ -75,7 +75,7 @@ public class SysOssDaoImpl extends BaseDao implements SysOssDao {
 		sql.append(" where 1=1 ");
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			List<SysOssEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<SysOssEntity>());
+			List<SysOssEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<SysOssEntity>(SysOssEntity.class));
 			page.setResult(list);
 		}
 		else {

@@ -59,7 +59,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		sql.append(getcondition(qvo));
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<UserVO>()));
+			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<UserVO>(UserVO.class)));
 		}
 		else {
 			page.setResult(new ArrayList<UserVO>());
@@ -93,7 +93,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",role.`name` rolename").append(FROM).append(QUERY_TABLE_NAME).append(LEFT).append(JOIN).append("sys_role role").append(ON).append("user.roleid=role.id");
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<UserVO>());
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<UserVO>(UserVO.class));
 	}
 	
 	@Override
@@ -103,7 +103,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		sql.append(WHERE).append("username='").append(loginname).append("'");
 		sql.append(OR).append("email='").append(loginname).append("'");
 		sql.append(OR).append("phone='").append(loginname).append("'");
-		List<UserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<UserVO>());
+		List<UserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<UserVO>(UserVO.class));
 		return list.size() == 0 ? null : list.get(0);
 	}
 	
@@ -136,7 +136,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		if (email) {
 			StringBuilder sqlsub = new StringBuilder();
 			sqlsub.append(sql.toString()).append(" and user.email='" + qvo.getEmail() + "'");
-			List<UserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<UserVO>());
+			List<UserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<UserVO>(UserVO.class));
 			check = check && QvoConditionUtil.checkList(list);
 			if (!check) {
 				return check;
@@ -145,7 +145,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		if (username) {
 			StringBuilder sqlsub = new StringBuilder();
 			sqlsub.append(sql.toString()).append(" and user.username='" + qvo.getUsername() + "'");
-			List<UserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<UserVO>());
+			List<UserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<UserVO>(UserVO.class));
 			check = check && QvoConditionUtil.checkList(list);
 			if (!check) {
 				return check;
@@ -154,7 +154,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		if (email) {
 			StringBuilder sqlsub = new StringBuilder();
 			sqlsub.append(sql.toString()).append(" and user.email='" + qvo.getEmail() + "'");
-			List<UserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<UserVO>());
+			List<UserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<UserVO>(UserVO.class));
 			check = check && QvoConditionUtil.checkList(list);
 		}
 		return check;

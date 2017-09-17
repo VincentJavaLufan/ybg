@@ -52,7 +52,7 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 	public ScheduleJobEntity queryObject(Long jobId) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select job_id,bean_name,method_name,params,cron_expression,status,remark,create_time from schedule_job where job_id = " + jobId);
-		List<ScheduleJobEntity> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<ScheduleJobEntity>());
+		List<ScheduleJobEntity> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<ScheduleJobEntity>(ScheduleJobEntity.class));
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
 	
@@ -108,7 +108,7 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select job_id,bean_name,method_name,params,cron_expression,status,remark,create_time  from schedule_job job ");
 		sqlappen(sql, "bean_name", qvo.getBean_Name());
-		List<ScheduleJobEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<ScheduleJobEntity>());
+		List<ScheduleJobEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<ScheduleJobEntity>(ScheduleJobEntity.class));
 		page.setResult(list);
 		page.setTotals(queryForInt(sql));
 		return page;
@@ -121,7 +121,7 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 		sql.append(" where 1=1 ");
 		sqlappen(sql, "beanname", qvo.getBean_Name());
 		sql.append(" and status = 0 ");
-		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<ScheduleJobEntity>());
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<ScheduleJobEntity>(ScheduleJobEntity.class));
 		// return new ArrayList<ScheduleJobEntity>();
 	}
 }

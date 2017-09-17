@@ -42,7 +42,7 @@ public class SysGeneratorDaoImpl extends BaseDao implements SysGeneratorDao {
 		});
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			List<TableEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<TableEntity>());
+			List<TableEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<TableEntity>(TableEntity.class));
 			page.setResult(list);
 		}
 		else {

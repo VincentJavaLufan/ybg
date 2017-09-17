@@ -25,7 +25,7 @@ public class MQproducerDaoImpl extends BaseDao implements MQproducerDao {
 	public MQproducer getIsUse() {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select id,topic,url,ak,sk,producerid from sys_mq_producer sp ");
-		List<MQproducer> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<MQproducer>());
+		List<MQproducer> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<MQproducer>(MQproducer.class));
 		return QvoConditionUtil.checkList(list) ? list.get(0) : new MQproducer();
 	}
 }

@@ -22,7 +22,7 @@ public class MQconsumerDaoImpl extends BaseDao implements MQconsumerDao {
 	public MQconsumer getIsUse() {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select id,topic,url,ak,sk,consumerid from sys_mq_consumer mc");
-		List<MQconsumer> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<MQconsumer>());
+		List<MQconsumer> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<MQconsumer>(MQconsumer.class));
 		return QvoConditionUtil.checkList(list) ? list.get(0) : new MQconsumer();
 	}
 }

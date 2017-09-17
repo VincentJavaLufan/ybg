@@ -27,7 +27,7 @@ public class SysConfigDaoImpl extends BaseDao implements SysConfigDao {
 	public String queryByKey(String paramKey) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select value from sys_config  sys_config where sys_config.key='" + paramKey + "'");
-		List<String> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<String>());
+		List<String> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<String>(String.class));
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
 	
@@ -66,7 +66,7 @@ public class SysConfigDaoImpl extends BaseDao implements SysConfigDao {
 	public SysConfigEntity queryObject(Long id) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select id,key,value,status,remark from sys_config where id=" + id);
-		List<SysConfigEntity> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<SysConfigEntity>());
+		List<SysConfigEntity> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<SysConfigEntity>(SysConfigEntity.class));
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
 	
@@ -93,7 +93,7 @@ public class SysConfigDaoImpl extends BaseDao implements SysConfigDao {
 		});
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			List<SysConfigEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<SysConfigEntity>());
+			List<SysConfigEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<SysConfigEntity>(SysConfigEntity.class));
 			page.setResult(list);
 		}
 		else {

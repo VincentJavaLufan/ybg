@@ -47,7 +47,7 @@ public class WeixinUserDaoImpl extends BaseDao implements WeixinUserDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<WeixinUserVO>());
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<WeixinUserVO>(WeixinUserVO.class));
 	}
 	
 	private String getcondition(WeixinUserQuery qvo) throws Exception {
