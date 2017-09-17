@@ -17,16 +17,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.ValidatorUtils;
-import com.ybg.rbac.resources.domain.SysButtonVO;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
 import com.ybg.rbac.resources.qvo.ResourcesQuery;
-import com.ybg.rbac.resources.qvo.SysButtonQuery;
 import com.ybg.rbac.resources.service.ResourcesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
-@Api(tags="用户访问资源管理接口")
+@Api(tags = "用户访问资源管理接口")
 @Controller
 @RequestMapping("/res/res_do/")
 public class RescourcesControllor {
@@ -63,16 +61,16 @@ public class RescourcesControllor {
 	public Json create(@RequestBody SysResourcesVO res) {
 		Json j = new Json();
 		j.setSuccess(true);
+		if (res.getType().equals("0")) {
+			res.setReskey(res.getName());
+			res.setParentid("0");
+			res.setResurl(res.getName());
+		}
+		else {
+			res.setReskey(res.getResurl());
+		}
+		ValidatorUtils.validateEntity(res);
 		try {
-			if (res.getType().equals("0")) {
-				res.setReskey(res.getName());
-				res.setParentid("0");
-				res.setResurl(res.getName());
-			}
-			else {
-				res.setReskey(res.getResurl());
-			}
-			ValidatorUtils.validateEntity(res);
 			resourcesService.save(res);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -89,16 +87,16 @@ public class RescourcesControllor {
 	public Json update(@RequestBody SysResourcesVO menu) {
 		Json j = new Json();
 		j.setSuccess(true);
+		if (menu.getType().equals("0")) {
+			menu.setReskey(menu.getName());
+			menu.setParentid("0");
+			menu.setResurl(menu.getName());
+		}
+		else {
+			menu.setReskey(menu.getResurl());
+		}
+		ValidatorUtils.validateEntity(menu);
 		try {
-			if (menu.getType().equals("0")) {
-				menu.setReskey(menu.getName());
-				menu.setParentid("0");
-				menu.setResurl(menu.getName());
-			}
-			else {
-				menu.setReskey(menu.getResurl());
-			}
-			ValidatorUtils.validateEntity(menu);
 			BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
 			BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
 			updatemap.put("description", menu.getDescription());
@@ -152,13 +150,6 @@ public class RescourcesControllor {
 		List<SysResourcesVO> list = resourcesService.list(qvo);
 		maps.put("menuList", list);
 		return maps;
-	}
-	
-	@ApiOperation(value = "授权资源 按钮列表", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	@RequestMapping(value = { "findByButtom.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public List<SysButtonVO> findByButtom() {
-		return resourcesService.querybutton(new SysButtonQuery());
 	}
 	
 	@ApiOperation(value = "加载角色所属授权资源", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
