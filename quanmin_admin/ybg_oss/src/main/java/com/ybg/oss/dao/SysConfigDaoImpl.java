@@ -27,8 +27,8 @@ public class SysConfigDaoImpl extends BaseDao implements SysConfigDao {
 	public String queryByKey(String paramKey) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select value from sys_config  sys_config where sys_config.key='" + paramKey + "'");
-		List<String> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<String>(String.class));
-		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
+		List<SysConfigEntity> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<SysConfigEntity>(SysConfigEntity.class));
+		return QvoConditionUtil.checkList(list) ? list.get(0).getValue() : null;
 	}
 	
 	@Override
