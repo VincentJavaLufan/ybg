@@ -30,4 +30,5 @@ public interface MayunUserService {
 	 * @param url */
 	void updateSetting(String appid, String value, String url);
 	
+	String queryMayunId(String userid);
 }

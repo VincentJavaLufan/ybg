@@ -13,4 +13,6 @@ public interface WeixinUserDao {
 	void remove(BaseMap<String, Object> wheremap);
 	
 	List<WeixinUserVO> query(WeixinUserQuery qvo) throws Exception;
+	
+	String queryWeixinId(String userid);
 }

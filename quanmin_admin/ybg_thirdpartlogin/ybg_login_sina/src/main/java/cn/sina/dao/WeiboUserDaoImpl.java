@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
+import com.ybg.base.jdbc.util.QvoConditionUtil;
 import cn.sina.domain.WeiboUserVO;
 import cn.sina.qvo.WeiboUserQuery;
 
@@ -93,5 +94,14 @@ public class WeiboUserDaoImpl extends BaseDao implements WeiboUserDao {
 		sql.append(UPDATE).append(tablename).append(SET).append(" `value` ='").append(url).append("'");
 		sql.append(WHERE).append("`key`='redirect_URI'");
 		getJdbcTemplate().update(sql.toString());
+	}
+	
+	@Override
+	public String queryWeiboId(String userid) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(SELECT).append("uid").append(FROM).append(QUERY_TABLE_NAME);
+		sql.append(WHERE).append("userid='").append(userid).append("'");
+		List<WeiboUserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<WeiboUserVO>(WeiboUserVO.class));
+		return QvoConditionUtil.checkList(list) ? list.get(0).getUid() : "";
 	}
 }

@@ -2,7 +2,7 @@ package com.ybg.member.service;
 import java.util.List;
 import com.ybg.member.domain.WeixinUserVO;
 
-public interface WeixinUserService {
+public interface WeixinMemberService {
 	
 	/** 开发者可通过OpenID来获取用户基本信息。特别需要注意的是，<br>
 	 * 如果开发者拥有多个移动应用、网站应用和公众帐号，可通过获取用户基本信息中的unionid来区分用户的唯一性，<br>

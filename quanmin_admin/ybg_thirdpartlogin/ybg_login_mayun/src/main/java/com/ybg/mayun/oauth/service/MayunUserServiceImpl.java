@@ -66,13 +66,13 @@ public class MayunUserServiceImpl implements MayunUserService {
 	@Override
 	public Long getMayunUserIdByToken(String access_token) {
 		Map<String, Object> paramMap = new LinkedHashMap<String, Object>();
-		//paramMap.put("access_token", access_token);
+		// paramMap.put("access_token", access_token);
 		try {
 			System.out.println(access_token);
-		//	String result=com.ybg.base.util.HttpRequest.sendGet("https://git.oschina.net/v5/user", "access_token="+access_token);
-			String result = HttpRequest.get("http://git.oschina.net/api/v5/user?access_token="+access_token).execute(true).body();
+			// String result=com.ybg.base.util.HttpRequest.sendGet("https://git.oschina.net/v5/user", "access_token="+access_token);
+			String result = HttpRequest.get("http://git.oschina.net/api/v5/user?access_token=" + access_token).execute(true).body();
 			JSONObject jsonResult = JSONObject.fromObject(result);
-			return Long.parseLong( jsonResult.get("id").toString());
+			return Long.parseLong(jsonResult.get("id").toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -86,10 +86,17 @@ public class MayunUserServiceImpl implements MayunUserService {
 		List<MayunUserVO> list = mayunUserDao.query(qvo);
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
-
+	
 	@Override
 	public void updateSetting(String appid, String value, String url) {
 		mayunUserDao.updateSetting(appid, value, url);
-		
+	}
+	
+	@Override
+	public String queryMayunId(String userid) {
+		if (!QvoConditionUtil.checkString(userid)) {
+			return "";
+		}
+		return mayunUserDao.queryMayunId(userid);
 	}
 }

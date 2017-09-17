@@ -1,16 +1,14 @@
 package com.qq.dao;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.qq.domain.QQuserVO;
 import com.qq.qvo.QQuserQuery;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
+import com.ybg.base.jdbc.util.QvoConditionUtil;
 
 @Repository
 public class QQuserDaoImpl extends BaseDao implements QQuserDao {
@@ -58,5 +56,14 @@ public class QQuserDaoImpl extends BaseDao implements QQuserDao {
 		sqlappen(sql, "qq.openid", qvo.getOpenid());
 		sqlappen(sql, "qq.userid", qvo.getUserid());
 		return sql.toString();
+	}
+	
+	@Override
+	public String queryQQId(String userid) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(SELECT).append("openid").append(FROM).append(QUERY_TABLE_NAME);
+		sql.append(WHERE).append("userid='").append(userid).append("'");
+		List<QQuserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<QQuserVO>(QQuserVO.class));
+		return QvoConditionUtil.checkList(list) ? list.get(0).getOpenid() : "";
 	}
 }

@@ -13,6 +13,7 @@ import com.baidu.oauth.domain.BaiduUser;
 import com.baidu.oauth.qvo.BaiduUserQvo;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
+import com.ybg.base.jdbc.util.QvoConditionUtil;
 
 @Repository
 public class BaiduUserDaoImpl extends BaseDao implements BaiduUserDao {
@@ -94,13 +95,13 @@ public class BaiduUserDaoImpl extends BaseDao implements BaiduUserDao {
 		sql.append(WHERE).append("`key`='redirect_URI'");
 		getJdbcTemplate().update(sql.toString());
 	}
-
+	
 	@Override
-	public long queryBaiduId(String userid) {
-		StringBuilder sql= new StringBuilder();
-		sql.append(SELECT ).append("uid").append(FROM).append(QUERY_TABLE_NAME);
-		sql.append(WHERE ).append("userid='").append(userid).append("'");
-		//getJdbcTemplate().queryForList(sql.toString());
-		return 0;
+	public String queryBaiduId(String userid) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(SELECT).append("uid as uid_str").append(FROM).append(QUERY_TABLE_NAME);
+		sql.append(WHERE).append("userid='").append(userid).append("'");
+		List<BaiduUser> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<BaiduUser>(BaiduUser.class));
+		return QvoConditionUtil.checkList(list) ? list.get(0).getUid_str() : "";
 	}
 }

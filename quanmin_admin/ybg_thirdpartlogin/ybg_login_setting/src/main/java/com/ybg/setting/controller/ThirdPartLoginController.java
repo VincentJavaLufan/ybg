@@ -8,11 +8,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.baidu.oauth.controllor.BaiduConfig;
 import com.baidu.oauth.service.BaiduUserService;
+import com.qq.service.QQuserService;
 import com.ybg.api.domain.WeixinOAuthConfig;
 import com.ybg.api.service.WeixinApiService;
+import com.ybg.base.jdbc.BaseMap;
+import com.ybg.base.util.Common;
 import com.ybg.base.util.Json;
 import com.ybg.mayun.oauth.controller.MayunConfig;
 import com.ybg.mayun.oauth.service.MayunUserService;
+import com.ybg.rbac.user.domain.UserVO;
+import com.ybg.weixin.login.service.WeixinUserService;
 import cn.sina.service.WeiboUserService;
 import io.swagger.annotations.Api;
 import weibo4j.util.WeiboConfig;
@@ -30,6 +35,10 @@ public class ThirdPartLoginController {
 	WeixinApiService	weixinApiService;
 	@Autowired
 	MayunUserService	mayunUserService;
+	@Autowired
+	QQuserService		qQuserService;
+	@Autowired
+	WeixinUserService	weixinUserService;
 	
 	@RequestMapping(value = "index.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String index() {
@@ -61,6 +70,104 @@ public class ThirdPartLoginController {
 		WeixinOAuthConfig.reflushProperties();
 		BaiduConfig.reflushProperties();
 		j.setSuccess(true);
+		return j;
+	}
+	
+	/** 用户绑定信息 **/
+	@ResponseBody
+	@RequestMapping("boundinfo.do")
+	public Map<String, Object> boundinfo() {
+		Map<String, Object> map = new LinkedHashMap<>();
+		UserVO user = Common.findUserSession();
+		if (user == null) {
+			return null;
+		}
+		String userid = user.getId();
+		map.put("baiduid", baiduUserService.queryBaiduId(userid));
+		map.put("mayunid", mayunUserService.queryMayunId(userid));
+		map.put("qqid", qQuserService.queryQQId(userid));
+		map.put("weixinid", weixinUserService.queryWeixinId(userid));
+		map.put("sinaid", weiboUserService.queryWeiboId(userid));
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("delbaidu.do")
+	public Json delbaidu() {
+		UserVO user = Common.findUserSession();
+		if (user == null) {
+			return null;
+		}
+		BaseMap<String, Object> conditionmap = new BaseMap<>();
+		conditionmap.put("userid", user.getId());
+		baiduUserService.remove(conditionmap);
+		Json j = new Json();
+		j.setSuccess(true);
+		j.setMsg("操作成功");
+		return j;
+	}
+	
+	@ResponseBody
+	@RequestMapping("delsina.do")
+	public Json delsina() {
+		UserVO user = Common.findUserSession();
+		if (user == null) {
+			return null;
+		}
+		BaseMap<String, Object> conditionmap = new BaseMap<>();
+		conditionmap.put("userid", user.getId());
+		weiboUserService.remove(conditionmap);
+		Json j = new Json();
+		j.setSuccess(true);
+		j.setMsg("操作成功");
+		return j;
+	}
+	
+	@ResponseBody
+	@RequestMapping("delweixin.do")
+	public Json delweixin() {
+		UserVO user = Common.findUserSession();
+		if (user == null) {
+			return null;
+		}
+		BaseMap<String, Object> conditionmap = new BaseMap<>();
+		conditionmap.put("userid", user.getId());
+		weiboUserService.remove(conditionmap);
+		Json j = new Json();
+		j.setSuccess(true);
+		j.setMsg("操作成功");
+		return j;
+	}
+	
+	@ResponseBody
+	@RequestMapping("delmayun.do")
+	public Json delmayun() {
+		UserVO user = Common.findUserSession();
+		if (user == null) {
+			return null;
+		}
+		BaseMap<String, Object> conditionmap = new BaseMap<>();
+		conditionmap.put("userid", user.getId());
+		mayunUserService.remove(conditionmap);
+		Json j = new Json();
+		j.setSuccess(true);
+		j.setMsg("操作成功");
+		return j;
+	}
+	
+	@ResponseBody
+	@RequestMapping("delqq.do")
+	public Json delqq() {
+		UserVO user = Common.findUserSession();
+		if (user == null) {
+			return null;
+		}
+		BaseMap<String, Object> conditionmap = new BaseMap<>();
+		conditionmap.put("userid", user.getId());
+		qQuserService.remove(conditionmap);
+		Json j = new Json();
+		j.setSuccess(true);
+		j.setMsg("操作成功");
 		return j;
 	}
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.xiaoleilu.hutool.http.HttpUtil;
 import com.ybg.api.domain.WeixinOAuthConfig;
 import com.ybg.base.jdbc.BaseMap;
+import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.weixin.login.dao.WeixinUserDao;
 import com.ybg.weixin.login.domain.WeixinUserVO;
 import com.ybg.weixin.login.qvo.WeixinUserQuery;
@@ -65,5 +66,13 @@ public class WeixinUserServiceImpl implements WeixinUserService {
 		}
 		return null;
 		// return "oTJR-wsfb6BGhNoAtZ9LyZgiia6g";
+	}
+	
+	@Override
+	public String queryWeixinId(String userid) {
+		if (!QvoConditionUtil.checkString(userid)) {
+			return "";
+		}
+		return weixinUserDao.queryWeixinId(userid);
 	}
 }

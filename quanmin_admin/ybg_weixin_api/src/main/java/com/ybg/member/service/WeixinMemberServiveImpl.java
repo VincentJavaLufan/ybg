@@ -7,7 +7,7 @@ import com.ybg.api.service.WeixinApiService;
 import com.ybg.member.domain.WeixinUserVO;
 
 @Repository
-public class WeixinUserServiveImpl implements WeixinUserService {
+public class WeixinMemberServiveImpl implements WeixinMemberService {
 	
 	@Autowired
 	WeixinNW			weixinNW;

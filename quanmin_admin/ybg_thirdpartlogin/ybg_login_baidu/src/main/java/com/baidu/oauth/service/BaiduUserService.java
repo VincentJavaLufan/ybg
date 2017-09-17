@@ -23,4 +23,6 @@ public interface BaiduUserService {
 	 * @param value
 	 * @param url */
 	void updateSetting(String appid, String value, String url);
+	
+	String queryBaiduId(String userid);
 }

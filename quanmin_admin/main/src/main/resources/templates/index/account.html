@@ -1,8 +1,96 @@
 <!-- Content Wrapper. Contains page content -->
 <!-- /.row -->
+<script>
+    var vm = new Vue({
+        el : '#rrapp',
+        data : {
+            weixinid : null,
+            mayunid : null,
+            qqid : null,
+            sinaid : null,
+            baiduid : null,
+        },
+        methods : {
+            boundinfo : function() {
+                $.ajax({
+                    type : "POST",
+                    url : rootPath + "/thirdoartlogin_do/boundinfo.do",
+                    success : function(data) {
+                        vm.weixinid = data.weixinid;
+                        vm.mayunid = data.mayunid;
+                        vm.qqid = data.qqid;
+                        vm.sinaid = data.sinaid;
+                        vm.baiduid = data.baiduid;
+                    }
+                });
+            },
+            delbaidu : function() {
+                confirm('确定要删除关联？', function() {
+                    $.ajax({
+                        type : "POST",
+                        url : rootPath + "/thirdoartlogin_do/delbaidu.do",
+                        success : function(data) {
+                            alert(data.msg);
+                            vm.boundinfo();
+                        }
+                    });
+                });
+            },
+            delmayun : function() {
+                confirm('确定要删除关联？', function() {
+                    $.ajax({
+                        type : "POST",
+                        url : rootPath + "/thirdoartlogin_do/delmayun.do",
+                        success : function(data) {
+                            alert(data.msg);
+                            vm.boundinfo();
+                        }
+                    });
+                });
+            },
+            delweixin : function() {
+                confirm('确定要删除关联？', function() {
+                    $.ajax({
+                        type : "POST",
+                        url : rootPath + "/thirdoartlogin_do/delweixin.do",
+                        success : function(data) {
+                            alert(data.msg);
+                            vm.boundinfo();
+                        }
+                    });
+                });
+            },
+            delqq : function() {
+                confirm('确定要删除关联？', function() {
+                    $.ajax({
+                        type : "POST",
+                        url : rootPath + "/thirdoartlogin_do/delqq.do",
+                        success : function(data) {
+                            alert(data.msg);
+                            vm.boundinfo();
+                        }
+                    });
+                });
+            },
+            delsina : function() {
+                confirm('确定要删除关联？', function() {
+                    $.ajax({
+                        type : "POST",
+                        url : rootPath + "/thirdoartlogin_do/delsina.do",
+                        success : function(data) {
+                            alert(data.msg);
+                            vm.boundinfo();
+                        }
+                    });
+                });
+            }
+        }
+    });
+    vm.boundinfo();
+</script>
 <div class="row">
 	<div class="col-xs-12">
-		<div class="box">
+		<div class="box" id="rrapp" v-cloak>
 			<div class="box-header">
 				<h3 class="box-title">绑定的第三方账号</h3>
 				<div class="box-tools">
@@ -25,10 +113,43 @@
 						<th>操作</th>
 					</tr>
 					<tr>
-						<td>183</td>
-						<td></td>
+						<td>百度</td>
+						<td>{{baiduid}}</td>
 						<td>
-							<span class="label label-danger">删除</span>
+							<button v-if="baiduid!=''" type="button" class="btn btn-danger marR10" @click="delbaidu">删除</button>
+							<span v-if="baiduid==''" class="label label-primary">未绑定</span>
+						</td>
+					</tr>
+					<tr>
+						<td>新浪</td>
+						<td>{{sinaid}}</td>
+						<td>
+							<button v-if="sinaid!=''" type="button" class="btn btn-danger marR10" @click="delsina">删除</button>
+							<span v-if="sinaid==''" class="label label-primary">未绑定</span>
+						</td>
+					</tr>
+					<tr>
+						<td>微信</td>
+						<td>{{weixinid}}</td>
+						<td>
+							<button v-if="weixinid!=''" type="button" class="btn btn-danger marR10" @click="delweixin">删除</button>
+							<span v-if="weixinid==''" class="label label-primary">未绑定</span>
+						</td>
+					</tr>
+					<tr>
+						<td>码云</td>
+						<td>{{mayunid}}</td>
+						<td>
+							<button v-if="mayunid!=''" type="button" class="btn btn-danger marR10" @click="delmayun">删除</button>
+							<span v-if="mayunid==''" class="label label-primary">未绑定</span>
+						</td>
+					</tr>
+					<tr>
+						<td>QQ</td>
+						<td>{{qqid}}</td>
+						<td>
+							<button v-if="qqid!=''" type="button" class="btn btn-danger marR10" @click="delqq">删除</button>
+							<span v-if="qqid==''" class="label label-primary">未绑定</span>
 						</td>
 					</tr>
 					<!--  

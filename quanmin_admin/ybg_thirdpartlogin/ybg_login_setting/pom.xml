@@ -45,6 +45,13 @@
 			<artifactId>ybg_login_mayun</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_login_qq</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		
+		
 	</dependencies>
 	<build>
 		<plugins>

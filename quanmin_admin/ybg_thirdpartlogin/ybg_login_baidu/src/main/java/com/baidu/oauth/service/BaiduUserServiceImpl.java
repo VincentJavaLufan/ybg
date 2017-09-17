@@ -7,6 +7,7 @@ import com.baidu.oauth.dao.BaiduUserDao;
 import com.baidu.oauth.domain.BaiduUser;
 import com.baidu.oauth.qvo.BaiduUserQvo;
 import com.ybg.base.jdbc.BaseMap;
+import com.ybg.base.jdbc.util.QvoConditionUtil;
 
 @Repository
 public class BaiduUserServiceImpl implements BaiduUserService {
@@ -41,11 +42,17 @@ public class BaiduUserServiceImpl implements BaiduUserService {
 	public Map<String, String> getSetting() {
 		return baiduUserDao.getSetting();
 	}
-
+	
 	@Override
 	public void updateSetting(String appid, String value, String url) {
 		baiduUserDao.updateSetting(appid, value, url);
-		
-		
+	}
+	
+	@Override
+	public String queryBaiduId(String userid) {
+		if (!QvoConditionUtil.checkString(userid)) {
+			return "";
+		}
+		return baiduUserDao.queryBaiduId(userid);
 	}
 }

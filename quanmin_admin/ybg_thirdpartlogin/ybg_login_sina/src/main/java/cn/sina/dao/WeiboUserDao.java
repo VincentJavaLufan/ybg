@@ -21,4 +21,6 @@ public interface WeiboUserDao {
 	 * @param value
 	 * @param url */
 	void updateSetting(String appid, String value, String url);
+	
+	String queryWeiboId(String userid);
 }

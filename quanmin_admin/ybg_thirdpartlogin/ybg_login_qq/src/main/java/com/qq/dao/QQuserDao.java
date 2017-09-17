@@ -13,4 +13,6 @@ public interface QQuserDao {
 	void remove(BaseMap<String, Object> wheremap);
 	
 	List<QQuserVO> query(QQuserQuery qvo) throws Exception;
+	
+	String queryQQId(String userid);
 }

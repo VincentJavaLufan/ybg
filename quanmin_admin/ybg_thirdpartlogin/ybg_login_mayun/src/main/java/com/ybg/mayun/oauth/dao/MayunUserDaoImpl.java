@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
+import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.mayun.oauth.domain.MayunUserVO;
 import com.ybg.mayun.oauth.qvo.MayunUserQuery;
 
@@ -85,5 +86,14 @@ public class MayunUserDaoImpl extends BaseDao implements MayunUserDao {
 		sql.append(UPDATE).append(tablename).append(SET).append(" `value` ='").append(url).append("'");
 		sql.append(WHERE).append("`key`='redirect_URI'");
 		getJdbcTemplate().update(sql.toString());
+	}
+	
+	@Override
+	public String queryMayunId(String userid) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(SELECT).append("mayunid").append(FROM).append(QUERY_TABLE_NAME);
+		sql.append(WHERE).append("userid='").append(userid).append("'");
+		List<MayunUserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<MayunUserVO>(MayunUserVO.class));
+		return QvoConditionUtil.checkList(list) ? list.get(0).getMayunid() : "";
 	}
 }

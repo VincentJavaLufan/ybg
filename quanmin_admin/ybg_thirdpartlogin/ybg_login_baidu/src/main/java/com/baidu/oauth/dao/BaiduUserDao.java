@@ -19,5 +19,5 @@ public interface BaiduUserDao {
 	
 	void updateSetting(String appid, String value, String url);
 	
-	long queryBaiduId(String userid);
+	String queryBaiduId(String userid);
 }

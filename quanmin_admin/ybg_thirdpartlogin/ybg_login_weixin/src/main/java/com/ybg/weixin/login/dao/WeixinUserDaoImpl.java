@@ -60,4 +60,13 @@ public class WeixinUserDaoImpl extends BaseDao implements WeixinUserDao {
 		sqlappen(sql, "wx.userid", qvo.getUserid());
 		return sql.toString();
 	}
+	
+	@Override
+	public String queryWeixinId(String userid) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(SELECT).append("openid").append(FROM).append(QUERY_TABLE_NAME);
+		sql.append(WHERE).append("userid='").append(userid).append("'");
+		List<WeixinUserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<WeixinUserVO>(WeixinUserVO.class));
+		return QvoConditionUtil.checkList(list) ? list.get(0).getOpenid() : "";
+	}
 }

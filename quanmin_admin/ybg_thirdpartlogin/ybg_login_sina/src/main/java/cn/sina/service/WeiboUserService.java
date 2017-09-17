@@ -23,4 +23,6 @@ public interface WeiboUserService {
 	 * @param value
 	 * @param url */
 	void updateSetting(String appid, String value, String url);
+	
+	String queryWeiboId(String userid);
 }
