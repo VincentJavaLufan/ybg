@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -43,16 +44,7 @@ public class SysGeneratorDaoImpl extends BaseDao implements SysGeneratorDao {
 		});
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			List<TableEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new RowMapper<TableEntity>() {
-				
-				@Override
-				public TableEntity mapRow(ResultSet rs, int index) throws SQLException {
-					TableEntity bean = new TableEntity();
-					bean.setTableName(rs.getString("tableName"));
-					bean.setComments(rs.getString("tableComment"));
-					return bean;
-				}
-			});
+			List<TableEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper(TableEntity.class));
 			page.setResult(list);
 		}
 		else {

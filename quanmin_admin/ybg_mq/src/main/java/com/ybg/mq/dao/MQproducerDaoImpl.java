@@ -3,6 +3,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -24,20 +25,7 @@ public class MQproducerDaoImpl extends BaseDao implements MQproducerDao {
 	public MQproducer getIsUse() {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select id,topic,url,ak,sk,producerid from sys_mq_producer sp ");
-		List<MQproducer> list = getJdbcTemplate().query(sql.toString(), new RowMapper<MQproducer>() {
-			
-			@Override
-			public MQproducer mapRow(ResultSet rs, int index) throws SQLException {
-				MQproducer bean = new MQproducer();
-				bean.setAk(rs.getString("ak"));
-				bean.setId(rs.getString("id"));
-				bean.setProducerid(rs.getString("producerid"));
-				bean.setSk(rs.getString("sk"));
-				bean.setTopic(rs.getString("topic"));
-				bean.setUrl(rs.getString("url"));
-				return bean;
-			}
-		});
+		List<MQproducer> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(MQproducer.class));
 		return QvoConditionUtil.checkList(list) ? list.get(0) : new MQproducer();
 	}
 }

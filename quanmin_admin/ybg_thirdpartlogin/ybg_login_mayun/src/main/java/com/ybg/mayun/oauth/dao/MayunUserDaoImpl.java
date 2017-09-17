@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -50,17 +51,7 @@ public class MayunUserDaoImpl extends BaseDao implements MayunUserDao {
 	public List<MayunUserVO> query(MayunUserQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
-		return getJdbcTemplate().query(sql.toString(), new RowMapper<MayunUserVO>() {
-			
-			@Override
-			public MayunUserVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-				MayunUserVO bean = new MayunUserVO();
-				bean.setId(rs.getString("id"));
-				bean.setMayunid(rs.getString("mayunid"));
-				bean.setUserid(rs.getString("userid"));
-				return bean;
-			}
-		});
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(MayunUserVO.class));
 	}
 	
 	@Override
@@ -78,7 +69,7 @@ public class MayunUserDaoImpl extends BaseDao implements MayunUserDao {
 		});
 		return map;
 	}
-
+	
 	@Override
 	public void updateSetting(String appid, String value, String url) {
 		String tablename = "mayun_login_setting_1";
@@ -94,6 +85,5 @@ public class MayunUserDaoImpl extends BaseDao implements MayunUserDao {
 		sql.append(UPDATE).append(tablename).append(SET).append(" `value` ='").append(url).append("'");
 		sql.append(WHERE).append("`key`='redirect_URI'");
 		getJdbcTemplate().update(sql.toString());
-		
 	}
 }

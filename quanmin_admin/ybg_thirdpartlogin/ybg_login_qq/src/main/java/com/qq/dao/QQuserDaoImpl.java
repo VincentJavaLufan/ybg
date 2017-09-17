@@ -3,6 +3,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -47,17 +48,7 @@ public class QQuserDaoImpl extends BaseDao implements QQuserDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new RowMapper<QQuserVO>() {
-			
-			@Override
-			public QQuserVO mapRow(ResultSet rs, int index) throws SQLException {
-				QQuserVO bean = new QQuserVO();
-				bean.setId(rs.getString("id"));
-				bean.setOpenid(rs.getString("openid"));
-				bean.setUserid(rs.getString("userid"));
-				return bean;
-			}
-		});
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(QQuserVO.class));
 	}
 	
 	private String getcondition(QQuserQuery qvo) throws Exception {

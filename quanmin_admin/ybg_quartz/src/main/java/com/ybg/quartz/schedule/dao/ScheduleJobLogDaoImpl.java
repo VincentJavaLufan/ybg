@@ -1,13 +1,11 @@
 package com.ybg.quartz.schedule.dao;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.DataBaseConstant;
@@ -31,34 +29,18 @@ public class ScheduleJobLogDaoImpl extends BaseDao implements ScheduleJobLogDao 
 	public ScheduleJobLogDO queryObject(Long jobId) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select log_id,job_id,bean_name,method_name,params,status,error,times,create_time from schedule_job_log where log_id = " + jobId);
-		List<ScheduleJobLogDO> list = getJdbcTemplate().query(sql.toString(), new RowMapper<ScheduleJobLogDO>() {
-			
-			@Override
-			public ScheduleJobLogDO mapRow(ResultSet rs, int index) throws SQLException {
-				ScheduleJobLogDO bean = new ScheduleJobLogDO();
-				bean.setBeanName(rs.getString("bean_name"));
-				bean.setCreateTime(rs.getString("create_time"));
-				bean.setError(rs.getString("error"));
-				bean.setJobId(rs.getLong("job_id"));
-				bean.setLogId(rs.getLong("log_id"));
-				bean.setMethodName(rs.getString("method_name"));
-				bean.setParams(rs.getString("params"));
-				bean.setStatus(rs.getInt("status"));
-				bean.setTimes(rs.getInt("times"));
-				return bean;
-			}
-		});
+		List<ScheduleJobLogDO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(ScheduleJobLogDO.class));
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
 	
 	@Override
 	public void save(ScheduleJobLogDO log) throws Exception {
 		Map<String, Object> createmap = new LinkedHashMap<String, Object>();
-		createmap.put("bean_name", log.getBeanName());
-		createmap.put("create_time", log.getCreateTime());
+		createmap.put("bean_name", log.getBean_Name());
+		createmap.put("create_time", log.getCreate_Time());
 		createmap.put("error", log.getError());
-		createmap.put("job_id", log.getJobId());
-		createmap.put("method_name", log.getMethodName());
+		createmap.put("job_id", log.getJob_Id());
+		createmap.put("method_name", log.getMethod_Name());
 		createmap.put("params", log.getParams());
 		createmap.put("status", log.getStatus());
 		createmap.put("times", log.getTimes());
@@ -69,24 +51,8 @@ public class ScheduleJobLogDaoImpl extends BaseDao implements ScheduleJobLogDao 
 	public Page queryList(Page page, ScheduleJobLogQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select log_id,job_id,bean_name,method_name,params,status,error,times,create_time from schedule_job_log  ");
-		sqlappen(sql, " job_id ", qvo.getJobId());
-		List<ScheduleJobLogDO> list = getJdbcTemplate().query(page.getPagesql(sql), new RowMapper<ScheduleJobLogDO>() {
-			
-			@Override
-			public ScheduleJobLogDO mapRow(ResultSet rs, int index) throws SQLException {
-				ScheduleJobLogDO bean = new ScheduleJobLogDO();
-				bean.setBeanName(rs.getString("bean_name"));
-				bean.setCreateTime(rs.getString("create_time"));
-				bean.setError(rs.getString("error"));
-				bean.setJobId(rs.getLong("job_id"));
-				bean.setLogId(rs.getLong("log_id"));
-				bean.setMethodName(rs.getString("method_name"));
-				bean.setParams(rs.getString("params"));
-				bean.setStatus(rs.getInt("status"));
-				bean.setTimes(rs.getInt("times"));
-				return bean;
-			}
-		});
+		sqlappen(sql, " job_id ", qvo.getJob_Id());
+		List<ScheduleJobLogDO> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper(ScheduleJobLogDO.class));
 		page.setResult(list);
 		page.setTotals(queryForInt(sql));
 		return page;

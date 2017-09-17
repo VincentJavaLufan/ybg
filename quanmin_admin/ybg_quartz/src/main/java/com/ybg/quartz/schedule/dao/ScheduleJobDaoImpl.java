@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -53,22 +54,7 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 	public ScheduleJobEntity queryObject(Long jobId) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select job_id,bean_name,method_name,params,cron_expression,status,remark,create_time from schedule_job where job_id = " + jobId);
-		List<ScheduleJobEntity> list = getJdbcTemplate().query(sql.toString(), new RowMapper<ScheduleJobEntity>() {
-			
-			@Override
-			public ScheduleJobEntity mapRow(ResultSet rs, int index) throws SQLException {
-				ScheduleJobEntity bean = new ScheduleJobEntity();
-				bean.setBeanName(rs.getString("bean_name"));
-				bean.setCreateTime(rs.getString("create_time"));
-				bean.setCronExpression(rs.getString("cron_expression"));
-				bean.setJobId(rs.getLong("job_Id"));
-				bean.setMethodName(rs.getString("method_name"));
-				bean.setParams(rs.getString("params"));
-				bean.setRemark(rs.getString("remark"));
-				bean.setStatus(rs.getInt("status"));
-				return bean;
-			}
-		});
+		List<ScheduleJobEntity> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(ScheduleJobEntity.class));
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
 	
@@ -93,53 +79,38 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 	@Override
 	public void update(ScheduleJobEntity scheduleJob) {
 		BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
-		updatemap.put("bean_name", scheduleJob.getBeanName());
-		updatemap.put("create_time", scheduleJob.getCreateTime());
-		updatemap.put("cron_expression", scheduleJob.getCronExpression());
-		updatemap.put("method_name", scheduleJob.getMethodName());
+		updatemap.put("bean_name", scheduleJob.getBean_Name());
+		updatemap.put("create_time", scheduleJob.getCreate_Time());
+		updatemap.put("cron_expression", scheduleJob.getCron_Expression());
+		updatemap.put("method_name", scheduleJob.getMethod_Name());
 		updatemap.put("params", scheduleJob.getParams());
 		updatemap.put("remark", scheduleJob.getRemark());
 		updatemap.put("status", scheduleJob.getStatus());
 		BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
-		wheremap.put("job_id", scheduleJob.getJobId());
+		wheremap.put("job_id", scheduleJob.getJob_Id());
 		baseupdate(updatemap, wheremap, "schedule_job");
 	}
 	
 	@Override
 	public void save(ScheduleJobEntity scheduleJob) throws Exception {
 		Map<String, Object> createmap = new LinkedHashMap<String, Object>();
-		createmap.put("bean_name", scheduleJob.getBeanName());
-		createmap.put("create_time", scheduleJob.getCreateTime());
-		createmap.put("cron_expression", scheduleJob.getCronExpression());
-		createmap.put("method_name", scheduleJob.getMethodName());
+		createmap.put("bean_name", scheduleJob.getBean_Name());
+		createmap.put("create_time", scheduleJob.getCreate_Time());
+		createmap.put("cron_expression", scheduleJob.getCron_Expression());
+		createmap.put("method_name", scheduleJob.getMethod_Name());
 		createmap.put("params", scheduleJob.getParams());
 		createmap.put("remark", scheduleJob.getRemark());
 		createmap.put("status", scheduleJob.getStatus());
 		Object id = basecreate(createmap, "schedule_job", true, new Long(0));
-		scheduleJob.setJobId(new Long((long) id));
+		scheduleJob.setJob_Id(new Long((long) id));
 	}
 	
 	@Override
 	public Page queryList(Page page, ScheduleJobQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select job_id,bean_name,method_name,params,cron_expression,status,remark,create_time  from schedule_job job ");
-		sqlappen(sql, "bean_name", qvo.getBeanName());
-		List<ScheduleJobEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new RowMapper<ScheduleJobEntity>() {
-			
-			@Override
-			public ScheduleJobEntity mapRow(ResultSet rs, int index) throws SQLException {
-				ScheduleJobEntity bean = new ScheduleJobEntity();
-				bean.setBeanName(rs.getString("bean_name"));
-				bean.setCreateTime(rs.getString("create_time"));
-				bean.setCronExpression(rs.getString("cron_expression"));
-				bean.setJobId(rs.getLong("job_id"));
-				bean.setMethodName(rs.getString("method_name"));
-				bean.setParams(rs.getString("params"));
-				bean.setRemark(rs.getString("remark"));
-				bean.setStatus(rs.getInt("status"));
-				return bean;
-			}
-		});
+		sqlappen(sql, "bean_name", qvo.getBean_Name());
+		List<ScheduleJobEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper(ScheduleJobEntity.class));
 		page.setResult(list);
 		page.setTotals(queryForInt(sql));
 		return page;
@@ -150,24 +121,9 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select job_id,bean_name,method_name,params,cron_expression,status,remark,create_time  from schedule_job job ");
 		sql.append(" where 1=1 ");
-		sqlappen(sql, "beanname", qvo.getBeanName());
+		sqlappen(sql, "beanname", qvo.getBean_Name());
 		sql.append(" and status = 0 ");
-		return getJdbcTemplate().query(sql.toString(), new RowMapper<ScheduleJobEntity>() {
-			
-			@Override
-			public ScheduleJobEntity mapRow(ResultSet rs, int index) throws SQLException {
-				ScheduleJobEntity bean = new ScheduleJobEntity();
-				bean.setBeanName(rs.getString("bean_name"));
-				bean.setCreateTime(rs.getString("create_time"));
-				bean.setCronExpression(rs.getString("cron_expression"));
-				bean.setJobId(rs.getLong("job_Id"));
-				bean.setMethodName(rs.getString("method_name"));
-				bean.setParams(rs.getString("params"));
-				bean.setRemark(rs.getString("remark"));
-				bean.setStatus(rs.getInt("status"));
-				return bean;
-			}
-		});
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(ScheduleJobEntity.class));
 		// return new ArrayList<ScheduleJobEntity>();
 	}
 }

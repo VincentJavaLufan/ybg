@@ -27,8 +27,6 @@
 		<module>ybg_rbac</module>
 		<!-- 企业模块 可删 -->
 		<module>ybg_company</module>
-		<!-- 微信模块 非必须 -->
-		<module>ybg_weixin</module>
 		<!-- 阿里MQ 非必须 -->
 		<module>ybg_mq</module>
 		<!--** email 必须 -->
@@ -49,12 +47,12 @@
 		<module>pay-java-parent</module>
 		<module>ybg_sms</module>
 		<module>ybg_thirdpartlogin</module>
-    <module>ybg_weixin_api</module>
-    <module>ybg_kaptcha</module>
-    <module>ybg_activiti</module>
-    <module>ybg_qrcode</module>
-    <module>ybg_https</module>
-  </modules>
+		<module>ybg_weixin_api</module>
+		<module>ybg_kaptcha</module>
+		<module>ybg_activiti</module>
+		<module>ybg_qrcode</module>
+		<module>ybg_https</module>
+	</modules>
 	<build>
 		<defaultGoal>compile</defaultGoal>
 	</build>

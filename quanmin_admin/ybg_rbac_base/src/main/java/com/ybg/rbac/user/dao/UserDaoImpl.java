@@ -104,23 +104,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		sql.append(WHERE).append("username='").append(loginname).append("'");
 		sql.append(OR).append("email='").append(loginname).append("'");
 		sql.append(OR).append("phone='").append(loginname).append("'");
-		List<UserVO> list = getJdbcTemplate().query(sql.toString(), new RowMapper<UserVO>() {
-			
-			public UserVO mapRow(ResultSet rs, int index) throws SQLException {
-				UserVO user = new UserVO();
-				user.setId(rs.getString("id"));
-				user.setCreatetime(rs.getString("createtime"));
-				user.setEmail(rs.getString("email"));
-				user.setIsdelete(rs.getInt("isdelete"));
-				user.setPassword(rs.getString("password"));
-				user.setPhone(rs.getString("phone"));
-				user.setState(rs.getString("state"));
-				user.setUsername(rs.getString("username"));
-				user.setRoleid(rs.getString("roleid"));
-				user.setCredentialssalt(rs.getString("credentialssalt"));
-				return user;
-			}
-		});
+		List<UserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(UserVO.class));
 		return list.size() == 0 ? null : list.get(0);
 	}
 	

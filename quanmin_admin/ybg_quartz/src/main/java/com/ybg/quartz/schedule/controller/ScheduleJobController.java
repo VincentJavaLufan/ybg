@@ -52,7 +52,7 @@ public class ScheduleJobController {
 		Page page = new Page();
 		page.setCurPage(pageNow);
 		ScheduleJobQuery qvo2 = new ScheduleJobQuery();
-		qvo2.setBeanName(qvo.getBeanName());
+		qvo2.setBean_Name(qvo.getBean_Name());
 		page = scheduleJobService.queryList(page, qvo2);
 		page.init();
 		return page;
@@ -205,13 +205,13 @@ public class ScheduleJobController {
 	
 	/** 验证参数是否正确 */
 	private void verifyForm(ScheduleJobEntity scheduleJob) {
-		if (StringUtils.isBlank(scheduleJob.getBeanName())) {
+		if (StringUtils.isBlank(scheduleJob.getBean_Name())) {
 			throw new RRException("bean名称不能为空");
 		}
-		if (StringUtils.isBlank(scheduleJob.getMethodName())) {
+		if (StringUtils.isBlank(scheduleJob.getMethod_Name())) {
 			throw new RRException("方法名称不能为空");
 		}
-		if (StringUtils.isBlank(scheduleJob.getCronExpression())) {
+		if (StringUtils.isBlank(scheduleJob.getCron_Expression())) {
 			throw new RRException("cron表达式不能为空");
 		}
 	}

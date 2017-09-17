@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -29,13 +30,7 @@ public class SysConfigDaoImpl extends BaseDao implements SysConfigDao {
 	public String queryByKey(String paramKey) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select value from sys_config  sys_config where sys_config.key='" + paramKey + "'");
-		List<String> list = getJdbcTemplate().query(sql.toString(), new RowMapper<String>() {
-			
-			@Override
-			public String mapRow(ResultSet rs, int index) throws SQLException {
-				return rs.getString("value");
-			}
-		});
+		List<String> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(String.class));
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
 	
@@ -74,18 +69,7 @@ public class SysConfigDaoImpl extends BaseDao implements SysConfigDao {
 	public SysConfigEntity queryObject(Long id) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select id,key,value,status,remark from sys_config where id=" + id);
-		List<SysConfigEntity> list = getJdbcTemplate().query(sql.toString(), new RowMapper<SysConfigEntity>() {
-			
-			@Override
-			public SysConfigEntity mapRow(ResultSet rs, int index) throws SQLException {
-				SysConfigEntity bean = new SysConfigEntity();
-				bean.setId(rs.getLong("id"));
-				bean.setKey(rs.getString("key"));
-				bean.setRemark(rs.getString("remark"));
-				bean.setValue(rs.getString("value"));
-				return bean;
-			}
-		});
+		List<SysConfigEntity> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(SysConfigEntity.class));
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
 	
@@ -112,18 +96,7 @@ public class SysConfigDaoImpl extends BaseDao implements SysConfigDao {
 		});
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			List<SysConfigEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new RowMapper<SysConfigEntity>() {
-				
-				@Override
-				public SysConfigEntity mapRow(ResultSet rs, int index) throws SQLException {
-					SysConfigEntity bean = new SysConfigEntity();
-					bean.setId(rs.getLong("id"));
-					bean.setKey(rs.getString("key"));
-					bean.setRemark(rs.getString("remark"));
-					bean.setValue(rs.getString("value"));
-					return bean;
-				}
-			});
+			List<SysConfigEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper(SysConfigEntity.class));
 			page.setResult(list);
 		}
 		else {

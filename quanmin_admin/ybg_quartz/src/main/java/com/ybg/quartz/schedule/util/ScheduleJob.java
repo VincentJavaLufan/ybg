@@ -38,18 +38,18 @@ public class ScheduleJob extends QuartzJobBean {
 		ScheduleJobLogService scheduleJobLogService = (ScheduleJobLogService) SpringContextUtils.applicationContext.getBean(ScheduleJobLogService.class);
 		// 数据库保存执行记录
 		ScheduleJobLogDO log = new ScheduleJobLogDO();
-		log.setJobId(scheduleJob.getJobId());
-		log.setBeanName(scheduleJob.getBeanName());
-		log.setMethodName(scheduleJob.getMethodName());
+		log.setJob_Id(scheduleJob.getJob_Id());
+		log.setBean_Name(scheduleJob.getBean_Name());
+		log.setMethod_Name(scheduleJob.getMethod_Name());
 		log.setParams(scheduleJob.getParams());
-		log.setCreateTime(DateUtil.getDate());
+		log.setCreate_Time(DateUtil.getDate());
 		log.setError("");
 		// 任务开始时间
 		long startTime = System.currentTimeMillis();
 		try {
 			// 执行任务
-			logger.info("任务准备执行，任务ID：" + scheduleJob.getJobId());
-			ScheduleRunnable task = new ScheduleRunnable(scheduleJob.getBeanName(), scheduleJob.getMethodName(), scheduleJob.getParams());
+			logger.info("任务准备执行，任务ID：" + scheduleJob.getJob_Id());
+			ScheduleRunnable task = new ScheduleRunnable(scheduleJob.getBean_Name(), scheduleJob.getMethod_Name(), scheduleJob.getParams());
 			Future<?> future = service.submit(task);
 			future.get();
 			// 任务执行总时长
@@ -57,9 +57,9 @@ public class ScheduleJob extends QuartzJobBean {
 			log.setTimes((int) times);
 			// 任务状态 0：成功 1：失败
 			log.setStatus(0);
-			logger.info("任务执行完毕，任务ID：" + scheduleJob.getJobId() + "  总共耗时：" + times + "毫秒");
+			logger.info("任务执行完毕，任务ID：" + scheduleJob.getJob_Id() + "  总共耗时：" + times + "毫秒");
 		} catch (Exception e) {
-			logger.error("任务执行失败，任务ID：" + scheduleJob.getJobId(), e);
+			logger.error("任务执行失败，任务ID：" + scheduleJob.getJob_Id(), e);
 			// 任务执行总时长
 			long times = System.currentTimeMillis() - startTime;
 			log.setTimes((int) times);

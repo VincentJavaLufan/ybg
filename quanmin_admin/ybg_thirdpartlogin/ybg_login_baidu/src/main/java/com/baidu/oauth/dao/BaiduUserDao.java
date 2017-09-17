@@ -16,6 +16,8 @@ public interface BaiduUserDao {
 	List<BaiduUser> query(BaiduUserQvo qvo) throws Exception;
 	
 	Map<String, String> getSetting();
-
+	
 	void updateSetting(String appid, String value, String url);
+	
+	long queryBaiduId(String userid);
 }

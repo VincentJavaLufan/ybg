@@ -12,56 +12,49 @@ public class ScheduleJobEntity implements Serializable {
 	/** 任务调度参数key */
 	public static final String	JOB_PARAM_KEY		= "JOB_PARAM_KEY";
 	/** 任务id */
-	private Long				jobId;
+	private Long				job_Id;
 	/** spring bean名称 */
-	private String				beanName;
+	private String				bean_Name;
 	/** 方法名 */
-	private String				methodName;
+	private String				method_Name;
 	/** 参数 */
 	private String				params;
 	/** cron表达式 */
-	private String				cronExpression;
+	private String				cron_Expression;
 	/** 任务状态 */
-	private Integer				status;//0暂停 1启用
+	private Integer				status;									// 0暂停 1启用
 	/** 备注 */
 	private String				remark;
 	/** 创建时间 */
-	private String				createTime;
+	private String				create_Time;
 	
 	@Override
 	public String toString() {
-		return "ScheduleJobDO [jobId=" + jobId + ", beanName=" + beanName + ", methodName=" + methodName + ", params=" + params + ", cronExpression=" + cronExpression + ", status=" + status + ", remark=" + remark + ", createTime=" + createTime + "]";
+		return "ScheduleJobDO [jobId=" + job_Id + ", beanName=" + bean_Name + ", methodName=" + method_Name + ", params=" + params + ", cronExpression=" + cron_Expression + ", status=" + status + ", remark=" + remark + ", createTime=" + create_Time + "]";
 	}
 	
-	/** 设置：任务id
-	 * 
-	 * @param jobId
-	 *            任务id */
-	public void setJobId(Long jobId) {
-		this.jobId = jobId;
+	public Long getJob_Id() {
+		return job_Id;
 	}
 	
-	/** 获取：任务id
-	 * 
-	 * @return Long */
-	public Long getJobId() {
-		return jobId;
+	public void setJob_Id(Long job_Id) {
+		this.job_Id = job_Id;
 	}
 	
-	public String getBeanName() {
-		return beanName;
+	public String getBean_Name() {
+		return bean_Name;
 	}
 	
-	public void setBeanName(String beanName) {
-		this.beanName = beanName;
+	public void setBean_Name(String beanName) {
+		this.bean_Name = beanName;
 	}
 	
-	public String getMethodName() {
-		return methodName;
+	public String getMethod_Name() {
+		return method_Name;
 	}
 	
-	public void setMethodName(String methodName) {
-		this.methodName = methodName;
+	public void setMethod_Name(String methodName) {
+		this.method_Name = methodName;
 	}
 	
 	public String getParams() {
@@ -99,29 +92,29 @@ public class ScheduleJobEntity implements Serializable {
 	 * 
 	 * @param cronExpression
 	 *            cron表达式 */
-	public void setCronExpression(String cronExpression) {
-		this.cronExpression = cronExpression;
+	public void setCron_Expression(String cronExpression) {
+		this.cron_Expression = cronExpression;
 	}
 	
 	/** 获取：cron表达式
 	 * 
 	 * @return String */
-	public String getCronExpression() {
-		return cronExpression;
+	public String getCron_Expression() {
+		return cron_Expression;
 	}
 	
 	/** 设置：创建时间
 	 * 
 	 * @param createTime
 	 *            创建时间 */
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
+	public void setCreate_Time(String createTime) {
+		this.create_Time = createTime;
 	}
 	
 	/** 获取：创建时间
 	 * 
 	 * @return Date */
-	public String getCreateTime() {
-		return createTime;
+	public String getCreate_Time() {
+		return create_Time;
 	}
 }

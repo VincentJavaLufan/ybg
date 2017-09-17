@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -49,17 +50,7 @@ public class WeiboUserDaoImpl extends BaseDao implements WeiboUserDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new RowMapper<WeiboUserVO>() {
-			
-			@Override
-			public WeiboUserVO mapRow(ResultSet rs, int index) throws SQLException {
-				WeiboUserVO bean = new WeiboUserVO();
-				bean.setId(rs.getString("id"));
-				bean.setUid(rs.getString("uid"));
-				bean.setUserid(rs.getString("userid"));
-				return bean;
-			}
-		});
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(WeiboUserVO.class));
 	}
 	
 	private String getcondition(WeiboUserQuery qvo) throws Exception {

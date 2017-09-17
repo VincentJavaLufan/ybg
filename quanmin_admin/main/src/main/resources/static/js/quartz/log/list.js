@@ -5,18 +5,18 @@ $(function() {
         id : 'paging',
         l_column : [
                 {
-                    colkey : "logId",
+                    colkey : "log_Id",
                     name : "任务ID",
                     width : "50px",
                     hide : true
                 }, {
-                    colkey : "beanName",
+                    colkey : "bean_Name",
                     name : "Spring Bean"
                 }, {
-                    colkey : "jobId",
+                    colkey : "job_Id",
                     name : "任务ID"
                 }, {
-                    colkey : "methodName",
+                    colkey : "method_Name",
                     name : "方法名",
                 }, {
                     colkey : "params",
@@ -28,7 +28,7 @@ $(function() {
                     colkey : "remark",
                     name : "备注"
                 }, {
-                    colkey : "createTime",
+                    colkey : "create_Time",
                     name : "创建时间"
                 }, {
                     colkey : "status",
@@ -43,7 +43,7 @@ $(function() {
                 ],
         jsonUrl : rootPath + '/sys/scheduleLog_do/list.do',
         checkbox : true,
-        checkValue : 'logId',
+        checkValue : 'log_Id',
     });
     $("#search").click("click", function() {// 绑定查询按扭
         var searchParams = $("#searchForm").serializeJson();// 初始化传参数

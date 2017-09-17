@@ -10,13 +10,13 @@ public class ScheduleJobLogDO implements Serializable {
 	
 	private static final long	serialVersionUID	= 1L;
 	/** 日志id */
-	private Long				logId;
+	private Long				log_Id;
 	/** 任务id */
-	private Long				jobId;
+	private Long				job_Id;
 	/** spring bean名称 */
-	private String				beanName;
+	private String				bean_Name;
 	/** 方法名 */
-	private String				methodName;
+	private String				method_Name;
 	/** 参数 */
 	private String				params;
 	/** 任务状态 0：成功 1：失败 */
@@ -26,43 +26,43 @@ public class ScheduleJobLogDO implements Serializable {
 	/** 耗时(单位：毫秒) */
 	private Integer				times;
 	/** 创建时间 */
-	private String				createTime;
+	private String				create_Time;
 	
 	@Override
 	public String toString() {
-		return "ScheduleJobLogEntity [logId=" + logId + ", jobId=" + jobId + ", beanName=" + beanName + ", methodName=" + methodName + ", params=" + params + ", status=" + status + ", error=" + error + ", times=" + times + ", createTime=" + createTime + "]";
+		return "ScheduleJobLogEntity [logId=" + log_Id + ", jobId=" + job_Id + ", beanName=" + bean_Name + ", methodName=" + method_Name + ", params=" + params + ", status=" + status + ", error=" + error + ", times=" + times + ", createTime=" + create_Time + "]";
 	}
 	
-	public Long getLogId() {
-		return logId;
+	public Long getLog_Id() {
+		return log_Id;
 	}
 	
-	public void setLogId(Long logId) {
-		this.logId = logId;
+	public void setLog_Id(Long logId) {
+		this.log_Id = logId;
 	}
 	
-	public Long getJobId() {
-		return jobId;
+	public Long getJob_Id() {
+		return job_Id;
 	}
 	
-	public void setJobId(Long jobId) {
-		this.jobId = jobId;
+	public void setJob_Id(Long jobId) {
+		this.job_Id = jobId;
 	}
 	
-	public String getBeanName() {
-		return beanName;
+	public String getBean_Name() {
+		return bean_Name;
 	}
 	
-	public void setBeanName(String beanName) {
-		this.beanName = beanName;
+	public void setBean_Name(String beanName) {
+		this.bean_Name = beanName;
 	}
 	
-	public String getMethodName() {
-		return methodName;
+	public String getMethod_Name() {
+		return method_Name;
 	}
 	
-	public void setMethodName(String methodName) {
-		this.methodName = methodName;
+	public void setMethod_Name(String methodName) {
+		this.method_Name = methodName;
 	}
 	
 	public String getParams() {
@@ -97,11 +97,11 @@ public class ScheduleJobLogDO implements Serializable {
 		this.times = times;
 	}
 	
-	public String getCreateTime() {
-		return createTime;
+	public String getCreate_Time() {
+		return create_Time;
 	}
 	
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
+	public void setCreate_Time(String createTime) {
+		this.create_Time = createTime;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -49,17 +50,7 @@ public class BaiduUserDaoImpl extends BaseDao implements BaiduUserDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new RowMapper<BaiduUser>() {
-			
-			@Override
-			public BaiduUser mapRow(ResultSet rs, int index) throws SQLException {
-				BaiduUser bean = new BaiduUser();
-				bean.setId(rs.getString("id"));
-				bean.setUid(Long.parseLong(rs.getString("uid")));
-				bean.setUserid(rs.getString("userid"));
-				return bean;
-			}
-		});
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(BaiduUser.class));
 	}
 	
 	private String getcondition(BaiduUserQvo qvo) throws Exception {
@@ -102,5 +93,14 @@ public class BaiduUserDaoImpl extends BaseDao implements BaiduUserDao {
 		sql.append(UPDATE).append(tablename).append(SET).append(" `value` ='").append(url).append("'");
 		sql.append(WHERE).append("`key`='redirect_URI'");
 		getJdbcTemplate().update(sql.toString());
+	}
+
+	@Override
+	public long queryBaiduId(String userid) {
+		StringBuilder sql= new StringBuilder();
+		sql.append(SELECT ).append("uid").append(FROM).append(QUERY_TABLE_NAME);
+		sql.append(WHERE ).append("userid='").append(userid).append("'");
+		//getJdbcTemplate().queryForList(sql.toString());
+		return 0;
 	}
 }
