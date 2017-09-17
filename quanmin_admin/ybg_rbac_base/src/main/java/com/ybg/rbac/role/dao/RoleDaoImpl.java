@@ -54,7 +54,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		sql.append(getcondition(qvo));
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper(SysRoleVO.class)));
+			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<SysRoleVO>()));
 		}
 		else {
 			page.setResult(new ArrayList<SysRoleVO>());
@@ -84,7 +84,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(SysRoleVO.class));
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<SysRoleVO>());
 	}
 	
 	@Override

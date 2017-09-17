@@ -50,7 +50,7 @@ public class BaiduUserDaoImpl extends BaseDao implements BaiduUserDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(BaiduUser.class));
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<BaiduUser>());
 	}
 	
 	private String getcondition(BaiduUserQvo qvo) throws Exception {

@@ -48,7 +48,7 @@ public class QQuserDaoImpl extends BaseDao implements QQuserDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(QQuserVO.class));
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<QQuserVO>());
 	}
 	
 	private String getcondition(QQuserQuery qvo) throws Exception {

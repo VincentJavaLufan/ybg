@@ -61,7 +61,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		sql.append(getcondition(qvo));
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper(SysResourcesVO.class)));
+			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<SysResourcesVO>()));
 		}
 		else {
 			page.setResult(new ArrayList<SysResourcesVO>());
@@ -97,7 +97,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",color.colorclass").append(FROM).append(QUERY_TABLE_NAME).append(",sys_color color");
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(SysResourcesVO.class));
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<SysResourcesVO>());
 	}
 	
 	@Override
@@ -108,7 +108,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		sql.append(AND).append("rr.state=0");
 		sql.append(AND).append("res.isdelete=0");
 		sql.append(AND).append("sc.id=res.colorid");
-		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(SysResourcesVO.class));
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<SysResourcesVO>());
 	}
 	
 	@Override
@@ -118,6 +118,6 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		sql.append(WHERE).append("res.id=rr.resId").append(AND).append("res.colorid=color.id").append(AND).append("rr.roleid=").append(roleid);
 		sqlappen(sql, "rr.roleid", roleid);
 		sqlappen(sql, "parentid", parentid);
-		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(SysResourcesVO.class));
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<SysResourcesVO>());
 	}
 }

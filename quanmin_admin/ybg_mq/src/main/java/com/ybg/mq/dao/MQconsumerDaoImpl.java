@@ -1,11 +1,8 @@
 package com.ybg.mq.dao;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
@@ -25,7 +22,7 @@ public class MQconsumerDaoImpl extends BaseDao implements MQconsumerDao {
 	public MQconsumer getIsUse() {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select id,topic,url,ak,sk,consumerid from sys_mq_consumer mc");
-		List<MQconsumer> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(MQconsumer.class));
+		List<MQconsumer> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<MQconsumer>());
 		return QvoConditionUtil.checkList(list) ? list.get(0) : new MQconsumer();
 	}
 }

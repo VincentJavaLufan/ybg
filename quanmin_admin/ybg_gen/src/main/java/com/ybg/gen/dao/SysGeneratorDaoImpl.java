@@ -6,14 +6,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseQueryAble;
-import com.ybg.base.jdbc.DataBaseConstant;
 import com.ybg.base.util.Page;
 import com.ybg.gen.entity.TableEntity;
 import com.ybg.gen.qvo.GeneratorQuery;
@@ -22,8 +20,8 @@ import com.ybg.gen.qvo.GeneratorQuery;
 public class SysGeneratorDaoImpl extends BaseDao implements SysGeneratorDao {
 	
 	@Autowired
-	//默认使用sys 如果修改数据库 @Qualifier 修改
-//	@Qualifier(DataBaseConstant.DB_EDU)
+	// 默认使用sys 如果修改数据库 @Qualifier 修改
+	// @Qualifier(DataBaseConstant.DB_EDU)
 	JdbcTemplate jdbcTemplate;
 	
 	public JdbcTemplate getJdbcTemplate() {
@@ -44,7 +42,7 @@ public class SysGeneratorDaoImpl extends BaseDao implements SysGeneratorDao {
 		});
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			List<TableEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper(TableEntity.class));
+			List<TableEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<TableEntity>());
 			page.setResult(list);
 		}
 		else {

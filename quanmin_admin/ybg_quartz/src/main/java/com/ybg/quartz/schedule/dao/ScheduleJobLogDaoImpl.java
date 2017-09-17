@@ -29,7 +29,7 @@ public class ScheduleJobLogDaoImpl extends BaseDao implements ScheduleJobLogDao 
 	public ScheduleJobLogDO queryObject(Long jobId) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select log_id,job_id,bean_name,method_name,params,status,error,times,create_time from schedule_job_log where log_id = " + jobId);
-		List<ScheduleJobLogDO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(ScheduleJobLogDO.class));
+		List<ScheduleJobLogDO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<ScheduleJobLogDO>());
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
 	
@@ -52,7 +52,7 @@ public class ScheduleJobLogDaoImpl extends BaseDao implements ScheduleJobLogDao 
 		StringBuilder sql = new StringBuilder();
 		sql.append("select log_id,job_id,bean_name,method_name,params,status,error,times,create_time from schedule_job_log  ");
 		sqlappen(sql, " job_id ", qvo.getJob_Id());
-		List<ScheduleJobLogDO> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper(ScheduleJobLogDO.class));
+		List<ScheduleJobLogDO> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<ScheduleJobLogDO>());
 		page.setResult(list);
 		page.setTotals(queryForInt(sql));
 		return page;

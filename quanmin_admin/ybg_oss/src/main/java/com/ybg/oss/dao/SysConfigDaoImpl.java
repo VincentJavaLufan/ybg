@@ -1,13 +1,10 @@
 package com.ybg.oss.dao;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
@@ -30,7 +27,7 @@ public class SysConfigDaoImpl extends BaseDao implements SysConfigDao {
 	public String queryByKey(String paramKey) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select value from sys_config  sys_config where sys_config.key='" + paramKey + "'");
-		List<String> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(String.class));
+		List<String> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<String>());
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
 	
@@ -69,7 +66,7 @@ public class SysConfigDaoImpl extends BaseDao implements SysConfigDao {
 	public SysConfigEntity queryObject(Long id) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select id,key,value,status,remark from sys_config where id=" + id);
-		List<SysConfigEntity> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(SysConfigEntity.class));
+		List<SysConfigEntity> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<SysConfigEntity>());
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
 	
@@ -96,7 +93,7 @@ public class SysConfigDaoImpl extends BaseDao implements SysConfigDao {
 		});
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			List<SysConfigEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper(SysConfigEntity.class));
+			List<SysConfigEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<SysConfigEntity>());
 			page.setResult(list);
 		}
 		else {

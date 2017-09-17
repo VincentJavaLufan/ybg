@@ -1,6 +1,5 @@
 package com.ybg.quartz.schedule.dao;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
@@ -54,7 +52,7 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 	public ScheduleJobEntity queryObject(Long jobId) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select job_id,bean_name,method_name,params,cron_expression,status,remark,create_time from schedule_job where job_id = " + jobId);
-		List<ScheduleJobEntity> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(ScheduleJobEntity.class));
+		List<ScheduleJobEntity> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<ScheduleJobEntity>());
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
 	
@@ -110,7 +108,7 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select job_id,bean_name,method_name,params,cron_expression,status,remark,create_time  from schedule_job job ");
 		sqlappen(sql, "bean_name", qvo.getBean_Name());
-		List<ScheduleJobEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper(ScheduleJobEntity.class));
+		List<ScheduleJobEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<ScheduleJobEntity>());
 		page.setResult(list);
 		page.setTotals(queryForInt(sql));
 		return page;
@@ -123,7 +121,7 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 		sql.append(" where 1=1 ");
 		sqlappen(sql, "beanname", qvo.getBean_Name());
 		sql.append(" and status = 0 ");
-		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(ScheduleJobEntity.class));
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<ScheduleJobEntity>());
 		// return new ArrayList<ScheduleJobEntity>();
 	}
 }

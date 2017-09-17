@@ -1,11 +1,8 @@
 package com.ybg.weixin.login.dao;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
@@ -50,7 +47,7 @@ public class WeixinUserDaoImpl extends BaseDao implements WeixinUserDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(WeixinUserVO.class));
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<WeixinUserVO>());
 	}
 	
 	private String getcondition(WeixinUserQuery qvo) throws Exception {

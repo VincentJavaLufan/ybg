@@ -1,13 +1,10 @@
 package com.ybg.oss.dao;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
@@ -29,7 +26,7 @@ public class SysOssDaoImpl extends BaseDao implements SysOssDao {
 	public SysOssEntity queryObject(Long id) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("	select id,url,create_date from sys_oss oss where id = " + id);
-		List<SysOssEntity> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(SysOssEntity.class));
+		List<SysOssEntity> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<SysOssEntity>());
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
 	
@@ -78,7 +75,7 @@ public class SysOssDaoImpl extends BaseDao implements SysOssDao {
 		sql.append(" where 1=1 ");
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			List<SysOssEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper(SysOssEntity.class) );
+			List<SysOssEntity> list = getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<SysOssEntity>());
 			page.setResult(list);
 		}
 		else {
