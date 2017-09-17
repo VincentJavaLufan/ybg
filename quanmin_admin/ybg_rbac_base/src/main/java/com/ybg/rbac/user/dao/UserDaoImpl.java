@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,6 @@ import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
 import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
-import com.ybg.rbac.user.mapper.UserMapper;
 import com.ybg.rbac.user.qvo.UserQuery;
 
 @Repository
@@ -31,6 +31,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	private static String	QUERY_TABLE_NAME	= "sys_user user";
 	private static String	QUERY_TABLE_COLUMN	= " user.id, user.username, user.phone, user.email, user.state, user.password, user.createtime, user.isdelete, user.roleid, user.credentialssalt ";
 	
+	@Override
 	public UserVO save(UserVO user) throws Exception {
 		BaseMap<String, Object> createmap = new BaseMap<String, Object>();
 		createmap.put("username", user.getUsername());
@@ -47,17 +48,19 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		return user;
 	}
 	
+	@Override
 	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> WHEREmap) {
 		this.baseupdate(updatemap, WHEREmap, "sys_user");
 	}
 	
+	@Override
 	public Page list(Page page, UserQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",role.`name` rolename").append(FROM).append(QUERY_TABLE_NAME).append(LEFT).append(JOIN).append("sys_role role").append(ON).append("user.roleid=role.id");
 		sql.append(getcondition(qvo));
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new UserMapper()));
+			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper(UserVO.class)));
 		}
 		else {
 			page.setResult(new ArrayList<UserVO>());
@@ -86,13 +89,15 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		return sql.toString();
 	}
 	
+	@Override
 	public List<UserVO> list(UserQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",role.`name` rolename").append(FROM).append(QUERY_TABLE_NAME).append(LEFT).append(JOIN).append("sys_role role").append(ON).append("user.roleid=role.id");
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new UserMapper());
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(UserVO.class));
 	}
 	
+	@Override
 	public UserVO login(String loginname) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
@@ -119,10 +124,12 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		return list.size() == 0 ? null : list.get(0);
 	}
 	
+	@Override
 	public void remove(BaseMap<String, Object> wheremap) {
 		baseremove(wheremap, "sys_user");
 	}
 	
+	@Override
 	public void removeExpired() throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(DELETE).append(FROM).append("sys_user").append(WHERE);
@@ -146,7 +153,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		if (email) {
 			StringBuilder sqlsub = new StringBuilder();
 			sqlsub.append(sql.toString()).append(" and user.email='" + qvo.getEmail() + "'");
-			List<UserVO> list = getJdbcTemplate().query(sql.toString(), new UserMapper());
+			List<UserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(UserVO.class));
 			check = check && QvoConditionUtil.checkList(list);
 			if (!check) {
 				return check;
@@ -155,7 +162,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		if (username) {
 			StringBuilder sqlsub = new StringBuilder();
 			sqlsub.append(sql.toString()).append(" and user.username='" + qvo.getUsername() + "'");
-			List<UserVO> list = getJdbcTemplate().query(sql.toString(), new UserMapper());
+			List<UserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(UserVO.class));
 			check = check && QvoConditionUtil.checkList(list);
 			if (!check) {
 				return check;
@@ -164,7 +171,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		if (email) {
 			StringBuilder sqlsub = new StringBuilder();
 			sqlsub.append(sql.toString()).append(" and user.email='" + qvo.getEmail() + "'");
-			List<UserVO> list = getJdbcTemplate().query(sql.toString(), new UserMapper());
+			List<UserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(UserVO.class));
 			check = check && QvoConditionUtil.checkList(list);
 		}
 		return check;

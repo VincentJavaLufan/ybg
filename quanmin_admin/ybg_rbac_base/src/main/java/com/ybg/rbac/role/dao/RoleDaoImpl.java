@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
@@ -13,7 +14,6 @@ import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
 import com.ybg.rbac.role.domain.RoleResDO;
 import com.ybg.rbac.role.domain.SysRoleVO;
-import com.ybg.rbac.role.mapper.RoleMapper;
 import com.ybg.rbac.role.qvo.RoleQuery;
 
 @Repository
@@ -29,6 +29,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 	private static String	QUERY_TABLE_NAME	= "sys_role role";
 	private static String	QUERY_TABLE_COLUMN	= " role.id,role.state,role.name,role.rolekey,role.description ,role.isdelete ";
 	
+	@Override
 	public SysRoleVO save(SysRoleVO role) throws Exception {
 		BaseMap<String, Object> createmap = new BaseMap<String, Object>();
 		String id = null;
@@ -41,17 +42,19 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		return role;
 	}
 	
+	@Override
 	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> WHEREmap) {
 		this.baseupdate(updatemap, WHEREmap, "sys_role");
 	}
 	
+	@Override
 	public Page list(Page page, RoleQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new RoleMapper()));
+			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper(SysRoleVO.class)));
 		}
 		else {
 			page.setResult(new ArrayList<SysRoleVO>());
@@ -76,13 +79,15 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		return sql.toString();
 	}
 	
+	@Override
 	public List<SysRoleVO> list(RoleQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new RoleMapper());
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper(SysRoleVO.class));
 	}
 	
+	@Override
 	public void saveOrupdateRole_Res(final List<RoleResDO> list) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(INSERT).append(INTO).append("sys_res_role (resid,roleid,state) ").append(VALUES).append("(?,?,?) ").append(ON).append(DUPLICATE).append(KEY).append(UPDATE).append("resid=?,roleid=?, state=? ");
