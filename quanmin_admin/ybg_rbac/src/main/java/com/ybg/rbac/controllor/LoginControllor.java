@@ -326,9 +326,15 @@ public class LoginControllor {
 	 * @throws Exception **/
 	@ApiOperation(value = "修改密码", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	@RequestMapping(value = { "/common/login_do/modifypwd" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json modifypwd(@RequestParam(name = "password", required = true) String password) throws Exception {
+	@RequestMapping(value = { "/common/login_do/modifypwd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public Json modifypwd(@RequestParam(name = VrifyCodeUtil.PARAMETERNAME, required = true) String vrifyCode, HttpServletRequest httpServletRequest, @RequestParam(name = "password", required = true) String password, @RequestParam(name = "newPassword", required = true) String newPassword) throws Exception {
 		Json j = new Json();
+		// 首先检测验证码
+		if (!VrifyCodeUtil.checkvrifyCode(vrifyCode, httpServletRequest)) {
+			j.setSuccess(false);
+			j.setMsg("验证码不正确");
+			return j;
+		}
 		j.setSuccess(true);
 		j.setMsg("操作成功");
 		UserVO user = (UserVO) Common.findUserSession();
@@ -336,10 +342,18 @@ public class LoginControllor {
 			j.setMsg("您尚未登陆");
 			return j;
 		}
+		if(newPassword.length()<=8){
+			j.setMsg("新密码太短");
+			return j;
+		}
+		if (!password.equals(new DesUtils().decrypt(user.getCredentialssalt()))) {
+			j.setMsg("密码错误！");
+			return j;
+		}
 		BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
 		BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
-		updatemap.put("password", UserConstant.getpwd(password));
-		updatemap.put("credentialssalt", new DesUtils().encrypt(password));
+		updatemap.put("password", UserConstant.getpwd(newPassword));
+		updatemap.put("credentialssalt", new DesUtils().encrypt(newPassword));
 		wheremap.put("id", user.getId());
 		userService.update(updatemap, wheremap);
 		return j;
