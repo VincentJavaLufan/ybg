@@ -13,7 +13,7 @@ import java.util.List;
 /** Created by Athos on 2016-10-16. */
 public class MyAccessDecisionManager extends AbstractAccessDecisionManager {
 	
-	public MyAccessDecisionManager(List<AccessDecisionVoter> decisionVoters) {
+	public MyAccessDecisionManager(List<AccessDecisionVoter<? extends Object>> decisionVoters) {
 		super(decisionVoters);
 	}
 	

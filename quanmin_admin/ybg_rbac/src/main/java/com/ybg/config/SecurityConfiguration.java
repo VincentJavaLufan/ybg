@@ -115,7 +115,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 */
 	@Bean(name = "accessDecisionManager")
 	public AccessDecisionManager accessDecisionManager() {
-		List<AccessDecisionVoter> decisionVoters = new ArrayList<AccessDecisionVoter>();
+		List<AccessDecisionVoter<? extends Object>> decisionVoters = new ArrayList<AccessDecisionVoter<?>>();
 		decisionVoters.add(new RoleVoter());
 		decisionVoters.add(new AuthenticatedVoter());
 		decisionVoters.add(webExpressionVoter());// 启用表达式投票器
