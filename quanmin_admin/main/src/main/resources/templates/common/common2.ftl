@@ -30,6 +30,7 @@
 <script src="/js/libs/bootstrap.min.js"></script>
 <script src="/js/libs/bootstrap-table.min.js"></script>
 <script type="text/javascript" src="/common/vue.js"></script>
+<script src="/common/vue-router.js"></script>
 <!-- Slimscroll -->
 <script src="/js/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
