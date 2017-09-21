@@ -15,6 +15,9 @@
 	<modules>
 		<!--** 主要入口 必须 -->
 		<module>main</module>
+		<!--  
+		<module>main_layerui</module>-->
+		
 		<!--** DAO封装 必须 -->
 		<module>ybg_base_jdbc</module>
 		<!--** 工具类 ,必须 -->
@@ -52,7 +55,8 @@
 		<module>ybg_activiti</module>
 		<module>ybg_qrcode</module>
 		<module>ybg_https</module>
-	</modules>
+        
+  </modules>
 	<build>
 		<defaultGoal>compile</defaultGoal>
 	</build>
