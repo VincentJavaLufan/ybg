@@ -5,7 +5,7 @@ QQ群：314658875（收费），310391018（免费）
 
 ###  声明，虽然本产品是开源。但未经本人允许擅自申请专利，将公开追究法律责任。
 
-### 更多信息 请移步到wiki [链接地址](http://git.oschina.net/SYDeament/88ybg/wikis/A1-%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E8%B4%A6%E5%8F%B7
+### 更多信息 请移步到wiki [链接地址](http://git.oschina.net/YYDeament/88ybg/wikis/A1-%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E8%B4%A6%E5%8F%B7
 )
 
 
