@@ -179,12 +179,70 @@ public class LoginControllor {
 	}
 	
 	// /** 忘记密码 **/
+	@Deprecated
 	@ApiOperation(value = "忘记密码", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "username", value = "帐号", dataType = "java.lang.String", required = true), @ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
 	@ResponseBody
 	@RequestMapping(value = "/common/login_do/forgetpwd.do", method = RequestMethod.GET)
 	public Json forgetpwd(@RequestParam(name = "username", required = true) String username) throws Exception {
 		Json j = new Json();
+		j.setSuccess(true);
+		UserQuery userqvo = new UserQuery();
+		userqvo.setUsername(username);
+		List<UserVO> userlist = userService.list(userqvo);
+		if (userlist == null || userlist.size() == 0) {
+			j.setSuccess(false);
+			j.setMsg("无此账号");
+			return j;
+		}
+		UserVO user = userlist.get(0);
+		if (user.getState().equals(UserStateConstant.LOCK)) {
+			j.setSuccess(false);
+			j.setMsg("账号被锁 ，无法使用");
+			return j;
+		}
+		if (user.getState().equals(UserStateConstant.DIE)) {
+			j.setSuccess(false);
+			j.setMsg("账号未激活 ，无法使用");
+			return j;
+		}
+		if (!user.getState().equals(UserStateConstant.OK)) {
+			j.setSuccess(false);
+			j.setMsg("未知原因 ，无法使用");
+			return j;
+		}
+		// 加密 的字符串 防止 用户知道自己的ID
+		JSONObject json = new JSONObject();
+		json.put("uid", user.getId());
+		json.put("dietime", DateUtil.getDate());
+		String encryptInfo = json.toString();
+		encryptInfo = "encryptInfo=" + new DesUtils().encrypt(encryptInfo);
+		String contemt = "<a href='" + SystemConstant.getSystemdomain() + "/common/login_do/resetpwd.do?" + encryptInfo + "'>重置密码，有效期截止到当天晚上24：00</a>";
+		try {
+			SendEmailInter send = new SendQQmailImpl();
+			send.sendMail(user.getEmail(), SystemConstant.getSystemName() + "-找回密码", contemt);
+		} catch (Exception e) {
+			e.printStackTrace();
+			j.setMsg("发送邮箱失败，可能被提供方拦截");
+			return j;
+		}
+		j.setMsg("发送邮箱成功，请到邮箱重置密码");
+		return j;
+	}
+	
+	// /** 忘记密码 **/
+	@ApiOperation(value = "忘记密码", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiImplicitParams({ @ApiImplicitParam(name = "username", value = "帐号", dataType = "java.lang.String", required = true), @ApiImplicitParam(name = "password", value = "密码", dataType = "java.lang.String", required = true) })
+	@ResponseBody
+	@RequestMapping(value = "/common/login_do/forgetPwd.do", method = RequestMethod.POST)
+	public Json forgetPwd(@RequestParam(name = "username", required = true) String username, @RequestParam(name = VrifyCodeUtil.PARAMETERNAME, required = true) String vrifyCode, HttpSession session) throws Exception {
+		Json j = new Json();
+		// 首先检测验证码
+		if (!VrifyCodeUtil.checkvrifyCode(vrifyCode, session)) {
+			j.setSuccess(false);
+			j.setMsg("验证码不正确");
+			return j;
+		}
 		j.setSuccess(true);
 		UserQuery userqvo = new UserQuery();
 		userqvo.setUsername(username);
@@ -342,7 +400,7 @@ public class LoginControllor {
 			j.setMsg("您尚未登陆");
 			return j;
 		}
-		if(newPassword.length()<=8){
+		if (newPassword.length() <= 8) {
 			j.setMsg("新密码太短");
 			return j;
 		}
