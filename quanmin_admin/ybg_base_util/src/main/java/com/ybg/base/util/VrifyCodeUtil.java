@@ -17,15 +17,19 @@ public class VrifyCodeUtil {
 	 * @param model
 	 * @return */
 	public static boolean checkvrifyCode(HttpServletRequest httpServletRequest, ModelMap model) {
+		HttpSession session = httpServletRequest.getSession();
 		String captchaId = (String) httpServletRequest.getSession().getAttribute(PARAMETERNAME);
 		String parameter = httpServletRequest.getParameter(PARAMETERNAME);
-		if(parameter==null){
+		if (parameter == null) {
+			cleanSession(session);
 			return false;
 		}
 		if (!captchaId.equals(parameter)) {
 			model.addAttribute("error", "验证码不正确！");
+			cleanSession(session);
 			return false;
 		}
+		cleanSession(session);
 		return true;
 	}
 	
@@ -34,13 +38,17 @@ public class VrifyCodeUtil {
 	 * @param httpServletRequest
 	 * @return */
 	public static boolean checkvrifyCode(String vrifyCode, HttpServletRequest httpServletRequest) {
+		HttpSession session = httpServletRequest.getSession();
 		String captchaId = (String) httpServletRequest.getSession().getAttribute(PARAMETERNAME);
-		if(vrifyCode==null){
+		if (vrifyCode == null) {
+			cleanSession(session);
 			return false;
 		}
 		if (!captchaId.equals(vrifyCode)) {
+			cleanSession(session);
 			return false;
 		}
+		cleanSession(session);
 		return true;
 	}
 	
@@ -50,12 +58,22 @@ public class VrifyCodeUtil {
 	 * @return */
 	public static boolean checkvrifyCode(String vrifyCode, HttpSession session) {
 		String captchaId = (String) session.getAttribute(PARAMETERNAME);
-		if(vrifyCode==null){
+		if (vrifyCode == null) {
+			cleanSession(session);
 			return false;
 		}
 		if (!captchaId.equals(vrifyCode)) {
+			cleanSession(session);
 			return false;
 		}
+		cleanSession(session);
 		return true;
+	}
+	
+	/** 验证是验证码 否正确后清除 验证码会话 防止重复利用攻击API
+	 * 
+	 * @param session */
+	private static void cleanSession(HttpSession session) {
+		session.removeAttribute(PARAMETERNAME);
 	}
 }
