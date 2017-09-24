@@ -207,7 +207,7 @@ layui.config({
         return false;
     });
     /**
-     * 登陆 form 表单
+     * 注册 form 表单
      */
     form.on("submit(regForm)", function(data) {
         // document.regForm.submit();
@@ -229,10 +229,23 @@ layui.config({
         return false;
     });
     /**
-     * 登陆 form 表单
+     * 忘记密码 form 表单
      */
     form.on("submit(updatePassForm)", function(data) {
-        layer.msg(JSON.stringify(data.field));
+     //   layer.msg(JSON.stringify(data.field));
+        
+        $.ajax({
+            
+            type : 'post', 
+            async : false,
+            url : "/common/login_do/forgetPwd.do" ,
+            data : data.field,
+            dataType : "json",
+            success : function(data) {
+                alert(data.msg);
+            }
+        });
+        
         return false;
     });
 });
