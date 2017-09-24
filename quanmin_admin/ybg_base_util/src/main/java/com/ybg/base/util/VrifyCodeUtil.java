@@ -21,7 +21,7 @@ public class VrifyCodeUtil {
 		String captchaId = (String) httpServletRequest.getSession().getAttribute(PARAMETERNAME);
 		String parameter = httpServletRequest.getParameter(PARAMETERNAME);
 		if (parameter == null) {
-			cleanSession(session);
+			//cleanSession(session);
 			return false;
 		}
 		if (!captchaId.equals(parameter)) {
@@ -41,7 +41,7 @@ public class VrifyCodeUtil {
 		HttpSession session = httpServletRequest.getSession();
 		String captchaId = (String) httpServletRequest.getSession().getAttribute(PARAMETERNAME);
 		if (vrifyCode == null) {
-			cleanSession(session);
+			//cleanSession(session);
 			return false;
 		}
 		if (!captchaId.equals(vrifyCode)) {
@@ -59,7 +59,7 @@ public class VrifyCodeUtil {
 	public static boolean checkvrifyCode(String vrifyCode, HttpSession session) {
 		String captchaId = (String) session.getAttribute(PARAMETERNAME);
 		if (vrifyCode == null) {
-			cleanSession(session);
+			//cleanSession(session);
 			return false;
 		}
 		if (!captchaId.equals(vrifyCode)) {
