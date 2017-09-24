@@ -1,0 +1,455 @@
+<html lang="en" class="app">
+<head>
+<#include "/common/common2.ftl"/>
+<script type="text/javascript">
+    $(function() {
+        //修改时间2015年10月13日14:32:57
+        //修改在手机上点击菜单后菜单不关闭问题
+        //修改人赵雷
+        var winwidth = $("body").width();
+        if (winwidth < 770) {
+            $("#nav ul.lt li").click(function() {
+                $("#nav").removeClass("nav-off-screen");
+            });
+        }
+        //---------修改人赵雷完毕----------
+        var tb = $("#loadhtml");
+        tb.html(CommnUtil.loadingImg());
+        tb.load(rootPath + "/welcome.html");
+        $("[nav-n]").each(function() {
+            $(this).bind("click", function() {
+                var nav = $(this).attr("nav-n");
+                var sn = nav.split(",");
+                var html = '<li><i class="fa fa-home"></i>';
+                html += '<a href="/common/login_do/index.do">Home</a></li>';
+                for (var i = 0; i < 2; i++) {
+                    html += '<li><a href="javascript:void(0)">' + sn[i] + '</a></li>';
+                }
+                $("#topli").html(html);
+                var tb = $("#loadhtml");
+                tb.html(CommnUtil.loadingImg());
+                tb.load(rootPath + sn[2]);
+            });
+        });
+    });
+    function modifypwd() {
+        if ($("#password").val().length < 8) {
+            alert("密码太短");
+            return false;
+        }
+        if ($("#password").val() != $("#chpassword").val()) {
+            alert("两次密码不一样");
+            return false;
+        }
+        $("#modifypwd").ajaxSubmit({
+            type : 'post', // 提交方式 get/post
+            url : '/common/login_do/modifypwd.do', // 需要提交的 url
+            data : {},
+            dataType : "json",
+            success : function(data) { // data 保存提交后返回的数据，一般为 json 数据
+                alert(data.msg);
+            }
+        });
+        $("#modifypwd").resetForm(); // 提交后重置表单
+        return false;
+    }
+</script>
+</head>
+<body>
+	<section class="vbox">
+		<header class="bg-dark dk header navbar navbar-fixed-top-xs">
+			<div class="navbar-header aside-md">
+				<a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
+					<i class="fa fa-bars"></i>
+				</a>
+				<a href="javascript:alert('已进入全屏模式,F11可以接触')" class="navbar-brand" data-toggle="fullscreen">
+					<i class="fa fa-cloud"></i>
+					云报告
+				</a>
+				<a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".nav-user">
+					<i class="fa fa-cog"></i>
+				</a>
+			</div>
+			<ul class="nav navbar-nav hidden-xs">
+				<li class="dropdown">
+					<a href="index.html#" class="dropdown-toggle dker" data-toggle="dropdown">
+						<i class="fa fa-building-o"></i>
+						<span class="font-bold">Activity2</span>
+					</a>
+					<section class="dropdown-menu aside-xl on animated fadeInLeft no-borders lt">
+						<div class="wrapper lter m-t-n-xs">
+							<a href="index.html#" class="thumb pull-left m-r">
+								<img src="/notebook/notebook_files/avatar.jpg" class="img-circle">
+							</a>
+							<div class="clear">
+								<a href="index.html#">
+									<span class="text-white font-bold">@Mike Mcalidek</span>
+								</a>
+								<small class="block">Art Director</small>
+								<a href="index.html#" class="btn btn-xs btn-success m-t-xs">Upgrade</a>
+							</div>
+						</div>
+						<div class="row m-l-none m-r-none m-b-n-xs text-center">
+							<div class="col-xs-4">
+								<div class="padder-v">
+									<span class="m-b-xs h4 block text-white">245</span>
+									<small class="text-muted">Followers</small>
+								</div>
+							</div>
+							<div class="col-xs-4 dk">
+								<div class="padder-v">
+									<span class="m-b-xs h4 block text-white">55</span>
+									<small class="text-muted">Likes</small>
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<div class="padder-v">
+									<span class="m-b-xs h4 block text-white">2,035</span>
+									<small class="text-muted">Photos</small>
+								</div>
+							</div>
+						</div>
+					</section>
+				</li>
+				<li>
+					<div class="m-t m-l">
+						<a href="price.html" class="dropdown-toggle btn btn-xs btn-primary" title="Upgrade">
+							<i class="fa fa-long-arrow-up"></i>
+						</a>
+					</div>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user">
+				<li class="hidden-xs">
+					<a href="index.html#" class="dropdown-toggle dk" data-toggle="dropdown">
+						<i class="fa fa-bell"></i>
+						<span class="badge badge-sm up bg-danger m-l-n-sm count" style="display: inline-block;">3</span>
+					</a>
+					<section class="dropdown-menu aside-xl">
+						<section class="panel bg-white">
+							<header class="panel-heading b-light bg-light">
+								<strong>
+									You have
+									<span class="count" style="display: inline;">66</span>
+									notifications
+								</strong>
+							</header>
+							<div class="list-group list-group-alt animated fadeInRight">
+								<a href="index.html#" class="media list-group-item" style="display: block;">
+									<span class="pull-left thumb-sm text-center">
+										<i class="fa fa-envelope-o fa-2x text-success"></i>
+									</span>
+									<span class="media-body block m-b-none">
+										Sophi sent you a email
+										<br>
+										<small class="text-muted">1 minutes ago</small>
+									</span>
+								</a>
+								<a href="index.html#" class="media list-group-item">
+									<span class="pull-left thumb-sm">
+										<img src="/notebook/notebook_files/avatar.jpg" alt="John said" class="img-circle">
+									</span>
+									<span class="media-body block m-b-none">
+										Use awesome animate.css22
+										<br>
+										<small class="text-muted">10 minutes ago</small>
+									</span>
+								</a>
+								<a href="index.html#" class="media list-group-item">
+									<span class="media-body block m-b-none">
+										1.0 initial released
+										<br>
+										<small class="text-muted">1 hour ago</small>
+									</span>
+								</a>
+							</div>
+							<footer class="panel-footer text-sm">
+								<a href="index.html#" class="pull-right">
+									<i class="fa fa-cog"></i>
+								</a>
+								<a href="index.html#notes" data-toggle="class:show animated fadeInRight">See all the notifications</a>
+							</footer>
+						</section>
+					</section>
+				</li>
+				<li class="dropdown hidden-xs">
+					<a href="index.html#" class="dropdown-toggle dker" data-toggle="dropdown">
+						<i class="fa fa-fw fa-search"></i>
+					</a>
+					<section class="dropdown-menu aside-xl animated fadeInUp">
+						<section class="panel bg-white">
+							<form role="search">
+								<div class="form-group wrapper m-b-none">
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="搜索">
+										<span class="input-group-btn">
+											<button type="submit" class="btn btn-info btn-icon">
+												<i class="fa fa-search"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</form>
+						</section>
+					</section>
+				</li>
+				<li class="dropdown">
+					<a href="index.html#" class="dropdown-toggle" data-toggle="dropdown">
+						<span class="thumb-sm avatar pull-left">
+							<img src="/notebook/notebook_files/avatar.jpg">
+						</span>
+						${userFormMap.username!}
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu animated fadeInRight">
+						<span class="arrow top"></span>
+						<li>
+							<a href="index.shtml#">Settings</a>
+						</li>
+						<li>
+							<a href="/common/login_do/index.do#modal-form" data-toggle="modal">密码修改</a>
+						</li>
+						<li>
+							<a href="index.html#">
+								<span class="badge bg-danger pull-right">3</span>
+								Notifications
+							</a>
+						</li>
+						<li>
+							<a href="docs.html">Help</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="/common/login_do/loginout.do">退出</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</header>
+		<section>
+			<section class="hbox stretch">
+				<!-- .aside -->
+				<aside class="bg-dark lter aside-md hidden-print hidden-xs" id="nav">
+					<section class="vbox">
+						<!-- <header class="header bg-primary lter text-center clearfix">
+							<div class="btn-group">
+							系统菜单
+							</div>
+						</header> -->
+						<section class="w-f scrollable">
+							<div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="5px" data-color="#333333">
+								<!-- nav -->
+								<nav class="nav-primary hidden-xs">
+									<ul class="nav">
+										<li>
+											<a href="javascript:void(0)">
+												<i class="fa fa-wechat icon">
+													<b class="dker bg-primary"></b>
+												</i>
+												<span class="pull-right">
+													<i class="fa fa-bookmark-o text-active"></i>
+												</span>
+												<span>微信</span>
+											</a>
+											<ul class="nav lt">
+												<li class="active">
+													<a href="javascript:void(0)" class="active" nav-n="微信,微信设置,/weixin/weixinsetting_do/index.do?id=a1de7ebbde7646849fa59785610dfee8">
+														<i class="fa fa-angle-right"></i>
+														<span>微信设置</span>
+													</a>
+												</li>
+											</ul>
+										</li>
+										<li class="">
+											<a href="javascript:void(0)" class="">
+												<i class="fa fa-low-vision icon">
+													<b class="dker bg-warning"></b>
+												</i>
+												<span class="pull-right">
+													<i class="fa fa-bookmark-o text-active"></i>
+												</span>
+												<span>系统监控管理</span>
+											</a>
+											<ul class="nav lt" style="display: none;">
+												<li class="">
+													<a href="javascript:void(0)" class="" nav-n="系统监控管理,访问监控,/druid_do/index.do?id=69">
+														<i class="fa fa-angle-right"></i>
+														<span>访问监控</span>
+													</a>
+												</li>
+											</ul>
+										</li>
+										<li class="active">
+											<a href="javascript:void(0)" class="active">
+												<i class="fa fa-desktop icon">
+													<b class="dk bg-warning"></b>
+												</i>
+												<span class="pull-right">
+													<i class="fa fa-bookmark-o text-active"></i>
+												</span>
+												<span>系统基础管理</span>
+											</a>
+											<ul class="nav lt" style="display: block;">
+												<li class="">
+													<a href="javascript:void(0)" class="" nav-n="系统基础管理,角色管理,/role/role_do/index.do?id=3">
+														<i class="fa fa-angle-right"></i>
+														<span>角色管理</span>
+													</a>
+												</li>
+												<li class="">
+													<a href="javascript:void(0)" class="" nav-n="系统基础管理,菜单管理,/res/res_do/index.do?id=4">
+														<i class="fa fa-angle-right"></i>
+														<span>菜单管理</span>
+													</a>
+												</li>
+												<li class="active">
+													<a href="javascript:void(0)" class="active" nav-n="系统基础管理,用户管理,/user/user_do/index.do?id=2">
+														<i class="fa fa-angle-right"></i>
+														<span>用户管理</span>
+													</a>
+												</li>
+											</ul>
+										</li>
+										<li class="">
+											<a href="javascript:void(0)" class="">
+												<i class="fa fa-building-o icon">
+													<b class="lt bg-warning"></b>
+												</i>
+												<span class="pull-right">
+													<i class="fa fa-bookmark-o text-active"></i>
+												</span>
+												<span>企业管理</span>
+											</a>
+											<ul class="nav lt" style="display: none;">
+												<li class="active">
+													<a href="javascript:void(0)" class="active" nav-n="企业管理,部门管理,/org/department_do/index.do?id=45ef14b2bcb84bcdbddd25be0e045b26">
+														<i class="fa fa-angle-right"></i>
+														<span>部门管理</span>
+													</a>
+												</li>
+												<li class="active">
+													<a href="javascript:void(0)" class="active" nav-n="企业管理,企业管理初始化,/org/compamy_do/index.do?id=5dd60cc1087447d9b215d91fbe1856f9">
+														<i class="fa fa-angle-right"></i>
+														<span>企业管理初始化</span>
+													</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+								<!-- / nav -->
+							</div>
+						</section>
+						<footer class="footer lt hidden-xs b-t b-dark">
+							<div id="chat" class="dropup">
+								<section class="dropdown-menu on aside-md m-l-n">
+									<section class="panel bg-white">
+										<header class="panel-heading b-b b-light">Active chats</header>
+										<div class="panel-body animated fadeInRight">
+											<p class="text-sm">No active chats.</p>
+											<p>
+												<a href="#" class="btn btn-sm btn-default">Start a chat</a>
+											</p>
+										</div>
+									</section>
+								</section>
+							</div>
+							<div id="invite" class="dropup">
+								<section class="dropdown-menu on aside-md m-l-n">
+									<section class="panel bg-white">
+										<header class="panel-heading b-b b-light">
+											John
+											<i class="fa fa-circle text-success"></i>
+										</header>
+										<div class="panel-body animated fadeInRight">
+											<p class="text-sm">No contacts in your lists.</p>
+											<p>
+												<a href="#" class="btn btn-sm btn-facebook">
+													<i class="fa fa-fw fa-facebook"></i>
+													Invite from Facebook
+												</a>
+											</p>
+										</div>
+									</section>
+								</section>
+							</div>
+							<a href="#nav" data-toggle="class:nav-xs" class="pull-right btn btn-sm btn-dark btn-icon">
+								<i class="fa fa-angle-left text"></i>
+								<i class="fa fa-angle-right text-active"></i>
+							</a>
+							<div class="btn-group hidden-nav-xs">
+								<button type="button" title="Chats" class="btn btn-icon btn-sm btn-dark" data-toggle="dropdown" data-target="#chat">
+									<i class="fa fa-comment-o"></i>
+								</button>
+								<button type="button" title="Contacts" class="btn btn-icon btn-sm btn-dark" data-toggle="dropdown" data-target="#invite">
+									<i class="fa fa-facebook"></i>
+								</button>
+							</div>
+						</footer>
+					</section>
+				</aside>
+				<!-- /.aside -->
+				<section id="content">
+					<section id="id_vbox" class="vbox">
+						<ul class="breadcrumb no-border no-radius b-b b-light" id="topli">
+						</ul>
+						<section class="scrollable" style="margin-top: 35px;">
+							<div id="loadhtml"></div>
+						</section>
+					</section>
+				</section>
+				<aside class="bg-light lter b-l aside-md hide" id="notes">
+					<div class="wrapper">Notification</div>
+				</aside>
+			</section>
+		</section>
+	</section>
+	<!-- Bootstrap -->
+	<div id="flotTip" style="display: none; position: absolute;"></div>
+	<div class="modal fade" id="modal-form">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-6 b-r">
+							<h3 class="m-t-none m-b">修改密码</h3>
+							<p>
+								您知道吗 ？捐助我可以申请修改更短的账号名称。
+								<a href="#" class="bg-warning">
+									开通VIP
+									<i class="fa fa-arrow-circle-right icon"></i>
+								</a>
+							</p>
+							<form id="modifypwd" onsubmit="return false;">
+								<div class="form-group">
+									<label>新密码</label>
+									<input id="password" name="password" type="password" class="form-control" placeholder="New Password">
+								</div>
+								<div class="form-group">
+									<label>确认密码</label>
+									<input id="chpassword" name="chpassword" type="password" class="form-control" placeholder="Confirm Password">
+								</div>
+								<div class="checkbox m-t-lg">
+									<button type="submit" onclick="modifypwd()" class="btn btn-sm btn-success pull-right text-uc m-t-n-xs">
+										<strong>确定</strong>
+									</button>
+								</div>
+							</form>
+						</div>
+						<div class="col-sm-6">
+							<h4>什么样的密码安全?</h4>
+							<p>1.密码长于8位</p>
+							<p>2.密码包含大小写和数字 最好有特殊符号</p>
+							<p>3.密码不要和任何平台的相同，部分网站是明文存储，有泄露风险。我平台绝对是无明文，且密码二次加密。放心使用</p>
+							<p>4.不要把密码随意告诉任何人。必须确认有相关安全常识。</p>
+							<p>5.未来添加第三方平台绑定，尽量少使用密码登陆。</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+</body>
+</html>

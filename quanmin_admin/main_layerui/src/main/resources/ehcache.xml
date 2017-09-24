@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+	updateCheck="false">
+	<diskStore path="java.io.tmpdir/Tmp_EhCache" />
+
+	<defaultCache eternal="false" maxElementsInMemory="1000"
+		overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="0"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LRU"></defaultCache>
+
+	<!-- 微信中央控制器缓存 只能缓存一小时 元素只能是3个上限，不缓存到硬盘 -->
+	<cache name="jsapiticketCache" eternal="false"
+		maxElementsInMemory="3" overflowToDisk="false" diskPersistent="false"
+		timeToIdleSeconds="3600" timeToLiveSeconds="3600"
+		memoryStoreEvictionPolicy="LFU"></cache>
+
+	<!-- 微信支付缓存 缓存一周 -->
+	<cache name="weixinPayRecordCache" eternal="false"
+		maxElementsInMemory="1000" overflowToDisk="false" diskPersistent="false"
+		maxElementsOnDisk="0" timeToIdleSeconds="604800" timeToLiveSeconds="604800"
+		memoryStoreEvictionPolicy="LFU"></cache>
+	<!-- 资源缓存 -->
+	<cache name="resourcesCache" maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="3600" timeToLiveSeconds="3600" overflowToDisk="false"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="120"
+		memoryStoreEvictionPolicy="LRU">
+	</cache>
+	<cache name="roleCache" maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="3600" timeToLiveSeconds="3600" overflowToDisk="false"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="120"
+		memoryStoreEvictionPolicy="LRU">
+	</cache>
+	<cache name="userCache" maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="3600" timeToLiveSeconds="3600" overflowToDisk="false"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="120"
+		memoryStoreEvictionPolicy="LRU">
+	</cache>
+	<cache name="resroleCache" maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="3600" timeToLiveSeconds="3600" overflowToDisk="false"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="120"
+		memoryStoreEvictionPolicy="LRU"></cache>
+
+</ehcache>

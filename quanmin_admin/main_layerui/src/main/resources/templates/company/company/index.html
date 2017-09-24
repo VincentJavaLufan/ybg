@@ -1,0 +1,35 @@
+<script type="text/javascript" src="/js/company/list.js"></script>
+<div class="m-b-md">
+	<form class="form-inline" role="form" id="searchForm" name="searchForm">
+		<div class="form-group">
+			<label class="control-label">
+				<span class="h4 font-thin v-middle">id:</span>
+			</label>
+			<input class="form-control" id="id" name="id">
+			<label class="control-label">
+				<span class="h4 font-thin v-middle">name:</span>
+			</label>
+			<input class="form-control" id="name" name="name">
+			<label class="control-label">
+				<span class="h4 font-thin v-middle">companyid:</span>
+			</label>
+			<input class="form-control" id="companyid" name="companyid">
+			<label class="control-label">
+				<span class="h4 font-thin v-middle">deptid:</span>
+			</label>
+			<input class="form-control" id="deptid" name="deptid">
+		</div>
+		<a href="javascript:void(0)" class="btn btn-s-md btn-default btn-rounded" id="search">查询</a>
+	</form>
+</div>
+<header class="panel-heading">
+	<div class="doc-buttons">
+		<#list res as key> ${key.description!}</#list>
+	</div>
+</header>
+<div class="table-responsive" style="width: 100%;overflow-x:false;">
+	<div id="paging" class="pagclass"></div>
+</div>
+<div id="callback_div" class="table-responsive" style="display: none;">
+	<div id="paging_callback" class="pagclass"></div>
+</div>
