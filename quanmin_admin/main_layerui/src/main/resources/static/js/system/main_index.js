@@ -8,7 +8,7 @@ layui.config({
 	$ = layui.jquery;
 	var _objs = {
 		doc: $(document),
-		left_sidebar: $("#left_sidebar"),
+		left_sidebar: $("#SYSTEM_MENU"),//左侧菜单ID
 		right_box: $("#right_box"),
 		site_tree_mobile: $('.site-tree-mobile'),
 		site_mobile_shade: $('.site-mobile-shade')
