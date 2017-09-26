@@ -1,119 +1,89 @@
 <!DOCTYPE html>
 <html>
-
-	<head>
-		<meta charset="UTF-8">
-		<title>后套管理系统</title>
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta http-equiv="Access-Control-Allow-Origin" content="*">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="format-detection" content="telephone=no">
-		
-		<link rel="stylesheet" href="/js/plugins/layui/css/layui.css" />
-		<link rel="stylesheet" href="/css/layerui/swiper.min.css" />
-		<link rel="stylesheet" href="//at.alicdn.com/t/font_405150_y9pymml2wi3yds4i.css" />
-		<link rel="stylesheet" href="/css/layerui/style.css" />
-		
-	</head>
-
-	<body>
-		<div class="layui-layout layui-layout-admin">
-			<!--  头部区域  -->
-			<div class="layui-header">
-				<div class="layui-logo" style="color: #fff;"><b>壹证通 · 云认证</b></div>
-				<ul class="layui-nav layui-layout-right top_menu">
-					<li class="layui-nav-item">
-						
-						<a href="javascript:;">
-							<img src="img/tx.jpg" class="layui-nav-img"> 衰仔
-						</a>
-						<dl class="layui-nav-child">
-							<dd>
-								<a href="javascript:;" data-url="./src/userInfo.html">
-									<i class="iconfont icon-gerenziliao" data-icon="icon-gerenziliao"></i>
-									<cite>个人资料</cite>
-								</a>
-							</dd>
-							<dd>
-								<a href="javascript:;" data-url="./src/changePwd.html" id="pass">
-									<i class="iconfont icon-sanhang" data-icon="icon-xiugaimima"></i>
-									<cite>修改密码</cite>
-								</a>
-							</dd>
-							<dd>
-								<a href="javascript:;">
-									<i class="iconfont icon-tuichu"></i>
-									<cite>注销</cite>
-								</a>
-							</dd>
-						</dl>
-					</li>
-					<li class="layui-nav-item">
-						<a href="./src/login_reg_fPass.html"><i class="iconfont icon-tuichu1" ></i>退出</a>
-					</li>
-				</ul>
-			</div>
-
-			<!--  左侧菜单栏  -->
-			<div class="layui-side layui-bg-black left_sidebar" id="left_sidebar">
-
-				<div class="closeLeftNav" id="closeLeftNav"><i class="iconfont icon-sanhang"></i></div>
-
-				<div class="layui-left-box">
-					<div class="navBar layui-side-scroll" style="height: 768px;"><ul class="layui-nav layui-nav-tree"><li class="layui-nav-item"><a href="javascript:;"><i class="iconfont icon-jigou" data-icon="icon-jigou"></i><cite>机构详情</cite><span class="layui-nav-more"></span></a><dl class="layui-nav-child"><dd class=""><a href="javascript:;" data-url="./src/broker_infoId.html"><i class="iconfont icon-ziliao" data-icon="icon-ziliao"></i><cite>机构资料</cite></a></dd></dl></li><li class="layui-nav-item"><a href="javascript:;" data-url="./src/app_manage.html"><i class="iconfont icon-552cc21bdf398-copy" data-icon="icon-552cc21bdf398-copy"></i><cite>应用资料</cite></a></li><li class="layui-nav-item"><a href="javascript:;" data-url="./src/authenticationUser_list.html"><i class="iconfont icon-renzheng" data-icon="icon-renzheng"></i><cite>认证记录</cite></a></li><li class="layui-nav-item layui-nav-itemed"><a href="javascript:;"><i class="iconfont icon-zhangdan" data-icon="icon-zhangdan"></i><cite>账单管理</cite><span class="layui-nav-more"></span></a><dl class="layui-nav-child"><dd class="layui-this"><a href="javascript:;" data-url="./src/order_list.html"><i class="iconfont icon-chongdianjilu" data-icon="icon-chongdianjilu"></i><cite>充值记录</cite></a></dd><dd><a href="javascript:;" data-url="./src/companyInfo_list.html"><i class="iconfont icon-koufeimingxi" data-icon="icon-koufeimingxi"></i><cite>扣费统计</cite></a></dd><dd><a href="javascript:;" data-url="./src/payInfo.html"><i class="iconfont icon-shenqingtuikuandedingdan" data-icon="icon-shenqingtuikuandedingdan"></i><cite>退款申请</cite></a></dd><dd><a href="javascript:;" data-url="./src/drawbackApplyInfo.html"><i class="iconfont icon-chongzhi" data-icon="icon-chongzhi"></i><cite>充值</cite></a></dd><dd><a href="javascript:;" data-url="./src/invoice_info.html"><i class="iconfont icon-fapiao" data-icon="icon-fapiao"></i><cite>发票申请</cite></a></dd></dl></li><li class="layui-nav-item"><a href="javascript:;" data-url="./src/companyQuestion_art.html"><i class="iconfont icon-fankui" data-icon="icon-fankui"></i><cite>技术问题反馈</cite></a></li><li class="layui-nav-item"><a href="javascript:;" data-url="./src/sdk_doc_dow.html"><i class="iconfont icon-wendang" data-icon="icon-wendang"></i><cite>SDK和接入文档</cite></a></li><li class="layui-nav-item"><a href="javascript:;"><i class="layui-icon" data-icon=""></i><cite>Layui官方文档</cite><span class="layui-nav-more"></span></a><dl class="layui-nav-child"><dd><a href="javascript:;" data-url="http://www.layui.com/doc/"><i class="iconfont icon-wendang" data-icon="icon-wendang"></i><cite>Layui文档</cite></a></dd><dd><a href="javascript:;" data-url="http://www.layui.com/doc/"><i class="iconfont icon-anlizhanshi" data-icon="icon-anlizhanshi"></i><cite>Layui示例</cite></a></dd><dd><a href="javascript:;" data-url="http://fly.layui.com/"><i class="iconfont icon-shequ" data-icon="icon-shequ"></i><cite>Fly社区</cite></a></dd><dd><a href="javascript:;" data-url="http://fly.layui.com/"><i class="iconfont icon-zujianku" data-icon="icon-zujianku"></i><cite>独立组件</cite></a></dd></dl></li><span class="layui-nav-bar" style="top: 157.5px; height: 0px; opacity: 0;"></span></ul></div>
-				</div>
-			</div>
-
-			<div class="layui-body" id="right_box">
-				<!-- 内容主体区域 -->
-				<div style="width: auto; height: 100%;box-sizing: border-box;">
-					<!-- 右侧内容 -->
-					<div class="layui-tab layui-tab-card marg0" lay-filter="bodyTab" id="top_tabs_box">
-						<ul class="layui-tab-title top_tab" id="top_tabs">
-							<li class="layui-this" lay-id=""><i class="iconfont icon-computer"></i> <cite>后台首页</cite></li>
-						</ul>
-						<ul class="layui-nav closeBox">
-							<li class="layui-nav-item">
-								<a href="javascript:;"><i class="iconfont icon-caozuo"></i> 页面操作</a>
-								<dl class="layui-nav-child">
-									<dd>
-										<a href="javascript:;" class="refresh refreshThis"><i class="layui-icon">&#x1002;</i> 刷新当前</a>
-									</dd>
-									<dd>
-										<a href="javascript:;" class="closePageOther"><i class="iconfont icon-huaban"></i> 关闭其他</a>
-									</dd>
-									<dd>
-										<a href="javascript:;" class="closePageAll"><i class="iconfont icon-randeng_shipin_suoxutubiao-"></i> 关闭全部</a>
-									</dd>
-								</dl>
-							</li>
-						</ul>
-
-						<div class="layui-tab-content clildFrame" id="clildFrame">
-							<div class="layui-tab-item layui-show">
-								<iframe src="./src/main.html"></iframe>
-							</div>
+<head>
+<meta charset="UTF-8">
+<title>88云报告</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<script src="/js/plugins/jQuery/jquery-2.3.4.min.js"></script>
+<link rel="stylesheet" href="/js/plugins/layui/css/layui.css" />
+<link rel="stylesheet" href="/css/layerui/swiper.min.css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_405150_y9pymml2wi3yds4i.css" />
+<link rel="stylesheet" href="/css/layerui/style.css" />
+</head>
+<body>
+	<div class="layui-layout layui-layout-admin">
+		<!--  头部区域  -->
+		<div class="layui-header" id="SYSTEM_HEAD"></div>
+		<!--  左侧菜单栏  -->
+		<div class="layui-side layui-bg-black left_sidebar" id="SYSTEM_MENU"></div>
+		<div class="layui-body" id="right_box">
+			<!-- 内容主体区域 -->
+			<div style="width: auto; height: 100%; box-sizing: border-box;">
+				<!-- 右侧内容 -->
+				<div class="layui-tab layui-tab-card marg0" lay-filter="bodyTab" id="top_tabs_box">
+					<ul class="layui-tab-title top_tab" id="top_tabs">
+						<li class="layui-this" lay-id="">
+							<i class="iconfont icon-computer"></i>
+							<cite>后台首页</cite>
+						</li>
+					</ul>
+					<ul class="layui-nav closeBox">
+						<li class="layui-nav-item">
+							<a href="javascript:;">
+								<i class="iconfont icon-caozuo"></i>
+								页面操作
+							</a>
+							<dl class="layui-nav-child">
+								<dd>
+									<a href="javascript:;" class="refresh refreshThis">
+										<i class="layui-icon">&#x1002;</i>
+										刷新当前
+									</a>
+								</dd>
+								<dd>
+									<a href="javascript:;" class="closePageOther">
+										<i class="iconfont icon-huaban"></i>
+										关闭其他
+									</a>
+								</dd>
+								<dd>
+									<a href="javascript:;" class="closePageAll">
+										<i class="iconfont icon-randeng_shipin_suoxutubiao-"></i>
+										关闭全部
+									</a>
+								</dd>
+							</dl>
+						</li>
+					</ul>
+					<div class="layui-tab-content clildFrame" id="clildFrame">
+						<div class="layui-tab-item layui-show" id="loadhtml">
+							<iframe src="/common/login_do/welcome.do"></iframe>
 						</div>
 					</div>
-
 				</div>
 			</div>
-
-			<div class="layui-footer">
-				<!-- 底部固定区域 -->
-				湘ICP备16015265号-2 版权归壹证通（深圳）科技有限公司所有，网站由湖南卷柏网络科技有限公司支持与维护
-			</div>
 		</div>
-		<div class="site-tree-mobile layui-hide">
-			<i class="layui-icon"></i>
-			<span>展开</span>
+		<div class="layui-footer">
+			<!-- 底部固定区域 -->
+			有限公司所有，网站有限公司支持与维护
 		</div>
-		<div class="site-mobile-shade"></div>
-		<script type="text/javascript" src="/js/plugins/layui/layui.js"></script>
-		<script type="text/javascript" src="/js/system/main_index.js"></script>
-	</body>
-
+	</div>
+	<div class="site-tree-mobile layui-hide">
+		<i class="layui-icon"></i>
+		<span>展开</span>
+	</div>
+	<div class="site-mobile-shade"></div>
+	<script type="text/javascript" src="/js/plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="/js/system/main_index.js"></script>
+	<script type="text/javascript">
+        $("#SYSTEM_HEAD").load("/common/login_do/head.do");
+        $("#SYSTEM_MENU").load("/common/login_do/menu.do");
+    </script>
+</body>
 </html>
