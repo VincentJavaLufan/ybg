@@ -1,93 +1,98 @@
-
-<script type="text/javascript" src="/js/system/thirdpart/thirdpart.js">
-    
-</script>
-<div id="rrapp">
-	<div class="panel panel-default">
-		<div class="panel-heading">{{title}}</div>
-		<form class="form-horizontal">
-			<div class="form-group">
-				<div class="col-sm-2 control-label">社交平台</div>
-				<div class="col-sm-10">
-					<select class="form-control" v-model="thirdpart">
-						<option value="1">码云</option>
-						<option value="2">微信</option>
-						<option value="3">新浪</option>
-						<option value="4">百度</option>
-					</select>
+<html>
+<head>
+<#include "/common/common2.ftl"/>
+</head>
+<body>
+	<div id="rrapp">
+		<div class="panel panel-default">
+			<div class="panel-heading">{{title}}</div>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-2 control-label">社交平台</div>
+					<div class="col-sm-10">
+						<select class="form-control" v-model="thirdpart">
+							<option value="1">码云</option>
+							<option value="2">微信</option>
+							<option value="3">新浪</option>
+							<option value="4">百度</option>
+						</select>
+					</div>
 				</div>
-			</div>
-			<div class="form-group" v-show="thirdpart == 1">
-				<div class="col-sm-2 control-label">码云APPid</div>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" v-model="mayun.client_ID" placeholder="" />
+				<div class="form-group" v-show="thirdpart == 1">
+					<div class="col-sm-2 control-label">码云APPid</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="mayun.client_ID" placeholder="" />
+					</div>
 				</div>
-			</div>
-			<div class="form-group" v-show="thirdpart == 1">
-				<div class="col-sm-2 control-label">码云密钥</div>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" v-model="mayun.client_SERCRET" placeholder="" />
+				<div class="form-group" v-show="thirdpart == 1">
+					<div class="col-sm-2 control-label">码云密钥</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="mayun.client_SERCRET" placeholder="" />
+					</div>
 				</div>
-			</div>
-			<div class="form-group" v-show="thirdpart == 1">
-				<div class="col-sm-2 control-label">码云回调地址</div>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" v-model="mayun.redirect_URI" placeholder="" />
+				<div class="form-group" v-show="thirdpart == 1">
+					<div class="col-sm-2 control-label">码云回调地址</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="mayun.redirect_URI" placeholder="" />
+					</div>
 				</div>
-			</div>
-			<div class="form-group" v-show="thirdpart == 3">
-				<div class="col-sm-2 control-label">新浪APPid</div>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" v-model="sina.client_ID" placeholder="" />
+				<div class="form-group" v-show="thirdpart == 3">
+					<div class="col-sm-2 control-label">新浪APPid</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="sina.client_ID" placeholder="" />
+					</div>
 				</div>
-			</div>
-			<div class="form-group" v-show="thirdpart == 3">
-				<div class="col-sm-2 control-label">新浪密钥</div>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" v-model="sina.client_SERCRET" placeholder="" />
+				<div class="form-group" v-show="thirdpart == 3">
+					<div class="col-sm-2 control-label">新浪密钥</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="sina.client_SERCRET" placeholder="" />
+					</div>
 				</div>
-			</div>
-			<div class="form-group" v-show="thirdpart == 3">
-				<div class="col-sm-2 control-label">新浪回调地址</div>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" v-model="sina.redirect_URI" placeholder="" />
+				<div class="form-group" v-show="thirdpart == 3">
+					<div class="col-sm-2 control-label">新浪回调地址</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="sina.redirect_URI" placeholder="" />
+					</div>
 				</div>
-			</div>
-			<div class="form-group" v-show="thirdpart == 4">
-				<div class="col-sm-2 control-label">百度APPid</div>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" v-model="baidu.client_ID" placeholder="" />
+				<div class="form-group" v-show="thirdpart == 4">
+					<div class="col-sm-2 control-label">百度APPid</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="baidu.client_ID" placeholder="" />
+					</div>
 				</div>
-			</div>
-			<div class="form-group" v-show="thirdpart == 4">
-				<div class="col-sm-2 control-label">百度密钥</div>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" v-model="baidu.client_SERCRET" placeholder="" />
+				<div class="form-group" v-show="thirdpart == 4">
+					<div class="col-sm-2 control-label">百度密钥</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="baidu.client_SERCRET" placeholder="" />
+					</div>
 				</div>
-			</div>
-			<div class="form-group" v-show="thirdpart == 4">
-				<div class="col-sm-2 control-label">百度回调地址</div>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" v-model="baidu.redirect_URI" placeholder="" />
+				<div class="form-group" v-show="thirdpart == 4">
+					<div class="col-sm-2 control-label">百度回调地址</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="baidu.redirect_URI" placeholder="" />
+					</div>
 				</div>
-			</div>
-			<div class="form-group" v-show="thirdpart == 2">
-				<div class="col-sm-2 control-label">微信APPid</div>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" v-model="weixin.appId" placeholder="" />
+				<div class="form-group" v-show="thirdpart == 2">
+					<div class="col-sm-2 control-label">微信APPid</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="weixin.appId" placeholder="" />
+					</div>
 				</div>
-			</div>
-			<div class="form-group" v-show="thirdpart == 2">
-				<div class="col-sm-2 control-label">微信密钥</div>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" v-model="weixin.secret" placeholder="" />
+				<div class="form-group" v-show="thirdpart == 2">
+					<div class="col-sm-2 control-label">微信密钥</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="weixin.secret" placeholder="" />
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-2 control-label"></div>
-				<input type="button" class="btn btn-primary" @click="update" value="确定" />
-			</div>
-		</form>
+				<div class="form-group">
+					<div class="col-sm-2 control-label"></div>
+					<input type="button" class="btn btn-primary" @click="update" value="确定" />
+				</div>
+			</form>
+		</div>
+		<div class="text-red">特别说明 ： QQ不能在线生效，请去往 main模块 的qqconnectconfig.properties 配置文件更改</div>
 	</div>
-	<div class="text-red"> 特别说明 ： QQ不能在线生效，请去往 main模块 的qqconnectconfig.properties 配置文件更改</div>
-</div>
+	<script type="text/javascript" src="/js/system/thirdpart/thirdpart.js">
+        
+    </script>
+</body>
