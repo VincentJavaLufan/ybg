@@ -15,8 +15,8 @@ layui.config({
 	}
 	
 	tab = layui.m_bodyTab({
-		openTabNum: "50", //最大可打开窗口数量
-		url: "json/navs.json" //获取菜单json地址
+		openTabNum: "50" //最大可打开窗口数量
+		//,url: "json/navs.json" //获取菜单json地址
 	});
 
 	//渲染左侧菜单
