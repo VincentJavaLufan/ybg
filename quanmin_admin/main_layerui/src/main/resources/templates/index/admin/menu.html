@@ -3,118 +3,188 @@
 </div>
 <div class="layui-left-box">
 	<div class="navBar layui-side-scroll" style="height: 768px;">
+		<select class="" onchange="selectsystem()" id="selectsystem_id">
+			<option value="sys">系统</option>
+			<option value="edu">教育</option>
+			<option value="oa">企业</option>
+		</select>
 		<ul class="layui-nav layui-nav-tree">
 			<li class="layui-nav-item">
 				<a href="javascript:;">
 					<i class="iconfont icon-jigou" data-icon="icon-jigou"></i>
-					<cite>机构详情</cite>
+					<cite>系统基础管理</cite>
 					<span class="layui-nav-more"></span>
 				</a>
 				<dl class="layui-nav-child">
 					<dd class="">
-						<a href="javascript:;" data-url="./src/broker_infoId.html">
+						<a href="javascript:;" data-url="/role/role_do/index.do">
 							<i class="iconfont icon-ziliao" data-icon="icon-ziliao"></i>
-							<cite>机构资料</cite>
+							<cite>角色管理</cite>
 						</a>
 					</dd>
 				</dl>
-			</li>
-			<li class="layui-nav-item">
-				<a href="javascript:;" data-url="./src/app_manage.html">
-					<i class="iconfont icon-552cc21bdf398-copy" data-icon="icon-552cc21bdf398-copy"></i>
-					<cite>应用资料</cite>
-				</a>
-			</li>
-			<li class="layui-nav-item">
-				<a href="javascript:;" data-url="./src/authenticationUser_list.html">
-					<i class="iconfont icon-renzheng" data-icon="icon-renzheng"></i>
-					<cite>认证记录</cite>
-				</a>
-			</li>
-			<li class="layui-nav-item layui-nav-itemed">
-				<a href="javascript:;">
-					<i class="iconfont icon-zhangdan" data-icon="icon-zhangdan"></i>
-					<cite>账单管理</cite>
-					<span class="layui-nav-more"></span>
-				</a>
 				<dl class="layui-nav-child">
-					<dd class="layui-this">
-						<a href="javascript:;" data-url="./src/order_list.html">
-							<i class="iconfont icon-chongdianjilu" data-icon="icon-chongdianjilu"></i>
-							<cite>充值记录</cite>
-						</a>
-					</dd>
-					<dd>
-						<a href="javascript:;" data-url="./src/companyInfo_list.html">
-							<i class="iconfont icon-koufeimingxi" data-icon="icon-koufeimingxi"></i>
-							<cite>扣费统计</cite>
-						</a>
-					</dd>
-					<dd>
-						<a href="javascript:;" data-url="./src/payInfo.html">
-							<i class="iconfont icon-shenqingtuikuandedingdan" data-icon="icon-shenqingtuikuandedingdan"></i>
-							<cite>退款申请</cite>
-						</a>
-					</dd>
-					<dd>
-						<a href="javascript:;" data-url="./src/drawbackApplyInfo.html">
-							<i class="iconfont icon-chongzhi" data-icon="icon-chongzhi"></i>
-							<cite>充值</cite>
-						</a>
-					</dd>
-					<dd>
-						<a href="javascript:;" data-url="./src/invoice_info.html">
-							<i class="iconfont icon-fapiao" data-icon="icon-fapiao"></i>
-							<cite>发票申请</cite>
+					<dd class="">
+						<a href="javascript:;" data-url="/res/res_do/index.do">
+							<i class="iconfont icon-ziliao" data-icon="icon-ziliao"></i>
+							<cite>菜单管理</cite>
 						</a>
 					</dd>
 				</dl>
-			</li>
-			<li class="layui-nav-item">
-				<a href="javascript:;" data-url="./src/companyQuestion_art.html">
-					<i class="iconfont icon-fankui" data-icon="icon-fankui"></i>
-					<cite>技术问题反馈</cite>
-				</a>
-			</li>
-			<li class="layui-nav-item">
-				<a href="javascript:;" data-url="./src/sdk_doc_dow.html">
-					<i class="iconfont icon-wendang" data-icon="icon-wendang"></i>
-					<cite>SDK和接入文档</cite>
-				</a>
+				<dl class="layui-nav-child">
+					<dd class="">
+						<a href="javascript:;" data-url="/user/user_do/index.do">
+							<i class="iconfont icon-ziliao" data-icon="icon-ziliao"></i>
+							<cite>用户管理</cite>
+						</a>
+					</dd>
+				</dl>
+				<dl class="layui-nav-child">
+					<dd class="">
+						<a href="javascript:;" data-url="/thirdoartlogin_do/index.do">
+							<i class="iconfont icon-ziliao" data-icon="icon-ziliao"></i>
+							<cite>社交管理</cite>
+						</a>
+					</dd>
+				</dl>
 			</li>
 			<li class="layui-nav-item">
 				<a href="javascript:;">
-					<i class="layui-icon" data-icon=""></i>
-					<cite>Layui官方文档</cite>
+					<i class="iconfont icon-jigou" data-icon="icon-jigou"></i>
+					<cite>开发工具</cite>
 					<span class="layui-nav-more"></span>
 				</a>
 				<dl class="layui-nav-child">
-					<dd>
-						<a href="javascript:;" data-url="http://www.layui.com/doc/">
-							<i class="iconfont icon-wendang" data-icon="icon-wendang"></i>
-							<cite>Layui文档</cite>
+					<dd class="">
+						<a href="javascript:;" data-url="/sys/generator_do/index.do">
+							<i class="iconfont icon-ziliao" data-icon="icon-ziliao"></i>
+							<cite>代码生成</cite>
 						</a>
 					</dd>
-					<dd>
-						<a href="javascript:;" data-url="http://www.layui.com/doc/">
-							<i class="iconfont icon-anlizhanshi" data-icon="icon-anlizhanshi"></i>
-							<cite>Layui示例</cite>
+				</dl>
+				<dl class="layui-nav-child">
+					<dd class="">
+						<a href="javascript:;" data-url="/swagger-ui.html">
+							<i class="iconfont icon-ziliao" data-icon="icon-ziliao"></i>
+							<cite>API文档</cite>
 						</a>
 					</dd>
-					<dd>
-						<a href="javascript:;" data-url="http://fly.layui.com/">
-							<i class="iconfont icon-shequ" data-icon="icon-shequ"></i>
-							<cite>Fly社区</cite>
-						</a>
-					</dd>
-					<dd>
-						<a href="javascript:;" data-url="http://fly.layui.com/">
-							<i class="iconfont icon-zujianku" data-icon="icon-zujianku"></i>
-							<cite>独立组件</cite>
+				</dl>
+				<dl class="layui-nav-child">
+					<dd class="">
+						<a href="javascript:;" data-url="/common/qrcode/index.do">
+							<i class="iconfont icon-ziliao" data-icon="icon-ziliao"></i>
+							<cite>二维码</cite>
 						</a>
 					</dd>
 				</dl>
 			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">
+					<i class="iconfont icon-jigou" data-icon="icon-jigou"></i>
+					<cite>OSS管理</cite>
+					<span class="layui-nav-more"></span>
+				</a>
+				<dl class="layui-nav-child">
+					<dd class="">
+						<a href="javascript:;" data-url="/sys/oss_do/index.do">
+							<i class="iconfont icon-ziliao" data-icon="icon-ziliao"></i>
+							<cite>OSS设置</cite>
+						</a>
+					</dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">
+					<i class="iconfont icon-jigou" data-icon="icon-jigou"></i>
+					<cite>任务管理</cite>
+					<span class="layui-nav-more"></span>
+				</a>
+				<dl class="layui-nav-child">
+					<dd class="">
+						<a href="javascript:;" data-url="/sys/schedule_do/index.do">
+							<i class="iconfont icon-ziliao" data-icon="icon-ziliao"></i>
+							<cite>定时任务</cite>
+						</a>
+					</dd>
+				</dl>
+				<dl class="layui-nav-child">
+					<dd class="">
+						<a href="javascript:;" data-url="/sys/scheduleLog_do/index.do">
+							<i class="iconfont icon-ziliao" data-icon="icon-ziliao"></i>
+							<cite>任务记录</cite>
+						</a>
+					</dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">
+					<i class="iconfont icon-jigou" data-icon="icon-jigou"></i>
+					<cite>微信</cite>
+					<span class="layui-nav-more"></span>
+				</a>
+				<dl class="layui-nav-child">
+					<dd class="">
+						<a href="javascript:;" data-url="/weixin/tags/index.do">
+							<i class="iconfont icon-ziliao" data-icon="icon-ziliao"></i>
+							<cite>微信标签管理</cite>
+						</a>
+					</dd>
+				</dl>
+				<dl class="layui-nav-child">
+					<dd class="">
+						<a href="javascript:;" data-url="/weixin/menu_do/index.do">
+							<i class="iconfont icon-ziliao" data-icon="icon-ziliao"></i>
+							<cite>微信菜单管理</cite>
+						</a>
+					</dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">
+					<i class="iconfont icon-jigou" data-icon="icon-jigou"></i>
+					<cite>系统监控管理</cite>
+					<span class="layui-nav-more"></span>
+				</a>
+				<dl class="layui-nav-child">
+					<dd class="">
+						<a href="javascript:;" data-url="/druid/index.html">
+							<i class="iconfont icon-ziliao" data-icon="icon-ziliao"></i>
+							<cite>连接池监控访问监控</cite>
+						</a>
+					</dd>
+				</dl>
+				<dl class="layui-nav-child">
+					<dd class="">
+						<a href="javascript:;" data-url="/monitoring">
+							<i class="iconfont icon-ziliao" data-icon="icon-ziliao"></i>
+							<cite>服务器监控</cite>
+						</a>
+					</dd>
+				</dl>
+				<dl class="layui-nav-child">
+					<dd class="">
+						<a href="javascript:;" data-url="/jk">
+							<i class="iconfont icon-ziliao" data-icon="icon-ziliao"></i>
+							<cite>springboot 监控</cite>
+						</a>
+					</dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">
+					<i class="iconfont icon-jigou" data-icon="icon-jigou"></i>
+					<cite>工作流管理</cite>
+					<span class="layui-nav-more"></span>
+				</a>
+				<dl class="layui-nav-child">
+					<dd class="">
+						<a href="javascript:;" data-url="/models/model_do/index.do">
+							<i class="iconfont icon-ziliao" data-icon="icon-ziliao"></i>
+							<cite>流程设计模型管理</cite>
+						</a>
+					</dd>
+				</dl></li>
 			<span class="layui-nav-bar" style="top: 157.5px; height: 0px; opacity: 0;"></span>
 		</ul>
 	</div>
