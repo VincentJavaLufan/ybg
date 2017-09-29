@@ -1,14 +1,67 @@
+
+<script type="text/javascript">
+    function selectsystem() {
+        var select_val = $("#selectsystem_id").val();
+        $("#oa_menu").css('display', 'none');
+        $("#sys_menu").css('display', 'none');
+        $("#edu_menu").css('display', 'none');
+        if (select_val == 'sys') {
+            $("#sys_menu").css('display', 'block');
+        }
+        if (select_val == 'oa') {
+            $("#oa_menu").css('display', 'block');
+        }
+        if (select_val == 'edu') {
+            $("#edu_menu").css('display', 'block');
+        }
+    }
+</script>
 <div class="closeLeftNav" id="closeLeftNav">
 	<i class="fa fa-bars"></i>
 </div>
 <div class="layui-left-box">
 	<div class="navBar layui-side-scroll" style="height: 768px;">
-	
-		<select style="color: red" onchange="selectsystem()" id="selectsystem_id">
+		<select style="color: red" onchange="alert('除系统菜单外其它未开发')" id="selectsystem_id">
 			<option value="sys">系统</option>
 			<option value="edu">教育</option>
 			<option value="oa">企业</option>
 		</select>
+		<ul class="layui-nav layui-nav-tree" id="edu_menu" style="display: none">
+			<li class="layui-nav-item">
+				<a href="javascript:;">
+					<i class="fa  fa-cogs"></i>
+					<cite>教育</cite>
+					<span class="layui-nav-more"></span>
+				</a>
+				<dl class="layui-nav-child">
+					<dd class="">
+						<a href="javascript:;" data-url="">
+							<i class="fa fa-circle-o"></i>
+							<cite>未开发</cite>
+						</a>
+					</dd>
+				</dl>
+				
+			</li>
+		</ul>
+		<ul class="layui-nav layui-nav-tree" id="oa_menu" style="display: none">
+			<li class="layui-nav-item">
+				<a href="javascript:;">
+					<i class="fa  fa-cogs"></i>
+					<cite>企业</cite>
+					<span class="layui-nav-more"></span>
+				</a>
+				<dl class="layui-nav-child">
+					<dd class="">
+						<a href="javascript:;" data-url="">
+							<i class="fa fa-circle-o"></i>
+							<cite>未开发</cite>
+						</a>
+					</dd>
+				</dl>
+				
+			</li>
+		</ul>
 		<ul class="layui-nav layui-nav-tree">
 			<li class="layui-nav-item">
 				<a href="javascript:;">
