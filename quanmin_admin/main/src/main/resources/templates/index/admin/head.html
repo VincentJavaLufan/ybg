@@ -1,0 +1,37 @@
+<div class="layui-logo" style="color: #fff;">
+	<b>88云报告</b>
+</div>
+<ul class="layui-nav layui-layout-right top_menu">
+	<li class="layui-nav-item">
+		<a href="javascript:;">
+			<img src="img/tx.jpg" class="layui-nav-img">
+			${userFormMap.username!}
+		</a>
+		<dl class="layui-nav-child">
+			<dd>
+				<a href="javascript:;" data-url="">
+					<i class="iconfont icon-gerenziliao" data-icon="icon-gerenziliao"></i>
+					<cite>个人资料</cite>
+				</a>
+			</dd>
+			<dd>
+				<a href="javascript:;" data-url="/common/accountsetting.do" id="pass">
+					<i class="iconfont icon-sanhang" data-icon="icon-xiugaimima"></i>
+					<cite>修改密码</cite>
+				</a>
+			</dd>
+			<dd>
+				<a href="/common/login_do/loginout.do">
+					<i class="iconfont icon-tuichu"></i>
+					<cite>注销</cite>
+				</a>
+			</dd>
+		</dl>
+	</li>
+	<li class="layui-nav-item">
+		<a href="/common/login_do/loginout.do">
+			<i class="iconfont icon-tuichu1"></i>
+			退出
+		</a>
+	</li>
+</ul>

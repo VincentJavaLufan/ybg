@@ -1,0 +1,272 @@
+<!-- Content Wrapper. Contains page content -->
+<!-- /.row -->
+<html>
+<head>
+<#include "/common/common2.ftl"/>
+</head>
+<body>
+	<div class="row" id="rrapp" v-cloak>
+		<div class="col-xs-12">
+			<div class="m-b-md">
+				<div class="form-inline" role="form" id="searchForm" name="searchForm">
+					<a href="javascript:void(0)" @click="updatePassword" class="btn btn-s-md btn-default btn-rounded" id="search">修改密码</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header">
+					<h3 class="box-title">绑定的第三方账号</h3>
+					<div class="box-tools">
+						<div class="input-group input-group-sm" style="width: 150px;">
+							<input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+							<div class="input-group-btn">
+								<button type="submit" class="btn btn-default" onclick="alert('未开发')">
+									<i class="fa fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body table-responsive no-padding">
+					<table class="table table-hover">
+						<tr>
+							<th>类型</th>
+							<th>ID</th>
+							<th>操作</th>
+						</tr>
+						<tr>
+							<td>百度</td>
+							<td>{{baiduid}}</td>
+							<td>
+								<button v-if="baiduid!=''" type="button" class="btn btn-danger marR10" @click="delbaidu">删除</button>
+								<span v-if="baiduid==''" class="label label-primary">未绑定</span>
+							</td>
+						</tr>
+						<tr>
+							<td>新浪</td>
+							<td>{{sinaid}}</td>
+							<td>
+								<button v-if="sinaid!=''" type="button" class="btn btn-danger marR10" @click="delsina">删除</button>
+								<span v-if="sinaid==''" class="label label-primary">未绑定</span>
+							</td>
+						</tr>
+						<tr>
+							<td>微信</td>
+							<td>{{weixinid}}</td>
+							<td>
+								<button v-if="weixinid!=''" type="button" class="btn btn-danger marR10" @click="delweixin">删除</button>
+								<span v-if="weixinid==''" class="label label-primary">未绑定</span>
+							</td>
+						</tr>
+						<tr>
+							<td>码云</td>
+							<td>{{mayunid}}</td>
+							<td>
+								<button v-if="mayunid!=''" type="button" class="btn btn-danger marR10" @click="delmayun">删除</button>
+								<span v-if="mayunid==''" class="label label-primary">未绑定</span>
+							</td>
+						</tr>
+						<tr>
+							<td>QQ</td>
+							<td>{{qqid}}</td>
+							<td>
+								<button v-if="qqid!=''" type="button" class="btn btn-danger marR10" @click="delqq">删除</button>
+								<span v-if="qqid==''" class="label label-primary">未绑定</span>
+							</td>
+						</tr>
+						<!--  
+					<tr>
+						<td>219</td>
+						<td>Alexander Pierce</td>
+						<td>11-7-2014</td>
+						<td>
+							<span class="label label-warning">Pending</span>
+						</td>
+						<td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+					</tr>
+					<tr>
+						<td>657</td>
+						<td>Bob Doe</td>
+						<td>11-7-2014</td>
+						<td>
+							<span class="label label-primary">Approved</span>
+						</td>
+						<td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+					</tr>
+					<tr>
+						<td>175</td>
+						<td>Mike Doe</td>
+						<td>11-7-2014</td>
+						<td>
+							<span class="label label-danger">Denied</span>
+						</td>
+						<td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+					</tr>-->
+					</table>
+				</div>
+				<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
+		</div>
+		<div id="passwordLayer" style="display: none; width: 500px;">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-3 control-label col-xs-3">原密码</div>
+					<div class="col-sm-7 col-xs-6">
+						<input type="password" class="form-control" v-model="password" placeholder="原密码" />
+					</div>
+					<!-- Left side column. contains the sidebar -->
+				</div>
+				<div class="form-group">
+					<div class="col-sm-3 control-label col-xs-3">新密码</div>
+					<div class="col-sm-7 col-xs-5">
+						<input type="password" class="form-control" v-model="newPassword" placeholder="新密码" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-3 control-label col-xs-4">再次确认</div>
+					<div class="col-sm-7 col-xs-5">
+						<input type="password" class="form-control" v-model="newPassword2" placeholder="新密码" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-3 control-label col-xs-3">验证码</div>
+					<img id="vrifyCode_modifypwd" alt="验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1" src="/defaultKaptcha" />
+					<input type="text" placeholder="请输入验证码" required="required" id="vrifyCode" name="vrifyCode" class="form-control input-sm" style="width: 30%; display: inline;">
+				</div>
+			</form>
+		</div>
+	</div>
+	<script>
+        var vm = new Vue({
+            el : '#rrapp',
+            data : {
+                weixinid : null,
+                mayunid : null,
+                qqid : null,
+                sinaid : null,
+                baiduid : null,
+                password : "",
+                newPassword2 : "",
+                newPassword : ""
+            },
+            methods : {
+                boundinfo : function() {
+                    $.ajax({
+                        type : "POST",
+                        url : rootPath + "/thirdoartlogin_do/boundinfo.do",
+                        success : function(data) {
+                            vm.weixinid = data.weixinid;
+                            vm.mayunid = data.mayunid;
+                            vm.qqid = data.qqid;
+                            vm.sinaid = data.sinaid;
+                            vm.baiduid = data.baiduid;
+                        }
+                    });
+                },
+                toupdatepwd : function() {
+                    $("#passwordLayer").css("display", 'block');
+                },
+                updatePassword : function() {
+                    layer.open({
+                        type : 1,
+                        skin : 'layui-layer-molv',
+                        title : "修改密码",
+                        area : [
+                                '600px', '400px'],
+                        shadeClose : false,
+                        content : jQuery("#passwordLayer"),
+                        btn : [
+                                '修改', '取消'],
+                        btn1 : function(index) {
+                            if (vm.newPassword != vm.newPassword2) {
+                                alert("两次密码不一致");
+                                return false;
+                            }
+                            var data = "password=" + vm.password + "&newPassword=" + vm.newPassword;
+                            $.ajax({
+                                type : "POST",
+                                url : "/common/login_do/modifypwd.do",
+                                data : {
+                                    password : vm.password,
+                                    newPassword : vm.newPassword,
+                                    vrifyCode : $("#vrifyCode").val()
+                                },
+                                dataType : "json",
+                                success : function(data) {
+                                    alert(data.msg);
+                                    $("#vrifyCode_modifypwd").attr("src", '/defaultKaptcha?d=' + new Date() * 1);
+                                }
+                            });
+                        }
+                    });
+                },
+                delbaidu : function() {
+                    confirm('确定要删除关联？', function() {
+                        $.ajax({
+                            type : "POST",
+                            url : rootPath + "/thirdoartlogin_do/delbaidu.do",
+                            success : function(data) {
+                                alert(data.msg);
+                                vm.boundinfo();
+                            }
+                        });
+                    });
+                },
+                delmayun : function() {
+                    confirm('确定要删除关联？', function() {
+                        $.ajax({
+                            type : "POST",
+                            url : rootPath + "/thirdoartlogin_do/delmayun.do",
+                            success : function(data) {
+                                alert(data.msg);
+                                vm.boundinfo();
+                            }
+                        });
+                    });
+                },
+                delweixin : function() {
+                    confirm('确定要删除关联？', function() {
+                        $.ajax({
+                            type : "POST",
+                            url : rootPath + "/thirdoartlogin_do/delweixin.do",
+                            success : function(data) {
+                                alert(data.msg);
+                                vm.boundinfo();
+                            }
+                        });
+                    });
+                },
+                delqq : function() {
+                    confirm('确定要删除关联？', function() {
+                        $.ajax({
+                            type : "POST",
+                            url : rootPath + "/thirdoartlogin_do/delqq.do",
+                            success : function(data) {
+                                alert(data.msg);
+                                vm.boundinfo();
+                            }
+                        });
+                    });
+                },
+                delsina : function() {
+                    confirm('确定要删除关联？', function() {
+                        $.ajax({
+                            type : "POST",
+                            url : rootPath + "/thirdoartlogin_do/delsina.do",
+                            success : function(data) {
+                                alert(data.msg);
+                                vm.boundinfo();
+                            }
+                        });
+                    });
+                }
+            }
+        });
+        vm.boundinfo();
+    </script>
+</body>
+<!-- /.content -->
+<!-- /.content-wrapper -->
