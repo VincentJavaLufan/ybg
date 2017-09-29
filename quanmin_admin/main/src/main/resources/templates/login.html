@@ -12,7 +12,6 @@
 <title>后台管理系统登录-注册-忘记密码</title>
 <link href="//cdn.bootcss.com/Swiper/3.4.1/css/swiper.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/js/plugins/layui/css/layui.css" />
-
 <link rel="stylesheet" href="/admin_files/awesome.css" />
 <link rel="stylesheet" href="/css/layerui/style.css" />
 <script type="text/javascript" src="/js/plugins/jQuery/jquery-2.3.4.min.js"></script>
@@ -21,31 +20,6 @@
 <script type="text/javascript" src="/common/base.js"></script>
 <script type="text/javascript" src="/common/vue.js"></script>
 <script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
-<style type="text/css">
-.impowerBox .qrcode {width: 200px;}
-.impowerBox .title {display: none;}
-.impowerBox .info {width: 200px;}
-.status_icon {display：none}
-.impowerBox .status {text-align: center;} 
-</style>
-<script type="text/javascript">
-
-function checkpassword() {
-    if ($("#inputPassword").val() != $("#password").val()) {
-        $("#checkpwd2").removeClass();
-        $("#checkpwd2").css('color', 'red');
-        $("#checkpwd2").html("两次密码不一致");
-        $("#checkpwd2").addClass('fa fa-times');
-    } else {
-        $("#checkpwd2").removeClass();
-        $("#checkpwd2").css('color', 'green');
-        $("#checkpwd2").html("");
-        $("#checkpwd2").addClass('fa fa-check');
-    }
-}
-//单独验证某一个input  class="checkpass"
-
-</script>
 </head>
 <body>
 	<div class="layui-layout layui-layout-admin">
@@ -134,14 +108,12 @@ function checkpassword() {
 												<input type="text" name="email" placeholder="请输入电子邮箱" autocomplete="off" class="layui-input" lay-verify="required">
 											</div>
 										</div>
-										
 										<div class="layui-form-item ipt-text">
 											<div class="dp-block">
 												<i class="fa fa-lock"></i>
 												<input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input" lay-verify="required">
 											</div>
 										</div>
-										
 										<div class="layui-form-item ipt-text">
 											<div class="dp-block">
 												<i class="fa fa-lock"></i>
@@ -153,8 +125,8 @@ function checkpassword() {
 												<input type="text" name="vrifyCode" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
 											</div>
 											<div class="layui-form-mid layui-word-aux">
-											<!-- src="/defaultKaptcha" -->
-												<img  alt="点击获取验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1"  />
+												<!-- src="/defaultKaptcha" -->
+												<img alt="点击获取验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1" />
 											</div>
 										</div>
 										<button type="button" class="layui-btn layui-btn-normal dp-block" lay-submit lay-filter="regForm">注 册</button>
@@ -188,8 +160,8 @@ function checkpassword() {
 												<input type="text" name="vrifyCode" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
 											</div>
 											<div class="layui-form-mid layui-word-aux">
-											<!-- src="/defaultKaptcha" -->
-												<img alt="点击获取验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1"  />
+												<!-- src="/defaultKaptcha" -->
+												<img alt="点击获取验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1" />
 											</div>
 										</div>
 										<button type="button" class="layui-btn layui-btn-normal dp-block" lay-submit lay-filter="updatePassForm">修 改</button>
@@ -215,8 +187,8 @@ function checkpassword() {
 	<div class="switch-bg">
 		<div id="switch-bg-list">
 			<div class="switch-loading" style="display: none;">
-			<img id="bgimg" src="/img/bg_img/bg-img-6.jpg" alt="" class="switch-chg-bg " />
-			<!-- 
+				<img id="bgimg" src="/img/bg_img/bg-img-6.jpg" alt="" class="switch-chg-bg " />
+				<!-- 
 			
 				<img src="/img/bg_img/thumbs/bg-trns.jpg" alt="" class="switch-chg-bg bg-trans active">
 				<img src="/img/bg_img/bg-img-1.jpg" alt="" class="switch-chg-bg" />
@@ -266,7 +238,6 @@ function checkpassword() {
         //        redirect_uri : weixinurl//别人的用于测试  https%3A%2F%2Fpassport.yhd.com%2Fwechat%2Fcallback.do           
         //    });
         //  });
-       
         //$.get("/common/weixin_do/getAppid", function(data) {
         //    var weixinurl = encodeURIComponent(data.weixinurl + "/common/weixin_do/login.do");
         //    obj = new WxLogin({
@@ -274,45 +245,14 @@ function checkpassword() {
         //        scope : "snsapi_login",
         //        state : "",
         //        style : "black",
-         //       href : "impowerBox status",
+        //       href : "impowerBox status",
         //        appid : 'wxbdc5610cc59c1631',//别人的用于测试     wxbdc5610cc59c1631
-       //         redirect_uri : 'https%3A%2F%2Fpassport.yhd.com%2Fwechat%2Fcallback.do'//别人的用于测试  https%3A%2F%2Fpassport.yhd.com%2Fwechat%2Fcallback.do           
-       //     });
-      //  });
-        function forgetpwd() {
-            layer.prompt({
-                title : '输入您的账号',
-                formType : 0
-            //prompt风格，支持0-2
-            }, function(pass) {
-                $.ajax({
-                    async : false,
-                    url : "/common/login_do/forgetpwd.do?username=" + pass,
-                    data : {},
-                    dataType : "json",
-                    success : function(data) {
-                        alert(data.msg);
-                    }
-                });
-            });
-        }
+        //         redirect_uri : 'https%3A%2F%2Fpassport.yhd.com%2Fwechat%2Fcallback.do'//别人的用于测试  https%3A%2F%2Fpassport.yhd.com%2Fwechat%2Fcallback.do           
+        //     });
+        //  });
         if ("${error!}" != "") {
             alert('${error!}');
         };
-        function register(){
-            $("regForm").ajaxSubmit({
-                type: 'post', // 提交方式 get/post
-                url: '/common/login_do/register.do', // 需要提交的 url
-                data: $("#regForm").serialize(),
-                success: function(data) { // data 保存提交后返回的数据，一般为 json 数据
-                    // 此处可对 data 作相关处理
-                    alert(data.msg);
-                    $("#regForm").resetForm(); // 提交后重置表单
-                }
-               
-            });
-        }
-       
     </script>
 </body>
 </html>
