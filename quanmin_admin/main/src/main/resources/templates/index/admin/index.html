@@ -69,9 +69,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="layui-footer">
-			<!-- 底部固定区域 -->
-			有限公司所有，网站有限公司支持与维护
+		<div class="layui-footer" id="SYSTEM_authinfo" >
+			{{SYSTEM_authinfo}}
 		</div>
 	</div>
 	<div class="site-tree-mobile layui-hide">
@@ -85,5 +84,19 @@
         $("#SYSTEM_HEAD").load("/common/login_do/head.do");
         $("#SYSTEM_MENU").load("/common/login_do/menu.do");
     </script>
+    <script >
+    var app2 = new Vue({
+        el : '#SYSTEM_authinfo',
+        data : {
+            SYSTEM_authinfo : ''
+        },
+        created : function() {
+            var url = "/common/login_do/system_authinfo.do";
+            var _self = this;
+            $.post(url, function(data) {
+                _self.SYSTEM_authinfo = data;
+            })
+        }
+    });</script>
 </body>
 </html>
