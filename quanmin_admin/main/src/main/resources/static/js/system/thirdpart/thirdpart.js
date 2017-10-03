@@ -2,11 +2,19 @@ var vm = new Vue({
     el : '#rrapp',
     data : {
         title : "第三方配置",
-        mayun : null,
-        sina : null,
-        baidu : null,
-        weixin : null,
-        thirdpart:1,
+        mayun : {
+            client_ID : null
+        },
+        sina : {
+            client_ID : null
+        },
+        baidu : {
+            client_ID : null
+        },
+        weixin : {
+            appId : null
+        },
+        thirdpart : 1
     },
     methods : {
         query : function() {
