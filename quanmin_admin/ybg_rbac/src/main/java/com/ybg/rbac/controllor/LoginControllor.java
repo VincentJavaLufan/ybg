@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.jdbc.util.DateUtil;
-import com.ybg.base.util.Common;
 import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.ServletUtil;
@@ -327,7 +327,7 @@ public class LoginControllor {
 	@ApiOperation(value = "修改密码", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "/common/login_do/modifypwd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json modifypwd(@RequestParam(name = VrifyCodeUtil.PARAMETERNAME, required = true) String vrifyCode, HttpServletRequest httpServletRequest, @RequestParam(name = "password", required = true) String password, @RequestParam(name = "newPassword", required = true) String newPassword) throws Exception {
+	public Json modifypwd(@AuthenticationPrincipal UserVO user, @RequestParam(name = VrifyCodeUtil.PARAMETERNAME, required = true) String vrifyCode, HttpServletRequest httpServletRequest, @RequestParam(name = "password", required = true) String password, @RequestParam(name = "newPassword", required = true) String newPassword) throws Exception {
 		Json j = new Json();
 		// 首先检测验证码
 		if (!VrifyCodeUtil.checkvrifyCode(vrifyCode, httpServletRequest)) {
@@ -337,7 +337,7 @@ public class LoginControllor {
 		}
 		j.setSuccess(true);
 		j.setMsg("操作成功");
-		UserVO user = (UserVO) Common.findUserSession();
+		// UserVO user = (UserVO) Common.findUserSession();
 		if (user == null) {
 			j.setMsg("您尚未登陆");
 			return j;

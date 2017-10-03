@@ -1,12 +1,12 @@
 package com.ybg.rbac.controllor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.ybg.base.util.Common;
 import com.ybg.base.util.SystemConstant;
 import com.ybg.base.util.UserConstant;
 import com.ybg.rbac.resources.service.ResourcesService;
@@ -14,7 +14,7 @@ import com.ybg.rbac.user.domain.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(tags="平台角色首页加载API")
+@Api(tags = "平台角色首页加载API")
 @Controller
 public class PageIndexController {
 	
@@ -58,8 +58,7 @@ public class PageIndexController {
 	// 新版index 拆分结构
 	@ApiOperation(value = "登录成功后的页面 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/index.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String index(Model model) throws Exception {
-		UserVO user = (UserVO) Common.findUserSession();
+	public String index(@AuthenticationPrincipal UserVO user, Model model) throws Exception {
 		if (user == null) {
 			return "redirect:/common/login_do/tologin.do";
 		}
@@ -76,16 +75,15 @@ public class PageIndexController {
 	/** 加载菜单 **/
 	@ApiOperation(value = "登录成功后的页面-菜单 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/menu.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String menu(ModelMap map) {
-		UserVO user = (UserVO) Common.findUserSession();
+	public String menu(@AuthenticationPrincipal UserVO user, ModelMap map) {
 		if (user == null) {
 			return "";
 		}
 		map.put("userFormMap", user);
-		if (UserConstant.IsAdmin()) {
+		if (UserConstant.IsAdmin(user)) {
 			return "/index/admin/menu";
 		}
-		if (UserConstant.IsOther()) {
+		if (UserConstant.IsOther(user)) {
 			return "/index/other/menu";
 		}
 		return "";
@@ -94,19 +92,18 @@ public class PageIndexController {
 	/** 加载子系統菜单 **/
 	@ApiOperation(value = "非超管加载OA子系統菜单-菜单 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/menu_oa.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String menu_oa(ModelMap map) {
-		UserVO user = (UserVO) Common.findUserSession();
+	public String menu_oa(@AuthenticationPrincipal UserVO user, ModelMap map) {
 		if (user == null) {
 			return "";
 		}
 		map.put("userFormMap", user);
 		return "/index/other/menu_oa";
 	}
+	
 	/** 加载子系統菜单 **/
 	@ApiOperation(value = "非超管加载教育子系統菜单-菜单 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/menu_edu.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String menu_edu(ModelMap map) {
-		UserVO user = (UserVO) Common.findUserSession();
+	public String menu_edu(@AuthenticationPrincipal UserVO user, ModelMap map) {
 		if (user == null) {
 			return "";
 		}
@@ -117,8 +114,7 @@ public class PageIndexController {
 	/** 加载头部 **/
 	@ApiOperation(value = "登录成功后的页面 -头部", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/head.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String head(ModelMap map) {
-		UserVO user = (UserVO) Common.findUserSession();
+	public String head(@AuthenticationPrincipal UserVO user, ModelMap map) {
 		if (user == null) {
 			return "";
 		}
@@ -129,16 +125,15 @@ public class PageIndexController {
 	/** 加载欢迎页面 **/
 	@ApiOperation(value = "登录成功后的页面-欢迎页面 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/welcome.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String welcome(ModelMap map) {
-		UserVO user = (UserVO) Common.findUserSession();
+	public String welcome(@AuthenticationPrincipal UserVO user, ModelMap map) {
 		if (user == null) {
 			return "";
 		}
 		map.put("userFormMap", user);
-		if (UserConstant.IsAdmin()) {
+		if (UserConstant.IsAdmin(user)) {
 			return "/index/admin/welcome";
 		}
-		if (UserConstant.IsOther()) {
+		if (UserConstant.IsOther(user)) {
 			// 让用户选择子系统
 			return "/index/other/welcome";
 		}

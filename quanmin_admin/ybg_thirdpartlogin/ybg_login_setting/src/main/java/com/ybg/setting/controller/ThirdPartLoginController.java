@@ -2,6 +2,7 @@ package com.ybg.setting.controller;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,7 +13,6 @@ import com.qq.service.QQuserService;
 import com.ybg.api.domain.WeixinOAuthConfig;
 import com.ybg.api.service.WeixinApiService;
 import com.ybg.base.jdbc.BaseMap;
-import com.ybg.base.util.Common;
 import com.ybg.base.util.Json;
 import com.ybg.mayun.oauth.controller.MayunConfig;
 import com.ybg.mayun.oauth.service.MayunUserService;
@@ -76,9 +76,8 @@ public class ThirdPartLoginController {
 	/** 用户绑定信息 **/
 	@ResponseBody
 	@RequestMapping("boundinfo.do")
-	public Map<String, Object> boundinfo() {
+	public Map<String, Object> boundinfo(@AuthenticationPrincipal UserVO user) {
 		Map<String, Object> map = new LinkedHashMap<>();
-		UserVO user = Common.findUserSession();
 		if (user == null) {
 			return null;
 		}
@@ -93,8 +92,7 @@ public class ThirdPartLoginController {
 	
 	@ResponseBody
 	@RequestMapping("delbaidu.do")
-	public Json delbaidu() {
-		UserVO user = Common.findUserSession();
+	public Json delbaidu(@AuthenticationPrincipal UserVO user) {
 		if (user == null) {
 			return null;
 		}
@@ -109,8 +107,7 @@ public class ThirdPartLoginController {
 	
 	@ResponseBody
 	@RequestMapping("delsina.do")
-	public Json delsina() {
-		UserVO user = Common.findUserSession();
+	public Json delsina(@AuthenticationPrincipal UserVO user) {
 		if (user == null) {
 			return null;
 		}
@@ -125,8 +122,7 @@ public class ThirdPartLoginController {
 	
 	@ResponseBody
 	@RequestMapping("delweixin.do")
-	public Json delweixin() {
-		UserVO user = Common.findUserSession();
+	public Json delweixin(@AuthenticationPrincipal UserVO user) {
 		if (user == null) {
 			return null;
 		}
@@ -141,8 +137,7 @@ public class ThirdPartLoginController {
 	
 	@ResponseBody
 	@RequestMapping("delmayun.do")
-	public Json delmayun() {
-		UserVO user = Common.findUserSession();
+	public Json delmayun(@AuthenticationPrincipal UserVO user) {
 		if (user == null) {
 			return null;
 		}
@@ -157,8 +152,7 @@ public class ThirdPartLoginController {
 	
 	@ResponseBody
 	@RequestMapping("delqq.do")
-	public Json delqq() {
-		UserVO user = Common.findUserSession();
+	public Json delqq(@AuthenticationPrincipal UserVO user) {
 		if (user == null) {
 			return null;
 		}
