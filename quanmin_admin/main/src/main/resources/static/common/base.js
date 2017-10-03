@@ -200,5 +200,5 @@ function closewait() {
     
     layer.closeAll('loading');
 }
-var a=document.body.innerHTML;
-document.body.innerHTML=a.replace(/\ufeff/g,'');
+//var a=document.body.innerHTML;
+//document.body.innerHTML=a.replace(/\ufeff/g,'');
