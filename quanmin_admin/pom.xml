@@ -15,9 +15,6 @@
 	<modules>
 		<!--** 主要入口 必须 -->
 		<module>main</module>
-		<!--  
-		<module>main_layerui</module>-->
-		
 		<!--** DAO封装 必须 -->
 		<module>ybg_base_jdbc</module>
 		<!--** 工具类 ,必须 -->
@@ -42,21 +39,27 @@
 		<module>ybg_base_jar</module>
 		<!-- 代码生成 必须 -->
 		<module>ybg_gen</module>
-		<!-- 教育子系统 -->
+		<!-- 教育子系统 非必须 -->
 		<module>edu</module>
-		<!-- 对象存储 -->
+		<!-- 对象存储 非必须 -->
 		<module>ybg_oss</module>
-		<!-- 支付模块 -->
+		<!-- 支付模块 非必须 -->
 		<module>pay-java-parent</module>
+		<!-- 短信模块 非必需 -->
 		<module>ybg_sms</module>
+		<!-- 第三方登陆模块 非必需 -->
 		<module>ybg_thirdpartlogin</module>
+		<!-- 微信接口模块 非必需 -->
 		<module>ybg_weixin_api</module>
+		<!-- 验证码模块 非必需 -->
 		<module>ybg_kaptcha</module>
+		<!-- 工作流模块 非必需 -->
 		<module>ybg_activiti</module>
+		<!-- 二维码模块 非必需 -->
 		<module>ybg_qrcode</module>
+		<!-- https 配置模块 非必需 -->
 		<module>ybg_https</module>
-        
-  </modules>
+	</modules>
 	<build>
 		<defaultGoal>compile</defaultGoal>
 	</build>
