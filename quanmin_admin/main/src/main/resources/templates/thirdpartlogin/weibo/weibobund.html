@@ -1,152 +1,120 @@
-<html lang="en" class="bg-dark js no-touch no-android chrome no-firefox no-iemobile no-ie no-ie10 no-ie11 no-ios no-ios7 ipad"">
+<!DOCTYPE html>
+<html>
 <head>
-<meta property="wb:webmaster" content="5384339811cd5abe" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- Google Chrome Frame也可以让IE用上Chrome的引擎: -->
-<meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<link href="/favicon.ico" type="image/x-icon" rel=icon>
-<link href="/favicon.ico" type="image/x-icon" rel="shortcut icon">
-<title>登录－云报告</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/notebook/notebook_files/font.css" />
-<link rel="stylesheet" href="/notebook/notebook_files/app.v1.css" />
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<title>后台管理系统登录-注册-忘记密码</title>
+<link href="//cdn.bootcss.com/Swiper/3.4.1/css/swiper.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/js/plugins/layui/css/layui.css" />
 <link rel="stylesheet" href="/admin_files/awesome.css" />
+<link rel="stylesheet" href="/css/layerui/style.css" />
 <script type="text/javascript" src="/js/plugins/jQuery/jquery-2.3.4.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="/js/layer-v1.9.2/layer/layer.js"></script>
 <script type="text/javascript" src="/common/base.js"></script>
-<script type="text/javascript">
-    layer.config({
-        extend : [
-            'skin/moon/style.css'], //加载新皮肤skin/style.css
-        fix : false, // 用于设定层是否不随滚动条而滚动，固定在可视区域。
-        skin : 'layer-ext-moon' //一旦设定，所有弹层风格都采用此主题。layui-layer-molv
-    });
-    function getCookie(cookie_name) {
-        var allcookies = document.cookie;
-        var cookie_pos = allcookies.indexOf(cookie_name); //索引的长度
-        // 如果找到了索引，就代表cookie存在，
-        // 反之，就说明不存在。
-        if (cookie_pos != -1) {
-            // 把cookie_pos放在值的开始，只要给值加1即可。
-            cookie_pos += cookie_name.length + 1; //这里容易出问题，所以请大家参考的时候自己好好研究一下
-            var cookie_end = allcookies.indexOf(";", cookie_pos);
-            if (cookie_end == -1) {
-                cookie_end = allcookies.length;
-            }
-            var value = unescape(allcookies.substring(cookie_pos, cookie_end)); //这里就可以得到你想要的cookie的值了。。。
-        }
-        return value;
-    }
-    function checkUserForm() {
-        document.loginform.submit();
-    }
-    function tologin() {
-        var username = getCookie("xabpoUsername");
-        var password = getCookie("xabpoPassword");
-        $("#username").val(username);
-        $("#password").val(password);
-        if (username != undefined && password != undefined)
-            $("#loginform").submit();
-    }
-    function forgetpwd() {
-        $.ajax({
-            async : false,
-            url : "/common/login_do/reset.do",
-            data : {
-                "key" : key,
-                "value" : $("#" + key).val()
-            },
-            dataType : "json",
-            success : function(data) {
-                if (data.flag) {
-                    alert("更新成功！");
-                } else {
-                    alert("更新失败！");
-                }
-            }
-        });
-    }
-    function forgetpwd() {
-        layer.prompt({
-            title : '输入您的账号',
-            formType : 0
-        //prompt风格，支持0-2
-        }, function(pass) {
-            $.ajax({
-                async : false,
-                url : "/common/login_do/forgetpwd.do?username=" + pass,
-                data : {},
-                dataType : "json",
-                success : function(data) {
-                    alert(data.msg);
-                }
-            });
-        });
-    }
-</script>
+<script type="text/javascript" src="/common/vue.js"></script>
+<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 </head>
-<body class="">
-	<section id="content" class="m-t-lg wrapper-md animated fadeInUp">
-		<div class="container aside-xxl">
-			<div style="text-align: center;">
-				<img src="/images/webicon/logo.png" width="100%" />
+<body>
+	<div class="layui-layout layui-layout-admin">
+		<div class="container con-bj">
+			<canvas id="canv"></canvas>
+			<div id="bg-overlay"></div>
+			<div class="cls-content">
+				<div class="cls-content-sm panel">
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide swiper-no-swiping">
+								<div class="panel-body">
+									<div class="mar-ver">
+										<img src="/images/webicon/logo100X100.png" />
+										<h3>请绑定系统账号</h3>
+									</div>
+									<form class="layui-form" action="/common/weibo/sinalogin_do/bund.do" id="loginForm">
+										<input type="hidden" name="uid" id="uid" value="${uid!}">
+										<div class="layui-form-item ipt-text">
+											<div class="dp-block">
+												<i class="fa fa-user"></i>
+												<input type="text" name="username" placeholder="请输入账号" autocomplete="off" class="layui-input" lay-verify="required">
+											</div>
+										</div>
+										<div class="layui-form-item ipt-text">
+											<div class="dp-block">
+												<i class="fa fa-lock"></i>
+												<input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input" lay-verify="required">
+											</div>
+										</div>
+										<div class="layui-form-item">
+											<div class="layui-input-inline">
+												<input type="text" name="vrifyCode" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+											</div>
+											<div class="layui-form-mid layui-word-aux">
+												<img name="Kaptcha" alt="验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1" src="/defaultKaptcha" />
+											</div>
+										</div>
+										<button type="button" class="layui-btn layui-btn-normal layui-btn-disabled dp-block" lay-submit lay-filter="loginForm" onclick="tologin()">绑定</button>
+									</form>
+								</div>
+								<div class="pad-all">
+									<div class="col-6 box-left">
+										
+										<a href="/common/login_do/login.do" class="reg">返回主页</a>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
 			</div>
-			<section class="panel panel-default bg-white m-t-lg">
-				<header class="panel-heading text-center">
-					<strong>请绑定系统账号</strong>
-				</header>
-				<form action="/common/weibo/sinalogin_do/bund.do" method="post" class="panel-body wrapper-lg">
-					<input type="hidden" name="uid" id="uid" value="${uid!}">
-					<div class="form-group">
-						<label class="control-label">账号</label>
-						<input type="text" placeholder="请输入账号" id="username" name="username" class="form-control input-lg">
-					</div>
-					<div class="form-group">
-						<label class="control-label">密码</label>
-						<input type="password" placeholder="请输入密码" id="password" name="password" class="form-control input-lg">
-					</div>
-					<div class="form-group">
-						<label class="control-label">验证码</label><label><img alt="验证码" onclick = "this.src='/defaultKaptcha?d='+new Date()*1" src="/defaultKaptcha" />  </label>
-						<input type="text" placeholder="请输入验证码" required="required" id="vrifyCode" name="vrifyCode" class="form-control input-sm" style="width: 30%;display: inline;">
-					</div>
-					<a href="javascript:forgetpwd()" class="pull-right m-t-xs">
-						<small>忘记密码?</small>
-					</a>
-					<button type="submit" class="btn btn-primary" onclick="javascript:wait()">绑定</button>
-					<div class="line line-dashed"></div>
-					<p class="text-muted text-center">
-						<small>还没有账号?</small>
-					</p>
-					<a href="/common/login_do/toregister.do" class="btn btn-default btn-block">注册</a>
-				</form>
-			</section>
 		</div>
-	</section>
-	<!-- footer -->
-	<footer id="footer">
-		<div class="text-center padder">
-			<p>
-				<small>
-					<a href="http://www.miitbeian.gov.cn/">© 2016-2016 88ybg.com 版权所有 ICP证：粤ICP备16078942号-1</a>
-				</small>
-			</p>
+	</div>
+	</div>
+	<div class="switch-bg">
+		<div id="switch-bg-list">
+			<div class="switch-loading" style="display: none;">
+				<img id="bgimg" src="/img/bg_img/bg-img-6.jpg" alt="" class="switch-chg-bg " />
+				<!-- 
+			
+				<img src="/img/bg_img/thumbs/bg-trns.jpg" alt="" class="switch-chg-bg bg-trans active">
+				<img src="/img/bg_img/bg-img-1.jpg" alt="" class="switch-chg-bg" />
+				<img src="/img/bg_img/bg-img-2.jpg" alt="" class="switch-chg-bg " />
+				<img src="/img/bg_img/bg-img-3.jpg" alt="" class="switch-chg-bg " />
+				<img src="/img/bg_img/bg-img-4.jpg" alt="" class="switch-chg-bg " />
+				<img  src="/img/bg_img/bg-img-5.jpg" alt="" class="switch-chg-bg " />
+				
+				<img src="/img/bg_img/bg-img-7.jpg" alt="" class="switch-chg-bg " /> -->
+			</div>
+			<a target="_blank" href="http://www.miitbeian.gov.cn/" id="SYSTEM_authinfo">{{SYSTEM_authinfo}} </a>
 		</div>
-	</footer>
-	<!-- / footer -->
-	<!-- Bootstrap -->
-	<!-- App -->
+	</div>
+	<script src="/js/plugins/swiper/swiper.js"></script>
+	<script type="text/javascript" src="/js/plugins/layui/layui.js"></script>
+	<script src="/js/system/login_reg_fPass.js"></script>
+	<script type="text/javascript">
+        var app2 = new Vue({
+            el : '#SYSTEM_authinfo',
+            data : {
+                SYSTEM_authinfo : ''
+            },
+            created : function() {
+                var url = "/common/login_do/system_authinfo.do";
+                var _self = this;
+                $.post(url, function(data) {
+                    _self.SYSTEM_authinfo = data;
+                })
+            }
+        });
+        if ("${error!}" != "") {
+            alert('${error!}');
+        };
+    </script>
 </body>
 </html>
-<#if error??>
-<script type="text/javascript">
-    if ("${error!}" != "") {
-        layer.tips('${error!}', '#username', {
-            tips : [
-                    1, '#FF3333']
-        //还可配置颜色
-        });
-    };
-    //tologin();
-</script>
-</#if>
