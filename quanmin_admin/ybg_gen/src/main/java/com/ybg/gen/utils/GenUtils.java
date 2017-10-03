@@ -42,7 +42,6 @@ public class GenUtils {
 		templates.add("template/menu.sql.vm");
 		templates.add("template/VO.java.vm");
 		templates.add("template/Query.java.vm");
-		templates.add("template/Mapper.java.vm");
 		return templates;
 	}
 	
@@ -97,7 +96,7 @@ public class GenUtils {
 		map.put("pk", tableEntity.getPk());
 		map.put("className", tableEntity.getClassName());
 		map.put("classname", tableEntity.getClassname());
-		map.put("pathName", config.getString("pathName")+  tableEntity.getClassname().toLowerCase()+"_do/");
+		map.put("pathName", config.getString("pathName") + tableEntity.getClassname().toLowerCase() + "_do/");
 		map.put("columns", tableEntity.getColumns());
 		map.put("package", config.getString("package"));
 		map.put("author", config.getString("author"));
@@ -168,13 +167,6 @@ public class GenUtils {
 		if (template.contains("DaoImpl.java.vm")) {
 			return packagePath + "dao" + File.separator + className + "DaoImpl.java";
 		}
-		if (template.contains("Mapper.java.vm")) {
-			return packagePath + "mapper" + File.separator + className + "Mapper.java";
-		}
-		
-//		if (template.contains("Dao.xml.vm")) {
-//			return packagePath + "dao" + File.separator + className + "Dao.xml";
-//		}
 		if (template.contains("Service.java.vm")) {
 			return packagePath + "service" + File.separator + className + "Service.java";
 		}

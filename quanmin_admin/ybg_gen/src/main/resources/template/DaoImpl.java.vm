@@ -12,12 +12,12 @@ import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
 import ${package}.domain.${className}DO;
 import ${package}.domain.${className}VO;
-import ${package}.mapper.${className}Mapper;
 import ${package}.qvo.${className}Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.ybg.base.jdbc.DataBaseConstant;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 @Repository
 public class ${className}DaoImpl extends BaseDao implements ${className}Dao {
 @Autowired
@@ -59,7 +59,7 @@ public class ${className}DaoImpl extends BaseDao implements ${className}Dao {
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
 			page.setResult(getJdbcTemplate().query(page.getPagesql(sql),
-					new ${className}Mapper()));
+					 new BeanPropertyRowMapper<${className}VO>(${className}VO.class)));
 		} else {
 			page.setResult(new ArrayList< ${className}VO>());
 		}
@@ -86,7 +86,7 @@ public class ${className}DaoImpl extends BaseDao implements ${className}Dao {
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM)
 				.append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new ${className}Mapper());
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<${className}VO>(${className}VO.class));
 	}
 	
 	@Override
@@ -101,7 +101,7 @@ public class ${className}DaoImpl extends BaseDao implements ${className}Dao {
 				.append(QUERY_TABLE_NAME);
 				sql.append(WHERE).append("1=1");
 				sql.append(AND).append("${pk.columnName}='"+id+"'");
-		List<${className}VO> list=getJdbcTemplate().query(sql.toString(), new ${className}Mapper());		
+		List<${className}VO> list=getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<${className}VO>(${className}VO.class));		
 		return QvoConditionUtil.checkList(list)?list.get(0):null;
 	}
 }

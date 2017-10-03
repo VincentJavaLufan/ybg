@@ -1,4 +1,8 @@
-
+<html>
+<head>
+<#include "/common/common2.ftl"/>
+</head>
+<body>
 <script src="${rc.contextPath}/js/generator/${pathName}.js"></script>
 <div id="rrapp" v-cloak>
 	<div v-show="showList">
@@ -39,5 +43,5 @@
 		</form>
 	</div>
 </div>
-
+</body>
 
