@@ -1,18 +1,17 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.ybg</groupId>
-    <artifactId>ybg_thirdpartlogin</artifactId>
-    <version>1.0.0</version>
-  </parent>
-  <groupId>com.ybg</groupId>
-  <artifactId>ybg_social</artifactId>
-  <version>1.0.0</version>
-  <name>ybg_social</name>
-  <url>http://maven.apache.org</url>
-  <properties>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.ybg</groupId>
+		<artifactId>ybg_thirdpartlogin</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	<groupId>com.ybg</groupId>
+	<artifactId>ybg_social</artifactId>
+	<version>1.0.0</version>
+	<name>ybg_social</name>
+	<url>http://maven.apache.org</url>
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
@@ -26,13 +25,43 @@
 			<artifactId>ybg_rbac_base</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_base_jar</artifactId>
 			<version>1.0.0</version>
+		</dependency><dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_login_qq</artifactId>
+			<version>1.0.0</version>
 		</dependency>
-	</dependencies><build>
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_login_baidu</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_login_sina</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_login_mayun</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_login_weixin</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_login_ali</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		
+	</dependencies>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
