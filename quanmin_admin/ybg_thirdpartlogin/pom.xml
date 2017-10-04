@@ -20,5 +20,6 @@
     <module>ybg_login_weixin</module>
      <module>ybg_login_ali</module>
     <module>ybg_login_setting</module>
+    <module>ybg_social</module>
   </modules>
 </project>
