@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.5.RELEASE</version>
+		<version>1.5.7.RELEASE</version>
 		<relativePath />
 		<!-- lookup parent from repository -->
 	</parent>
@@ -66,7 +66,17 @@
 			<artifactId>ybg_login_weixin</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- 第三方登陆 end-->
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_login_ali</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ybg</groupId>
+				<artifactId>ybg_login_setting</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<!-- 第三方登陆 end -->
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_mq</artifactId>
@@ -83,14 +93,14 @@
 			<artifactId>ybg_gen</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- 代码生成 end-->
-		<!--云存储  -->
+		<!-- 代码生成 end -->
+		<!--云存储 -->
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_oss</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!--云存储  end-->
+		<!--云存储 end -->
 		<!-- <dependency> <groupId>com.ybg</groupId> <artifactId>ybg_weixin</artifactId> <version>1.0.0</version> </dependency> -->
 		<!-- 数据库 jdbc -->
 		<dependency>
@@ -98,7 +108,7 @@
 			<artifactId>ybg_base_jdbc</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- 数据库 end-->
+		<!-- 数据库 end -->
 		<!-- 教育模块 -->
 		<dependency>
 			<groupId>com.ybg</groupId>
@@ -151,7 +161,16 @@
 			<artifactId>ybg_activiti</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- 工作流 end-->
+		<!-- 工作流 end -->
+		<!-- 二维码 -->
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_qrcode</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<!-- 二维码 end -->
+		<!-- https 按需引入 <dependency> <groupId>com.ybg</groupId> <artifactId>ybg_https</artifactId> <version>1.0.0</version> </dependency> -->
+		<!--https end -->
 	</dependencies>
 	<build>
 		<plugins>
@@ -185,7 +204,10 @@
 							<goal>repackage</goal><!--可以把依赖的包都打包到生成的Jar包中 -->
 						</goals>
 						<!--可以生成不含依赖包的不可执行Jar包 -->
-						<!-- configuration> <classifier>exec</classifier> </configuration> -->
+						<!---->
+						<configuration>
+							<classifier>exec</classifier>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
