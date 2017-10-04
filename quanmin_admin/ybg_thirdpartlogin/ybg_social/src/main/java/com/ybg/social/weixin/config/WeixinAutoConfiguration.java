@@ -2,15 +2,15 @@
  * 
  */
 package com.ybg.social.weixin.config;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.social.SocialAutoConfigurerAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.social.connect.ConnectionFactory;
 import org.springframework.web.servlet.View;
-import com.ybg.core.properties.SecurityProperties;
+import com.ybg.api.service.WeixinApiService;
 import com.ybg.core.properties.WeixinProperties;
 import com.ybg.social.ImoocConnectView;
 import com.ybg.social.weixin.connect.WeixinConnectionFactory;
@@ -19,11 +19,13 @@ import com.ybg.social.weixin.connect.WeixinConnectionFactory;
  * 
  * @author zhailiang */
 @Configuration
-@ConditionalOnProperty(prefix = "imooc.security.social.weixin", name = "app-id")
+// @ConditionalOnProperty(prefix = "imooc.security.social.weixin", name = "app-id")
 public class WeixinAutoConfiguration extends SocialAutoConfigurerAdapter {
 	
+	// @Autowired
+	// private SecurityProperties securityProperties;
 	@Autowired
-	private SecurityProperties securityProperties;
+	WeixinApiService apiService;
 	
 	/*
 	 * (non-Javadoc)
@@ -32,7 +34,10 @@ public class WeixinAutoConfiguration extends SocialAutoConfigurerAdapter {
 	 */
 	@Override
 	protected ConnectionFactory<?> createConnectionFactory() {
-		WeixinProperties weixinConfig = securityProperties.getSocial().getWeixin();
+		WeixinProperties weixinConfig = new WeixinProperties();
+		Map<String, String> setting = apiService.getSetting();
+		weixinConfig.setAppId(setting.get("appId"));
+		weixinConfig.setAppSecret(setting.get("secret"));
 		return new WeixinConnectionFactory(weixinConfig.getProviderId(), weixinConfig.getAppId(), weixinConfig.getAppSecret());
 	}
 	

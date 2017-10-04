@@ -2,22 +2,27 @@
  * 
  */
 package com.ybg.social.qq.config;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.social.SocialAutoConfigurerAdapter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.social.connect.ConnectionFactory;
+import com.qq.service.QQuserService;
 import com.ybg.core.properties.QQProperties;
-import com.ybg.core.properties.SecurityProperties;
+
 import com.ybg.social.qq.connet.QQConnectionFactory;
 
 /** @author zhailiang */
 @Configuration
-@ConditionalOnProperty(prefix = "imooc.security.social.qq", name = "app-id")
+//@ConditionalOnProperty(prefix = "imooc.security.social.qq", name = "app-id")
 public class QQAutoConfig extends SocialAutoConfigurerAdapter {
 	
+//	@Autowired
+//	private SecurityProperties securityProperties;
+	
 	@Autowired
-	private SecurityProperties securityProperties;
+	QQuserService qQuserService;
 	
 	/*
 	 * (non-Javadoc)
@@ -26,7 +31,10 @@ public class QQAutoConfig extends SocialAutoConfigurerAdapter {
 	 */
 	@Override
 	protected ConnectionFactory<?> createConnectionFactory() {
-		QQProperties qqConfig = securityProperties.getSocial().getQq();
+	Map<String,String> setting=qQuserService.getSetting();
+		QQProperties qqConfig =new QQProperties();
+		qqConfig.setAppId(setting.get("client_ID"));
+		qqConfig.setAppSecret(setting.get("client_SERCRET"));
 		return new QQConnectionFactory(qqConfig.getProviderId(), qqConfig.getAppId(), qqConfig.getAppSecret());
 	}
 }

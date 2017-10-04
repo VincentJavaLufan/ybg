@@ -15,7 +15,7 @@ import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.social.security.SpringSocialConfigurer;
-import com.ybg.core.properties.SecurityProperties;
+//import com.ybg.core.properties.SecurityProperties;
 
 /** @author zhailiang */
 @Configuration
@@ -24,8 +24,8 @@ public class SocialConfig extends SocialConfigurerAdapter {
 	
 	@Autowired
 	private DataSource			dataSource;
-	@Autowired
-	private SecurityProperties	securityProperties;
+//	@Autowired
+//	private SecurityProperties	securityProperties;
 	@Autowired(required = false)
 	private ConnectionSignUp	connectionSignUp;
 	
@@ -41,9 +41,9 @@ public class SocialConfig extends SocialConfigurerAdapter {
 	
 	@Bean
 	public SpringSocialConfigurer imoocSocialSecurityConfig() {
-		String filterProcessesUrl = securityProperties.getSocial().getFilterProcessesUrl();
+		String filterProcessesUrl = "/social";
 		ImoocSpringSocialConfigurer configurer = new ImoocSpringSocialConfigurer(filterProcessesUrl);
-		configurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
+		//configurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
 		return configurer;
 	}
 	
