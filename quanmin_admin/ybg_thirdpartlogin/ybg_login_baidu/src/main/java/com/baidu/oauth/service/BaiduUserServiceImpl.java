@@ -32,10 +32,13 @@ public class BaiduUserServiceImpl implements BaiduUserService {
 	}
 	
 	public BaiduUser getByUid(Long uid) throws Exception {
-		BaiduUserQvo qvo = new BaiduUserQvo();
-		qvo.setUid(uid);
-		List<BaiduUser> list = baiduUserDao.query(qvo);
-		return list != null && list.size() > 0 ? list.get(0) : null;
+		if(uid!=null && uid>0L){
+			BaiduUserQvo qvo = new BaiduUserQvo();
+			qvo.setUid(uid);
+			List<BaiduUser> list = baiduUserDao.query(qvo);
+			return list != null && list.size() > 0 ? list.get(0) : null;
+		}
+		return null;
 	}
 	
 	@Override
