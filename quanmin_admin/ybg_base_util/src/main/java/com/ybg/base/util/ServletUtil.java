@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanUtils;
@@ -281,5 +282,16 @@ public class ServletUtil {
 	/** 过滤设置到SQL语句中的字符串 */
 	public final static String toDBFilter(String aStr) {
 		return trim(aStr).replaceAll("\\\'", "''");
+	}
+	
+	/** 输出参数 **/
+	public static void sayParm(HttpServletRequest request) {
+		Map<String, String[]> map = request.getParameterMap();
+		System.out.println("请求地址"+request.getRequestURI());
+		for (Entry<String, String[]> me : map.entrySet()) {
+			String name = me.getKey();
+			String[] v = me.getValue();
+			System.out.println("参数："+name + "=" + v[0]);
+		}
 	}
 }
