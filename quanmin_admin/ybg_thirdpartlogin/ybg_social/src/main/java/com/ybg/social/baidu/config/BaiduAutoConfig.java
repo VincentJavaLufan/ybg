@@ -23,7 +23,7 @@ public class BaiduAutoConfig extends SocialAutoConfigurerAdapter {
 	// @Autowired
 	// private SecurityProperties securityProperties;
 	@Autowired
-	BaiduUserService qQuserService;
+	BaiduUserService baiduuserService;
 	
 	/*
 	 * (non-Javadoc)
@@ -32,11 +32,10 @@ public class BaiduAutoConfig extends SocialAutoConfigurerAdapter {
 	 */
 	@Override
 	protected ConnectionFactory<?> createConnectionFactory() {
-		Map<String, String> setting = qQuserService.getSetting();
+		Map<String, String> setting = baiduuserService.getSetting();
 		BaiduProperties baiduConfig = new BaiduProperties();
 		baiduConfig.setAppId(setting.get("client_ID"));
 		baiduConfig.setAppSecret(setting.get("client_SERCRET"));
-		baiduConfig.setProviderId("/baidu_do/login.do");
 		return new BaiduConnectionFactory(baiduConfig.getProviderId(), baiduConfig.getAppId(), baiduConfig.getAppSecret());
 	}
 }

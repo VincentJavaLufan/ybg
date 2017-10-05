@@ -4,61 +4,43 @@ import com.baidu.api.utils.JsonUtil;
 
 public class BaiduUserInfo {
 	
-	private String	id;
-	/** 用户uid */
-	private long	uid	= 0;
-	/** 用户名 */
-	private String	uname;
-	/** 用户头像加密串 */
-	private String	portrait;
+	String	userid;			// 当前登录用户的数字ID
+	String	username;		// 当前登录用户的用户名，值可能为空。
+	String	realname;		// 用户真实姓名，可能为空。
+	String	portrait;		// 当前登录用户的头像
+	String	userdetail;		// 自我简介，可能为空。
+	String	birthday;		// 生日，以yyyy-mm-dd格式显示。
+	String	marriage;		// 婚姻状况
+	String	sex;			// 性别。"1"表示男，"0"表示女。
+	String	blood;			// 血型
+	String	figure;			// 体型
+	String	constellation;	// 星座
+	String	education;		// 学历
+	String	trade;			// 当前职业
+	String	job;			// 职位
 	
-	public BaiduUserInfo() {
+	public String getUserid() {
+		return userid;
 	}
 	
-	/** 通过json数据，构建User类
-	 * 
-	 * @param json */
-	public BaiduUserInfo(String json) {
-		JSONObject obj = JsonUtil.parseJson(json);
-		if (obj != null) {
-			Object objUid = obj.get("uid");
-			Object objUname = obj.get("uname");
-			Object objPortrait = obj.get("portrait");
-			if (objPortrait != null) {
-				this.setPortrait(objPortrait.toString());
-			}
-			if (objUid != null) {
-				this.setUid(Long.valueOf(objUid.toString()));
-			}
-			if (objUname != null) {
-				this.setUname(objUname.toString());
-			}
-		}
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public void putToJSONObject(JSONObject obj) {
-		if (obj != null) {
-			obj.put("uid", getUid());
-			obj.put("uname", getUname());
-			obj.put("portrait", getPortrait());
-		}
+	public String getUsername() {
+		return username;
 	}
 	
-	public long getUid() {
-		return uid;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
-	public void setUid(long uid) {
-		this.uid = uid;
+	public String getRealname() {
+		return realname;
 	}
 	
-	public String getUname() {
-		return uname;
-	}
-	
-	public void setUname(String uname) {
-		this.uname = uname;
+	public void setRealname(String realname) {
+		this.realname = realname;
 	}
 	
 	public String getPortrait() {
@@ -69,16 +51,83 @@ public class BaiduUserInfo {
 		this.portrait = portrait;
 	}
 	
-	public String getId() {
-		return id;
+	public String getUserdetail() {
+		return userdetail;
 	}
 	
-	public void setId(String id) {
-		this.id = id;
+	public void setUserdetail(String userdetail) {
+		this.userdetail = userdetail;
 	}
 	
-	@Override
-	public String toString() {
-		return "User [uid=" + uid + ", uname=" + uname + ", portrait=" + portrait + "]";
+	public String getBirthday() {
+		return birthday;
+	}
+	
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+	
+	public String getMarriage() {
+		return marriage;
+	}
+	
+	public void setMarriage(String marriage) {
+		this.marriage = marriage;
+	}
+	
+	public String getSex() {
+		return sex;
+	}
+	
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	
+	public String getBlood() {
+		return blood;
+	}
+	
+	public void setBlood(String blood) {
+		this.blood = blood;
+	}
+	
+	public String getFigure() {
+		return figure;
+	}
+	
+	public void setFigure(String figure) {
+		this.figure = figure;
+	}
+	
+	public String getConstellation() {
+		return constellation;
+	}
+	
+	public void setConstellation(String constellation) {
+		this.constellation = constellation;
+	}
+	
+	public String getEducation() {
+		return education;
+	}
+	
+	public void setEducation(String education) {
+		this.education = education;
+	}
+	
+	public String getTrade() {
+		return trade;
+	}
+	
+	public void setTrade(String trade) {
+		this.trade = trade;
+	}
+	
+	public String getJob() {
+		return job;
+	}
+	
+	public void setJob(String job) {
+		this.job = job;
 	}
 }
