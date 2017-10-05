@@ -50,4 +50,8 @@ public interface UserDao {
 	
 	/** 查询账户是否已存在 **/
 	boolean checkisExist(UserQuery qvo);
+	
+	
+	UserVO loginById(String userId);
+	
 }

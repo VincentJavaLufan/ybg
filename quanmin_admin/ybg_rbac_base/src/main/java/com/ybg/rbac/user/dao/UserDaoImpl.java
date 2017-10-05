@@ -1,12 +1,10 @@
 package com.ybg.rbac.user.dao;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseMap;
@@ -158,5 +156,14 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 			check = check && QvoConditionUtil.checkList(list);
 		}
 		return check;
+	}
+	
+	@Override
+	public UserVO loginById(String userId) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",role.`name` rolename").append(FROM).append(QUERY_TABLE_NAME).append(LEFT).append(JOIN).append("sys_role role").append(ON).append("user.roleid=role.id");
+		sql.append(WHERE).append(" user.userId='").append(userId).append("'");
+		List<UserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<UserVO>(UserVO.class));
+		return list.size() == 0 ? null : list.get(0);
 	}
 }

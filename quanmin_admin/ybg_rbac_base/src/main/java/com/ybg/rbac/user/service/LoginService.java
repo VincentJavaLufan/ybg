@@ -1,11 +1,16 @@
 package com.ybg.rbac.user.service;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.social.security.SocialUserDetails;
+import org.springframework.social.security.SocialUserDetailsService;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
@@ -14,7 +19,8 @@ import com.ybg.rbac.user.dao.UserDao;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.qvo.UserQuery;
 
-@Repository
+/** 实现 了 账号密码登陆以及社交登陆接口 **/
+@Component
 public class LoginService implements UserDetailsService {
 	
 	@Autowired
@@ -57,9 +63,11 @@ public class LoginService implements UserDetailsService {
 	public UserVO getUserByname(String username) throws Exception {
 		UserQuery qvo = new UserQuery();
 		qvo.setUsername(username);
-		List<UserVO> list = userdao.list(qvo);
-		if (list != null && list.size() > 0) {
-			return list.get(0);
+		if (QvoConditionUtil.checkString(username)) {
+			List<UserVO> list = userdao.list(qvo);
+			if (list != null && list.size() > 0) {
+				return list.get(0);
+			}
 		}
 		return null;
 	}

@@ -46,24 +46,24 @@ public class UserServiceImpl implements UserService {
 		userDao.update(updatemap, wheremap);
 	}
 	
-	/** 获取单个信息 
+	/** 获取单个信息
+	 * 
 	 * @throws Exception **/
 	@Cacheable(value = "userCache", key = "#root.method.name+#root.args[0]")
 	public UserVO get(String id) throws Exception {
-		UserQuery qvo = new UserQuery();
-		qvo.setId(id);
-		List<UserVO> list = userDao.list(qvo);
-		return list != null && list.size() > 0 ? list.get(0) : null;
+		return userDao.loginById(id);
 	}
 	
-	/** 分页查询用户信息 
+	/** 分页查询用户信息
+	 * 
 	 * @throws Exception **/
 	@Cacheable(value = "userCache", key = "#root.method.name+#root.args[0]+#root.method.name+#root.args[1]")
 	public Page list(Page page, UserQuery qvo) throws Exception {
 		return userDao.list(page, qvo);
 	}
 	
-	/** 不分页查询用户信息 
+	/** 不分页查询用户信息
+	 * 
 	 * @throws Exception **/
 	@Cacheable(value = "userCache", key = "#root.method.name+#root.args[0]")
 	public List<UserVO> list(UserQuery qvo) throws Exception {
@@ -76,7 +76,8 @@ public class UserServiceImpl implements UserService {
 		return userDao.login(loginname);
 	}
 	
-	/** 清楚注册不激活的用户 
+	/** 清楚注册不激活的用户
+	 * 
 	 * @throws Exception **/
 	@CacheEvict(value = "userCache", allEntries = true)
 	public void removeExpired() throws Exception {
