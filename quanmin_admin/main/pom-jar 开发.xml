@@ -40,7 +40,7 @@
 			<artifactId>ybg_company</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- 第三方登陆 -->
+		<!-- 第三方登陆 
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_login_qq</artifactId>
@@ -70,10 +70,15 @@
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_login_ali</artifactId>
 			<version>1.0.0</version>
+		</dependency>-->
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_login_setting</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ybg</groupId>
-				<artifactId>ybg_login_setting</artifactId>
+			<artifactId>ybg_social</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 		<!-- 第三方登陆 end -->
