@@ -3,6 +3,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.social.connect.Connection;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
@@ -87,5 +88,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean checkisExist(UserQuery qvo) {
 		return userDao.checkisExist(qvo);
+	}
+
+	@Override
+	public List<String> findUserIdsWithConnection(Connection<?> connection) {
+		// TODO Auto-generated method stub
+		return userDao.findUserIdsWithConnection(connection);
 	}
 }

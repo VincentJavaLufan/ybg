@@ -1,5 +1,6 @@
 package com.ybg.rbac.user.dao;
 import java.util.List;
+import org.springframework.social.connect.Connection;
 import org.springframework.stereotype.Component;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
@@ -53,5 +54,7 @@ public interface UserDao {
 	
 	
 	UserVO loginById(String userId);
+	
+	public List<String> findUserIdsWithConnection(Connection<?> connection) ;
 	
 }

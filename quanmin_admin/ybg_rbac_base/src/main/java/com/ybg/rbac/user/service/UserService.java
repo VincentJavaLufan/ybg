@@ -1,5 +1,6 @@
 package com.ybg.rbac.user.service;
 import java.util.List;
+import org.springframework.social.connect.Connection;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
 import com.ybg.rbac.user.domain.UserVO;
@@ -51,4 +52,7 @@ public interface UserService {
 	
 	/** 查询账户是否已存在 **/
 	boolean checkisExist(UserQuery qvo);
+	
+	public List<String> findUserIdsWithConnection(Connection<?> connection) ;
+	
 }
