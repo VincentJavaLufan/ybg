@@ -19,7 +19,7 @@
 <script type="text/javascript" src="/js/layer-v1.9.2/layer/layer.js"></script>
 <script type="text/javascript" src="/common/base.js"></script>
 <script type="text/javascript" src="/common/vue.js"></script>
-<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+
 </head>
 <body>
 	<div class="layui-layout layui-layout-admin">
@@ -59,21 +59,26 @@
 										</div>
 										<button type="button" class="layui-btn layui-btn-normal layui-btn-disabled dp-block" lay-submit lay-filter="loginForm" onclick="tologin()">登 录</button>
 										<div style="padding-top: 30px;">
-											<a href="/common/weibo/sinalogin_do/tologin.do">
+											<a href="/social/sina">
 												<img src="/images/thirdpartlogin/sina.png" style="cursor: pointer" />
 											</a>
+											<a href="/social/weixin">
+												2<img src="/images/thirdpartlogin/weixin.png" style="cursor: pointer" />
+											</a>
+											
 											<a @click="weixinlogin" id="weixinloginuri">
 												<img src="/images/thirdpartlogin/weixin.png" style="cursor: pointer" />
 											</a>
-											<a href="/commom/mayun_do/tologin.do">
+											<!--  
+											<a href="/social/mayun">
 												<img src="/images/thirdpartlogin/mayun.png" height="24px;" style="cursor: pointer" />
-											</a>
+											</a>-->
 										</div>
 										<div style="padding-top: 15px;">
-											<a href="/common/qq/login_do/index.do">
+											<a href="/social/qq">
 												<img src="/images/thirdpartlogin/qq.png" style="cursor: pointer" />
 											</a>
-											<a href="/common/baidu_do/tologin.do">
+											<a href="/social/baidu">
 												<img src="/images/thirdpartlogin/baidu.png" style="cursor: pointer" />
 											</a>
 											<div id="login_container"></div>
@@ -234,8 +239,8 @@
         //     var weixinurl=encodeURIComponent(data.weixinurl+"/common/weixin_do/login.do");
         //    obj = new WxLogin({
         //         id : "login_container", scope : "snsapi_login" ,state : "", style : "black", href : "",
-        //        appid : data.appid,//别人的用于测试     wxbdc5610cc59c1631
-        //        redirect_uri : weixinurl//别人的用于测试  https%3A%2F%2Fpassport.yhd.com%2Fwechat%2Fcallback.do           
+        //        appid : data.appid,
+        //        redirect_uri : "/social/weixin"
         //    });
         //  });
         //$.get("/common/weixin_do/getAppid", function(data) {
@@ -254,5 +259,6 @@
             alert('${error!}');
         };
     </script>
+    <script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 </body>
 </html>
