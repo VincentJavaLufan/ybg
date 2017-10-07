@@ -45,12 +45,12 @@
 			<artifactId>ybg_login_sina</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_weixin</artifactId>
+			<artifactId>ybg_weixin_api</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_login_ali</artifactId>
