@@ -45,11 +45,7 @@
 			<artifactId>ybg_login_sina</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_mayun</artifactId>
-			<version>1.0.0</version>
-		</dependency>
+		
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_login_weixin</artifactId>
