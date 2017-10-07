@@ -55,29 +55,6 @@ QQ群：314658875（收费），310391018（免费）
 | springjdbc    |    | |
 | springmvc    |    | |
 |  spring social       |    | |
-| ehcache |   | |
-| spring session | | |
-| quartz| | |
-| freemarker | 2.X| |
-| swagger2| 2.X| |
-| activiti| 5.22.0 | |
-| vue.js| 2.X| |
-| Jquery|   | |
-| qrcode|   | 二维码|
-| layerui|   | |
-| adminlte|   | |
-| kaptche|   | 验证码|
-| druid|   | 数据库连接池|
-| javamail|   | 邮箱发送|
-| mysql|  5.6 | 数据库|
-| poi|  | excel 操作|
-| javamelody|  | 系统监控|
-| https|  | 传输安全（可选是否集成）|
-| jwt|  | （未使用）|
-| oss|  | 云存储|
-| sdk-dysmsapi |  | 阿里云短信（未使用）|
-| spring-boot-admin |  | 系统监控|
-| jdk       |  8 | |
-| maven      |  3.3.9 | | 
+
 
 --------------------------------------------
