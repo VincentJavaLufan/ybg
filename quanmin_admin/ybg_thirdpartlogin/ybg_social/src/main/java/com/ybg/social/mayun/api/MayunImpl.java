@@ -13,10 +13,12 @@ public class MayunImpl extends AbstractOAuth2ApiBinding implements Mayun {
 	private String				id;
 	@Override
 	public MayunUserInfo getUserInfo(String uid) {
-		String result = getRestTemplate().postForObject(URL_GET_USERINFO, null, String.class);
+		System.out.println("16MayunImpl");
+		String result = getRestTemplate().getForObject(URL_GET_USERINFO, null, String.class);
 		System.out.println(result);
 		try {
 			MayunUserInfo bean = JSONObject.parseObject(result, MayunUserInfo.class);
+			System.out.println(bean);
 			return bean;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -27,10 +29,10 @@ public class MayunImpl extends AbstractOAuth2ApiBinding implements Mayun {
 	public MayunImpl(String accessToken, String appId) {
 		super(accessToken, TokenStrategy.ACCESS_TOKEN_PARAMETER);
 		this.appId = appId;
-		
+		System.out.println("32MayunImpl");
 		String url = String.format(URL_GET_OPENID, accessToken);
 		String result = getRestTemplate().getForObject(url, String.class);
-		System.out.println(result);
+		System.out.println("34"+result);
 		this.id = new JSONObject().parseObject(result, Map.class).get("id").toString();
 	}
 }

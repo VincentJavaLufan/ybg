@@ -2,7 +2,13 @@ package com.ybg.social.mayun.api;
 public class MayunUserInfo {
 	
 	// https://gitee.com/api/v5/oauth_doc
+	
 	String	login;
+	@Override
+	public String toString() {
+		return "MayunUserInfo [login=" + login + ", id=" + id + ", avatar_url=" + avatar_url + ", url=" + url + ", html_url=" + html_url + ", followers_url=" + followers_url + ", gists_url=" + gists_url + ", starred_url=" + starred_url + ", subscriptions_url=" + subscriptions_url + ", organizations_url=" + organizations_url + ", repos_url=" + repos_url + ", events_url=" + events_url + ", received_events_url=" + received_events_url + ", type=" + type + ", site_admin=" + site_admin + ", name=" + name + ", blog=" + blog + ", weibo=" + weibo + ", bio=" + bio + ", public_repos=" + public_repos + ", public_gists=" + public_gists + ", followers=" + followers + ", stared=" + stared + ", watched=" + watched + ", created_at=" + created_at + ", updated_at=" + updated_at + ", email=" + email + ", unconfirmed_email=" + unconfirmed_email + ", phone=" + phone + ", private_token=" + private_token + ", total_repos=" + total_repos + ", owned_repos=" + owned_repos + ", total_private_repos=" + total_private_repos + ", owned_private_repos=" + owned_private_repos + ", private_gists=" + private_gists + ", address=" + address + "]";
+	}
+
 	Long	id;
 	String	avatar_url;
 	String	url;
