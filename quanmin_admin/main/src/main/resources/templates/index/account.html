@@ -16,7 +16,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">绑定的第三方账号</h3>
+					<h3 class="box-title">社交账号</h3>
 					<div class="box-tools">
 						<div class="input-group input-group-sm" style="width: 150px;">
 							<input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
@@ -32,78 +32,45 @@
 				<div class="box-body table-responsive no-padding">
 					<table class="table table-hover">
 						<tr>
-							<th>类型</th>
-							<th>ID</th>
+							<th>社交账号</th>
 							<th>操作</th>
 						</tr>
 						<tr>
 							<td>百度</td>
-							<td>{{baiduid}}</td>
 							<td>
-								<button v-if="baiduid!=''" type="button" class="btn btn-danger marR10" @click="delbaidu">删除</button>
-								<span v-if="baiduid==''" class="label label-primary">未绑定</span>
+								<button v-if="baidu" type="button" class="btn btn-danger marR10" @click="delsocial('baidu')">删除</button>
+								<form v-if="!baidu" action="/connect/baidu" method="post">
+									<button class="btn btn-primary marR10" type="submit">绑定百度</button>
+								</form>
 							</td>
 						</tr>
 						<tr>
 							<td>新浪</td>
-							<td>{{sinaid}}</td>
 							<td>
-								<button v-if="sinaid!=''" type="button" class="btn btn-danger marR10" @click="delsina">删除</button>
-								<span v-if="sinaid==''" class="label label-primary">未绑定</span>
+								<button v-if="sina" type="button" class="btn btn-danger marR10" @click="delsocial('sina')">删除</button>
+								<form v-if="!sina" action="/connect/sina" method="post">
+									<button class="btn btn-primary marR10" type="submit">绑定新浪</button>
+								</form>
 							</td>
 						</tr>
 						<tr>
 							<td>微信</td>
-							<td>{{weixinid}}</td>
 							<td>
-								<button v-if="weixinid!=''" type="button" class="btn btn-danger marR10" @click="delweixin">删除</button>
-								<span v-if="weixinid==''" class="label label-primary">未绑定</span>
-							</td>
-						</tr>
-						<tr>
-							<td>码云</td>
-							<td>{{mayunid}}</td>
-							<td>
-								<button v-if="mayunid!=''" type="button" class="btn btn-danger marR10" @click="delmayun">删除</button>
-								<span v-if="mayunid==''" class="label label-primary">未绑定</span>
+								<button v-if="weixin" type="button" class="btn btn-danger marR10" @click="delsocial('weixin')">删除</button>
+								<form v-if="!weixin" action="/connect/weixin" method="post">
+									<button class="btn btn-primary marR10" type="submit">绑定微信</button>
+								</form>
 							</td>
 						</tr>
 						<tr>
 							<td>QQ</td>
-							<td>{{qqid}}</td>
 							<td>
-								<button v-if="qqid!=''" type="button" class="btn btn-danger marR10" @click="delqq">删除</button>
-								<span v-if="qqid==''" class="label label-primary">未绑定</span>
+								<button v-if="qq" type="button" class="btn btn-danger marR10" @click="delsocial('qq')">删除</button>
+								<form v-if="!qq" action="/connect/qq" method="post">
+									<button class="btn btn-primary marR10" type="submit">绑定QQ</button>
+								</form>
 							</td>
 						</tr>
-						<!--  
-					<tr>
-						<td>219</td>
-						<td>Alexander Pierce</td>
-						<td>11-7-2014</td>
-						<td>
-							<span class="label label-warning">Pending</span>
-						</td>
-						<td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-					</tr>
-					<tr>
-						<td>657</td>
-						<td>Bob Doe</td>
-						<td>11-7-2014</td>
-						<td>
-							<span class="label label-primary">Approved</span>
-						</td>
-						<td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-					</tr>
-					<tr>
-						<td>175</td>
-						<td>Mike Doe</td>
-						<td>11-7-2014</td>
-						<td>
-							<span class="label label-danger">Denied</span>
-						</td>
-						<td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-					</tr>-->
 					</table>
 				</div>
 				<!-- /.box-body -->
@@ -143,11 +110,10 @@
         var vm = new Vue({
             el : '#rrapp',
             data : {
-                weixinid : null,
-                mayunid : null,
-                qqid : null,
-                sinaid : null,
-                baiduid : null,
+                weixin : null,
+                qq : null,
+                sina : null,
+                baidu : null,
                 password : "",
                 newPassword2 : "",
                 newPassword : ""
@@ -155,14 +121,14 @@
             methods : {
                 boundinfo : function() {
                     $.ajax({
-                        type : "POST",
+                        type : "GET",
                         url : rootPath + "/thirdoartlogin_do/boundinfo.do",
+                        dataType : "json",
                         success : function(data) {
-                            vm.weixinid = data.weixinid;
-                            vm.mayunid = data.mayunid;
-                            vm.qqid = data.qqid;
-                            vm.sinaid = data.sinaid;
-                            vm.baiduid = data.baiduid;
+                            vm.weixin = data.weixin;
+                            vm.qq = data.qq;
+                            vm.sina = data.sina;
+                            vm.baidu = data.baidu;
                         }
                     });
                 },
@@ -203,11 +169,15 @@
                         }
                     });
                 },
-                delbaidu : function() {
+                delsocial : function(pro) {
                     confirm('确定要删除关联？', function() {
                         $.ajax({
                             type : "POST",
-                            url : rootPath + "/thirdoartlogin_do/delbaidu.do",
+                            url : rootPath + "/thirdoartlogin_do/delsocialbind.do",
+                            dataType : "json",
+                            data : {
+                                providerid : pro
+                            },
                             success : function(data) {
                                 alert(data.msg);
                                 vm.boundinfo();
@@ -215,53 +185,8 @@
                         });
                     });
                 },
-                delmayun : function() {
-                    confirm('确定要删除关联？', function() {
-                        $.ajax({
-                            type : "POST",
-                            url : rootPath + "/thirdoartlogin_do/delmayun.do",
-                            success : function(data) {
-                                alert(data.msg);
-                                vm.boundinfo();
-                            }
-                        });
-                    });
-                },
-                delweixin : function() {
-                    confirm('确定要删除关联？', function() {
-                        $.ajax({
-                            type : "POST",
-                            url : rootPath + "/thirdoartlogin_do/delweixin.do",
-                            success : function(data) {
-                                alert(data.msg);
-                                vm.boundinfo();
-                            }
-                        });
-                    });
-                },
-                delqq : function() {
-                    confirm('确定要删除关联？', function() {
-                        $.ajax({
-                            type : "POST",
-                            url : rootPath + "/thirdoartlogin_do/delqq.do",
-                            success : function(data) {
-                                alert(data.msg);
-                                vm.boundinfo();
-                            }
-                        });
-                    });
-                },
-                delsina : function() {
-                    confirm('确定要删除关联？', function() {
-                        $.ajax({
-                            type : "POST",
-                            url : rootPath + "/thirdoartlogin_do/delsina.do",
-                            success : function(data) {
-                                alert(data.msg);
-                                vm.boundinfo();
-                            }
-                        });
-                    });
+                connected : function(pro) {
+                    location.href = rootPath + "/connect/" + pro + "Connected";
                 }
             }
         });

@@ -2,9 +2,6 @@ var vm = new Vue({
     el : '#rrapp',
     data : {
         title : "第三方配置",
-        mayun : {
-            client_ID : null
-        },
         sina : {
             client_ID : null
         },
@@ -14,7 +11,10 @@ var vm = new Vue({
         weixin : {
             appId : null
         },
-        thirdpart : 1
+        qq : {
+            client_ID : null
+        },
+        thirdpart : 2
     },
     methods : {
         query : function() {
@@ -24,7 +24,7 @@ var vm = new Vue({
                 url : rootPath + "/thirdoartlogin_do/info.do",
                 dataType : "json",
                 success : function(data) {
-                    vm.mayun = data.mayun;
+                    vm.qq = data.qq;
                     vm.sina = data.sina;
                     vm.baidu = data.baidu;
                     vm.weixin = data.weixin;
@@ -36,17 +36,14 @@ var vm = new Vue({
                 type : "POST",
                 url : rootPath + "/thirdoartlogin_do/update.do",
                 data : {
-                    mayunid : vm.mayun.client_ID,
-                    mayunSERCRET : vm.mayun.client_SERCRET,
-                    mayunurl : vm.mayun.redirect_URI,
                     baiduid : vm.baidu.client_ID,
                     baiduSERCRET : vm.baidu.client_SERCRET,
-                    baiduurl : vm.baidu.redirect_URI,
                     sinaid : vm.sina.client_ID,
                     sinaSERCRET : vm.sina.client_SERCRET,
-                    sinaurl : vm.sina.redirect_URI,
                     weixinid : vm.weixin.appId,
-                    weixinSERCRET : vm.weixin.secret
+                    weixinSERCRET : vm.weixin.secret,
+                    qqid : vm.qq.client_ID,
+                    qqSERCRET : vm.qq.client_SERCRET
                 },
                 success : function(data) {
                     alert(data.msg);
