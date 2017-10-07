@@ -52,20 +52,20 @@ QQ群：314658875（收费），310391018（免费）
 | ---------   | -----  | -----:|
 | spring boot    | 1.5.7 | |
 | spring         |    | |
-| springjdbc    |    | |
-| springmvc    |    | |
-|  spring social       |    | |
-| ehcache |   | |
-| spring session | | |
-| quartz| | |
-| freemarker | 2.X| |
-| swagger2| 2.X| |
-| activiti| 5.22.0 | |
-| vue.js| 2.X| |
-| Jquery|   | |
+| springjdbc    |    | 数据库操作模板|
+| springmvc    |    | 视图层|
+|  spring social       |    |社交登陆 |
+| ehcache |   | 缓存|
+| spring session | |session |
+| quartz| | 定时任务|
+| freemarker | 2.X|模板引擎 |
+| swagger2| 2.X| 在线API|
+| activiti| 5.22.0 | 工作流|
+| vue.js| 2.X| 前端JS|
+| Jquery|   | 前端JS|
 | qrcode|   | 二维码|
-| layerui|   | |
-| adminlte|   | |
+| layerui|   | 界面|
+| adminlte|   | 界面|
 | kaptche|   | 验证码|
 | druid|   | 数据库连接池|
 | javamail|   | 邮箱发送|
