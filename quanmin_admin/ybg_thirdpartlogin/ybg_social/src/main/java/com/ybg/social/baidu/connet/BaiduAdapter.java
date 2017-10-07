@@ -7,8 +7,6 @@ import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
 import com.ybg.social.baidu.api.Baidu;
 import com.ybg.social.baidu.api.BaiduUserInfo;
-import com.ybg.social.weixin.api.Weixin;
-import com.ybg.social.weixin.api.WeixinUserInfo;
 
 /** 微信 api适配器，将微信 api的数据模型转为spring social的标准模型。
  * 

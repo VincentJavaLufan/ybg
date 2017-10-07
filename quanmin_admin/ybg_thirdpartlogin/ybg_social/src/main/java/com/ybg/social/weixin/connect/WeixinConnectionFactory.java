@@ -31,20 +31,10 @@ public class WeixinConnectionFactory extends OAuth2ConnectionFactory<Weixin> {
 		return null;
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.springframework.social.connect.support.OAuth2ConnectionFactory#createConnection(org.springframework.social.oauth2.AccessGrant)
-	 */
 	public Connection<Weixin> createConnection(AccessGrant accessGrant) {
 		return new OAuth2Connection<Weixin>(getProviderId(), extractProviderUserId(accessGrant), accessGrant.getAccessToken(), accessGrant.getRefreshToken(), accessGrant.getExpireTime(), getOAuth2ServiceProvider(), getApiAdapter(extractProviderUserId(accessGrant)));
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.springframework.social.connect.support.OAuth2ConnectionFactory#createConnection(org.springframework.social.connect.ConnectionData)
-	 */
 	public Connection<Weixin> createConnection(ConnectionData data) {
 		return new OAuth2Connection<Weixin>(data, getOAuth2ServiceProvider(), getApiAdapter(data.getProviderUserId()));
 	}

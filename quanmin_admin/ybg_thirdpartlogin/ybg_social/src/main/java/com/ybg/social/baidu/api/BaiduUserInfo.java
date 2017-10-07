@@ -1,7 +1,4 @@
 package com.ybg.social.baidu.api;
-import org.json.simple.JSONObject;
-import com.baidu.api.utils.JsonUtil;
-
 public class BaiduUserInfo {
 	
 	String	userid;			// 当前登录用户的数字ID

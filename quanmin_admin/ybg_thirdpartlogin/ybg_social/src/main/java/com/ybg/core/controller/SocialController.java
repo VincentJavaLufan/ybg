@@ -6,14 +6,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.web.ProviderSignInUtils;
-import org.springframework.social.security.SocialAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,35 +45,36 @@ public class SocialController {
 	
 	@Autowired
 	private ProviderSignInUtils	providerSignInUtils;
-	 private RequestCache requestCache = new HttpSessionRequestCache();
+	private RequestCache		requestCache	= new HttpSessionRequestCache();
 	@Autowired
 	UserService					userService;
 	@Autowired
 	SocialLoginService			socialLoginService;
 	
-	 /** 当需要身份认证时，跳转到这里
+	/** 当需要身份认证时，跳转到这里
 	 *
 	 * @param request
 	 * @param response
 	 * @return
 	 * @throws IOException */
-	 @RequestMapping("/authentication/require")
-	 @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
-	 public String requireAuthentication(HttpServletRequest request, HttpServletResponse response, ModelMap map) {
-	 SavedRequest savedRequest = requestCache.getRequest(request, response);
-	 if (savedRequest != null) {
-	 String targetUrl = savedRequest.getRedirectUrl();
-	 return "redirect:" + targetUrl;
-	 // if (StringUtils.endsWithIgnoreCase(targetUrl, ".html")) {
-	 //
-	 // //redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
-	 // }
-	 }
-//	 map.put("error", "访问的服务需要身份认证");
-//	 return "redirect:/";
-	 System.out.println("需要认证");
-	 return "/";
-	 }
+	@RequestMapping("/authentication/require")
+	@ResponseStatus(code = HttpStatus.UNAUTHORIZED)
+	public String requireAuthentication(HttpServletRequest request, HttpServletResponse response, ModelMap map) {
+		SavedRequest savedRequest = requestCache.getRequest(request, response);
+		if (savedRequest != null) {
+			String targetUrl = savedRequest.getRedirectUrl();
+			return "redirect:" + targetUrl;
+			// if (StringUtils.endsWithIgnoreCase(targetUrl, ".html")) {
+			//
+			// //redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
+			// }
+		}
+		// map.put("error", "访问的服务需要身份认证");
+		// return "redirect:/";
+		System.out.println("需要认证");
+		return "/";
+	}
+	
 	@ResponseBody
 	@GetMapping("/social/user")
 	public SocialUserInfo getSocialUserInfo(HttpServletRequest request) {
@@ -107,7 +105,7 @@ public class SocialController {
 	
 	// 第三方 登陆注册新用户绑定方式
 	@ResponseBody
-	@PostMapping(value={"/common/thirdpart/register","/signup"})
+	@PostMapping(value = { "/common/thirdpart/register", "/signup" })
 	public Json regist(UserVO user, HttpServletRequest request, @RequestParam(name = "email", required = true) String email, @RequestParam(name = VrifyCodeUtil.PARAMETERNAME, required = true) String vrifyCode, HttpSession session) throws Exception {
 		Json j = new Json();
 		j.setMsg("操作成功");

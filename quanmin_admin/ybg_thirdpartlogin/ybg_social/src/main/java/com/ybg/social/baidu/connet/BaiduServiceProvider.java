@@ -5,8 +5,6 @@ package com.ybg.social.baidu.connet;
 import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 import com.ybg.social.baidu.api.Baidu;
 import com.ybg.social.baidu.api.BaiduImpl;
-import com.ybg.social.weixin.api.Weixin;
-import com.ybg.social.weixin.api.WeixinImpl;
 
 /** 微信的OAuth2流程处理器的提供器，供spring social的connect体系调用
  * 

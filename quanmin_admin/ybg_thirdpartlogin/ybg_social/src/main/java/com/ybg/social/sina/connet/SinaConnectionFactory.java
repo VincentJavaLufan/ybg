@@ -14,6 +14,5 @@ public class SinaConnectionFactory extends OAuth2ConnectionFactory<Sina> {
 	 * @param appSecret */
 	public SinaConnectionFactory(String providerId, String appId, String appSecret) {
 		super(providerId, new SinaServiceProvider(appId, appSecret), new SinaAdapter());
-		System.out.println("37:SinaConnectionFactory");
 	}
 }

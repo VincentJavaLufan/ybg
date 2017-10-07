@@ -9,6 +9,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.TokenStrategy;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /** Weixin API调用模板， scope为Request的Spring bean, 根据当前用户的accessToken创建。
@@ -16,12 +17,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author zhailiang */
 public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
 	
-	/**
-	 * 
-	 */
-	private ObjectMapper		objectMapper		= new ObjectMapper();
 	/** 获取用户信息的url */
-	private static final String	URL_GET_USER_INFO	= "https://api.weixin.qq.com/sns/userinfo?openid=";
+	private static final String URL_GET_USER_INFO = "https://api.weixin.qq.com/sns/userinfo?openid=";
 	
 	/** @param accessToken */
 	public WeixinImpl(String accessToken) {
@@ -46,7 +43,7 @@ public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
 		}
 		WeixinUserInfo profile = null;
 		try {
-			profile = objectMapper.readValue(response, WeixinUserInfo.class);
+			profile = JSONObject.parseObject(response, WeixinUserInfo.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
