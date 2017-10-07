@@ -23,38 +23,5 @@ public class BaiduConnectionFactory extends OAuth2ConnectionFactory<Baidu> {
 		super(providerId, new BaiduServiceProvider(appId, appSecret), new BaiduAdapter());
 	}
 	
-	/** 由于微信的openId是和accessToken一起返回的，所以在这里直接根据accessToken设置providerUserId即可，不用像QQ那样通过QQAdapter来获取 */
-	@Override
-	protected String extractProviderUserId(AccessGrant accessGrant) {
-		if (accessGrant instanceof BaiduAccessGrant) {
-			return ((BaiduAccessGrant) accessGrant).getUid();
-		}
-		return null;
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.springframework.social.connect.support.OAuth2ConnectionFactory#createConnection(org.springframework.social.oauth2.AccessGrant)
-	 */
-	public Connection<Baidu> createConnection(AccessGrant accessGrant) {
-		return new OAuth2Connection<Baidu>(getProviderId(), extractProviderUserId(accessGrant), accessGrant.getAccessToken(), accessGrant.getRefreshToken(), accessGrant.getExpireTime(), getOAuth2ServiceProvider(), getApiAdapter(extractProviderUserId(accessGrant)));
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.springframework.social.connect.support.OAuth2ConnectionFactory#createConnection(org.springframework.social.connect.ConnectionData)
-	 */
-	public Connection<Baidu> createConnection(ConnectionData data) {
-		return new OAuth2Connection<Baidu>(data, getOAuth2ServiceProvider(), getApiAdapter(data.getProviderUserId()));
-	}
-	
-	private ApiAdapter<Baidu> getApiAdapter(String providerUserId) {
-		return new BaiduAdapter(providerUserId);
-	}
-	
-	private OAuth2ServiceProvider<Baidu> getOAuth2ServiceProvider() {
-		return (OAuth2ServiceProvider<Baidu>) getServiceProvider();
-	}
+
 }

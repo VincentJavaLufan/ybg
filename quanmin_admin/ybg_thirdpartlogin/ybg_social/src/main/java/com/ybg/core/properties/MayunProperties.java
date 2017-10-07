@@ -3,7 +3,7 @@ import org.springframework.boot.autoconfigure.social.SocialProperties;
 
 public class MayunProperties extends SocialProperties {
 	
-	private String providerId = "baidu";
+	private String providerId = "mayun";
 	
 	public String getProviderId() {
 		return providerId;

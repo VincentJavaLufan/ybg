@@ -2,10 +2,13 @@
  * 
  */
 package com.ybg.social.qq.api;
+import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.TokenStrategy;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ybg.social.baidu.api.BaiduUserInfo;
 
 /** @author zhailiang */
 public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
@@ -14,7 +17,6 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
 	private static final String	URL_GET_USERINFO	= "https://graph.qq.com/user/get_user_info?oauth_consumer_key=%s&openid=%s";
 	private String				appId;
 	private String				openId;
-	private ObjectMapper		objectMapper		= new ObjectMapper();
 	
 	public QQImpl(String accessToken, String appId) {
 		super(accessToken, TokenStrategy.ACCESS_TOKEN_PARAMETER);
@@ -22,7 +24,7 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
 		String url = String.format(URL_GET_OPENID, accessToken);
 		String result = getRestTemplate().getForObject(url, String.class);
 		System.out.println(result);
-		this.openId = StringUtils.substringBetween(result, "\"openid\":\"", "\"}");
+		this.openId = new JSONObject().parseObject(result, Map.class).get("openid").toString();
 	}
 	
 	/*
@@ -37,8 +39,7 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
 		System.out.println(result);
 		QQUserInfo userInfo = null;
 		try {
-			userInfo = objectMapper.readValue(result, QQUserInfo.class);
-			userInfo.setOpenId(openId);
+			userInfo = JSONObject.parseObject(result, QQUserInfo.class);
 			return userInfo;
 		} catch (Exception e) {
 			throw new RuntimeException("获取用户信息失败", e);

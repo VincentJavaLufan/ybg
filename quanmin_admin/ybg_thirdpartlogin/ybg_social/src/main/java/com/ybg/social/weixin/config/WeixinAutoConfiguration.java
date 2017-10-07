@@ -13,6 +13,7 @@ import org.springframework.web.servlet.View;
 import com.ybg.api.service.WeixinApiService;
 import com.ybg.core.properties.WeixinProperties;
 import com.ybg.social.ImoocConnectView;
+import com.ybg.social.weixin.api.Weixin;
 import com.ybg.social.weixin.connect.WeixinConnectionFactory;
 
 /** 微信登录配置
@@ -33,7 +34,7 @@ public class WeixinAutoConfiguration extends SocialAutoConfigurerAdapter {
 	 * @see org.springframework.boot.autoconfigure.social.SocialAutoConfigurerAdapter #createConnectionFactory()
 	 */
 	@Override
-	protected ConnectionFactory<?> createConnectionFactory() {
+	protected ConnectionFactory<Weixin> createConnectionFactory() {
 		WeixinProperties weixinConfig = new WeixinProperties();
 		Map<String, String> setting = apiService.getSetting();
 		weixinConfig.setAppId(setting.get("appId"));

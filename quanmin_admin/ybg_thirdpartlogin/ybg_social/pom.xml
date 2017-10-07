@@ -27,9 +27,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ybg</groupId>
-			<artifactId>ybg_base_jar</artifactId>
+			<artifactId>ybg_email</artifactId>
 			<version>1.0.0</version>
-		</dependency><dependency>
+		</dependency>
+		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_login_qq</artifactId>
 			<version>1.0.0</version>
@@ -59,7 +60,6 @@
 			<artifactId>ybg_login_ali</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		
 	</dependencies>
 	<build>
 		<plugins>

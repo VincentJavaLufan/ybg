@@ -36,17 +36,20 @@ public class BaiduAdapter implements ApiAdapter<Baidu> {
 	 * @param values */
 	@Override
 	public void setConnectionValues(Baidu api, ConnectionValues values) {
-		BaiduUserInfo profile = api.getUserInfo(uid);
-		// values.setProviderUserId(profile.getOpenid());
-		// values.setDisplayName(profile.getNickname());
-		// values.setImageUrl(profile.getHeadimgurl());
+		BaiduUserInfo userInfo = api.getUserInfo(uid);
+		values.setDisplayName(userInfo.getUsername());// 昵称
+		values.setImageUrl(userInfo.getPortrait());// 用户头像
+		values.setProfileUrl(null);// 个人主页，不一定有。
+		values.setProviderUserId(userInfo.getUserid());// 服务商的用户ID ,QQ 的是QQid // 这个异常需要捕获处理 处理成运行时异常
 	}
 	
 	/** @param api
 	 * @return */
 	@Override
 	public UserProfile fetchUserProfile(Baidu api) {
-		return null;
+		BaiduUserInfo userInfo = api.getUserInfo(uid);
+		UserProfile bean = new UserProfile(userInfo.getUserid(), userInfo.getUsername(), null, null, null, userInfo.getUsername());
+		return bean;
 	}
 	
 	/** @param api

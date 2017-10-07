@@ -4,16 +4,16 @@
 package com.ybg.social.baidu.config;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+
 import org.springframework.boot.autoconfigure.social.SocialAutoConfigurerAdapter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.social.connect.ConnectionFactory;
 import com.baidu.oauth.service.BaiduUserService;
-import com.qq.service.QQuserService;
+
 import com.ybg.core.properties.BaiduProperties;
-import com.ybg.core.properties.QQProperties;
+
+import com.ybg.social.baidu.api.Baidu;
 import com.ybg.social.baidu.connet.BaiduConnectionFactory;
-import com.ybg.social.qq.connet.QQConnectionFactory;
 
 /** @author zhailiang */
 @Configuration
@@ -31,7 +31,7 @@ public class BaiduAutoConfig extends SocialAutoConfigurerAdapter {
 	 * @see org.springframework.boot.autoconfigure.social.SocialAutoConfigurerAdapter #createConnectionFactory()
 	 */
 	@Override
-	protected ConnectionFactory<?> createConnectionFactory() {
+	protected ConnectionFactory<Baidu> createConnectionFactory() {
 		Map<String, String> setting = baiduuserService.getSetting();
 		BaiduProperties baiduConfig = new BaiduProperties();
 		baiduConfig.setAppId(setting.get("client_ID"));
