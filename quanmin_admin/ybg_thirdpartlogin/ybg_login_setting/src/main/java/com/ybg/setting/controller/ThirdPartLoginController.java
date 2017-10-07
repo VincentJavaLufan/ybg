@@ -1,5 +1,6 @@
 package com.ybg.setting.controller;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -9,18 +10,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.baidu.oauth.controllor.BaiduConfig;
 import com.baidu.oauth.service.BaiduUserService;
+import com.qq.QQconfig;
 import com.qq.service.QQuserService;
 import com.ybg.api.domain.WeixinOAuthConfig;
 import com.ybg.api.service.WeixinApiService;
 import com.ybg.base.jdbc.BaseMap;
+import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Json;
-import com.ybg.mayun.oauth.controller.MayunConfig;
-import com.ybg.mayun.oauth.service.MayunUserService;
 import com.ybg.rbac.user.domain.UserVO;
-import com.ybg.weixin.login.service.WeixinUserService;
+import com.ybg.setting.domain.SocialUserVO;
+import com.ybg.setting.qvo.SocialUserQuery;
+import com.ybg.setting.service.SocialUserService;
+import cn.sina.WeiboConfig;
 import cn.sina.service.WeiboUserService;
 import io.swagger.annotations.Api;
-import weibo4j.util.WeiboConfig;
 
 @Api(tags = "第三方登陆设置项")
 @Controller
@@ -33,12 +36,12 @@ public class ThirdPartLoginController {
 	BaiduUserService	baiduUserService;
 	@Autowired
 	WeixinApiService	weixinApiService;
-	@Autowired
-	MayunUserService	mayunUserService;
+	// @Autowired
+	// MayunUserService mayunUserService;
 	@Autowired
 	QQuserService		qQuserService;
 	@Autowired
-	WeixinUserService	weixinUserService;
+	SocialUserService	socialUserService;
 	
 	@RequestMapping(value = "index.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String index() {
@@ -50,115 +53,78 @@ public class ThirdPartLoginController {
 	public Map<String, Object> info() {
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 		map.put("sina", weiboUserService.getSetting());
-		map.put("mayun", mayunUserService.getSetting());
+		// map.put("mayun", mayunUserService.getSetting());
 		map.put("weixin", weixinApiService.getSetting());
 		map.put("baidu", baiduUserService.getSetting());
+		map.put("qq", qQuserService.getSetting());
 		return map;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "update.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public Json update(String mayunid, String mayunSERCRET, String mayunurl, String baiduid, String baiduSERCRET, String baiduurl, String sinaid, String sinaSERCRET, String sinaurl, String weixinid, String weixinSERCRET) {
+	public Json update(String qqid, String qqSERCRET, String baiduid, String baiduSERCRET, String sinaid, String sinaSERCRET, String weixinid, String weixinSERCRET) {
 		Json j = new Json();
 		j.setMsg("操作成功");
-		weiboUserService.updateSetting(sinaid, sinaSERCRET, sinaurl);
-		mayunUserService.updateSetting(mayunid, mayunSERCRET, mayunurl);
+		// 1.4版本 删除码云登陆， 回调地址 不需要再填写
+		weiboUserService.updateSetting(sinaid, sinaSERCRET, "");
+		// mayunUserService.updateSetting(mayunid, mayunSERCRET, mayunurl);
 		weixinApiService.updateSetting(weixinid, weixinSERCRET);
-		baiduUserService.updateSetting(baiduid, baiduSERCRET, baiduurl);
+		baiduUserService.updateSetting(baiduid, baiduSERCRET, "");
+		qQuserService.updateSetting(qqid, qqSERCRET, "");
 		WeiboConfig.reflushProperties();
-		MayunConfig.reflushProperties();
+		// MayunConfig.reflushProperties();
 		WeixinOAuthConfig.reflushProperties();
 		BaiduConfig.reflushProperties();
+		QQconfig.reflushProperties();
 		j.setSuccess(true);
 		return j;
 	}
 	
-	/** 用户绑定信息 **/
+	/** 用户绑定信息
+	 * 
+	 * @throws Exception **/
 	@ResponseBody
 	@RequestMapping("boundinfo.do")
-	public Map<String, Object> boundinfo(@AuthenticationPrincipal UserVO user) {
+	public Map<String, Object> boundinfo(@AuthenticationPrincipal UserVO user) throws Exception {
 		Map<String, Object> map = new LinkedHashMap<>();
 		if (user == null) {
 			return null;
 		}
 		String userid = user.getId();
-		map.put("baiduid", baiduUserService.queryBaiduId(userid));
-		map.put("mayunid", mayunUserService.queryMayunId(userid));
-		map.put("qqid", qQuserService.queryQQId(userid));
-		map.put("weixinid", weixinUserService.queryWeixinId(userid));
-		map.put("sinaid", weiboUserService.queryWeiboId(userid));
+		SocialUserQuery qvo = new SocialUserQuery();
+		qvo.setUserid(userid);
+		List<SocialUserVO> list = socialUserService.query(qvo);
+		map.put("list", list);
+		map.put("baidu", checkproviderid("baidu", list));
+		map.put("qq", checkproviderid("qq", list));
+		map.put("sina", checkproviderid("sina", list));
+		map.put("weixin", checkproviderid("weixin", list));
 		return map;
 	}
 	
-	@ResponseBody
-	@RequestMapping("delbaidu.do")
-	public Json delbaidu(@AuthenticationPrincipal UserVO user) {
-		if (user == null) {
-			return null;
+	private boolean checkproviderid(String providerid, List<SocialUserVO> list) {
+		boolean flag = false;
+		for (SocialUserVO bean : list) {
+			if (bean.getProviderid().toLowerCase().equals(providerid.toLowerCase())) {
+				return true;
+			}
 		}
-		BaseMap<String, Object> conditionmap = new BaseMap<>();
-		conditionmap.put("userid", user.getId());
-		baiduUserService.remove(conditionmap);
-		Json j = new Json();
-		j.setSuccess(true);
-		j.setMsg("操作成功");
-		return j;
+		return flag;
 	}
 	
+	//
 	@ResponseBody
-	@RequestMapping("delsina.do")
-	public Json delsina(@AuthenticationPrincipal UserVO user) {
+	@RequestMapping("delsocialbind.do")
+	public Json delbaidu(@AuthenticationPrincipal UserVO user, String providerid) {
 		if (user == null) {
 			return null;
 		}
-		BaseMap<String, Object> conditionmap = new BaseMap<>();
-		conditionmap.put("userid", user.getId());
-		weiboUserService.remove(conditionmap);
-		Json j = new Json();
-		j.setSuccess(true);
-		j.setMsg("操作成功");
-		return j;
-	}
-	
-	@ResponseBody
-	@RequestMapping("delweixin.do")
-	public Json delweixin(@AuthenticationPrincipal UserVO user) {
-		if (user == null) {
-			return null;
+		if (QvoConditionUtil.checkString(providerid)) {
+			BaseMap<String, Object> conditionmap = new BaseMap<>();
+			conditionmap.put("userid", user.getId());
+			conditionmap.put("providerid", providerid);
+			socialUserService.remove(conditionmap);
 		}
-		BaseMap<String, Object> conditionmap = new BaseMap<>();
-		conditionmap.put("userid", user.getId());
-		weiboUserService.remove(conditionmap);
-		Json j = new Json();
-		j.setSuccess(true);
-		j.setMsg("操作成功");
-		return j;
-	}
-	
-	@ResponseBody
-	@RequestMapping("delmayun.do")
-	public Json delmayun(@AuthenticationPrincipal UserVO user) {
-		if (user == null) {
-			return null;
-		}
-		BaseMap<String, Object> conditionmap = new BaseMap<>();
-		conditionmap.put("userid", user.getId());
-		mayunUserService.remove(conditionmap);
-		Json j = new Json();
-		j.setSuccess(true);
-		j.setMsg("操作成功");
-		return j;
-	}
-	
-	@ResponseBody
-	@RequestMapping("delqq.do")
-	public Json delqq(@AuthenticationPrincipal UserVO user) {
-		if (user == null) {
-			return null;
-		}
-		BaseMap<String, Object> conditionmap = new BaseMap<>();
-		conditionmap.put("userid", user.getId());
-		qQuserService.remove(conditionmap);
 		Json j = new Json();
 		j.setSuccess(true);
 		j.setMsg("操作成功");

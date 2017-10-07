@@ -17,11 +17,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.ybg</groupId>
-			<artifactId>ybg_rbac</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ybg</groupId>
 			<artifactId>ybg_base_jar</artifactId>
 			<version>1.0.0</version>
 		</dependency>
@@ -32,17 +27,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_weixin</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ybg</groupId>
 			<artifactId>ybg_login_sina</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_mayun</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>
@@ -50,8 +35,11 @@
 			<artifactId>ybg_login_qq</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		
-		
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_weixin_api</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
