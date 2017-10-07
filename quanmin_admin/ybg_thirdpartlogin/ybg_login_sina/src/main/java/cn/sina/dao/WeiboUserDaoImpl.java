@@ -2,18 +2,12 @@ package cn.sina.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
-import com.ybg.base.jdbc.BaseMap;
-import com.ybg.base.jdbc.util.QvoConditionUtil;
-import cn.sina.domain.WeiboUserVO;
-import cn.sina.qvo.WeiboUserQuery;
 
 @Repository
 public class WeiboUserDaoImpl extends BaseDao implements WeiboUserDao {
@@ -23,44 +17,6 @@ public class WeiboUserDaoImpl extends BaseDao implements WeiboUserDao {
 	
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
-	}
-	
-	private static final String	QUERY_TABLE_COLUMN	= "weibo.id,weibo.userid,weibo.uid";
-	private static String		QUERY_TABLE_NAME	= "sina_user weibo";
-	
-	@Override
-	public void create(WeiboUserVO bean) throws Exception {
-		BaseMap<String, Object> createmap = new BaseMap<>();
-		createmap.put("userid", bean.getUserid());
-		createmap.put("uid", bean.getUid());
-		baseCreate(createmap, "sina_user", "id");
-	}
-	
-	@Override
-	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> wheremap) {
-		baseupdate(updatemap, wheremap, "sina_user");
-	}
-	
-	@Override
-	public void remove(BaseMap<String, Object> wheremap) {
-		baseremove(wheremap, "sina_user");
-	}
-	
-	@Override
-	public List<WeiboUserVO> query(WeiboUserQuery qvo) throws Exception {
-		StringBuilder sql = new StringBuilder();
-		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
-		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<WeiboUserVO>(WeiboUserVO.class));
-	}
-	
-	private String getcondition(WeiboUserQuery qvo) throws Exception {
-		StringBuilder sql = new StringBuilder();
-		sql.append(WHERE).append("1=1");
-		sqlappen(sql, "weibo.id", qvo.getId());
-		sqlappen(sql, "weibo.userid", qvo.getUserid());
-		sqlappen(sql, "weibo.uid", qvo.getUid());
-		return sql.toString();
 	}
 	
 	@Override
@@ -94,14 +50,5 @@ public class WeiboUserDaoImpl extends BaseDao implements WeiboUserDao {
 		sql.append(UPDATE).append(tablename).append(SET).append(" `value` ='").append(url).append("'");
 		sql.append(WHERE).append("`key`='redirect_URI'");
 		getJdbcTemplate().update(sql.toString());
-	}
-	
-	@Override
-	public String queryWeiboId(String userid) {
-		StringBuilder sql = new StringBuilder();
-		sql.append(SELECT).append("uid").append(FROM).append(QUERY_TABLE_NAME);
-		sql.append(WHERE).append("userid='").append(userid).append("'");
-		List<WeiboUserVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<WeiboUserVO>(WeiboUserVO.class));
-		return QvoConditionUtil.checkList(list) ? list.get(0).getUid() : "";
 	}
 }
