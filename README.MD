@@ -48,37 +48,37 @@ QQ群：314658875（收费），310391018（免费）
 
 --------------------------------------------
 
-| 技术选型      | 版本 |  描述 |
-| ---------   | -----  | -----:|
-| spring boot    | 1.5.7 | |
-| spring         |    | |
-| springjdbc    |    | 数据库操作模板|
-| springmvc    |    | 视图层|
-|  spring social       |    |社交登陆 |
-| ehcache |   | 缓存|
-| spring session | |session |
-| quartz| | 定时任务|
-| freemarker | 2.X|模板引擎 |
-| swagger2| 2.X| 在线API|
-| activiti| 5.22.0 | 工作流|
-| vue.js| 2.X| 前端JS|
-| Jquery|   | 前端JS|
-| qrcode|   | 二维码|
-| layerui|   | 界面|
-| adminlte|   | 界面|
-| kaptche|   | 验证码|
-| druid|   | 数据库连接池|
-| javamail|   | 邮箱发送|
-| mysql|  5.6 | 数据库|
-| poi|  | excel 操作|
-| javamelody|  | 系统监控|
-| https|  | 传输安全（可选是否集成）|
-| jwt|  | （未使用）|
-| oss|  | 云存储|
-| sdk-dysmsapi |  | 阿里云短信（未使用）|
-| spring-boot-admin |  | 系统监控|
-| jdk       |  8 | |
-| maven      |  3.3.9 | | 
+| 技术选型      | 版本 |  描述 | 版本新增|
+| ---------   | ----- | ----- | -----:||
+| spring boot    | 1.5.7 | |1.3版本之前|
+| spring         |    | |1.3版本之前|
+| springjdbc    |    | 数据库操作模板|1.3版本之前|
+| springmvc    |    | 视图层|1.3版本之前|
+|  spring social       |    |社交登陆 |1.4版本新增|
+| ehcache |   | 缓存|1.3版本之前|
+| spring session | |session |1.4版本新增|
+| quartz| | 定时任务|1.3版本之前|
+| freemarker | 2.X|模板引擎 |1.3版本之前|
+| swagger2| 2.X| 在线API|1.3版本之前|
+| activiti| 5.22.0 | 工作流|1.3版本之前|
+| vue.js| 2.X| 前端JS|1.3版本之前|
+| Jquery|   | 前端JS|1.3版本之前|
+| qrcode|   | 二维码|1.3版本之前|
+| layerui|   | 界面|1.3版本之前|
+| adminlte|   | 界面|1.3版本之前|
+| kaptche|   | 验证码|1.3版本之前|
+| druid|   | 数据库连接池|1.3版本之前|
+| javamail|   | 邮箱发送|1.3版本之前|
+| mysql|  5.6 | 数据库|1.3版本之前|
+| poi|  | excel 操作|1.3版本之前|
+| javamelody|  | 系统监控|1.3版本之前|
+| https|  | 传输安全（可选是否集成）|1.3版本之前|
+| jwt|  | （未使用）|1.3版本之前|
+| oss|  | 云存储|1.3版本之前|
+| sdk-dysmsapi |  | 阿里云短信（未使用）|1.3版本之前|
+| spring-boot-admin |  | 系统监控||
+| jdk       |  8 | |1.3版本之前|
+| maven      |  3.3.9 | | 1.3版本之前|
 
 
 --------------------------------------------
