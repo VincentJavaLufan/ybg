@@ -23,5 +23,12 @@ public class SinaOAuth2Template extends OAuth2Template {
 	public SinaOAuth2Template(String clientId, String clientSecret, String authorizeUrl, String accessTokenUrl) {
 		super(clientId, clientSecret, authorizeUrl, accessTokenUrl);
 		setUseParametersForClientAuthentication(true);
+		System.out.println("37:SinaOAuth2Template");
+	}
+	@Override
+	protected RestTemplate createRestTemplate() {
+		RestTemplate restTemplate = super.createRestTemplate();
+		restTemplate.getMessageConverters().add(new StringHttpMessageConverter(Charset.forName("UTF-8")));
+		return restTemplate;
 	}
 }

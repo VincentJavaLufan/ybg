@@ -27,6 +27,7 @@ public class SinaServiceProvider extends AbstractOAuth2ServiceProvider<Sina> {
 		// 父类的的 接口，第一个是应用号，第二个是 应用 密钥 ，第三个是 导向第四部URL,第四个是申请 access_token 的URL
 		super(new SinaOAuth2Template(appId, appSecret, URL_AUTHORIZE, URL_ACCESS_TOKEN));
 		this.appId = appId;
+		System.out.println("37:SinaServiceProvider");
 	}
 	
 	@Override

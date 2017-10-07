@@ -4,7 +4,6 @@ import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.TokenStrategy;
 import com.alibaba.fastjson.JSONObject;
 
-
 public class SinaImpl extends AbstractOAuth2ApiBinding implements Sina {
 	
 	private static final String	URL_GET_OPENID		= "https://api.weibo.com/2/users/show.json";
@@ -19,19 +18,15 @@ public class SinaImpl extends AbstractOAuth2ApiBinding implements Sina {
 		String result = getRestTemplate().getForObject(url, String.class);
 		System.out.println(result);
 		this.id = new JSONObject().parseObject(result, Map.class).get("id").toString();
+		System.out.println("22:SinaImpl");
 	}
 	
 	@Override
 	public SinaUserInfo getUserInfo(String uid) {
-		
 		String result = getRestTemplate().postForObject(URL_GET_USERINFO, null, String.class);
-		System.out.println(result);
-		try {
-			SinaUserInfo bean = JSONObject.parseObject(result, SinaUserInfo.class);
-			return bean;
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("获取用户信息失败", e);
-		}
+		System.out.println("28:" + result);
+		SinaUserInfo bean = JSONObject.parseObject(result, SinaUserInfo.class);
+		System.out.println(bean.getIdstr());
+		return bean;
 	}
 }

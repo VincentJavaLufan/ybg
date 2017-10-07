@@ -47,6 +47,7 @@ public class SinaAdapter implements ApiAdapter<Sina> {
 	@Override
 	public UserProfile fetchUserProfile(Sina api) {
 		SinaUserInfo userInfo = api.getUserInfo(id);
+		System.out.println("50:");
 		UserProfile bean = new UserProfile(userInfo.getIdstr(), userInfo.getName(), null, null, null, userInfo.getName());
 		return bean;
 	}
