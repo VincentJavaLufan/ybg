@@ -32,6 +32,7 @@ public class SinaServiceProvider extends AbstractOAuth2ServiceProvider<Sina> {
 	
 	@Override
 	public Sina getApi(String accessToken) {
+		System.out.println("35:SinaOAuth2Template");
 		return new SinaImpl(accessToken, appId);
 	}
 }

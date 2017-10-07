@@ -34,8 +34,9 @@ public class SinaAdapter implements ApiAdapter<Sina> {
 	 * @param values */
 	@Override
 	public void setConnectionValues(Sina api, ConnectionValues values) {
-		System.out.println("37:");
-		SinaUserInfo userInfo = api.getUserInfo(id);
+		
+		SinaUserInfo userInfo = api.getUserInfo();
+		System.out.println("37:"+userInfo);
 		values.setDisplayName(userInfo.getName());// 昵称
 		values.setImageUrl(userInfo.getProfile_image_url());// 用户头像
 		values.setProfileUrl(userInfo.getUrl());// 个人主页，不一定有。
@@ -46,8 +47,8 @@ public class SinaAdapter implements ApiAdapter<Sina> {
 	 * @return */
 	@Override
 	public UserProfile fetchUserProfile(Sina api) {
-		SinaUserInfo userInfo = api.getUserInfo(id);
 		System.out.println("50:");
+		SinaUserInfo userInfo = api.getUserInfo();
 		UserProfile bean = new UserProfile(userInfo.getIdstr(), userInfo.getName(), null, null, null, userInfo.getName());
 		return bean;
 	}

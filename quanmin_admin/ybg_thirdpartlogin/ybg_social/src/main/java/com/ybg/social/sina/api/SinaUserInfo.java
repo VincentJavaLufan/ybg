@@ -1,7 +1,12 @@
 package com.ybg.social.sina.api;
 public class SinaUserInfo {
 	
-	Integer	id;					// 用户UID
+	@Override
+	public String toString() {
+		return "SinaUserInfo [id=" + id + ", idstr=" + idstr + ", screen_name=" + screen_name + ", name=" + name + ", province=" + province + ", city=" + city + ", location=" + location + ", description=" + description + ", url=" + url + ", profile_image_url=" + profile_image_url + ", profile_url=" + profile_url + ", domain=" + domain + ", weihao=" + weihao + ", gender=" + gender + ", followers_count=" + followers_count + ", friends_count=" + friends_count + ", statuses_count=" + statuses_count + ", favourites_count=" + favourites_count + ", created_at=" + created_at + ", following=" + following + ", allow_all_act_msg=" + allow_all_act_msg + ", geo_enabled=" + geo_enabled + ", verified=" + verified + ", verified_type=" + verified_type + ", remark=" + remark + ", allow_all_comment=" + allow_all_comment + ", avatar_large=" + avatar_large + ", avatar_hd=" + avatar_hd + ", verified_reason=" + verified_reason + ", follow_me=" + follow_me + ", online_status=" + online_status + ", bi_followers_count=" + bi_followers_count + ", lang=" + lang + "]";
+	}
+	
+	Long	id;					// 用户UID
 	String	idstr;				// 字符串型的用户UID
 	String	screen_name;		// 用户昵称
 	String	name;				// 友好显示名称
@@ -36,11 +41,11 @@ public class SinaUserInfo {
 	Integer	bi_followers_count;	// 用户的互粉数
 	String	lang;				// 用户当前的语言版本，zh-cn：简体中文，zh-tw：繁体中文，en：英语
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	

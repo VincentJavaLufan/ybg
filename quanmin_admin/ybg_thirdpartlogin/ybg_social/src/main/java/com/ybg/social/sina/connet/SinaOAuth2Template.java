@@ -27,6 +27,7 @@ public class SinaOAuth2Template extends OAuth2Template {
 	}
 	@Override
 	protected RestTemplate createRestTemplate() {
+		System.out.println("30:SinaOAuth2Template");
 		RestTemplate restTemplate = super.createRestTemplate();
 		restTemplate.getMessageConverters().add(new StringHttpMessageConverter(Charset.forName("UTF-8")));
 		return restTemplate;
