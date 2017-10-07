@@ -204,12 +204,7 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		<!-- qq互联 -->
-		<dependency>
-			<groupId>net.gplatform</groupId>
-			<artifactId>Sdk4J</artifactId>
-			<version>2.0</version>
-		</dependency>
+		
 		<!-- rabbit <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-amqp</artifactId> </dependency> -->
 		<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
 		<dependency>
