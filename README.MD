@@ -33,7 +33,6 @@ QQ群：314658875（收费），310391018（免费）
 
 ### 代码结构
 
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0708/212856_12884395_880593.png "在这里输入图片标题")
 
 -----------------------------------------------------------------------------------------------------------------
 
@@ -52,4 +51,36 @@ QQ群：314658875（收费），310391018（免费）
 | svn 工具 | tortoiseSVN  |
 
 
+--------------------------------------------
 
+| 技术选型      | 版本 |  描述 |
+| ---------     | -----:|
+| spring boot    | 1.5.7 | |
+| spring         |    | |
+| springjdbc|    | |
+| springmvc|    | |
+|  spring social       |    | |
+| ehcache |   | |
+| spring session | | |
+| quartz| | |
+| freemarker | 2.X| |
+| swagger2| 2.X| |
+| activiti| 5.22.0 | |
+| vue.js| 2.X| |
+| Jquery|   | |
+| qrcode|   | 二维码|
+| layerui|   | |
+| adminlte|   | |
+| kaptche|   | 验证码|
+| druid|   | 数据库连接池|
+| javamail|   | 邮箱发送|
+| mysql|  5.6 | 数据库|
+| poi|  | excel 操作|
+| javamelody|  | 系统监控|
+| https|  | 传输安全（可选是否集成）|
+| jwt|  | （未使用）|
+| oss|  | 云存储|
+| sdk-dysmsapi|  | 阿里云短信（未使用）|
+| spring-boot-admin|  | 系统监控|
+| jdk|  8 | |
+| maven|  3.3.9 | |
