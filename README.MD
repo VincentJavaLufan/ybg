@@ -54,9 +54,9 @@ QQ群：314658875（收费），310391018（免费）
 | spring         |    | |1.3版本之前|
 | springjdbc    |    | 数据库操作模板|1.3版本之前|
 | springmvc    |    | 视图层|1.3版本之前|
-|  spring social       |    |社交登陆 |1.4版本新增|
+|  spring social       |    |社交登陆 |`1.4版本新增`|
 | ehcache |   | 缓存|1.3版本之前|
-| spring session | |session |1.4版本新增|
+| spring session | |session |`1.4版本新增`|
 | quartz| | 定时任务|1.3版本之前|
 | freemarker | 2.X|模板引擎 |1.3版本之前|
 | swagger2| 2.X| 在线API|1.3版本之前|
