@@ -23,10 +23,7 @@ import com.ybg.rbac.user.service.LoginService;
 
 @Configuration
 public class SpringMVCConfiguration extends WebMvcConfigurerAdapter {
-	@Bean
-	public UserDetailsService userDetailsService() {
-		return new LoginService();
-	}
+	
 
 	// public void addInterceptors(InterceptorRegistry registry) {
 	// registry.addInterceptor(new
