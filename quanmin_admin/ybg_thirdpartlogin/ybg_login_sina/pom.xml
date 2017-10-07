@@ -18,11 +18,7 @@
   <dependencies>
 		<dependency>
 			<groupId>com.ybg</groupId>
-			<artifactId>ybg_rbac</artifactId>
-			<version>1.0.0</version>
-		</dependency><dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_base_jar</artifactId>
+			<artifactId>ybg_base_jdbc</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 	</dependencies><build>
