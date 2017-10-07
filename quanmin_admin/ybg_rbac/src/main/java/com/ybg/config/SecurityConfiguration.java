@@ -22,6 +22,9 @@ import org.springframework.security.web.access.expression.DefaultWebSecurityExpr
 import org.springframework.security.web.access.expression.WebExpressionVoter;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.session.InvalidSessionStrategy;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
+import org.springframework.social.security.SpringSocialConfigurer;
 import com.ybg.config.security.LoginSuccessHandler;
 import com.ybg.config.security.MyAccessDecisionManager;
 import com.ybg.config.security.MySecurityMetadataSource;
@@ -33,13 +36,17 @@ import com.ybg.rbac.user.service.LoginService;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	private LoginService				userDetailsService;
+	private LoginService						userDetailsService;
 	@Autowired
-	private YcAnthencationProder		provider;
+	private YcAnthencationProder				provider;
 	@Autowired
-	DataSource							datasource;
+	private MySecurityMetadataSource			mySecurityMetadataSource;
 	@Autowired
-	private MySecurityMetadataSource	mySecurityMetadataSource;
+	private SpringSocialConfigurer				imoocSocialSecurityConfig;
+	@Autowired
+	private SessionInformationExpiredStrategy	sessionInformationExpiredStrategy;
+	@Autowired
+	private InvalidSessionStrategy				invalidSessionStrategy;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -54,6 +61,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// http.csrf().disable();
 		// / ************分隔***/
 		// http.addFilterAfter(MyUsernamePasswordAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+		http.apply(imoocSocialSecurityConfig);
+		// http.apply(socialConfigurer).and().apply(socialConfigurer);
+		http.sessionManagement().invalidSessionStrategy(invalidSessionStrategy).maximumSessions(1).maxSessionsPreventsLogin(true).expiredSessionStrategy(sessionInformationExpiredStrategy);
 		// 开启默认登录页面
 		http.authorizeRequests().anyRequest().authenticated().withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
 			

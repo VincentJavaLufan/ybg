@@ -28,8 +28,10 @@ import com.ybg.base.util.UserConstant;
 import com.ybg.base.util.VrifyCodeUtil;
 import com.ybg.component.email.sendemail.SendEmailInter;
 import com.ybg.component.email.sendemail.SendQQmailImpl;
-import com.ybg.rbac.domain.Loginproxy;
+
 import com.ybg.rbac.resources.service.ResourcesService;
+import com.ybg.rbac.support.controller.LoginProxyController;
+import com.ybg.rbac.support.domain.Loginproxy;
 import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.qvo.UserQuery;
@@ -401,8 +403,3 @@ public class LoginControllor {
 		return buffer.toString();
 	}
 }
-// @ApiOperation(value = "注册页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
-// @RequestMapping(value = { "/common/login_do/toregister.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-// public String toregister() {
-// return "/register";
-// }
