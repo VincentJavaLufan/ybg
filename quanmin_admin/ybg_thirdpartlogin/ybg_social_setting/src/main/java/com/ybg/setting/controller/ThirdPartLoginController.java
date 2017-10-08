@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ybg.api.domain.WeixinOAuthConfig;
 import com.ybg.api.service.WeixinApiService;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
@@ -17,11 +16,8 @@ import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.setting.domain.SocialUserVO;
 import com.ybg.setting.qvo.SocialUserQuery;
 import com.ybg.setting.service.SocialUserService;
-import com.ybg.social.baidu.controllor.BaiduConfig;
 import com.ybg.social.baidu.service.BaiduUserService;
-import com.ybg.social.qq.QQconfig;
 import com.ybg.social.qq.service.QQuserService;
-import com.ybg.social.sina.WeiboConfig;
 import com.ybg.social.sina.service.WeiboUserService;
 import io.swagger.annotations.Api;
 
@@ -36,8 +32,6 @@ public class ThirdPartLoginController {
 	BaiduUserService	baiduUserService;
 	@Autowired
 	WeixinApiService	weixinApiService;
-	// @Autowired
-	// MayunUserService mayunUserService;
 	@Autowired
 	QQuserService		qQuserService;
 	@Autowired
@@ -53,7 +47,6 @@ public class ThirdPartLoginController {
 	public Map<String, Object> info() {
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 		map.put("sina", weiboUserService.getSetting());
-		// map.put("mayun", mayunUserService.getSetting());
 		map.put("weixin", weixinApiService.getSetting());
 		map.put("baidu", baiduUserService.getSetting());
 		map.put("qq", qQuserService.getSetting());
@@ -67,15 +60,9 @@ public class ThirdPartLoginController {
 		j.setMsg("操作成功");
 		// 1.4版本 删除码云登陆， 回调地址 不需要再填写
 		weiboUserService.updateSetting(sinaid, sinaSERCRET, "");
-		// mayunUserService.updateSetting(mayunid, mayunSERCRET, mayunurl);
 		weixinApiService.updateSetting(weixinid, weixinSERCRET);
 		baiduUserService.updateSetting(baiduid, baiduSERCRET, "");
 		qQuserService.updateSetting(qqid, qqSERCRET, "");
-		WeiboConfig.reflushProperties();
-		// MayunConfig.reflushProperties();
-		WeixinOAuthConfig.reflushProperties();
-		BaiduConfig.reflushProperties();
-		QQconfig.reflushProperties();
 		j.setSuccess(true);
 		return j;
 	}
