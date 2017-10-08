@@ -8,10 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.baidu.oauth.controllor.BaiduConfig;
-import com.baidu.oauth.service.BaiduUserService;
-import com.qq.QQconfig;
-import com.qq.service.QQuserService;
 import com.ybg.api.domain.WeixinOAuthConfig;
 import com.ybg.api.service.WeixinApiService;
 import com.ybg.base.jdbc.BaseMap;
@@ -21,8 +17,12 @@ import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.setting.domain.SocialUserVO;
 import com.ybg.setting.qvo.SocialUserQuery;
 import com.ybg.setting.service.SocialUserService;
-import cn.sina.WeiboConfig;
-import cn.sina.service.WeiboUserService;
+import com.ybg.social.baidu.controllor.BaiduConfig;
+import com.ybg.social.baidu.service.BaiduUserService;
+import com.ybg.social.qq.QQconfig;
+import com.ybg.social.qq.service.QQuserService;
+import com.ybg.social.sina.WeiboConfig;
+import com.ybg.social.sina.service.WeiboUserService;
 import io.swagger.annotations.Api;
 
 @Api(tags = "第三方登陆设置项")

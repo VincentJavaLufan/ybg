@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.ybg.social;
 import org.springframework.social.security.SocialAuthenticationFilter;
 import org.springframework.social.security.SpringSocialConfigurer;

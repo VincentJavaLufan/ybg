@@ -7,7 +7,7 @@
 		<version>1.0.0</version>
 	</parent>
 	<groupId>com.ybg</groupId>
-	<artifactId>ybg_login_setting</artifactId>
+	<artifactId>ybg_social_setting</artifactId>
 	<version>1.0.0</version>
 	<name>ybg_login_setting</name>
 	<url>http://maven.apache.org</url>
@@ -20,21 +20,13 @@
 			<artifactId>ybg_base_jar</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_baidu</artifactId>
+			<artifactId>ybg_social</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_sina</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_qq</artifactId>
-			<version>1.0.0</version>
-		</dependency>
+		
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_weixin_api</artifactId>

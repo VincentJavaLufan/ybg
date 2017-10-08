@@ -8,10 +8,9 @@ import org.springframework.boot.autoconfigure.social.SocialAutoConfigurerAdapter
 import org.springframework.context.annotation.Configuration;
 import org.springframework.social.connect.ConnectionFactory;
 import com.ybg.core.properties.SinaProperties;
-import com.ybg.social.baidu.connet.BaiduConnectionFactory;
 import com.ybg.social.sina.api.Sina;
 import com.ybg.social.sina.connet.SinaConnectionFactory;
-import cn.sina.service.WeiboUserService;
+import com.ybg.social.sina.service.WeiboUserService;
 
 /** @author zhailiang */
 @Configuration

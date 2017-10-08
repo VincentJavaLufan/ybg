@@ -40,40 +40,11 @@
 			<artifactId>ybg_company</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- 第三方登陆 
+		
+		<!-- 社交登陆 -->
 		<dependency>
 			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_qq</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_baidu</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_sina</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_mayun</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_weixin</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_ali</artifactId>
-			<version>1.0.0</version>
-		</dependency>-->
-		<dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_setting</artifactId>
+			<artifactId>ybg_social_setting</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>
@@ -81,7 +52,7 @@
 			<artifactId>ybg_social</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- 第三方登陆 end -->
+		<!-- 社交登陆 end -->
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_mq</artifactId>

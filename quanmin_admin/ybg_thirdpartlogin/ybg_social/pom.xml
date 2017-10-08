@@ -30,30 +30,10 @@
 			<artifactId>ybg_email</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_qq</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_baidu</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_sina</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_weixin_api</artifactId>
-			<version>1.0.0</version>
-		</dependency>
 		
 		<dependency>
 			<groupId>com.ybg</groupId>
-			<artifactId>ybg_login_ali</artifactId>
+			<artifactId>ybg_weixin_api</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 	</dependencies>

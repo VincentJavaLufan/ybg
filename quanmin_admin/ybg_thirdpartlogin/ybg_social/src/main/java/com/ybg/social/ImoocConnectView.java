@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.ybg.social;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
