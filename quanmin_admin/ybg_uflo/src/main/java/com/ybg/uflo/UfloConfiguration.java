@@ -9,7 +9,7 @@ import com.bstek.uflo.console.UfloServlet;
 @ImportResource("classpath:uflocontext.xml")
 public class UfloConfiguration {
 	
-	@Bean
+	@Bean(name="ufloServlet")
 	public ServletRegistrationBean buildUfloServlet() {
 		return new ServletRegistrationBean(new UfloServlet(), "/uflo/*");
 	}

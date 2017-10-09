@@ -9,7 +9,7 @@ import com.bstek.urule.console.servlet.URuleServlet;
 @ImportResource({"classpath:urulecontext.xml"})
 public class URuleConfiguration {
 	
-	@Bean
+	@Bean(name="uRuleServlet")
 	public ServletRegistrationBean registerURuleServlet() {
 		return new ServletRegistrationBean(new URuleServlet(), "/urule/*");
 	}

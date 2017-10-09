@@ -4,17 +4,17 @@
 	">
 	<import resource="classpath:uflo-console-context.xml" />
 	<bean class="com.ybg.uflo.UFLOEnvironmentProvider">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-		<property name="platformTransactionManager" ref="transactionManager"></property>
+		<property name="sessionFactory" ref="uflosessionFactory"></property>
+		<property name="platformTransactionManager" ref="uflotransactionManager"></property>
 	</bean>
-	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory"></property>
+	<bean id="uflotransactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="uflosessionFactory"></property>
 	</bean>
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="url" value="jdbc:mysql://localhost:3306/uflo?useUnicode=true&amp;characterEncoding=UTF-8" />
+	<bean id="uflodataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="url" value="jdbc:mysql://localhost:3306/uflo?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=true" />
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="username" value="root" />
-		<property name="password" value="qwertyuioplm" />
+		<property name="password" value="root" />
 		<property name="minIdle" value="10" />
 		<property name="maxActive" value="20" />
 		<property name="maxWait" value="1000" />
@@ -22,8 +22,8 @@
 		<property name="removeAbandoned" value="true" />
 		<property name="logAbandoned" value="true" />
 	</bean>
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
+	<bean id="uflosessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="uflodataSource" />
 		<property name="packagesToScan">
 			<list>
 				<value>com.bstek.uflo.model</value>

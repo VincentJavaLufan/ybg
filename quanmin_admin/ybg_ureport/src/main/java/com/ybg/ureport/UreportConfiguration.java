@@ -9,7 +9,7 @@ import com.bstek.ureport.console.UReportServlet;
 @ImportResource("classpath:ureportcontext.xml")
 public class UreportConfiguration {
 	
-	@Bean
+	@Bean(name="uReportServlet")
 	public ServletRegistrationBean buildUfloServlet() {
 		return new ServletRegistrationBean(new UReportServlet(), "/ureport/*");
 	}
