@@ -40,7 +40,6 @@
 			<artifactId>ybg_company</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		
 		<!-- 社交登陆 -->
 		<dependency>
 			<groupId>com.ybg</groupId>
@@ -147,6 +146,24 @@
 		<!-- 二维码 end -->
 		<!-- https 按需引入 <dependency> <groupId>com.ybg</groupId> <artifactId>ybg_https</artifactId> <version>1.0.0</version> </dependency> -->
 		<!--https end -->
+		<!-- -->
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_uflo</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<!-- -->
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_ureport</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<!--  -->
+		<dependency>
+			<groupId>com.ybg</groupId>
+			<artifactId>ybg_urule</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

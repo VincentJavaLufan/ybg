@@ -59,6 +59,9 @@
 		<module>ybg_qrcode</module>
 		<!-- https 配置模块 非必需 -->
 		<module>ybg_https</module>
+		<module>ybg_uflo</module>
+		<module>ybg_ureport</module>
+		<module>ybg_urule</module>
 	</modules>
 	<build>
 		<defaultGoal>compile</defaultGoal>

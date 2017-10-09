@@ -49,13 +49,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
-			<!--排除默认 见 http://www.cnblogs.com/tomlxq/p/5514658.html 
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.tomcat</groupId>
-					<artifactId>tomcat-jdbc</artifactId>
-				</exclusion>
-			</exclusions>-->
+			<!--排除默认 见 http://www.cnblogs.com/tomlxq/p/5514658.html <exclusions> <exclusion> <groupId>org.apache.tomcat</groupId> <artifactId>tomcat-jdbc</artifactId> </exclusion> </exclusions> -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -80,11 +74,10 @@
 			<artifactId>spring-session</artifactId>
 		</dependency>
 		<dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-social-linkedin</artifactId>
-
-</dependency>
-		<!-- spring social  -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-social-linkedin</artifactId>
+		</dependency>
+		<!-- spring social -->
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-config</artifactId>
@@ -101,7 +94,7 @@
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-web</artifactId>
 		</dependency>
-		<!-- spring social  end-->
+		<!-- spring social end -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
@@ -178,12 +171,12 @@
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
-			<version>3.9</version>
+			<version>3.17</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>3.9</version>
+			<version>3.17</version>
 		</dependency>
 		<!-- excel工具 end -->
 		<dependency>
@@ -204,7 +197,6 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		
 		<!-- rabbit <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-amqp</artifactId> </dependency> -->
 		<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
 		<dependency>
@@ -482,7 +474,8 @@
 				<exclusion>
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-beans</artifactId>
-				</exclusion><exclusion>
+				</exclusion>
+				<exclusion>
 					<groupId>org.springframework.security</groupId>
 					<artifactId>spring-security-core</artifactId>
 				</exclusion>
@@ -500,7 +493,8 @@
 				<exclusion>
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-beans</artifactId>
-				</exclusion><exclusion>
+				</exclusion>
+				<exclusion>
 					<groupId>org.springframework.security</groupId>
 					<artifactId>spring-security-core</artifactId>
 				</exclusion>
@@ -518,7 +512,8 @@
 				<exclusion>
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-beans</artifactId>
-				</exclusion><exclusion>
+				</exclusion>
+				<exclusion>
 					<groupId>org.springframework.security</groupId>
 					<artifactId>spring-security-core</artifactId>
 				</exclusion>
@@ -557,7 +552,8 @@
 				<exclusion>
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-beans</artifactId>
-				</exclusion><exclusion>
+				</exclusion>
+				<exclusion>
 					<groupId>org.springframework.security</groupId>
 					<artifactId>spring-security-core</artifactId>
 				</exclusion>
@@ -575,7 +571,8 @@
 				<exclusion>
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-beans</artifactId>
-				</exclusion><exclusion>
+				</exclusion>
+				<exclusion>
 					<groupId>org.springframework.security</groupId>
 					<artifactId>spring-security-core</artifactId>
 				</exclusion>
@@ -593,7 +590,8 @@
 				<exclusion>
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-beans</artifactId>
-				</exclusion><exclusion>
+				</exclusion>
+				<exclusion>
 					<groupId>org.springframework.security</groupId>
 					<artifactId>spring-security-core</artifactId>
 				</exclusion>
@@ -641,6 +639,39 @@
 			<artifactId>mapdb</artifactId>
 			<version>1.0.9</version>
 		</dependency>
+		<!-- 规则报表 -->
+		<dependency>
+			<groupId>com.bstek.uflo</groupId>
+			<artifactId>uflo-console</artifactId>
+			<version>2.0.3-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.bstek.ureport</groupId>
+			<artifactId>ureport2-console</artifactId>
+			<version>2.1.3</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.poi</groupId>
+					<artifactId>poi-ooxml</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>commons-beanutils</groupId>
+					<artifactId>commons-beanutils-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.bstek.urule</groupId>
+			<artifactId>urule-console</artifactId>
+			<version>2.0.5</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.derby</groupId>
+                    <artifactId>derby</artifactId>
+                </exclusion>
+            </exclusions>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>
@@ -660,4 +691,11 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<repositories>
+		<repository>
+			<id>sonatype</id>
+			<url>https://oss.sonatype.org/content/groups/public/</url>
+		</repository>
+	</repositories>
 </project>
