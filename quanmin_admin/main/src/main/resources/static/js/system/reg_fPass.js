@@ -256,6 +256,7 @@ layui.config({
             dataType : "json",
             success : function(data) {
                 alert(data.msg);
+                $("#updatePassForm").find("img").attr("src","/defaultKaptcha?d='+new Date()*1");
             }
         });
         

@@ -224,6 +224,7 @@ layui.config({
                 // 此处可对 data 作相关处理
                 alert(data.msg);
                 $("#regForm").resetForm(); // 提交后重置表单
+                $("#regForm").find("img").attr("src","/defaultKaptcha?d='+new Date()*1");
             }
         });
         return false;
@@ -243,6 +244,7 @@ layui.config({
             dataType : "json",
             success : function(data) {
                 alert(data.msg);
+                $("#updatePassForm").find("img").attr("src","/defaultKaptcha?d='+new Date()*1");
             }
         });
         
