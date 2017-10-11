@@ -41,15 +41,21 @@ layui.config({
 		$('body').removeClass('site-mobile');
 	});
 
-	// 添加新窗口
+	// 添加新窗口	
 	$("body").on("click", ".layui-nav .layui-nav-item a", function() {
-		//如果不存在子级
+		//如果不存在子级		
 		if($(this).siblings().length == 0) {
 			addTab($(this));
+			$(this).parent("li").siblings().addClass("layui-nav-itemed");
 			$('body').removeClass('site-mobile'); //移动端点击菜单关闭菜单层
 		}
-		$(this).parent("li").siblings().removeClass("layui-nav-itemed");
+		else{
+			$(this).parent("li").siblings().removeClass("layui-nav-itemed");
+		}
+		
 	})
+
+
 
 	//刷新后还原打开的窗口
 	if(window.sessionStorage.getItem("menu") != null) {
