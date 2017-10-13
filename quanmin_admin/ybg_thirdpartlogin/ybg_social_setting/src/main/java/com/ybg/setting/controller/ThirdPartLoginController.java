@@ -17,6 +17,7 @@ import com.ybg.setting.domain.SocialUserVO;
 import com.ybg.setting.qvo.SocialUserQuery;
 import com.ybg.setting.service.SocialUserService;
 import com.ybg.social.baidu.service.BaiduUserService;
+import com.ybg.social.github.service.GithubuserService;
 import com.ybg.social.qq.service.QQuserService;
 import com.ybg.social.sina.service.WeiboUserService;
 import io.swagger.annotations.Api;
@@ -36,7 +37,8 @@ public class ThirdPartLoginController {
 	QQuserService		qQuserService;
 	@Autowired
 	SocialUserService	socialUserService;
-	
+	@Autowired
+	GithubuserService githubuserService;
 	@RequestMapping(value = "index.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String index() {
 		return "/thirdpartlogin/setting";
@@ -50,12 +52,13 @@ public class ThirdPartLoginController {
 		map.put("weixin", weixinApiService.getSetting());
 		map.put("baidu", baiduUserService.getSetting());
 		map.put("qq", qQuserService.getSetting());
+		map.put("github", githubuserService.getSetting());
 		return map;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "update.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public Json update(String qqid, String qqSERCRET, String baiduid, String baiduSERCRET, String sinaid, String sinaSERCRET, String weixinid, String weixinSERCRET) {
+	public Json update(String qqid, String qqSERCRET, String baiduid, String baiduSERCRET, String sinaid, String sinaSERCRET, String weixinid, String weixinSERCRET,String githubid,String githubSERCRET) {
 		Json j = new Json();
 		j.setMsg("操作成功");
 		// 1.4版本 删除码云登陆， 回调地址 不需要再填写
@@ -63,6 +66,7 @@ public class ThirdPartLoginController {
 		weixinApiService.updateSetting(weixinid, weixinSERCRET);
 		baiduUserService.updateSetting(baiduid, baiduSERCRET, "");
 		qQuserService.updateSetting(qqid, qqSERCRET, "");
+		
 		j.setSuccess(true);
 		return j;
 	}
@@ -86,6 +90,7 @@ public class ThirdPartLoginController {
 		map.put("qq", checkproviderid("qq", list));
 		map.put("sina", checkproviderid("sina", list));
 		map.put("weixin", checkproviderid("weixin", list));
+		map.put("github", checkproviderid("github", list));
 		return map;
 	}
 	
