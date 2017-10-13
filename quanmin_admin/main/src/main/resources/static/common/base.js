@@ -1,4 +1,5 @@
 ﻿function alert(text) {
+    layer.closeAll();//关闭所有 
     layer.alert(text, {
         icon : 8
     });
@@ -11,10 +12,12 @@
 
 //重写confirm式样框
 window.confirm = function(msg, callback){
-    parent.layer.confirm(msg, {btn: ['确定','取消']},
+    layer.confirm(msg, {btn: ['确定','取消']},
     function(){//确定事件
+       
         if(typeof(callback) === "function"){
             callback("ok");
+           alert(1);
         }
     });
 }
