@@ -71,6 +71,15 @@
 								</form>
 							</td>
 						</tr>
+						<tr>
+							<td>Github</td>
+							<td>
+								<button v-if="github" type="button" class="btn btn-danger marR10" @click="delsocial('github')">删除</button>
+								<form v-if="!github" action="/connect/github" method="post">
+									<button class="btn btn-primary marR10" type="submit">绑定Github</button>
+								</form>
+							</td>
+						</tr>
 					</table>
 				</div>
 				<!-- /.box-body -->
