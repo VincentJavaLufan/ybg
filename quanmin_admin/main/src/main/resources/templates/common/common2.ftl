@@ -40,9 +40,9 @@
 <script type="text/javascript" src="/js/jquery/jquery-validation/jquery.validate.min.js"></script>
 <script type="text/javascript" src="/js/jquery/jquery-validation/messages_cn.js"></script>
 <script type="text/javascript" src="/js/layer-v1.9.2/layer/layer.js"></script>
-<script type="text/javascript" src="/common/common.js"></script>
 <script type="text/javascript" src="/common/lyGrid.js"></script>
-<script type="text/javascript" src="/common/base.js"></script>
+
+
 
 <script src="/js/plugins/treegrid/jquery.treegrid.min.js"></script>
 <script src="/js/plugins/treegrid/jquery.treegrid.bootstrap3.js"></script>
@@ -142,3 +142,5 @@ function getSelectEx(byId,options){
 	}
 }
 </script>
+<script type="text/javascript" src="/common/common.js"></script>
+<script type="text/javascript" src="/common/base.js"></script>

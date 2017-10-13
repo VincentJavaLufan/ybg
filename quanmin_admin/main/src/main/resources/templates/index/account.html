@@ -123,6 +123,7 @@
                 qq : null,
                 sina : null,
                 baidu : null,
+                github:null,
                 password : "",
                 newPassword2 : "",
                 newPassword : ""
@@ -138,6 +139,7 @@
                             vm.qq = data.qq;
                             vm.sina = data.sina;
                             vm.baidu = data.baidu;
+                            vm.github=data.github;
                         }
                     });
                 },
@@ -188,11 +190,15 @@
                                 providerid : pro
                             },
                             success : function(data) {
+                                layer.closeAll();
                                 alert(data.msg);
                                 vm.boundinfo();
+                                return false;
                             }
                         });
+                        
                     });
+                   
                 },
                 connected : function(pro) {
                     location.href = rootPath + "/connect/" + pro + "Connected";

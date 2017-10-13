@@ -14,6 +14,9 @@ var vm = new Vue({
         qq : {
             client_ID : null
         },
+        github : {
+            client_ID : null
+        },
         thirdpart : 2
     },
     methods : {
@@ -28,6 +31,7 @@ var vm = new Vue({
                     vm.sina = data.sina;
                     vm.baidu = data.baidu;
                     vm.weixin = data.weixin;
+                    vm.github = data.github;
                 }
             });
         },
@@ -43,7 +47,9 @@ var vm = new Vue({
                     weixinid : vm.weixin.appId,
                     weixinSERCRET : vm.weixin.secret,
                     qqid : vm.qq.client_ID,
-                    qqSERCRET : vm.qq.client_SERCRET
+                    qqSERCRET : vm.qq.client_SERCRET,
+                    githubid : vm.github.client_ID,
+                    githubSERCRET : vm.github.client_SERCRET
                 },
                 success : function(data) {
                     alert(data.msg);

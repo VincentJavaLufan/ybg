@@ -15,6 +15,7 @@
 							<option value="3">新浪</option>
 							<option value="4">百度</option>
 							<option value="5">QQ</option>
+							<option value="6">Github</option>
 						</select>
 					</div>
 				</div>
@@ -64,6 +65,18 @@
 					<div class="col-sm-2 control-label">qq密钥</div>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" v-model="qq.client_SERCRET" placeholder="" />
+					</div>
+				</div>
+					<div class="form-group" v-show="thirdpart == 6">
+					<div class="col-sm-2 control-label">GithubAPPid</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="github.client_ID" placeholder="" />
+					</div>
+				</div>
+				<div class="form-group" v-show="thirdpart == 6">
+					<div class="col-sm-2 control-label">Github密钥</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="github.client_SERCRET" placeholder="" />
 					</div>
 				</div>
 				<div class="form-group">
