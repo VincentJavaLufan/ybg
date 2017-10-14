@@ -40,7 +40,7 @@
 							<td>
 								<button v-if="baidu" type="button" class="btn btn-danger marR10" @click="delsocial('baidu')">删除</button>
 								<form v-if="!baidu" action="/connect/baidu" method="post">
-									<button class="btn btn-primary marR10" type="submit">绑定百度</button>
+									<button class="btn btn-primary marR10" type="submit" disabled="disabled">绑定百度</button>
 								</form>
 							</td>
 						</tr>
@@ -49,7 +49,7 @@
 							<td>
 								<button v-if="sina" type="button" class="btn btn-danger marR10" @click="delsocial('sina')">删除</button>
 								<form v-if="!sina" action="/connect/sina" method="post">
-									<button class="btn btn-primary marR10" type="submit">绑定新浪</button>
+									<button class="btn btn-primary marR10" type="submit" disabled="disabled">绑定新浪</button>
 								</form>
 							</td>
 						</tr>
@@ -58,7 +58,7 @@
 							<td>
 								<button v-if="weixin" type="button" class="btn btn-danger marR10" @click="delsocial('weixin')">删除</button>
 								<form v-if="!weixin" action="/connect/weixin" method="post">
-									<button class="btn btn-primary marR10" type="submit">绑定微信</button>
+									<button class="btn btn-primary marR10" type="submit" disabled="disabled">绑定微信</button>
 								</form>
 							</td>
 						</tr>
@@ -67,7 +67,7 @@
 							<td>
 								<button v-if="qq" type="button" class="btn btn-danger marR10" @click="delsocial('qq')">删除</button>
 								<form v-if="!qq" action="/connect/qq" method="post">
-									<button class="btn btn-primary marR10" type="submit">绑定QQ</button>
+									<button class="btn btn-primary marR10" type="submit" disabled="disabled">绑定QQ</button>
 								</form>
 							</td>
 						</tr>
@@ -76,7 +76,7 @@
 							<td>
 								<button v-if="github" type="button" class="btn btn-danger marR10" @click="delsocial('github')">删除</button>
 								<form v-if="!github" action="/connect/github" method="post">
-									<button class="btn btn-primary marR10" type="submit">绑定Github</button>
+									<button class="btn btn-primary marR10" type="submit" disabled="disabled">绑定Github</button>
 								</form>
 							</td>
 						</tr>
