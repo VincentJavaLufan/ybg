@@ -41,19 +41,7 @@ layui.config({
 		$('body').removeClass('site-mobile');
 	});
 
-	// 添加新窗口	
-	$("body").on("click", ".layui-nav .layui-nav-item a", function() {
-		//如果不存在子级		
-		if($(this).siblings().length == 0) {
-			addTab($(this));
-			$(this).parent("li").siblings().addClass("layui-nav-itemed");
-			$('body').removeClass('site-mobile'); //移动端点击菜单关闭菜单层
-		}
-		else{
-			$(this).parent("li").siblings().removeClass("layui-nav-itemed");
-		}
-		
-	})
+	
 
 
 
@@ -160,3 +148,16 @@ layui.config({
 function addTab(_this) {
 	tab.tabAdd(_this);
 }
+//添加新窗口    
+$("body").on("click", ".layui-nav .layui-nav-item a", function() {
+    //如果不存在子级       
+    if($(this).siblings().length == 0) {
+        addTab($(this));
+    //    $(this).parent("li").siblings().addClass("layui-nav-itemed");
+       // $('body').removeClass('site-mobile'); //移动端点击菜单关闭菜单层
+    }
+//    else{
+//        $(this).parent("li").siblings().removeClass("layui-nav-itemed");
+//    }
+    
+})
