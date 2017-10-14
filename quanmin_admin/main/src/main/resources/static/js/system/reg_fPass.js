@@ -211,6 +211,9 @@ layui.config({
             success : function(data) { // data 保存提交后返回的数据，一般为 json 数据
                 // 此处可对 data 作相关处理
                 alert(data.msg);
+                if(data.success){
+                    location.href="/common/login_do/index.do";
+                }
                //需要刷新验证码？
                 $("#loginForm").find("img").attr("src","/defaultKaptcha?d='+new Date()*1");
             }
@@ -233,7 +236,7 @@ layui.config({
             data : $(this).serialize(),
             success : function(data) { // data 保存提交后返回的数据，一般为 json 数据
                 // 此处可对 data 作相关处理
-                alert(data.msg);
+                alert(data.msg);              
                 $("#regForm").resetForm(); // 提交后重置表单
                 //需要刷新验证码？
                 $("#regForm").find("img").attr("src","/defaultKaptcha?d='+new Date()*1");
