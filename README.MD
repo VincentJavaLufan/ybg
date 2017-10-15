@@ -45,6 +45,7 @@ QQ群：`314658875（收费）`，310391018（免费）
 | mysql |    5.6+|
 | svn 插件 | eclipse SVN插件  |
 | svn 工具 | tortoiseSVN  |
+| Maven镜像 | t阿里云的maven镜像  |
 
 
 
