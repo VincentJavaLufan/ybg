@@ -89,8 +89,60 @@ QQ群：`314658875（收费）`，310391018（免费）
 
 --------------------------------------------
 
+### `如何打包上线`。
 
- **系统内部界面** 
+
+1.5.4版本之后的打包方式  不再使用 打包成一个jar 的形式，也不在使用tomcat 目录形式打包。而是使用lib 外置模块方式打包。这个更加贴近模块化的开发思想。
+
+如何打包？ 
+
+1.先编译您的项目  单击quanming_admin 模块 run as 如下图
+
+
+![输入图片说明](https://gitee.com/uploads/images/2017/1015/152101_a579f13f_880593.png "屏幕截图.png")
+
+![输入图片说明](https://gitee.com/uploads/images/2017/1015/152250_19b6b979_880593.png "屏幕截图.png")
+
+执行 compile 命令
+
+
+2.重复以上操作。但是compile 命令 改成 package.
+
+3.执行打包命令后 在 main 模块下面有一个压缩包。如果没有请单击target 目录 F5刷新
+
+![输入图片说明](https://gitee.com/uploads/images/2017/1015/152346_4fb4f76d_880593.png "屏幕截图.png")
+
+解压 main-1.0.0.exe-distribution.tar 就是网站部署的目录。 里面有 bat文件。双击就是运行网站。即时运行。也有.sh liunix 运行。
+如果不喜欢 还可以直接复制里面的命令 到 命令行界面上。这种方式  可以方便修改配置文件。模块替换上线。
+
+
+打包后目录结构
+
+![输入图片说明](https://gitee.com/uploads/images/2017/1015/153043_179ec88a_880593.png "屏幕截图.png")
+
+
+![输入图片说明](https://gitee.com/uploads/images/2017/1015/152756_e0944e2c_880593.png "屏幕截图.png")
+
+
+![输入图片说明](https://gitee.com/uploads/images/2017/1015/152850_6abf7502_880593.png "屏幕截图.png")
+
+
+![输入图片说明](https://gitee.com/uploads/images/2017/1015/153329_60c29628_880593.png "屏幕截图.png")
+
+
+运行脚本 运营网站
+
+bat 是windows 执行
+
+sh 是liunix 执行
+
+
+
+
+-------------------------------------------------
+
+###  `系统内部界面` 
+
 
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225615_5146cdb0_880593.png "屏幕截图.png")
 
