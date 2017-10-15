@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- 整个项目打包成jar 的方式， 参考使用，不再维护。  缺点  上线不方便。 供参考，有些模块已经不用了 自己注意下。 -->
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
