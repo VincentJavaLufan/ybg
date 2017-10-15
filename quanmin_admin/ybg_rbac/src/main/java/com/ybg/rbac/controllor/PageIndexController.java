@@ -64,9 +64,9 @@ public class PageIndexController {
 		}
 		// 取消加载 菜单
 		// 登陆的信息回传页面
-		model.addAttribute("systemname", SystemConstant.getValue("systemname"));
-		model.addAttribute("systemauth", SystemConstant.getValue("systemauth"));
-		model.addAttribute("icp", SystemConstant.getValue("icp"));
+		model.addAttribute("systemname", SystemConstant.getSystemName());
+		model.addAttribute("systemauth", SystemConstant.getSystemAuth());
+		model.addAttribute("icp", SystemConstant.getICP());
 		model.addAttribute("systemdomain", SystemConstant.getSystemdomain());
 		model.addAttribute("userFormMap", user);
 		return "/index/admin/index";

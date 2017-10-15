@@ -33,7 +33,7 @@
                 <include>env/uat/*</include>
                 <include>env/prod/*</include> -->
                 <!-- *.* -->
-                <include>application.properties</include>
+                <include>*.*</include>
             </includes>
         </fileSet>
         <fileSet>
