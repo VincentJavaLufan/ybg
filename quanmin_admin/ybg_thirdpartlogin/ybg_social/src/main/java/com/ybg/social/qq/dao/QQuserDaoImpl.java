@@ -14,7 +14,7 @@ public class QQuserDaoImpl extends BaseDao implements QQuserDao {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
+	@Override
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}

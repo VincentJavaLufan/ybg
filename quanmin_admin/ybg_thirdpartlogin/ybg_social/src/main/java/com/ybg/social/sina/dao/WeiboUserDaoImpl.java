@@ -14,7 +14,7 @@ public class WeiboUserDaoImpl extends BaseDao implements WeiboUserDao {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
+	@Override
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}

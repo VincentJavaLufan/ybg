@@ -1,5 +1,6 @@
 package com.ybg.social.sina.api;
 import java.util.Map;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.TokenStrategy;
 import com.alibaba.fastjson.JSONObject;
@@ -21,7 +22,8 @@ public class SinaImpl extends AbstractOAuth2ApiBinding implements Sina {
 		this.appId = appId;
 		this.accessToken = accessToken;
 		String result = getRestTemplate().postForObject(URL_GET_OPENID, null, String.class);
-		this.id = new JSONObject().parseObject(result, Map.class).get("uid").toString();
+		String uid = StringUtils.substringBetween(result, "\"uid\":\"", "\"}");
+		setId(id);
 	}
 	
 	@Override
@@ -29,5 +31,29 @@ public class SinaImpl extends AbstractOAuth2ApiBinding implements Sina {
 		String result = HttpUtil.get(URL_GET_USERINFO + "?access_token=" + accessToken + "&uid=" + this.id);
 		SinaUserInfo bean = JSONObject.parseObject(result, SinaUserInfo.class);
 		return bean;
+	}
+	
+	public String getAppId() {
+		return appId;
+	}
+	
+	public void setAppId(String appId) {
+		this.appId = appId;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public String getAccessToken() {
+		return accessToken;
+	}
+	
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
 	}
 }

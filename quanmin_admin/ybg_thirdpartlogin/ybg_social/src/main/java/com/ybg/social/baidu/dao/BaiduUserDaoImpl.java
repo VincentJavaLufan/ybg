@@ -14,7 +14,7 @@ public class BaiduUserDaoImpl extends BaseDao implements BaiduUserDao {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
+	@Override
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}

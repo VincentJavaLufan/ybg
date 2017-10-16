@@ -31,7 +31,7 @@ import com.ybg.base.util.UserConstant;
 import com.ybg.base.util.VrifyCodeUtil;
 import com.ybg.component.email.sendemail.SendEmailInter;
 import com.ybg.component.email.sendemail.SendQQmailImpl;
-import com.ybg.core.support.SocialLoginService;
+import com.ybg.core.support.SocialLoginServiceImpl;
 import com.ybg.core.support.SocialUserInfo;
 import com.ybg.rbac.support.controller.LoginProxyController;
 import com.ybg.rbac.support.domain.Loginproxy;
@@ -49,7 +49,7 @@ public class SocialController {
 	@Autowired
 	UserService					userService;
 	@Autowired
-	SocialLoginService			socialLoginService;
+	SocialLoginServiceImpl		socialLoginService;
 	
 	/** 当需要身份认证时，跳转到这里
 	 *

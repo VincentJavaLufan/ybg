@@ -16,7 +16,7 @@ import com.ybg.rbac.user.dao.UserDao;
 import com.ybg.rbac.user.domain.UserVO;
 
 @Repository
-public class SocialLoginService implements SocialUserDetailsService {
+public class SocialLoginServiceImpl implements SocialUserDetailsService {
 	
 	@Autowired
 	UserDao				userdao;

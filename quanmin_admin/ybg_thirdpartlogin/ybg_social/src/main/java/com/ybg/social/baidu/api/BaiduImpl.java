@@ -20,7 +20,7 @@ public class BaiduImpl extends AbstractOAuth2ApiBinding implements Baidu {
 		this.appId = appId;
 		String url = String.format(URL_GET_OPENID, accessToken);
 		String result = getRestTemplate().getForObject(url, String.class);
-		this.uid = new JSONObject().parseObject(result, Map.class).get("uid").toString();
+		this.uid = StringUtils.substringBetween(result, "\"uid\":\"", "\"}");
 	}
 	
 	@Override

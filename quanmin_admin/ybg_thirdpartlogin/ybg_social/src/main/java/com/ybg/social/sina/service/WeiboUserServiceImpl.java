@@ -9,7 +9,7 @@ public class WeiboUserServiceImpl implements WeiboUserService {
 	
 	@Autowired
 	WeiboUserDao weiboUserDao;
-	
+	@Override
 	public Map<String, String> getSetting() {
 		return weiboUserDao.getSetting();
 	}
