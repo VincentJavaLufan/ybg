@@ -16,7 +16,7 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
 	public MyAccessDeniedHandler(String accessDeniedUrl) {
 		this.accessDeniedUrl = accessDeniedUrl;
 	}
-	
+	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
 		response.sendRedirect(accessDeniedUrl);
 		request.getSession().setAttribute("message", "你没有权限访问这个页面!");

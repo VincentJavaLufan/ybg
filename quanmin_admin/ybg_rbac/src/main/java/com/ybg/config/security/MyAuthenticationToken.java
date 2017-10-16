@@ -36,10 +36,11 @@ public class MyAuthenticationToken extends AbstractAuthenticationToken implement
 	
 	// ~ Methods
 	// ========================================================================================================
+	@Override
 	public Object getPrincipal() {
 		return this.principal;
 	}
-	
+	@Override
 	public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
 		super.setAuthenticated(true);
 	}
