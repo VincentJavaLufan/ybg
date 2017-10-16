@@ -279,15 +279,17 @@ public class DateUtil {
 	
 	public final static String dateTips(String dateStr) {
 		Date dt = parseSimpleDate(dateStr);
-		if (dt == null){
-			return dateStr;}
+		if (dt == null) {
+			return dateStr;
+		}
 		return dateTimeTips(dt);
 	}
 	
 	public final static String dateTimeTips(String dateTime) {
 		Date dt = parseSimpleDateTime(dateTime); // 转换成日期时间类型
-		if (dt == null){
-			return dateTime;}
+		if (dt == null) {
+			return dateTime;
+		}
 		return dateTimeTips(dt);
 	}
 	
