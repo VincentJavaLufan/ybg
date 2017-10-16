@@ -21,7 +21,7 @@ public class EmailMessage {
 	private MimeMessage		mimeMessage		= null;
 	private String			saveAttachPath	= "";					// 附件下载后的存放目录
 	private StringBuffer	bodytext		= new StringBuffer();	// 存放邮件内容
-	private String			dateformat		= "yy-MM-dd HH:mm";	// 默认的日前显示格式
+	private String			dateformat		= "yy-MM-dd HH:mm";		// 默认的日前显示格式
 	
 	public EmailMessage(MimeMessage mimeMessage) {
 		this.mimeMessage = mimeMessage;
@@ -125,8 +125,9 @@ public class EmailMessage {
 		String contenttype = part.getContentType();
 		int nameindex = contenttype.indexOf("name");
 		boolean conname = false;
-		if (nameindex != -1)
+		if (nameindex != -1) {
 			conname = true;
+		}
 		if (part.isMimeType("text/plain") && !conname) {
 			bodytext.append((String) part.getContent());
 		}
@@ -186,17 +187,20 @@ public class EmailMessage {
 			for (int i = 0; i < mp.getCount(); i++) {
 				BodyPart mpart = mp.getBodyPart(i);
 				String disposition = mpart.getDisposition();
-				if (disposition != null && (disposition.equals(Part.ATTACHMENT) || disposition.equals(Part.INLINE)))
+				if (disposition != null && (disposition.equals(Part.ATTACHMENT) || disposition.equals(Part.INLINE))) {
 					attachflag = true;
+				}
 				else if (mpart.isMimeType("multipart/*")) {
 					attachflag = isContainAttach((Part) mpart);
 				}
 				else {
 					String contype = mpart.getContentType();
-					if (contype.toLowerCase().indexOf("application") != -1)
+					if (contype.toLowerCase().indexOf("application") != -1) {
 						attachflag = true;
-					if (contype.toLowerCase().indexOf("name") != -1)
+					}
+					if (contype.toLowerCase().indexOf("name") != -1) {
 						attachflag = true;
+					}
 				}
 			}
 		}
@@ -258,12 +262,14 @@ public class EmailMessage {
 		String osName = System.getProperty("os.name");
 		String storedir = getAttachPath();
 		String separator = "";
-		if (osName == null)
+		if (osName == null) {
 			osName = "";
+		}
 		if (osName.toLowerCase().indexOf("win") != -1) {
 			separator = "\\";
-			if (storedir == null || storedir.equals(""))
+			if (storedir == null || storedir.equals("")) {
 				storedir = "c:\\tmp";
+			}
 		}
 		else {
 			separator = "/";
