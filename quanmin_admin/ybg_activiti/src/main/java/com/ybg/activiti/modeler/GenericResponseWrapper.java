@@ -36,7 +36,7 @@ public class GenericResponseWrapper extends HttpServletResponseWrapper {
 		super.setContentLength(length);
 	}
 	
-	@Override
+	
 	public int getContentLength() {
 		return contentLength;
 	}
