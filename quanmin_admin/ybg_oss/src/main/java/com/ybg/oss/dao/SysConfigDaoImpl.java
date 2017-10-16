@@ -19,6 +19,7 @@ public class SysConfigDaoImpl extends BaseDao implements SysConfigDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
+	@Override
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}

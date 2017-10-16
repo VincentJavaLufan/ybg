@@ -18,6 +18,7 @@ public class SysOssDaoImpl extends BaseDao implements SysOssDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
+	@Override
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
