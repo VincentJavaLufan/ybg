@@ -19,16 +19,19 @@ public class JsonpCallbackFilter implements Filter {
 	
 	private static Logger log = LoggerFactory.getLogger(JsonpCallbackFilter.class);
 	
+	@Override
 	public void init(FilterConfig fConfig) throws ServletException {
 	}
 	
+	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		Map<String, String[]> parms = httpRequest.getParameterMap();
 		if (parms.containsKey("callback")) {
-			if (log.isDebugEnabled())
+			if (log.isDebugEnabled()) {
 				log.debug("Wrapping response with JSONP callback '" + parms.get("callback")[0] + "'");
+			}
 			OutputStream out = httpResponse.getOutputStream();
 			GenericResponseWrapper wrapper = new GenericResponseWrapper(httpResponse);
 			chain.doFilter(request, wrapper);
@@ -48,6 +51,7 @@ public class JsonpCallbackFilter implements Filter {
 		}
 	}
 	
+	@Override
 	public void destroy() {
 	}
 }
