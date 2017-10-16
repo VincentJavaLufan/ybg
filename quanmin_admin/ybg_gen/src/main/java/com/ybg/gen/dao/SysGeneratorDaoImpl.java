@@ -24,6 +24,7 @@ public class SysGeneratorDaoImpl extends BaseDao implements SysGeneratorDao {
 	// @Qualifier(DataBaseConstant.DB_EDU)
 	JdbcTemplate jdbcTemplate;
 	
+	@Override
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
