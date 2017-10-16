@@ -16,12 +16,14 @@ public class EncodingUtil {
 		tmp.ensureCapacity(source.length() * 6);
 		for (i = 0; i < source.length(); i++) {
 			j = source.charAt(i);
-			if (Character.isDigit(j) || Character.isLowerCase(j) || Character.isUpperCase(j))
+			if (Character.isDigit(j) || Character.isLowerCase(j) || Character.isUpperCase(j)) {
 				tmp.append(j);
+			}
 			else if (j < 256) {
 				tmp.append("%");
-				if (j < 16)
+				if (j < 16) {
 					tmp.append("0");
+				}
 				tmp.append(Integer.toString(j, 16));
 			}
 			else {

@@ -13,8 +13,9 @@ public class StringUtil {
 	
 	/** 过滤将要写入到XML文件中的字符串，即过滤掉<![CDATA[和]]>标签 */
 	public static String toXMLFilter(Object obj) {
-		if (trim(obj).equals(""))
+		if (trim(obj).equals("")) {
 			return " ";
+		}
 		return trim(obj).replaceAll("<!\\[CDATA\\[", "&lt;!CDATA").replaceAll("\\]\\]>", "]] >");
 	}
 	
@@ -25,8 +26,9 @@ public class StringUtil {
 	
 	/** 对一字符串数组进行去空格操作 */
 	public final static String[] trim(String[] aStr) {
-		if (aStr == null)
+		if (aStr == null) {
 			return null;
+		}
 		for (int i = 0; i < aStr.length; i++) {
 			aStr[i] = trim(aStr[i]);
 		}
@@ -62,8 +64,9 @@ public class StringUtil {
 	 * @return 转换后的结果 */
 	public final static float parseFloat(String str, float defaultVal) {
 		try {
-			if (str == null)
+			if (str == null) {
 				return defaultVal;
+			}
 			return Float.parseFloat(str);
 		} catch (NumberFormatException ex) {
 			return defaultVal;
@@ -93,8 +96,9 @@ public class StringUtil {
 	 *            默认值
 	 * @return 转换后的结果 */
 	public final static int[] parseInt(String[] str, int defaultVal) {
-		if (str == null || str.length < 1)
+		if (str == null || str.length < 1) {
 			return new int[0];
+		}
 		int[] result = new int[str.length];
 		for (int i = 0; i < str.length; i++) {
 			result[i] = parseInt(str[i], defaultVal);
@@ -110,8 +114,9 @@ public class StringUtil {
 	 *            默认值
 	 * @return 转换后的结果 */
 	public final static Integer[] parseInteger(String[] str, int defaultVal) {
-		if (str == null || str.length < 1)
+		if (str == null || str.length < 1) {
 			return new Integer[0];
+		}
 		Integer[] result = new Integer[str.length];
 		for (int i = 0; i < str.length; i++) {
 			result[i] = parseInt(str[i], defaultVal);
@@ -125,18 +130,21 @@ public class StringUtil {
 	 * @param target
 	 * @return */
 	public final static int[] exclude(int[] src, int[] target) {
-		if (target == null || target.length < 1)
+		if (target == null || target.length < 1) {
 			return src;
+		}
 		StringBuilder tmp = new StringBuilder();
 		for (int tt : src) {
-			if (!include(target, tt))
+			if (!include(target, tt)) {
 				tmp.append(tt + ",");
+			}
 		}
 		if (tmp.length() > 1 && tmp.charAt(tmp.length() - 1) == ',') {
 			tmp.deleteCharAt(tmp.length() - 1);
 		}
-		if (tmp.toString().trim().length() < 1)
+		if (tmp.toString().trim().length() < 1) {
 			return new int[0];
+		}
 		String[] array = tmp.toString().split(",");
 		return parseInt(array, 0);
 	}
@@ -147,40 +155,46 @@ public class StringUtil {
 	 * @param target
 	 * @return */
 	public final static String[] exclude(String[] src, String[] target) {
-		if (target == null || target.length < 1)
+		if (target == null || target.length < 1) {
 			return src;
+		}
 		StringBuilder tmp = new StringBuilder();
 		for (String str : src) {
-			if (!include(target, str))
+			if (!include(target, str)) {
 				tmp.append(str + ",");
+			}
 		}
 		if (tmp.length() > 1 && tmp.charAt(tmp.length() - 1) == ',') {
 			tmp.deleteCharAt(tmp.length() - 1);
 		}
-		if (tmp.toString().trim().length() < 1)
+		if (tmp.toString().trim().length() < 1) {
 			return new String[0];
+		}
 		return tmp.toString().split(",");
 	}
 	
 	/** 将指定的数组字符串使用指定的符号进行连接. */
 	public final static String join(Object[] src, String spliter) {
-		if (src == null || src.length < 1)
+		if (src == null || src.length < 1) {
 			return "";
+		}
 		StringBuffer tmp = new StringBuffer();
 		// String mySpliter = trim(spliter).intern() == "" ? "," : spliter;
 		String mySpliter = trim(spliter);
 		for (int i = 0; i < src.length; i++) {
 			tmp.append(src[i]);
-			if (i < src.length - 1)
+			if (i < src.length - 1) {
 				tmp.append(mySpliter);
+			}
 		}
 		return tmp.toString();
 	}
 	
 	/** 将指定的数组字符串使用指定的符号进行连接. */
 	public final static String join(int[] src, String spliter) {
-		if (src == null || src.length < 1)
+		if (src == null || src.length < 1) {
 			return "";
+		}
 		StringBuffer tmp = new StringBuffer();
 		String mySpliter = trim(spliter).intern() == "" ? "," : spliter;
 		for (int i = 0; i < src.length; i++) {
@@ -195,8 +209,9 @@ public class StringUtil {
 	 * @param str
 	 * @return */
 	public final static String[] arround(String[] src, String str) {
-		if (src == null || src.length < 1)
+		if (src == null || src.length < 1) {
 			return src;
+		}
 		String[] result = new String[src.length];
 		for (int i = 0; i < src.length; i++) {
 			result[i] = str + src[i] + str;
@@ -218,8 +233,9 @@ public class StringUtil {
 	 * @return */
 	public final static String toMethodName(String name) {
 		String tmp = trim(name).intern();
-		if (tmp == "")
+		if (tmp == "") {
 			return "";
+		}
 		if (tmp.length() < 2) {
 			return "set" + name.toUpperCase();
 		}
@@ -233,8 +249,9 @@ public class StringUtil {
 	 * @param obj
 	 * @return */
 	public final static String reflectObj(Object obj) {
-		if (obj == null)
+		if (obj == null) {
 			return "";
+		}
 		return ReflectionToStringBuilder.reflectionToString(obj);
 	}
 	
@@ -243,8 +260,9 @@ public class StringUtil {
 	 * @param map
 	 * @return */
 	public final static String mapToString(Map<?, ?> map) {
-		if (map == null)
+		if (map == null) {
 			return null;
+		}
 		StringBuilder buf = new StringBuilder("[");
 		Iterator<?> it = map.keySet().iterator();
 		while (it.hasNext()) {
@@ -262,20 +280,25 @@ public class StringUtil {
 	 * @param array
 	 * @return */
 	public final static boolean sameLength(String[]... array) {
-		if (array.length <= 1)
+		if (array.length <= 1) {
 			return true;
+		}
 		for (int i = 0; i < array.length; i++) {
 			String[] str1 = array[i];
 			for (int j = i + 1; j < array.length; j++) {
 				String[] str2 = array[j];
-				if (str1 == null && str2 == null)
+				if (str1 == null && str2 == null) {
 					continue;
-				if (str1 == null && str2 != null)
+				}
+				if (str1 == null && str2 != null) {
 					return false;
-				if (str1 != null && str2 == null)
+				}
+				if (str1 != null && str2 == null) {
 					return false;
-				if (str1.length != str2.length)
+				}
+				if (str1.length != str2.length) {
 					return false;
+				}
 			}
 		}
 		return true;
@@ -287,11 +310,13 @@ public class StringUtil {
 	 * @param test
 	 * @return */
 	public final static boolean include(int[] source, int test) {
-		if (source == null || source.length < 1)
+		if (source == null || source.length < 1) {
 			return false;
+		}
 		for (int tmp : source) {
-			if (tmp == test)
+			if (tmp == test) {
 				return true;
+			}
 		}
 		return false;
 	}
@@ -302,13 +327,16 @@ public class StringUtil {
 	 * @param test
 	 * @return */
 	public final static boolean include(String[] source, String test) {
-		if (source == null || source.length < 1)
+		if (source == null || source.length < 1) {
 			return false;
+		}
 		for (String tmp : source) {
-			if (tmp == null && test == null)
+			if (tmp == null && test == null) {
 				return true;
-			if (tmp != null && tmp.equals(test))
+			}
+			if (tmp != null && tmp.equals(test)) {
 				return true;
+			}
 		}
 		return false;
 	}
@@ -319,13 +347,16 @@ public class StringUtil {
 	 * @param test
 	 * @return */
 	public final static boolean includeIgnoreCase(String[] source, String test) {
-		if (source == null || source.length < 1)
+		if (source == null || source.length < 1) {
 			return false;
+		}
 		for (String tmp : source) {
-			if (tmp == null && test == null)
+			if (tmp == null && test == null) {
 				return true;
-			if (tmp != null && tmp.equalsIgnoreCase(test))
+			}
+			if (tmp != null && tmp.equalsIgnoreCase(test)) {
 				return true;
+			}
 		}
 		return false;
 	}
@@ -335,10 +366,12 @@ public class StringUtil {
 	 * @param str
 	 * @return */
 	public final static String capitalize(String str) {
-		if (str == null || str.length() < 1)
+		if (str == null || str.length() < 1) {
 			return str;
-		if (str.length() == 1)
+		}
+		if (str.length() == 1) {
 			return str.toUpperCase();
+		}
 		return str.substring(0, 1).toUpperCase() + str.substring(1);
 	}
 	
@@ -347,10 +380,12 @@ public class StringUtil {
 	 * @param str
 	 * @return */
 	public final static String unCapitalize(String str) {
-		if (str == null || str.length() < 1)
+		if (str == null || str.length() < 1) {
 			return str;
-		if (str.length() == 1)
+		}
+		if (str.length() == 1) {
 			return str.toLowerCase();
+		}
 		return str.substring(0, 1).toLowerCase() + str.substring(1);
 	}
 	
@@ -367,8 +402,9 @@ public class StringUtil {
 	 * @param str
 	 * @return */
 	public final static String reverse(String str) {
-		if (trim(str).equals(""))
+		if (trim(str).equals("")) {
 			return str;
+		}
 		return new StringBuilder(str).reverse().toString();
 	}
 }

@@ -41,39 +41,41 @@ public class Page implements Serializable {
 	public String getCountsql(StringBuilder sql) {
 		return PagerUtils.count(sql.toString(), JdbcConstants.MYSQL);
 	}
+	
 	// add by zhangdan
-		/** 构造方法，只构造空页. */
-		public Page() {
-			this(0, 0, DEFAULT_PAGE_SIZE, new ArrayList<Object>());
-		}
-		
-		/** 默认构造方法.
-		 * 
-		 * @param startIndex
-		 *            本页数据在数据库中的起始位置
-		 * @param totals
-		 *            数据库中总记录条数
-		 * @param pageSize
-		 *            本页容量
-		 * @param result
-		 *            本页包含的数据 by zhangdan */
-		public Page(Integer startIndex, Integer totals, Integer pageSize, List<?> result) {
-			this.pageSize = pageSize;
-			this.startIndex = startIndex;
-			this.totals = totals;
-			this.result = result;
-		}
-		
-		/** 获取任一页第一条数据在数据集的位置.
-		 * 
-		 * @param pageNo
-		 *            从1开始的页号
-		 * @param pageSize
-		 *            每页记录条数
-		 * @return 该页第一条数据 */
-		public static Integer getStartOfPage(Integer pageNo, Integer pageSize) {
-			return (pageNo - 1) * pageSize;
-		}
+	/** 构造方法，只构造空页. */
+	public Page() {
+		this(0, 0, DEFAULT_PAGE_SIZE, new ArrayList<Object>());
+	}
+	
+	/** 默认构造方法.
+	 * 
+	 * @param startIndex
+	 *            本页数据在数据库中的起始位置
+	 * @param totals
+	 *            数据库中总记录条数
+	 * @param pageSize
+	 *            本页容量
+	 * @param result
+	 *            本页包含的数据 by zhangdan */
+	public Page(Integer startIndex, Integer totals, Integer pageSize, List<?> result) {
+		this.pageSize = pageSize;
+		this.startIndex = startIndex;
+		this.totals = totals;
+		this.result = result;
+	}
+	
+	/** 获取任一页第一条数据在数据集的位置.
+	 * 
+	 * @param pageNo
+	 *            从1开始的页号
+	 * @param pageSize
+	 *            每页记录条数
+	 * @return 该页第一条数据 */
+	public static Integer getStartOfPage(Integer pageNo, Integer pageSize) {
+		return (pageNo - 1) * pageSize;
+	}
+	
 	public Integer getTotalpages() {
 		return totalpages;
 	}
@@ -119,8 +121,9 @@ public class Page implements Serializable {
 		}
 		else {
 			Integer totalPages = this.totals / this.pageSize;
-			if (this.totals % this.pageSize != 0)
+			if (this.totals % this.pageSize != 0) {
 				totalPages += 1;
+			}
 			return totalPages;
 		}
 	}
@@ -142,8 +145,9 @@ public class Page implements Serializable {
 	 * @param startIndex */
 	public void setStartIndex(Integer startIndex) {
 		this.startIndex = startIndex;
-		if (this.startIndex <= 0)
+		if (this.startIndex <= 0) {
 			this.startIndex = 1;
+		}
 	}
 	
 	public Integer getTotals() {
@@ -161,6 +165,4 @@ public class Page implements Serializable {
 	public void setAssistBusiness(List<?> assistBusiness) {
 		this.assistBusiness = assistBusiness;
 	}
-	
-	
 }

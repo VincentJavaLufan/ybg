@@ -152,8 +152,8 @@ public class ServletUtil {
 	 *            默认值
 	 * @return 转换后的结果 */
 	public final static int[] parseInt(String[] str, int defaultVal) {
-		if (str == null || str.length < 1)
-			return new int[0];
+		if (str == null || str.length < 1){
+			return new int[0];}
 		int[] result = new int[str.length];
 		for (int i = 0; i < str.length; i++) {
 			result[i] = parseInt(str[i], defaultVal);
@@ -215,13 +215,13 @@ public class ServletUtil {
 	public static Long getLongParamDefault0(HttpServletRequest request, String paramName) {
 		String value = request.getParameter(paramName);
 		if (null == value) {
-			return 0l;
+			return 0L;
 		}
 		else {
 			try {
 				return Long.parseLong(value.trim());
 			} catch (Exception e) {
-				return 0l;
+				return 0L;
 			}
 		}
 	}
