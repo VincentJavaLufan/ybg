@@ -88,8 +88,9 @@ public class DateUtil {
 	 * @param dateStr */
 	public final static boolean isDate(String dateStr) {
 		Date dt = parseSimpleDate(dateStr);
-		if (dt != null)
+		if (dt != null) {
 			return true;
+		}
 		return parseSimpleDateTime(dateStr) != null;
 	}
 	
@@ -161,10 +162,12 @@ public class DateUtil {
 	 * @param date2
 	 * @return */
 	public final static int compareDate(Date date1, Date date2) {
-		if (date1.before(date2))
+		if (date1.before(date2)) {
 			return -1;
-		if (date1.after(date2))
+		}
+		if (date1.after(date2)) {
 			return 1;
+		}
 		return 0;
 	}
 	
@@ -174,8 +177,9 @@ public class DateUtil {
 	 * @param date2
 	 * @return */
 	public final static boolean isBefore(Date date1, Date date2) {
-		if (date1 == null || date2 == null)
+		if (date1 == null || date2 == null) {
 			return false;
+		}
 		return date1.before(date2);
 	}
 	
@@ -189,8 +193,9 @@ public class DateUtil {
 	 * @param date2
 	 * @return */
 	public final static boolean isAfter(Date date1, Date date2) {
-		if (date1 == null || date2 == null)
+		if (date1 == null || date2 == null) {
 			return false;
+		}
 		return date1.after(date2);
 	}
 	
@@ -204,8 +209,9 @@ public class DateUtil {
 	 * @param date2
 	 * @return */
 	public final static boolean isEquals(Date date1, Date date2) {
-		if (date1 == null || date2 == null)
+		if (date1 == null || date2 == null) {
 			return false;
+		}
 		return date1.equals(date2);
 	}
 	
@@ -229,8 +235,9 @@ public class DateUtil {
 	public final static Date setDate(Date date, int... deviation) {
 		Calendar cal = Calendar.getInstance(Locale.US);
 		cal.setTime(date);
-		if (deviation.length < 1)
+		if (deviation.length < 1) {
 			return cal.getTime();
+		}
 		final int[] filed = { Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH, Calendar.HOUR_OF_DAY, Calendar.MINUTE, Calendar.SECOND };
 		for (int i = 0; i < deviation.length; i++) {
 			cal.add(filed[i], deviation[i]);
@@ -249,32 +256,38 @@ public class DateUtil {
 	public final static String dateTimeTips(Date dt) {
 		Calendar cal = Calendar.getInstance(); // 获取当前日期时间
 		long times = cal.getTimeInMillis() - dt.getTime(); // 获取时间差
-		if (times <= 60 * 1000L)
+		if (times <= 60 * 1000L) {
 			return "1 分钟前";
-		else if (times <= 60 * 60 * 1000L)
+		}
+		else if (times <= 60 * 60 * 1000L) {
 			return (times / (60 * 1000)) + " 分钟前";
-		else if (times <= 24 * 60 * 60 * 1000L)
+		}
+		else if (times <= 24 * 60 * 60 * 1000L) {
 			return (times / (60 * 60 * 1000L)) + " 小时前";
-		else if (times <= 7 * 24 * 60 * 60 * 1000L)
+		}
+		else if (times <= 7 * 24 * 60 * 60 * 1000L) {
 			return (times / (24 * 60 * 60 * 1000L)) + " 天前";
-		else if (times <= 30 * 24 * 60 * 60 * 1000L)
+		}
+		else if (times <= 30 * 24 * 60 * 60 * 1000L) {
 			return (times / (7 * 24 * 60 * 60 * 1000L)) + " 星期前";
-		else if (times <= 12 * 30 * 24 * 60 * 60 * 1000L)
+		}
+		else if (times <= 12 * 30 * 24 * 60 * 60 * 1000L) {
 			return (times / (30 * 24 * 60 * 60 * 1000L)) + " 个月前";
+		}
 		return (times / (12 * 30 * 24 * 60 * 60 * 1000L)) + " 年前";
 	}
 	
 	public final static String dateTips(String dateStr) {
 		Date dt = parseSimpleDate(dateStr);
-		if (dt == null)
-			return dateStr;
+		if (dt == null){
+			return dateStr;}
 		return dateTimeTips(dt);
 	}
 	
 	public final static String dateTimeTips(String dateTime) {
 		Date dt = parseSimpleDateTime(dateTime); // 转换成日期时间类型
-		if (dt == null)
-			return dateTime;
+		if (dt == null){
+			return dateTime;}
 		return dateTimeTips(dt);
 	}
 	
