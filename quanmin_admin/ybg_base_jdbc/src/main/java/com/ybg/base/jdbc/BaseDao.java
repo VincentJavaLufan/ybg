@@ -63,7 +63,7 @@ public abstract class BaseDao extends BaseSQL {
 		}
 		sql.append("  )");
 		getJdbcTemplate().update(sql.toString(), new PreparedStatementSetter() {
-			
+			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
 				int count = 1;
 				for (Entry<String, Object> entry : createmap.entrySet()) {
@@ -338,7 +338,7 @@ public abstract class BaseDao extends BaseSQL {
 			sql.replace(sql.length() - 1, sql.length(), "");
 		}
 		getJdbcTemplate().update(sql.toString(), new PreparedStatementSetter() {
-			
+			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
 				int count = 1;
 				for (Entry<String, Object> entry : createmap.entrySet()) {
@@ -466,7 +466,7 @@ public abstract class BaseDao extends BaseSQL {
 			return 0;
 		}
 		return getJdbcTemplate().update(sql.toString(), new PreparedStatementSetter() {
-			
+			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
 				int count = 1;
 				for (Entry<String, Object> entry : updatemap.entrySet()) {
@@ -579,7 +579,7 @@ public abstract class BaseDao extends BaseSQL {
 			sql.append(AND + entry.getKey() + "=? ");
 		}
 		return getJdbcTemplate().update(sql.toString(), new PreparedStatementSetter() {
-			
+			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
 				int count = 1;
 				for (Entry<String, Object> entry : conditionmap.entrySet()) {
