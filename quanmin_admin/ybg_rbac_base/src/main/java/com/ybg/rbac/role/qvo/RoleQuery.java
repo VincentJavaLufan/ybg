@@ -12,7 +12,7 @@ public class RoleQuery extends RoleDO implements BaseQueryAble {
 	/** 是否模糊查询 **/
 	@ApiModelProperty(name = "blurred", dataType = "java.lang.Boolean", value = "是否模糊查询", hidden = true)
 	private boolean				blurred;
-	
+	@Override
 	public boolean isBlurred() {
 		return blurred;
 	}

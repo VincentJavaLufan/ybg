@@ -150,73 +150,96 @@ public class UserDO implements Serializable {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		UserDO other = (UserDO) obj;
 		if (createtime == null) {
-			if (other.createtime != null)
+			if (other.createtime != null) {
 				return false;
+			}
 		}
-		else if (!createtime.equals(other.createtime))
+		else if (!createtime.equals(other.createtime)) {
 			return false;
+		}
 		if (credentialssalt == null) {
-			if (other.credentialssalt != null)
+			if (other.credentialssalt != null) {
 				return false;
+			}
 		}
-		else if (!credentialssalt.equals(other.credentialssalt))
+		else if (!credentialssalt.equals(other.credentialssalt)) {
 			return false;
+		}
 		if (email == null) {
-			if (other.email != null)
+			if (other.email != null) {
 				return false;
+			}
 		}
-		else if (!email.equals(other.email))
+		else if (!email.equals(other.email)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
+			}
 		}
-		else if (!id.equals(other.id))
+		else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (isdelete == null) {
-			if (other.isdelete != null)
+			if (other.isdelete != null) {
 				return false;
+			}
 		}
-		else if (!isdelete.equals(other.isdelete))
+		else if (!isdelete.equals(other.isdelete)) {
 			return false;
+		}
 		if (password == null) {
-			if (other.password != null)
+			if (other.password != null) {
 				return false;
+			}
 		}
-		else if (!password.equals(other.password))
+		else if (!password.equals(other.password)) {
 			return false;
+		}
 		if (phone == null) {
-			if (other.phone != null)
+			if (other.phone != null) {
 				return false;
+			}
 		}
-		else if (!phone.equals(other.phone))
+		else if (!phone.equals(other.phone)) {
 			return false;
+		}
 		if (roleid == null) {
-			if (other.roleid != null)
+			if (other.roleid != null) {
 				return false;
+			}
 		}
-		else if (!roleid.equals(other.roleid))
+		else if (!roleid.equals(other.roleid)) {
 			return false;
+		}
 		if (state == null) {
-			if (other.state != null)
+			if (other.state != null) {
 				return false;
+			}
 		}
-		else if (!state.equals(other.state))
+		else if (!state.equals(other.state)) {
 			return false;
+		}
 		if (username == null) {
-			if (other.username != null)
+			if (other.username != null) {
 				return false;
+			}
 		}
-		else if (!username.equals(other.username))
+		else if (!username.equals(other.username)) {
 			return false;
+		}
 		return true;
 	}
 }

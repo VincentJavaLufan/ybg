@@ -93,49 +93,64 @@ public class RoleDO implements Serializable {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		RoleDO other = (RoleDO) obj;
 		if (description == null) {
-			if (other.description != null)
+			if (other.description != null) {
 				return false;
+			}
 		}
-		else if (!description.equals(other.description))
+		else if (!description.equals(other.description)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
+			}
 		}
-		else if (!id.equals(other.id))
+		else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (isdelete == null) {
-			if (other.isdelete != null)
+			if (other.isdelete != null) {
 				return false;
+			}
 		}
-		else if (!isdelete.equals(other.isdelete))
+		else if (!isdelete.equals(other.isdelete)) {
 			return false;
+		}
 		if (name == null) {
-			if (other.name != null)
+			if (other.name != null) {
 				return false;
+			}
 		}
-		else if (!name.equals(other.name))
+		else if (!name.equals(other.name)) {
 			return false;
+		}
 		if (rolekey == null) {
-			if (other.rolekey != null)
+			if (other.rolekey != null) {
 				return false;
+			}
 		}
-		else if (!rolekey.equals(other.rolekey))
+		else if (!rolekey.equals(other.rolekey)) {
 			return false;
+		}
 		if (state == null) {
-			if (other.state != null)
+			if (other.state != null) {
 				return false;
+			}
 		}
-		else if (!state.equals(other.state))
+		else if (!state.equals(other.state)) {
 			return false;
+		}
 		return true;
 	}
 }

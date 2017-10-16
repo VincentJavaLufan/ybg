@@ -21,7 +21,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
+	@Override
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}

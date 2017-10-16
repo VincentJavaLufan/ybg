@@ -17,7 +17,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
+	@Override
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}

@@ -23,7 +23,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
+	@Override
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}

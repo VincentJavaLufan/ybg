@@ -161,85 +161,112 @@ public class ResourcesDO implements Serializable {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		ResourcesDO other = (ResourcesDO) obj;
 		if (colorid == null) {
-			if (other.colorid != null)
+			if (other.colorid != null) {
 				return false;
+			}
 		}
-		else if (!colorid.equals(other.colorid))
+		else if (!colorid.equals(other.colorid)) {
 			return false;
+		}
 		if (description == null) {
-			if (other.description != null)
+			if (other.description != null) {
 				return false;
+			}
 		}
-		else if (!description.equals(other.description))
+		else if (!description.equals(other.description)) {
 			return false;
+		}
 		if (icon == null) {
-			if (other.icon != null)
+			if (other.icon != null) {
 				return false;
+			}
 		}
-		else if (!icon.equals(other.icon))
+		else if (!icon.equals(other.icon)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
+			}
 		}
-		else if (!id.equals(other.id))
+		else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (isdelete == null) {
-			if (other.isdelete != null)
+			if (other.isdelete != null) {
 				return false;
+			}
 		}
-		else if (!isdelete.equals(other.isdelete))
+		else if (!isdelete.equals(other.isdelete)) {
 			return false;
+		}
 		if (ishide == null) {
-			if (other.ishide != null)
+			if (other.ishide != null) {
 				return false;
+			}
 		}
-		else if (!ishide.equals(other.ishide))
+		else if (!ishide.equals(other.ishide)) {
 			return false;
+		}
 		if (level == null) {
-			if (other.level != null)
+			if (other.level != null) {
 				return false;
+			}
 		}
-		else if (!level.equals(other.level))
+		else if (!level.equals(other.level)) {
 			return false;
+		}
 		if (name == null) {
-			if (other.name != null)
+			if (other.name != null) {
 				return false;
+			}
 		}
-		else if (!name.equals(other.name))
+		else if (!name.equals(other.name)) {
 			return false;
+		}
 		if (parentid == null) {
-			if (other.parentid != null)
+			if (other.parentid != null) {
 				return false;
+			}
 		}
-		else if (!parentid.equals(other.parentid))
+		else if (!parentid.equals(other.parentid)) {
 			return false;
+		}
 		if (reskey == null) {
-			if (other.reskey != null)
+			if (other.reskey != null) {
 				return false;
+			}
 		}
-		else if (!reskey.equals(other.reskey))
+		else if (!reskey.equals(other.reskey)) {
 			return false;
+		}
 		if (resurl == null) {
-			if (other.resurl != null)
+			if (other.resurl != null) {
 				return false;
+			}
 		}
-		else if (!resurl.equals(other.resurl))
+		else if (!resurl.equals(other.resurl)) {
 			return false;
+		}
 		if (type == null) {
-			if (other.type != null)
+			if (other.type != null) {
 				return false;
+			}
 		}
-		else if (!type.equals(other.type))
+		else if (!type.equals(other.type)) {
 			return false;
+		}
 		return true;
 	}
 }

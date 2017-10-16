@@ -14,7 +14,7 @@ public class RoleResDO implements Serializable {
 	private String				resid;										// 菜单编号
 	/** 是否可用 **/
 	private Integer				state;										// 是否可用
-								
+	
 	public String getRoleid() {
 		return roleid;
 	}
@@ -56,31 +56,40 @@ public class RoleResDO implements Serializable {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		RoleResDO other = (RoleResDO) obj;
 		if (resid == null) {
-			if (other.resid != null)
+			if (other.resid != null) {
 				return false;
+			}
 		}
-		else if (!resid.equals(other.resid))
+		else if (!resid.equals(other.resid)) {
 			return false;
+		}
 		if (roleid == null) {
-			if (other.roleid != null)
+			if (other.roleid != null) {
 				return false;
+			}
 		}
-		else if (!roleid.equals(other.roleid))
+		else if (!roleid.equals(other.roleid)) {
 			return false;
+		}
 		if (state == null) {
-			if (other.state != null)
+			if (other.state != null) {
 				return false;
+			}
 		}
-		else if (!state.equals(other.state))
+		else if (!state.equals(other.state)) {
 			return false;
+		}
 		return true;
 	}
 }

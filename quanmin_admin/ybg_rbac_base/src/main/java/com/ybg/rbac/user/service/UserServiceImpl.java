@@ -19,13 +19,13 @@ public class UserServiceImpl implements UserService {
 	
 	/** 新增并返回主键
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception **/@Override
 	@CacheEvict(value = "userCache", allEntries = true)
 	public UserVO save(UserVO user) throws Exception {
 		return userDao.save(user);
 	}
 	
-	/** 根据id删除 **/
+	/** 根据id删除 **/@Override
 	@CacheEvict(value = "userCache", allEntries = true)
 	public void removebyid(String id) {
 		BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
@@ -35,13 +35,13 @@ public class UserServiceImpl implements UserService {
 		update(updatemap, wheremap);
 	}
 	
-	/** 注册 发送邮箱失败删除 **/
+	/** 注册 发送邮箱失败删除 **/@Override
 	@CacheEvict(value = "userCache", allEntries = true)
 	public void remove(BaseMap<String, Object> wheremap) {
 		userDao.remove(wheremap);
 	}
 	
-	/** 根据某些属性来更新 不再限定固定属性 **/
+	/** 根据某些属性来更新 不再限定固定属性 **/@Override
 	@CacheEvict(value = "userCache", allEntries = true)
 	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> wheremap) {
 		userDao.update(updatemap, wheremap);
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 	
 	/** 获取单个信息
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception **/@Override
 	@Cacheable(value = "userCache", key = "#root.method.name+#root.args[0]")
 	public UserVO get(String id) throws Exception {
 		return userDao.loginById(id);
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
 	
 	/** 分页查询用户信息
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception **/@Override
 	@Cacheable(value = "userCache", key = "#root.method.name+#root.args[0]+#root.method.name+#root.args[1]")
 	public Page list(Page page, UserQuery qvo) throws Exception {
 		return userDao.list(page, qvo);
@@ -65,13 +65,13 @@ public class UserServiceImpl implements UserService {
 	
 	/** 不分页查询用户信息
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception **/@Override
 	@Cacheable(value = "userCache", key = "#root.method.name+#root.args[0]")
 	public List<UserVO> list(UserQuery qvo) throws Exception {
 		return userDao.list(qvo);
 	}
 	
-	/** 登陆 **/
+	/** 登陆 **/@Override
 	@Cacheable(value = "userCache", key = "#root.method.name+#root.args[0]")
 	public UserVO login(String loginname) {
 		return userDao.login(loginname);
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
 	
 	/** 清楚注册不激活的用户
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception **/@Override
 	@CacheEvict(value = "userCache", allEntries = true)
 	public void removeExpired() throws Exception {
 		userDao.removeExpired();
