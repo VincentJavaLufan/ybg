@@ -40,19 +40,19 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 			}
 		}
 	}
-	
+	@Override
 	public ScheduleJobEntity queryObject(Long jobId) {
 		return schedulerJobDao.queryObject(jobId);
 	}
-	
+	@Override
 	public Page queryList(Page page, ScheduleJobQuery qvo) throws Exception {
 		return schedulerJobDao.queryList(page, qvo);
 	}
-	
+	@Override
 	public List<ScheduleJobEntity> queryList(ScheduleJobQuery qvo) throws Exception {
 		return schedulerJobDao.queryList(qvo);
 	}
-	
+	@Override
 	@Transactional
 	public void save(ScheduleJobEntity scheduleJob) throws Exception {
 		scheduleJob.setCreate_Time(DateUtil.getDate());
@@ -60,13 +60,13 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 		schedulerJobDao.save(scheduleJob);
 		ScheduleUtils.createScheduleJob(scheduler, scheduleJob);
 	}
-	
+	@Override
 	@Transactional
 	public void update(ScheduleJobEntity scheduleJob) {
 		ScheduleUtils.updateScheduleJob(scheduler, scheduleJob);
 		schedulerJobDao.update(scheduleJob);
 	}
-	
+	@Override
 	@Transactional
 	public void deleteBatch(Long[] jobIds) {
 		for (Long jobId : jobIds) {
@@ -75,21 +75,21 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 		// 删除数据
 		schedulerJobDao.deleteBatch(jobIds);
 	}
-	
+	@Override
 	public int updateBatch(Long[] jobIds, int status) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", jobIds);
 		map.put("status", status);
 		return schedulerJobDao.updateBatch(status, jobIds);
 	}
-	
+	@Override
 	@Transactional
 	public void run(Long[] jobIds) {
 		for (Long jobId : jobIds) {
 			ScheduleUtils.run(scheduler, queryObject(jobId));
 		}
 	}
-	
+	@Override
 	@Transactional
 	public void pause(Long[] jobIds) {
 		for (Long jobId : jobIds) {
@@ -97,7 +97,7 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 		}
 		updateBatch(jobIds, ScheduleStatus.PAUSE.getValue());
 	}
-	
+	@Override
 	@Transactional
 	public void resume(Long[] jobIds) {
 		for (Long jobId : jobIds) {

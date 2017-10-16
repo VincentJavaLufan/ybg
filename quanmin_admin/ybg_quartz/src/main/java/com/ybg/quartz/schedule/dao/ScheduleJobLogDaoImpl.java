@@ -20,7 +20,7 @@ public class ScheduleJobLogDaoImpl extends BaseDao implements ScheduleJobLogDao 
 	@Autowired
 	@Qualifier(DataBaseConstant.JD_QUARTZ)
 	JdbcTemplate jdbcTemplate;
-	
+	@Override
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}

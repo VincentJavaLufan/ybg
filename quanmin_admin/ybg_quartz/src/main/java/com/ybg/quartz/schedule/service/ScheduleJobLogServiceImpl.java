@@ -10,15 +10,15 @@ public class ScheduleJobLogServiceImpl implements  ScheduleJobLogService{
 	
 	@Autowired
 	private ScheduleJobLogDao	scheduleJobLogDao;
-	
+	@Override
 	public Page queryList(Page page, ScheduleJobLogQuery qvo) throws Exception {
 		return scheduleJobLogDao.queryList(page, qvo);
 	}
-	
+	@Override
 	public void save(ScheduleJobLogDO log) throws Exception {
 		scheduleJobLogDao.save(log);
 	}
-	
+	@Override
 	public ScheduleJobLogDO queryObject(Long jobId) {
 		return scheduleJobLogDao.queryObject(jobId);
 	}
