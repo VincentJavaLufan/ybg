@@ -1,4 +1,4 @@
-package org.ybg_uflo;
+package com.ybg;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
