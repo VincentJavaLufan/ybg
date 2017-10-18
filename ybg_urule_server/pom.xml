@@ -55,10 +55,6 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.6.0</version>
@@ -70,6 +66,38 @@
 						<verbose />
 						<bootclasspath>${java.home}/lib/rt.jar;${java.home}/lib/jce.jar</bootclasspath>
 					</compilerArguments>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptor>src/main/resources/distribution/gs-spring-boot-distribution.xml</descriptor>
+					<finalName>ybg_urule_server-1.0.0.exe</finalName>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>App</mainClass>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib</classpathPrefix>
+						</manifest>
+						<manifestEntries>
+							<Claa-Path>./</Claa-Path>
+						</manifestEntries>
+					</archive>
 				</configuration>
 			</plugin>
 		</plugins>
