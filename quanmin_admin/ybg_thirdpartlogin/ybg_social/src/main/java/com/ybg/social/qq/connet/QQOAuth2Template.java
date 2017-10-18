@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.ybg.social.qq.connet;
 import java.nio.charset.Charset;
 import org.apache.commons.lang.StringUtils;
@@ -12,7 +9,8 @@ import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-/** @author zhailiang */
+/** @author https://gitee.com/YYDeament/88ybg
+ * @date 2017/10/1 **/
 public class QQOAuth2Template extends OAuth2Template {
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());

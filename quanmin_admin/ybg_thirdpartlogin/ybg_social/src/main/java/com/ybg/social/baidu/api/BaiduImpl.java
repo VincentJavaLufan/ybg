@@ -1,13 +1,11 @@
 package com.ybg.social.baidu.api;
-import java.util.Map;
-import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.TokenStrategy;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
+/** @author Deament
+ * @date 2017/10/1 **/
 public class BaiduImpl extends AbstractOAuth2ApiBinding implements Baidu {
 	
 	private static final String	URL_GET_OPENID		= "https://openapi.baidu.com/rest/2.0/passport/users/getLoggedInUser";

@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.ybg.social.baidu.dao.BaiduUserDao;
 
+/** @author Deament
+ * @date 2017/10/1 **/
 @Repository
 public class BaiduUserServiceImpl implements BaiduUserService {
 	

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.ybg.social.sina.config;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +9,8 @@ import com.ybg.social.sina.api.Sina;
 import com.ybg.social.sina.connet.SinaConnectionFactory;
 import com.ybg.social.sina.service.WeiboUserService;
 
-/** @author zhailiang */
+/** @author https://gitee.com/YYDeament/88ybg
+ * @date 2017/10/1 **/
 @Configuration
 public class SinaAutoConfig extends SocialAutoConfigurerAdapter {
 	

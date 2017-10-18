@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.social.security.SocialUserDetails;
 import org.springframework.social.security.SocialUserDetailsService;
@@ -15,6 +14,8 @@ import com.ybg.rbac.resources.service.ResourcesService;
 import com.ybg.rbac.user.dao.UserDao;
 import com.ybg.rbac.user.domain.UserVO;
 
+/** @author Deament
+ * @date 2017/10/1 **/
 @Repository
 public class SocialLoginServiceImpl implements SocialUserDetailsService {
 	

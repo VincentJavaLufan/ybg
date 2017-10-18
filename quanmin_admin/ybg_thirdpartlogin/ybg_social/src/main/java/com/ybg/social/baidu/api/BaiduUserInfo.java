@@ -1,4 +1,6 @@
 package com.ybg.social.baidu.api;
+/** @author Deament
+ * @date 2017/10/1 **/
 public class BaiduUserInfo {
 	
 	String	userid;			// 当前登录用户的数字ID

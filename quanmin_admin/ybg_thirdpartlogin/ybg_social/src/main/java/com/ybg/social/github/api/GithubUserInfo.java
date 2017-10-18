@@ -1,4 +1,6 @@
 package com.ybg.social.github.api;
+/** @author Deament
+ * @date 2017/10/1 **/
 public class GithubUserInfo {
 	
 	Long	id;

@@ -12,9 +12,9 @@ import com.ybg.social.qq.api.QQ;
 import com.ybg.social.qq.connet.QQConnectionFactory;
 import com.ybg.social.qq.service.QQuserService;
 
-/** @author zhailiang */
+/** @author https://gitee.com/YYDeament/88ybg
+ * @date 2017/10/1 **/
 @Configuration
-// @ConditionalOnProperty(prefix = "imooc.security.social.qq", name = "app-id")
 public class QQAutoConfig extends SocialAutoConfigurerAdapter {
 	
 	@Autowired

@@ -9,11 +9,14 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 
+/** @author https://gitee.com/YYDeament/88ybg
+ * @date 2017/10/1 **/
 @Repository
 public class BaiduUserDaoImpl extends BaseDao implements BaiduUserDao {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+	
 	@Override
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;

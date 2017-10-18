@@ -1,5 +1,4 @@
 package com.ybg.social.github.config;
-
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.social.SocialAutoConfigurerAdapter;
@@ -13,10 +12,14 @@ import com.ybg.social.github.api.GitHub;
 import com.ybg.social.github.connect.GithubConnectionFactory;
 import com.ybg.social.github.service.GithubuserService;
 
+/** @author Deament
+ * @date 2017/10/1 **/
 @Configuration
-public class GithubAutoConfig extends SocialAutoConfigurerAdapter{
+public class GithubAutoConfig extends SocialAutoConfigurerAdapter {
+	
 	@Autowired
 	GithubuserService githubuserService;
+	
 	@Override
 	protected ConnectionFactory<GitHub> createConnectionFactory() {
 		Map<String, String> setting = githubuserService.getSetting();

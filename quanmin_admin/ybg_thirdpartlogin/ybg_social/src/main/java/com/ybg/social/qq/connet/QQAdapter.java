@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.ybg.social.qq.connet;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;
@@ -8,7 +5,8 @@ import org.springframework.social.connect.UserProfile;
 import com.ybg.social.qq.api.QQ;
 import com.ybg.social.qq.api.QQUserInfo;
 
-/** @author zhailiang */
+/** @author https://gitee.com/YYDeament/88ybg
+ * @date 2017/10/1 **/
 public class QQAdapter implements ApiAdapter<QQ> {
 	
 	// 测试API是否可用

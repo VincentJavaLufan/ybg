@@ -1,8 +1,6 @@
-/**
- * 
- */
 package com.ybg.social.qq.api;
-/** @author zhailiang */
+/** @author https://gitee.com/YYDeament/88ybg
+ * @date 2017/10/1 **/
 public class QQUserInfo {
 	
 	/** 返回码 */

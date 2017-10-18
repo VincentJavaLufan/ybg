@@ -2,10 +2,11 @@ package com.ybg.social.github.connect;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
-import com.ybg.social.baidu.api.BaiduUserInfo;
 import com.ybg.social.github.api.GitHub;
 import com.ybg.social.github.api.GithubUserInfo;
 
+/** @author Deament
+ * @date 2017/10/1 **/
 public class GithubAdapter implements ApiAdapter<GitHub> {
 	
 	@Override
@@ -25,7 +26,7 @@ public class GithubAdapter implements ApiAdapter<GitHub> {
 	@Override
 	public UserProfile fetchUserProfile(GitHub api) {
 		GithubUserInfo userInfo = api.getUserInfo();
-		UserProfile bean = new UserProfile(userInfo.getId()+"", userInfo.getName(), null, null, null, userInfo.getName());
+		UserProfile bean = new UserProfile(userInfo.getId() + "", userInfo.getName(), null, null, null, userInfo.getName());
 		return bean;
 	}
 	

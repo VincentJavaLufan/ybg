@@ -1,11 +1,11 @@
 package com.ybg.social.github.api;
-import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.TokenStrategy;
 import com.alibaba.fastjson.JSONObject;
-import com.ybg.base.util.SystemConstant;
 
+/** @author Deament
+ * @date 2017/10/1 **/
 public class GithubImpl extends AbstractOAuth2ApiBinding implements GitHub {
 	
 	private static final String	URL_GET_OPENID		= "https://api.github.com/user?access_token=%s";// ?client_id={client_id}&redirect_uri={redirect_uri}&state={state}

@@ -1,12 +1,10 @@
-/**
- * 
- */
 package com.ybg.social.qq.connet;
 import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 import com.ybg.social.qq.api.QQ;
 import com.ybg.social.qq.api.QQImpl;
 
-/** @author zhailiang */
+/** @author https://gitee.com/YYDeament/88ybg
+ * @date 2017/10/1 **/
 public class QQServiceProvider extends AbstractOAuth2ServiceProvider<QQ> {
 	
 	private String				appId;

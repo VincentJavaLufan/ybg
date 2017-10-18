@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.base.jdbc.BaseDao;
 
+/** @author https://gitee.com/YYDeament/88ybg
+ * @date 2017/10/1 **/
 @Repository
 public class GithubuserDaoImpl extends BaseDao implements GithubuserDao {
 	

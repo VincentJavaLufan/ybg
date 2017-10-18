@@ -3,8 +3,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.ybg.social.github.dao.GithubuserDao;
-import com.ybg.social.github.dao.GithubuserDaoImpl;
 
+/** @author https://gitee.com/YYDeament/88ybg
+ * @date 2017/10/1 **/
 @Repository
 public class GithubuserServiceImpl implements GithubuserService {
 	

@@ -40,6 +40,8 @@ import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.UserService;
 import io.swagger.annotations.ApiOperation;
 
+/** @author Deament
+ * @date 2017/10/1 **/
 @Controller
 public class SocialController {
 	
@@ -56,7 +58,8 @@ public class SocialController {
 	 * @param request
 	 * @param response
 	 * @return
-	 * @throws IOException */
+	 * @throws IOException
+	 */
 	@RequestMapping("/authentication/require")
 	@ResponseStatus(code = HttpStatus.UNAUTHORIZED)
 	public String requireAuthentication(HttpServletRequest request, HttpServletResponse response, ModelMap map) {
@@ -64,10 +67,6 @@ public class SocialController {
 		if (savedRequest != null) {
 			String targetUrl = savedRequest.getRedirectUrl();
 			return "redirect:" + targetUrl;
-			// if (StringUtils.endsWithIgnoreCase(targetUrl, ".html")) {
-			//
-			// //redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
-			// }
 		}
 		// map.put("error", "访问的服务需要身份认证");
 		// return "redirect:/";
