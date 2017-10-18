@@ -6,13 +6,13 @@ import com.bstek.urule.URulePropertyPlaceholderConfigurer;
 
 /** @author Jacky.gao 相当于 configure.properties 
  * @since 2016年10月12日 */
-// @Component 
+ @Component 
 public class PropertiesConfiguration extends URulePropertyPlaceholderConfigurer implements InitializingBean {
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		Properties props = new Properties();
-		props.setProperty("urule.repository.xml", "classpath:mysql.xml");
+		props.setProperty("urule.resporityServerUrl", "http://127.0.0.1:8081/urule-server");
 		setProperties(props);
 	}
 }
