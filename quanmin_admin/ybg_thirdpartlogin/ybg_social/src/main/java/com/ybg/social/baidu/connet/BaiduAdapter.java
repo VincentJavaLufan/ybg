@@ -31,14 +31,19 @@ public class BaiduAdapter implements ApiAdapter<Baidu> {
 	}
 	
 	/** @param api
-	 * @param values */
+	 * @param values
+	 */
 	@Override
 	public void setConnectionValues(Baidu api, ConnectionValues values) {
 		BaiduUserInfo userInfo = api.getUserInfo(uid);
-		values.setDisplayName(userInfo.getUsername());// 昵称
-		values.setImageUrl(userInfo.getPortrait());// 用户头像
-		values.setProfileUrl(null);// 个人主页，不一定有。
-		values.setProviderUserId(userInfo.getUserid());// 服务商的用户ID ,QQ 的是QQid // 这个异常需要捕获处理 处理成运行时异常
+		// 昵称
+		values.setDisplayName(userInfo.getUsername());
+		// 用户头像
+		values.setImageUrl(userInfo.getPortrait());
+		// 个人主页，不一定有。
+		values.setProfileUrl(null);
+		// 服务商的用户ID ,QQ 的是QQid // 这个异常需要捕获处理 处理成运行时异常
+		values.setProviderUserId(userInfo.getUserid());
 	}
 	
 	/** @param api
@@ -51,7 +56,8 @@ public class BaiduAdapter implements ApiAdapter<Baidu> {
 	}
 	
 	/** @param api
-	 * @param message */
+	 * @param message
+	 */
 	@Override
 	public void updateStatus(Baidu api, String message) {
 		// do nothing

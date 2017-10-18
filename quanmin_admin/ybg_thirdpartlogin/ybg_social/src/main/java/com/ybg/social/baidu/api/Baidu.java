@@ -3,5 +3,9 @@ package com.ybg.social.baidu.api;
  * @date 2017/10/1 **/
 public interface Baidu {
 	
+	/** 返回用户信息
+	 * 
+	 * @param uid
+	 *            用户ID **/
 	BaiduUserInfo getUserInfo(String uid);
 }

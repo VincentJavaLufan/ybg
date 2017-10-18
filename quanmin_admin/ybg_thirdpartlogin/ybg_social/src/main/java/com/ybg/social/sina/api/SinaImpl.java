@@ -6,13 +6,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.xiaoleilu.hutool.http.HttpUtil;
 
 /** @author https://gitee.com/YYDeament/88ybg
- * @date 2017/10/1 **/
-// 如果跳转到了 /signin页面 则表示 此类有问题。。真的是这个类
+ * @date 2017/10/1 / 如果跳转到了 /signin页面 则表示 此类有问题。。真的是这个类 **/
 public class SinaImpl extends AbstractOAuth2ApiBinding implements Sina {
 	
-	// 根据 TOKEN 换取 用户ID 的地址。
+	/** 根据 TOKEN 换取 用户ID 的地址。 */
 	private static final String	URL_GET_OPENID		= "https://api.weibo.com/oauth2/get_token_info";
-	// 根据用户ID 请求 用户详细信息的地址
+	/** 根据用户ID 请求 用户详细信息的地址 */
 	private static final String	URL_GET_USERINFO	= "https://api.weibo.com/2/users/show.json";
 	private String				appId;
 	private String				id;

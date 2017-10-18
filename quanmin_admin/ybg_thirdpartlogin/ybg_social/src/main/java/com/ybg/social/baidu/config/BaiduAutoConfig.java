@@ -14,7 +14,6 @@ import com.ybg.social.baidu.service.BaiduUserService;
 
 /** @author zhailiang */
 @Configuration
-// @ConditionalOnProperty(prefix = "imooc.security.social.qq", name = "app-id")
 public class BaiduAutoConfig extends SocialAutoConfigurerAdapter {
 	
 	@Autowired

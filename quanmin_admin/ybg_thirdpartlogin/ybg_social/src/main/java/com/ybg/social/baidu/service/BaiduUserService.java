@@ -5,9 +5,12 @@ import java.util.Map;
  * @date 2017/10/1 **/
 public interface BaiduUserService {
 	
+	/** 返回百度社交登陆设置 **/
 	Map<String, String> getSetting();
 	
-	/** @param appid
+	/** 更新百度社交登陆设置
+	 * 
+	 * @param appid
 	 * @param value
 	 * @param url
 	 */
