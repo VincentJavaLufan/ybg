@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.ybg.social.weixin.api;
 /** 微信API调用接口
  * 
