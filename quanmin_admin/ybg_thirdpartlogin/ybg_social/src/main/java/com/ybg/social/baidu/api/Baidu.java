@@ -6,6 +6,9 @@ public interface Baidu {
 	/** 返回用户信息
 	 * 
 	 * @param uid
-	 *            用户ID **/
+	 *            用户ID
+	 * 
+	 * 
+	 * @return BaiduUserInfo **/
 	BaiduUserInfo getUserInfo(String uid);
 }

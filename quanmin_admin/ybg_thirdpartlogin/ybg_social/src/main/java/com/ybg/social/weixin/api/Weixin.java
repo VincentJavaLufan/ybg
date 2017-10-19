@@ -7,5 +7,8 @@ package com.ybg.social.weixin.api;
  * @author zhailiang */
 public interface Weixin {
 	
+	/*** 获取微信用户信息
+	 * 
+	 * @return WeixinUserInfo **/
 	WeixinUserInfo getUserInfo(String openId);
 }
