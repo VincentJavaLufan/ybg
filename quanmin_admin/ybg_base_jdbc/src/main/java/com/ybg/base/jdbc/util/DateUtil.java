@@ -85,7 +85,8 @@ public class DateUtil {
 	/** 判断指定的字符串是否是正确的日期时间字符串.<br>
 	 * 该方法支持日期或日期时间的判断.
 	 * 
-	 * @param dateStr */
+	 * @param dateStr
+	 */
 	public final static boolean isDate(String dateStr) {
 		Date dt = parseSimpleDate(dateStr);
 		if (dt != null) {
@@ -254,8 +255,10 @@ public class DateUtil {
 	 *            日期时间字符串,必须包含时间
 	 * @return */
 	public final static String dateTimeTips(Date dt) {
-		Calendar cal = Calendar.getInstance(); // 获取当前日期时间
-		long times = cal.getTimeInMillis() - dt.getTime(); // 获取时间差
+		// 获取当前日期时间
+		Calendar cal = Calendar.getInstance();
+		// 获取时间差
+		long times = cal.getTimeInMillis() - dt.getTime();
 		if (times <= 60 * 1000L) {
 			return "1 分钟前";
 		}
@@ -286,7 +289,8 @@ public class DateUtil {
 	}
 	
 	public final static String dateTimeTips(String dateTime) {
-		Date dt = parseSimpleDateTime(dateTime); // 转换成日期时间类型
+		// 转换成日期时间类型
+		Date dt = parseSimpleDateTime(dateTime);
 		if (dt == null) {
 			return dateTime;
 		}
@@ -337,10 +341,10 @@ public class DateUtil {
 	
 	/** 获取某月的第一天
 	 * 
-	 * @throws ParseException */
+	 * @throws ParseException
+	 */
 	public static String getFirstDay(String date) throws ParseException {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		// Calendar calendar = Calendar.getInstance();
 		Date theDate = df.parse(date);
 		GregorianCalendar gcLast = (GregorianCalendar) Calendar.getInstance();
 		gcLast.setTime(theDate);
@@ -367,7 +371,6 @@ public class DateUtil {
 	public static String getLastDay() {
 		Calendar calendar = Calendar.getInstance();
 		// 设置时间,当前时间不用设置
-		// calendar.setTime(new Date());
 		// 设置日期为本月最大日期
 		calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
 		// 打印
@@ -378,7 +381,8 @@ public class DateUtil {
 	/** 某月的最后一天 首先要获取月份
 	 * 
 	 * @return
-	 * @throws ParseException */
+	 * @throws ParseException
+	 */
 	public static String getLastDay(String date) throws ParseException {
 		Calendar calendar = Calendar.getInstance();
 		// 设置时间,当前时间不用设置
@@ -408,21 +412,28 @@ public class DateUtil {
 	
 	/** 返回到两个时间段所有月份列表
 	 * 
-	 * @throws ParseException */
+	 * @throws ParseException
+	 */
 	public static String[] getMothList(String da1, String da2) throws ParseException {
 		StringBuffer sb = new StringBuffer();
-		// String teamborders[] = teamService.gainThisTeamBorders();
-		Date d1 = new SimpleDateFormat("yyyy-MM").parse(da1);// 定义起始日期
-		Date d2 = new SimpleDateFormat("yyyy-MM").parse(da2);// 定义结束日期
-		Calendar dd = Calendar.getInstance();// 定义日期实例
-		dd.setTime(d1);// 设置日期起始时间
+		// 定义起始日期
+		Date d1 = new SimpleDateFormat("yyyy-MM").parse(da1);
+		// 定义结束日期
+		Date d2 = new SimpleDateFormat("yyyy-MM").parse(da2);
+		// 定义日期实例
+		Calendar dd = Calendar.getInstance();
+		// 设置日期起始时间
+		dd.setTime(d1);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
-		while (dd.getTime().before(d2)) {// 判断是否到结束日期
+		// 判断是否到结束日期
+		while (dd.getTime().before(d2)) {
 			String str = sdf.format(dd.getTime());
 			sb.append(str + ",");
-			dd.add(Calendar.MONTH, 1);// 进行当前日期月份加1
+			// 进行当前日期月份加1
+			dd.add(Calendar.MONTH, 1);
 		}
-		sb.append(sdf.format(dd.getTime()));// 补全最后一个月
+		// 补全最后一个月
+		sb.append(sdf.format(dd.getTime()));
 		return sb.toString().split(",");
 	}
 	
@@ -430,13 +441,12 @@ public class DateUtil {
 	public static String[] getWeeks(String da1, String da2) throws ParseException {
 		Calendar c_begin = new GregorianCalendar();
 		Calendar c_end = new GregorianCalendar();
-		// DateFormatSymbols dfs = new DateFormatSymbols();
-		// String[] weeks = dfs.getWeekdays();
 		StringBuffer sb = new StringBuffer();
 		c_begin.setTime(convertToDate(da1));
 		c_end.setTime(convertToDate(da2));
 		int count = 1;
-		c_end.add(Calendar.DAY_OF_YEAR, 1); // 结束日期下滚一天是为了包含最后一天
+		// 结束日期下滚一天是为了包含最后一天
+		c_end.add(Calendar.DAY_OF_YEAR, 1);
 		while (c_begin.before(c_end)) {
 			if (c_begin.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
 				sb.append("第" + count + "周,");
@@ -467,17 +477,21 @@ public class DateUtil {
 	
 	/*** 把字符串转换成 日期
 	 * 
-	 * @throws ParseException */
+	 * @throws ParseException
+	 */
 	public static Date convertToDate(String time) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");// 小写的mm表示的是分钟
+		// 小写的mm表示的是分钟
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.parse(time);
 	}
 	
 	/*** 把字符串转换成 日期 指定格式
 	 * 
-	 * @throws ParseException */
+	 * @throws ParseException
+	 */
 	public static Date convertToDate(String time, String format) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat(format);// 小写的mm表示的是分钟
+		// 小写的mm表示的是分钟
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
 		return sdf.parse(time);
 	}
 	

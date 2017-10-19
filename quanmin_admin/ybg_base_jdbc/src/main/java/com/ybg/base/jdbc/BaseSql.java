@@ -1,6 +1,6 @@
 package com.ybg.base.jdbc;
 /** 数据库 常用单词 不喜欢可以不用 **/
-public class BaseSQL {
+public class BaseSql {
 	
 	protected static final String	ADD					= " ADD ";
 	protected static final String	ANALYZE				= " ANALYZE ";

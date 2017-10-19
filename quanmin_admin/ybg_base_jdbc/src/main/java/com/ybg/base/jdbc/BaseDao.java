@@ -22,7 +22,7 @@ import com.ybg.base.util.Page;
  * 2.数据库字段一律小写 <br>
  * 3.数据库字段不得使用下划线，表名可以。 <br>
  ***/
-public abstract class BaseDao extends BaseSQL {
+public abstract class BaseDao extends BaseSql {
 	
 	/** 新增 只适用于UUID
 	 * 
@@ -35,14 +35,14 @@ public abstract class BaseDao extends BaseSQL {
 	 * @throws Exception
 	 **/
 	@SuppressWarnings("unused")
-	public String baseCreate(BaseMap<String, Object> createmap, String table_name, String id_name) throws Exception {
+	public String baseCreate(BaseMap<String, Object> createmap, String tableName, String idName) throws Exception {
 		UUID uuid = UUID.randomUUID();
 		String id = uuid.toString().replaceAll("-", "");
 		StringBuilder sql = new StringBuilder();
-		sql.append(INSERT).append(INTO).append(table_name).append("(");
+		sql.append(INSERT).append(INTO).append(tableName).append("(");
 		if (createmap != null && createmap.size() > 0) {
-			if (id_name != null && id_name.trim().length() > 0) {
-				createmap.put(id_name, id);
+			if (idName != null && idName.trim().length() > 0) {
+				createmap.put(idName, id);
 			}
 			createmap.put("gmt_modified", DateUtil.getDateTime());
 			createmap.put("gmt_create", DateUtil.getDateTime());
@@ -133,13 +133,13 @@ public abstract class BaseDao extends BaseSQL {
 	 **/
 	@SuppressWarnings("unused")
 	@Deprecated
-	public Object basecreate(final Map<String, Object> createmap, String table_name, boolean returnid, Object idtype) throws Exception {
+	public Object basecreate(final Map<String, Object> createmap, String tableName, boolean returnid, Object idtype) throws Exception {
 		final BaseMap<String, Object> basemap = new BaseMap<String, Object>();
 		for (Entry<String, Object> entry : createmap.entrySet()) {
 			basemap.put(entry.getKey(), entry.getValue());
 		}
 		final StringBuilder sql = new StringBuilder();
-		sql.append(" INSERT INTO " + table_name + "(");
+		sql.append(" INSERT INTO " + tableName + "(");
 		if (basemap != null && basemap.size() > 0) {
 			for (Entry<String, Object> entry : basemap.entrySet()) {
 				sql.append(entry.getKey() + ",");
@@ -287,21 +287,21 @@ public abstract class BaseDao extends BaseSQL {
 	 * 
 	 *            <br>
 	 *            createmap 为空则过滤掉该列，空map传递 则取消指向。
-	 * @param table_name
+	 * @param tableName
 	 *            表名称
-	 * @param id_name
+	 * @param idName
 	 *            主键列名称
 	 * @param unionkey
 	 *            主码 ，该表的唯一唯一索引(必须有) 若是新增 则返回ID **/
 	@SuppressWarnings("unused")
-	public String saveOrUpdate(BaseMap<String, Object> createmap, String table_name, String id_name, String[] unionkey) throws Exception {
+	public String saveOrUpdate(BaseMap<String, Object> createmap, String tableName, String idName, String[] unionkey) throws Exception {
 		UUID uuid = UUID.randomUUID();
 		String id = uuid.toString().replaceAll("-", "");
 		StringBuilder sql = new StringBuilder();
-		sql.append(INSERT).append(INTO).append(table_name).append("(");
+		sql.append(INSERT).append(INTO).append(tableName).append("(");
 		if (createmap != null && createmap.size() > 0) {
-			if (id_name != null && id_name.trim().length() > 0) {
-				createmap.put(id_name, id);
+			if (idName != null && idName.trim().length() > 0) {
+				createmap.put(idName, id);
 			}
 			createmap.put("gmt_modified", DateUtil.getDateTime());
 			createmap.put("gmt_create", DateUtil.getDateTime());
@@ -331,7 +331,7 @@ public abstract class BaseDao extends BaseSQL {
 			updatemap.remove(u);
 		}
 		updatemap.remove("gmt_create");
-		updatemap.remove(id_name);
+		updatemap.remove(idName);
 		if (updatemap != null && updatemap.size() > 0) {
 			for (Entry<String, Object> entry : updatemap.entrySet()) {
 				sql.append(entry.getKey() + "=?,");
@@ -443,11 +443,11 @@ public abstract class BaseDao extends BaseSQL {
 	 *            需要更新的字段和值
 	 * @param wheremap
 	 *            更新中的条件字段和值
-	 * @param table_name
+	 * @param tableName
 	 *            表的名称 **/
-	public int baseupdate(final BaseMap<String, Object> updatemap, final BaseMap<String, Object> wheremap, String table_name) {
+	public int baseupdate(final BaseMap<String, Object> updatemap, final BaseMap<String, Object> wheremap, String tableName) {
 		StringBuilder sql = new StringBuilder();
-		sql.append(UPDATE + table_name + SET);
+		sql.append(UPDATE + tableName + SET);
 		if (updatemap != null && updatemap.size() > 0) {
 			updatemap.put("gmt_modified", DateUtil.getDateTime());
 			for (Entry<String, Object> entry : updatemap.entrySet()) {
@@ -570,11 +570,11 @@ public abstract class BaseDao extends BaseSQL {
 	 * @param conditionmap
 	 *            删除的字段和值
 	 * 
-	 * @param table_name
+	 * @param tableName
 	 *            表的名称 **/
-	public int baseremove(final BaseMap<String, Object> conditionmap, String table_name) {
+	public int baseremove(final BaseMap<String, Object> conditionmap, String tableName) {
 		StringBuilder sql = new StringBuilder();
-		sql.append(DELETE + FROM + table_name + WHERE + " 1=1 ");
+		sql.append(DELETE + FROM + tableName + WHERE + " 1=1 ");
 		if (conditionmap == null || conditionmap.size() == 0) {
 			return 0;
 		}
@@ -793,7 +793,8 @@ public abstract class BaseDao extends BaseSQL {
 	 *            查询的范围 大于object[0],小于object[1] 长度必须是2
 	 * @return sql.append(" and " + name + ">" + object[0]+" and " + name + "<" + object[1] ); ***/
 	public void sqlappen(StringBuilder sql, String name, Object[] array) {
-		if (QvoConditionUtil.checkObjectArray(array, 2)) {
+		int max_num = 2;
+		if (QvoConditionUtil.checkObjectArray(array, max_num)) {
 			sql.append(AND).append(name).append("<").append("'").append(array[0]).append("'");
 			sql.append(AND).append(name).append(">").append("'").append(array[1]).append("'");
 		}
@@ -806,29 +807,29 @@ public abstract class BaseDao extends BaseSQL {
 	 * 
 	 * @param name
 	 *            列的名称
-	 * @param Start
+	 * @param start
 	 *            小于改条件
-	 * @param End
+	 * @param end
 	 *            大于改条件
 	 * @return 如果Start不为空，sql.append( and name< Start)如果End 不为空，sql.append( and name> End) ***/
-	public void sqlappen(StringBuilder sql, String name, Object Start, Object End) {
-		if (Start instanceof String && QvoConditionUtil.checkString((String) Start)) {
-			sql.append(AND).append(name + "<").append("'").append((String) Start).append("'");
+	public void sqlappen(StringBuilder sql, String name, Object start, Object end) {
+		if (start instanceof String && QvoConditionUtil.checkString((String) start)) {
+			sql.append(AND).append(name + "<").append("'").append((String) start).append("'");
 		}
-		if (End instanceof String && QvoConditionUtil.checkString((String) End)) {
-			sql.append(AND).append(name + ">").append("'").append((String) End).append("'");
+		if (end instanceof String && QvoConditionUtil.checkString((String) end)) {
+			sql.append(AND).append(name + ">").append("'").append((String) end).append("'");
 		}
-		if (Start instanceof Integer && QvoConditionUtil.checkInteger((Integer) Start)) {
-			sql.append(AND).append(name).append("<" + "'").append((Integer) Start).append("'");
+		if (start instanceof Integer && QvoConditionUtil.checkInteger((Integer) start)) {
+			sql.append(AND).append(name).append("<" + "'").append((Integer) start).append("'");
 		}
-		if (End instanceof Integer && QvoConditionUtil.checkInteger((Integer) End)) {
-			sql.append(AND).append(name).append(">").append("'").append((Integer) End).append("'");
+		if (end instanceof Integer && QvoConditionUtil.checkInteger((Integer) end)) {
+			sql.append(AND).append(name).append(">").append("'").append((Integer) end).append("'");
 		}
-		if (Start instanceof Float && QvoConditionUtil.checkFloat((Float) Start)) {
-			sql.append(AND).append(name).append("<").append("'").append((Float) Start).append("'");
+		if (start instanceof Float && QvoConditionUtil.checkFloat((Float) start)) {
+			sql.append(AND).append(name).append("<").append("'").append((Float) start).append("'");
 		}
-		if (End instanceof Float && QvoConditionUtil.checkFloat((Float) End)) {
-			sql.append(AND).append(name + ">").append("'").append((Float) End).append("'");
+		if (end instanceof Float && QvoConditionUtil.checkFloat((Float) end)) {
+			sql.append(AND).append(name + ">").append("'").append((Float) end).append("'");
 		}
 	}
 	
@@ -837,6 +838,9 @@ public abstract class BaseDao extends BaseSQL {
 		return getJdbcTemplate().queryForObject(new Page().getCountsql(sql), Integer.class);
 	}
 	
+	/** 获取模板方法
+	 * 
+	 * @return JdbcTemplate **/
 	public abstract JdbcTemplate getJdbcTemplate();
 	
 	/****/
