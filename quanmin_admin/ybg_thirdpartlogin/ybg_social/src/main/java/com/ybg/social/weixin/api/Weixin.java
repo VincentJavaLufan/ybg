@@ -9,6 +9,8 @@ public interface Weixin {
 	
 	/*** 获取微信用户信息
 	 * 
+	 * @param openId
+	 *            微信的ID
 	 * @return WeixinUserInfo **/
 	WeixinUserInfo getUserInfo(String openId);
 }
