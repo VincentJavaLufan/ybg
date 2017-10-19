@@ -20,7 +20,7 @@ import com.ybg.component.jwt.HTTPBearerAuthorizeAttribute;
 @ComponentScan(basePackages = { "com.qq", "com.baidu", "com.ybg", "cn", "weibo4j", "org.mybatis" }) // 扫描注解
 @ServletComponentScan({ "com.qq", "com.baidu", "com.ybg", "cn", "weibo4j", "org.mybatis" }) // 扫描servlet
 @Configuration
-public class SpringMVCConfiguration extends WebMvcConfigurerAdapter {
+public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
 	
 	/** 自定义异常页 */
 	@Bean
