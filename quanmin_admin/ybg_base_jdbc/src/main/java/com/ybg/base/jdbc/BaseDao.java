@@ -21,7 +21,7 @@ import com.ybg.base.util.Page;
 /*** 1.数据库所有逻辑主键使用 UUID方式 ，不要设置id为主键，设置它的主码索引就可以<br>
  * 2.数据库字段一律小写 <br>
  * 3.数据库字段不得使用下划线，表名可以。 <br>
-***/
+ ***/
 public abstract class BaseDao extends BaseSQL {
 	
 	/** 新增 只适用于UUID
@@ -32,7 +32,8 @@ public abstract class BaseDao extends BaseSQL {
 	 *            <br>
 	 *            createmap 为空则过滤掉该列，空map传递 则取消指向。
 	 * @return 返回 UUID主键
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	@SuppressWarnings("unused")
 	public String baseCreate(BaseMap<String, Object> createmap, String table_name, String id_name) throws Exception {
 		UUID uuid = UUID.randomUUID();
@@ -63,6 +64,7 @@ public abstract class BaseDao extends BaseSQL {
 		}
 		sql.append("  )");
 		getJdbcTemplate().update(sql.toString(), new PreparedStatementSetter() {
+			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
 				int count = 1;
@@ -127,7 +129,8 @@ public abstract class BaseDao extends BaseSQL {
 	 * @param T
 	 *            返回的类型
 	 * @return 主键
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	@SuppressWarnings("unused")
 	@Deprecated
 	public Object basecreate(final Map<String, Object> createmap, String table_name, boolean returnid, Object idtype) throws Exception {
@@ -161,7 +164,7 @@ public abstract class BaseDao extends BaseSQL {
 				
 				@Override
 				public PreparedStatement createPreparedStatement(Connection conn) throws SQLException {
-					PreparedStatement ps = conn.prepareStatement(sql.toString(),PreparedStatement.RETURN_GENERATED_KEYS);
+					PreparedStatement ps = conn.prepareStatement(sql.toString(), PreparedStatement.RETURN_GENERATED_KEYS);
 					int count = 1;
 					for (Entry<String, Object> entry : basemap.entrySet()) {
 						if (entry.getValue() instanceof Integer) {
@@ -210,13 +213,11 @@ public abstract class BaseDao extends BaseSQL {
 					return ps;
 				}
 			}, idkey);
-			
-			
 			if (idtype instanceof Integer) {
 				return idkey.getKey().intValue();
 			}
 			else if (idtype instanceof Long) {
-				return  idkey.getKey().longValue();
+				return idkey.getKey().longValue();
 			}
 			else {
 				return idkey.getKey().toString();
@@ -338,6 +339,7 @@ public abstract class BaseDao extends BaseSQL {
 			sql.replace(sql.length() - 1, sql.length(), "");
 		}
 		getJdbcTemplate().update(sql.toString(), new PreparedStatementSetter() {
+			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
 				int count = 1;
@@ -466,6 +468,7 @@ public abstract class BaseDao extends BaseSQL {
 			return 0;
 		}
 		return getJdbcTemplate().update(sql.toString(), new PreparedStatementSetter() {
+			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
 				int count = 1;
@@ -579,6 +582,7 @@ public abstract class BaseDao extends BaseSQL {
 			sql.append(AND + entry.getKey() + "=? ");
 		}
 		return getJdbcTemplate().update(sql.toString(), new PreparedStatementSetter() {
+			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
 				int count = 1;
@@ -636,10 +640,12 @@ public abstract class BaseDao extends BaseSQL {
 	 *            是否模糊查询（禁止左模糊）
 	 * @param name
 	 *            列的具体值
-	 * @throws Exception ***/
+	 * @throws Exception
+	 ***/
 	public String equalsorlike(boolean isblureed, String name) throws Exception {
 		if (checkSQLinject(name)) {
-			throw new Exception();// 存在sql 注入
+			// 存在sql 注入
+			throw new Exception();
 		}
 		if (isblureed) {
 			return LIKE + " '" + name + "%'";
@@ -662,7 +668,8 @@ public abstract class BaseDao extends BaseSQL {
 	 * @param qvo
 	 *            查看接口的方法 是否属于模糊查询
 	 * @return sql.append( and name=/like 'value'/'%value%')
-	 * @throws Exception ***/
+	 * @throws Exception
+	 ***/
 	public void sqlappen(StringBuilder sql, String name, String value, BaseQueryAble qvo) throws Exception {
 		sqlappen(sql, name, value, qvo.isBlurred());
 	}
@@ -680,7 +687,8 @@ public abstract class BaseDao extends BaseSQL {
 	 * @param qvo
 	 *            查看接口的方法 是否属于模糊查询
 	 * @return sql.append( and name=/like 'value'/'%value%')
-	 * @throws Exception ***/
+	 * @throws Exception
+	 ***/
 	public void sqlappen(StringBuilder sql, String name, String value, boolean blurred) throws Exception {
 		if (QvoConditionUtil.checkString(value)) {
 			sql.append(AND).append(name).append(equalsorlike(blurred, value));
@@ -698,7 +706,8 @@ public abstract class BaseDao extends BaseSQL {
 	 *            列的值
 	 * 
 	 * @return sql.append( and name= 'value')
-	 * @throws Exception ***/
+	 * @throws Exception
+	 ***/
 	public void sqlappen(StringBuilder sql, String name, String value) throws Exception {
 		if (QvoConditionUtil.checkString(value)) {
 			sql.append(AND).append(name).append(equalsorlike(false, value));
@@ -733,7 +742,8 @@ public abstract class BaseDao extends BaseSQL {
 	 *            列的值
 	 * 
 	 * @return sql.append( and name= 'value')
-	 * @throws Exception ***/
+	 * @throws Exception
+	 ***/
 	public void sqlappen(StringBuilder sql, String name, Long value) throws Exception {
 		if (QvoConditionUtil.checkLong(value)) {
 			sql.append(AND).append(name).append(equalsorlike(false, value.toString()));
@@ -837,8 +847,10 @@ public abstract class BaseDao extends BaseSQL {
 		if (sqlParm == null) {
 			return false;
 		}
-		sqlParm = sqlParm.toLowerCase();// 统一转为小写
-		String badStr = "'|and|exec|execute|insert|select|delete|update|count|drop|*|%|chr|mid|master|truncate|" + "char|declare|sitename|net user|xp_cmdshell|;|or|-|+|,|like'|and|exec|execute|insert|create|drop|" + "table|from|grant|use|group_concat|column_name|" + "information_schema.columns|table_schema|union|where|select|delete|update|order|by|count|*|" + "chr|mid|master|truncate|char|declare|or|;|-|--|+|,|like|//|/|%|#";// 过滤掉的sql关键字，可以手动添加
+		// 统一转为小写
+		sqlParm = sqlParm.toLowerCase();
+		// 过滤掉的sql关键字，可以手动添加
+		String badStr = "'|and|exec|execute|insert|select|delete|update|count|drop|*|%|chr|mid|master|truncate|" + "char|declare|sitename|net user|xp_cmdshell|;|or|-|+|,|like'|and|exec|execute|insert|create|drop|" + "table|from|grant|use|group_concat|column_name|" + "information_schema.columns|table_schema|union|where|select|delete|update|order|by|count|*|" + "chr|mid|master|truncate|char|declare|or|;|-|--|+|,|like|//|/|%|#";
 		String[] badStrs = badStr.split("\\|");
 		for (int i = 0; i < badStrs.length; i++) {
 			if (sqlParm.indexOf(badStrs[i]) >= 0) {
