@@ -17,10 +17,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author zhailiang */
 public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
 	
+	private static final String	ERRORCODE			= "errcode";
 	/** 获取用户信息的url */
-	private static final String URL_GET_USER_INFO = "https://api.weixin.qq.com/sns/userinfo?openid=";
+	private static final String	URL_GET_USER_INFO	= "https://api.weixin.qq.com/sns/userinfo?openid=";
 	
-	/** @param accessToken */
+	/** @param accessToken
+	 */
 	public WeixinImpl(String accessToken) {
 		super(accessToken, TokenStrategy.ACCESS_TOKEN_PARAMETER);
 	}
@@ -39,7 +41,7 @@ public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
 	public WeixinUserInfo getUserInfo(String openId) {
 		String url = URL_GET_USER_INFO + openId;
 		String response = getRestTemplate().getForObject(url, String.class);
-		if (StringUtils.contains(response, "errcode")) {
+		if (StringUtils.contains(response, ERRORCODE)) {
 			return null;
 		}
 		WeixinUserInfo profile = null;

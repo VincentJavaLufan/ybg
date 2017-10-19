@@ -23,6 +23,8 @@ public class WeixinOAuth2Template extends OAuth2Template {
 	private String				clientSecret;
 	private String				accessTokenUrl;
 	private static final String	REFRESH_TOKEN_URL	= "https://api.weixin.qq.com/sns/oauth2/refresh_token";
+	private static final String	ERRORCODE			= "errcode";
+	private static final String	ERRORMSG			= "errmsg";
 	
 	public WeixinOAuth2Template(String clientId, String clientSecret, String authorizeUrl, String accessTokenUrl) {
 		super(clientId, clientSecret, authorizeUrl, accessTokenUrl);
@@ -62,9 +64,9 @@ public class WeixinOAuth2Template extends OAuth2Template {
 			e.printStackTrace();
 		}
 		// 返回错误码时直接返回空
-		if (StringUtils.isNotBlank(MapUtils.getString(result, "errcode"))) {
-			String errcode = MapUtils.getString(result, "errcode");
-			String errmsg = MapUtils.getString(result, "errmsg");
+		if (StringUtils.isNotBlank(MapUtils.getString(result, ERRORCODE))) {
+			String errcode = MapUtils.getString(result, ERRORCODE);
+			String errmsg = MapUtils.getString(result, ERRORMSG);
 			throw new RuntimeException("获取access token失败, errcode:" + errcode + ", errmsg:" + errmsg);
 		}
 		WeixinAccessGrant accessToken = new WeixinAccessGrant(MapUtils.getString(result, "access_token"), MapUtils.getString(result, "scope"), MapUtils.getString(result, "refresh_token"), MapUtils.getLong(result, "expires_in"));

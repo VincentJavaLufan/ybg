@@ -34,7 +34,6 @@ public class WeixinAutoConfiguration extends SocialAutoConfigurerAdapter {
 	}
 	
 	@Bean(name = { "connect/weixinConnect", "connect/weixinConnected" })
-	// @ConditionalOnMissingBean(name = "weixinConnectedView")
 	public View weixinConnectedView() {
 		return new ImoocConnectView();
 	}

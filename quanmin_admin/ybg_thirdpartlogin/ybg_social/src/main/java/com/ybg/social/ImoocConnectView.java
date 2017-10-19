@@ -7,15 +7,12 @@ import org.springframework.web.servlet.view.AbstractView;
 /** @author zhailiang */
 public class ImoocConnectView extends AbstractView {
 	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.springframework.web.servlet.view.AbstractView#renderMergedOutputModel (java.util.Map, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-	 */
+	private static final String CONNECTION_MODEL_KEY = "connection";
+	
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=UTF-8");
-		if (model.get("connection") == null) {
+		if (model.get(CONNECTION_MODEL_KEY) == null) {
 			response.getWriter().write("<h3>解绑成功</h3>");
 		}
 		else {
