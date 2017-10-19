@@ -3,10 +3,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
 import de.codecentric.boot.admin.config.EnableAdminServer;
+
+/** 程序入口类
+ * 
+ * @author Deament
+ * @date 2017/1/1 */
 @EnableAdminServer
 @SpringBootApplication
-@EnableAutoConfiguration(exclude = {
-		org.activiti.spring.boot.SecurityAutoConfiguration.class, org.springframework.boot.actuate.autoconfigure.ManagementWebSecurityAutoConfiguration.class })
+@EnableAutoConfiguration(exclude = { org.activiti.spring.boot.SecurityAutoConfiguration.class, org.springframework.boot.actuate.autoconfigure.ManagementWebSecurityAutoConfiguration.class })
 @ComponentScan(basePackages = { "org.activiti.rest.diagram", "com.ybg", "cn", "org.mybatis" }) // 扫描注解
 public class Application {
 	

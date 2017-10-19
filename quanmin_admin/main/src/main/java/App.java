@@ -5,7 +5,11 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import de.codecentric.boot.admin.config.EnableAdminServer;
 
-//@EnableAutoConfiguration    //这个注解可以根据你依赖的包自动生成相关配置
+/** 程序入口类
+ * 
+ * @author Deament
+ * @date 2017/1/1 */
+// @EnableAutoConfiguration //这个注解可以根据你依赖的包自动生成相关配置
 @ComponentScan(basePackages = { "org.activiti.rest.diagram", "com.ybg", "cn", "org.mybatis" }) // 扫描注解
 @EnableAutoConfiguration(exclude = { org.activiti.spring.boot.SecurityAutoConfiguration.class, org.springframework.boot.actuate.autoconfigure.ManagementWebSecurityAutoConfiguration.class })
 @EnableAdminServer // spring boot admin监控 ，不喜欢可以不要

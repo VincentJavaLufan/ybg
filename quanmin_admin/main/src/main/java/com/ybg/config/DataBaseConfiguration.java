@@ -11,9 +11,12 @@ import org.springframework.transaction.PlatformTransactionManager;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.ybg.base.jdbc.DataBaseConstant;
 
-/** 数据源配置， DataSource 返回的数据源 @Primary 表示 如果不适用@Qualifier 注解时候，则使用默认<br>
- * JdbcTemplate 是springjdbc 配置，一般是，一个数据源配置一个JdbcTemplate 模板，<br>
- * 通过@Bean(name = DataBaseConstant.DB_QUARTZ)的方式指定数据源 **/
+/** * @author Deament
+ * 
+ * @date 2017/1/1<br>
+ *       数据源配置， DataSource 返回的数据源 @Primary 表示 如果不适用@Qualifier 注解时候，则使用默认<br>
+ *       JdbcTemplate 是springjdbc 配置，一般是，一个数据源配置一个JdbcTemplate 模板，<br>
+ *       通过@Bean(name = DataBaseConstant.DB_QUARTZ)的方式指定数据源 **/
 @Configuration
 public class DataBaseConfiguration {
 	
@@ -72,21 +75,18 @@ public class DataBaseConfiguration {
 	
 	// 事务管理器
 	@Bean(name = DataBaseConstant.TM_OA)
-	
 	public PlatformTransactionManager oaTransactionManager(@Qualifier(DataBaseConstant.DB_OA) DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}
 	
 	// 事务管理器
 	@Bean(name = DataBaseConstant.TM_QUARTZ)
-	
 	public PlatformTransactionManager quartzTransactionManager(@Qualifier(DataBaseConstant.DB_QUARTZ) DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}
 	
 	// 事务管理器
 	@Bean(name = DataBaseConstant.TM_EDU)
-	
 	public PlatformTransactionManager eduTransactionManager(@Qualifier(DataBaseConstant.DB_EDU) DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}

@@ -1,8 +1,6 @@
 package com.ybg.config;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -11,24 +9,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import com.ybg.component.jwt.HTTPBasicAuthorizeAttribute;
 import com.ybg.component.jwt.HTTPBearerAuthorizeAttribute;
-import com.ybg.rbac.user.service.LoginService;
-/**springmvc 配置，虽然没没有怎么生效**/
+
+/** @author Deament
+ * 
+ * @date 2017/1/1springmvc 配置，虽然没没有怎么生效 **/
 @ComponentScan(basePackages = { "com.qq", "com.baidu", "com.ybg", "cn", "weibo4j", "org.mybatis" }) // 扫描注解
 @ServletComponentScan({ "com.qq", "com.baidu", "com.ybg", "cn", "weibo4j", "org.mybatis" }) // 扫描servlet
-
 @Configuration
 public class SpringMVCConfiguration extends WebMvcConfigurerAdapter {
 	
-
-	// public void addInterceptors(InterceptorRegistry registry) {
-	// registry.addInterceptor(new
-	// UserSecurityInterceptor()).addPathPatterns("/user/**");
-	// }
 	/** 自定义异常页 */
 	@Bean
 	public EmbeddedServletContainerCustomizer containerCustomizer() {
@@ -39,11 +32,11 @@ public class SpringMVCConfiguration extends WebMvcConfigurerAdapter {
 			container.addErrorPages(error401Page, error404Page, error500Page);
 		};
 	}
-
+	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 	}
-
+	
 	@Bean
 	public FilterRegistrationBean basicFilterRegistrationBean() {
 		FilterRegistrationBean registrationBean = new FilterRegistrationBean();
@@ -54,7 +47,7 @@ public class SpringMVCConfiguration extends WebMvcConfigurerAdapter {
 		registrationBean.setUrlPatterns(urlPatterns);
 		return registrationBean;
 	}
-
+	
 	@Bean
 	public FilterRegistrationBean jwtFilterRegistrationBean() {
 		FilterRegistrationBean registrationBean = new FilterRegistrationBean();
@@ -65,5 +58,4 @@ public class SpringMVCConfiguration extends WebMvcConfigurerAdapter {
 		registrationBean.setUrlPatterns(urlPatterns);
 		return registrationBean;
 	}
-
 }
