@@ -29,7 +29,8 @@ public class SocialConfig extends SocialConfigurerAdapter {
 	@Override
 	public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
 		JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
-		repository.setTablePrefix("sys_");// 前缀
+		// 表名 前缀
+		repository.setTablePrefix("sys_");
 		if (connectionSignUp != null) {
 			repository.setConnectionSignUp(connectionSignUp);
 		}
@@ -41,7 +42,8 @@ public class SocialConfig extends SocialConfigurerAdapter {
 	public SpringSocialConfigurer imoocSocialSecurityConfig() {
 		String filterProcessesUrl = "/social";
 		ImoocSpringSocialConfigurer configurer = new ImoocSpringSocialConfigurer(filterProcessesUrl);
-		configurer.signupUrl("/common/login_do/toregister.do");// 注册地址 如果 抛出 无绑定异常，则 添加 session 到 服务器中 再去 绑定页中 请求/social/user 地址 就可以拿到 对应 的 第三方ID
+		// 注册地址 如果 抛出 无绑定异常，则 添加 session 到 服务器中 再去 绑定页中 请求/social/user 地址 就可以拿到 对应 的 第三方ID
+		configurer.signupUrl("/common/login_do/toregister.do");
 		return configurer;
 	}
 	

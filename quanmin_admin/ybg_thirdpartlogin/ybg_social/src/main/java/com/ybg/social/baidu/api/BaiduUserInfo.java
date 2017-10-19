@@ -3,20 +3,34 @@ package com.ybg.social.baidu.api;
  * @date 2017/10/1 **/
 public class BaiduUserInfo {
 	
-	String	userid;			// 当前登录用户的数字ID
-	String	username;		// 当前登录用户的用户名，值可能为空。
-	String	realname;		// 用户真实姓名，可能为空。
-	String	portrait;		// 当前登录用户的头像
-	String	userdetail;		// 自我简介，可能为空。
-	String	birthday;		// 生日，以yyyy-mm-dd格式显示。
-	String	marriage;		// 婚姻状况
-	String	sex;			// 性别。"1"表示男，"0"表示女。
-	String	blood;			// 血型
-	String	figure;			// 体型
-	String	constellation;	// 星座
-	String	education;		// 学历
-	String	trade;			// 当前职业
-	String	job;			// 职位
+	/** 当前登录用户的数字ID **/
+	String	userid;
+	/** 当前登录用户的用户名，值可能为空。 **/
+	String	username;
+	/** 用户真实姓名，可能为空。 **/
+	String	realname;
+	/** 当前登录用户的头像 **/
+	String	portrait;
+	/** 自我简介，可能为空。 */
+	String	userdetail;
+	/** 生日，以yyyy-mm-dd格式显示。 **/
+	String	birthday;
+	/** 婚姻状况 **/
+	String	marriage;
+	/** 性别。"1"表示男，"0"表示女。 */
+	String	sex;
+	/** 血型 */
+	String	blood;
+	/** 体型 **/
+	String	figure;
+	/** 星座 **/
+	String	constellation;
+	/** 学历 **/
+	String	education;
+	/** 当前职业 */
+	String	trade;
+	/** 职位 **/
+	String	job;
 	
 	public String getUserid() {
 		return userid;

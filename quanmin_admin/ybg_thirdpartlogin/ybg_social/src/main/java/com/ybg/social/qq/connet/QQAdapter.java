@@ -18,10 +18,14 @@ public class QQAdapter implements ApiAdapter<QQ> {
 	@Override
 	public void setConnectionValues(QQ api, ConnectionValues values) {
 		QQUserInfo userInfo = api.getUserInfo();
-		values.setDisplayName(userInfo.getNickname());// 昵称
-		values.setImageUrl(userInfo.getFigureurl_qq_1());// 用户头像
-		values.setProfileUrl(null);// 个人主页，不一定有。
-		values.setProviderUserId(userInfo.getOpenId());// 服务商的用户ID ,QQ 的是QQid // 这个异常需要捕获处理 处理成运行时异常
+		// 昵称
+		values.setDisplayName(userInfo.getNickname());
+		// 用户头像
+		values.setImageUrl(userInfo.getFigureurl_qq_1());
+		// 个人主页，不一定有。
+		values.setProfileUrl(null);
+		// 服务商的用户ID ,QQ 的是QQid // 这个异常需要捕获处理 处理成运行时异常
+		values.setProviderUserId(userInfo.getOpenId());
 	}
 	
 	@Override

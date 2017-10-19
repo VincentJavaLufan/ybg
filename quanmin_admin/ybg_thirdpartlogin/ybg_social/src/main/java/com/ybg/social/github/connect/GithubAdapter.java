@@ -17,10 +17,14 @@ public class GithubAdapter implements ApiAdapter<GitHub> {
 	@Override
 	public void setConnectionValues(GitHub api, ConnectionValues values) {
 		GithubUserInfo userInfo = api.getUserInfo();
-		values.setDisplayName(userInfo.getName());// 昵称
-		values.setImageUrl(userInfo.getAvatar_url());// 用户头像
-		values.setProfileUrl(userInfo.getHtml_url());// 个人主页，不一定有。
-		values.setProviderUserId(userInfo.getId() + "");// 服务商的用户ID ,QQ 的是QQid // 这个异常需要捕获处理 处理成运行时异常
+		// 昵称
+		values.setDisplayName(userInfo.getName());
+		// 用户头像
+		values.setImageUrl(userInfo.getAvatar_url());
+		// 个人主页，不一定有。
+		values.setProfileUrl(userInfo.getHtml_url());
+		// 服务商的用户ID ,QQ 的是QQid // 这个异常需要捕获处理 处理成运行时异常
+		values.setProviderUserId(userInfo.getId() + "");
 	}
 	
 	@Override

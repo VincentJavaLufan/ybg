@@ -139,7 +139,8 @@ public class SocialController {
 			return j;
 		}
 		String url = SystemConstant.getSystemdomain() + "/common/login_do/relife.do?userid=" + user.getId() + "&username=" + user.getUsername() + "&salt=" + user.getCredentialssalt();
-		String contemt = this.getActiveContent(url, user.getUsername()); // 获取激活邮件的hmtl内容
+		// 获取激活邮件的hmtl内容
+		String contemt = this.getActiveContent(url, user.getUsername()); 
 		try {
 			SendEmailInter send = new SendQQmailImpl();
 			send.sendMail(email, SystemConstant.getSystemName() + "注册", contemt);

@@ -31,14 +31,19 @@ public class SinaAdapter implements ApiAdapter<Sina> {
 	}
 	
 	/** @param api
-	 * @param values */
+	 * @param values
+	 */
 	@Override
 	public void setConnectionValues(Sina api, ConnectionValues values) {
 		SinaUserInfo userInfo = api.getUserInfo();
-		values.setDisplayName(userInfo.getName());// 昵称
-		values.setImageUrl(userInfo.getProfile_image_url());// 用户头像
-		values.setProfileUrl(userInfo.getUrl());// 个人主页，不一定有。
-		values.setProviderUserId(userInfo.getIdstr());// 服务商的用户ID ,QQ 的是QQid // 这个异常需要捕获处理 处理成运行时异常
+		// 昵称
+		values.setDisplayName(userInfo.getName());
+		// 用户头像
+		values.setImageUrl(userInfo.getProfile_image_url());
+		// 个人主页，不一定有。
+		values.setProfileUrl(userInfo.getUrl());
+		// 服务商的用户ID ,QQ 的是QQid // 这个异常需要捕获处理 处理成运行时异常
+		values.setProviderUserId(userInfo.getIdstr());
 	}
 	
 	/** @param api
@@ -51,7 +56,8 @@ public class SinaAdapter implements ApiAdapter<Sina> {
 	}
 	
 	/** @param api
-	 * @param message */
+	 * @param message
+	 */
 	@Override
 	public void updateStatus(Sina api, String message) {
 		// do nothing
