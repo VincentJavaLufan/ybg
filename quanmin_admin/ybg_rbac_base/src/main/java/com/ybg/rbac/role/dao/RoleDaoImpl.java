@@ -16,6 +16,9 @@ import com.ybg.rbac.role.domain.RoleResDO;
 import com.ybg.rbac.role.domain.SysRoleVO;
 import com.ybg.rbac.role.qvo.RoleQuery;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @Repository
 public class RoleDaoImpl extends BaseDao implements RoleDao {
 	
@@ -44,8 +47,8 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 	}
 	
 	@Override
-	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> WHEREmap) {
-		this.baseupdate(updatemap, WHEREmap, "sys_role");
+	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> whereMap) {
+		this.baseupdate(updatemap, whereMap, "sys_role");
 	}
 	
 	@Override
@@ -90,7 +93,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 	}
 	
 	@Override
-	public void saveOrupdateRole_Res(final List<RoleResDO> list) {
+	public void saveOrUpdateRoleRes(final List<RoleResDO> list) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(INSERT).append(INTO).append("sys_res_role (resid,roleid,state) ").append(VALUES).append("(?,?,?) ").append(ON).append(DUPLICATE).append(KEY).append(UPDATE).append("resid=?,roleid=?, state=? ");
 		getJdbcTemplate().batchUpdate(sql.toString(), new BatchPreparedStatementSetter() {

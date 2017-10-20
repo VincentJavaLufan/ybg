@@ -11,6 +11,9 @@ import com.ybg.rbac.role.domain.RoleResDO;
 import com.ybg.rbac.role.domain.SysRoleVO;
 import com.ybg.rbac.role.qvo.RoleQuery;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @Repository
 public class RoleServiceImpl implements RoleService {
 	
@@ -20,7 +23,8 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	/** 返回主键的创建
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	@CacheEvict(value = "roleCache", allEntries = true)
 	public SysRoleVO save(SysRoleVO role) throws Exception {
 		return roleDao.save(role);
@@ -54,7 +58,8 @@ public class RoleServiceImpl implements RoleService {
 	
 	/** 获取单个实体信息
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	@Override
 	@Cacheable(value = "roleCache", key = "#root.method.name+#root.args[0]")
 	public SysRoleVO get(String id) throws Exception {
@@ -66,7 +71,8 @@ public class RoleServiceImpl implements RoleService {
 	
 	/** 分页查询
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	@Override
 	@Cacheable(value = "roleCache", key = "#root.method.name+#root.args[0]+#root.method.name+#root.args[1]")
 	public Page list(Page page, RoleQuery qvo) throws Exception {
@@ -75,7 +81,8 @@ public class RoleServiceImpl implements RoleService {
 	
 	/** 不分页查询
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	@Override
 	@Cacheable(value = "roleCache", key = "#root.method.name+#root.args[0]")
 	public List<SysRoleVO> list(RoleQuery qvo) throws Exception {
@@ -85,7 +92,7 @@ public class RoleServiceImpl implements RoleService {
 	/** 角色授权 增删改都在里面了 **/
 	@Override
 	@CacheEvict(value = "resroleCache", allEntries = true)
-	public void saveOrupdateRole_Res(List<RoleResDO> list) {
-		roleDao.saveOrupdateRole_Res(list);
+	public void saveOrUpdateRoleRes(List<RoleResDO> list) {
+		roleDao.saveOrUpdateRoleRes(list);
 	}
 }

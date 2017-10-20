@@ -4,7 +4,11 @@ import org.hibernate.validator.constraints.NotBlank;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-/** 角色实体（数据库） **/
+/*** 角色实体（数据库）
+ * 
+ * @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @ApiModel("角色实体（数据库)")
 public class RoleDO implements Serializable {
 	

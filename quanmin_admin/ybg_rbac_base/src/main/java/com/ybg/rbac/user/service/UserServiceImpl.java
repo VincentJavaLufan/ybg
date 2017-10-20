@@ -10,7 +10,9 @@ import com.ybg.base.util.Page;
 import com.ybg.rbac.user.dao.UserDao;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.qvo.UserQuery;
+/*** @author https://gitee.com/YYDeament/88ybg 
 
+ * @date 2016/10/1 */
 @Repository
 public class UserServiceImpl implements UserService {
 	

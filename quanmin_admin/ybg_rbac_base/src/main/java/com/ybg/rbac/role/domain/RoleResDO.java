@@ -1,7 +1,11 @@
 package com.ybg.rbac.role.domain;
 import java.io.Serializable;
 
-/** 菜单 角色关联实体 （数据库) **/
+/** 菜单 角色关联实体 （数据库)
+ * 
+ * @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 public class RoleResDO implements Serializable {
 	
 	private static final long	serialVersionUID	= 5334721818648118713L;

@@ -17,7 +17,9 @@ import com.ybg.base.util.Page;
 import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.qvo.UserQuery;
+/*** @author https://gitee.com/YYDeament/88ybg 
 
+ * @date 2016/10/1 */
 @Repository
 public class UserDaoImpl extends BaseDao implements UserDao {
 	
@@ -49,8 +51,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	}
 	
 	@Override
-	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> WHEREmap) {
-		this.baseupdate(updatemap, WHEREmap, "sys_user");
+	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> whereMap) {
+		this.baseupdate(updatemap, whereMap, "sys_user");
 	}
 	
 	@Override

@@ -5,9 +5,16 @@ import com.ybg.base.util.Page;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
 import com.ybg.rbac.resources.qvo.ResourcesQuery;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * 
+ * @date 2016/10/1 */
 public interface ResourcesDao {
 	
-	/** 返回主键的创建 **/
+	/** 创建资源
+	 * 
+	 * @param bean
+	 * @return SysResourcesVO **/
 	SysResourcesVO save(SysResourcesVO bean);
 	
 	/** 更新数据，条件 和 需要更新的字段都不能为空 不限个数个条件
@@ -23,25 +30,35 @@ public interface ResourcesDao {
 	
 	/** 分页查询
 	 * 
+	 * @param page
+	 * @param qvo
+	 * @return
 	 * @throws Exception
-	 **/
+	 */
 	Page list(Page page, ResourcesQuery qvo) throws Exception;
 	
 	/** 不分页查询
 	 * 
+	 * @param qvo
+	 * @return
 	 * @throws Exception
-	 **/
+	 */
 	List<SysResourcesVO> list(ResourcesQuery qvo) throws Exception;
 	
 	/** 角色 权限集合
 	 * 
+	 * @param roleid
+	 * @return
 	 * @throws Exception
-	 **/
+	 */
 	List<SysResourcesVO> getRolesByUserId(String roleid) throws Exception;
 	
 	/** 授权的按钮操作
 	 * 
+	 * @param roleid
+	 * @param parentid
+	 * @return
 	 * @throws Exception
-	 **/
+	 */
 	List<SysResourcesVO> getOperatorButton(String roleid, String parentid) throws Exception;
 }

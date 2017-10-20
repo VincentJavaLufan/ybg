@@ -12,6 +12,10 @@ import com.ybg.base.util.Page;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
 import com.ybg.rbac.resources.qvo.ResourcesQuery;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * 
+ * @date 2016/10/1 */
 @Repository
 public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 	
@@ -24,7 +28,6 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 	}
 	
 	private static String	QUERY_TABLE_NAME	= "sys_resources res";
-	// private static String QUERY_TABLE_COLUMN = " res.id,res.name,res.parentid,res.reskey,res.type,res.resurl,res.level,res.icon,res.ishide,res.description,res.colorid ";
 	private static String	QUERY_TABLE_COLUMN	= " res.id,res.name,res.parentid,res.reskey,res.type,res.resurl,res.level,res.ishide,res.description,res.colorid ";
 	
 	@Override
@@ -51,13 +54,14 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 	}
 	
 	@Override
-	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> WHEREmap) {
-		this.baseupdate(updatemap, WHEREmap, "sys_resources");
+	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> whereMap) {
+		this.baseupdate(updatemap, whereMap, "sys_resources");
 	}
 	
 	@Override
 	public Page list(Page page, ResourcesQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
+		// 原来是有顺序的 前后分离后没有必要了 private static String QUERY_TABLE_COLUMN = " res.id,res.name,res.parentid,res.reskey,res.type,res.resurl,res.level,res.icon,res.ishide,res.description,res.colorid ";
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",color.colorclass").append(FROM).append(QUERY_TABLE_NAME).append(",sys_color color");
 		sql.append(getcondition(qvo));
 		page.setTotals(queryForInt(sql));

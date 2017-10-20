@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.ybg.rbac.user.domain;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -8,6 +5,9 @@ import java.io.Serializable;
 import org.hibernate.validator.constraints.NotBlank;
 import com.ybg.base.util.excel.ExcelVOAttribute;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @ApiModel(value = "用戶实体类(数据库)", description = "")
 /** @author yy 2016-06-21 用戶实体类(数据库) */
 public class UserDO implements Serializable {

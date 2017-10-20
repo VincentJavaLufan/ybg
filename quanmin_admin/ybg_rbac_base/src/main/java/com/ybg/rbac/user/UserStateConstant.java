@@ -1,5 +1,7 @@
 package com.ybg.rbac.user;
-/** 账号状态常量 **/
+/*** 账号状态常量 @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 public class UserStateConstant {
 	
 	private UserStateConstant() {

@@ -11,6 +11,8 @@ import com.ybg.rbac.resources.dao.ResourcesDao;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
 import com.ybg.rbac.resources.qvo.ResourcesQuery;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * @date 2016/10/1 */
 @Repository
 public class ResourcrsServiceImpl implements ResourcesService {
 	
@@ -52,7 +54,8 @@ public class ResourcrsServiceImpl implements ResourcesService {
 	
 	/** 获取单个实体信息
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	@Override
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]")
 	public SysResourcesVO get(String id) throws Exception {
@@ -64,7 +67,8 @@ public class ResourcrsServiceImpl implements ResourcesService {
 	
 	/** 分页查询
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	@Override
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]+#root.method.name+#root.args[1]")
 	public Page list(Page page, ResourcesQuery qvo) throws Exception {
@@ -73,7 +77,8 @@ public class ResourcrsServiceImpl implements ResourcesService {
 	
 	/** 不分页查询
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	@Override
 	@Cacheable(value = "resourcesCache", key = "#root.method.name+#root.args[0]")
 	public List<SysResourcesVO> list(ResourcesQuery qvo) throws Exception {
@@ -82,7 +87,8 @@ public class ResourcrsServiceImpl implements ResourcesService {
 	
 	/** 角色 权限集合
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	@Override
 	@Cacheable(value = "resroleCache", key = "#root.method.name+#root.args[0]")
 	public List<SysResourcesVO> getRolesByUserId(String roleid) throws Exception {
@@ -91,7 +97,8 @@ public class ResourcrsServiceImpl implements ResourcesService {
 	
 	/** 授权的按钮操作
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	@Override
 	@Cacheable(value = "resroleCache", key = "#root.method.name+#root.args[0]+#root.method.name+#root.args[1]")
 	public List<SysResourcesVO> getOperatorButton(String roleid, String parentid) throws Exception {

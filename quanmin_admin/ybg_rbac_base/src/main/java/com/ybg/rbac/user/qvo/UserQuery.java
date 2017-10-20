@@ -3,7 +3,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import com.ybg.base.jdbc.BaseQueryAble;
 import com.ybg.rbac.user.domain.UserVO;
+/*** @author https://gitee.com/YYDeament/88ybg 
 
+ * @date 2016/10/1 */
 @ApiModel(value = "用户查询条件", parent = UserVO.class, description = "")
 public class UserQuery extends UserVO implements BaseQueryAble {
 	

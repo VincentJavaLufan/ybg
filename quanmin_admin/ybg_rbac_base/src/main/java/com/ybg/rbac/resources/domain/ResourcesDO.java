@@ -4,7 +4,9 @@ import org.hibernate.validator.constraints.NotBlank;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-/** 菜单类实体（ 数据库） **/
+/*** @author https://gitee.com/YYDeament/88ybg 菜单类实体（ 数据库）
+ * 
+ * @date 2016/10/1 */
 @ApiModel("菜单类实体")
 public class ResourcesDO implements Serializable {
 	

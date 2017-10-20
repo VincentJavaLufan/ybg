@@ -111,7 +111,7 @@ public class RoleControllor {
 					}
 				}
 			}
-			roleService.saveOrupdateRole_Res(list);
+			roleService.saveOrUpdateRoleRes(list);
 		} catch (Exception e) {
 			e.printStackTrace();
 			j.setMsg("操作失败");
@@ -171,7 +171,7 @@ public class RoleControllor {
 					}
 				}
 			}
-			roleService.saveOrupdateRole_Res(list);
+			roleService.saveOrUpdateRoleRes(list);
 		} catch (DuplicateKeyException e) {
 			e.printStackTrace();
 			j.setMsg("操作失败,已存在该记录");

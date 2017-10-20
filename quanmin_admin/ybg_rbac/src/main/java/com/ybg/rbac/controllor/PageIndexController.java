@@ -83,10 +83,10 @@ public class PageIndexController {
 			return "";
 		}
 		map.put("userFormMap", user);
-		if (RbacConstant.IsAdmin(user)) {
+		if (RbacConstant.isAdmin(user)) {
 			return "/index/admin/menu";
 		}
-		if (RbacConstant.IsOther(user)) {
+		if (RbacConstant.isOther(user)) {
 			return "/index/other/menu";
 		}
 		return "";
@@ -133,10 +133,10 @@ public class PageIndexController {
 			return "";
 		}
 		map.put("userFormMap", user);
-		if (RbacConstant.IsAdmin(user)) {
+		if (RbacConstant.isAdmin(user)) {
 			return "/index/admin/welcome";
 		}
-		if (RbacConstant.IsOther(user)) {
+		if (RbacConstant.isOther(user)) {
 			// 让用户选择子系统
 			return "/index/other/welcome";
 		}

@@ -1,6 +1,9 @@
 package com.ybg.rbac.role.domain;
 import java.util.List;
 
+/** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 public class SysRoleVO extends RoleDO {
 	
 	/**

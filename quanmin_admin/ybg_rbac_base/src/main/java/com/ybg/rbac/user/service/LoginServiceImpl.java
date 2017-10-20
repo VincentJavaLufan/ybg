@@ -19,7 +19,9 @@ import com.ybg.rbac.user.dao.UserDao;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.qvo.UserQuery;
 
-/** 实现 了 账号密码登陆以及社交登陆接口 **/
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @Component
 public class LoginServiceImpl implements UserDetailsService {
 	

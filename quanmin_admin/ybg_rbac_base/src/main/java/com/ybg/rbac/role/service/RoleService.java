@@ -6,12 +6,17 @@ import com.ybg.rbac.role.domain.RoleResDO;
 import com.ybg.rbac.role.domain.SysRoleVO;
 import com.ybg.rbac.role.qvo.RoleQuery;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 public interface RoleService {
 	
-	/** 返回主键的创建
+	/** 创建角色
 	 * 
+	 * @param role
+	 * @return
 	 * @throws Exception
-	 **/
+	 */
 	SysRoleVO save(SysRoleVO role) throws Exception;
 	
 	/** 更新数据，条件 和 需要更新的字段都不能为空 不限个数个条件
@@ -27,20 +32,38 @@ public interface RoleService {
 	
 	/** 分页查询
 	 * 
+	 * @param page
+	 * @param qvo
+	 * @return
 	 * @throws Exception
-	 **/
+	 */
 	Page list(Page page, RoleQuery qvo) throws Exception;
 	
 	/** 不分页查询
 	 * 
+	 * @param qvo
+	 * @return
 	 * @throws Exception
-	 **/
+	 */
 	List<SysRoleVO> list(RoleQuery qvo) throws Exception;
 	
-	/** 角色授权 增删改都在里面了 **/
-	void saveOrupdateRole_Res(List<RoleResDO> list);
+	/** 角色授权 增删改都在里面了
+	 * 
+	 * @param list
+	 */
+	void saveOrUpdateRoleRes(List<RoleResDO> list);
 	
+	/** 根据ID获取角色
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
 	SysRoleVO get(String id) throws Exception;
 	
+	/** 根据ID删除角色
+	 * 
+	 * @param id
+	 */
 	void removebyid(String id);
 }

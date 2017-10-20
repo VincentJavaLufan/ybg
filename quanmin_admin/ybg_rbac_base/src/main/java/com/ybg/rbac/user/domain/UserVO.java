@@ -8,16 +8,16 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.ybg.rbac.user.UserStateConstant;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @ApiModel(value = "用户类", parent = UserDO.class)
 public class UserVO extends UserDO implements UserDetails {
 	
-	/**
-	 * 
-	 */
 	private static final long		serialVersionUID	= 6514868907104830464L;
 	@ApiModelProperty(name = "salt", dataType = "java.lang.String", value = "可解析加密盐", hidden = true)
 	private String					salt;
-	// 用户自身权限
+	/** 用户自身权限 **/
 	List<SimpleGrantedAuthority>	auths;
 	@ApiModelProperty(name = "rolename", dataType = "java.lang.String", value = "角色名称", hidden = true)
 	private String					rolename;
@@ -40,8 +40,6 @@ public class UserVO extends UserDO implements UserDetails {
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// List<SimpleGrantedAuthority> auths = new ArrayList<>();
-		// auths.add(new SimpleGrantedAuthority(getRoleid()));
 		return auths;
 	}
 	
