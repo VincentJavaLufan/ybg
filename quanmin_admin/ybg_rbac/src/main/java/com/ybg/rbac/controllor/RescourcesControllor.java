@@ -24,6 +24,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
+/** @author Deament
+ * 
+ * @date 2016/9/31 ***/
 @Api(tags = "用户访问资源管理接口")
 @Controller
 @RequestMapping("/res/res_do/")
@@ -128,10 +131,7 @@ public class RescourcesControllor {
 		Json j = new Json();
 		j.setSuccess(true);
 		try {
-			// String ids[] = ids2.split(",");
-			// for (String id : ids) {
 			resourcesService.removebyid(id);
-			// }
 		} catch (Exception e) {
 			e.printStackTrace();
 			j.setMsg("操作失败");

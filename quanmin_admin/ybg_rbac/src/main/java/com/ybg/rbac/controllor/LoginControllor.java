@@ -28,7 +28,6 @@ import com.ybg.base.util.UserConstant;
 import com.ybg.base.util.VrifyCodeUtil;
 import com.ybg.component.email.sendemail.SendEmailInter;
 import com.ybg.component.email.sendemail.SendQQmailImpl;
-
 import com.ybg.rbac.resources.service.ResourcesService;
 import com.ybg.rbac.support.controller.LoginProxyController;
 import com.ybg.rbac.support.domain.Loginproxy;
@@ -43,7 +42,9 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONObject;
 
-/*** 用Shiro登陆 **/
+/** @author Deament
+ * 
+ * @date 2016/9/31 ***/
 @Api(tags = "平台登录操作")
 @Controller
 public class LoginControllor {
@@ -111,7 +112,8 @@ public class LoginControllor {
 	
 	/** 注册
 	 *
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	@ApiOperation(value = "注册", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = "/common/login_do/register.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -139,7 +141,8 @@ public class LoginControllor {
 			return j;
 		}
 		String url = SystemConstant.getSystemdomain() + "/common/login_do/relife.do?userid=" + user.getId() + "&username=" + user.getUsername() + "&salt=" + user.getCredentialssalt();
-		String contemt = this.getActiveContent(url, user.getUsername()); // 获取激活邮件的hmtl内容
+		// 获取激活邮件的hmtl内容
+		String contemt = this.getActiveContent(url, user.getUsername());
 		try {
 			SendEmailInter send = new SendQQmailImpl();
 			send.sendMail(email, SystemConstant.getSystemName() + "注册", contemt);
@@ -325,7 +328,8 @@ public class LoginControllor {
 	
 	/** 修改密码
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	@ApiOperation(value = "修改密码", notes = " ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "/common/login_do/modifypwd.do" }, method = { RequestMethod.GET, RequestMethod.POST })
@@ -339,7 +343,6 @@ public class LoginControllor {
 		}
 		j.setSuccess(true);
 		j.setMsg("操作成功");
-		// UserVO user = (UserVO) Common.findUserSession();
 		if (user == null) {
 			j.setMsg("您尚未登陆");
 			return j;
@@ -361,13 +364,14 @@ public class LoginControllor {
 		return j;
 	}
 	
-	/** 清除过期没有激活的用户
+	/** 清除过期没有激活的用户<br>
+	 * // @Scheduled(cron = "1 * * * * ? ") 1分钟一次
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	@Scheduled(cron = "0 0 */6 * * ?")
-	// XXX 好像还有点问题
-	// @Scheduled(cron = "1 * * * * ? ")
 	public void cleanuser() throws Exception {
+		// XXX 好像还有点问题
 		userService.removeExpired();
 	}
 	

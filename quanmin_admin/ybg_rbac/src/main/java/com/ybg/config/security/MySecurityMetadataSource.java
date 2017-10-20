@@ -19,7 +19,9 @@ import com.ybg.rbac.resources.domain.SysResourcesVO;
 import com.ybg.rbac.resources.qvo.ResourcesQuery;
 import com.ybg.rbac.resources.service.ResourcesService;
 
-/** Created by Athos on 2016-10-16. */
+/** @author Deament
+ * 
+ * @date 2016/9/31 ***/
 @Component
 public class MySecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 	

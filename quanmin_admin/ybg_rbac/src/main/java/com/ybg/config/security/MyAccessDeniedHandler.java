@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
+/** @author Deament
+ * 
+ * @date 2016/9/31 ***/
 public class MyAccessDeniedHandler implements AccessDeniedHandler {
 	
 	private String accessDeniedUrl;
@@ -16,6 +19,7 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
 	public MyAccessDeniedHandler(String accessDeniedUrl) {
 		this.accessDeniedUrl = accessDeniedUrl;
 	}
+	
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
 		response.sendRedirect(accessDeniedUrl);

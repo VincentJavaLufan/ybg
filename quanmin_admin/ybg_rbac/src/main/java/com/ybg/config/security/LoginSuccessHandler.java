@@ -10,30 +10,30 @@ import com.ybg.rbac.user.domain.UserVO;
 /** @author 朱良兴， 可以在这里将用户登录信息存入数据库。 */
 public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 	
+	private static final String IPADRESS_TYPE_UNKNOWN="unknown";
+	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 		// 获得授权后可得到用户信息 可使用SUserService进行数据库操作
 		UserVO userDetails = (UserVO) authentication.getPrincipal();
 		request.getSession().setAttribute("userSession", userDetails);
-	
-		// super.onAuthenticationSuccess(request, response, authentication);
 	}
 	
 	public String getIpAddress(HttpServletRequest request) {
 		String ip = request.getHeader("x-forwarded-for");
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		if (ip == null || ip.length() == 0 || IPADRESS_TYPE_UNKNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("Proxy-Client-IP");
 		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		if (ip == null || ip.length() == 0 || IPADRESS_TYPE_UNKNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("WL-Proxy-Client-IP");
 		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		if (ip == null || ip.length() == 0 || IPADRESS_TYPE_UNKNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("HTTP_CLIENT_IP");
 		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		if (ip == null || ip.length() == 0 || IPADRESS_TYPE_UNKNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
 		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		if (ip == null || ip.length() == 0 || IPADRESS_TYPE_UNKNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getRemoteAddr();
 		}
 		return ip;

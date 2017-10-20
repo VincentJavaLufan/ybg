@@ -31,11 +31,6 @@ public class YcAnthencationProder implements AuthenticationProvider {
 		if (user == null) {
 			throw new BadCredentialsException("Username not found.");
 		}
-		// 加密过程在这里体现
-		// if (!password.equals(user.getPassword())) {
-		// System.out.println("密码错误");
-		// throw new BadCredentialsException("Wrong password.");
-		// }
 		Collection<? extends GrantedAuthority> authorities = userService.loadUserByUsername(username).getAuthorities();
 		return new UsernamePasswordAuthenticationToken(user, password, authorities);
 	}

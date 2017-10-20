@@ -32,7 +32,10 @@ import com.ybg.rbac.role.domain.SysRoleVO;
 import com.ybg.rbac.role.qvo.RoleQuery;
 import com.ybg.rbac.role.service.RoleService;
 
-@Api(tags="角色管理")
+/** @author Deament
+ * 
+ * @date 2016/9/31 ***/
+@Api(tags = "角色管理")
 @Controller
 @RequestMapping("/role/role_do/")
 public class RoleControllor {
@@ -45,7 +48,6 @@ public class RoleControllor {
 	@ApiOperation(value = "角色管理页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String index() {
-		// map.addAttribute("res", findByRes(request));
 		return "/system/role/index";
 	}
 	
@@ -64,7 +66,8 @@ public class RoleControllor {
 	
 	/** 角色下拉列表
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	@ResponseBody
 	@RequestMapping(value = { "select.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public Map<String, Object> select() throws Exception {
@@ -95,7 +98,8 @@ public class RoleControllor {
 				RoleResDO rr = new RoleResDO();
 				rr.setResid(res.getId());
 				rr.setRoleid(roleId);
-				rr.setState(1);// 禁止使用
+				// 禁止使用
+				rr.setState(1);
 				list.add(rr);
 			}
 			if (role.getMenuIdList() != null && role.getMenuIdList().size() > 0) {
@@ -154,7 +158,8 @@ public class RoleControllor {
 				RoleResDO rr = new RoleResDO();
 				rr.setResid(res.getId());
 				rr.setRoleid(roleId);
-				rr.setState(1);// 禁止使用
+				// 禁止使用
+				rr.setState(1);
 				list.add(rr);
 			}
 			if (bean.getMenuIdList() != null && bean.getMenuIdList().size() > 0) {

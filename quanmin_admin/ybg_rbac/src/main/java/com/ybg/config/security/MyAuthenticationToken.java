@@ -5,21 +5,19 @@ import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 
+/** @author Deament
+ * 
+ * @date 2016/9/31 ***/
 public class MyAuthenticationToken extends AbstractAuthenticationToken implements Serializable {
 	
 	private static final long	serialVersionUID	= SpringSecurityCoreVersion.SERIAL_VERSION_UID;
-	// ~ Instance fields
-	// ================================================================================================
 	private final Object		principal;
 	// private Object credentials;
 	
-	// ~ Constructors
-	// ===================================================================================================
 	/** This constructor can be safely used by any code that wishes to create a <code>UsernamePasswordAuthenticationToken</code>, as the {@link #isAuthenticated()} will return <code>false</code>. */
 	public MyAuthenticationToken(Object principal) {
 		super(null);
 		this.principal = principal;
-		// this.credentials = credentials;
 		setAuthenticated(true);
 	}
 	
@@ -27,28 +25,25 @@ public class MyAuthenticationToken extends AbstractAuthenticationToken implement
 	 *
 	 * @param principal
 	 * @param credentials
-	 * @param authorities */
+	 * @param authorities
+	 */
 	public MyAuthenticationToken(Object principal, Collection<? extends GrantedAuthority> authorities) {
 		super(authorities);
 		this.principal = principal;
-		super.setAuthenticated(true); // must use super, as we override
+		// must use super, as we override
+		super.setAuthenticated(true);
 	}
 	
-	// ~ Methods
-	// ========================================================================================================
 	@Override
 	public Object getPrincipal() {
 		return this.principal;
 	}
+	
 	@Override
 	public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
 		super.setAuthenticated(true);
 	}
 	
-	// @Override
-	// public void eraseCredentials() {
-	// super.eraseCredentials();
-	// }
 	@Override
 	public Object getCredentials() {
 		return null;

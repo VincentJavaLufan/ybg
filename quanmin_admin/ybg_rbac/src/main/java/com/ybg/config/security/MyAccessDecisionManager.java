@@ -10,7 +10,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-/** Created by Athos on 2016-10-16. */
+/** @author Deament
+ * 
+ * @date 2016/9/31 ***/
 public class MyAccessDecisionManager extends AbstractAccessDecisionManager {
 	
 	public MyAccessDecisionManager(List<AccessDecisionVoter<? extends Object>> decisionVoters) {

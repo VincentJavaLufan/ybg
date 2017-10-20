@@ -79,7 +79,10 @@ import io.swagger.annotations.ApiOperation;
 //      q参数为媒体类型的质量因子，越大则优先权越高(从0到1)
 //③Accept：*/*,text/*,text/html
 //      将按照如下顺序进行produces的匹配 ①text/html ②text/* ③*/* 
-@Api(value="用户管理接口",tags="用户管理接口")
+/** @author Deament
+ * 
+ * @date 2016/9/31 ***/
+@Api(value = "用户管理接口", tags = "用户管理接口")
 @Controller
 @RequestMapping("/user/user_do/")
 public class UserControllor {
@@ -93,13 +96,13 @@ public class UserControllor {
 	@ApiOperation(value = "用户页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String index(@ApiIgnore ModelMap modelMap) {
-		// modelMap.addAttribute("res", findByRes(request));
 		return "/system/user/index";
 	}
 	
 	/** 列表
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	@ApiOperation(value = "用户分页列表", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "java.lang.Integer"), @ApiImplicitParam(name = "qvo", value = "用户查询条件", required = false, dataType = "UserQvo") })
 	@ResponseBody
@@ -111,8 +114,10 @@ public class UserControllor {
 		page = userService.list(page, qvo);
 		List<UserVO> list = (List<UserVO>) page.getResult();
 		for (UserVO user : list) {
-			user.setPassword("");// 禁止泄露
-			user.setCredentialssalt("");// 禁止泄露
+			// 禁止泄露
+			user.setPassword("");
+			// 禁止泄露
+			user.setCredentialssalt("");
 		}
 		page.init();
 		return page;
@@ -156,8 +161,9 @@ public class UserControllor {
 	public ResponseEntity<Map<String, Object>> get(@RequestParam(name = "id", required = true) String id) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 		UserVO bean = userService.get(id);
+		// 敏感信息禁止泄露
 		bean.setPassword("");
-		bean.setCredentialssalt("");// 敏感信息禁止泄露
+		bean.setCredentialssalt("");
 		result.put("user", bean);
 		ResponseEntity<Map<String, Object>> map = new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
 		return map;
@@ -216,7 +222,9 @@ public class UserControllor {
 		filename = java.net.URLEncoder.encode(filename, "UTF-8");
 		response.setHeader("Content-disposition", "attachment;filename=" + filename + ".xls");
 		ServletOutputStream out = response.getOutputStream();
-		ExcelUtil<UserVO> util = new ExcelUtil<UserVO>(UserVO.class);// 创建工具类.
-		util.exportExcel(userService.list(qvo), "用户", out, 2, null, true);// 导出
+		// 创建工具类.
+		ExcelUtil<UserVO> util = new ExcelUtil<UserVO>(UserVO.class);
+		// 导出
+		util.exportExcel(userService.list(qvo), "用户", out, 2, null, true);
 	}
 }

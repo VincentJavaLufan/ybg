@@ -31,6 +31,9 @@ import com.ybg.config.security.MySecurityMetadataSource;
 import com.ybg.config.security.YcAnthencationProder;
 import com.ybg.rbac.user.service.LoginService;
 
+/** @author Deament
+ * 
+ * @since @date 2016/9/31 ***/
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -67,6 +70,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// 开启默认登录页面
 		http.authorizeRequests().anyRequest().authenticated().withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
 			
+			@Override
 			public <O extends FilterSecurityInterceptor> O postProcess(O fsi) {
 				fsi.setSecurityMetadataSource(mySecurityMetadataSource);
 				fsi.setAccessDecisionManager(accessDecisionManager());
@@ -128,7 +132,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		List<AccessDecisionVoter<? extends Object>> decisionVoters = new ArrayList<AccessDecisionVoter<?>>();
 		decisionVoters.add(new RoleVoter());
 		decisionVoters.add(new AuthenticatedVoter());
-		decisionVoters.add(webExpressionVoter());// 启用表达式投票器
+		// 启用表达式投票器
+		decisionVoters.add(webExpressionVoter());
 		MyAccessDecisionManager accessDecisionManager = new MyAccessDecisionManager(decisionVoters);
 		return accessDecisionManager;
 	}
