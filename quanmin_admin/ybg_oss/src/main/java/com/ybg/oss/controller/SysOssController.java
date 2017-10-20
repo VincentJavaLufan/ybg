@@ -18,8 +18,8 @@ import com.ybg.base.jdbc.util.DateUtil;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.Page;
 import com.ybg.base.util.ValidatorUtils;
-import com.ybg.base.util.webexception.R;
-import com.ybg.base.util.webexception.RRException;
+import com.ybg.base.util.webexception.RepostResult;
+import com.ybg.base.util.webexception.ResultException;
 import com.ybg.oss.CloudStorageConfig;
 import com.ybg.oss.ConfigConstant;
 import com.ybg.oss.OSSConstant;
@@ -74,9 +74,9 @@ public class SysOssController {
 	@ApiOperation(value = "云存储配置信息", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "config.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public R config() {
+	public RepostResult config() {
 		CloudStorageConfig config = sysConfigService.getConfigObject(KEY, CloudStorageConfig.class);
-		return R.ok().put("config", config);
+		return RepostResult.ok().put("config", config);
 	}
 	
 	/** 保存云存储配置信息
@@ -113,7 +113,7 @@ public class SysOssController {
 	@RequestMapping(value = { "upload.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<Map<String, Object>> upload(@RequestParam("file") MultipartFile file) throws Exception {
 		if (file.isEmpty()) {
-			throw new RRException("上传文件不能为空");
+			throw new ResultException("上传文件不能为空");
 		}
 		Map<String, Object> result = new HashMap<String, Object>();
 		// 上传文件

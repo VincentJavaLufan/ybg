@@ -55,7 +55,8 @@ public class MathTest {
 	 *            选择索引，从0开始 */
 	private static void arrangementSelect(String[] dataList, String[] resultList, int resultIndex) {
 		int resultLen = resultList.length;
-		if (resultIndex >= resultLen) { // 全部选择完时，输出排列结果
+		// 全部选择完时，输出排列结果
+		if (resultIndex >= resultLen) { 
 			System.out.println("88:" + Arrays.asList(resultList));
 			String[] linshi = new String[resultList.length];
 			System.arraycopy(resultList, 0, linshi, 0, resultList.length);
@@ -72,7 +73,8 @@ public class MathTest {
 					break;
 				}
 			}
-			if (!exists) { // 排列结果不存在该项，才可选择
+			if (!exists) { 
+				// 排列结果不存在该项，才可选择
 				resultList[resultIndex] = dataList[i];
 				arrangementSelect(dataList, resultList, resultIndex + 1);
 			}
@@ -103,7 +105,8 @@ public class MathTest {
 	private static void combinationSelect(String[] dataList, int dataIndex, String[] resultList, int resultIndex) {
 		int resultLen = resultList.length;
 		int resultCount = resultIndex + 1;
-		if (resultCount > resultLen) { // 全部选择完时，输出组合结果
+		if (resultCount > resultLen) { 
+			// 全部选择完时，输出组合结果
 			System.out.println("99:" + Arrays.asList(resultList));
 			String[] linshi = new String[resultList.length];
 			System.arraycopy(resultList, 0, linshi, 0, resultList.length);

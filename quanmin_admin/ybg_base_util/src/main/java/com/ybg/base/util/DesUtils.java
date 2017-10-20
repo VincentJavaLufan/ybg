@@ -151,7 +151,8 @@ public class DesUtils {
 	public void main(String[] args) {
 		try {
 			String test = "123456789";
-			DesUtils des = new DesUtils("leemenz");// 自定义密钥
+			// 自定义密钥
+			DesUtils des = new DesUtils("leemenz");
 			System.out.println("加密前的字符：" + test);
 			System.out.println("加密后的字符：" + des.encrypt(test));
 			System.out.println("解密后的字符：" + des.decrypt(des.encrypt(test)));

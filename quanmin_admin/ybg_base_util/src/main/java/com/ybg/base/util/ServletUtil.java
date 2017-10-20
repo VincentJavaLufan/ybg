@@ -242,7 +242,7 @@ public class ServletUtil {
 			for (int i = 0; i < ary.length; i++) {
 				result += ary[i] + splitBy;
 			}
-			if (!result.equals("")) {
+			if (!"".equals(result)) {
 				result = result.substring(0, result.length() - 1);
 			}
 		}

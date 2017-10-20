@@ -5,7 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
 
-//http://blog.csdn.net/u014104286/article/details/70515004 參考
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
+// http://blog.csdn.net/u014104286/article/details/70515004 參考
 @Configuration
 public class KaptchaConfig {
 	

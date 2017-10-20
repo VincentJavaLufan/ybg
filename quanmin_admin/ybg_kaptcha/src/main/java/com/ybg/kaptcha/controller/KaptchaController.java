@@ -13,7 +13,9 @@ import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.ybg.base.util.VrifyCodeUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+/*** @author https://gitee.com/YYDeament/88ybg 
 
+ * @date 2016/10/1 */
 @Api(tags = "验证码API")
 @Controller
 public class KaptchaController {

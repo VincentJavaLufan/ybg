@@ -26,8 +26,10 @@ public class BeanToMapUtil {
 	 * @throws InvocationTargetException
 	 *             如果调用属性的 setter 方法失败 */
 	public static Object convertMap(Class<?> type, Map<?, ?> map) throws IntrospectionException, IllegalAccessException, InstantiationException, InvocationTargetException {
-		BeanInfo beanInfo = Introspector.getBeanInfo(type); // 获取类属性
-		Object obj = type.newInstance(); // 创建 JavaBean 对象
+		// 获取类属性
+		BeanInfo beanInfo = Introspector.getBeanInfo(type);
+		// 创建 JavaBean 对象
+		Object obj = type.newInstance();
 		// 给 JavaBean 对象的属性赋值
 		PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
 		for (int i = 0; i < propertyDescriptors.length; i++) {
@@ -63,7 +65,7 @@ public class BeanToMapUtil {
 		for (int i = 0; i < propertyDescriptors.length; i++) {
 			PropertyDescriptor descriptor = propertyDescriptors[i];
 			String propertyName = descriptor.getName();
-			if (!propertyName.equals("class")) {
+			if (!"class".equals(propertyName)) {
 				Method readMethod = descriptor.getReadMethod();
 				Object result = readMethod.invoke(bean, new Object[0]);
 				if (result != null) {

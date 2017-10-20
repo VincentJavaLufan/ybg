@@ -35,10 +35,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * 4.鼠标移动到该列时提示信息可以通过注解配置. <br>
  * 5.用注解设置只能下拉选择不能随意填写功能. <br>
  * 6.用注解设置是否只导出标题而不导出内容,这在导出内容作为模板以供用户填写时比较实用. <br>
- * 本工具类以后可能还会加功能,请关注我的博客: http://blog.csdn.net/lk_blog <br> */
+ * 本工具类以后可能还会加功能,请关注我的博客: http://blog.csdn.net/lk_blog <br>
+ */
 public class ExcelUtil<T> {
 	
-	Class<T>	clazz;
+	Class<T> clazz;
 	
 	public ExcelUtil(Class<T> clazz) {
 		this.clazz = clazz;
@@ -62,7 +63,7 @@ public class ExcelUtil<T> {
 				workbook = new XSSFWorkbook(input);
 			}
 			Sheet sheet = workbook.getSheet(sheetName);
-			if (!sheetName.trim().equals("")) {
+			if (!"".equals(sheetName.trim())) {
 				sheet = workbook.getSheet(sheetName);// 如果指定sheet名,则取指定sheet中的内容.
 			}
 			if (sheet == null) {
@@ -178,7 +179,7 @@ public class ExcelUtil<T> {
 		try {
 			XSSFWorkbook workbook = new XSSFWorkbook(input);
 			XSSFSheet sheet = workbook.getSheet(sheetName);
-			if (!sheetName.trim().equals("")) {
+			if (!"".trim().equals(sheetName)) {
 				sheet = workbook.getSheet(sheetName);// 如果指定sheet名,则取指定sheet中的内容.
 			}
 			if (sheet == null) {
@@ -328,7 +329,7 @@ public class ExcelUtil<T> {
 					cell.setCellType(HSSFCell.CELL_TYPE_STRING);// 设置列中写入内容为String类型
 					cell.setCellValue(attr.name());// 写入列名
 					// 如果设置了提示信息则鼠标放上去提示.
-					if (!attr.prompt().trim().equals("")) {
+					if (!"".equals(attr.prompt().trim())) {
 						setHSSFPrompt(sheet, "", attr.prompt(), 1, 100, col, col);// 这里默认设了2-101列提示.
 					}
 					// 如果设置了combo属性则本列只能选择不能输入
@@ -396,7 +397,8 @@ public class ExcelUtil<T> {
 	 * @param ismodifytablehead
 	 *            是否修改表头名称 ，false 不修改 ，map参数也视为无效
 	 * @throws IOException
-	 * @throws FileNotFoundException */
+	 * @throws FileNotFoundException
+	 */
 	private boolean exportExcel(List<T> lists[], OutputStream output, String templatePath, int startrow, Map<String, String> map, boolean ismodifytablehead) throws FileNotFoundException, IOException {
 		FileInputStream fis = null;
 		fis = new FileInputStream(templatePath);
@@ -421,7 +423,7 @@ public class ExcelUtil<T> {
 				cell.setCellType(HSSFCell.CELL_TYPE_STRING);// 设置列中写入内容为String类型
 				cell.setCellValue(attr.name());// 写入列名
 				// 如果设置了提示信息则鼠标放上去提示.
-				if (!attr.prompt().trim().equals("")) {
+				if (!"".equals(attr.prompt().trim())) {
 					setHSSFPrompt(sheet, "", attr.prompt(), 1, 100, col, col);// 这里默认设了2-101列提示.
 				}
 				// 如果设置了combo属性则本列只能选择不能输入
@@ -502,7 +504,8 @@ public class ExcelUtil<T> {
 	 *            java输出流
 	 * @param
 	 * @throws IOException
-	 * @throws FileNotFoundException */
+	 * @throws FileNotFoundException
+	 */
 	public boolean exportExcel(List<T> list, OutputStream output, String templatePath, int startrow, Map<String, String> map, boolean ishead) throws FileNotFoundException, IOException {
 		// 此处 对类型进行转换
 		List<T> ilist = new ArrayList<T>();
@@ -516,7 +519,8 @@ public class ExcelUtil<T> {
 	
 	/** 将EXCEL中A,B,C,D,E列映射成0,1,2,3
 	 *
-	 * @param col */
+	 * @param col
+	 */
 	private static short getExcelCol(String col) {
 		col = col.toUpperCase();
 		// 从-1开始计算,字母重1开始运算。这种总数下来算数正好相同。
@@ -551,9 +555,9 @@ public class ExcelUtil<T> {
 		// 四个参数分别是：起始行、终止行、起始列、终止列
 		CellRangeAddressList regions = new CellRangeAddressList(firstRow, endRow, firstCol, endCol);
 		// 数据有效性对象
-		HSSFDataValidation data_validation_view = new HSSFDataValidation(regions, constraint);
-		data_validation_view.createPromptBox(promptTitle, promptContent);
-		sheet.addValidationData(data_validation_view);
+		HSSFDataValidation dataValidationView = new HSSFDataValidation(regions, constraint);
+		dataValidationView.createPromptBox(promptTitle, promptContent);
+		sheet.addValidationData(dataValidationView);
 		return sheet;
 	}
 	
@@ -578,8 +582,8 @@ public class ExcelUtil<T> {
 		// 设置数据有效性加载在哪个单元格上,四个参数分别是：起始行、终止行、起始列、终止列
 		CellRangeAddressList regions = new CellRangeAddressList(firstRow, endRow, firstCol, endCol);
 		// 数据有效性对象
-		HSSFDataValidation data_validation_list = new HSSFDataValidation(regions, constraint);
-		sheet.addValidationData(data_validation_list);
+		HSSFDataValidation dataValidationList = new HSSFDataValidation(regions, constraint);
+		sheet.addValidationData(dataValidationList);
 		return sheet;
 	}
 	

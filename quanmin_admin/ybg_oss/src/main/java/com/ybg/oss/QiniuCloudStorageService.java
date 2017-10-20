@@ -4,7 +4,7 @@ import com.qiniu.http.Response;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
-import com.ybg.base.util.webexception.RRException;
+import com.ybg.base.util.webexception.ResultException;
 import org.apache.commons.io.IOUtils;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,7 +39,7 @@ public class QiniuCloudStorageService extends CloudStorageService {
 			}
 		} catch (Exception e) {
 			// e.printStackTrace();
-			throw new RRException("上传文件失败，请核对七牛配置信息");
+			throw new ResultException("上传文件失败，请核对七牛配置信息");
 		}
 		return config.getQiniuDomain() + "/" + path;
 	}
@@ -50,7 +50,7 @@ public class QiniuCloudStorageService extends CloudStorageService {
 			byte[] data = IOUtils.toByteArray(inputStream);
 			return this.upload(data, path);
 		} catch (IOException e) {
-			throw new RRException("上传文件失败", e);
+			throw new ResultException("上传文件失败", e);
 		}
 	}
 	
