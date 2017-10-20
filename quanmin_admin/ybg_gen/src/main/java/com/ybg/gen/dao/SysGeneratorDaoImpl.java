@@ -36,7 +36,7 @@ public class SysGeneratorDaoImpl extends BaseDao implements SysGeneratorDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select table_name tableName, engine, table_comment tableComment, create_time createTime from information_schema.tables ");
 		sql.append(" 	where table_schema = (select database())");
-		sqlappen(sql, "table_name", qvo.getTable_name(), new BaseQueryAble() {
+		sqlappen(sql, "table_name", qvo.getTablename(), new BaseQueryAble() {
 			
 			@Override
 			public boolean isBlurred() {

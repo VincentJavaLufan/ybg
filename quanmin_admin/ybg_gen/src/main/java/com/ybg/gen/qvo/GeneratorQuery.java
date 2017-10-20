@@ -10,13 +10,13 @@ public class GeneratorQuery implements Serializable {
 	 * 
 	 */
 	private static final long	serialVersionUID	= -2999652572222957636L;
-	private String				table_name;
+	private String				tablename;
 	
-	public String getTable_name() {
-		return table_name;
+	public String getTablename() {
+		return tablename;
 	}
 	
-	public void setTable_name(String table_name) {
-		this.table_name = table_name;
+	public void setTablename(String tablename) {
+		this.tablename = tablename;
 	}
 }
