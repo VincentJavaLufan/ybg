@@ -9,10 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
  * 
  * @date 2017/10/1 */
 @SpringBootApplication
-@EnableAutoConfiguration // 这个注解可以根据你依赖的包自动生成相关配置
+@EnableAutoConfiguration
 @ComponentScan(basePackages = { "com.bstek", "com.ybg", "cn", "org.mybatis" }) // 扫描注解
-// @EnableAutoConfiguration(exclude = { org.activiti.spring.boot.SecurityAutoConfiguration.class, org.springframework.boot.actuate.autoconfigure.ManagementWebSecurityAutoConfiguration.class })
-// @EnableAdminServer // spring boot admin监控 ，不喜欢可以不要
 public class App extends SpringBootServletInitializer {
 	
 	public static void main(String[] args) {
