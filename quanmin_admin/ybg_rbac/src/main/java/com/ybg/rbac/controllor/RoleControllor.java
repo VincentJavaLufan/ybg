@@ -190,7 +190,7 @@ public class RoleControllor {
 	@ResponseBody
 	@RequestMapping(value = { "get.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<Map<String, Object>> get(@RequestParam(name = "id", required = true) String id) throws Exception {
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<String, Object>(100);
 		SysRoleVO role = roleService.get(id);
 		List<SysResourcesVO> menusvo = resourcesService.getRolesByUserId(id);
 		List<String> list = new ArrayList<String>();

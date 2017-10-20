@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Json;
+import com.ybg.base.util.RbacConstant;
 import com.ybg.base.util.ValidatorUtils;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
 import com.ybg.rbac.resources.qvo.ResourcesQuery;
@@ -52,7 +53,7 @@ public class RescourcesControllor {
 	@ResponseBody
 	@RequestMapping(value = { "select.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<Map<String, Object>> select(@ModelAttribute ResourcesQuery qvo) throws Exception {
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<String, Object>(100);
 		result.put("menuList", resourcesService.list(qvo));
 		ResponseEntity<Map<String, Object>> map = new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
 		return map;
@@ -64,9 +65,9 @@ public class RescourcesControllor {
 	public Json create(@RequestBody SysResourcesVO res) {
 		Json j = new Json();
 		j.setSuccess(true);
-		if (res.getType().equals("0")) {
+		if (res.getType().equals(RbacConstant.RESOURCE_MENU)) {
 			res.setReskey(res.getName());
-			res.setParentid("0");
+			res.setParentid(RbacConstant.RESOURCE_DEFAULT_PARENTID);
 			res.setResurl(res.getName());
 		}
 		else {
@@ -146,7 +147,7 @@ public class RescourcesControllor {
 	@ResponseBody
 	@RequestMapping(value = { "reslists.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public Map<String, Object> reslists(@ModelAttribute ResourcesQuery qvo) throws Exception {
-		Map<String, Object> maps = new HashMap<String, Object>();
+		Map<String, Object> maps = new HashMap<String, Object>(100);
 		List<SysResourcesVO> list = resourcesService.list(qvo);
 		maps.put("menuList", list);
 		return maps;
@@ -165,7 +166,7 @@ public class RescourcesControllor {
 	@ResponseBody
 	@RequestMapping(value = { "get.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<Map<String, Object>> get(@RequestParam(name = "id", required = true) String id) throws Exception {
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<String, Object>(100);
 		SysResourcesVO vo = resourcesService.get(id);
 		result.put("menu", vo);
 		ResponseEntity<Map<String, Object>> bean = new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);

@@ -8,7 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.ybg.base.util.SystemConstant;
-import com.ybg.base.util.UserConstant;
+import com.ybg.base.util.RbacConstant;
 import com.ybg.rbac.resources.service.ResourcesService;
 import com.ybg.rbac.user.domain.UserVO;
 import io.swagger.annotations.Api;
@@ -83,10 +83,10 @@ public class PageIndexController {
 			return "";
 		}
 		map.put("userFormMap", user);
-		if (UserConstant.IsAdmin(user)) {
+		if (RbacConstant.IsAdmin(user)) {
 			return "/index/admin/menu";
 		}
-		if (UserConstant.IsOther(user)) {
+		if (RbacConstant.IsOther(user)) {
 			return "/index/other/menu";
 		}
 		return "";
@@ -133,10 +133,10 @@ public class PageIndexController {
 			return "";
 		}
 		map.put("userFormMap", user);
-		if (UserConstant.IsAdmin(user)) {
+		if (RbacConstant.IsAdmin(user)) {
 			return "/index/admin/welcome";
 		}
-		if (UserConstant.IsOther(user)) {
+		if (RbacConstant.IsOther(user)) {
 			// 让用户选择子系统
 			return "/index/other/welcome";
 		}

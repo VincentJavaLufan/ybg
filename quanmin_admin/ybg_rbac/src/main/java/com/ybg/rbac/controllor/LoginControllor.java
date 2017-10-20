@@ -24,7 +24,7 @@ import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.ServletUtil;
 import com.ybg.base.util.SystemConstant;
-import com.ybg.base.util.UserConstant;
+import com.ybg.base.util.RbacConstant;
 import com.ybg.base.util.VrifyCodeUtil;
 import com.ybg.component.email.sendemail.SendEmailInter;
 import com.ybg.component.email.sendemail.SendQQmailImpl;
@@ -128,7 +128,7 @@ public class LoginControllor {
 		j.setMsg("我们将发送邮箱到您的邮箱中进行验证，大约3小时左右不验证将删除注册信息");
 		String now = DateUtil.getDateTime();
 		user.setCredentialssalt(new DesUtils().encrypt(user.getPassword()));
-		user.setPassword(UserConstant.getpwd(user.getPassword()));
+		user.setPassword(RbacConstant.getpwd(user.getPassword()));
 		user.setRoleid("10");
 		user.setPhone("");
 		user.setState(UserStateConstant.DIE);
@@ -305,7 +305,7 @@ public class LoginControllor {
 			}
 			BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
 			BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
-			updatemap.put("password", UserConstant.getpwd(password));
+			updatemap.put("password", RbacConstant.getpwd(password));
 			updatemap.put("credentialssalt", new DesUtils().encrypt(password));
 			wheremap.put("id", user.getId());
 			userService.update(updatemap, wheremap);
@@ -347,7 +347,7 @@ public class LoginControllor {
 			j.setMsg("您尚未登陆");
 			return j;
 		}
-		if (newPassword.length() <= 8) {
+		if (newPassword.length() <= RbacConstant.MIN_PASSWORD_LENTH) {
 			j.setMsg("新密码太短");
 			return j;
 		}
@@ -357,7 +357,7 @@ public class LoginControllor {
 		}
 		BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
 		BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
-		updatemap.put("password", UserConstant.getpwd(newPassword));
+		updatemap.put("password", RbacConstant.getpwd(newPassword));
 		updatemap.put("credentialssalt", new DesUtils().encrypt(newPassword));
 		wheremap.put("id", user.getId());
 		userService.update(updatemap, wheremap);
