@@ -22,6 +22,9 @@ import com.ybg.social.qq.service.QQuserService;
 import com.ybg.social.sina.service.WeiboUserService;
 import io.swagger.annotations.Api;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @Api(tags = "第三方登陆设置项")
 @Controller
 @RequestMapping("/thirdoartlogin_do/")
@@ -38,7 +41,8 @@ public class ThirdPartLoginController {
 	@Autowired
 	SocialUserService	socialUserService;
 	@Autowired
-	GithubuserService githubuserService;
+	GithubuserService	githubuserService;
+	
 	@RequestMapping(value = "index.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String index() {
 		return "/thirdpartlogin/setting";
@@ -58,7 +62,7 @@ public class ThirdPartLoginController {
 	
 	@ResponseBody
 	@RequestMapping(value = "update.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public Json update(String qqid, String qqSERCRET, String baiduid, String baiduSERCRET, String sinaid, String sinaSERCRET, String weixinid, String weixinSERCRET,String githubid,String githubSERCRET) {
+	public Json update(String qqid, String qqSERCRET, String baiduid, String baiduSERCRET, String sinaid, String sinaSERCRET, String weixinid, String weixinSERCRET, String githubid, String githubSERCRET) {
 		Json j = new Json();
 		j.setMsg("操作成功");
 		// 1.4版本 删除码云登陆， 回调地址 不需要再填写
@@ -66,14 +70,14 @@ public class ThirdPartLoginController {
 		weixinApiService.updateSetting(weixinid, weixinSERCRET);
 		baiduUserService.updateSetting(baiduid, baiduSERCRET, "");
 		qQuserService.updateSetting(qqid, qqSERCRET, "");
-		
 		j.setSuccess(true);
 		return j;
 	}
 	
 	/** 用户绑定信息
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	@ResponseBody
 	@RequestMapping("boundinfo.do")
 	public Map<String, Object> boundinfo(@AuthenticationPrincipal UserVO user) throws Exception {

@@ -1,19 +1,22 @@
 package com.ybg.setting.domain;
-
 import java.io.Serializable;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 public class SocialUserDO implements Serializable {
-	String userid;
-	String providerid;
-	String provideruserid;
-	Integer rank;
-	String displayname;
-	String profileurl;
-	String imageurl;
-	String accesstoken;
-	String secret;
-	String refreshtoken;
-	Long expiretime;
+	
+	String	userid;
+	String	providerid;
+	String	provideruserid;
+	Integer	rank;
+	String	displayname;
+	String	profileurl;
+	String	imageurl;
+	String	accesstoken;
+	String	secret;
+	String	refreshtoken;
+	Long	expiretime;
 	
 	public String getUserid() {
 		return userid;
@@ -103,5 +106,8 @@ public class SocialUserDO implements Serializable {
 		this.expiretime = expiretime;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "SocialUserDO [userid=" + userid + ", providerid=" + providerid + ", provideruserid=" + provideruserid + ", rank=" + rank + ", displayname=" + displayname + ", profileurl=" + profileurl + ", imageurl=" + imageurl + ", accesstoken=" + accesstoken + ", secret=" + secret + ", refreshtoken=" + refreshtoken + ", expiretime=" + expiretime + "]";
+	}
 }

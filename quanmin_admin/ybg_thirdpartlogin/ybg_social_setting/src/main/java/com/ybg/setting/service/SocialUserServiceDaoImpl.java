@@ -7,6 +7,9 @@ import com.ybg.setting.dao.SocialUserDao;
 import com.ybg.setting.domain.SocialUserVO;
 import com.ybg.setting.qvo.SocialUserQuery;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @Repository
 public class SocialUserServiceDaoImpl implements SocialUserService {
 	
