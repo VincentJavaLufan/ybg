@@ -29,7 +29,7 @@ import com.ybg.config.security.LoginSuccessHandler;
 import com.ybg.config.security.MyAccessDecisionManager;
 import com.ybg.config.security.MySecurityMetadataSource;
 import com.ybg.config.security.YcAnthencationProder;
-import com.ybg.rbac.user.service.LoginService;
+import com.ybg.rbac.user.service.LoginServiceImpl;
 
 /** @author Deament
  * 
@@ -39,7 +39,7 @@ import com.ybg.rbac.user.service.LoginService;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	private LoginService						userDetailsService;
+	private LoginServiceImpl						userDetailsService;
 	@Autowired
 	private YcAnthencationProder				provider;
 	@Autowired

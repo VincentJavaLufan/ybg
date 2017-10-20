@@ -21,6 +21,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+	
 	@Override
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
@@ -69,7 +70,8 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 			sql.append(AND).append("role.isdelete=").append(qvo.getIsdelete());
 		}
 		else {
-			sql.append(AND).append("role.isdelete=0");// 默认
+			// 默认
+			sql.append(AND).append("role.isdelete=0");
 		}
 		sqlappen(sql, "role.id", qvo.getId());
 		sqlappen(sql, "role.state", qvo.getState(), qvo);

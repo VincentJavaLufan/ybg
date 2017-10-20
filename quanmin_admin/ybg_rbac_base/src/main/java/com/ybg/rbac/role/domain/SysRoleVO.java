@@ -17,4 +17,9 @@ public class SysRoleVO extends RoleDO {
 	public void setMenuIdList(List<String> menuIdList) {
 		this.menuIdList = menuIdList;
 	}
+	
+	@Override
+	public String toString() {
+		return "SysRoleVO [menuIdList=" + menuIdList + ", getId()=" + getId() + ", getState()=" + getState() + ", getName()=" + getName() + ", getRolekey()=" + getRolekey() + ", getDescription()=" + getDescription() + ", getIsdelete()=" + getIsdelete() + "]";
+	}
 }

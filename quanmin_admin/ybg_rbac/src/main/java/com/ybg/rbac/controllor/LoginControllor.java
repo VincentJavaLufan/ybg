@@ -34,7 +34,7 @@ import com.ybg.rbac.support.domain.Loginproxy;
 import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.qvo.UserQuery;
-import com.ybg.rbac.user.service.LoginService;
+import com.ybg.rbac.user.service.LoginServiceImpl;
 import com.ybg.rbac.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -54,7 +54,7 @@ public class LoginControllor {
 	@Autowired
 	ResourcesService		resourcesService;
 	@Autowired
-	LoginService			loginService;
+	LoginServiceImpl			loginService;
 	@Autowired
 	AuthenticationManager	authenticationManager;
 	

@@ -4,12 +4,11 @@ import com.ybg.rbac.resources.domain.ResourcesDO;
 
 public class ResourcesQuery extends ResourcesDO implements BaseQueryAble {
 	
-	/**
-	 * 
-	 */
 	private static final long	serialVersionUID	= -2003511996451369333L;
-	boolean						blurred;									// 是否模糊查询
-	@Override							
+	// 是否模糊查询
+	boolean						blurred;
+	
+	@Override
 	public boolean isBlurred() {
 		return blurred;
 	}

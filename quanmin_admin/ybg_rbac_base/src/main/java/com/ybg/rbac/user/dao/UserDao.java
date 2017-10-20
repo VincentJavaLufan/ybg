@@ -13,7 +13,7 @@ public interface UserDao {
 	/** 返回主键的创建
 	 * 
 	 * @throws Exception **/
-	// sys_user
+	
 	UserVO save(UserVO user) throws Exception;
 	
 	/** 更新数据，条件 和 需要更新的字段都不能为空 不限个数个条件
@@ -25,21 +25,21 @@ public interface UserDao {
 	 *            更新中的条件字段和值
 	 * @param table_name
 	 *            表的名称 **/
-	// sys_user
+	
 	void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> wheremap);
 	
 	/** 分页查询 
 	 * @throws Exception **/
-	// sys_user
+	
 	Page list(Page page, UserQuery qvo) throws Exception;
 	
 	/** 不分页查询 
 	 * @throws Exception **/
-	// sys_user
+	
 	List<UserVO> list(UserQuery qvo) throws Exception;
 	
 	/** 登陆 **/
-	// sys_user
+	
 	UserVO login(String loginname);
 	
 	/** 根据条件删除 **/

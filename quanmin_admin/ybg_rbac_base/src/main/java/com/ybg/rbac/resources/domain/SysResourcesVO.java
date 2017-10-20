@@ -1,12 +1,11 @@
 package com.ybg.rbac.resources.domain;
 public class SysResourcesVO extends ResourcesDO {
 	
-	/**
-	 * 
-	 */
 	private static final long	serialVersionUID	= -7166979139317222396L;
-	private String				colorclass;									// 颜色
-	private String				parentname;									// 父目录名称
+	// 颜色
+	private String				colorclass;
+	// 父目录名称
+	private String				parentname;
 	
 	public String getParentname() {
 		return parentname;
@@ -23,4 +22,10 @@ public class SysResourcesVO extends ResourcesDO {
 	public void setColorclass(String colorclass) {
 		this.colorclass = colorclass;
 	}
+
+	@Override
+	public String toString() {
+		return "SysResourcesVO [colorclass=" + colorclass + ", parentname=" + parentname + ", getId()=" + getId() + ", getName()=" + getName() + ", getParentid()=" + getParentid() + ", getReskey()=" + getReskey() + ", getType()=" + getType() + ", getResurl()=" + getResurl() + ", getLevel()=" + getLevel() + ", getIcon()=" + getIcon() + ", getIshide()=" + getIshide() + ", getDescription()=" + getDescription() + ", getIsdelete()=" + getIsdelete() + ", getColorid()=" + getColorid() + "]";
+	}
+	
 }

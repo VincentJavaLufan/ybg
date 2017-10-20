@@ -17,6 +17,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+	
 	@Override
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
@@ -76,7 +77,8 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 			sql.append(AND).append("res.isdelete=").append(qvo.getIsdelete());
 		}
 		else {
-			sql.append(AND).append("res.isdelete=0");// 默认
+			// 默认
+			sql.append(AND).append("res.isdelete=0");
 		}
 		sql.append(AND).append("res.colorid=color.id");
 		sqlappen(sql, "res.colorid", qvo.getColorid());

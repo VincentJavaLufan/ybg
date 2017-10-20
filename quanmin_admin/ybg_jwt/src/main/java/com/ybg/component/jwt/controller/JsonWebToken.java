@@ -13,7 +13,7 @@ import com.ybg.component.jwt.MyUtils;
 import com.ybg.component.jwt.ResultMsg;
 import com.ybg.component.jwt.ResultStatusCode;
 import com.ybg.rbac.user.domain.UserVO;
-import com.ybg.rbac.user.service.LoginService;
+import com.ybg.rbac.user.service.LoginServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -26,7 +26,7 @@ public class JsonWebToken {
 	@Autowired
 	private Audience	audienceEntity;
 	@Autowired
-	LoginService		loginService;
+	LoginServiceImpl		loginService;
 	
 	@ApiOperation(value = "token校验", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(value = { "oauth/token" }, method = { RequestMethod.GET, RequestMethod.POST })

@@ -8,7 +8,8 @@ public class Loginproxy {
 	String	password;
 	String	result;
 	boolean	success;
-	UserVO	user;										// 成功后的 用户
+	// 成功后的 用户
+	UserVO	user;
 	
 	public UserVO getUser() {
 		return user;

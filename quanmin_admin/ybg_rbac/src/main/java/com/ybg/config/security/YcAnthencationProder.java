@@ -9,14 +9,14 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 import com.ybg.rbac.user.domain.UserVO;
-import com.ybg.rbac.user.service.LoginService;
+import com.ybg.rbac.user.service.LoginServiceImpl;
 
 /** @author 自定义验证 */
 @Component
 public class YcAnthencationProder implements AuthenticationProvider {
 	
 	@Autowired
-	private LoginService userService;
+	private LoginServiceImpl userService;
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {

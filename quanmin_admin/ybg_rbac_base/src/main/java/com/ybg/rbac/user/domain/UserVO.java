@@ -17,7 +17,8 @@ public class UserVO extends UserDO implements UserDetails {
 	private static final long		serialVersionUID	= 6514868907104830464L;
 	@ApiModelProperty(name = "salt", dataType = "java.lang.String", value = "可解析加密盐", hidden = true)
 	private String					salt;
-	List<SimpleGrantedAuthority>	auths;										// 用户自身权限
+	// 用户自身权限
+	List<SimpleGrantedAuthority>	auths;
 	@ApiModelProperty(name = "rolename", dataType = "java.lang.String", value = "角色名称", hidden = true)
 	private String					rolename;
 	
@@ -72,5 +73,10 @@ public class UserVO extends UserDO implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "UserVO [salt=" + salt + ", auths=" + auths + ", rolename=" + rolename + ", getCredentialssalt()=" + getCredentialssalt() + ", getId()=" + getId() + ", getUsername()=" + getUsername() + ", getEmail()=" + getEmail() + ", getPhone()=" + getPhone() + ", getPassword()=" + getPassword() + ", getState()=" + getState() + ", getCreatetime()=" + getCreatetime() + ", getIsdelete()=" + getIsdelete() + ", getRoleid()=" + getRoleid() + ", toString()=" + super.toString() + "]";
 	}
 }

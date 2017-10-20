@@ -27,7 +27,7 @@ import com.ybg.base.util.DesUtils;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.ServletUtil;
 import com.ybg.base.util.SystemConstant;
-import com.ybg.base.util.UserConstant;
+import com.ybg.base.util.RbacConstant;
 import com.ybg.base.util.VrifyCodeUtil;
 import com.ybg.component.email.sendemail.SendEmailInter;
 import com.ybg.component.email.sendemail.SendQQmailImpl;
@@ -126,7 +126,7 @@ public class SocialController {
 		j.setMsg("我们将发送邮箱到您的邮箱中进行验证，大约3小时左右不验证将删除注册信息");
 		String now = DateUtil.getDateTime();
 		user.setCredentialssalt(new DesUtils().encrypt(user.getPassword()));
-		user.setPassword(UserConstant.getpwd(user.getPassword()));
+		user.setPassword(RbacConstant.getpwd(user.getPassword()));
 		user.setRoleid("10");
 		user.setPhone("");
 		user.setState(UserStateConstant.DIE);

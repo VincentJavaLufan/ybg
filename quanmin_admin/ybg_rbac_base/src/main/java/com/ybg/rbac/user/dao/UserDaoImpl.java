@@ -75,7 +75,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 			sql.append(AND).append("user.isdelete=").append(qvo.getIsdelete());
 		}
 		else {
-			sql.append(AND).append("user.isdelete=0");// 默认
+			// 默认
+			sql.append(AND).append("user.isdelete=0");
 		}
 		sqlappen(sql, "user.state", qvo.getState(), qvo);
 		sqlappen(sql, "user.id", qvo.getId());

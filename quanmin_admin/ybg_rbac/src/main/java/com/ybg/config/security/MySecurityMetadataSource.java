@@ -29,12 +29,6 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
 	@Autowired
 	private ResourcesService								aclResourcesService;
 	
-	/** 构造方法 */
-	// 1
-	// public MySecurityMetadataSource(ResourcesService aclResourcesService) {
-	// this.aclResourcesService = aclResourcesService;
-	// loadResourceDefine();
-	// }
 	public MySecurityMetadataSource() {
 	}
 	

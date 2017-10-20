@@ -10,8 +10,8 @@ public interface RoleDao {
 	
 	/** 返回主键的创建
 	 * 
-	 * @throws Exception **/
-	// sys_role
+	 * @throws Exception
+	 **/
 	SysRoleVO save(SysRoleVO role) throws Exception;
 	
 	/** 更新数据，条件 和 需要更新的字段都不能为空 不限个数个条件
@@ -23,20 +23,20 @@ public interface RoleDao {
 	 *            更新中的条件字段和值
 	 * @param table_name
 	 *            表的名称 **/
-	// sys_role
 	void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> wheremap);
 	
-	/** 分页查询 
-	 * @throws Exception **/
-	// sys_role
+	/** 分页查询
+	 * 
+	 * @throws Exception
+	 **/
 	Page list(Page page, RoleQuery qvo) throws Exception;
 	
-	/** 不分页查询 
-	 * @throws Exception **/
-	// sys_role
+	/** 不分页查询
+	 * 
+	 * @throws Exception
+	 **/
 	List<SysRoleVO> list(RoleQuery qvo) throws Exception;
 	
 	/** 角色授权 增删改都在里面了 **/
-	// sys_res_role
 	void saveOrupdateRole_Res(List<RoleResDO> list);
 }

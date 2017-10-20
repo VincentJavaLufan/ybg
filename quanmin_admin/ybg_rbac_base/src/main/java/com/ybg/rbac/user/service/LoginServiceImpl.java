@@ -21,7 +21,7 @@ import com.ybg.rbac.user.qvo.UserQuery;
 
 /** 实现 了 账号密码登陆以及社交登陆接口 **/
 @Component
-public class LoginService implements UserDetailsService {
+public class LoginServiceImpl implements UserDetailsService {
 	
 	@Autowired
 	UserDao				userdao;
