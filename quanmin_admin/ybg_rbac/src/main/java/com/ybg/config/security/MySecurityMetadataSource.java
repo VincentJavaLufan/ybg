@@ -73,7 +73,7 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		aclResourceMap = new HashMap<String, Collection<ConfigAttribute>>();
+		aclResourceMap = new HashMap<String, Collection<ConfigAttribute>>(100);
 		for (SysResourcesVO aclResources : aclResourceses) {
 			ConfigAttribute ca = new SecurityConfig(aclResources.getResurl());
 			String url = aclResources.getResurl();

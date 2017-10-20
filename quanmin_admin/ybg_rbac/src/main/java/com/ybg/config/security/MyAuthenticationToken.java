@@ -12,9 +12,7 @@ public class MyAuthenticationToken extends AbstractAuthenticationToken implement
 	
 	private static final long	serialVersionUID	= SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 	private final Object		principal;
-	// private Object credentials;
 	
-	/** This constructor can be safely used by any code that wishes to create a <code>UsernamePasswordAuthenticationToken</code>, as the {@link #isAuthenticated()} will return <code>false</code>. */
 	public MyAuthenticationToken(Object principal) {
 		super(null);
 		this.principal = principal;

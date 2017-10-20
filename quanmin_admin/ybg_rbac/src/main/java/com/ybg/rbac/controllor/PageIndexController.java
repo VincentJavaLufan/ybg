@@ -95,7 +95,7 @@ public class PageIndexController {
 	/** 加载子系統菜单 **/
 	@ApiOperation(value = "非超管加载OA子系統菜单-菜单 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/menu_oa.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String menu_oa(@AuthenticationPrincipal UserVO user, ModelMap map) {
+	public String menuOa(@AuthenticationPrincipal UserVO user, ModelMap map) {
 		if (user == null) {
 			return "";
 		}
@@ -106,7 +106,7 @@ public class PageIndexController {
 	/** 加载子系統菜单 **/
 	@ApiOperation(value = "非超管加载教育子系統菜单-菜单 ", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/common/login_do/menu_edu.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String menu_edu(@AuthenticationPrincipal UserVO user, ModelMap map) {
+	public String menuEdu(@AuthenticationPrincipal UserVO user, ModelMap map) {
 		if (user == null) {
 			return "";
 		}

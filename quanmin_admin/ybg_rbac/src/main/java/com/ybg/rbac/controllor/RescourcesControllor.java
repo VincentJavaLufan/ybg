@@ -91,9 +91,9 @@ public class RescourcesControllor {
 	public Json update(@RequestBody SysResourcesVO menu) {
 		Json j = new Json();
 		j.setSuccess(true);
-		if (menu.getType().equals("0")) {
+		if (menu.getType().equals(RbacConstant.RESOURCE_MENU)) {
 			menu.setReskey(menu.getName());
-			menu.setParentid("0");
+			menu.setParentid(RbacConstant.RESOURCE_DEFAULT_PARENTID);
 			menu.setResurl(menu.getName());
 		}
 		else {

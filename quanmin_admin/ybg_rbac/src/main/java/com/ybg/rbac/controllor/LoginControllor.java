@@ -70,7 +70,7 @@ public class LoginControllor {
 	@ApiOperation(value = "备案，版权声明信息", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "/common/login_do/system_authinfo.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String system_authinfo() {
+	public String systemAuthinfo() {
 		return "© 2016-2016 " + SystemConstant.getSystemdomain() + " 版权所有 ICP证：" + SystemConstant.getICP();
 	}
 	
