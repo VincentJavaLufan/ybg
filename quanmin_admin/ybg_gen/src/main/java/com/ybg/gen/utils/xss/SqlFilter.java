@@ -6,7 +6,7 @@ import org.apache.commons.lang.StringUtils;
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2017-04-01 16:16 */
-public class SQLFilter {
+public class SqlFilter {
 	
 	/** SQL注入过滤
 	 * 
