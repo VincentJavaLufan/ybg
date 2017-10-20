@@ -32,6 +32,9 @@ public interface SysGeneratorService {
 	 * @return */
 	List<Map<String, String>> queryColumns(String tableName);
 	
-	/** 生成代码 */
+	/** 生成代码
+	 * 
+	 * @param tableNames
+	 * @return */
 	byte[] generatorCode(String[] tableNames);
 }
