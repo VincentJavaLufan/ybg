@@ -42,7 +42,7 @@ public class ModelSaveRestResource implements ModelDataJsonConstants {
 	
 	@RequestMapping(value = "/model/{modelId}/save", method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.OK)
-	public void saveModel(@PathVariable String modelId, @RequestParam("name") String name, @RequestParam("json_xml") String json_xml, @RequestParam("svg_xml") String svg_xml, @RequestParam("description") String description) {// 对接收参数进行了修改
+	public void saveModel(@PathVariable String modelId, @RequestParam("name") String name, @RequestParam("json_xml") String jsonXml, @RequestParam("svg_xml") String svgXml, @RequestParam("description") String description) {// 对接收参数进行了修改
 		try {
 			Model model = repositoryService.getModel(modelId);
 			ObjectNode modelJson = (ObjectNode) objectMapper.readTree(model.getMetaInfo());
@@ -51,8 +51,8 @@ public class ModelSaveRestResource implements ModelDataJsonConstants {
 			model.setMetaInfo(modelJson.toString());
 			model.setName(name);
 			repositoryService.saveModel(model);
-			repositoryService.addModelEditorSource(model.getId(), json_xml.getBytes("utf-8"));
-			InputStream svgStream = new ByteArrayInputStream(svg_xml.getBytes("utf-8"));
+			repositoryService.addModelEditorSource(model.getId(), jsonXml.getBytes("utf-8"));
+			InputStream svgStream = new ByteArrayInputStream(svgXml.getBytes("utf-8"));
 			TranscoderInput input = new TranscoderInput(svgStream);
 			PNGTranscoder transcoder = new PNGTranscoder();
 			// Setup output

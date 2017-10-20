@@ -4,7 +4,11 @@ import java.io.PrintWriter;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
+/*** @author https://gitee.com/YYDeament/88ybg 
 
+ * 
+ * 
+ * @date 2016/10/1 */
 public class GenericResponseWrapper extends HttpServletResponseWrapper {
 	
 	private ByteArrayOutputStream	output;

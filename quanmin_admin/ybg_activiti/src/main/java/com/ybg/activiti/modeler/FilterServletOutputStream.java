@@ -5,6 +5,11 @@ import java.io.OutputStream;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.WriteListener;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * 
+ * 
+ * @date 2016/10/1 */
 public class FilterServletOutputStream extends ServletOutputStream {
 	
 	private DataOutputStream	stream;

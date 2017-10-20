@@ -13,11 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * 
+ * 
+ * @date 2016/10/1 */
 public class JsonpCallbackFilter implements Filter {
 	
-	private static Logger log = LoggerFactory.getLogger(JsonpCallbackFilter.class);
+	private static Logger		log				= LoggerFactory.getLogger(JsonpCallbackFilter.class);
+	private static final String	CALLBACK_KEY	= "callback";
 	
 	@Override
 	public void init(FilterConfig fConfig) throws ServletException {
@@ -28,7 +33,7 @@ public class JsonpCallbackFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		Map<String, String[]> parms = httpRequest.getParameterMap();
-		if (parms.containsKey("callback")) {
+		if (parms.containsKey(CALLBACK_KEY)) {
 			if (log.isDebugEnabled()) {
 				log.debug("Wrapping response with JSONP callback '" + parms.get("callback")[0] + "'");
 			}

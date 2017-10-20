@@ -25,7 +25,10 @@ import org.springframework.web.bind.annotation.*;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-/** 懒得写，直接参照了：http://www.jianshu.com/p/cf766a713a86 自己增加的controller，用于对model进行操作，返回值随便弄的，需要修改 Created by chenhai on 2017/6/6. */
+/** * @author https://gitee.com/YYDeament/88ybg
+ * 
+ * 
+ * @date 2016/10/1懒得写，直接参照了：http://www.jianshu.com/p/cf766a713a86 自己增加的controller，用于对model进行操作，返回值随便弄的，需要修改 Created by chenhai on 2017/6/6. */
 @Api(tags = "工作流-模型API")
 @Controller
 @RequestMapping("/models/model_do/")
@@ -46,7 +49,8 @@ public class ModelCreateController {
 	/** 新建一个空模型
 	 * 
 	 * @return
-	 * @throws UnsupportedEncodingException */
+	 * @throws UnsupportedEncodingException
+	 */
 	@ApiOperation(value = "创建模型", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "ModelEntity", value = "模型实体", required = true, dataType = "org.activiti.engine.impl.persistence.entity.ModelEntity") })
 	@ResponseBody
@@ -86,7 +90,7 @@ public class ModelCreateController {
 		editorNode.put("resourceId", "canvas");
 		ObjectNode stencilSetNode = objectMapper.createObjectNode();
 		stencilSetNode.put("namespace", "http://b3mn.org/stencilset/bpmn2.0#");
-		editorNode.put("stencilset", stencilSetNode);
+		editorNode.set("stencilset", stencilSetNode);
 		repositoryService.addModelEditorSource(id, editorNode.toString().getBytes("utf-8"));
 		json.setSuccess(true);
 		json.setMsg("操作成功");
@@ -136,7 +140,8 @@ public class ModelCreateController {
 	 *
 	 * @param id
 	 * @return
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	@ApiOperation(value = "发布模型", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiImplicitParam(name = "id[]", value = "发布模型的ID", required = true, dataType = "java.lang.String")
 	@ResponseBody
