@@ -29,19 +29,31 @@ import java.util.zip.ZipOutputStream;
  * @date 2016年12月19日 下午11:40:24 */
 public class GenUtils {
 	
+	private static final String	TEMPLATES_DO	= "DO.java.vm";
+	private static final String	TEMPLATES_DAO	= "Dao.java.vm";
+	private static final String	TEMPLATES_DAOIMPL	= "DaoImpl.java.vm";
+	private static final String	TEMPLATES_SERVICE	= "Service.java.vm";
+	private static final String	TEMPLATES_SERVICEIMPL	= "ServiceImpl.java.vm";
+	private static final String	TEMPLATES_CONTROLLER	= "Controller.java.vm";
+	private static final String	TEMPLATES_LIST_HTML	= "list.html.vm";
+	private static final String	TEMPLATES_LIST_JS	= "list.js.vm";
+	private static final String	TEMPLATES_SQL	= "menu.sql.vm";
+	private static final String	TEMPLATES_VO	= "VO.java.vm";
+	private static final String	TEMPLATES_QUERY	= "Query.java.vm";
+	private static final String	BASE_DIR	= "template";
 	public static List<String> getTemplates() {
 		List<String> templates = new ArrayList<String>();
-		templates.add("template/DO.java.vm");
-		templates.add("template/Dao.java.vm");
-		templates.add("template/DaoImpl.java.vm");
-		templates.add("template/Service.java.vm");
-		templates.add("template/ServiceImpl.java.vm");
-		templates.add("template/Controller.java.vm");
-		templates.add("template/list.html.vm");
-		templates.add("template/list.js.vm");
-		templates.add("template/menu.sql.vm");
-		templates.add("template/VO.java.vm");
-		templates.add("template/Query.java.vm");
+		templates.add(BASE_DIR+"/"+ TEMPLATES_DO);
+		templates.add(BASE_DIR+"/"+ TEMPLATES_DAO);
+		templates.add(BASE_DIR+"/"+ TEMPLATES_DAOIMPL);
+		templates.add(BASE_DIR+"/"+ TEMPLATES_SERVICE);
+		templates.add(BASE_DIR+"/"+ TEMPLATES_SERVICEIMPL);
+		templates.add(BASE_DIR+"/"+ TEMPLATES_CONTROLLER);
+		templates.add(BASE_DIR+"/"+TEMPLATES_LIST_HTML);
+		templates.add(BASE_DIR+"/"+TEMPLATES_LIST_JS);
+		templates.add(BASE_DIR+"/"+TEMPLATES_SQL);
+		templates.add(BASE_DIR+"/"+TEMPLATES_VO);
+		templates.add(BASE_DIR+"/"+TEMPLATES_QUERY);
 		return templates;
 	}
 	
@@ -154,37 +166,37 @@ public class GenUtils {
 		if (StringUtils.isNotBlank(packageName)) {
 			packagePath += packageName.replace(".", File.separator) + File.separator;
 		}
-		if (template.contains("DO.java.vm")) {
+		if (template.contains(TEMPLATES_DO)) {
 			return packagePath + "domain" + File.separator + className + "DO.java";
 		}
-		if (template.contains("VO.java.vm")) {
+		if (template.contains(TEMPLATES_VO)) {
 			return packagePath + "domain" + File.separator + className + "VO.java";
 		}
-		if (template.contains("Query.java.vm")) {
+		if (template.contains(TEMPLATES_QUERY)) {
 			return packagePath + "qvo" + File.separator + className + "Query.java";
 		}
-		if (template.contains("Dao.java.vm")) {
+		if (template.contains(TEMPLATES_DAO)) {
 			return packagePath + "dao" + File.separator + className + "Dao.java";
 		}
-		if (template.contains("DaoImpl.java.vm")) {
+		if (template.contains(TEMPLATES_DAOIMPL)) {
 			return packagePath + "dao" + File.separator + className + "DaoImpl.java";
 		}
-		if (template.contains("Service.java.vm")) {
+		if (template.contains(TEMPLATES_SERVICE)) {
 			return packagePath + "service" + File.separator + className + "Service.java";
 		}
-		if (template.contains("ServiceImpl.java.vm")) {
+		if (template.contains(TEMPLATES_SERVICEIMPL)) {
 			return packagePath + "service" + File.separator + className + "ServiceImpl.java";
 		}
-		if (template.contains("Controller.java.vm")) {
+		if (template.contains(TEMPLATES_CONTROLLER)) {
 			return packagePath + "controller" + File.separator + className + "Controller.java";
 		}
-		if (template.contains("list.html.vm")) {
+		if (template.contains(TEMPLATES_LIST_HTML)) {
 			return "main" + File.separator + "webapp" + File.separator + "WEB-INF" + File.separator + "page" + File.separator + "generator" + File.separator + className.toLowerCase() + ".html";
 		}
-		if (template.contains("list.js.vm")) {
+		if (template.contains(TEMPLATES_LIST_JS)) {
 			return "main" + File.separator + "webapp" + File.separator + "js" + File.separator + "generator" + File.separator + className.toLowerCase() + ".js";
 		}
-		if (template.contains("menu.sql.vm")) {
+		if (template.contains(TEMPLATES_SQL)) {
 			return className.toLowerCase() + "_menu.sql";
 		}
 		return null;

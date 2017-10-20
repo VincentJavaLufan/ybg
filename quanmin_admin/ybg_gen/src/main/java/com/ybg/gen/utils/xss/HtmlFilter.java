@@ -370,7 +370,8 @@ public final class HtmlFilter {
 			final String protocol = m.group(1);
 			if (!inArray(protocol, vAllowedProtocols)) {
 				s = "#" + s.substring(protocol.length() + 1, s.length());
-				if (s.startsWith("#//")) {
+				String protocolpre = "#//";
+				if (s.startsWith(protocolpre)) {
 					s = "#" + s.substring(3, s.length());
 				}
 			}
