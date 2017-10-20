@@ -41,7 +41,7 @@ QQ群：`314658875（收费）`，310391018（免费）
 | --------- | -----:|
 | java  | 8 |
 | Maven     |   3.3.9 |
-| eclipse      |    neon2 |
+| eclipse      |    neon2/oxygen |
 | mysql |    5.6+|
 | svn 插件 | eclipse SVN插件  |
 | svn 工具 | tortoiseSVN  |
