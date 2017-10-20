@@ -47,7 +47,8 @@ public class GenUtils {
 	
 	/** 生成代码
 	 * 
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	public static void generatorCode(Map<String, String> table, List<Map<String, String>> columns, ZipOutputStream zip) throws Exception {
 		// 配置信息
 		Configuration config = getConfig();
@@ -90,7 +91,7 @@ public class GenUtils {
 		prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
 		Velocity.init(prop);
 		// 封装模板数据
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>(10);
 		map.put("tableName", tableEntity.getTableName());
 		map.put("comments", tableEntity.getComments());
 		map.put("pk", tableEntity.getPk());
@@ -137,7 +138,8 @@ public class GenUtils {
 	
 	/** 获取配置信息
 	 * 
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	public static Configuration getConfig() throws Exception {
 		try {
 			return new PropertiesConfiguration("generator.properties");
