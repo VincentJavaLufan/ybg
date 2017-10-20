@@ -1,5 +1,8 @@
 package com.ybg.base.jdbc;
-/** 查询接口 */
+/** * @author https://gitee.com/YYDeament/88ybg
+ * 
+ * 
+ * @date 2016/10/1查询接口 */
 public interface BaseQueryAble {
 	
 	/** 是否模糊查询

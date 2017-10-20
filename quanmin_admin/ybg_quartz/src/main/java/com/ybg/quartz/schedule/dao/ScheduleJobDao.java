@@ -12,7 +12,7 @@ import com.ybg.quartz.schedule.qvo.ScheduleJobQuery;
 public interface ScheduleJobDao {
 	
 	/** 批量更新状态 */
-	int updateBatch(int status, final Long[] job_id);
+	int updateBatch(int status, final Long[] jobId);
 	
 	ScheduleJobEntity queryObject(Long jobId);
 	

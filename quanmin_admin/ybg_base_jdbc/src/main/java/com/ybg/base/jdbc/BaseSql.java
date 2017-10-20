@@ -1,5 +1,8 @@
 package com.ybg.base.jdbc;
-/** 数据库 常用单词 不喜欢可以不用 **/
+/** * @author https://gitee.com/YYDeament/88ybg
+ * 
+ * 
+ * @date 2016/10/1数据库 常用单词 不喜欢可以不用 **/
 public class BaseSql {
 	
 	protected static final String	ADD					= " ADD ";

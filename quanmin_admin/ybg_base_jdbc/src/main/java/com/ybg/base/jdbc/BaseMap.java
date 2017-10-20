@@ -1,8 +1,12 @@
 package com.ybg.base.jdbc;
 import java.util.LinkedHashMap;
 
-/** 改进的LinkedHashMap <br>
- * put 元素取消 value为null的集合 **/
+/** * @author https://gitee.com/YYDeament/88ybg
+ * 
+ * 
+ * @date 2016/10/1<br>
+ * 		改进的LinkedHashMap <br>
+ *       put 元素取消 value为null的集合 **/
 public class BaseMap<K, V> extends LinkedHashMap<K, V> {
 	
 	/**

@@ -1,7 +1,11 @@
 package com.ybg.base.jdbc.util;
 import java.util.List;
 
-/** 检查查询条件 */
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * 
+ * @date 2016/10/1<br>
+ *       检查查询条件 */
 public class QvoConditionUtil {
 	
 	/** 检测String 非空且length大于0为真 **/

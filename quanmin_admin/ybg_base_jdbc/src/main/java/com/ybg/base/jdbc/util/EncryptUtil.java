@@ -8,13 +8,13 @@ public class EncryptUtil {
 	
 	/** MD5加密
 	 * 
-	 * @param s
+	 * @param jiami
 	 *            源字符串
 	 * @return 加密后的字符串 */
-	public final static String MD5(String s) {
+	public final static String md5(String jiami) {
 		char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 		try {
-			byte[] btInput = s.getBytes();
+			byte[] btInput = jiami.getBytes();
 			MessageDigest mdInst = MessageDigest.getInstance("MD5");
 			mdInst.update(btInput);
 			byte[] md = mdInst.digest();

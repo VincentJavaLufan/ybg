@@ -30,19 +30,19 @@ public class ScheduleJobDaoImpl extends BaseDao implements ScheduleJobDao {
 	}
 	
 	@Override
-	public int updateBatch(int status, final Long[] job_id) {
+	public int updateBatch(int status, final Long[] jobId) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("update schedule_job set status = " + status + " where job_id =? ");
 		int[] result = getJdbcTemplate().batchUpdate(sql.toString(), new BatchPreparedStatementSetter() {
 			
 			@Override
 			public void setValues(PreparedStatement ps, int index) throws SQLException {
-				ps.setLong(1, job_id[index]);
+				ps.setLong(1, jobId[index]);
 			}
 			
 			@Override
 			public int getBatchSize() {
-				return job_id.length;
+				return jobId.length;
 			}
 		});
 		return 0;

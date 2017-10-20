@@ -18,9 +18,13 @@ import com.ybg.base.jdbc.util.DateUtil;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
 
-/*** 1.数据库所有逻辑主键使用 UUID方式 ，不要设置id为主键，设置它的主码索引就可以<br>
- * 2.数据库字段一律小写 <br>
- * 3.数据库字段不得使用下划线，表名可以。 <br>
+/*** * @author https://gitee.com/YYDeament/88ybg
+ * 
+ * 
+ * @date 2016/10/1<br>
+ *       1.数据库所有逻辑主键使用 UUID方式 ，不要设置id为主键，设置它的主码索引就可以<br>
+ *       2.数据库字段一律小写 <br>
+ *       3.数据库字段不得使用下划线，表名可以。 <br>
  ***/
 public abstract class BaseDao extends BaseSql {
 	
@@ -793,8 +797,8 @@ public abstract class BaseDao extends BaseSql {
 	 *            查询的范围 大于object[0],小于object[1] 长度必须是2
 	 * @return sql.append(" and " + name + ">" + object[0]+" and " + name + "<" + object[1] ); ***/
 	public void sqlappen(StringBuilder sql, String name, Object[] array) {
-		int max_num = 2;
-		if (QvoConditionUtil.checkObjectArray(array, max_num)) {
+		int maxNum = 2;
+		if (QvoConditionUtil.checkObjectArray(array, maxNum)) {
 			sql.append(AND).append(name).append("<").append("'").append(array[0]).append("'");
 			sql.append(AND).append(name).append(">").append("'").append(array[1]).append("'");
 		}

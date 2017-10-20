@@ -334,8 +334,8 @@ public class DateUtil {
 		GregorianCalendar gcLast = (GregorianCalendar) Calendar.getInstance();
 		gcLast.setTime(theDate);
 		gcLast.set(Calendar.DAY_OF_MONTH, 1);
-		String day_first = df.format(gcLast.getTime());
-		StringBuffer str = new StringBuffer().append(day_first).append(" 00:00:00");
+		String dayFirst = df.format(gcLast.getTime());
+		StringBuffer str = new StringBuffer().append(dayFirst).append(" 00:00:00");
 		return str.toString();
 	}
 	
@@ -349,8 +349,8 @@ public class DateUtil {
 		GregorianCalendar gcLast = (GregorianCalendar) Calendar.getInstance();
 		gcLast.setTime(theDate);
 		gcLast.set(Calendar.DAY_OF_MONTH, 1);
-		String day_first = df.format(gcLast.getTime());
-		StringBuffer str = new StringBuffer().append(day_first).append(" 00:00:00");
+		String dayFirst = df.format(gcLast.getTime());
+		StringBuffer str = new StringBuffer().append(dayFirst).append(" 00:00:00");
 		return str.toString();
 	}
 	
@@ -439,20 +439,20 @@ public class DateUtil {
 	
 	/** 获取到两个时间之间的所有周 **/
 	public static String[] getWeeks(String da1, String da2) throws ParseException {
-		Calendar c_begin = new GregorianCalendar();
-		Calendar c_end = new GregorianCalendar();
+		Calendar cBegin = new GregorianCalendar();
+		Calendar cEnd = new GregorianCalendar();
 		StringBuffer sb = new StringBuffer();
-		c_begin.setTime(convertToDate(da1));
-		c_end.setTime(convertToDate(da2));
+		cBegin.setTime(convertToDate(da1));
+		cEnd.setTime(convertToDate(da2));
 		int count = 1;
 		// 结束日期下滚一天是为了包含最后一天
-		c_end.add(Calendar.DAY_OF_YEAR, 1);
-		while (c_begin.before(c_end)) {
-			if (c_begin.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+		cEnd.add(Calendar.DAY_OF_YEAR, 1);
+		while (cBegin.before(cEnd)) {
+			if (cBegin.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
 				sb.append("第" + count + "周,");
 				count++;
 			}
-			c_begin.add(Calendar.DAY_OF_YEAR, 1);
+			cBegin.add(Calendar.DAY_OF_YEAR, 1);
 		}
 		return sb.toString().split(",");
 	}
