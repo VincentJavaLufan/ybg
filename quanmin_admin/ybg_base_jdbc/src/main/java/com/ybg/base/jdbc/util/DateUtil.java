@@ -246,57 +246,6 @@ public class DateUtil {
 		return cal.getTime();
 	}
 	
-	/** 对日期时间字符串的提示字符串生成方法.
-	 * <P>
-	 * 
-	 * 该方法主要是对日期时间字符串的提示,类似:1分钟前,1小时前等.对于大于1天的,则会提示 1天前,2天前等等这样的提示.
-	 * 
-	 * @param dateTime
-	 *            日期时间字符串,必须包含时间
-	 * @return */
-	public final static String dateTimeTips(Date dt) {
-		// 获取当前日期时间
-		Calendar cal = Calendar.getInstance();
-		// 获取时间差
-		long times = cal.getTimeInMillis() - dt.getTime();
-		if (times <= 60 * 1000L) {
-			return "1 分钟前";
-		}
-		else if (times <= 60 * 60 * 1000L) {
-			return (times / (60 * 1000)) + " 分钟前";
-		}
-		else if (times <= 24 * 60 * 60 * 1000L) {
-			return (times / (60 * 60 * 1000L)) + " 小时前";
-		}
-		else if (times <= 7 * 24 * 60 * 60 * 1000L) {
-			return (times / (24 * 60 * 60 * 1000L)) + " 天前";
-		}
-		else if (times <= 30 * 24 * 60 * 60 * 1000L) {
-			return (times / (7 * 24 * 60 * 60 * 1000L)) + " 星期前";
-		}
-		else if (times <= 12 * 30 * 24 * 60 * 60 * 1000L) {
-			return (times / (30 * 24 * 60 * 60 * 1000L)) + " 个月前";
-		}
-		return (times / (12 * 30 * 24 * 60 * 60 * 1000L)) + " 年前";
-	}
-	
-	public final static String dateTips(String dateStr) {
-		Date dt = parseSimpleDate(dateStr);
-		if (dt == null) {
-			return dateStr;
-		}
-		return dateTimeTips(dt);
-	}
-	
-	public final static String dateTimeTips(String dateTime) {
-		// 转换成日期时间类型
-		Date dt = parseSimpleDateTime(dateTime);
-		if (dt == null) {
-			return dateTime;
-		}
-		return dateTimeTips(dt);
-	}
-	
 	/** 获得字符串类型的当前系统时间
 	 * 
 	 * @return 当前时间 String */
@@ -309,19 +258,6 @@ public class DateUtil {
 	public static String formatDate(Date date, String fmt) {
 		SimpleDateFormat format = new SimpleDateFormat(fmt);
 		return format.format(date);
-	}
-	
-	/** 分钟、秒钟的下拉选择框
-	 * 
-	 * @param selectName
-	 * @return */
-	public static String getMinuteSelectHtml(String selectName) {
-		StringBuffer sb = new StringBuffer("<select id='").append(selectName).append("' name='").append(selectName).append("'>");
-		for (int i = 0; i < 60; i++) {
-			sb.append("<option value='").append(i).append("'>").append(i).append("</option>");
-		}
-		sb.append("</select>");
-		return sb.toString();
 	}
 	
 	/** 当月第一天
@@ -352,17 +288,6 @@ public class DateUtil {
 		String dayFirst = df.format(gcLast.getTime());
 		StringBuffer str = new StringBuffer().append(dayFirst).append(" 00:00:00");
 		return str.toString();
-	}
-	
-	public static String getCompleteDate(String date) {
-		String[] dateTemp = date.split("-");
-		if (dateTemp[1].length() == 1 && Integer.parseInt(dateTemp[1]) < 10) {
-			dateTemp[1] = "0" + dateTemp[1];
-		}
-		if (dateTemp[1].length() == 1 && Integer.parseInt(dateTemp[2]) < 10) {
-			dateTemp[2] = "0" + dateTemp[2];
-		}
-		return dateTemp[0] + "-" + dateTemp[1] + "-" + dateTemp[2];
 	}
 	
 	/** 当月最后一天
