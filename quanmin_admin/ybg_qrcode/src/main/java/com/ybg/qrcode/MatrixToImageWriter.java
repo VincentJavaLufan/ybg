@@ -14,12 +14,15 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
-/** 二维码生成工具 */
+/*** 二维码生成工具@author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 public class MatrixToImageWriter {
 	
 	private static final int	BLACK	= 0xFF000000;
 	private static final int	WHITE	= 0xFFFFFFFF;
-	private static final int	MARGIN	= 1;			// 边框
+	/*** 边框 **/
+	private static final int	MARGIN	= 1;
 	private static final String	FORMAT	= "png";
 	
 	private MatrixToImageWriter() {
@@ -27,17 +30,20 @@ public class MatrixToImageWriter {
 	
 	public static void createRqCode(String textOrUrl, int width, int height, OutputStream toStream) throws WriterException, IOException {
 		Hashtable<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();
-		hints.put(EncodeHintType.CHARACTER_SET, "utf-8"); // 内容所使用字符集编码
+		// 内容所使用字符集编码
+		hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
 		hints.put(EncodeHintType.MARGIN, new Integer(MARGIN));
 		BitMatrix bitMatrix = new MultiFormatWriter().encode(textOrUrl, BarcodeFormat.QR_CODE, width, height, hints);
 		BufferedImage image = toBufferedImage(bitMatrix);
-		applyLogo(image);// 应用LOGO
+		// 应用LOGO
+		applyLogo(image);
 		writeToStream(image, FORMAT, toStream);
 	}
 	
 	private static void applyLogo(BufferedImage image) throws IOException {
 		Graphics2D gs = image.createGraphics();
-		ClassPathResource resource = new ClassPathResource("logo.png");// logo图片
+		// logo图片
+		ClassPathResource resource = new ClassPathResource("logo.png");
 		// 载入logo
 		Image img = ImageIO.read(resource.getFile());
 		int left = image.getWidth() / 2 - img.getWidth(null) / 2;

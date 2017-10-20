@@ -1,10 +1,12 @@
 package com.ybg.qrcode;
-import java.io.ByteArrayOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import io.swagger.annotations.Api;
 
+/*** 二维码生成工具@author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @Controller
 @RequestMapping("/common/qrcode/")
 @Api(tags = "二维码接口")
