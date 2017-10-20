@@ -16,12 +16,14 @@ import com.ybg.base.util.Page;
 import com.ybg.gen.entity.TableEntity;
 import com.ybg.gen.qvo.GeneratorQuery;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @Repository
 public class SysGeneratorDaoImpl extends BaseDao implements SysGeneratorDao {
 	
+	/** 默认使用sys 如果修改数据库 @Qualifier 修改 @Qualifier(DataBaseConstant.JD_EDU) */
 	@Autowired
-	// 默认使用sys 如果修改数据库 @Qualifier 修改
-	// @Qualifier(DataBaseConstant.DB_EDU)
 	JdbcTemplate jdbcTemplate;
 	
 	@Override

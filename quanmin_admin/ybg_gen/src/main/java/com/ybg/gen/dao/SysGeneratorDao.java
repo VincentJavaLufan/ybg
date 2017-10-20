@@ -11,9 +11,24 @@ import com.ybg.gen.qvo.GeneratorQuery;
  * @date 2016年12月19日 下午3:32:04 */
 public interface SysGeneratorDao {
 	
+	/** 分页查询
+	 * 
+	 * @param page
+	 * @param qvo
+	 * @return
+	 * @throws Exception
+	 */
 	Page list(Page page, GeneratorQuery qvo) throws Exception;
 	
+	/** 查询表
+	 * 
+	 * @param tableName
+	 * @return */
 	Map<String, String> queryTable(String tableName);
 	
+	/** 查询列
+	 * 
+	 * @param tableName
+	 * @return */
 	List<Map<String, String>> queryColumns(String tableName);
 }
