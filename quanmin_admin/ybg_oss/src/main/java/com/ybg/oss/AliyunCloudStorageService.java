@@ -9,7 +9,7 @@ import java.io.InputStream;
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2017-03-26 16:22 */
-public class AliyunCloudStorageService extends CloudStorageService {
+public class AliyunCloudStorageService extends AbstractCloudStorageService {
 	
 	private OSSClient client;
 	

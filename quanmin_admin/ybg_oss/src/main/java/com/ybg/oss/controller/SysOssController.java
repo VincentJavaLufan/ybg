@@ -22,8 +22,8 @@ import com.ybg.base.util.webexception.RepostResult;
 import com.ybg.base.util.webexception.ResultException;
 import com.ybg.oss.CloudStorageConfig;
 import com.ybg.oss.ConfigConstant;
-import com.ybg.oss.OSSConstant;
-import com.ybg.oss.OSSFactory;
+import com.ybg.oss.OssConstant;
+import com.ybg.oss.OssFactory;
 import com.ybg.oss.domian.SysOssEntity;
 import com.ybg.oss.service.SysConfigService;
 import com.ybg.oss.service.SysOssService;
@@ -89,15 +89,15 @@ public class SysOssController {
 		Json j = new Json();
 		// 校验类型
 		ValidatorUtils.validateEntity(config);
-		if (config.getType() == OSSConstant.CloudService.QINIU.getValue()) {
+		if (config.getType() == OssConstant.CloudService.QINIU.getValue()) {
 			// 校验七牛数据
 			ValidatorUtils.validateEntity(config, QiniuGroup.class);
 		}
-		else if (config.getType() == OSSConstant.CloudService.ALIYUN.getValue()) {
+		else if (config.getType() == OssConstant.CloudService.ALIYUN.getValue()) {
 			// 校验阿里云数据
 			ValidatorUtils.validateEntity(config, AliyunGroup.class);
 		}
-		else if (config.getType() == OSSConstant.CloudService.QCLOUD.getValue()) {
+		else if (config.getType() == OssConstant.CloudService.QCLOUD.getValue()) {
 			// 校验腾讯云数据
 			ValidatorUtils.validateEntity(config, QcloudGroup.class);
 		}
@@ -115,9 +115,9 @@ public class SysOssController {
 		if (file.isEmpty()) {
 			throw new ResultException("上传文件不能为空");
 		}
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<String, Object>(1);
 		// 上传文件
-		String url = OSSFactory.build().upload(file.getBytes());
+		String url = OssFactory.build().upload(file.getBytes());
 		// 保存文件信息
 		SysOssEntity ossEntity = new SysOssEntity();
 		ossEntity.setUrl(url);

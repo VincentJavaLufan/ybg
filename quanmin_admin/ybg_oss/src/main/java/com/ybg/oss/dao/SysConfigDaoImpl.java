@@ -13,6 +13,9 @@ import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
 import com.ybg.oss.domian.SysConfigEntity;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @Repository
 public class SysConfigDaoImpl extends BaseDao implements SysConfigDao {
 	

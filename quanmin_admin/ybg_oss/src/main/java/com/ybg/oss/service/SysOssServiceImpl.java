@@ -5,6 +5,9 @@ import com.ybg.base.util.Page;
 import com.ybg.oss.dao.SysOssDao;
 import com.ybg.oss.domian.SysOssEntity;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @Repository
 public class SysOssServiceImpl implements SysOssService {
 	

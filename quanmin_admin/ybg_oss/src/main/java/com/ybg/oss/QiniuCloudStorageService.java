@@ -14,7 +14,7 @@ import java.io.InputStream;
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2017-03-25 15:41 */
-public class QiniuCloudStorageService extends CloudStorageService {
+public class QiniuCloudStorageService extends AbstractCloudStorageService {
 	
 	private UploadManager	uploadManager;
 	private String			token;
@@ -38,7 +38,6 @@ public class QiniuCloudStorageService extends CloudStorageService {
 				throw new RuntimeException("上传七牛出错：" + res.toString());
 			}
 		} catch (Exception e) {
-			// e.printStackTrace();
 			throw new ResultException("上传文件失败，请核对七牛配置信息");
 		}
 		return config.getQiniuDomain() + "/" + path;

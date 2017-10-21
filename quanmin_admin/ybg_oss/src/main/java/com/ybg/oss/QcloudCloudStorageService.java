@@ -14,7 +14,7 @@ import java.io.InputStream;
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2017-03-26 20:51 */
-public class QcloudCloudStorageService extends CloudStorageService {
+public class QcloudCloudStorageService extends AbstractCloudStorageService {
 	
 	private COSClient client;
 	
@@ -36,14 +36,16 @@ public class QcloudCloudStorageService extends CloudStorageService {
 	@Override
 	public String upload(byte[] data, String path) {
 		// 腾讯云必需要以"/"开头
-		if (!path.startsWith("/")) {
+		String qclouduploadhead = "/";
+		String jsonCodeName = "code";
+		if (!path.startsWith(qclouduploadhead)) {
 			path = "/" + path;
 		}
 		// 上传到腾讯云
 		UploadFileRequest request = new UploadFileRequest(config.getQcloudBucketName(), path, data);
 		String response = client.uploadFile(request);
 		JSONObject jsonObject = JSONObject.fromObject(response);
-		if (jsonObject.getInt("code") != 0) {
+		if (jsonObject.getInt(jsonCodeName) != 0) {
 			throw new ResultException("文件上传失败，" + jsonObject.getString("message"));
 		}
 		return config.getQcloudDomain() + path;

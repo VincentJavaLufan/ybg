@@ -13,19 +13,34 @@ public interface SysConfigService {
 	
 	/** 保存配置信息
 	 * 
-	 * @throws Exception */
+	 * @param config
+	 * @throws Exception
+	 */
 	public void save(SysConfigEntity config) throws Exception;
 	
-	/** 更新配置信息 */
+	/** 更新配置信息
+	 * 
+	 * @param config
+	 */
 	public void update(SysConfigEntity config);
 	
-	/** 根据key，更新value */
+	/** 根据key，更新value
+	 * 
+	 * @param key
+	 * @param value
+	 */
 	public void updateValueByKey(String key, String value);
 	
-	/** 删除配置信息 */
+	/** 删除配置信息
+	 * 
+	 * @param ids
+	 */
 	public void deleteBatch(Long[] ids);
 	
-	//
+	/** 查询单个
+	 * 
+	 * @param id
+	 * @return */
 	public SysConfigEntity queryObject(Long id);
 	
 	/** 根据key，获取配置的value值
@@ -33,7 +48,8 @@ public interface SysConfigService {
 	 * @param key
 	 *            key
 	 * @param defaultValue
-	 *            缺省值 */
+	 *            缺省值
+	 * @return */
 	public String getValue(String key, String defaultValue);
 	
 	/** 根据key，获取value的Object对象
@@ -41,8 +57,16 @@ public interface SysConfigService {
 	 * @param key
 	 *            key
 	 * @param clazz
-	 *            Object对象 */
+	 *            Object对象
+	 * @return */
 	public <T> T getConfigObject(String key, Class<T> clazz);
 	
-	Page list(Page page,SysConfigEntity qvo) throws Exception;
+	/** 分页查询
+	 * 
+	 * @param page
+	 * @param qvo
+	 * @return
+	 * @throws Exception
+	 */
+	Page list(Page page, SysConfigEntity qvo) throws Exception;
 }
