@@ -3,7 +3,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	">
 	<import resource="classpath:uflo-console-context.xml" />
-	<bean class="com.ybg.uflo.UFLOEnvironmentProvider">
+	<bean class="com.ybg.uflo.UfloConfiguration">
 		<property name="sessionFactory" ref="uflosessionFactory"></property>
 		<property name="platformTransactionManager" ref="uflotransactionManager"></property>
 	</bean>
