@@ -3,7 +3,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.ui.ModelMap;
 
-/** 验证码工具 **/
+/** 验证码工具 @author https://gitee.com/YYDeament/88ybg **/
 public class VrifyCodeUtil {
 	
 	public static final String PARAMETERNAME = "vrifyCode";
@@ -82,7 +82,8 @@ public class VrifyCodeUtil {
 	
 	/** 验证是验证码 否正确后清除 验证码会话 防止重复利用攻击API
 	 * 
-	 * @param session */
+	 * @param session
+	 */
 	private static void cleanSession(HttpSession session) {
 		session.removeAttribute(PARAMETERNAME);
 	}

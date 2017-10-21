@@ -15,25 +15,12 @@ import net.bytebuddy.asm.Advice.This;
  * @author liulibo */
 public class MathTest {
 	
-	// private static Shuzu Shuzu = new Shuzu();
 	static List<String[]> combinationSelectList = new ArrayList<String[]>();
 	
 	public static void init() {
 		combinationSelectList = new ArrayList<String[]>();
 	}
 	
-	// public static void main(String[] args) {
-	// init();// 初始化
-	// combinationSelect(new String[] { "1", "2", "3", "4" }, 3);
-	// for (String[] strs : combinationSelectList) {
-	// System.out.println("33:" + Arrays.asList(strs));
-	// }
-	// init();// 初始化
-	// arrangementSelect(new String[] { "1", "2", "3", "4" }, 3);
-	// for (String[] strs : combinationSelectList) {
-	// System.out.println("44:" + Arrays.asList(strs));
-	// }
-	// }
 	/** 排列选择（从列表中选择n个排列）
 	 * 
 	 * @param dataList
@@ -56,7 +43,7 @@ public class MathTest {
 	private static void arrangementSelect(String[] dataList, String[] resultList, int resultIndex) {
 		int resultLen = resultList.length;
 		// 全部选择完时，输出排列结果
-		if (resultIndex >= resultLen) { 
+		if (resultIndex >= resultLen) {
 			System.out.println("88:" + Arrays.asList(resultList));
 			String[] linshi = new String[resultList.length];
 			System.arraycopy(resultList, 0, linshi, 0, resultList.length);
@@ -73,7 +60,7 @@ public class MathTest {
 					break;
 				}
 			}
-			if (!exists) { 
+			if (!exists) {
 				// 排列结果不存在该项，才可选择
 				resultList[resultIndex] = dataList[i];
 				arrangementSelect(dataList, resultList, resultIndex + 1);
@@ -105,7 +92,7 @@ public class MathTest {
 	private static void combinationSelect(String[] dataList, int dataIndex, String[] resultList, int resultIndex) {
 		int resultLen = resultList.length;
 		int resultCount = resultIndex + 1;
-		if (resultCount > resultLen) { 
+		if (resultCount > resultLen) {
 			// 全部选择完时，输出组合结果
 			System.out.println("99:" + Arrays.asList(resultList));
 			String[] linshi = new String[resultList.length];

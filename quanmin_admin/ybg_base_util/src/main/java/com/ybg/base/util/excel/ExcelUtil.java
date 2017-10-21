@@ -25,7 +25,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-/** ExcelUtil工具类实现功能: <br>
+/** ExcelUtil工具类实现功能: @author https://gitee.com/YYDeament/88ybg <br>
  * 导出时传入list<T>,即可实现导出为一个excel,其中每个对象Ｔ为Excel中的一条记录. <br>
  * 导入时读取excel,得到的结果是一个list<T>.T是自己定义的对象. <br>
  * 需要导出的实体对象只需简单配置注解就能实现灵活导出,通过注解您可以方便实现下面功能: <br>
@@ -54,37 +54,46 @@ public class ExcelUtil<T> {
 	public List<T> importExcel(String sheetName, InputStream input, int startrow, String name) throws Exception {
 		int maxCol = 0;
 		List<T> list = new ArrayList<T>();
+		String excel2003 = "xls";
+		String excel2007 = "xlsx";
 		try {
 			Workbook workbook = null;
-			if (name.endsWith("xls")) {
+			if (name.endsWith(excel2003)) {
 				workbook = new HSSFWorkbook(input);
 			}
-			else if (name.endsWith("xlsx")) {
+			else if (name.endsWith(excel2007)) {
 				workbook = new XSSFWorkbook(input);
 			}
 			Sheet sheet = workbook.getSheet(sheetName);
 			if (!"".equals(sheetName.trim())) {
-				sheet = workbook.getSheet(sheetName);// 如果指定sheet名,则取指定sheet中的内容.
+				// 如果指定sheet名,则取指定sheet中的内容.
+				sheet = workbook.getSheet(sheetName);
 			}
 			if (sheet == null) {
-				sheet = workbook.getSheetAt(0); // 如果传入的sheet名不存在则默认指向第1个sheet.
+				// 如果传入的sheet名不存在则默认指向第1个sheet.
+				sheet = workbook.getSheetAt(0);
 			}
 			int rows = sheet.getLastRowNum();
-			if (rows > 0) {// 有数据时才处理
+			if (rows > 0) {
+				// 有数据时才处理
 				// Field[] allFields = clazz.getDeclaredFields();// 得到类的所有field.
 				List<Field> allFields = getMappedFiled(clazz, null);
-				Map<Integer, Field> fieldsMap = new HashMap<Integer, Field>();// 定义一个map用于存放列的序号和field.
+				Map<Integer, Field> fieldsMap = new HashMap<Integer, Field>(30);
+				// 定义一个map用于存放列的序号和field.
 				for (Field field : allFields) {
 					// 将有注解的field存放到map中.
 					if (field.isAnnotationPresent(ExcelVOAttribute.class)) {
 						ExcelVOAttribute attr = field.getAnnotation(ExcelVOAttribute.class);
-						int col = getExcelCol(attr.column());// 获得列号
+						// 获得列号
+						int col = getExcelCol(attr.column());
 						maxCol = Math.max(col, maxCol);
-						field.setAccessible(true);// 设置类的私有字段属性可访问.
+						// 设置类的私有字段属性可访问.
+						field.setAccessible(true);
 						fieldsMap.put(col, field);
 					}
 				}
-				for (int i = startrow; i <= rows; i++) {// 从第2行开始取数据,默认第一行是表头.
+				for (int i = startrow; i <= rows; i++) {
+					// 从第2行开始取数据,默认第一行是表头.
 					Row row = sheet.getRow(i);
 					int cellNum = maxCol;
 					T entity = null;
@@ -96,7 +105,8 @@ public class ExcelUtil<T> {
 						if (cell == null) {
 							continue;
 						}
-						Field field = fieldsMap.get(j);// 从map中得到对应列的field.
+						// 从map中得到对应列的field.
+						Field field = fieldsMap.get(j);
 						if (field == null) {
 							continue;
 						}
@@ -105,7 +115,7 @@ public class ExcelUtil<T> {
 						String c = "";
 						if (cellType == XSSFCell.CELL_TYPE_NUMERIC) {
 							c = String.valueOf(cell.getNumericCellValue());
-							if (String.class == fieldType) {//
+							if (String.class == fieldType) {
 								DecimalFormat df = new DecimalFormat("#");
 								c = df.format(cell.getNumericCellValue());
 							}
@@ -122,13 +132,14 @@ public class ExcelUtil<T> {
 						if (c == null || c.equals("")) {
 							continue;
 						}
-						entity = (entity == null ? clazz.newInstance() : entity);// 如果不存在实例则新建.
+						entity = (entity == null ? clazz.newInstance() : entity);
+						// 如果不存在实例则新建.
 						// 取得类型,并根据对象类型设置值.
 						if (String.class == fieldType) {
 							field.set(entity, String.valueOf(c));
 						}
 						else if (Integer.TYPE == fieldType || Integer.class == fieldType) {
-							if (String.class == fieldType) {//
+							if (String.class == fieldType) {
 								DecimalFormat df = new DecimalFormat("#");
 								c = df.format(cell.getNumericCellValue());
 							}
@@ -180,27 +191,35 @@ public class ExcelUtil<T> {
 			XSSFWorkbook workbook = new XSSFWorkbook(input);
 			XSSFSheet sheet = workbook.getSheet(sheetName);
 			if (!"".trim().equals(sheetName)) {
-				sheet = workbook.getSheet(sheetName);// 如果指定sheet名,则取指定sheet中的内容.
+				// 如果指定sheet名,则取指定sheet中的内容.
+				sheet = workbook.getSheet(sheetName);
 			}
 			if (sheet == null) {
-				sheet = workbook.getSheetAt(0); // 如果传入的sheet名不存在则默认指向第1个sheet.
+				// 如果传入的sheet名不存在则默认指向第1个sheet.
+				sheet = workbook.getSheetAt(0);
 			}
 			int rows = sheet.getLastRowNum();
-			if (rows > 0) {// 有数据时才处理
-				// Field[] allFields = clazz.getDeclaredFields();// 得到类的所有field.
+			if (rows > 0) {
+				// 有数据时才处理
+				// Field[] allFields = clazz.getDeclaredFields();
+				// 得到类的所有field.
 				List<Field> allFields = getMappedFiled(clazz, null);
-				Map<Integer, Field> fieldsMap = new HashMap<Integer, Field>();// 定义一个map用于存放列的序号和field.
+				Map<Integer, Field> fieldsMap = new HashMap<Integer, Field>(1);
+				// 定义一个map用于存放列的序号和field.
 				for (Field field : allFields) {
 					// 将有注解的field存放到map中.
 					if (field.isAnnotationPresent(ExcelVOAttribute.class)) {
 						ExcelVOAttribute attr = field.getAnnotation(ExcelVOAttribute.class);
-						int col = getExcelCol(attr.column());// 获得列号
+						// 获得列号
+						int col = getExcelCol(attr.column());
 						maxCol = Math.max(col, maxCol);
-						field.setAccessible(true);// 设置类的私有字段属性可访问.
+						// 设置类的私有字段属性可访问.
+						field.setAccessible(true);
 						fieldsMap.put(col, field);
 					}
 				}
-				for (int i = startrow; i <= rows; i++) {// 从第2行开始取数据,默认第一行是表头.
+				for (int i = startrow; i <= rows; i++) {
+					// 从第2行开始取数据,默认第一行是表头.
 					XSSFRow row = sheet.getRow(i);
 					int cellNum = maxCol;
 					T entity = null;
@@ -212,7 +231,8 @@ public class ExcelUtil<T> {
 						if (cell == null) {
 							continue;
 						}
-						Field field = fieldsMap.get(j);// 从map中得到对应列的field.
+						Field field = fieldsMap.get(j);
+						// 从map中得到对应列的field.
 						if (field == null) {
 							continue;
 						}
@@ -221,7 +241,7 @@ public class ExcelUtil<T> {
 						String c = "";
 						if (cellType == XSSFCell.CELL_TYPE_NUMERIC) {
 							c = String.valueOf(cell.getNumericCellValue());
-							if (String.class == fieldType) {//
+							if (String.class == fieldType) {
 								DecimalFormat df = new DecimalFormat("#");
 								c = df.format(cell.getNumericCellValue());
 							}
@@ -238,13 +258,14 @@ public class ExcelUtil<T> {
 						if (c == null || c.equals("")) {
 							continue;
 						}
-						entity = (entity == null ? clazz.newInstance() : entity);// 如果不存在实例则新建.
+						entity = (entity == null ? clazz.newInstance() : entity);
+						// 如果不存在实例则新建.
 						// 取得类型,并根据对象类型设置值.
 						if (String.class == fieldType) {
 							field.set(entity, String.valueOf(c));
 						}
 						else if (Integer.TYPE == fieldType || Integer.class == fieldType) {
-							if (String.class == fieldType) {//
+							if (String.class == fieldType) {
 								DecimalFormat df = new DecimalFormat("#");
 								c = df.format(cell.getNumericCellValue());
 							}
@@ -306,46 +327,61 @@ public class ExcelUtil<T> {
 		if (lists.length != sheetNames.length) {
 			return false;
 		}
-		HSSFWorkbook workbook = new HSSFWorkbook();// 产生工作薄对象
+		HSSFWorkbook workbook = new HSSFWorkbook();
+		// 产生工作薄对象
 		for (int ii = 0; ii < lists.length; ii++) {
 			List<T> list = lists[ii];
 			String sheetName = sheetNames[ii];
 			List<Field> fields = getMappedFiled(clazz, null);
-			HSSFSheet sheet = workbook.createSheet();// 产生工作表对象
+			HSSFSheet sheet = workbook.createSheet();
+			// 产生工作表对象
 			workbook.setSheetName(ii, sheetName);
 			HSSFRow row;
-			HSSFCell cell;// 产生单元格
+			HSSFCell cell;
+			// 产生单元格
 			HSSFCellStyle style = workbook.createCellStyle();
 			style.setFillForegroundColor(HSSFColor.SKY_BLUE.index);
 			style.setFillBackgroundColor(HSSFColor.GREY_40_PERCENT.index);
 			// 写入各个字段的列头名称
 			if (ismodifytablehead) {
-				row = sheet.createRow(startrow - 1);// 产生一行
+				row = sheet.createRow(startrow - 1);
+				// 产生一行
 				for (int i = 0; i < fields.size(); i++) {
 					Field field = fields.get(i);
 					ExcelVOAttribute attr = field.getAnnotation(ExcelVOAttribute.class);
-					short col = getExcelCol(attr.column());// 获得列号
-					cell = row.createCell(col);// 创建列
-					cell.setCellType(HSSFCell.CELL_TYPE_STRING);// 设置列中写入内容为String类型
-					cell.setCellValue(attr.name());// 写入列名
+					short col = getExcelCol(attr.column());
+					// 获得列号
+					cell = row.createCell(col);
+					// 创建列
+					cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+					// 设置列中写入内容为String类型
+					cell.setCellValue(attr.name());
+					// 写入列名
 					// 如果设置了提示信息则鼠标放上去提示.
 					if (!"".equals(attr.prompt().trim())) {
-						setHSSFPrompt(sheet, "", attr.prompt(), 1, 100, col, col);// 这里默认设了2-101列提示.
+						setHSSFPrompt(sheet, "", attr.prompt(), 1, 100, col, col);
+						// 这里默认设了2-101列提示.
 					}
 					// 如果设置了combo属性则本列只能选择不能输入
 					if (attr.combo().length > 0) {
-						setHSSFValidation(sheet, attr.combo(), 1, 100, col, col);// 这里默认设了2-101列只能选择不能输入.
+						setHSSFValidation(sheet, attr.combo(), 1, 100, col, col);
+						// 这里默认设了2-101列只能选择不能输入.
 					}
 					cell.setCellStyle(style);
 				}
 				if (map != null) {
-					row = sheet.createRow(startrow - 1);// 产生一行
+					row = sheet.createRow(startrow - 1);
+					// 产生一行
 					Set<String> keyset = map.keySet();
 					for (String key : keyset) {
-						short col = getExcelCol(key);// 获得列号
-						cell = row.createCell(col);// 创建列
-						cell.setCellType(HSSFCell.CELL_TYPE_STRING);// 设置列中写入内容为String类型
-						cell.setCellValue(map.get(key));// 写入列名
+						short col = getExcelCol(key);
+						// 获得列号
+						cell = row.createCell(col);
+						// 创建列
+						cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+						// 设置列中写入内容为String类型
+						cell.setCellValue(map.get(key));
+						// 写入列名
 					}
 				}
 			}
@@ -354,17 +390,22 @@ public class ExcelUtil<T> {
 			// 写入各条记录,每条记录对应excel表中的一行
 			for (int i = startNo; i < endNo; i++) {
 				row = sheet.createRow(i + startrow - startNo);
-				T vo = (T) list.get(i); // 得到导出对象.
+				T vo = (T) list.get(i);
+				// 得到导出对象.
 				for (int j = 0; j < fields.size(); j++) {
-					Field field = fields.get(j);// 获得field.
-					field.setAccessible(true);// 设置实体类私有属性可访问
+					Field field = fields.get(j);
+					// 获得field.
+					field.setAccessible(true);
+					// 设置实体类私有属性可访问
 					ExcelVOAttribute attr = field.getAnnotation(ExcelVOAttribute.class);
 					try {
 						// 根据ExcelVOAttribute中设置情况决定是否导出,有些情况需要保持为空,希望用户填写这一列.
 						if (attr.isExport()) {
-							cell = row.createCell(getExcelCol(attr.column()));// 创建cell
+							cell = row.createCell(getExcelCol(attr.column()));
+							// 创建cell
 							cell.setCellType(HSSFCell.CELL_TYPE_STRING);
-							cell.setCellValue(field.get(vo) == null ? "" : String.valueOf(field.get(vo)));// 如果数据存在就填入,不存在填入空格.
+							cell.setCellValue(field.get(vo) == null ? "" : String.valueOf(field.get(vo)));
+							// 如果数据存在就填入,不存在填入空格.
 						}
 					} catch (IllegalArgumentException e) {
 						e.printStackTrace();
@@ -405,7 +446,8 @@ public class ExcelUtil<T> {
 		HSSFWorkbook workbook = new HSSFWorkbook(fis);
 		List<T> list = lists[0];
 		List<Field> fields = getMappedFiled(clazz, null);
-		HSSFSheet sheet = workbook.getSheetAt(0);// 产生工作表对象
+		HSSFSheet sheet = workbook.getSheetAt(0);
+		// 产生工作表对象
 		// workbook.setSheetName(ii, sheetName);
 		HSSFRow row;
 		HSSFCell cell;// 产生单元格
@@ -414,32 +456,44 @@ public class ExcelUtil<T> {
 		style.setFillBackgroundColor(HSSFColor.GREY_40_PERCENT.index);
 		// 写入各个字段的列头名称
 		if (ismodifytablehead) {
-			row = sheet.createRow(startrow - 1);// 产生一行
+			row = sheet.createRow(startrow - 1);
+			// 产生一行
 			for (int i = 0; i < fields.size(); i++) {
 				Field field = fields.get(i);
 				ExcelVOAttribute attr = field.getAnnotation(ExcelVOAttribute.class);
-				short col = getExcelCol(attr.column());// 获得列号
-				cell = row.createCell(col);// 创建列
-				cell.setCellType(HSSFCell.CELL_TYPE_STRING);// 设置列中写入内容为String类型
-				cell.setCellValue(attr.name());// 写入列名
+				short col = getExcelCol(attr.column());
+				// 获得列号
+				cell = row.createCell(col);
+				// 创建列
+				cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+				// 设置列中写入内容为String类型
+				cell.setCellValue(attr.name());
+				// 写入列名
 				// 如果设置了提示信息则鼠标放上去提示.
 				if (!"".equals(attr.prompt().trim())) {
-					setHSSFPrompt(sheet, "", attr.prompt(), 1, 100, col, col);// 这里默认设了2-101列提示.
+					setHSSFPrompt(sheet, "", attr.prompt(), 1, 100, col, col);
+					// 这里默认设了2-101列提示.
 				}
 				// 如果设置了combo属性则本列只能选择不能输入
 				if (attr.combo().length > 0) {
-					setHSSFValidation(sheet, attr.combo(), 1, 100, col, col);// 这里默认设了2-101列只能选择不能输入.
+					setHSSFValidation(sheet, attr.combo(), 1, 100, col, col);
+					// 这里默认设了2-101列只能选择不能输入.
 				}
 				cell.setCellStyle(style);
 			}
 			if (map != null) {
-				row = sheet.createRow(startrow - 1);// 产生一行
+				row = sheet.createRow(startrow - 1);
+				// 产生一行
 				Set<String> keyset = map.keySet();
 				for (String key : keyset) {
-					short col = getExcelCol(key);// 获得列号
-					cell = row.createCell(col);// 创建列
-					cell.setCellType(HSSFCell.CELL_TYPE_STRING);// 设置列中写入内容为String类型
-					cell.setCellValue(map.get(key));// 写入列名
+					short col = getExcelCol(key);
+					// 获得列号
+					cell = row.createCell(col);
+					// 创建列
+					cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+					// 设置列中写入内容为String类型
+					cell.setCellValue(map.get(key));
+					// 写入列名
 				}
 			}
 		}
@@ -448,17 +502,22 @@ public class ExcelUtil<T> {
 		// 写入各条记录,每条记录对应excel表中的一行
 		for (int i = startNo; i < endNo; i++) {
 			row = sheet.createRow(i + startrow - startNo);
-			T vo = (T) list.get(i); // 得到导出对象.
+			T vo = (T) list.get(i);
+			// 得到导出对象.
 			for (int j = 0; j < fields.size(); j++) {
-				Field field = fields.get(j);// 获得field.
-				field.setAccessible(true);// 设置实体类私有属性可访问
+				Field field = fields.get(j);
+				// 获得field.
+				field.setAccessible(true);
+				// 设置实体类私有属性可访问
 				ExcelVOAttribute attr = field.getAnnotation(ExcelVOAttribute.class);
 				try {
 					// 根据ExcelVOAttribute中设置情况决定是否导出,有些情况需要保持为空,希望用户填写这一列.
 					if (attr.isExport()) {
-						cell = row.createCell(getExcelCol(attr.column()));// 创建cell
+						cell = row.createCell(getExcelCol(attr.column()));
+						// 创建cell
 						cell.setCellType(HSSFCell.CELL_TYPE_STRING);
-						cell.setCellValue(field.get(vo) == null ? "" : String.valueOf(field.get(vo)));// 如果数据存在就填入,不存在填入空格.
+						cell.setCellValue(field.get(vo) == null ? "" : String.valueOf(field.get(vo)));
+						// 如果数据存在就填入,不存在填入空格.
 					}
 				} catch (IllegalArgumentException e) {
 					e.printStackTrace();
@@ -596,7 +655,8 @@ public class ExcelUtil<T> {
 		if (fields == null) {
 			fields = new ArrayList<Field>();
 		}
-		Field[] allFields = clazz.getDeclaredFields();// 得到所有定义字段
+		Field[] allFields = clazz.getDeclaredFields();
+		// 得到所有定义字段
 		// 得到所有field并存放到一个list中.
 		for (Field field : allFields) {
 			if (field.isAnnotationPresent(ExcelVOAttribute.class)) {

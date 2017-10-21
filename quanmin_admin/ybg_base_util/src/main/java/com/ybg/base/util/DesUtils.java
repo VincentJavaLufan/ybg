@@ -9,7 +9,7 @@ import javax.crypto.Cipher;
  *         <p>
  *         2009-12-5
  *         </p>
-*/
+ */
 public class DesUtils {
 	
 	/** 字符串默认键值 */
@@ -57,9 +57,10 @@ public class DesUtils {
 		byte[] arrB = strIn.getBytes();
 		int iLen = arrB.length;
 		// 两个字符表示一个字节，所以字节数组长度是字符串长度除以2
-		byte[] arrOut = new byte[iLen / 2];
-		for (int i = 0; i < iLen; i = i + 2) {
-			String strTmp = new String(arrB, i, 2);
+		int byteleng = 2;
+		byte[] arrOut = new byte[iLen / byteleng];
+		for (int i = 0; i < iLen; i = i + byteleng) {
+			String strTmp = new String(arrB, i, byteleng);
 			arrOut[i / 2] = (byte) Integer.parseInt(strTmp, 16);
 		}
 		return arrOut;
@@ -67,7 +68,8 @@ public class DesUtils {
 	
 	/** 默认构造方法，使用默认密钥
 	 * 
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	public DesUtils() throws Exception {
 		this(strDefaultKey);
 	}
@@ -76,7 +78,8 @@ public class DesUtils {
 	 * 
 	 * @param strKey
 	 *            指定的密钥
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	public DesUtils(String strKey) throws Exception {
 		Security.addProvider(new com.sun.crypto.provider.SunJCE());
 		Key key = getKey(strKey.getBytes());
@@ -91,7 +94,8 @@ public class DesUtils {
 	 * @param arrB
 	 *            需加密的字节数组
 	 * @return 加密后的字节数组
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	public byte[] encrypt(byte[] arrB) throws Exception {
 		return encryptCipher.doFinal(arrB);
 	}
@@ -101,7 +105,8 @@ public class DesUtils {
 	 * @param strIn
 	 *            需加密的字符串
 	 * @return 加密后的字符串
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	public String encrypt(String strIn) throws Exception {
 		return byteArr2HexStr(encrypt(strIn.getBytes()));
 	}
@@ -111,7 +116,8 @@ public class DesUtils {
 	 * @param arrB
 	 *            需解密的字节数组
 	 * @return 解密后的字节数组
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	public byte[] decrypt(byte[] arrB) throws Exception {
 		return decryptCipher.doFinal(arrB);
 	}
@@ -121,7 +127,8 @@ public class DesUtils {
 	 * @param strIn
 	 *            需解密的字符串
 	 * @return 解密后的字符串
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	public String decrypt(String strIn) throws Exception {
 		return new String(decrypt(hexStr2ByteArr(strIn)));
 	}
@@ -131,7 +138,8 @@ public class DesUtils {
 	 * @param arrBTmp
 	 *            构成该字符串的字节数组
 	 * @return 生成的密钥
-	 * @throws java.lang.Exception */
+	 * @throws java.lang.Exception
+	 */
 	private Key getKey(byte[] arrBTmp) throws Exception {
 		// 创建一个空的8位字节数组（默认值为0）
 		byte[] arrB = new byte[8];
@@ -147,7 +155,8 @@ public class DesUtils {
 	/** main方法 。
 	 * 
 	 * @author 刘尧兴
-	 * @param args */
+	 * @param args
+	 */
 	public void main(String[] args) {
 		try {
 			String test = "123456789";

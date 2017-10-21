@@ -1,6 +1,8 @@
 package com.ybg.base.util;
 /** java版的escape和unescape方法解析类.
  * 
+ * @author https://gitee.com/YYDeament/88ybg
+ * 
  * 
  * @version 1.0 */
 public class EncodingUtil {

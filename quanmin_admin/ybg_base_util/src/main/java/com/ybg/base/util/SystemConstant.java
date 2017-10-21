@@ -1,44 +1,22 @@
 package com.ybg.base.util;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Properties;
 
-/** 系统常量类 **/
+/** 系统常量类 @author https://gitee.com/YYDeament/88ybg **/
 public class SystemConstant {
 	
 	/** 是否调试模式 **/
 	private static Properties	props	= new Properties();
-	//public static final boolean	DEBUG	= false;
-	// static {
-	// try {
-	// props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("systemconstant.properties"));
-	// } catch (FileNotFoundException e) {
-	// e.printStackTrace();
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-	// }
-	static SystemConfig config =null;
-	
-	
-	
+	static SystemConfig			config	= null;
 	
 	public static SystemConfig getConfig() {
-		
-		if(config==null){
-			 config = (SystemConfig) SpringContextUtils.getBean(SystemConfig.class);
+		if (config == null) {
+			config = (SystemConfig) SpringContextUtils.getBean(SystemConfig.class);
 		}
-		
 		return config;
 	}
-
-	
-	
-	
 	
 	/** 系统域名 www.???.com **/
 	public static String getSystemdomain() {
-		
 		return getConfig().getDomain();
 	}
 	

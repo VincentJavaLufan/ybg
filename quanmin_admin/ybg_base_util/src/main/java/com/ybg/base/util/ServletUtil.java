@@ -12,7 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-/** Servlet的工具类。 */
+/** Servlet的工具类。 @author https://gitee.com/YYDeament/88ybg */
 public class ServletUtil {
 	
 	public static Log		log				= LogFactory.getLog(ServletUtil.class);
@@ -24,36 +24,6 @@ public class ServletUtil {
 		response.setContentType(HTML_ENCODING);
 	}
 	
-	/** 判断值是否为-1或#. 为空、-1、#返回false,否则返回true
-	 * 
-	 * @param requestName
-	 *            .
-	 * @return -1,null,# return true */
-	public static boolean equalF1J(String value) {
-		boolean returnTemp = false;
-		if (StringUtils.isNotBlank(value)) {
-			if ("-1".equals(value)) {
-				returnTemp = true;
-			}
-			if ("#".equals(value)) {
-				returnTemp = true;
-			}
-		}
-		else {
-			returnTemp = true;
-		}
-		return returnTemp;
-	}
-	
-	/** 判断httpRequest传过来的值是否为-1,null,#
-	 * 
-	 * @param requestName
-	 *            .
-	 * @return -1,null,# return true */
-	public static boolean equalF1J(HttpServletRequest request, String requestName) {
-		return equalF1J(ServletUtil.removeSpace(request, requestName));
-	}
-	
 	/** 设置HTML header的文本类型及编码为"text/xml;charset=gb2312"; */
 	public static void setXMLContentType(HttpServletResponse response) {
 		response.setContentType(XML_ENCODING);
@@ -63,7 +33,8 @@ public class ServletUtil {
 	 * 
 	 * @param response
 	 * @param ems
-	 * @throws IOException */
+	 * @throws IOException
+	 */
 	public static void outView(HttpServletResponse response, String ems) throws IOException {
 		PrintWriter out = response.getWriter();
 		out.print(ems);
@@ -103,7 +74,7 @@ public class ServletUtil {
 	}
 	
 	/** 读取参数，并把该参数转化为整型 saber修改于[2008-1-23]<br>
-	*/
+	 */
 	public static Integer getIntParam(HttpServletRequest request, String paramName) {
 		String value = request.getParameter(paramName);
 		if (null == value) {
@@ -152,8 +123,9 @@ public class ServletUtil {
 	 *            默认值
 	 * @return 转换后的结果 */
 	public final static int[] parseInt(String[] str, int defaultVal) {
-		if (str == null || str.length < 1){
-			return new int[0];}
+		if (str == null || str.length < 1) {
+			return new int[0];
+		}
 		int[] result = new int[str.length];
 		for (int i = 0; i < str.length; i++) {
 			result[i] = parseInt(str[i], defaultVal);
@@ -167,7 +139,8 @@ public class ServletUtil {
 	 * @param url
 	 *            跳转到的路径
 	 * @return
-	 * @throws IOException */
+	 * @throws IOException
+	 */
 	public final static void outTips(HttpServletResponse response, String msg, String url) throws IOException {
 		StringBuffer tips = new StringBuffer();
 		tips.append("<script language='javascript'>");
@@ -199,17 +172,6 @@ public class ServletUtil {
 		response.setHeader("Pragma", "No-cache");
 		response.setHeader("Cache-Control", "no-cache");
 		response.setDateHeader("Expires", 0);
-	}
-	
-	public static Integer getIntParamDefault0(HttpServletRequest request, String paramName) {
-		String value = request.getParameter(paramName);
-		if (StringUtil.isNullAndBlank(value)) {
-			// if (StringUtils.isBlank(value)) {
-			return 0;
-		}
-		else {
-			return Integer.parseInt(value.trim());
-		}
 	}
 	
 	public static Long getLongParamDefault0(HttpServletRequest request, String paramName) {
@@ -287,11 +249,11 @@ public class ServletUtil {
 	/** 输出参数 **/
 	public static void sayParm(HttpServletRequest request) {
 		Map<String, String[]> map = request.getParameterMap();
-		System.out.println("请求地址"+request.getRequestURI());
+		System.out.println("请求地址" + request.getRequestURI());
 		for (Entry<String, String[]> me : map.entrySet()) {
 			String name = me.getKey();
 			String[] v = me.getValue();
-			System.out.println("参数："+name + "=" + v[0]);
+			System.out.println("参数：" + name + "=" + v[0]);
 		}
 	}
 }

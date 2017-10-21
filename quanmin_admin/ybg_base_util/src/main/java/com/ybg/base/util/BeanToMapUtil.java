@@ -8,6 +8,9 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 public class BeanToMapUtil {
 	
 	/** 将一个 Map 对象转化为一个 JavaBean
@@ -59,7 +62,7 @@ public class BeanToMapUtil {
 	 *             如果调用属性的 setter 方法失败 */
 	public static Map<String, Object> convertBean(Object bean) throws IntrospectionException, IllegalAccessException, InvocationTargetException {
 		Class<? extends Object> type = bean.getClass();
-		Map<String, Object> returnMap = new HashMap<String, Object>();
+		Map<String, Object> returnMap = new HashMap<String, Object>(1);
 		BeanInfo beanInfo = Introspector.getBeanInfo(type);
 		PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
 		for (int i = 0; i < propertyDescriptors.length; i++) {

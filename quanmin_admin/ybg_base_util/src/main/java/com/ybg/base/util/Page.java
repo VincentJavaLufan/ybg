@@ -9,7 +9,8 @@ import com.alibaba.druid.util.JdbcConstants;
 /** DAO查询的页对象.<br>
  * 包括设置获取的开始位置、每页的大小、总的记录数和查询的列表结果。
  * 
- *
+ * @author https://gitee.com/YYDeament/88ybg 
+
  * @version 1.0 */
 public class Page implements Serializable {
 	
@@ -18,13 +19,19 @@ public class Page implements Serializable {
 	 */
 	private static final long	serialVersionUID	= 1L;
 	public static Integer		DEFAULT_PAGE_SIZE	= 10;
-	private Integer				startIndex;									// 对象获取的开始位置，应该总是从1开始
-	private Integer				pageSize			= DEFAULT_PAGE_SIZE;	// 每页获取的页大小，默认是15
-	private Integer				totals;										// 总的记录数
-	private Integer				curPage				= 1;					// 应该总是从1开始
-	private List<?>				result;										// 查询的结果
-	private String				paginate;									// 分页代码
-	private List<?>				assistBusiness;								// 辅助
+	/** 对象获取的开始位置，应该总是从1开始 */
+	private Integer				startIndex;
+	/** 每页获取的页大小，默认是15 /** 总的记录数 */
+	private Integer				pageSize			= DEFAULT_PAGE_SIZE;
+	private Integer				totals;
+	/** 应该总是从1开始 */
+	private Integer				curPage				= 1;
+	/** 查询的结果 */
+	private List<?>				result;
+	/** 分页代码 */
+	private String				paginate;
+	/** 辅助 */
+	private List<?>				assistBusiness;
 	private Integer				totalpages;
 	
 	/** 分页插件初始化,请写在最后一步 要获取数据和数据总数目之后使用 **/
@@ -42,7 +49,6 @@ public class Page implements Serializable {
 		return PagerUtils.count(sql.toString(), JdbcConstants.MYSQL);
 	}
 	
-	// add by zhangdan
 	/** 构造方法，只构造空页. */
 	public Page() {
 		this(0, 0, DEFAULT_PAGE_SIZE, new ArrayList<Object>());
@@ -142,7 +148,8 @@ public class Page implements Serializable {
 	
 	/** 查询的开始位置总是从1开始.
 	 * 
-	 * @param startIndex */
+	 * @param startIndex
+	 */
 	public void setStartIndex(Integer startIndex) {
 		this.startIndex = startIndex;
 		if (this.startIndex <= 0) {

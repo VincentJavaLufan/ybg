@@ -1,25 +1,19 @@
 package com.ybg.base.util;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-import groovy.util.logging.Commons;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @Component
 @ConfigurationProperties(prefix = "system", ignoreInvalidFields = false)
 public class SystemConfig {
 	
-	// @Value("${domain}")
 	private String	domain;
-	// @Value("${email}")
 	private String	email;
-	// @Value("${emailpwd}")
 	private String	emailpwd;
-	// @Value("${name}")
 	private String	name;
-	// @Value("${icp}")
 	private String	icp;
-	// @Value("${auth}")
 	private String	auth;
 	
 	public String getDomain() {
