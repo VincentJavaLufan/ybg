@@ -1,7 +1,7 @@
 package com.ybg.mq.domian;
 import java.io.Serializable;
 
-public class MQconsumer implements Serializable {
+public class MqConsumer implements Serializable {
 	
 	String	id;
 	String	topic;

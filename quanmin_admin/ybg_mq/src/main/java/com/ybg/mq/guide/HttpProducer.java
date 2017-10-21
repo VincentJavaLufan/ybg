@@ -31,18 +31,23 @@ public class HttpProducer {
 		httpClient.start();
 		// Properties properties = new Properties();
 		// properties.load(HttpProducer.class.getClassLoader().getResourceAsStream("user.properties"));
-		String topic = bean.getTopic(); // 请在user.properties配置您的Topic
-		String url = bean.getUrl();// 公测集群配置为http://publictest-rest.ons.aliyun.com/
-		String ak = bean.getAk();// 请在user.properties配置您的Ak
-		String sk = bean.getSk();// 请在user.properties配置您的Sk
-		String pid = bean.getProducerid();// 请在user.properties配置您的Producer ID
-		String date = String.valueOf(new Date().getTime());
+		String topic = bean.getTopic();
+		// 请在user.properties配置您的Topic
+		String url = bean.getUrl();
+		// 公测集群配置为http://publictest-rest.ons.aliyun.com/
+		String ak = bean.getAk();
+		// 请在user.properties配置您的Ak
+		String sk = bean.getSk();
+		// 请在user.properties配置您的Sk
+		String pid = bean.getProducerid();
+		// 请在user.properties配置您的Producer ID
+		String date = String.valueOf(System.currentTimeMillis());
 		String sign = null;
 		// String body="hello ons http";
 		// String NEWLINE="\n";
 		String signString = url + ak + sk + pid + date;
 		for (int i = 0; i < 10; i++) {
-			date = String.valueOf(new Date().getTime());
+			date = String.valueOf(System.currentTimeMillis());
 			Request req = httpClient.POST(url + "?topic=" + topic + "&time=" + date + "&tag=http" + "&key=http");
 			ContentProvider content = new StringContentProvider(body);
 			req.content(content);

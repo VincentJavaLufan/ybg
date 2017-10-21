@@ -6,23 +6,24 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
-import com.ybg.mq.domian.MQconsumer;
+import com.ybg.mq.domian.MqConsumer;
 
 @Repository
-public class MQconsumerDaoImpl extends BaseDao implements MQconsumerDao {
+public class MQconsumerDaoImpl extends BaseDao implements MqConsumerDao {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
+	@Override
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
 	
 	@Override
-	public MQconsumer getIsUse() {
+	public MqConsumer getIsUse() {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select id,topic,url,ak,sk,consumerid from sys_mq_consumer mc");
-		List<MQconsumer> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<MQconsumer>(MQconsumer.class));
-		return QvoConditionUtil.checkList(list) ? list.get(0) : new MQconsumer();
+		List<MqConsumer> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<MqConsumer>(MqConsumer.class));
+		return QvoConditionUtil.checkList(list) ? list.get(0) : new MqConsumer();
 	}
 }

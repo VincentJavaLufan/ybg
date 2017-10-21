@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Properties;
 import com.ybg.base.util.SpringContextUtils;
 import com.ybg.mq.consumer.SimpleMessage;
-import com.ybg.mq.domian.MQconsumer;
-import com.ybg.mq.service.MQconsumerService;
+import com.ybg.mq.domian.MqConsumer;
+import com.ybg.mq.service.MqConsumerService;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.ContentResponse;
 import org.eclipse.jetty.client.api.Request;
@@ -25,26 +25,24 @@ public class HttpConsumer {
 	public static String	MSGHANDLE	= "msgHandle";
 	public static String	TIME		= "time";
 	
-	public static void getmsg(MQconsumer bean ) throws Exception {
-		// MQconsumerService mQconsumerService = (MQconsumerService) SpringContextUtils.getBean(MQconsumerService.class);
-		// MQconsumer bean = mQconsumerService.getIsUse();
+	public static void getmsg(MqConsumer bean) throws Exception {
 		HttpClient httpClient = new HttpClient();
 		httpClient.setMaxConnectionsPerDestination(1);
 		httpClient.start();
-		// Properties properties=new Properties();
-		// properties.load(HttpConsumer.class.getClassLoader().getResourceAsStream("user.properties"));
-		String topic = bean.getTopic(); // 请在user.properties配置您的topic
-		String url = bean.getUrl();// 公测集群配置为http://publictest-rest.ons.aliyun.com/
-		String ak = bean.getAk();// 请在user.properties配置您的Ak
-		String sk = bean.getSk();// 请在user.properties配置您的Sk
+		String topic = bean.getTopic();
+		// 请在user.properties配置您的topic
+		String url = bean.getUrl();
+		// 公测集群配置为http://publictest-rest.ons.aliyun.com/
+		String ak = bean.getAk();
+		// 请在user.properties配置您的Ak
+		String sk = bean.getSk();
+		// 请在user.properties配置您的Sk
 		String cid = bean.getConsumerid();// 请在user.properties配置您的Consumer ID
-		String date = String.valueOf(new Date().getTime());
+		String date = String.valueOf(System.currentTimeMillis());
 		String sign = null;
-		String NEWLINE = "\n";
-		System.out.println(NEWLINE + NEWLINE);
 		while (true) {
 			try {
-				date = String.valueOf(new Date().getTime());
+				date = String.valueOf(System.currentTimeMillis());
 				Request req = httpClient.POST(url + "?topic=" + topic + "&time=" + date + "&num=" + 32);
 				req.method(HttpMethod.GET);
 				ContentResponse response;
@@ -65,7 +63,7 @@ public class HttpConsumer {
 				}
 				System.out.println("size is :" + list.size());
 				for (SimpleMessage simpleMessage : list) {
-					date = String.valueOf(new Date().getTime());
+					date = String.valueOf(System.currentTimeMillis());
 					System.out.println("receive msg:" + simpleMessage.getBody() + "   born time " + simpleMessage.getBornTime());
 					req = httpClient.POST(url + "?msgHandle=" + simpleMessage.getMsgHandle() + "&topic=" + topic + "&time=" + date);
 					req.method(HttpMethod.DELETE);

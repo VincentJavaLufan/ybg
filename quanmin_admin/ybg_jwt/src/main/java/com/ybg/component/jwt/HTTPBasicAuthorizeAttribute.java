@@ -67,8 +67,9 @@ public class HTTPBasicAuthorizeAttribute implements Filter {
 	}
 	
 	private String getFromBASE64(String s) {
-		if (s == null)
+		if (s == null) {
 			return null;
+		}
 		BASE64Decoder decoder = new BASE64Decoder();
 		try {
 			byte[] b = decoder.decodeBuffer(s);

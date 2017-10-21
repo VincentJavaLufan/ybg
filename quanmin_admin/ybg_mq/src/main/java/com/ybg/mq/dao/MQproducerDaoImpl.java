@@ -17,6 +17,7 @@ public class MQproducerDaoImpl extends BaseDao implements MQproducerDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
+	@Override
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
