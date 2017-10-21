@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.api.domain.WeixinJson;
 import com.ybg.api.network.WeixinNW;
 import com.ybg.api.service.WeixinApiService;
@@ -11,6 +10,9 @@ import com.ybg.tags.domain.WeixinTagsVO;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @Repository
 public class WeixinTagsServiceImpl implements WeixinTagsService {
 	
@@ -31,12 +33,10 @@ public class WeixinTagsServiceImpl implements WeixinTagsService {
 	@Override
 	public List<WeixinTagsVO> list() {
 		WeixinJson wj = weixinNW.tags_get(getAccessToken());
-		
 		if (wj.isSuccess()) {
 			String json = wj.getJson();
 			;
 			JSONArray jsonArray = JSONArray.fromObject(JSONObject.fromObject(json).get("tags"));
-			// JSONArray.toList(jsonArray,WeixinTagsVO.class);
 			return (List<WeixinTagsVO>) JSONArray.toCollection(jsonArray, WeixinTagsVO.class);
 		}
 		return new ArrayList<>();

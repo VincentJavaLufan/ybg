@@ -22,6 +22,9 @@ import com.ybg.menu.service.WeixinMenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @Api(tags = "微信菜单管理")
 @RequestMapping("/weixin/menu_do/")
 @Controller
@@ -31,7 +34,7 @@ public class WeixinMenuController {
 	WeixinMenuService weixinMenuService;
 	
 	@ApiOperation(value = "用户页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
-	@RequestMapping(value={"index.do"}, method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String index() {
 		return "/weixin/menu";
 	}
@@ -47,7 +50,8 @@ public class WeixinMenuController {
 			j.setMsg("名称不能为空");
 			return j;
 		}
-		if (weixinmenu.getIfsub() == WeixinButtonConstant.IFSUBYES) {// 如果是按钮类型
+		if (weixinmenu.getIfsub() == WeixinButtonConstant.IFSUBYES) {
+			// 如果是按钮类型
 			if (weixinmenu.getButtonorder() > WeixinButtonConstant.MAXBUTTON || weixinmenu.getButtonorder() < 1) {
 				j.setSuccess(false);
 				j.setMsg("按钮序号超出范围");
@@ -118,7 +122,8 @@ public class WeixinMenuController {
 				return j;
 			}
 			try {
-				WeixinButtonVO menuben = new WeixinButtonVO();// 主要去掉一些属性
+				WeixinButtonVO menuben = new WeixinButtonVO();
+				// 主要去掉一些属性
 				menuben.setName(weixinmenu.getName());
 				menuben.setMenuorder(weixinmenu.getMenuorder());
 				weixinMenuService.create(menuben);
@@ -160,7 +165,7 @@ public class WeixinMenuController {
 	@ResponseBody
 	@RequestMapping(value = { "select.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<Map<String, Object>> select() throws Exception {
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<String, Object>(15);
 		result.put("menuList", weixinMenuService.list());
 		ResponseEntity<Map<String, Object>> map = new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
 		return map;
@@ -170,7 +175,7 @@ public class WeixinMenuController {
 	@ResponseBody
 	@RequestMapping(value = { "get.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<Map<String, Object>> get(String id) throws Exception {
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<String, Object>(15);
 		result.put("weixinbutton", weixinMenuService.get(id));
 		ResponseEntity<Map<String, Object>> map = new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
 		return map;
@@ -186,7 +191,8 @@ public class WeixinMenuController {
 			j.setMsg("名称不能为空");
 			return j;
 		}
-		if (weixinmenu.getIfsub() == WeixinButtonConstant.IFSUBYES) {// 如果是按钮类型
+		if (weixinmenu.getIfsub() == WeixinButtonConstant.IFSUBYES) {
+			// 如果是按钮类型
 			if (weixinmenu.getButtonorder() > WeixinButtonConstant.MAXBUTTON || weixinmenu.getButtonorder() < 1) {
 				j.setSuccess(false);
 				j.setMsg("按钮序号超出范围");
@@ -230,7 +236,8 @@ public class WeixinMenuController {
 		}
 		else {// 菜单类型
 			try {
-				WeixinButtonVO menuben = new WeixinButtonVO();// 主要去掉一些属性
+				WeixinButtonVO menuben = new WeixinButtonVO();
+				// 主要去掉一些属性
 				menuben.setName(weixinmenu.getName());
 				menuben.setMenuorder(weixinmenu.getMenuorder());
 				menuben.setId(weixinmenu.getId());
@@ -272,15 +279,15 @@ public class WeixinMenuController {
 		j.setMsg(json.getErrorMsg());
 		return j;
 	}
-	/**清空微信菜单**/
+	
+	/** 清空微信菜单 **/
 	@ResponseBody
-	@RequestMapping(value={"cleanmenu.do"}, method = { RequestMethod.GET, RequestMethod.POST })
-	public Json cleanmenu(){
+	@RequestMapping(value = { "cleanmenu.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public Json cleanmenu() {
 		Json j = new Json();
 		WeixinJson json = weixinMenuService.cleanmenu();
 		j.setSuccess(json.isSuccess());
 		j.setMsg(json.getErrorMsg());
 		return j;
 	}
-	
 }

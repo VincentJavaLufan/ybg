@@ -13,6 +13,9 @@ import com.ybg.menu.dao.WeixinButtonDao;
 import com.ybg.menu.domain.WeixinButtonVO;
 import net.sf.json.JSONObject;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @Repository
 public class WeixinMenuServiceImpl implements WeixinMenuService {
 	
@@ -65,7 +68,8 @@ public class WeixinMenuServiceImpl implements WeixinMenuService {
 	@Override
 	public WeixinJson save(List<WeixinButtonVO> list) {
 		JSONObject menu = new JSONObject();
-		Collections.sort(list);// 已经排序好了
+		Collections.sort(list);
+		// 已经排序好了
 		// 一 组合成适合的树状结构。
 		List<WeixinButtonVO> menuList = new ArrayList<WeixinButtonVO>();
 		for (WeixinButtonVO bean : list) {

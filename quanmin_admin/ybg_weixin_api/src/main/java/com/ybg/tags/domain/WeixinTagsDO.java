@@ -1,11 +1,15 @@
 package com.ybg.tags.domain;
 import java.io.Serializable;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 public class WeixinTagsDO implements Serializable {
 	
 	Integer	id;
 	String	name;
-	Integer	count;	// 此标签下粉丝数
+	/** 此标签下粉丝数 */
+	Integer	count;
 	
 	public Integer getId() {
 		return id;
@@ -29,5 +33,10 @@ public class WeixinTagsDO implements Serializable {
 	
 	public void setCount(Integer count) {
 		this.count = count;
+	}
+	
+	@Override
+	public String toString() {
+		return "WeixinTagsDO [id=" + id + ", name=" + name + ", count=" + count + "]";
 	}
 }

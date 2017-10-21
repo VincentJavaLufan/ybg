@@ -2,6 +2,9 @@ package com.ybg.menu.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 public class WeixinButtonVO extends WeixinButtonDO implements Comparable<WeixinButtonVO> {
 	
 	List<WeixinButtonVO> sub_button = new ArrayList<>();
@@ -31,5 +34,10 @@ public class WeixinButtonVO extends WeixinButtonDO implements Comparable<WeixinB
 			return this.getButtonorder() - o.getButtonorder();
 		}
 		return i;
+	}
+	
+	@Override
+	public String toString() {
+		return "WeixinButtonVO [sub_button=" + sub_button + ", parentname=" + parentname + ", getMenuorder()=" + getMenuorder() + ", getButtonorder()=" + getButtonorder() + ", getIfsub()=" + getIfsub() + ", getId()=" + getId() + ", getParentid()=" + getParentid() + ", getType()=" + getType() + ", getName()=" + getName() + ", getKey()=" + getKey() + ", getUrl()=" + getUrl() + ", getMedia_id()=" + getMedia_id() + ", getAppid()=" + getAppid() + ", getPagepath()=" + getPagepath() + "]";
 	}
 }

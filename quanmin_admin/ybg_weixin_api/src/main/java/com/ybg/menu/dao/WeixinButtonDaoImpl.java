@@ -10,6 +10,9 @@ import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.menu.WeixinButtonConstant;
 import com.ybg.menu.domain.WeixinButtonVO;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @Repository
 public class WeixinButtonDaoImpl extends BaseDao implements WeixinButtonDao {
 	

@@ -13,6 +13,9 @@ import com.ybg.tags.domain.WeixinTagsVO;
 import com.ybg.tags.service.WeixinTagsService;
 import io.swagger.annotations.Api;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 @Api(tags = "微信用户标签API")
 @Controller
 @RequestMapping("/weixin/tags/")
