@@ -10,7 +10,6 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.TokenStrategy;
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /** Weixin API调用模板， scope为Request的Spring bean, 根据当前用户的accessToken创建。
  * 
