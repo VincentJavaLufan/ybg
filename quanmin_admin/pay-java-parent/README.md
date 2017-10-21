@@ -1,5 +1,5 @@
 
-#pay-java-parent 上一次同步模块时间2017年7月02日
+#pay-java-parent
 
 ##整合支付模块（微信支付，支付宝）
 
@@ -31,7 +31,7 @@
 <dependency>
     <groupId>com.egzosn</groupId>
     <artifactId>pay-java-common</artifactId>
-    <version>2.0.3</version>
+    <version>2.0.4.RELEASE</version>
 </dependency>
 
 ```
@@ -43,7 +43,7 @@
 <dependency>
     <groupId>com.egzosn</groupId>
     <artifactId>{module-name}</artifactId>
-    <version>2.0.3</version>
+    <version>2.0.4.RELEASE</version>
 </dependency>
 
 ```
@@ -55,7 +55,14 @@
 
 测试链接 ： http://pay.egzosn.com/index.html
 
-服务端+网页端详细使用与简单教程请看 [pay-java-demo](pay-java-demo?dir=1&filepath=pay-java-demo)
+######单一支付教程 
+
+ [支付宝](pay-java-ali?dir=1&filepath=pay-java-ali)
+ [微信](pay-java-wx?dir=1&filepath=pay-java-wx)
+ [友店微信](pay-java-wx-youdian?dir=1&filepath=pay-java-youdian)
+ [富友](pay-java-fuiou?dir=1&filepath=pay-java-fuiou)
+
+支付整合》服务端+网页端详细使用与简单教程请看 [pay-java-demo](pay-java-demo?dir=1&filepath=pay-java-demo)
 
 android 例子 [pay-java-android](http://git.oschina.net/egzosn/pay-java-android)
 
@@ -63,7 +70,9 @@ android 例子 [pay-java-android](http://git.oschina.net/egzosn/pay-java-android
 ##交流
 很希望更多志同道合友友一起扩展新的的支付接口。
 
-这里感谢[ouyangxiangshao](https://github.com/ouyangxiangshao) 与[Actinian](http://git.oschina.net/Actinia517) 所提交的安卓例子或者分支
+这里感谢[ouyangxiangshao](https://github.com/ouyangxiangshao),[ZhuangXiong](https://github.com/ZhuangXiong) 与[Actinian](http://git.oschina.net/Actinia517) 所提交的安卓例子或者分支
+
+也感谢各大友友同学帮忙进行接口测试
 
 非常欢迎和感谢对本项目发起Pull Request的同学，不过本项目基于git flow开发流程，因此在发起Pull Request的时候请选择develop分支。
 

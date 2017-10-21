@@ -17,13 +17,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- *  支付宝支付通知
+ *  支付宝支付服务
  * @author  egan
  *
  * email egzosn@gmail.com
@@ -243,6 +244,17 @@ public class AliPayService extends BasePayService {
             for (int i = 0,len =  values.length; i < len; i++) {
                 valueStr += (i == len - 1) ?  values[i] : values[i] + ",";
             }
+            //乱码解决，这段代码在出现乱码时使用。如果mysign和sign不相等也可以使用这段代码转化
+            //valueStr = new String(valueStr.getBytes("ISO-8859-1"), "gbk");
+            if (!valueStr.matches("\\w+")){
+                try {
+                    if(valueStr.equals(new String(valueStr.getBytes("iso8859-1"), "iso8859-1"))){
+                        valueStr=new String(valueStr.getBytes("iso8859-1"), payConfigStorage.getInputCharset());
+                    }
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
             params.put(name, valueStr);
         }
 
@@ -293,7 +305,6 @@ public class AliPayService extends BasePayService {
 
     /**
      * 生成二维码支付
-     * 暂未实现或无此功能
      * @param order 发起支付的订单信息
      * @return 返回图片信息，支付时需要的
      */
