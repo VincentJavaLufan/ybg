@@ -30,7 +30,7 @@ import com.ybg.base.util.SystemConstant;
 import com.ybg.base.util.RbacConstant;
 import com.ybg.base.util.VrifyCodeUtil;
 import com.ybg.component.email.sendemail.SendEmailInter;
-import com.ybg.component.email.sendemail.SendQQmailImpl;
+import com.ybg.component.email.sendemail.SendQqmailImpl;
 import com.ybg.core.support.SocialLoginServiceImpl;
 import com.ybg.core.support.SocialUserInfo;
 import com.ybg.rbac.support.controller.LoginProxyController;
@@ -142,7 +142,7 @@ public class SocialController {
 		// 获取激活邮件的hmtl内容
 		String contemt = this.getActiveContent(url, user.getUsername()); 
 		try {
-			SendEmailInter send = new SendQQmailImpl();
+			SendEmailInter send = new SendQqmailImpl();
 			send.sendMail(email, SystemConstant.getSystemName() + "注册", contemt);
 		} catch (Exception e) {
 			e.printStackTrace();

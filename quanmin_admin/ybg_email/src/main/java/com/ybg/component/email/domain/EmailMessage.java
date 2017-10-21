@@ -16,12 +16,20 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
 public class EmailMessage {
 	
-	private MimeMessage		mimeMessage		= null;
-	private String			saveAttachPath	= "";					// 附件下载后的存放目录
-	private StringBuffer	bodytext		= new StringBuffer();	// 存放邮件内容
-	private String			dateformat		= "yy-MM-dd HH:mm";		// 默认的日前显示格式
+	private MimeMessage		mimeMessage			= null;
+	/** 附件下载后的存放目录 **/
+	private String			saveAttachPath		= "";
+	/** 存放邮件内容 **/
+	private StringBuffer	bodytext			= new StringBuffer();
+	/** 默认的日前显示格式 **/
+	private String			dateformat			= "yy-MM-dd HH:mm";
+	String					mimetypeMutipart	= "multipart/*";
+	String					mimetypeMessage		= "message/rfc822";
 	
 	public EmailMessage(MimeMessage mimeMessage) {
 		this.mimeMessage = mimeMessage;
@@ -33,17 +41,6 @@ public class EmailMessage {
 	
 	/** 获得发件人的地址和姓名 */
 	public String getFrom() throws Exception {
-		// InternetAddress address[] = (InternetAddress[]) mimeMessage.getFrom();
-		// String from = address[0].getAddress();
-		// if (from == null)
-		// from = "";
-		// String personal = address[0].getPersonal();
-		// if (personal == null)
-		// personal = "";
-		// String fromaddr = personal + "<" + from + ">";
-		//
-		//
-		// return fromaddr;
 		String reply = mimeMessage.getReplyTo()[0].toString();
 		try {
 			reply = reply.substring(reply.indexOf("<") + 1, reply.indexOf(">"));
@@ -58,11 +55,14 @@ public class EmailMessage {
 		String mailaddr = "";
 		String addtype = type.toUpperCase();
 		InternetAddress[] address = null;
-		if (addtype.equals("TO") || addtype.equals("CC") || addtype.equals("BCC")) {
-			if (addtype.equals("TO")) {
+		String to = "TO";
+		String cc = "CC";
+		String bcc = "BCC";
+		if (addtype.equals(to) || addtype.equals(cc) || addtype.equals(bcc)) {
+			if (addtype.equals(to)) {
 				address = (InternetAddress[]) mimeMessage.getRecipients(Message.RecipientType.TO);
 			}
-			else if (addtype.equals("CC")) {
+			else if (addtype.equals(cc)) {
 				address = (InternetAddress[]) mimeMessage.getRecipients(Message.RecipientType.CC);
 			}
 			else {
@@ -128,31 +128,16 @@ public class EmailMessage {
 		if (nameindex != -1) {
 			conname = true;
 		}
-		if (part.isMimeType("text/plain") && !conname) {
+		String textType = "text/plain";
+		if (part.isMimeType(textType) && !conname) {
 			bodytext.append((String) part.getContent());
 		}
-		// else if (part.isMimeType("text/html") && !conname) {
-		// bodytext.append((String) part.getContent());
-		// }
-		// 屏蔽附件
-		// else if (part.isMimeType("multipart/*")) {
-		// Multipart multipart = (Multipart) part.getContent();
-		// int counts = multipart.getCount();
-		// for (int i = 0; i < counts; i++) {
-		// getMailContent(multipart.getBodyPart(i));
-		// }
-		// }
-		// else if (part.isMimeType("message/rfc822")) {
-		// getMailContent((Part) part.getContent());
-		// }
-		// else {
-		// }
 	}
 	
 	/** 判断此邮件是否需要回执，如果需要回执返回"true",否则返回"false" */
 	public boolean getReplySign() throws MessagingException {
 		boolean replysign = false;
-		String needreply[] = mimeMessage.getHeader("Disposition-Notification-To");
+		String[] needreply = mimeMessage.getHeader("Disposition-Notification-To");
 		if (needreply != null) {
 			replysign = true;
 		}
@@ -181,16 +166,16 @@ public class EmailMessage {
 	/** 判断此邮件是否包含附件 */
 	public boolean isContainAttach(Part part) throws Exception {
 		boolean attachflag = false;
-		// String contentType = part.getContentType();
-		if (part.isMimeType("multipart/*")) {
+		if (part.isMimeType(mimetypeMutipart)) {
 			Multipart mp = (Multipart) part.getContent();
 			for (int i = 0; i < mp.getCount(); i++) {
 				BodyPart mpart = mp.getBodyPart(i);
 				String disposition = mpart.getDisposition();
-				if (disposition != null && (disposition.equals(Part.ATTACHMENT) || disposition.equals(Part.INLINE))) {
+				boolean flag = disposition != null && (disposition.equals(Part.ATTACHMENT) || disposition.equals(Part.INLINE));
+				if (flag) {
 					attachflag = true;
 				}
-				else if (mpart.isMimeType("multipart/*")) {
+				else if (mpart.isMimeType(mimetypeMutipart)) {
 					attachflag = isContainAttach((Part) mpart);
 				}
 				else {
@@ -204,7 +189,7 @@ public class EmailMessage {
 				}
 			}
 		}
-		else if (part.isMimeType("message/rfc822")) {
+		else if (part.isMimeType(mimetypeMessage)) {
 			attachflag = isContainAttach((Part) part.getContent());
 		}
 		return attachflag;
@@ -213,19 +198,20 @@ public class EmailMessage {
 	/** 【保存附件】 */
 	public void saveAttachMent(Part part) throws Exception {
 		String fileName = "";
-		if (part.isMimeType("multipart/*")) {
+		if (part.isMimeType(mimetypeMutipart)) {
 			Multipart mp = (Multipart) part.getContent();
 			for (int i = 0; i < mp.getCount(); i++) {
 				BodyPart mpart = mp.getBodyPart(i);
 				String disposition = mpart.getDisposition();
-				if (disposition != null && (disposition.equals(Part.ATTACHMENT) || disposition.equals(Part.INLINE))) {
+				boolean flag = disposition != null && (disposition.equals(Part.ATTACHMENT) || disposition.equals(Part.INLINE));
+				if (flag) {
 					fileName = mpart.getFileName();
 					if (fileName.toLowerCase().indexOf("gb2312") != -1) {
 						fileName = MimeUtility.decodeText(fileName);
 					}
 					saveFile(fileName, mpart.getInputStream());
 				}
-				else if (mpart.isMimeType("multipart/*")) {
+				else if (mpart.isMimeType(mimetypeMutipart)) {
 					saveAttachMent(mpart);
 				}
 				else {
@@ -237,7 +223,7 @@ public class EmailMessage {
 				}
 			}
 		}
-		else if (part.isMimeType("message/rfc822")) {
+		else if (part.isMimeType(mimetypeMessage)) {
 			saveAttachMent((Part) part.getContent());
 		}
 	}
@@ -265,7 +251,8 @@ public class EmailMessage {
 		if (osName == null) {
 			osName = "";
 		}
-		if (osName.toLowerCase().indexOf("win") != -1) {
+		String windows = "win";
+		if (osName.toLowerCase().indexOf(windows) != -1) {
 			separator = "\\";
 			if (storedir == null || storedir.equals("")) {
 				storedir = "c:\\tmp";
@@ -276,9 +263,6 @@ public class EmailMessage {
 			storedir = "/tmp";
 		}
 		File storefile = new File(storedir + separator + fileName);
-		// for(int i=0;storefile.exists();i++){
-		// storefile = new File(storedir+separator+fileName+i);
-		// }
 		BufferedOutputStream bos = null;
 		BufferedInputStream bis = null;
 		try {

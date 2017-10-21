@@ -27,7 +27,7 @@ import com.ybg.base.util.SystemConstant;
 import com.ybg.base.util.RbacConstant;
 import com.ybg.base.util.VrifyCodeUtil;
 import com.ybg.component.email.sendemail.SendEmailInter;
-import com.ybg.component.email.sendemail.SendQQmailImpl;
+import com.ybg.component.email.sendemail.SendQqmailImpl;
 import com.ybg.rbac.resources.service.ResourcesService;
 import com.ybg.rbac.support.controller.LoginProxyController;
 import com.ybg.rbac.support.domain.Loginproxy;
@@ -144,7 +144,7 @@ public class LoginControllor {
 		// 获取激活邮件的hmtl内容
 		String contemt = this.getActiveContent(url, user.getUsername());
 		try {
-			SendEmailInter send = new SendQQmailImpl();
+			SendEmailInter send = new SendQqmailImpl();
 			send.sendMail(email, SystemConstant.getSystemName() + "注册", contemt);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -223,7 +223,7 @@ public class LoginControllor {
 		encryptInfo = "encryptInfo=" + new DesUtils().encrypt(encryptInfo);
 		String contemt = "<a href='" + SystemConstant.getSystemdomain() + "/common/login_do/resetpwd.do?" + encryptInfo + "'>重置密码，有效期截止到当天晚上24：00</a>";
 		try {
-			SendEmailInter send = new SendQQmailImpl();
+			SendEmailInter send = new SendQqmailImpl();
 			send.sendMail(user.getEmail(), SystemConstant.getSystemName() + "-找回密码", contemt);
 		} catch (Exception e) {
 			e.printStackTrace();

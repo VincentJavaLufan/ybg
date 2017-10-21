@@ -1,22 +1,23 @@
 package com.ybg.component.email;
-
 import com.ybg.base.util.SystemConstant;
 
-/** 定义 邮箱常量 **/
+/** 定义 邮箱常量 @author https:/**gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 **/
 public class EmailConstant {
 	
 	/** 使用的协议 **/
 	public static final String	PROTOCOL		= "pop3";
-	// 定义连接POP3服务器的属性信息
+	/** 定义连接POP3服务器的属性信息*/
 	public static final String	POP163SERVER	= "pop.163.com";
 	public static final String	SMTP163SERVER	= "smtp.163.com";
-	// qq
-	public static final String	POPqqSERVER		= "pop.qq.com";
-	public static final String	SMTPqqSERVER	= "smtp.qq.com";
-	// 有SSL端口
+	/** qq*/
+	public static final String	POP_QQ_SERVER		= "pop.qq.com";
+	public static final String	SMTP_QQ_SERVER	= "smtp.qq.com";
+	/** 有SSL端口*/
 	public static final String	SSLPOP3PORT		= "995";
 	public static final String	SSLSMTPPORT		= "587";
-	// 无SSL端口
+	/** 无SSL端口*/
 	public static final String	POP3PORT		= "110";
 	public static final String	SMTPPORT		= "25";
 	
@@ -31,6 +32,6 @@ public class EmailConstant {
 	}
 	
 	private EmailConstant() {
-		// 禁止实例化
+		/// 禁止实例化
 	}
 }

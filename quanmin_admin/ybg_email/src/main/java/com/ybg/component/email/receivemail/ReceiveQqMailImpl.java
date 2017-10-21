@@ -5,22 +5,25 @@ import javax.mail.Session;
 import javax.mail.Store;
 import com.ybg.component.email.EmailConstant;
 
-public class ReceiveQQMailImpl extends AbstractReceiveMail {
+/*** @author https://gitee.com/YYDeament/88ybg
+ * 
+ * @date 2016/10/1 */
+public class ReceiveQqMailImpl extends AbstractReceiveMail {
 	
 	@Override
 	public Store getStore(Session session) throws Exception {
 		Store store = session.getStore(EmailConstant.PROTOCOL);
-		store.connect(EmailConstant.POPqqSERVER, EmailConstant.getEmailaccount(), EmailConstant.getEmailpwd());
+		store.connect(EmailConstant.POP_QQ_SERVER, EmailConstant.getEmailaccount(), EmailConstant.getEmailpwd());
 		return store;
 	}
 	
 	@Override
 	public Properties getProperties() {
-		String host = EmailConstant.POPqqSERVER;
+		String host = EmailConstant.POP_QQ_SERVER;
 		String port = EmailConstant.SSLPOP3PORT;
-		String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+		String sslFactory = "javax.net.ssl.SSLSocketFactory";
 		Properties props = new Properties();
-		props.setProperty("mail.pop3.socketFactory.class", SSL_FACTORY);
+		props.setProperty("mail.pop3.socketFactory.class", sslFactory);
 		props.setProperty("mail.pop3.socketFactory.port", port);
 		props.setProperty("mail.store.protocol", EmailConstant.PROTOCOL);
 		props.setProperty("mail.pop3.host", host);
