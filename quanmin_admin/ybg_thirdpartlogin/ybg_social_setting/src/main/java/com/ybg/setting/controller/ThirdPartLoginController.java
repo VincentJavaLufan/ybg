@@ -16,9 +16,9 @@ import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.setting.domain.SocialUserVO;
 import com.ybg.setting.qvo.SocialUserQuery;
 import com.ybg.setting.service.SocialUserService;
-import com.ybg.social.baidu.service.BaiduUserService;
-import com.ybg.social.github.service.GithubuserService;
-import com.ybg.social.qq.service.QQuserService;
+import com.ybg.social.baidu.service.BaiduSocialSettingService;
+import com.ybg.social.github.service.GithubSocialSettingService;
+import com.ybg.social.qq.service.QqSocialSettingService;
 import com.ybg.social.sina.service.WeiboUserService;
 import io.swagger.annotations.Api;
 
@@ -33,15 +33,15 @@ public class ThirdPartLoginController {
 	@Autowired
 	WeiboUserService	weiboUserService;
 	@Autowired
-	BaiduUserService	baiduUserService;
+	BaiduSocialSettingService	baiduUserService;
 	@Autowired
 	WeixinApiService	weixinApiService;
 	@Autowired
-	QQuserService		qQuserService;
+	QqSocialSettingService		qQuserService;
 	@Autowired
 	SocialUserService	socialUserService;
 	@Autowired
-	GithubuserService	githubuserService;
+	GithubSocialSettingService	githubuserService;
 	
 	@RequestMapping(value = "index.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String index() {
