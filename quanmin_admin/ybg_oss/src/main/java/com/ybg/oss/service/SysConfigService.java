@@ -1,6 +1,4 @@
 package com.ybg.oss.service;
-import java.util.List;
-import java.util.Map;
 import com.ybg.base.util.Page;
 import com.ybg.oss.domian.SysConfigEntity;
 
