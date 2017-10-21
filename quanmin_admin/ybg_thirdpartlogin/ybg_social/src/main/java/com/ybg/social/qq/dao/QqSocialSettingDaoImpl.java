@@ -12,7 +12,7 @@ import com.ybg.base.jdbc.BaseDao;
 /** @author https://gitee.com/YYDeament/88ybg
  * @date 2017/10/1 **/
 @Repository
-public class QQuserDaoImpl extends BaseDao implements QQuserDao {
+public class QqSocialSettingDaoImpl extends BaseDao implements QqSocialSettingDao {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;

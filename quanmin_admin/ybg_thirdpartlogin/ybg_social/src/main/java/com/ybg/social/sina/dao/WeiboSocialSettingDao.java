@@ -1,11 +1,16 @@
-package com.ybg.social.qq.dao;
+package com.ybg.social.sina.dao;
 import java.util.Map;
 
 /** @author https://gitee.com/YYDeament/88ybg
  * @date 2017/10/1 **/
-public interface QQuserDao {
+public interface WeiboSocialSettingDao {
 	
-	/** 更新qq社交登陆设置
+	/** 返回社交设置
+	 * 
+	 * @return Map<String, String> **/
+	Map<String, String> getSetting();
+	
+	/** 更新微博社交登陆设置
 	 * 
 	 * @param appid
 	 *            应用ID
@@ -14,9 +19,4 @@ public interface QQuserDao {
 	 * @param url
 	 *            回调地址（已作废） **/
 	void updateSetting(String appid, String value, String url);
-	
-	/** 返回社交设置
-	 * 
-	 * @return Map<String, String> **/
-	Map<String, String> getSetting();
 }

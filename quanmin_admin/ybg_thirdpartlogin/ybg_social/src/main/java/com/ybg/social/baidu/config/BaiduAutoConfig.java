@@ -10,14 +10,14 @@ import org.springframework.social.connect.ConnectionFactory;
 import com.ybg.core.properties.BaiduProperties;
 import com.ybg.social.baidu.api.Baidu;
 import com.ybg.social.baidu.connet.BaiduConnectionFactory;
-import com.ybg.social.baidu.service.BaiduUserService;
+import com.ybg.social.baidu.service.BaiduSocialSettingService;
 
 /** @author zhailiang */
 @Configuration
 public class BaiduAutoConfig extends SocialAutoConfigurerAdapter {
 	
 	@Autowired
-	BaiduUserService baiduuserService;
+	BaiduSocialSettingService baiduuserService;
 	
 	@Override
 	protected ConnectionFactory<Baidu> createConnectionFactory() {

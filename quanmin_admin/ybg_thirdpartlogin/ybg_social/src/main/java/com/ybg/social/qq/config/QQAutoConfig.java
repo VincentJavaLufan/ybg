@@ -10,7 +10,7 @@ import org.springframework.social.connect.ConnectionFactory;
 import com.ybg.core.properties.QQProperties;
 import com.ybg.social.qq.api.QQ;
 import com.ybg.social.qq.connet.QQConnectionFactory;
-import com.ybg.social.qq.service.QQuserService;
+import com.ybg.social.qq.service.QqSocialSettingService;
 
 /** @author https://gitee.com/YYDeament/88ybg
  * @date 2017/10/1 **/
@@ -18,7 +18,7 @@ import com.ybg.social.qq.service.QQuserService;
 public class QQAutoConfig extends SocialAutoConfigurerAdapter {
 	
 	@Autowired
-	QQuserService qQuserService;
+	QqSocialSettingService qQuserService;
 	
 	@Override
 	protected ConnectionFactory<QQ> createConnectionFactory() {

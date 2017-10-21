@@ -2,15 +2,15 @@ package com.ybg.social.baidu.service;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.ybg.social.baidu.dao.BaiduUserDao;
+import com.ybg.social.baidu.dao.BaiduSocialSettingDao;
 
 /** @author Deament
  * @date 2017/10/1 **/
 @Repository
-public class BaiduUserServiceImpl implements BaiduUserService {
+public class BaiduSocialSettingServiceImpl implements BaiduSocialSettingService {
 	
 	@Autowired
-	BaiduUserDao baiduUserDao;
+	BaiduSocialSettingDao baiduUserDao;
 	
 	@Override
 	public Map<String, String> getSetting() {

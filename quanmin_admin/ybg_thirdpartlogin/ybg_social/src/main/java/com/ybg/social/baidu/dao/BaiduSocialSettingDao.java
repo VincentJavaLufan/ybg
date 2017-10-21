@@ -3,7 +3,7 @@ import java.util.Map;
 
 /** @author Deament
  * @date 2017/10/1 **/
-public interface BaiduUserDao {
+public interface BaiduSocialSettingDao {
 	
 	/** 返回百度社交登陆设置
 	 * 

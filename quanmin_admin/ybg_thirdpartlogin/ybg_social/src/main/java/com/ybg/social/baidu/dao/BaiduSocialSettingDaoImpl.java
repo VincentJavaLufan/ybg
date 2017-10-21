@@ -12,7 +12,7 @@ import com.ybg.base.jdbc.BaseDao;
 /** @author https://gitee.com/YYDeament/88ybg
  * @date 2017/10/1 **/
 @Repository
-public class BaiduUserDaoImpl extends BaseDao implements BaiduUserDao {
+public class BaiduSocialSettingDaoImpl extends BaseDao implements BaiduSocialSettingDao {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;

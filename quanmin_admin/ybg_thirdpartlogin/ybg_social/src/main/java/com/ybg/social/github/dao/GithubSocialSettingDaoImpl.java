@@ -12,7 +12,7 @@ import com.ybg.base.jdbc.BaseDao;
 /** @author https://gitee.com/YYDeament/88ybg
  * @date 2017/10/1 **/
 @Repository
-public class GithubuserDaoImpl extends BaseDao implements GithubuserDao {
+public class GithubSocialSettingDaoImpl extends BaseDao implements GithubSocialSettingDao {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;

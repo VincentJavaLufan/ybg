@@ -10,7 +10,7 @@ import com.ybg.social.baidu.api.Baidu;
 import com.ybg.social.baidu.connet.BaiduConnectionFactory;
 import com.ybg.social.github.api.GitHub;
 import com.ybg.social.github.connect.GithubConnectionFactory;
-import com.ybg.social.github.service.GithubuserService;
+import com.ybg.social.github.service.GithubSocialSettingService;
 
 /** @author Deament
  * @date 2017/10/1 **/
@@ -18,7 +18,7 @@ import com.ybg.social.github.service.GithubuserService;
 public class GithubAutoConfig extends SocialAutoConfigurerAdapter {
 	
 	@Autowired
-	GithubuserService githubuserService;
+	GithubSocialSettingService githubuserService;
 	
 	@Override
 	protected ConnectionFactory<GitHub> createConnectionFactory() {

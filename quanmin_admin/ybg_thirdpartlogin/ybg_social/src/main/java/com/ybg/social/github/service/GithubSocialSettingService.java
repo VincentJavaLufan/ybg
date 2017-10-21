@@ -1,9 +1,9 @@
-package com.ybg.social.github.dao;
+package com.ybg.social.github.service;
 import java.util.Map;
 
-/** @author Deament
+/** @author https://gitee.com/YYDeament/88ybg
  * @date 2017/10/1 **/
-public interface GithubuserDao {
+public interface GithubSocialSettingService {
 	
 	/** 返回社交设置
 	 * 
