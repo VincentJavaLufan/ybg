@@ -5,16 +5,19 @@
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta http-equiv="Access-Control-Allow-Origin" content="*">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="format-detection" content="telephone=no">
 <title>88云报告</title>
-<link href="//cdn.bootcss.com/Swiper/3.4.1/css/swiper.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/Swiper/3.4.1/css/swiper.min.css"
+	rel="stylesheet">
 <link rel="stylesheet" href="/js/plugins/layui/css/layui.css" />
 <link rel="stylesheet" href="/admin_files/awesome.css" />
 <link rel="stylesheet" href="/css/layerui/style.css" />
-<script type="text/javascript" src="/js/plugins/jQuery/jquery-2.3.4.min.js"></script>
+<script type="text/javascript"
+	src="/js/plugins/jQuery/jquery-2.3.4.min.js"></script>
 <script type="text/javascript" src="/js/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="/js/layer-v1.9.2/layer/layer.js"></script>
 <script type="text/javascript" src="/common/base.js"></script>
@@ -36,37 +39,48 @@
 										<img src="/images/webicon/logo100X100.png" />
 										<h3>您的报告无处不在</h3>
 									</div>
-									<form class="layui-form" action="/common/login_do/login.do" method="post" id="loginForm">
+									<form class="layui-form" action="/common/login_do/login.do"
+										method="post" id="loginForm">
 										<div class="layui-form-item ipt-text">
 											<div class="dp-block">
-												<i class="fa fa-user"></i>
-												<input type="text" name="username" placeholder="请输入账号" autocomplete="off" class="layui-input" lay-verify="required">
+												<i class="fa fa-user"></i> <input type="text"
+													name="username" placeholder="请输入账号" autocomplete="off"
+													class="layui-input" lay-verify="required">
 											</div>
 										</div>
 										<div class="layui-form-item ipt-text">
 											<div class="dp-block">
-												<i class="fa fa-lock"></i>
-												<input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input" lay-verify="required">
+												<i class="fa fa-lock"></i> <input type="password"
+													name="password" placeholder="请输入密码" autocomplete="off"
+													class="layui-input" lay-verify="required">
 											</div>
 										</div>
 										<div class="layui-form-item">
 											<div class="layui-input-inline">
-												<input type="text" name="vrifyCode" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+												<input type="text" name="vrifyCode" required
+													lay-verify="required" placeholder="请输入验证码"
+													autocomplete="off" class="layui-input">
 											</div>
 											<div class="layui-form-mid layui-word-aux">
-												<img name="Kaptcha" alt="验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1" src="/defaultKaptcha" />
+												<img name="Kaptcha" alt="验证码"
+													onclick="this.src='/defaultKaptcha?d='+new Date()*1"
+													src="/defaultKaptcha" />
 											</div>
 										</div>
-										<button type="button" class="layui-btn layui-btn-normal layui-btn-disabled dp-block" lay-submit lay-filter="loginForm" onclick="tologin()">登 录</button>
+										<button type="button"
+											class="layui-btn layui-btn-normal layui-btn-disabled dp-block"
+											lay-submit lay-filter="loginForm" onclick="tologin()">登
+											录</button>
 										<div style="padding-top: 30px;">
-											<a href="/social/sina">
-												<img src="/images/thirdpartlogin/sina.png" style="cursor: pointer" />
+											<a href="/social/sina"> <img
+												src="/images/thirdpartlogin/sina.png"
+												style="cursor: pointer" />
+											</a> <a href="/social/weixin"> <img
+												src="/images/thirdpartlogin/weixin.png"
+												style="cursor: pointer" />
 											</a>
-											<a href="/social/weixin">
-												<img src="/images/thirdpartlogin/weixin.png" style="cursor: pointer" />
-											</a>
-											
-											
+
+
 											<!--  <a @click="weixinlogin" id="weixinloginuri">
 												<img src="/images/thirdpartlogin/weixin.png" style="cursor: pointer" />
 											</a>
@@ -75,22 +89,21 @@
 											</a>-->
 										</div>
 										<div style="padding-top: 15px;">
-											<a href="/social/qq">
-												<img src="/images/thirdpartlogin/qq.png" style="cursor: pointer" />
-											</a>
-											<a href="/social/baidu">
-												<img src="/images/thirdpartlogin/baidu.png" style="cursor: pointer" />
-											</a>
-											
-											<a href="/social/github"><img height="26px;" src="/images/thirdpartlogin/github.jpg" style="cursor: pointer" /></a>
+											<a href="/social/qq"> <img
+												src="/images/thirdpartlogin/qq.png" style="cursor: pointer" />
+											</a> <a href="/social/baidu"> <img
+												src="/images/thirdpartlogin/baidu.png"
+												style="cursor: pointer" />
+											</a> <a href="/social/github"><img height="26px;"
+												src="/images/thirdpartlogin/github.jpg"
+												style="cursor: pointer" /></a>
 											<div id="login_container"></div>
 										</div>
 									</form>
 								</div>
 								<div class="pad-all">
 									<div class="col-6 box-left">
-										没有账号？
-										<a target="_blank" class="reg">立即注册</a>
+										没有账号？ <a target="_blank" class="reg">立即注册</a>
 									</div>
 									<div class="col-6 box-right">
 										<a target="_blank" class="forgetPass">忘记密码？</a>
@@ -102,51 +115,60 @@
 									<div class="mar-ver">
 										<h3>（注册）</h3>
 									</div>
-									<form class="layui-form" action="/common/login_do/register.do" method="post"  id="regForm">
+									<form class="layui-form" action="/common/login_do/register.do"
+										method="post" id="regForm">
 										<div class="layui-form-item ipt-text">
 											<div class="dp-block">
-												<i class="fa fa-user"></i>
-												<input type="text" name="username" placeholder="请输入账号" autocomplete="off" class="layui-input" lay-verify="required">
+												<i class="fa fa-user"></i> <input type="text"
+													name="username" placeholder="请输入账号" autocomplete="off"
+													class="layui-input" lay-verify="required">
 											</div>
 										</div>
 										<div class="layui-form-item ipt-text">
 											<div class="dp-block">
-												<i class="fa fa-envelope-o"></i>
-												<input type="text" name="email" placeholder="请输入电子邮箱" autocomplete="off" class="layui-input" lay-verify="required">
+												<i class="fa fa-envelope-o"></i> <input type="text"
+													name="email" placeholder="请输入电子邮箱" autocomplete="off"
+													class="layui-input" lay-verify="required">
 											</div>
 										</div>
 										<div class="layui-form-item ipt-text">
 											<div class="dp-block">
-												<i class="fa fa-lock"></i>
-												<input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input" lay-verify="required">
+												<i class="fa fa-lock"></i> <input type="password"
+													name="password" placeholder="请输入密码" autocomplete="off"
+													class="layui-input" lay-verify="required">
 											</div>
 										</div>
 										<div class="layui-form-item ipt-text">
 											<div class="dp-block">
-												<i class="fa fa-lock"></i>
-												<input type="password" name="inputPassword" placeholder="请输入确认密码" autocomplete="off" class="layui-input" lay-verify="required">
+												<i class="fa fa-lock"></i> <input type="password"
+													name="inputPassword" placeholder="请输入确认密码"
+													autocomplete="off" class="layui-input"
+													lay-verify="required">
 											</div>
 										</div>
 										<div class="layui-form-item">
 											<div class="layui-input-inline">
-												<input type="text" name="vrifyCode" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+												<input type="text" name="vrifyCode" required
+													lay-verify="required" placeholder="请输入验证码"
+													autocomplete="off" class="layui-input">
 											</div>
 											<div class="layui-form-mid layui-word-aux">
 												<!-- src="/defaultKaptcha" -->
-												<img alt="点击获取验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1" />
+												<img alt="点击获取验证码"
+													onclick="this.src='/defaultKaptcha?d='+new Date()*1" />
 											</div>
 										</div>
-										<button type="button" class="layui-btn layui-btn-normal dp-block" lay-submit lay-filter="regForm">注 册</button>
+										<button type="button"
+											class="layui-btn layui-btn-normal dp-block" lay-submit
+											lay-filter="regForm">注 册</button>
 									</form>
 								</div>
 								<div class="pad-all">
 									<div class="col-6 box-left">
-										已有账号？
-										<a target="_blank" class="login">立即登录</a>
+										已有账号？ <a target="_blank" class="login">立即登录</a>
 									</div>
 									<div class="col-6 box-right">
-										注册即表示同意遵守
-										<a target="_blank">协议条款</a>
+										注册即表示同意遵守 <a target="_blank">协议条款</a>
 									</div>
 								</div>
 							</div>
@@ -158,20 +180,26 @@
 									<form class="layui-form" action="" id="updatePassForm">
 										<div class="layui-form-item ipt-text">
 											<div class="dp-block">
-												<i class="fa fa-user"></i>
-												<input type="text" name="username" placeholder="请输入账号" autocomplete="off" class="layui-input" lay-verify="required">
+												<i class="fa fa-user"></i> <input type="text"
+													name="username" placeholder="请输入账号" autocomplete="off"
+													class="layui-input" lay-verify="required">
 											</div>
 										</div>
 										<div class="layui-form-item">
 											<div class="layui-input-inline">
-												<input type="text" name="vrifyCode" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+												<input type="text" name="vrifyCode" required
+													lay-verify="required" placeholder="请输入验证码"
+													autocomplete="off" class="layui-input">
 											</div>
 											<div class="layui-form-mid layui-word-aux">
 												<!-- src="/defaultKaptcha" -->
-												<img alt="点击获取验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1" />
+												<img alt="点击获取验证码"
+													onclick="this.src='/defaultKaptcha?d='+new Date()*1" />
 											</div>
 										</div>
-										<button type="button" class="layui-btn layui-btn-normal dp-block" lay-submit lay-filter="updatePassForm">修 改</button>
+										<button type="button"
+											class="layui-btn layui-btn-normal dp-block" lay-submit
+											lay-filter="updatePassForm">修 改</button>
 									</form>
 								</div>
 								<div class="pad-all">
@@ -179,8 +207,7 @@
 										<a target="_blank" class="login">立即登录</a>
 									</div>
 									<div class="col-6 box-right">
-										没有账号？
-										<a target="_blank" class="reg">立即注册</a>
+										没有账号？ <a target="_blank" class="reg">立即注册</a>
 									</div>
 								</div>
 							</div>
@@ -194,7 +221,8 @@
 	<div class="switch-bg">
 		<div id="switch-bg-list">
 			<div class="switch-loading" style="display: none;">
-				<img id="bgimg" src="/img/bg_img/bg-img-6.jpg" alt="" class="switch-chg-bg " />
+				<img id="bgimg" src="/img/bg_img/bg-img-6.jpg" alt=""
+					class="switch-chg-bg " />
 				<!-- 
 			
 				<img src="/img/bg_img/thumbs/bg-trns.jpg" alt="" class="switch-chg-bg bg-trans active">
@@ -206,61 +234,72 @@
 				
 				<img src="/img/bg_img/bg-img-7.jpg" alt="" class="switch-chg-bg " /> -->
 			</div>
-			<a target="_blank" href="http://www.miitbeian.gov.cn/" id="SYSTEM_authinfo">{{SYSTEM_authinfo}} </a>
+			<a target="_blank" href="http://www.miitbeian.gov.cn/"
+				id="SYSTEM_authinfo">{{SYSTEM_authinfo}} </a>
 		</div>
 	</div>
 	<script src="/js/plugins/swiper/swiper.js"></script>
 	<script type="text/javascript" src="/js/plugins/layui/layui.js"></script>
 	<script src="/js/system/login_reg_fPass.js"></script>
 	<script type="text/javascript">
-        var app2 = new Vue({
-            el : '#SYSTEM_authinfo',
-            data : {
-                SYSTEM_authinfo : ''
-            },
-            created : function() {
-                var url = "/common/login_do/system_authinfo.do";
-                var _self = this;
-                $.post(url, function(data) {
-                    _self.SYSTEM_authinfo = data;
-                })
-            }
-        });
-        var app = new Vue({
-            el : '#loginForm',
-            data : {},
-            methods : {
-                weixinlogin : function() {
-                    location.href = '/common/weixin_do/tologin.do';
-                }
-            }
-        });
-        var obj = null;
-        //如果申请了 微信网站 扫码登陆 请把取消 注释
-        // $.get("/common/weixin_do/getAppid", function(data) {
-        //     var weixinurl=encodeURIComponent(data.weixinurl+"/common/weixin_do/login.do");
-        //    obj = new WxLogin({
-        //         id : "login_container", scope : "snsapi_login" ,state : "", style : "black", href : "",
-        //        appid : data.appid,
-        //        redirect_uri : "/social/weixin"
-        //    });
-        //  });
-        //$.get("/common/weixin_do/getAppid", function(data) {
-        //    var weixinurl = encodeURIComponent(data.weixinurl + "/common/weixin_do/login.do");
-        //    obj = new WxLogin({
-        //        id : "login_container",
-        //        scope : "snsapi_login",
-        //        state : "",
-        //        style : "black",
-        //       href : "impowerBox status",
-        //        appid : 'wxbdc5610cc59c1631',//别人的用于测试     wxbdc5610cc59c1631
-        //         redirect_uri : 'https%3A%2F%2Fpassport.yhd.com%2Fwechat%2Fcallback.do'//别人的用于测试  https%3A%2F%2Fpassport.yhd.com%2Fwechat%2Fcallback.do           
-        //     });
-        //  });
-        if ("${error!}" != "") {
-            alert('${error!}');
-        };
-    </script>
-    <script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+		var app2 = new Vue({
+			el : '#SYSTEM_authinfo',
+			data : {
+				SYSTEM_authinfo : ''
+			},
+			created : function() {
+				var url = "/common/login_do/system_authinfo.do";
+				var _self = this;
+				$.post(url, function(data) {
+					_self.SYSTEM_authinfo = data;
+				})
+			}
+		});
+		var app = new Vue({
+			el : '#loginForm',
+			data : {},
+			methods : {
+				weixinlogin : function() {
+					location.href = '/common/weixin_do/tologin.do';
+				}
+			}
+		});
+		var obj = null;
+		//如果申请了 微信网站 扫码登陆 请把取消 注释
+		// $.get("/common/weixin_do/getAppid", function(data) {
+		//     var weixinurl=encodeURIComponent(data.weixinurl+"/common/weixin_do/login.do");
+		//    obj = new WxLogin({
+		//         id : "login_container", scope : "snsapi_login" ,state : "", style : "black", href : "",
+		//        appid : data.appid,
+		//        redirect_uri : "/social/weixin"
+		//    });
+		//  });
+		//$.get("/common/weixin_do/getAppid", function(data) {
+		//    var weixinurl = encodeURIComponent(data.weixinurl + "/common/weixin_do/login.do");
+		//    obj = new WxLogin({
+		//        id : "login_container",
+		//        scope : "snsapi_login",
+		//        state : "",
+		//        style : "black",
+		//       href : "impowerBox status",
+		//        appid : 'wxbdc5610cc59c1631',//别人的用于测试     wxbdc5610cc59c1631
+		//         redirect_uri : 'https%3A%2F%2Fpassport.yhd.com%2Fwechat%2Fcallback.do'//别人的用于测试  https%3A%2F%2Fpassport.yhd.com%2Fwechat%2Fcallback.do           
+		//     });
+		//  });
+		if ("${error!}" != "") {
+			alert('${error!}');
+		};
+	</script>
+	<script
+		src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+			var hm = document.createElement("script");
+			hm.src = "https://hm.baidu.com/hm.js?577038104fe0a8e00d90faee2f037aac";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
 </body>
 </html>

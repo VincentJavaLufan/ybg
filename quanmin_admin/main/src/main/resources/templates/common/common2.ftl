@@ -144,3 +144,12 @@ function getSelectEx(byId,options){
 </script>
 <script type="text/javascript" src="/common/common.js"></script>
 <script type="text/javascript" src="/common/base.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?577038104fe0a8e00d90faee2f037aac";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
