@@ -1,6 +1,7 @@
 package com.ybg.menu.dao;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
@@ -8,7 +9,6 @@ import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.menu.WeixinButtonConstant;
 import com.ybg.menu.domain.WeixinButtonVO;
-import com.ybg.menu.mapper.WeixinMenuMapper;
 
 @Repository
 public class WeixinButtonDaoImpl extends BaseDao implements WeixinButtonDao {
@@ -54,7 +54,7 @@ public class WeixinButtonDaoImpl extends BaseDao implements WeixinButtonDao {
 	public List<WeixinButtonVO> list() {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
-		return getJdbcTemplate().query(sql.toString(), new WeixinMenuMapper());
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<WeixinButtonVO>(WeixinButtonVO.class));
 	}
 	
 	@Override
@@ -63,7 +63,7 @@ public class WeixinButtonDaoImpl extends BaseDao implements WeixinButtonDao {
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(WHERE).append("1=1");
 		sql.append(AND).append("id='" + id + "'");
-		List<WeixinButtonVO> list = getJdbcTemplate().query(sql.toString(), new WeixinMenuMapper());
+		List<WeixinButtonVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<WeixinButtonVO>(WeixinButtonVO.class));
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
 	
@@ -73,8 +73,8 @@ public class WeixinButtonDaoImpl extends BaseDao implements WeixinButtonDao {
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(WHERE).append("1=1");
 		sql.append(AND).append(" weixinMenu.parentid ").append(IS).append(NULL);
-		//sqlappen(sql, "weixinMenu.ifsub", WeixinButtonConstant.IFSUBNO);
-		return getJdbcTemplate().query(sql.toString(), new WeixinMenuMapper());
+		// sqlappen(sql, "weixinMenu.ifsub", WeixinButtonConstant.IFSUBNO);
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<WeixinButtonVO>(WeixinButtonVO.class));
 	}
 	
 	@Override
@@ -85,6 +85,6 @@ public class WeixinButtonDaoImpl extends BaseDao implements WeixinButtonDao {
 		sql.append(AND).append(" weixinMenu.parentid ").append(IS).append(NOT).append(NULL);
 		sqlappen(sql, "parentid", parentid);
 		sqlappen(sql, "weixinMenu.ifsub", WeixinButtonConstant.IFSUBYES);
-		return getJdbcTemplate().query(sql.toString(), new WeixinMenuMapper());
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<WeixinButtonVO>(WeixinButtonVO.class));
 	}
 }
