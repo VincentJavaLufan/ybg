@@ -1,1 +1,1 @@
-java -jar main-1.0.0.jar --spring.config.classpath=./config/application.properties,./config/wx.properties
+java -jar /var/www/html/main-1.0.0.exe/main-1.0.0.jar --spring.config.classpath=/var/www/html/main-1.0.0.exe/config/application.properties,/var/www/html/main-1.0.0.exe/config/wx.properties  
