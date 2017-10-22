@@ -2,7 +2,10 @@ package com.ybg.api.domain;
 import java.util.Properties;
 import com.ybg.api.service.WeixinApiService;
 import com.ybg.base.util.SpringContextUtils;
-
+/**
+ * @author Deament
+ * @date 2017年10月1日
+ * **/
 public class WeixinOpenAuthorizationConfig {
 	
 	public static final String	APPID	= "appId";

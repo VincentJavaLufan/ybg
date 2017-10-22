@@ -7,7 +7,10 @@ import com.xiaoleilu.hutool.http.HttpUtil;
 import com.ybg.api.domain.WeixinJson;
 import com.ybg.api.domain.WeixinOpenAuthorizationConfig;
 import net.sf.json.JSONObject;
-
+/**
+ * @author Deament
+ * @date 2017年10月1日
+ * **/
 @Repository
 public class WeixinNetWorkImpl implements WeixinNetWork {
 	
