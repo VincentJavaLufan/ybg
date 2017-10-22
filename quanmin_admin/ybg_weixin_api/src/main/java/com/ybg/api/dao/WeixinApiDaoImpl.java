@@ -8,7 +8,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
-
+/**
+ * @author Deament
+ * @date 2017年10月1日
+ * **/
 @Repository
 public class WeixinApiDaoImpl extends BaseDao implements WeixinApiDao {
 	

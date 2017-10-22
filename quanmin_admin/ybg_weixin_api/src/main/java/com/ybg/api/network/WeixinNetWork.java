@@ -5,8 +5,9 @@ import com.google.gson.JsonObject;
 import com.ybg.api.domain.WeixinJson;
 import net.sf.json.JSONObject;
 
-/** 都是些根据 token 访问的接口 并不是最全 **/
-public interface WeixinNW {
+/** @author Deament
+ * @date 2017年10月1日 都是些根据 token 访问的接口 并不是最全 **/
+public interface WeixinNetWork {
 	
 	/** 获取微信服务器IP地址 **/
 	WeixinJson getWeixinIPaddress();

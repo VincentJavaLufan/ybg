@@ -6,17 +6,19 @@ import org.springframework.stereotype.Repository;
 import com.xiaoleilu.hutool.http.HttpUtil;
 import com.ybg.api.dao.WeixinApiDao;
 import com.ybg.api.domain.WeixinJson;
-import com.ybg.api.domain.WeixinOAuthConfig;
-import com.ybg.api.network.WeixinNW;
+import com.ybg.api.domain.WeixinOpenAuthorizationConfig;
+import com.ybg.api.network.WeixinNetWork;
 import net.sf.json.JSONObject;
 
+/** @author Deament
+ * @date 2017年10月22日 **/
 @Repository
 public class WeixinApiServiceImpl implements WeixinApiService {
 	
 	@Autowired
 	WeixinApiDao	weixinApiDao;
 	@Autowired
-	WeixinNW		weixinNW;
+	WeixinNetWork	weixinNW;
 	
 	@Override
 	public Map<String, String> getSetting() {
@@ -27,8 +29,8 @@ public class WeixinApiServiceImpl implements WeixinApiService {
 	public String getOpenidByCode(String code) {
 		StringBuilder uri = new StringBuilder();
 		uri.append("https://api.weixin.qq.com/sns/oauth2/access_token?appid=");
-		uri.append(WeixinOAuthConfig.getValue(WeixinOAuthConfig.APPID));
-		uri.append("&secret=").append(WeixinOAuthConfig.getValue(WeixinOAuthConfig.SECRET));
+		uri.append(WeixinOpenAuthorizationConfig.getValue(WeixinOpenAuthorizationConfig.APPID));
+		uri.append("&secret=").append(WeixinOpenAuthorizationConfig.getValue(WeixinOpenAuthorizationConfig.SECRET));
 		uri.append("&code=" + code).append("&grant_type=authorization_code");
 		try {
 			String result = HttpUtil.get(uri.toString());
@@ -45,8 +47,8 @@ public class WeixinApiServiceImpl implements WeixinApiService {
 	public String getAccessToken() {
 		StringBuilder uri = new StringBuilder();
 		uri.append("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=");
-		uri.append(WeixinOAuthConfig.getValue(WeixinOAuthConfig.APPID));
-		uri.append("&secret=").append(WeixinOAuthConfig.getValue(WeixinOAuthConfig.SECRET));
+		uri.append(WeixinOpenAuthorizationConfig.getValue(WeixinOpenAuthorizationConfig.APPID));
+		uri.append("&secret=").append(WeixinOpenAuthorizationConfig.getValue(WeixinOpenAuthorizationConfig.SECRET));
 		String result = HttpUtil.get(uri.toString());
 		WeixinJson json = new WeixinJson(result);
 		if (json.isSuccess()) {

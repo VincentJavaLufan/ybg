@@ -5,16 +5,16 @@ import org.springframework.stereotype.Repository;
 import com.google.gson.JsonObject;
 import com.xiaoleilu.hutool.http.HttpUtil;
 import com.ybg.api.domain.WeixinJson;
-import com.ybg.api.domain.WeixinOAuthConfig;
+import com.ybg.api.domain.WeixinOpenAuthorizationConfig;
 import net.sf.json.JSONObject;
 
 @Repository
-public class WeixinNWImpl implements WeixinNW {
+public class WeixinNetWorkImpl implements WeixinNetWork {
 	
 	@Override
 	public WeixinJson getWeixinIPaddress() {
 		StringBuilder uri = new StringBuilder();
-		uri.append("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=").append(WeixinOAuthConfig.getValue(WeixinOAuthConfig.APPID)).append("&secret=").append(WeixinOAuthConfig.getValue(WeixinOAuthConfig.SECRET));
+		uri.append("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=").append(WeixinOpenAuthorizationConfig.getValue(WeixinOpenAuthorizationConfig.APPID)).append("&secret=").append(WeixinOpenAuthorizationConfig.getValue(WeixinOpenAuthorizationConfig.SECRET));
 		String result = HttpUtil.get(uri.toString());
 		return new WeixinJson(result);
 	}

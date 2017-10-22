@@ -1,6 +1,9 @@
 package com.ybg.api.service;
 import java.util.Map;
-
+/**
+ * @author Deament
+ * @date 2017年10月22日
+ * **/
 public interface WeixinApiService {
 	
 	/** 获取微信设置 **/

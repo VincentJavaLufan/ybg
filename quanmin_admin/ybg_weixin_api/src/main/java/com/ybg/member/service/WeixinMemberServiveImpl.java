@@ -2,7 +2,7 @@ package com.ybg.member.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.ybg.api.network.WeixinNW;
+import com.ybg.api.network.WeixinNetWork;
 import com.ybg.api.service.WeixinApiService;
 import com.ybg.member.domain.WeixinUserVO;
 
@@ -10,7 +10,7 @@ import com.ybg.member.domain.WeixinUserVO;
 public class WeixinMemberServiveImpl implements WeixinMemberService {
 	
 	@Autowired
-	WeixinNW			weixinNW;
+	WeixinNetWork			weixinNW;
 	@Autowired
 	WeixinApiService	weixinApiService;
 	

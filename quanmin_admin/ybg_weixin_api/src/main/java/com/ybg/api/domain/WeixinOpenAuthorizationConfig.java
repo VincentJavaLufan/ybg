@@ -3,12 +3,12 @@ import java.util.Properties;
 import com.ybg.api.service.WeixinApiService;
 import com.ybg.base.util.SpringContextUtils;
 
-public class WeixinOAuthConfig {
+public class WeixinOpenAuthorizationConfig {
 	
 	public static final String	APPID	= "appId";
 	public static final String	SECRET	= "secret";
 	
-	public WeixinOAuthConfig() {
+	public WeixinOpenAuthorizationConfig() {
 	}
 	
 	private static Properties props = new Properties();

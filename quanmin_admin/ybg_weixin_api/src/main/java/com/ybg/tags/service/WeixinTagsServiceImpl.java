@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.ybg.api.domain.WeixinJson;
-import com.ybg.api.network.WeixinNW;
+import com.ybg.api.network.WeixinNetWork;
 import com.ybg.api.service.WeixinApiService;
 import com.ybg.tags.domain.WeixinTagsVO;
 import net.sf.json.JSONArray;
@@ -17,7 +17,7 @@ import net.sf.json.JSONObject;
 public class WeixinTagsServiceImpl implements WeixinTagsService {
 	
 	@Autowired
-	WeixinNW			weixinNW;
+	WeixinNetWork			weixinNW;
 	@Autowired
 	WeixinApiService	weixinApiService;
 	

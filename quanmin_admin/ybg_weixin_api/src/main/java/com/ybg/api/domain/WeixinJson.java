@@ -1,7 +1,10 @@
 package com.ybg.api.domain;
 import com.ybg.api.WeiXinErrorCodeConstant;
 import net.sf.json.JSONObject;
-
+/**
+ * @author Deament
+ * @date 2017年10月1日
+ * **/
 public class WeixinJson {
 	
 	String json = "";

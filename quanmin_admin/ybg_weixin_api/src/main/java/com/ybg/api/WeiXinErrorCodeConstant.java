@@ -2,6 +2,8 @@ package com.ybg.api;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/** @author Deament
+ * @date 2017年10月1日 **/
 public class WeiXinErrorCodeConstant {
 	
 	public static Map<Integer, String> errcodemap = new LinkedHashMap<Integer, String>();
