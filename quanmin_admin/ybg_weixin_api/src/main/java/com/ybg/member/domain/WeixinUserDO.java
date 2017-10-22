@@ -1,7 +1,11 @@
 package com.ybg.member.domain;
 import java.io.Serializable;
+import java.util.Arrays;
 
-/** 用户基本信息 */
+/** 用户基本信息 
+ * 
+ * @author Deament
+ * @date 2017/1/1 */
 public class WeixinUserDO implements Serializable {
 	
 	/** 用户是否订阅该公众号标识，值为0时，代表此用户没有关注该公众号，拉取不到其余信息。 **/
@@ -144,4 +148,10 @@ public class WeixinUserDO implements Serializable {
 	public void setTagid_list(Integer[] tagid_list) {
 		this.tagid_list = tagid_list;
 	}
+
+	@Override
+	public String toString() {
+		return "WeixinUserDO [subscribe=" + subscribe + ", openid=" + openid + ", nickname=" + nickname + ", sex=" + sex + ", city=" + city + ", country=" + country + ", province=" + province + ", language=" + language + ", headimgurl=" + headimgurl + ", subscribe_time=" + subscribe_time + ", unionid=" + unionid + ", remark=" + remark + ", groupid=" + groupid + ", tagid_list=" + Arrays.toString(tagid_list) + "]";
+	}
+	
 }

@@ -6,11 +6,13 @@ import com.ybg.api.network.WeixinNetWork;
 import com.ybg.api.service.WeixinApiService;
 import com.ybg.member.domain.WeixinUserVO;
 
+/** @author Deament
+ * @date 2017/1/1 */
 @Repository
 public class WeixinMemberServiveImpl implements WeixinMemberService {
 	
 	@Autowired
-	WeixinNetWork			weixinNW;
+	WeixinNetWork		weixinNW;
 	@Autowired
 	WeixinApiService	weixinApiService;
 	
@@ -26,7 +28,7 @@ public class WeixinMemberServiveImpl implements WeixinMemberService {
 	
 	@Override
 	public List<WeixinUserVO> batchget(String openid) {
-		//XXX 不打算做。。。。
+		// XXX 不打算做。。。。
 		return null;
 	}
 }
