@@ -4,8 +4,8 @@ import io.swagger.annotations.ApiModelProperty;
 import com.ybg.base.jdbc.BaseQueryAble;
 import com.ybg.region.domain.RegionDO;
 
-
-/** 查询条件 **/
+/** @author Deament
+ * @since 2017-10-22 **/
 @ApiModel(value = "角色查询条件", parent = RegionDO.class)
 public class RegionQuery extends RegionDO implements BaseQueryAble {
 	
@@ -14,6 +14,7 @@ public class RegionQuery extends RegionDO implements BaseQueryAble {
 	@ApiModelProperty(name = "blurred", dataType = "java.lang.Boolean", value = "是否模糊查询", hidden = true)
 	private boolean				blurred;
 	
+	@Override
 	public boolean isBlurred() {
 		return blurred;
 	}
@@ -21,6 +22,4 @@ public class RegionQuery extends RegionDO implements BaseQueryAble {
 	public void setBlurred(boolean blurred) {
 		this.blurred = blurred;
 	}
-	
-	
 }

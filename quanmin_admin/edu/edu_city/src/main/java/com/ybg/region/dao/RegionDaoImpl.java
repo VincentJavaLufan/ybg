@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
@@ -10,9 +11,10 @@ import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.jdbc.DataBaseConstant;
 import com.ybg.base.util.Page;
 import com.ybg.region.domain.RegionVO;
-import com.ybg.region.mapper.RegionMapper;
 import com.ybg.region.qvo.RegionQuery;
 
+/** @author Deament
+ * @since 2017-10-22 **/
 @Repository
 public class RegionDaoImpl extends BaseDao implements RegionDao {
 	
@@ -20,6 +22,7 @@ public class RegionDaoImpl extends BaseDao implements RegionDao {
 	@Qualifier(DataBaseConstant.JD_EDU)
 	JdbcTemplate jdbcTemplate;
 	
+	@Override
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
@@ -55,8 +58,8 @@ public class RegionDaoImpl extends BaseDao implements RegionDao {
 	}
 	
 	@Override
-	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> WHEREmap) {
-		this.baseupdate(updatemap, WHEREmap, "edu_region");
+	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> whereMap) {
+		this.baseupdate(updatemap, whereMap, "edu_region");
 	}
 	
 	@Override
@@ -66,7 +69,7 @@ public class RegionDaoImpl extends BaseDao implements RegionDao {
 		sql.append(getcondition(qvo));
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new RegionMapper()));
+			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<RegionVO>(RegionVO.class)));
 		}
 		else {
 			page.setResult(new ArrayList<RegionVO>());
@@ -109,7 +112,7 @@ public class RegionDaoImpl extends BaseDao implements RegionDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new RegionMapper());
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<RegionVO>(RegionVO.class));
 	}
 	
 	@Override
@@ -123,7 +126,7 @@ public class RegionDaoImpl extends BaseDao implements RegionDao {
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(WHERE).append("1=1");
 		sql.append(AND + "region.PkId=" + pkid);
-		List<RegionVO> list = getJdbcTemplate().query(sql.toString(), new RegionMapper());
+		List<RegionVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<RegionVO>(RegionVO.class));
 		return list.get(0);
 	}
 }

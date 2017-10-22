@@ -1,33 +1,34 @@
 package com.ybg.region.service;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.ybg.region.dao.RegionDao;
 import com.ybg.region.domain.RegionVO;
 import com.ybg.region.qvo.RegionQuery;
-
 import java.util.List;
-
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
 
+/** 行政区域表
+ * 
+ * @author Deament
+ * @email
+ * @date 2017-07-06 */
 @Repository
 public class RegionServiceImpl implements RegionService {
+	
 	@Autowired
 	private RegionDao regionDao;
-
+	
 	@Override
 	/** 返回主键的创建
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	public RegionVO save(RegionVO bean) throws Exception {
 		return regionDao.save(bean);
-
 	}
-
-	/**
-	 * 更新数据，条件 和 需要更新的字段都不能为空 不限个数个条件
+	
+	/** 更新数据，条件 和 需要更新的字段都不能为空 不限个数个条件
 	 * 
 	 * @author Deament
 	 * @param updatemap
@@ -35,17 +36,13 @@ public class RegionServiceImpl implements RegionService {
 	 * @param wheremap
 	 *            更新中的条件字段和值
 	 * @param table_name
-	 *            表的名称
-	 **/
-
+	 *            表的名称 **/
 	@Override
-	public void update(BaseMap<String, Object> updatemap,
-			BaseMap<String, Object> wheremap) {
+	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> wheremap) {
 		regionDao.update(updatemap, wheremap);
 	}
-
-	/**
-	 * 分页查询
+	
+	/** 分页查询
 	 * 
 	 * @throws Exception
 	 **/
@@ -53,9 +50,8 @@ public class RegionServiceImpl implements RegionService {
 	public Page list(Page page, RegionQuery qvo) throws Exception {
 		return regionDao.list(page, qvo);
 	}
-
-	/**
-	 * 不分页查询
+	
+	/** 不分页查询
 	 * 
 	 * @throws Exception
 	 **/
@@ -63,17 +59,15 @@ public class RegionServiceImpl implements RegionService {
 	public List<RegionVO> list(RegionQuery qvo) throws Exception {
 		return regionDao.list(qvo);
 	}
-
+	
 	/** 根据条件删除 **/
 	@Override
 	public void remove(BaseMap<String, Object> wheremap) {
 		regionDao.remove(wheremap);
 	}
-
+	
 	@Override
 	public RegionVO get(Integer pkid) {
-
 		return regionDao.get(pkid);
 	}
-
 }
