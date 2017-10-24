@@ -19,7 +19,7 @@ public class GithubImpl extends AbstractOAuth2ApiBinding implements GitHub {
 		this.appId = appId;
 		String url = String.format(URL_GET_OPENID, accessToken);
 		String result = getRestTemplate().getForObject(url, String.class);
-		this.id = StringUtils.substringBetween(result, "\"id\":\"", "\"}");
+		this.id = StringUtils.substringBetween(result, "\"id\":\"", "\"");
 		userinfo = JSONObject.parseObject(result, GithubUserInfo.class);
 	}
 	

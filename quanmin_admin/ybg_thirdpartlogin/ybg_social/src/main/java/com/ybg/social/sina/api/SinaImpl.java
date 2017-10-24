@@ -22,7 +22,7 @@ public class SinaImpl extends AbstractOAuth2ApiBinding implements Sina {
 		this.appId = appId;
 		this.accessToken = accessToken;
 		String result = getRestTemplate().postForObject(URL_GET_OPENID, null, String.class);
-		String uid = StringUtils.substringBetween(result, "\"uid\":\"", "\"}");
+		String uid = StringUtils.substringBetween(result, "\"uid\":\"", "\"");
 		setId(id);
 	}
 	
