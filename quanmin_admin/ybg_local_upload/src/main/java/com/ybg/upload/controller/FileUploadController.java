@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.ybg.upload.LocalUploadConstant;
 
-/** 文件上传的Controller
+/** 文件上传的Demo Controller
  * 
  * @author 单红宇(CSDN CATOOP)
  * @create 2017年3月11日 */
