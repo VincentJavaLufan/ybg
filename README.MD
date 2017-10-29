@@ -9,7 +9,7 @@ QQ群：`314658875（收费）`，310391018（免费）
 )
 
 
-配置文档：[下载地址](https://gitee.com/YYDeament/88ybg/blob/master/quanmin_admin/%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3.doc)
+配置文档：[`下载地址`](https://gitee.com/YYDeament/88ybg/blob/master/quanmin_admin/%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3.doc)
 
 
  `数据库`在本页面的`附件`中有 或者`交流群`也有
