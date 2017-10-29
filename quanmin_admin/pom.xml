@@ -62,7 +62,8 @@
 		<module>ybg_uflo</module>
 		<module>ybg_ureport</module>
 		<module>ybg_urule</module>
-	</modules>
+    <module>ybg_local_upload</module>
+  </modules>
 	<build>
 		<defaultGoal>compile</defaultGoal>
 	</build>
