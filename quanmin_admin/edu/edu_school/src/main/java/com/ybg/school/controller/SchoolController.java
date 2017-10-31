@@ -30,7 +30,7 @@ import springfox.documentation.annotations.ApiIgnore;
  * @date 2017-07-07 */
 @Api(value="学校管理",tags="学校管理")
 @Controller
-@RequestMapping("/edu/school.do/")
+@RequestMapping("/edu/school_do/")
 public class SchoolController {
 	
 	@Autowired
@@ -39,7 +39,7 @@ public class SchoolController {
 	@ApiOperation(value = "School管理页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String index(ModelMap map) {
-		return "/system/school/index";
+		return "/edu/school/index";
 	}
 	
 	@ApiOperation(value = "School分页列表", notes = "JSON ", produces = MediaType.APPLICATION_JSON_VALUE)
