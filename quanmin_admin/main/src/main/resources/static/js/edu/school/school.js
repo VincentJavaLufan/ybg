@@ -28,53 +28,6 @@ $(function() {
             data : searchParams
         });
     });
-    $("#addRole").click("click", function() {
-        addRole();
-    });
-    $("#editRole").click("click", function() {
-        editRole();
-    });
-    $("#delRole").click("click", function() {
-        delRole();
-    });
+   
 });
-function editRole() {
-    var cbox = grid.getSelectedCheckbox();
-    if (cbox.length > 1 || cbox == "") {
-        layer.msg("只能选中一个");
-        return;
-    }
-    pageii = layer.open({
-        title : "编辑",
-        type : 2,
-        maxmin : true, // 开启最大化最小化按钮
-        area : [
-                "600px", "60%"],
-        content : rootPath + '/edu/school_do/toupdate.do?id=' + cbox
-    });
-}
-function addRole() {
-    pageii = layer.open({
-        title : "新增",
-        type : 2,
-        maxmin : true, // 开启最大化最小化按钮
-        area : [
-                "600px", "60%"],
-        content : rootPath + '/edu/school_do/toadd.do'
-    });
-}
-function delRole() {
-    var cbox = grid.getSelectedCheckbox();
-    if (cbox == "") {
-        layer.msg("请选择删除项！！");
-        return;
-    }
-    layer.confirm('是否删除？', function(index) {
-        var url = rootPath + '/edu/school_do/remove.do';
-        var s = CommnUtil.ajax(url, {
-            ids : cbox.join(",")
-        }, "json");
-        layer.msg(s.msg);
-        grid.loadData();
-    });
-}
+
