@@ -1,7 +1,6 @@
 package com.ybg.rbac.user.dao;
 import java.util.List;
 import org.springframework.social.connect.Connection;
-import org.springframework.stereotype.Component;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
 import com.ybg.rbac.user.domain.UserVO;
@@ -10,7 +9,6 @@ import com.ybg.rbac.user.qvo.UserQuery;
 /*** @author https://gitee.com/YYDeament/88ybg
  * 
  * @date 2016/10/1 */
-@Component
 public interface UserDao {
 	
 	/** 创建用户
