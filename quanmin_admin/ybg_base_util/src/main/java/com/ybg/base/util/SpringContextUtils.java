@@ -19,7 +19,7 @@ public class SpringContextUtils implements ApplicationContextAware {
 		SpringContextUtils.applicationContext = applicationContext;
 	}
 	
-	public static Object getBean(Class<?> clazz) {
+	public static <T> T getBean(Class<T> clazz) {
 		return applicationContext.getBean(clazz);
 	}
 	
