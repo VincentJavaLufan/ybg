@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>文件上传示例</title>
+<script type="text/javascript">
+
+function  downloadfile(){
+	var path= document.getElementById("download").value;
+	location.href='/testDownload?filename='+path;
+}
+</script>
+</head>
+<body>
+	<h2>文件上传示例</h2>
+	<hr/>
+	<form method="POST" enctype="multipart/form-data" action="/upload">
+		<p>
+			文件：<input type="file" name="file" />
+		</p>
+		<p>
+			<input type="submit" value="上传" />
+		</p>
+	</form>
+	<div >
+	文件下载(在upload 文件夹中的文件名)<input id="download"> <button onclick="downloadfile()">下载</button>
+	</div>
+</body>
+</html>
