@@ -75,7 +75,7 @@ public class KindeditorController {
 			String savePath = LocalUploadConstant.BASEPATH + "kindeditor" + File.separatorChar + "products" + File.separatorChar + user.getId() + File.separatorChar + privilege + File.separatorChar;
 			String saveUrl = LocalUploadConstant.BASEURL + "kindeditor" + "/" + "products" + "/" + user.getId() + "/" + privilege + "/";
 			// 定义允许上传的文件扩展名
-			HashMap<String, String> extMap = new HashMap<String, String>();
+			HashMap<String, String> extMap = new HashMap<String, String>(4);
 			extMap.put("image", "gif,jpg,jpeg,png,bmp");
 			extMap.put("flash", "swf,flv");
 			extMap.put("media", "swf,flv,mp3,wav,wma,wmv,mid,avi,mpg,asf,rm,rmvb");
@@ -161,32 +161,19 @@ public class KindeditorController {
 	 * @throws IOException
 	 **/
 	@RequestMapping("/kindeditor/file_manager_json.do")
-	public void file_manager_json(@AuthenticationPrincipal UserVO user, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void fileManagerJson(@AuthenticationPrincipal UserVO user, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		PrintWriter writer = response.getWriter();
 		if (user == null || user.getId() == null) {
 			writer.println("non-privileged.");
 			return;
 		}
 		// 根目录路径，可以指定绝对路径，比如 /var/www/attached/
-		// String rootPath = pageContext.getServletContext().getRealPath("/") + "attached/";
+		
 		String rootPath = LocalUploadConstant.BASEPATH + "kindeditor" + File.separatorChar + "products" + File.separatorChar + user.getId() + File.separatorChar;
 		String rootUrl = LocalUploadConstant.BASEURL + "kindeditor" + "/" + "products" + "/" + user.getId() + "/";
 		// 图片扩展名
 		String[] fileTypes = new String[] { "gif", "jpg", "jpeg", "png", "bmp" };
-		// String dirName = request.getParameter("dir");
-		// if (dirName != null) {
-		// if (!Arrays.<String> asList(new String[] { "image", "flash", "media", "file" }).contains(dirName)) {
-		// // out.println("Invalid Directory name.");
-		// writer.println("Invalid Directory name.");
-		// return;
-		// }
-		// rootPath += dirName + "/";
-		// rootUrl += dirName + "/";
-		// File saveDirFile = new File(rootPath);
-		// if (!saveDirFile.exists()) {
-		// saveDirFile.mkdirs();
-		// }
-		// }
+		
 		// 根据path参数，设置各路径和URL
 		String path = request.getParameter("path") != null ? request.getParameter("path") : "";
 		String currentPath = rootPath + path;
@@ -200,12 +187,14 @@ public class KindeditorController {
 		// 排序形式，name or size or type
 		String order = request.getParameter("order") != null ? request.getParameter("order").toLowerCase() : "name";
 		// 不允许使用..移动到上一级目录
-		if (path.indexOf("..") >= 0) {
+		String  lastpath="..";
+		if (path.indexOf(lastpath) >= 0) {
 			writer.println("Access is not allowed.");
 			return;
 		}
 		// 最后一个字符不是/
-		if (!"".equals(path) && !path.endsWith("/")) {
+		String  endpath="/";
+		if (!"".equals(path) && !path.endsWith(endpath)) {
 			writer.println("Parameter is not valid.");
 			return;
 		}
@@ -241,10 +230,12 @@ public class KindeditorController {
 				fileList.add(hash);
 			}
 		}
-		if ("size".equals(order)) {
+		String orderbysize="size";
+		String orderbytype="type";
+		if (orderbysize.equals(order)) {
 			Collections.sort(fileList, new SizeComparator());
 		}
-		else if ("type".equals(order)) {
+		else if (orderbytype.equals(order)) {
 			Collections.sort(fileList, new TypeComparator());
 		}
 		else {
