@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.ybg.base.util.Json;
+import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.upload.LocalUploadConstant;
 import com.ybg.upload.support.NameComparator;
 import com.ybg.upload.support.SizeComparator;
@@ -42,6 +43,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.simple.JSONObject;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 /** @author Deament
  * @Date 2017年11月2日22:46:41 */
@@ -60,19 +62,31 @@ public class KindeditorController {
 	/** KindEditor JSP
 	 * 
 	 * 本JSP程序是演示程序，建议不要直接在实际项目中使用。 如果您确定直接使用本程序，使用之前请仔细确认相关安全设置。
-	 * 
+	 * @param privilege 权限 分为public private group ...
+	 * @param user
+	 * @param request
+	 * @param response
 	 * @throws Exception
+	 * 
 	 */
-	@RequestMapping(value = "/kindeditor/upload_json.do", method = RequestMethod.POST)
-	public void uploadFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	
+	@RequestMapping(value = "/kindeditor/{privilege}/upload_json.do", method = RequestMethod.POST)
+	public void uploadFile(@PathVariable String privilege,@AuthenticationPrincipal UserVO user, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		PrintWriter writer = response.getWriter();
+		if(LocalUploadConstant.FLODER_PRIVILEGE_MAP.get(privilege)==null) {
+			writer.println(getError("no PRIVILEGE!无权限"));
+			return ;
+		}
 		try {
 			// 文件保存目录路径
-			String savePath = LocalUploadConstant.BASEPATH + "kindeditor" + File.separatorChar + "products" + File.separatorChar;
-			String saveUrl = LocalUploadConstant.BASEURL + "kindeditor" + "/" + "products" + "/";
+			String savePath = LocalUploadConstant.BASEPATH + "kindeditor" + File.separatorChar + "products" + File.separatorChar + user.getId() +File.separatorChar+privilege+ File.separatorChar;
+			String saveUrl = LocalUploadConstant.BASEURL + "kindeditor" + "/" + "products" + "/" + user.getId() + "/"+privilege+"/";
 			// 定义允许上传的文件扩展名
 			HashMap<String, String> extMap = new HashMap<String, String>();
 			extMap.put("image", "gif,jpg,jpeg,png,bmp");
+			extMap.put("flash", "swf,flv");
+			extMap.put("media", "swf,flv,mp3,wav,wma,wmv,mid,avi,mpg,asf,rm,rmvb");
+			extMap.put("file", "doc,docx,xls,xlsx,ppt,htm,html,txt,zip,rar,gz,bz2");
 			// 最大文件大小
 			long maxSize = 1000000;
 			response.setContentType("text/html; charset=UTF-8");
@@ -84,6 +98,14 @@ public class KindeditorController {
 			// 判断文件夹是否存在,如果不存在则创建文件夹
 			if (!uploadDir.exists()) {
 				uploadDir.mkdirs();
+			}
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String ymd = sdf.format(new Date());
+			savePath += ymd + "/";
+			saveUrl += ymd + "/";
+			File dirFile = new File(savePath);
+			if (!dirFile.exists()) {
+				dirFile.mkdirs();
 			}
 			// 检查目录写权限
 			if (!uploadDir.canWrite()) {
@@ -126,7 +148,6 @@ public class KindeditorController {
 				writer.println(obj.toString());
 			}
 		} catch (Exception serviceException) {
-			
 			writer.println(getError("未知错误"));
 			return;
 		}
@@ -142,33 +163,37 @@ public class KindeditorController {
 	/** KindEditor JSP
 	 *
 	 * 本JSP程序是演示程序，建议不要直接在实际项目中使用。 如果您确定直接使用本程序，使用之前请仔细确认相关安全设置。 */
-	/** 文件管理 
-	 * @throws IOException **/
+	/** 文件管理
+	 * 
+	 * @throws IOException
+	 **/
 	@RequestMapping("/kindeditor/file_manager_json.do")
-	public void file_manager_json(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void file_manager_json(@AuthenticationPrincipal UserVO user,HttpServletRequest request, HttpServletResponse response) throws IOException {
 		PrintWriter writer = response.getWriter();
+		if(user==null||user.getId()==null) {
+			writer.println("non-privileged.");
+			return;
+		}
 		// 根目录路径，可以指定绝对路径，比如 /var/www/attached/
 		// String rootPath = pageContext.getServletContext().getRealPath("/") + "attached/";
-		String rootPath = LocalUploadConstant.BASEPATH + "kindeditor/";
-		// 根目录URL，可以指定绝对路径，比如 http://www.yoursite.com/attached/
-		// String rootUrl = request.getContextPath() + "/attached/";
-		String rootUrl = LocalUploadConstant.BASEPATH + "kindeditor/";
+		String rootPath = LocalUploadConstant.BASEPATH + "kindeditor" + File.separatorChar + "products" + File.separatorChar + user.getId() + File.separatorChar;
+		String rootUrl = LocalUploadConstant.BASEURL + "kindeditor" + "/" + "products" + "/" + user.getId() + "/";
 		// 图片扩展名
 		String[] fileTypes = new String[] { "gif", "jpg", "jpeg", "png", "bmp" };
-		String dirName = request.getParameter("dir");
-		if (dirName != null) {
-			if (!Arrays.<String> asList(new String[] { "image", "flash", "media", "file" }).contains(dirName)) {
-				// out.println("Invalid Directory name.");
-				writer.println("Invalid Directory name.");
-				return;
-			}
-			rootPath += dirName + "/";
-			rootUrl += dirName + "/";
-			File saveDirFile = new File(rootPath);
-			if (!saveDirFile.exists()) {
-				saveDirFile.mkdirs();
-			}
-		}
+//		String dirName = request.getParameter("dir");
+//		if (dirName != null) {
+//			if (!Arrays.<String> asList(new String[] { "image", "flash", "media", "file" }).contains(dirName)) {
+//				// out.println("Invalid Directory name.");
+//				writer.println("Invalid Directory name.");
+//				return;
+//			}
+//			rootPath += dirName + "/";
+//			rootUrl += dirName + "/";
+//			File saveDirFile = new File(rootPath);
+//			if (!saveDirFile.exists()) {
+//				saveDirFile.mkdirs();
+//			}
+//		}
 		// 根据path参数，设置各路径和URL
 		String path = request.getParameter("path") != null ? request.getParameter("path") : "";
 		String currentPath = rootPath + path;
@@ -240,16 +265,17 @@ public class KindeditorController {
 		result.put("file_list", fileList);
 		// response.setContentType("application/json; charset=UTF-8");
 		writer.println(result.toJSONString());
-		
 	}
 	
 	/** 上传回调方法 **/
-	@RequestMapping(method = RequestMethod.GET, value = "/upload/kindeditor/products/{filename:.+}")
+	@RequestMapping(method = RequestMethod.GET, value = "/upload/kindeditor/products/{userid}/{privilege}/{date}/{filename:.+}")
 	@ResponseBody
-	public ResponseEntity<?> getFile(@PathVariable String filename) {
-		System.out.println("206");
+	public ResponseEntity<?> getFile(@PathVariable String privilege,@PathVariable String userid,@PathVariable String date ,@PathVariable String filename) {
+		
 		try {
-			return ResponseEntity.ok(resourceLoader.getResource("file:" + "./upload/kindeditor/products/" + filename));
+			//TODO 此处加上 判断 privilege的逻辑。。。。
+			
+			return ResponseEntity.ok(resourceLoader.getResource("file:" + "./upload/kindeditor/products/" +"/"+userid+"/"+privilege+"/"+date+"/"+ filename));
 		} catch (Exception e) {
 			return ResponseEntity.notFound().build();
 		}
