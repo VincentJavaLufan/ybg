@@ -11,11 +11,7 @@ import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,7 +46,7 @@ public class FileUploadController {
 	 * 
 	 * @author 单红宇(CSDN CATOOP)
 	 * @create 2017年3月11日 */
-	@RequestMapping(value = "/upload", method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value = "/upload", method = { RequestMethod.POST, RequestMethod.GET })
 	@ResponseBody
 	public String upload(@RequestParam("file") MultipartFile file) {
 		if (!file.isEmpty()) {
@@ -194,6 +190,4 @@ public class FileUploadController {
 		}
 		return null;
 	}
-	
-	
 }
