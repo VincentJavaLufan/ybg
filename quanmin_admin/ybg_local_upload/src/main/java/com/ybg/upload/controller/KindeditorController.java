@@ -7,11 +7,9 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import com.ybg.base.util.Json;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.upload.LocalUploadConstant;
 import com.ybg.upload.support.NameComparator;
@@ -33,14 +31,9 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.simple.JSONObject;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -62,25 +55,25 @@ public class KindeditorController {
 	/** KindEditor JSP
 	 * 
 	 * 本JSP程序是演示程序，建议不要直接在实际项目中使用。 如果您确定直接使用本程序，使用之前请仔细确认相关安全设置。
-	 * @param privilege 权限 分为public private group ...
+	 * 
+	 * @param privilege
+	 *            权限 分为public private group ...
 	 * @param user
 	 * @param request
 	 * @param response
 	 * @throws Exception
-	 * 
 	 */
-	
 	@RequestMapping(value = "/kindeditor/{privilege}/upload_json.do", method = RequestMethod.POST)
-	public void uploadFile(@PathVariable String privilege,@AuthenticationPrincipal UserVO user, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void uploadFile(@PathVariable String privilege, @AuthenticationPrincipal UserVO user, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		PrintWriter writer = response.getWriter();
-		if(LocalUploadConstant.FLODER_PRIVILEGE_MAP.get(privilege)==null) {
+		if (LocalUploadConstant.FLODER_PRIVILEGE_MAP.get(privilege) == null) {
 			writer.println(getError("no PRIVILEGE!无权限"));
-			return ;
+			return;
 		}
 		try {
 			// 文件保存目录路径
-			String savePath = LocalUploadConstant.BASEPATH + "kindeditor" + File.separatorChar + "products" + File.separatorChar + user.getId() +File.separatorChar+privilege+ File.separatorChar;
-			String saveUrl = LocalUploadConstant.BASEURL + "kindeditor" + "/" + "products" + "/" + user.getId() + "/"+privilege+"/";
+			String savePath = LocalUploadConstant.BASEPATH + "kindeditor" + File.separatorChar + "products" + File.separatorChar + user.getId() + File.separatorChar + privilege + File.separatorChar;
+			String saveUrl = LocalUploadConstant.BASEURL + "kindeditor" + "/" + "products" + "/" + user.getId() + "/" + privilege + "/";
 			// 定义允许上传的文件扩展名
 			HashMap<String, String> extMap = new HashMap<String, String>();
 			extMap.put("image", "gif,jpg,jpeg,png,bmp");
@@ -168,9 +161,9 @@ public class KindeditorController {
 	 * @throws IOException
 	 **/
 	@RequestMapping("/kindeditor/file_manager_json.do")
-	public void file_manager_json(@AuthenticationPrincipal UserVO user,HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void file_manager_json(@AuthenticationPrincipal UserVO user, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		PrintWriter writer = response.getWriter();
-		if(user==null||user.getId()==null) {
+		if (user == null || user.getId() == null) {
 			writer.println("non-privileged.");
 			return;
 		}
@@ -180,20 +173,20 @@ public class KindeditorController {
 		String rootUrl = LocalUploadConstant.BASEURL + "kindeditor" + "/" + "products" + "/" + user.getId() + "/";
 		// 图片扩展名
 		String[] fileTypes = new String[] { "gif", "jpg", "jpeg", "png", "bmp" };
-//		String dirName = request.getParameter("dir");
-//		if (dirName != null) {
-//			if (!Arrays.<String> asList(new String[] { "image", "flash", "media", "file" }).contains(dirName)) {
-//				// out.println("Invalid Directory name.");
-//				writer.println("Invalid Directory name.");
-//				return;
-//			}
-//			rootPath += dirName + "/";
-//			rootUrl += dirName + "/";
-//			File saveDirFile = new File(rootPath);
-//			if (!saveDirFile.exists()) {
-//				saveDirFile.mkdirs();
-//			}
-//		}
+		// String dirName = request.getParameter("dir");
+		// if (dirName != null) {
+		// if (!Arrays.<String> asList(new String[] { "image", "flash", "media", "file" }).contains(dirName)) {
+		// // out.println("Invalid Directory name.");
+		// writer.println("Invalid Directory name.");
+		// return;
+		// }
+		// rootPath += dirName + "/";
+		// rootUrl += dirName + "/";
+		// File saveDirFile = new File(rootPath);
+		// if (!saveDirFile.exists()) {
+		// saveDirFile.mkdirs();
+		// }
+		// }
 		// 根据path参数，设置各路径和URL
 		String path = request.getParameter("path") != null ? request.getParameter("path") : "";
 		String currentPath = rootPath + path;
@@ -270,12 +263,10 @@ public class KindeditorController {
 	/** 上传回调方法 **/
 	@RequestMapping(method = RequestMethod.GET, value = "/upload/kindeditor/products/{userid}/{privilege}/{date}/{filename:.+}")
 	@ResponseBody
-	public ResponseEntity<?> getFile(@PathVariable String privilege,@PathVariable String userid,@PathVariable String date ,@PathVariable String filename) {
-		
+	public ResponseEntity<?> getFile(@PathVariable String privilege, @PathVariable String userid, @PathVariable String date, @PathVariable String filename) {
 		try {
-			//TODO 此处加上 判断 privilege的逻辑。。。。
-			
-			return ResponseEntity.ok(resourceLoader.getResource("file:" + "./upload/kindeditor/products/" +"/"+userid+"/"+privilege+"/"+date+"/"+ filename));
+			// TODO 此处加上 判断 privilege的逻辑。。。。
+			return ResponseEntity.ok(resourceLoader.getResource("file:" + "./upload/kindeditor/products/" + "/" + userid + "/" + privilege + "/" + date + "/" + filename));
 		} catch (Exception e) {
 			return ResponseEntity.notFound().build();
 		}
