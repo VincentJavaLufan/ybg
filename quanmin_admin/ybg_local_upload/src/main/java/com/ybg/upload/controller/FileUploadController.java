@@ -46,7 +46,7 @@ public class FileUploadController {
 	 * 
 	 * @author 单红宇(CSDN CATOOP)
 	 * @create 2017年3月11日 */
-	@RequestMapping(value = "/upload", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/upload", method = { RequestMethod.POST })
 	@ResponseBody
 	public String upload(@RequestParam("file") MultipartFile file) {
 		if (!file.isEmpty()) {
