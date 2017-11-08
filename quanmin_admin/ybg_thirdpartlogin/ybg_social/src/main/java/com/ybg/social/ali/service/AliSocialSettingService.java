@@ -1,7 +1,7 @@
 package com.ybg.social.ali.service;
 import java.util.Map;
 
-/** @author Deament
+/** @author Deament 
  * @date 2017/10/1 **/
 public interface AliSocialSettingService {
 	
