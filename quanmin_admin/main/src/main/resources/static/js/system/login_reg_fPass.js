@@ -203,7 +203,23 @@ layui.config({
         // }, function() {
         // window.location.href = "../index.html"
         // });
-        $("#loginForm").submit();
+    //    $("#loginForm").submit();
+    	$("#loginForm").ajaxSubmit({
+            type : 'post', // 提交方式 get/post
+            url : '/common/login_do/login.do', // 需要提交的 url
+            data : $(this).serialize(),
+            success : function(data) { // data 保存提交后返回的数据，一般为 json 数据
+                // 此处可对 data 作相关处理
+                alert(data.msg);
+                $("#loginyzm").attr("src","/defaultKaptcha?d='+new Date()*1");
+                if(data.success){
+                	// alert(data.msg);
+                	
+                	 window.location.href ="/common/login_do/index.do";
+                }
+               
+            }
+        });
         return false;
     });
     /**
