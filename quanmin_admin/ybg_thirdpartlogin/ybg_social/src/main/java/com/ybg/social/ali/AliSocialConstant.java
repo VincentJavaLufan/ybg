@@ -9,5 +9,5 @@ package com.ybg.social.ali;
 public class AliSocialConstant {
 
 	/** 是否沙箱环境 如果非测试环境 把dev 改成"" **/
-	public static final String DEV = "dev";
+	public static final String DEV = "";
 }

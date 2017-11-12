@@ -17,7 +17,11 @@ var vm = new Vue({
         github : {
             client_ID : null
         },
-        thirdpart : 2
+        thirdpart : 2,
+        
+        ali : {
+            client_ID : null
+        }
     },
     methods : {
         query : function() {
@@ -32,6 +36,7 @@ var vm = new Vue({
                     vm.baidu = data.baidu;
                     vm.weixin = data.weixin;
                     vm.github = data.github;
+                    vm.ali = data.ali;
                 }
             });
         },
@@ -49,7 +54,10 @@ var vm = new Vue({
                     qqid : vm.qq.client_ID,
                     qqSERCRET : vm.qq.client_SERCRET,
                     githubid : vm.github.client_ID,
-                    githubSERCRET : vm.github.client_SERCRET
+                    githubSERCRET : vm.github.client_SERCRET,
+                    aliid : vm.ali.client_ID,
+                    aliSERCRET : vm.ali.client_SERCRET,
+                    alipublickey:vm.ali.alipublickey
                 },
                 success : function(data) {
                     alert(data.msg);

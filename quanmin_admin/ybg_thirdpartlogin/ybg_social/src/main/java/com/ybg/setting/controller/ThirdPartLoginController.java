@@ -1,4 +1,5 @@
 package com.ybg.setting.controller;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,38 +17,43 @@ import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.setting.domain.SocialUserVO;
 import com.ybg.setting.qvo.SocialUserQuery;
 import com.ybg.setting.service.SocialUserService;
+import com.ybg.social.ali.service.AliSocialSettingService;
 import com.ybg.social.baidu.service.BaiduSocialSettingService;
 import com.ybg.social.github.service.GithubSocialSettingService;
 import com.ybg.social.qq.service.QqSocialSettingService;
 import com.ybg.social.sina.service.WeiboUserService;
 import io.swagger.annotations.Api;
 
-/*** @author https://gitee.com/YYDeament/88ybg
+/***
+ * @author https://gitee.com/YYDeament/88ybg
  * 
- * @date 2016/10/1 */
+ * @date 2016/10/1
+ */
 @Api(tags = "第三方登陆设置项")
 @Controller
 @RequestMapping("/thirdoartlogin_do/")
 public class ThirdPartLoginController {
-	
+
 	@Autowired
-	WeiboUserService	weiboUserService;
+	WeiboUserService weiboUserService;
 	@Autowired
-	BaiduSocialSettingService	baiduUserService;
+	BaiduSocialSettingService baiduUserService;
 	@Autowired
-	WeixinApiService	weixinApiService;
+	WeixinApiService weixinApiService;
 	@Autowired
-	QqSocialSettingService		qQuserService;
+	QqSocialSettingService qQuserService;
 	@Autowired
-	SocialUserService	socialUserService;
+	SocialUserService socialUserService;
 	@Autowired
-	GithubSocialSettingService	githubuserService;
-	
+	GithubSocialSettingService githubuserService;
+	@Autowired
+	AliSocialSettingService aliSocialSettingService;
+
 	@RequestMapping(value = "index.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String index() {
 		return "/thirdpartlogin/setting";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "info.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public Map<String, Object> info() {
@@ -57,12 +63,15 @@ public class ThirdPartLoginController {
 		map.put("baidu", baiduUserService.getSetting());
 		map.put("qq", qQuserService.getSetting());
 		map.put("github", githubuserService.getSetting());
+		map.put("ali", aliSocialSettingService.getSetting());
 		return map;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "update.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public Json update(String qqid, String qqSERCRET, String baiduid, String baiduSERCRET, String sinaid, String sinaSERCRET, String weixinid, String weixinSERCRET, String githubid, String githubSERCRET) {
+	public Json update(String qqid, String qqSERCRET, String baiduid, String baiduSERCRET, String sinaid,
+			String sinaSERCRET, String weixinid, String weixinSERCRET, String githubid, String githubSERCRET,
+			String aliid, String aliSERCRET, String alipublickey) {
 		Json j = new Json();
 		j.setMsg("操作成功");
 		// 1.4版本 删除码云登陆， 回调地址 不需要再填写
@@ -70,11 +79,14 @@ public class ThirdPartLoginController {
 		weixinApiService.updateSetting(weixinid, weixinSERCRET);
 		baiduUserService.updateSetting(baiduid, baiduSERCRET, "");
 		qQuserService.updateSetting(qqid, qqSERCRET, "");
+		aliSocialSettingService.updateSetting(aliid, aliSERCRET, alipublickey);
+
 		j.setSuccess(true);
 		return j;
 	}
-	
-	/** 用户绑定信息
+
+	/**
+	 * 用户绑定信息
 	 * 
 	 * @throws Exception
 	 **/
@@ -97,7 +109,7 @@ public class ThirdPartLoginController {
 		map.put("github", checkproviderid("github", list));
 		return map;
 	}
-	
+
 	private boolean checkproviderid(String providerid, List<SocialUserVO> list) {
 		boolean flag = false;
 		for (SocialUserVO bean : list) {
@@ -107,8 +119,7 @@ public class ThirdPartLoginController {
 		}
 		return flag;
 	}
-	
-	//
+
 	@ResponseBody
 	@RequestMapping("delsocialbind.do")
 	public Json delbaidu(@AuthenticationPrincipal UserVO user, String providerid) {

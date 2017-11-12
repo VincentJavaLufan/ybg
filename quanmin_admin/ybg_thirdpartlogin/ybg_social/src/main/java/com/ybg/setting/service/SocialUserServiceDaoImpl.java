@@ -25,4 +25,10 @@ public class SocialUserServiceDaoImpl implements SocialUserService {
 	public void remove(BaseMap<String, Object> conditionmap) {
 		socialUserDao.remove(conditionmap);
 	}
+
+	@Override
+	public void create(String userid, String provideruserid, String prividerid) {
+		socialUserDao.create(userid, provideruserid, prividerid);
+		
+	}
 }

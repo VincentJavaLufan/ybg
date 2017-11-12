@@ -8,8 +8,10 @@
 	<div class="row" id="rrapp" v-cloak>
 		<div class="col-xs-12">
 			<div class="m-b-md">
-				<div class="form-inline" role="form" id="searchForm" name="searchForm">
-					<a href="javascript:void(0)" @click="updatePassword" class="btn btn-s-md btn-default btn-rounded" id="search">修改密码</a>
+				<div class="form-inline" role="form" id="searchForm"
+					name="searchForm">
+					<a href="javascript:void(0)" @click="updatePassword"
+						class="btn btn-s-md btn-default btn-rounded" id="search">修改密码</a>
 				</div>
 			</div>
 		</div>
@@ -19,9 +21,11 @@
 					<h3 class="box-title">社交账号</h3>
 					<div class="box-tools">
 						<div class="input-group input-group-sm" style="width: 150px;">
-							<input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+							<input type="text" name="table_search"
+								class="form-control pull-right" placeholder="Search">
 							<div class="input-group-btn">
-								<button type="submit" class="btn btn-default" onclick="alert('未开发')">
+								<button type="submit" class="btn btn-default"
+									onclick="alert('未开发')">
 									<i class="fa fa-search"></i>
 								</button>
 							</div>
@@ -33,53 +37,23 @@
 					<table class="table table-hover">
 						<tr>
 							<th>社交账号</th>
+							<th>id</th>
 							<th>操作</th>
 						</tr>
-						<tr>
-							<td>百度</td>
+						<tr v-for='item in items'>
+							<td><p v-if="item.providerid=='baidu'">百度</p>
+								<p v-if="item.providerid=='ali'">支付宝</p>
+								<p v-if="item.providerid=='qq'">腾讯</p>
+								<p v-if="item.providerid=='sina'">新浪</p>
+								<p v-if="item.providerid=='weixin'">微信</p></td>
+							<td>{{item.provideruserid}}</td>
 							<td>
-								<button v-if="baidu" type="button" class="btn btn-danger marR10" @click="delsocial('baidu')">删除</button>
-								<form v-if="!baidu" action="/connect/baidu" method="post">
-									<button class="btn btn-primary marR10" type="submit" disabled="disabled">绑定百度</button>
-								</form>
+								<button type="button" class="btn btn-danger marR10"
+									@click="delsocial(item.providerid,item.provideruserid)">删除</button>
+
 							</td>
 						</tr>
-						<tr>
-							<td>新浪</td>
-							<td>
-								<button v-if="sina" type="button" class="btn btn-danger marR10" @click="delsocial('sina')">删除</button>
-								<form v-if="!sina" action="/connect/sina" method="post">
-									<button class="btn btn-primary marR10" type="submit" disabled="disabled">绑定新浪</button>
-								</form>
-							</td>
-						</tr>
-						<tr>
-							<td>微信</td>
-							<td>
-								<button v-if="weixin" type="button" class="btn btn-danger marR10" @click="delsocial('weixin')">删除</button>
-								<form v-if="!weixin" action="/connect/weixin" method="post">
-									<button class="btn btn-primary marR10" type="submit" disabled="disabled">绑定微信</button>
-								</form>
-							</td>
-						</tr>
-						<tr>
-							<td>QQ</td>
-							<td>
-								<button v-if="qq" type="button" class="btn btn-danger marR10" @click="delsocial('qq')">删除</button>
-								<form v-if="!qq" action="/connect/qq" method="post">
-									<button class="btn btn-primary marR10" type="submit" disabled="disabled">绑定QQ</button>
-								</form>
-							</td>
-						</tr>
-						<tr>
-							<td>Github</td>
-							<td>
-								<button v-if="github" type="button" class="btn btn-danger marR10" @click="delsocial('github')">删除</button>
-								<form v-if="!github" action="/connect/github" method="post">
-									<button class="btn btn-primary marR10" type="submit" disabled="disabled">绑定Github</button>
-								</form>
-							</td>
-						</tr>
+
 					</table>
 				</div>
 				<!-- /.box-body -->
@@ -91,41 +65,43 @@
 				<div class="form-group">
 					<div class="col-sm-3 control-label col-xs-3">原密码</div>
 					<div class="col-sm-7 col-xs-6">
-						<input type="password" class="form-control" v-model="password" placeholder="原密码" />
+						<input type="password" class="form-control" v-model="password"
+							placeholder="原密码" />
 					</div>
 					<!-- Left side column. contains the sidebar -->
 				</div>
 				<div class="form-group">
 					<div class="col-sm-3 control-label col-xs-3">新密码</div>
 					<div class="col-sm-7 col-xs-5">
-						<input type="password" class="form-control" v-model="newPassword" placeholder="新密码" />
+						<input type="password" class="form-control" v-model="newPassword"
+							placeholder="新密码" />
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-3 control-label col-xs-4">再次确认</div>
 					<div class="col-sm-7 col-xs-5">
-						<input type="password" class="form-control" v-model="newPassword2" placeholder="新密码" />
+						<input type="password" class="form-control" v-model="newPassword2"
+							placeholder="新密码" />
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-3 control-label col-xs-3">验证码</div>
-					<img id="vrifyCode_modifypwd" alt="验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1" src="/defaultKaptcha" />
-					<input type="text" placeholder="请输入验证码" required="required" id="vrifyCode" name="vrifyCode" class="form-control input-sm" style="width: 30%; display: inline;">
+					<img id="vrifyCode_modifypwd" alt="验证码"
+						onclick="this.src='/defaultKaptcha?d='+new Date()*1"
+						src="/defaultKaptcha" /> <input type="text" placeholder="请输入验证码"
+						required="required" id="vrifyCode" name="vrifyCode"
+						class="form-control input-sm" style="width: 30%; display: inline;">
 				</div>
 			</form>
 		</div>
-		
+
 	</div>
 	<font color="red">绑定当前版本不支持 即时绑定。请退出后再绑定</font>
 	<script>
         var vm = new Vue({
             el : '#rrapp',
             data : {
-                weixin : null,
-                qq : null,
-                sina : null,
-                baidu : null,
-                github:null,
+            	items:null,
                 password : "",
                 newPassword2 : "",
                 newPassword : ""
@@ -137,11 +113,8 @@
                         url : rootPath + "/thirdoartlogin_do/boundinfo.do",
                         dataType : "json",
                         success : function(data) {
-                            vm.weixin = data.weixin;
-                            vm.qq = data.qq;
-                            vm.sina = data.sina;
-                            vm.baidu = data.baidu;
-                            vm.github=data.github;
+                            vm.items = data.list;
+                            
                         }
                     });
                 },
@@ -182,14 +155,15 @@
                         }
                     });
                 },
-                delsocial : function(pro) {
+                delsocial : function(pro,provideruserid) {
                     confirm('确定要删除关联？', function() {
                         $.ajax({
                             type : "POST",
                             url : rootPath + "/thirdoartlogin_do/delsocialbind.do",
                             dataType : "json",
                             data : {
-                                providerid : pro
+                                providerid : pro,
+                                provideruserid,provideruserid
                             },
                             success : function(data) {
                                 layer.closeAll();

@@ -49,12 +49,7 @@
 			<artifactId>ybg_company</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- 社交登陆 -->
-		<dependency>
-			<groupId>com.ybg</groupId>
-			<artifactId>ybg_social_setting</artifactId>
-			<version>1.0.0</version>
-		</dependency>
+		<!-- 社交登陆 -->		
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_social</artifactId>

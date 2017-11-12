@@ -13,7 +13,7 @@ public interface AliSocialSettingDao {
 	/** 更新阿里社交登陆设置
 	 * @param appid 应用ID
 	 * @param value 应用密码
-	 * @param url 回调地址（已作废）
+	 * @param alipublickey 支付宝公钥
 	 *  **/
-	void updateSetting(String appid, String value, String url);
+	void updateSetting(String appid, String value, String alipublickey);
 }

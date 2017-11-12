@@ -16,6 +16,7 @@
 							<option value="4">百度</option>
 							<option value="5">QQ</option>
 							<option value="6">Github</option>
+							<option value="7">阿里</option>
 						</select>
 					</div>
 				</div>
@@ -77,6 +78,24 @@
 					<div class="col-sm-2 control-label">Github密钥</div>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" v-model="github.client_SERCRET" placeholder="" />
+					</div>
+				</div>
+				<div class="form-group" v-show="thirdpart == 7">
+					<div class="col-sm-2 control-label">支付宝APPid</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="ali.client_ID" placeholder="" />
+					</div>
+				</div>
+				<div class="form-group" v-show="thirdpart == 7">
+					<div class="col-sm-2 control-label">支付宝商户密钥</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="ali.client_SERCRET" placeholder="2048位" />
+					</div>
+				</div>
+				<div class="form-group" v-show="thirdpart == 7">
+					<div class="col-sm-2 control-label">支付宝公钥</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="ali.alipublickey" placeholder="" />
 					</div>
 				</div>
 				<div class="form-group">

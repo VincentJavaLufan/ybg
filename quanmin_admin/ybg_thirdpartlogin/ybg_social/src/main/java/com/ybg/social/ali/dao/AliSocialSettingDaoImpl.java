@@ -39,7 +39,7 @@ public class AliSocialSettingDaoImpl extends BaseDao implements AliSocialSetting
 	}
 	
 	@Override
-	public void updateSetting(String appid, String value, String url) {
+	public void updateSetting(String appid, String value, String alipublickey) {
 		String tablename = "ali_login_setting_1";
 		StringBuilder sql = new StringBuilder();
 		sql.append(UPDATE).append(tablename).append(SET).append(" `value` ='").append(appid).append("'");
@@ -50,8 +50,8 @@ public class AliSocialSettingDaoImpl extends BaseDao implements AliSocialSetting
 		sql.append(WHERE).append("`key`='client_SERCRET'");
 		getJdbcTemplate().update(sql.toString());
 		sql = new StringBuilder();
-		sql.append(UPDATE).append(tablename).append(SET).append(" `value` ='").append(url).append("'");
-		sql.append(WHERE).append("`key`='redirect_URI'");
+		sql.append(UPDATE).append(tablename).append(SET).append(" `value` ='").append(alipublickey).append("'");
+		sql.append(WHERE).append("`key`='alipublickey'");
 		getJdbcTemplate().update(sql.toString());
 	}
 }

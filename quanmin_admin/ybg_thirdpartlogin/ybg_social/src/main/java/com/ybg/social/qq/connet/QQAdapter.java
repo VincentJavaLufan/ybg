@@ -9,7 +9,7 @@ import com.ybg.social.qq.api.QQUserInfo;
  * @date 2017/10/1 **/
 public class QQAdapter implements ApiAdapter<QQ> {
 	
-	// 测试API是否可用
+	/** 测试API是否可用**/
 	@Override
 	public boolean test(QQ api) {
 		return true;

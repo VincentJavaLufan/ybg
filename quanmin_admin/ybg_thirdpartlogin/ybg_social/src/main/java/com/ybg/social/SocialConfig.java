@@ -37,7 +37,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
 		return repository;
 	}
 	
-	// 改变默认的过滤器
+	/** 改变默认的过滤器**/
 	@Bean
 	public SpringSocialConfigurer imoocSocialSecurityConfig() {
 		String filterProcessesUrl = "/social";
@@ -47,7 +47,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
 		return configurer;
 	}
 	
-	// 和社交登陆绑定的工具类
+	/** 和社交登陆绑定的工具类**/
 	@Bean
 	public ProviderSignInUtils providerSignInUtils(ConnectionFactoryLocator connectionFactoryLocator) {
 		return new ProviderSignInUtils(connectionFactoryLocator, getUsersConnectionRepository(connectionFactoryLocator)) {

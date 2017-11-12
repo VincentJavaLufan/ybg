@@ -452,7 +452,7 @@
 			<artifactId>aliyun-java-jdk</artifactId>
 			<version>1.0.0</version>
 			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/alipay-sdk-java20170818173712.jar</systemPath>
+			<systemPath>${project.basedir}/src/main/resources/lib/alipay-sdk-java20171027120314.jar</systemPath>
 		</dependency>
 		<!-- 支付宝登陆 end -->
 		<!-- 验证码 -->

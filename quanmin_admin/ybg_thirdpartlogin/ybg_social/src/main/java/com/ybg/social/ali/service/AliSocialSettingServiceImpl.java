@@ -20,7 +20,7 @@ public class AliSocialSettingServiceImpl implements AliSocialSettingService {
 	}
 	
 	@Override
-	public void updateSetting(String appid, String value, String url) {
-		aliUserDao.updateSetting(appid, value, url);
+	public void updateSetting(String appid, String value, String alipublickey) {
+		aliUserDao.updateSetting(appid, value, alipublickey);
 	}
 }

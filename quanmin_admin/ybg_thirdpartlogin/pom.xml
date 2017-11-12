@@ -13,7 +13,7 @@
 	<url>http://maven.apache.org</url>
 	<packaging>pom</packaging>
 	<modules>
-		<module>ybg_social_setting</module>
+		
 		<module>ybg_social</module>
 	</modules>
 </project>
