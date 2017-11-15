@@ -1,34 +1,27 @@
-<?xml version="1.0"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.egzosn</groupId>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
 		<artifactId>pay-java-parent</artifactId>
+		<groupId>com.egzosn</groupId>
 		<version>2.0.4-SNAPSHOT</version>
 	</parent>
-	<groupId>com.egzosn</groupId>
-	<artifactId>pay-java-union</artifactId>
-	<version>2.0.4-SNAPSHOT</version>
-	<name>pay-java-union</name>
-	<url>http://maven.apache.org</url>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-	<dependencies>
+    <modelVersion>4.0.0</modelVersion>
 
-		<!-- pay-java -->
-		<dependency>
-			<groupId>com.egzosn</groupId>
-			<artifactId>pay-java-common</artifactId>
-			<version>2.0.4-SNAPSHOT</version>
-		</dependency>
-		<!-- /pay-java -->
+    <artifactId>pay-java-union</artifactId>
 
-	</dependencies>
-	
-	<build>
+    <dependencies>
+
+        <!-- pay-java  -->
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-common</artifactId>
+            <version>2.0.4-SNAPSHOT</version>
+        </dependency>
+        <!-- /pay-java  -->
+
+    </dependencies><build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -46,5 +39,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	
 </project>
