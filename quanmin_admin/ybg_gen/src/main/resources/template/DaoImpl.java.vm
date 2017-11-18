@@ -29,9 +29,9 @@ public class ${className}DaoImpl extends BaseDao implements ${className}Dao {
 	}
 
 
-	private static String QUERY_TABLE_NAME = "#foreach($column in $columns) #if($column.columnName != $pk.columnName)
+	private static String  QUERY_TABLE_COLUMN= "#foreach($column in $columns) #if($column.columnName != $pk.columnName)
 	  ${classname}.${column.columnName},#end#end ${pk.columnName}";
-	private static String QUERY_TABLE_COLUMN ="${tableName}  ${classname}";
+	private static String  QUERY_TABLE_NAME="${tableName}  ${classname}";
 	@Override
 	public ${className}VO save(${className}VO ${classname}) throws Exception {
 		BaseMap<String, Object> createmap = new BaseMap<String, Object>();
