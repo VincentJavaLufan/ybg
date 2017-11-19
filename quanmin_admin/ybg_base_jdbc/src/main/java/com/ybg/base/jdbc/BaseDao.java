@@ -41,7 +41,8 @@ public abstract class BaseDao extends BaseSql {
 	@SuppressWarnings("unused")
 	public String baseCreate(BaseMap<String, Object> createmap, String tableName, String idName) throws Exception {
 		UUID uuid = UUID.randomUUID();
-		String id = uuid.toString().replaceAll("-", "");
+		//加上时间戳，因为在大并发下 还是会重复。
+		String id = uuid.toString().replaceAll("-", "")+System.currentTimeMillis();
 		StringBuilder sql = new StringBuilder();
 		sql.append(INSERT).append(INTO).append(tableName).append("(");
 		if (createmap != null && createmap.size() > 0) {
