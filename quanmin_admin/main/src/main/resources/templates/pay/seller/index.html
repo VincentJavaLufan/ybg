@@ -1,0 +1,142 @@
+<html>
+<head>
+<#include "/common/common2.ftl"/>
+</head>
+<body>
+	<div id="rrapp" v-cloak>
+		<div v-show="showList">
+			<div class="m-b-md">
+				<form class="form-inline" role="form" id="searchForm"
+					name="searchForm">
+					<div class="form-group">
+						<label class="control-label">
+							<span class="h4 font-thin v-middle">支付类型:</span>
+						</label>
+						<input class="form-control" id="paytype" name="paytype">
+					</div>
+					<a href="javascript:void(0)"
+						class="btn btn-s-md btn-default btn-rounded" @click="query"
+						id="search">查询</a>
+				</form>
+			</div>
+			<header class="panel-heading">
+				<div class="doc-buttons">
+					<a class="btn btn-primary" @click="add">
+						<i class="fa fa-plus"></i>
+						&nbsp;新增
+					</a>
+					<a class="btn btn-primary" @click="update">
+						<i class="fa fa-pencil-square-o"></i>
+						&nbsp;修改
+					</a>
+					<a class="btn btn-primary" @click="del">
+						<i class="fa fa-trash-o"></i>
+						&nbsp;删除
+					</a>
+				</div>
+			</header>
+			<div class="table-responsive">
+				<div id="paging" class="pagclass"></div>
+			</div>
+		</div>
+		<div v-show="!showList" class="panel panel-default">
+			<div class="panel-heading">{{title}}</div>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-2 control-label">商户ID</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="seller.partner"
+							placeholder="商户ID" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">应用ID</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="seller.appid"
+							placeholder="应用ID" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">公钥</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="seller.publickey"
+							placeholder="公钥" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">私钥</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="seller.privatekey" placeholder="私钥" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">异步回调地址</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="seller.notifyurl"
+							placeholder="异步回调地址" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">同步回调地址</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="seller.returnurl"
+							placeholder="同步回调地址" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">收款帐号</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="seller.seller"
+							placeholder="收款帐号" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">签名类型</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="seller.signtype"
+							placeholder="签名类型" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">支付类型</div>
+					<div class="col-sm-10">
+						<select class="form-control" v-model="seller.paytype">
+							<option value="aliPay">支付宝</option>
+							<option value="wxPay">微信</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">消息类型</div>
+					<div class="col-sm-10">
+						<select class="form-control" v-model="seller.msgtype">
+							<option value="text">文本</option>
+							<option value="xml">XML</option>
+							<option value="json">Json</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">是否测试</div>
+					<div class="col-sm-10">
+						<select class="form-control" v-model="seller.test">
+							<option value="1">是</option>
+							<option value="0">否</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label"></div>
+					<input type="button" class="btn btn-primary" @click="saveOrUpdate"
+						value="确定" />
+					&nbsp;&nbsp;
+					<input type="button" class="btn btn-warning" @click="reload"
+						value="返回" />
+				</div>
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript" src="/js/pay/seller.js"></script>
+</body>
+</html>

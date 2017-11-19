@@ -7,15 +7,13 @@
 <div id="rrapp" v-cloak>
 	<div v-show="showList">
 		<div class="grid-btn">
-			$save
+			
 			<a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
-			$end
-			$update
+			
 			<a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
-			$end
-			$delete
+			
 			<a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
-			$end
+			
 		</div>
 	    <div class="table-responsive">
 			<div id="paging" class="pagclass"></div>
@@ -44,4 +42,4 @@
 	</div>
 </div>
 </body>
-
+</html>

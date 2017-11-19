@@ -308,7 +308,9 @@ public class AliPayService extends BasePayService {
 
 
         //预订单
+        System.out.println("311:"+getReqUrl() + "?" + UriVariables.getMapToParameters(orderInfo));
         JSONObject result = getHttpRequestTemplate().postForObject(getReqUrl() + "?" + UriVariables.getMapToParameters(orderInfo), null, JSONObject.class);
+        System.out.println("313:"+result.toString());
         JSONObject response = result.getJSONObject("alipay_trade_precreate_response");
         if ("10000".equals(response.getString("code"))){
             return MatrixToImageWriter.writeInfoToJpgBuff( response.getString("qr_code"));

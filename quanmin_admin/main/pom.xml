@@ -49,7 +49,7 @@
 			<artifactId>ybg_company</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- 社交登陆 -->		
+		<!-- 社交登陆 -->
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_social</artifactId>
@@ -127,10 +127,13 @@
 			<artifactId>pay-java-wx-youdian</artifactId>
 			<version>${pay-java.version}</version>
 		</dependency>
+		<!-- <dependency> <groupId>com.egzosn</groupId> <artifactId>pay-java-demo</artifactId> 
+			<version>2.0.4-SNAPSHOT</version> </dependency> -->
 		<dependency>
 			<groupId>com.egzosn</groupId>
-	<artifactId>pay-java-demo</artifactId>
-	<version>2.0.4-SNAPSHOT</version>
+			<artifactId>ybg_pay</artifactId>
+			<version>1.0.0</version>
+
 		</dependency>
 		<!-- 支付模块结束 -->
 		<!-- 验证码 -->
@@ -163,13 +166,13 @@
 			<artifactId>ybg_uflo</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- -->
+	
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_ureport</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<!-- -->
+		
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_urule</artifactId>
