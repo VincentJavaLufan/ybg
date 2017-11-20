@@ -1,5 +1,7 @@
 package com.egzosn.pay.seller.domain;
 
+import java.io.Serializable;
+
 import com.egzosn.pay.common.bean.MsgType;
 
 /**
@@ -9,7 +11,7 @@ import com.egzosn.pay.common.bean.MsgType;
  * @date
  * @version v1.0
  */
-public class SellerDO {
+public class SellerDO implements Serializable{
 
 	/** 支付账号id **/
 	private String payid;

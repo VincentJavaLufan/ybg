@@ -1,15 +1,16 @@
 package com.egzosn.pay.commodity.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * 商品
+ * 商品（开通会员型，其他类型，请 自行实现。）
  * 
  * @author https://gitee.com/YYDeament/88ybg
  * @date
  * @version v1.0
  */
-public class CommodityDO {
+public class CommodityDO implements Serializable{
 
 	String id;
 	/** 名称 **/
