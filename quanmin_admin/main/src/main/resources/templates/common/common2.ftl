@@ -165,3 +165,4 @@ var _hmt = _hmt || [];
   		s.parentNode.insertBefore(mta, s);
   	})();
 </script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=64208831" charset="UTF-8"></script>
