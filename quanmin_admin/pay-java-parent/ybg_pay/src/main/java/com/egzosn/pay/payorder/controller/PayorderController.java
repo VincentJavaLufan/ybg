@@ -23,10 +23,12 @@ import com.egzosn.pay.common.bean.PayOrder;
 import com.egzosn.pay.common.bean.PayOutMessage;
 import com.egzosn.pay.common.util.MatrixToImageWriter;
 import com.egzosn.pay.common.util.str.StringUtils;
+import com.egzosn.pay.payorder.DefaultPaySetting;
 import com.egzosn.pay.seller.domain.PayType;
 import com.egzosn.pay.seller.service.PayResponse;
 import com.egzosn.pay.seller.service.SellerService;
 import com.egzosn.pay.wx.bean.WxTransactionType;
+import com.ybg.base.util.ServletUtil;
 
 /**
  * @author https://gitee.com/YYDeament/88ybg
@@ -38,6 +40,7 @@ import com.egzosn.pay.wx.bean.WxTransactionType;
 public class PayorderController {
 	@Resource
 	private SellerService service;
+
 	@RequestMapping("index.do")
 	public String index() {
 		return "/pay/huiyuan/huiyuan";
@@ -66,9 +69,10 @@ public class PayorderController {
 	/** 支付宝方式开通会员 **/
 	@ResponseBody
 	@RequestMapping(value = "toAliQrPay.jpg", produces = "image/jpeg;charset=UTF-8")
-	public byte[] toAliQrPay( HttpServletRequest request) throws IOException {
-		Integer aliPayId=1;int price=10;
-		
+	public byte[] toAliQrPay(HttpServletRequest request) throws IOException {
+		String aliPayId = DefaultPaySetting.ALIPAYID;
+		int price = 10;
+
 		// 获取对应的支付账户操作工具（可根据账户id）
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		// 这里为需要生成二维码的地址
@@ -80,7 +84,7 @@ public class PayorderController {
 			url.append("aliPayId=").append(aliPayId).append("&");
 		}
 		url.append("price=").append(price);
-		//加上用户信息
+		// 加上用户信息
 		url.append("&userid=asdasdasd");
 
 		ImageIO.write(MatrixToImageWriter.writeInfoToJpgBuff(url.toString()), "JPEG", baos);
@@ -135,7 +139,8 @@ public class PayorderController {
 	 * @param price
 	 *            金额
 	 * @return 支付宝与微信平台的判断
-	 */@ResponseBody
+	 */
+	@ResponseBody
 	@RequestMapping(value = "toAliPay.do", produces = "text/html;charset=UTF-8")
 	public String toAliPay(Integer aliPayId, BigDecimal price, HttpServletRequest request) throws IOException {
 		StringBuilder html = new StringBuilder();
@@ -161,6 +166,7 @@ public class PayorderController {
 		html.append("function isAliPay(){\n" + " var ua = window.navigator.userAgent.toLowerCase();\n" + " if(ua.match(/AlipayClient/i) =='alipayclient'){\n" + "  return true;\n" + " }\n" + "  return false;\n" + "}</script> <body></html>");
 		return html.toString();
 	}
+
 	/**
 	 * 跳到支付页面
 	 * 针对实时支付,即时付款
@@ -181,7 +187,7 @@ public class PayorderController {
 		// 获取对应的支付账户操作工具（可根据账户id）
 
 		PayResponse payResponse = service.getPayResponse(payId);
-//XXX 这里应该把订单插进数据库
+		// XXX 这里应该把订单插进数据库
 		PayOrder order = new PayOrder("订单title", "摘要", null == price ? new BigDecimal(0.01) : price, UUID.randomUUID().toString().replace("-", ""), PayType.valueOf(payResponse.getStorage().getPayType()).getTransactionType(transactionType));
 		// ------ 微信H5使用----
 		order.setSpbillCreateIp(request.getHeader("X-Real-IP"));
@@ -199,26 +205,35 @@ public class PayorderController {
 		Map<String, Object> orderInfo = payResponse.getService().orderInfo(order);
 		return payResponse.getService().buildRequest(orderInfo, MethodType.POST);
 	}
-	
-	
+
+	/** 同步通知 */
+	@RequestMapping("alipaysuccess.do")
+	public String aliPaySuccess() {
+		return "/pay/alipaysuccess";
+	}
+
 	/**
-	 * 支付回调地址
-	 *支付宝例子：http://192.168.1.101/pay/huiyuan/alipayBack.json?total_amount=10.00<br>
-	 *&timestamp=2017-11-21+23%3A15%3A39&<br>
-	 *sign=xxx&trade_no=2017112121001004810200312390<br>支付宝定义的订单ID
-	 *&sign_type=RSA2<br>
-	 *&auth_app_id=2016080500169957&charset=UTF-8&seller_id=2088102170002870<br>
-	 *&method=alipay.trade.wap.pay.return<br>
-	 *&app_id=2016080500169957<br>
-	 *&out_trade_no=c5258442d59a4b58ba49a331d0590b82<br>自己定义的订单ID
-	 *&version=1.0
+	 * 支付回调地址（异步）
+	 * 支付宝例子：http://192.168.1.101/pay/huiyuan/alipayBack.json?total_amount=10.00<br>
+	 * &timestamp=2017-11-21+23%3A15%3A39&<br>
+	 * sign=xxx&trade_no=2017112121001004810200312390<br>
+	 * 支付宝定义的订单ID
+	 * &sign_type=RSA2<br>
+	 * &auth_app_id=2016080500169957&charset=UTF-8&seller_id=2088102170002870<br>
+	 * &method=alipay.trade.wap.pay.return<br>
+	 * &app_id=2016080500169957<br>
+	 * &out_trade_no=c5258442d59a4b58ba49a331d0590b82<br>
+	 * 自己定义的订单ID
+	 * &version=1.0
+	 * 
 	 * @param request
 	 * @return 支付是否成功
 	 */
 	@ResponseBody
 	@RequestMapping(value = "alipayBack.json")
 	public String payBack(HttpServletRequest request) throws IOException {
-		String payId="1";
+		ServletUtil.sayParm(request);
+		String payId = DefaultPaySetting.ALIPAYID;
 		// 根据账户id，获取对应的支付账户操作工具
 		PayResponse payResponse = service.getPayResponse(payId);
 		PayConfigStorage storage = payResponse.getStorage();
@@ -238,5 +253,5 @@ public class PayorderController {
 		System.out.println(230);
 		return payResponse.getService().getPayOutMessage("fail", "失败").toMessage();
 	}
-	
+
 }
