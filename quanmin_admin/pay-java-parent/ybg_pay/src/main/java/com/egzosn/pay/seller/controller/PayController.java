@@ -279,7 +279,7 @@ public class PayController {
 	public Map<String, Object> getOrderInfo(String payId, String transactionType, BigDecimal price) {
 		// 获取对应的支付账户操作工具（可根据账户id）
 		PayResponse payResponse = service.getPayResponse(payId);
-		Map<String, Object> data = new HashMap<>();
+		Map<String, Object> data = new HashMap<>(1);
 		data.put("code", 0);
 		PayOrder order = new PayOrder("订单title", "摘要", null == price ? new BigDecimal(0.01) : price, UUID.randomUUID().toString().replace("-", ""), PayType.valueOf(payResponse.getStorage().getPayType()).getTransactionType(transactionType));
 		data.put("orderInfo", payResponse.getService().orderInfo(order));
@@ -299,7 +299,7 @@ public class PayController {
 		PayConfigStorage storage = payResponse.getStorage();
 		// 获取支付方返回的对应参数
 		Map<String, Object> params = payResponse.getService().getParameter2Map(request.getParameterMap(), request.getInputStream());
-		if (null == params) {
+		if (null == params) { 
 			return payResponse.getService().getPayOutMessage("fail", "失败").toMessage();
 		}
 
@@ -338,7 +338,7 @@ public class PayController {
 		PayResponse payResponse = service.getPayResponse(order.getPayId());
 		return payResponse.getService().close(order.getTradeNo(), order.getOutTradeNo());
 	}
-
+	
 	/**
 	 * 申请退款接口
 	 *

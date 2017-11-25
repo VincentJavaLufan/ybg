@@ -190,4 +190,10 @@ public class PayOrder {
     public void setOpenid(String openid) {
         this.openid = openid;
     }
+
+	@Override
+	public String toString() {
+		return "PayOrder [subject=" + subject + ", body=" + body + ", price=" + price + ", outTradeNo=" + outTradeNo + ", bankType=" + bankType + ", deviceInfo=" + deviceInfo + ", spbillCreateIp=" + spbillCreateIp + ", authCode=" + authCode + ", wapUrl=" + wapUrl + ", wapName=" + wapName + ", openid=" + openid + ", transactionType=" + transactionType + ", curType=" + curType + "]";
+	}
+    
 }

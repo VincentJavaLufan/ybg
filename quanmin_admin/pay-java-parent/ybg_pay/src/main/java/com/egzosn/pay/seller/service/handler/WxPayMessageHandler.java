@@ -5,7 +5,7 @@ import com.egzosn.pay.common.bean.PayOutMessage;
 import com.egzosn.pay.common.exception.PayErrorException;
 import java.util.Map;
 
-/** 微信支付回调处理器 Created by ZaoSheng on 2016/6/1. */
+/** 微信支付回调处理器 @author Created by ZaoSheng on 2016/6/1. */
 public class WxPayMessageHandler extends BasePayMessageHandler {
 	
 	public WxPayMessageHandler(String payId) {

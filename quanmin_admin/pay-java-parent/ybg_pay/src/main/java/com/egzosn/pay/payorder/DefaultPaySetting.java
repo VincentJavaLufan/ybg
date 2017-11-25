@@ -9,7 +9,7 @@ package com.egzosn.pay.payorder;
  */
 public class DefaultPaySetting {
 	/** 阿里支付的ID **/
-	public static String ALIPAYID = "1";
+	public static String ALIPAYID = "5";
 	/** 微信支付的ID **/
 	public static String WEIXINPAYID = "3";
 }

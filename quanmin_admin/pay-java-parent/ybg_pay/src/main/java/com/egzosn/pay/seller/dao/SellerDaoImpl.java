@@ -1,5 +1,4 @@
 package com.egzosn.pay.seller.dao;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +12,20 @@ import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
 
+/** @author https://gitee.com/YYDeament/88ybg
+ *
+ * @date
+ * @version v1.0 */
 @Repository
 public class SellerDaoImpl extends BaseDao implements SellerDao {
-	private static String QUERY_TABLE_COLUMN = "payAccount.partner,payAccount.appid,payAccount.publickey,payAccount.privatekey,payAccount.notifyurl,payAccount.returnurl,payAccount.seller,payAccount.signtype,payAccount.inputcharset,payAccount.paytype,payAccount.msgtype,payAccount.test, payid";
-	private static String QUERY_TABLE_NAME = "pay_account  payAccount";
+	
+	private static String	QUERY_TABLE_COLUMN	= "payAccount.partner,payAccount.appid,payAccount.publickey,payAccount.privatekey,payAccount.notifyurl,payAccount.returnurl,payAccount.seller,payAccount.signtype,payAccount.inputcharset,payAccount.paytype,payAccount.msgtype,payAccount.test, payid";
+	private static String	QUERY_TABLE_NAME	= "pay_account  payAccount";
 	@Autowired
-	JdbcTemplate jdbcTemplate;
-
+	JdbcTemplate			jdbcTemplate;
+	
 	@Override
 	public SellerVO get(String id) {
-
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(WHERE).append("1=1");
@@ -31,7 +34,7 @@ public class SellerDaoImpl extends BaseDao implements SellerDao {
 		List<SellerVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<SellerVO>(SellerVO.class));
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
-
+	
 	@Override
 	public Page list(Page page, SellerQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
@@ -40,12 +43,13 @@ public class SellerDaoImpl extends BaseDao implements SellerDao {
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
 			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<SellerVO>(SellerVO.class)));
-		} else {
+		}
+		else {
 			page.setResult(new ArrayList<SellerVO>());
 		}
 		return page;
 	}
-
+	
 	private String getcondition(SellerQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(WHERE).append("1=1");
@@ -70,10 +74,9 @@ public class SellerDaoImpl extends BaseDao implements SellerDao {
 		if (qvo.getMsgtype() != null) {
 			sqlappen(sql, "payAccount.msgtype", qvo.getMsgtype().toString());
 		}
-
 		return sql.toString();
 	}
-
+	
 	@Override
 	public List<SellerVO> list(SellerQuery qvo) throws Exception {
 		StringBuilder sql = new StringBuilder();
@@ -81,22 +84,19 @@ public class SellerDaoImpl extends BaseDao implements SellerDao {
 		sql.append(getcondition(qvo));
 		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<SellerVO>(SellerVO.class));
 	}
-
+	
 	@Override
 	public void update(BaseMap<String, Object> updateMap, BaseMap<String, Object> whereMap) {
 		baseupdate(updateMap, whereMap, "pay_account");
-
 	}
-
+	
 	@Override
 	public void remove(BaseMap<String, Object> conditionmap) {
 		baseremove(conditionmap, "pay_account");
-
 	}
-
+	
 	@Override
 	public SellerVO create(SellerVO payAccount) throws Exception {
-
 		BaseMap<String, Object> createmap = new BaseMap<String, Object>();
 		String id = null;
 		createmap.put("partner", payAccount.getPartner());
@@ -115,16 +115,13 @@ public class SellerDaoImpl extends BaseDao implements SellerDao {
 			createmap.put("msgtype", payAccount.getMsgtype().toString());
 		}
 		createmap.put("test", payAccount.getTest());
-
 		id = baseCreate(createmap, "pay_account", "payid");
 		payAccount.setPayid((String) id);
 		return payAccount;
 	}
-
+	
 	@Override
 	public JdbcTemplate getJdbcTemplate() {
-
 		return jdbcTemplate;
 	}
-
 }

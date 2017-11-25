@@ -26,7 +26,6 @@ public class RSA2 {
 	* @return 布尔值
 	*/
 	public static boolean verify(String content, String sign, String publicKey, String characterEncoding){
-
 		return RSA.verify(content, sign, publicKey, SIGN_SHA256RSA_ALGORITHMS, characterEncoding );
 	}
 	

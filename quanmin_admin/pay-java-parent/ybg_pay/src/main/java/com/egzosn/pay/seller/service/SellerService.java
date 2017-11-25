@@ -1,28 +1,22 @@
 package com.egzosn.pay.seller.service;
-
 import java.util.List;
-
 import com.egzosn.pay.seller.domain.SellerVO;
 import com.egzosn.pay.seller.qvo.SellerQuery;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
 
-/**
- * @author https://gitee.com/YYDeament/88ybg
+/** @author https://gitee.com/YYDeament/88ybg
  * @date
- * @version v1.0
- */
+ * @version v1.0 */
 public interface SellerService {
-	/**
-	 * 根据ID获取
+	
+	/** 根据ID获取
 	 * 
 	 * @param id
-	 * @return
-	 */
+	 * @return */
 	SellerVO get(String id);
-
-	/**
-	 * 分页查询
+	
+	/** 分页查询
 	 * 
 	 * @param page
 	 * @param qvo
@@ -30,33 +24,29 @@ public interface SellerService {
 	 * @throws Exception
 	 */
 	Page list(Page page, SellerQuery qvo) throws Exception;
-
-	/**
-	 * 查询
+	
+	/** 查询
 	 * 
 	 * @param qvo
 	 * @return
 	 * @throws Exception
 	 */
 	List<SellerVO> list(SellerQuery qvo) throws Exception;
-
-	/**
-	 * 更新
+	
+	/** 更新
 	 * 
 	 * @param updateMap
 	 * @param whereMap
 	 */
 	void update(BaseMap<String, Object> updateMap, BaseMap<String, Object> whereMap);
-
-	/**
-	 * 删除
+	
+	/** 删除
 	 * 
 	 * @param conditionmap
 	 */
 	void remove(BaseMap<String, Object> conditionmap);
-
-	/**
-	 * 创建（返回ID）
+	
+	/** 创建（返回ID）
 	 * 
 	 * @param bean
 	 * @return
@@ -64,9 +54,9 @@ public interface SellerService {
 	 */
 	SellerVO create(SellerVO bean) throws Exception;
 	
-	/**
+	/** 根据ID获取
+	 * 
 	 * @param id
-	 * @return
-	 */
-	 PayResponse getPayResponse(String id) ;
+	 * @return */
+	PayResponse getPayResponse(String id);
 }

@@ -14,6 +14,24 @@ import com.egzosn.pay.common.bean.PayOrder;
 public class PayorderDO extends PayOrder implements Serializable {
 	String id;
 	String userid;
+	String payid;
+	String transactionype;
+
+	public String getPayid() {
+		return payid;
+	}
+
+	public void setPayid(String payid) {
+		this.payid = payid;
+	}
+
+	public String getTransactionype() {
+		return transactionype;
+	}
+
+	public void setTransactionype(String transactionype) {
+		this.transactionype = transactionype;
+	}
 
 	public String getId() {
 		return id;
