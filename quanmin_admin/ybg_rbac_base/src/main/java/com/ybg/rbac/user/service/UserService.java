@@ -90,4 +90,11 @@ public interface UserService {
 	 * 
 	 * @return */
 	public List<String> findUserIdsWithConnection(Connection<?> connection);
+	
+	/** 更新用户的角色依赖
+	 * 
+	 * @param userid
+	 * @param roleids
+	 */
+	void updateUserRole(String userid, List<String> roleids);
 }

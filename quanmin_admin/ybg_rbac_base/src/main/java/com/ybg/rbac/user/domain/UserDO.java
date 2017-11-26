@@ -39,10 +39,10 @@ public class UserDO implements Serializable {
 	private String				createtime;
 	@ApiModelProperty(name = "isdelete", dataType = "java.lang.Integer", value = "是否删除")
 	private Integer				isdelete;
-	@ApiModelProperty(name = "roleid", dataType = "java.lang.String", value = "角色编码")
-	@ExcelVOAttribute(name = "角色编码", column = "H", isExport = true)
-	@NotBlank(message = "角色编码不能为空")
-	private String				roleid;
+	// @ApiModelProperty(name = "roleid", dataType = "java.lang.String", value = "角色编码")
+	// @ExcelVOAttribute(name = "角色编码", column = "H", isExport = true)
+	// @NotBlank(message = "角色编码不能为空")
+	// private String roleid;
 	@ApiModelProperty(name = "credentialssalt", dataType = "java.lang.String", value = "加密盐", hidden = true)
 	private String				credentialssalt;
 	
@@ -118,17 +118,9 @@ public class UserDO implements Serializable {
 		this.isdelete = isdelete;
 	}
 	
-	public String getRoleid() {
-		return roleid;
-	}
-	
-	public void setRoleid(String roleid) {
-		this.roleid = roleid;
-	}
-	
 	@Override
 	public String toString() {
-		return "UserDO [id=" + id + ", username=" + username + ", email=" + email + ", phone=" + phone + ", password=" + password + ", state=" + state + ", createtime=" + createtime + ", isdelete=" + isdelete + ", roleid=" + roleid + ", credentialssalt=" + credentialssalt + "]";
+		return "UserDO [id=" + id + ", username=" + username + ", email=" + email + ", phone=" + phone + ", password=" + password + ", state=" + state + ", createtime=" + createtime + ", isdelete=" + isdelete + ", credentialssalt=" + credentialssalt + "]";
 	}
 	
 	@Override
@@ -142,7 +134,6 @@ public class UserDO implements Serializable {
 		result = prime * result + ((isdelete == null) ? 0 : isdelete.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
-		result = prime * result + ((roleid == null) ? 0 : roleid.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -214,14 +205,6 @@ public class UserDO implements Serializable {
 			}
 		}
 		else if (!phone.equals(other.phone)) {
-			return false;
-		}
-		if (roleid == null) {
-			if (other.roleid != null) {
-				return false;
-			}
-		}
-		else if (!roleid.equals(other.roleid)) {
 			return false;
 		}
 		if (state == null) {

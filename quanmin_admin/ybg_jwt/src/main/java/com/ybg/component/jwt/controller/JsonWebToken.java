@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import com.google.common.base.Joiner;
 import com.ybg.component.jwt.AccessToken;
 import com.ybg.component.jwt.Audience;
 import com.ybg.component.jwt.JwtHelper;
@@ -17,7 +18,7 @@ import com.ybg.rbac.user.service.LoginServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(tags="jwt校验API")
+@Api(tags = "jwt校验API")
 @RestController
 public class JsonWebToken {
 	
@@ -26,7 +27,7 @@ public class JsonWebToken {
 	@Autowired
 	private Audience	audienceEntity;
 	@Autowired
-	LoginServiceImpl		loginService;
+	LoginServiceImpl	loginService;
 	
 	@ApiOperation(value = "token校验", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(value = { "oauth/token" }, method = { RequestMethod.GET, RequestMethod.POST })
@@ -53,7 +54,7 @@ public class JsonWebToken {
 				}
 			}
 			// 拼装accessToken
-			String accessToken = JwtHelper.createJWT(loginPara.getUserName(), String.valueOf(user.getUsername()), user.getRoleid(), audienceEntity.getClientId(), audienceEntity.getName(), audienceEntity.getExpiresSecond() * 1000, audienceEntity.getBase64Secret());
+			String accessToken = JwtHelper.createJWT(loginPara.getUserName(), String.valueOf(user.getUsername()), Joiner.on(",").join(user.getRoleids()), audienceEntity.getClientId(), audienceEntity.getName(), audienceEntity.getExpiresSecond() * 1000, audienceEntity.getBase64Secret());
 			// 返回accessToken
 			AccessToken accessTokenEntity = new AccessToken();
 			accessTokenEntity.setAccess_token(accessToken);

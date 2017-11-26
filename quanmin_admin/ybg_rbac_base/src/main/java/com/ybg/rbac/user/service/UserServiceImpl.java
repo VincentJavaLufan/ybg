@@ -94,7 +94,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<String> findUserIdsWithConnection(Connection<?> connection) {
-		// TODO Auto-generated method stub
+		
 		return userDao.findUserIdsWithConnection(connection);
+	}
+
+	@Override
+	public void updateUserRole(String userid, List<String> roleids) {
+		userDao.updateUserRole(userid, roleids);
+		
 	}
 }

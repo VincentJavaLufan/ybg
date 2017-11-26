@@ -1,4 +1,5 @@
 package com.ybg.rbac.resources.service;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -6,6 +7,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseMap;
+import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Page;
 import com.ybg.rbac.resources.dao.ResourcesDao;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
@@ -91,8 +93,20 @@ public class ResourcrsServiceImpl implements ResourcesService {
 	 **/
 	@Override
 	@Cacheable(value = "resroleCache", key = "#root.method.name+#root.args[0]")
-	public List<SysResourcesVO> getRolesByUserId(String roleid) throws Exception {
-		return resourcesDao.getRolesByUserId(roleid);
+	public List<SysResourcesVO> getRolesByRoleId(String roleid) throws Exception {
+		return resourcesDao.getRolesByRoleId(roleid);
+	}
+	
+	@Override
+	// @Cacheable(value = "resroleCache", key = "#root.method.name+#root.args[0]")
+	public List<SysResourcesVO> getRolesByRoleIds(List<String> roleids) throws Exception {
+		List<SysResourcesVO> list = new ArrayList<>();
+		if (QvoConditionUtil.checkList(roleids)) {
+			for (String roleid : roleids) {
+				list.addAll(resourcesDao.getRolesByRoleId(roleid));
+			}
+		}
+		return list;
 	}
 	
 	/** 授权的按钮操作

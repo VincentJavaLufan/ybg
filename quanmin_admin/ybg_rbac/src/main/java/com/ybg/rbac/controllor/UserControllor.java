@@ -178,13 +178,15 @@ public class UserControllor {
 		j.setSuccess(true);
 		BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
 		BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
-		updatemap.put("roleid", user.getRoleid());
+	//	updatemap.put("roleid", user.getRoleids());
 		updatemap.put("state", user.getState());
 		updatemap.put("email", user.getEmail());
 		updatemap.put("phone", user.getPhone());
 		wheremap.put("id", user.getId());
 		try {
 			userService.update(updatemap, wheremap);
+			//更新角色
+			userService.updateUserRole(user.getId(), user.getRoleids());
 		} catch (Exception e) {
 			j.setMsg("操作失败");
 			return j;

@@ -1,5 +1,5 @@
 package com.ybg.core.controller;
-
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,28 +42,24 @@ import com.ybg.rbac.user.UserStateConstant;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.service.UserService;
 import com.ybg.setting.service.SocialUserService;
-
 import io.swagger.annotations.ApiOperation;
 
-/**
- * @author Deament
- * @date 2017/10/1
- **/
+/** @author Deament
+ * @date 2017/10/1 **/
 @Controller
 public class SocialController {
-
+	
 	@Autowired
-	private ProviderSignInUtils providerSignInUtils;
-	private RequestCache requestCache = new HttpSessionRequestCache();
+	private ProviderSignInUtils	providerSignInUtils;
+	private RequestCache		requestCache	= new HttpSessionRequestCache();
 	@Autowired
-	UserService userService;
+	UserService					userService;
 	@Autowired
-	SocialLoginServiceImpl socialLoginService;
+	SocialLoginServiceImpl		socialLoginService;
 	@Autowired
-	SocialUserService socialUserService;
-
-	/**
-	 * 当需要身份认证时，跳转到这里
+	SocialUserService			socialUserService;
+	
+	/** 当需要身份认证时，跳转到这里
 	 *
 	 * @param request
 	 * @param response
@@ -83,7 +79,7 @@ public class SocialController {
 		System.out.println("需要认证");
 		return "/";
 	}
-
+	
 	@ResponseBody
 	@GetMapping("/social/user")
 	public SocialUserInfo getSocialUserInfo(HttpServletRequest request) {
@@ -95,7 +91,7 @@ public class SocialController {
 		userInfo.setHeadimg(connection.getImageUrl());
 		return userInfo;
 	}
-
+	
 	@ApiOperation(value = "注册或者绑定页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "/common/login_do/toregister.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String toregister(HttpServletRequest request) throws Exception {
@@ -111,14 +107,11 @@ public class SocialController {
 		}
 		return "/thirdregister";
 	}
-
-	/** 第三方 登陆注册新用户绑定方式**/
+	
+	/** 第三方 登陆注册新用户绑定方式 **/
 	@ResponseBody
 	@PostMapping(value = { "/common/thirdpart/register", "/signup" })
-	public Json regist(UserVO user, HttpServletRequest request,
-			@RequestParam(name = "email", required = true) String email,
-			@RequestParam(name = VrifyCodeUtil.PARAMETERNAME, required = true) String vrifyCode, HttpSession session)
-			throws Exception {
+	public Json regist(UserVO user, HttpServletRequest request, @RequestParam(name = "email", required = true) String email, @RequestParam(name = VrifyCodeUtil.PARAMETERNAME, required = true) String vrifyCode, HttpSession session) throws Exception {
 		Json j = new Json();
 		j.setMsg("操作成功");
 		j.setSuccess(true);
@@ -140,7 +133,7 @@ public class SocialController {
 		String now = DateUtil.getDateTime();
 		user.setCredentialssalt(new DesUtils().encrypt(user.getPassword()));
 		user.setPassword(RbacConstant.getpwd(user.getPassword()));
-		user.setRoleid("10");
+		user.setRoleids(RbacConstant.initRole());
 		user.setPhone("");
 		user.setState(UserStateConstant.DIE);
 		user.setCreatetime(now);
@@ -151,8 +144,7 @@ public class SocialController {
 			j.setMsg("创建失败，已存在该用户");
 			return j;
 		}
-		String url = SystemConstant.getSystemdomain() + "/common/login_do/relife.do?userid=" + user.getId()
-				+ "&username=" + user.getUsername() + "&salt=" + user.getCredentialssalt();
+		String url = SystemConstant.getSystemdomain() + "/common/login_do/relife.do?userid=" + user.getId() + "&username=" + user.getUsername() + "&salt=" + user.getCredentialssalt();
 		// 获取激活邮件的hmtl内容
 		String contemt = this.getActiveContent(url, user.getUsername());
 		try {
@@ -169,8 +161,8 @@ public class SocialController {
 		providerSignInUtils.doPostSignUp(user.getId(), new ServletWebRequest(request));
 		return j;
 	}
-
-	/** 第三方 账号绑定**/
+	
+	/** 第三方 账号绑定 **/
 	@ResponseBody
 	@PostMapping("/common/thirdpart/bind")
 	public Json bind(HttpServletRequest httpServletRequest, ModelMap map) throws Exception {
@@ -183,8 +175,7 @@ public class SocialController {
 			j.setSuccess(false);
 			return j;
 		}
-		Connection<?> connection = providerSignInUtils
-				.getConnectionFromSession(new ServletWebRequest(httpServletRequest));
+		Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(httpServletRequest));
 		if (connection != null) {
 			if (connection.getKey().getProviderId() == null) {
 				j.setMsg("操作失败，请返回主页从新操作！");
@@ -192,10 +183,10 @@ public class SocialController {
 				return j;
 				// 会话失效 或者是被攻击
 			}
-		} else {
+		}
+		else {
 			return othertype(httpServletRequest);
 		}
-
 		String username = ServletUtil.getStringParamDefaultBlank(httpServletRequest, "username");
 		String password = ServletUtil.getStringParamDefaultBlank(httpServletRequest, "password");
 		Loginproxy proxy = LoginProxyController.login(httpServletRequest, username, password, null);
@@ -206,17 +197,17 @@ public class SocialController {
 			userInfo.setNickname(connection.getDisplayName());
 			userInfo.setHeadimg(connection.getImageUrl());
 			providerSignInUtils.doPostSignUp(proxy.getUser().getId(), new ServletWebRequest(httpServletRequest));
-			
 			j.setMsg("绑定成功");
 			j.setSuccess(true);
 			return j;
-		} else {
+		}
+		else {
 			j.setMsg(proxy.getResult());
 			j.setSuccess(false);
 			return j;
 		}
 	}
-
+	
 	/** 非正规渠道绑定。 **/
 	private Json othertype(HttpServletRequest httpServletRequest) throws AuthenticationException, Exception {
 		Json j = new Json();
@@ -231,29 +222,28 @@ public class SocialController {
 			userInfo.setProviderUserId(providerUserId);
 			userInfo.setNickname("");
 			userInfo.setHeadimg("");
-		//	providerSignInUtils.doPostSignUp(proxy.getUser().getId(), new ServletWebRequest(httpServletRequest));
+			// providerSignInUtils.doPostSignUp(proxy.getUser().getId(), new ServletWebRequest(httpServletRequest));
 			socialUserService.create(proxy.getUser().getId(), providerUserId, providerId);
 			httpServletRequest.getSession().removeAttribute("ProviderSignInAttempt");
 			httpServletRequest.getSession().removeAttribute("providerUserId");
 			j.setMsg("绑定成功");
 			j.setSuccess(true);
 			return j;
-		} else {
+		}
+		else {
 			j.setMsg(proxy.getResult());
 			j.setSuccess(false);
 			return j;
 		}
 	}
-
-	/**
-	 * 获取拼接的激活邮件的内容
+	
+	/** 获取拼接的激活邮件的内容
 	 * 
 	 * @param url
 	 *            激活链接
 	 * @param username
 	 *            用户名
-	 * @return 字符串形的邮件内容
-	 */
+	 * @return 字符串形的邮件内容 */
 	private String getActiveContent(String activeurl, String username) {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("<html><head>");
@@ -267,8 +257,7 @@ public class SocialController {
 		buffer.append("<a href=" + activeurl + ">激活</a>");
 		buffer.append("激活您的账号,<br>");
 		buffer.append("为保障您的帐号安全，请在3小时内点击该链接<br>");
-		buffer.append("如无法点击请您将下面链接<br><span style=\"color:blue\">" + activeurl
-				+ "</span><br>复制到浏览器地址栏访问。 若如果您已激活，请忽略本邮件，由此给您带来的不便请谅解。<br><br><br>");
+		buffer.append("如无法点击请您将下面链接<br><span style=\"color:blue\">" + activeurl + "</span><br>复制到浏览器地址栏访问。 若如果您已激活，请忽略本邮件，由此给您带来的不便请谅解。<br><br><br>");
 		buffer.append("本邮件由系统自动发出，请勿直接回复！ ");
 		buffer.append("</body></html>");
 		return buffer.toString();

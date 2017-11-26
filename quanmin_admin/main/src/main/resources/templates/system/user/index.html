@@ -59,7 +59,7 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label">所属角色</label>
 						<div class="col-sm-9">
-							<select class="form-control" v-model="user.roleid" required lay-verify="required">
+							<select v-select2="" class="form-control select2" style="width: 100%;" multiple="multiple" data-placeholder="请选择角色" v-model="user.roleids" required lay-verify="required">
 								<option v-bind:value="roleoption.id" v-for="roleoption in roleoptions">{{ roleoption.name }}</option>
 							</select>
 						</div>

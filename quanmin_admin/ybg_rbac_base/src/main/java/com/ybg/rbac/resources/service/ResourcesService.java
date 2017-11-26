@@ -52,7 +52,17 @@ public interface ResourcesService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<SysResourcesVO> getRolesByUserId(String roleid) throws Exception;
+	List<SysResourcesVO> getRolesByRoleId(String roleid) throws Exception;
+	
+	
+	/** 角色 权限集合
+	 * 
+	 * @param roleid
+	 * @return
+	 * @throws Exception
+	 */
+	List<SysResourcesVO> getRolesByRoleIds(List<String> roleid) throws Exception;
+	
 	
 	/** 授权的按钮操作
 	 * 

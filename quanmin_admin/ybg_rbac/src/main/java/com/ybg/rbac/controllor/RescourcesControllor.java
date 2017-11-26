@@ -158,7 +158,7 @@ public class RescourcesControllor {
 	@ResponseBody
 	@RequestMapping(value = { "findRes.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public List<SysResourcesVO> findUserRes(@RequestParam(name = "roleid", required = true) String roleid) throws Exception {
-		return resourcesService.getRolesByUserId(roleid);
+		return resourcesService.getRolesByRoleId(roleid);
 	}
 	
 	@ApiOperation(value = "获取单个授权资源", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -1,9 +1,34 @@
+  Vue.directive('select2', {
+            inserted: function (el, binding, vnode) {
+                let options = binding.value || {};
+
+                $(el).select2(options).on("select2:select", (e) => {
+                    // v-model looks for
+                    //  - an event named "change"
+                    //  - a value with property path "$event.target.value"
+                    el.dispatchEvent(new Event('change', { target: e.target })); //说好的双向绑定，竟然不安套路
+                    console.log("fire change in insert");
+                });
+            },
+            update: function (el, binding, vnode) {
+                for (var i = 0; i < vnode.data.directives.length; i++) {
+                    if (vnode.data.directives[i].name == "model") {
+                        $(el).val(vnode.data.directives[i].value);
+                        console.log("new value in update:"+vnode.data.directives[i].value);
+                    }
+                }
+                $(el).trigger("change");
+                console.log("fire change in update");
+            }
+        });
 var vm = new Vue({
     el : '#rrapp',
     data : {
         showList : true,
         title : null,
-        user : {},
+        user : {
+        	roleids:[]
+        },
         roleoptions : null
     },
     methods : {
@@ -17,9 +42,14 @@ var vm = new Vue({
             }
             vm.showList = false;
             vm.title = "编辑用户";
+            vm.user={
+                	roleids:[]
+            };
             vm.getUser(userid);
         },
         update : function() {
+        	
+        	console.log(vm.user.roleids);
             $.ajax({
                 type : "POST",
                 url : rootPath + "/user/user_do/update.do",
@@ -56,10 +86,15 @@ var vm = new Vue({
             });
         },
         getUser : function(userid) {
+        	
             $.get(rootPath + '/role/role_do/select.do', function(r) {
                 vm.roleoptions = r.roleselect;
                 $.get(rootPath + '/user/user_do/get.do?id=' + userid, function(r) {
+                	
                     vm.user = r.user;
+                 
+                  
+                   
                 });
             });
         },
@@ -95,9 +130,6 @@ $(function() {
                     colkey : "email",
                     name : "电子邮箱",
                 }, {
-                    colkey : "rolename",
-                    name : "所属角色",
-                }, {
                     colkey : "state",
                     name : "账号状态",
                     renderData : function(rowindex, data, rowdata, column) {
@@ -128,77 +160,7 @@ $(function() {
         checkbox : true,
         serNumber : true
     });
-    // $("#search").click("click", function() {// 绑定查询按扭
-    // var searchParams = $("#searchForm").serializeJson();// 初始化传参数
-    // grid.setOptions({
-    // data : searchParams
-    // });
-    // });
-    // $("#addAccount").click("click", function() {
-    // addAccount();
-    // });
-    // $("#editAccount").click("click", function() {
-    // editAccount();
-    // });
-    // $("#delAccount").click("click", function() {
-    // delAccount();
-    // });
-    // $("#permissions").click("click", function() {
-    // permissions();
-    // });
-    // $("#downFun").click("click", function() {
-    // downFun();
-    // });
+    
 });
-// function downFun() {
-// // var searchParams1 = $("#searchForm").serializeJson();
-// // var s = CommnUtil.ajax("/user/user_do/export.do", searchParams, "json");
-// // CommnUtil.ajax("/user/user_do/export.do",searchParams1,"text" );
-// // $.post("/user/user_do/export.do",
-// // $("#searchForm").serializeJson(),"file");
-// location.href = "/user/user_do/export.do?" + $("#searchForm").serialize();
-// }
-// function editAccount() {
-// var cbox = grid.getSelectedCheckbox();
-// if (cbox.length > 1 || cbox == "") {
-// alert("只能选中一个");
-// return;
-// }
-// pageii = layer.open({
-// title : "编辑",
-// type : 2,
-// maxmin : true, // 开启最大化最小化按钮
-// area : [
-// "600px", "80%"],
-// content : rootPath + '/user/user_do/toupdate.do?id=' + cbox
-// });
-// }
-// function addAccount() {
-// pageii = layer.open({
-// title : "新增",
-// type : 2,
-// maxmin : true, // 开启最大化最小化按钮
-// area : [
-// "600px", "80%"],
-// content : rootPath + '/user/user_do/toadd.do'
-// });
-// }
-// function delAccount() {
-// var cbox = grid.getSelectedCheckbox();
-// if (cbox == "") {
-// alert("请选择删除项！！");
-// return;
-// }
-// layer.confirm('是否删除？', function(index) {
-// var url = rootPath + '/user/user_do/remove.do';
-// var s = CommnUtil.ajax(url, {
-// ids : cbox.join(",")
-// }, "json");
-// if (s.msg == "操作成功") {
-// alert('删除成功');
-// grid.loadData();
-// } else {
-// alert('删除失败');
-// }
-// });
-// }
+
+$('.select2').select2();

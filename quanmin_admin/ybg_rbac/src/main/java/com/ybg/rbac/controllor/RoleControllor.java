@@ -192,7 +192,7 @@ public class RoleControllor {
 	public ResponseEntity<Map<String, Object>> get(@RequestParam(name = "id", required = true) String id) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>(100);
 		SysRoleVO role = roleService.get(id);
-		List<SysResourcesVO> menusvo = resourcesService.getRolesByUserId(id);
+		List<SysResourcesVO> menusvo = resourcesService.getRolesByRoleId(id);
 		List<String> list = new ArrayList<String>();
 		for (SysResourcesVO r : menusvo) {
 			list.add(r.getId());

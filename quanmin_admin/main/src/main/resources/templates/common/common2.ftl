@@ -10,6 +10,7 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="/css/ionicons.min.css">
   <!-- Theme style -->
+  <link rel="stylesheet" href="/js/plugins/select2/select2.css">
   <link rel="stylesheet" href="/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
@@ -20,6 +21,10 @@
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <link rel="stylesheet" href="/js/plugins/treegrid/jquery.treegrid.css">
  <link rel="stylesheet" href="/css/bootstrap-table.min.css">
+ 
+  
+
+ 
   <!-- jQuery 2.2.3 -->
 <script src="/js/plugins/jQuery/jquery-2.3.4.min.js"></script>
 <!-- AdminLTE App -->
@@ -51,6 +56,7 @@
 <script src="/js/plugins/jqgrid/grid.locale-cn.js"></script>
 <script src="/js/plugins/jqgrid/jquery.jqGrid.min.js"></script>
 <script src="/js/plugins/ztree/jquery.ztree.all.min.js"></script>
+<script src="/js/plugins/select2/select2.full.js"></script>
 
 
 <!--[if lt IE 9]> <script src="/js/jquery/ie/html5shiv.js"></script> 

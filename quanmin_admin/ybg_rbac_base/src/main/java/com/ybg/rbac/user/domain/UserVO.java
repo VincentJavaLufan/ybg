@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import com.ybg.rbac.role.domain.SysRoleVO;
 import com.ybg.rbac.user.UserStateConstant;
 
 /*** @author https://gitee.com/YYDeament/88ybg
@@ -19,8 +20,25 @@ public class UserVO extends UserDO implements UserDetails {
 	private String					salt;
 	/** 用户自身权限 **/
 	List<SimpleGrantedAuthority>	auths;
-	@ApiModelProperty(name = "rolename", dataType = "java.lang.String", value = "角色名称", hidden = true)
-	private String					rolename;
+	List<SysRoleVO>					rolelist;
+	/** 角色ID 集合 **/
+	List<String>					roleids;
+	
+	public List<String> getRoleids() {
+		return roleids;
+	}
+	
+	public void setRoleids(List<String> roleids) {
+		this.roleids = roleids;
+	}
+	
+	public List<SysRoleVO> getRolelist() {
+		return rolelist;
+	}
+	
+	public void setRolelist(List<SysRoleVO> rolelist) {
+		this.rolelist = rolelist;
+	}
 	
 	public String getSalt() {
 		return salt;
@@ -30,16 +48,16 @@ public class UserVO extends UserDO implements UserDetails {
 		this.salt = salt;
 	}
 	
-	public String getRolename() {
-		return rolename;
-	}
-	
-	public void setRolename(String rolename) {
-		this.rolename = rolename;
-	}
-	
+	// public String getRolename() {
+	// return rolename;
+	// }
+	//
+	// public void setRolename(String rolename) {
+	// this.rolename = rolename;
+	// }
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// 根据自定义逻辑来返回用户权限，如果用户权限返回空或者和拦截路径对应权限不同，验证不通过
 		return auths;
 	}
 	
@@ -47,6 +65,7 @@ public class UserVO extends UserDO implements UserDetails {
 		this.auths = (List<SimpleGrantedAuthority>) auths;
 	}
 	
+	/** 帐号是否不过期，false则验证不通过 */
 	@Override
 	public boolean isAccountNonExpired() {
 		if (UserStateConstant.DIE.equals(getState())) {
@@ -55,6 +74,7 @@ public class UserVO extends UserDO implements UserDetails {
 		return true;
 	}
 	
+	/** 帐号是否不锁定，false则验证不通过 */
 	@Override
 	public boolean isAccountNonLocked() {
 		if (UserStateConstant.LOCK.equals(getState())) {
@@ -63,18 +83,21 @@ public class UserVO extends UserDO implements UserDetails {
 		return true;
 	}
 	
+	/** 凭证是否不过期，false则验证不通过 */
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 	
+	/** 该帐号是否启用，false则验证不通过 */
 	@Override
 	public boolean isEnabled() {
 		return true;
 	}
 	
+	
 	@Override
 	public String toString() {
-		return "UserVO [salt=" + salt + ", auths=" + auths + ", rolename=" + rolename + ", getCredentialssalt()=" + getCredentialssalt() + ", getId()=" + getId() + ", getUsername()=" + getUsername() + ", getEmail()=" + getEmail() + ", getPhone()=" + getPhone() + ", getPassword()=" + getPassword() + ", getState()=" + getState() + ", getCreatetime()=" + getCreatetime() + ", getIsdelete()=" + getIsdelete() + ", getRoleid()=" + getRoleid() + ", toString()=" + super.toString() + "]";
+		return "UserVO [salt=" + salt + ", auths=" + auths + ", getCredentialssalt()=" + getCredentialssalt() + ", getId()=" + getId() + ", getUsername()=" + getUsername() + ", getEmail()=" + getEmail() + ", getPhone()=" + getPhone() + ", getPassword()=" + getPassword() + ", getState()=" + getState() + ", getCreatetime()=" + getCreatetime() + ", getIsdelete()=" + getIsdelete() + ", toString()=" + super.toString() + "]";
 	}
 }

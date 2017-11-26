@@ -41,7 +41,7 @@ public class SocialLoginServiceImpl implements SocialUserDetailsService {
 		// 这里要把权限加进去 不然无法加载权限
 		List<SysResourcesVO> authlist = null;
 		try {
-			authlist = resourcesService.getRolesByUserId(user.getRoleid());
+			authlist = resourcesService.getRolesByRoleIds(user.getRoleids());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

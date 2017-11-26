@@ -107,7 +107,7 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 	}
 	
 	@Override
-	public List<SysResourcesVO> getRolesByUserId(String roleid) throws Exception {
+	public List<SysResourcesVO> getRolesByRoleId(String roleid) throws Exception {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",sc.colorclass").append(FROM).append("sys_resources res,sys_res_role rr,sys_color sc").append(WHERE).append("res.id=rr.resId");
 		sqlappen(sql, "rr.roleid", roleid);
