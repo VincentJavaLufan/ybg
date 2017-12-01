@@ -10,6 +10,15 @@ public class SysResourcesVO extends ResourcesDO {
 	private String				colorclass;
 	/** 父目录名称 **/
 	private String				parentname;
+	private String				rolekey;
+	
+	public String getRolekey() {
+		return rolekey;
+	}
+	
+	public void setRolekey(String rolekey) {
+		this.rolekey = rolekey;
+	}
 	
 	public String getParentname() {
 		return parentname;

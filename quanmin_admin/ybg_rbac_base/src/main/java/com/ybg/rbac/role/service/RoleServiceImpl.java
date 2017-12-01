@@ -1,11 +1,16 @@
 package com.ybg.rbac.role.service;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
+import com.ybg.rbac.resources.dao.ResourcesDao;
+import com.ybg.rbac.resources.domain.SysResourcesVO;
+import com.ybg.rbac.resources.service.ResourcesService;
 import com.ybg.rbac.role.dao.RoleDao;
 import com.ybg.rbac.role.domain.RoleResDO;
 import com.ybg.rbac.role.domain.SysRoleVO;
@@ -18,7 +23,9 @@ import com.ybg.rbac.role.qvo.RoleQuery;
 public class RoleServiceImpl implements RoleService {
 	
 	@Autowired
-	RoleDao roleDao;
+	RoleDao			roleDao;
+	@Autowired
+	ResourcesDao	resourcesDao;
 	
 	@Override
 	/** 返回主键的创建
@@ -94,5 +101,23 @@ public class RoleServiceImpl implements RoleService {
 	@CacheEvict(value = "resroleCache", allEntries = true)
 	public void saveOrUpdateRoleRes(List<RoleResDO> list) {
 		roleDao.saveOrUpdateRoleRes(list);
+	}
+	
+	@Override
+	/** 获取所有角色，并且里面包含权限
+	 * 
+	 * @throws Exception
+	 **/
+	public Map<String, List<SysResourcesVO>> listIncludeResourceAllRole() throws Exception {
+		
+		Map<String, List<SysResourcesVO>> map= new LinkedHashMap<>();
+		
+		List<SysRoleVO> list = roleDao.list(new RoleQuery());
+		for(SysRoleVO role:list) {
+			List<SysResourcesVO> roleresourcelist = resourcesDao.getRolesByRoleId(role.getId());
+			map.put(role.getRolekey(), roleresourcelist);
+		}
+		
+		return map;
 	}
 }

@@ -1,5 +1,7 @@
 package com.ybg.config;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDecisionVoter;
+import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.vote.AuthenticatedVoter;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,10 +23,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.access.expression.WebExpressionVoter;
+import org.springframework.security.web.access.intercept.DefaultFilterInvocationSecurityMetadataSource;
+import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.social.security.SpringSocialConfigurer;
 import com.ybg.config.security.LoginSuccessHandler;
 import com.ybg.config.security.MyAccessDecisionManager;
@@ -39,7 +45,7 @@ import com.ybg.rbac.user.service.LoginServiceImpl;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	private LoginServiceImpl						userDetailsService;
+	private LoginServiceImpl					userDetailsService;
 	@Autowired
 	private YcAnthencationProder				provider;
 	@Autowired
@@ -64,6 +70,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// http.csrf().disable();
 		// / ************分隔***/
 		// http.addFilterAfter(MyUsernamePasswordAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+		/** 社交登录 **/
 		http.apply(imoocSocialSecurityConfig);
 		// http.apply(socialConfigurer).and().apply(socialConfigurer);
 		http.sessionManagement().invalidSessionStrategy(invalidSessionStrategy).maximumSessions(1).maxSessionsPreventsLogin(true).expiredSessionStrategy(sessionInformationExpiredStrategy);
@@ -173,4 +180,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		webExpressionVoter.setExpressionHandler(webSecurityExpressionHandler());
 		return webExpressionVoter;
 	}
+	
+	
 }

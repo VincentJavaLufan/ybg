@@ -1,7 +1,9 @@
 package com.ybg.rbac.role.service;
 import java.util.List;
+import java.util.Map;
 import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
+import com.ybg.rbac.resources.domain.SysResourcesVO;
 import com.ybg.rbac.role.domain.RoleResDO;
 import com.ybg.rbac.role.domain.SysRoleVO;
 import com.ybg.rbac.role.qvo.RoleQuery;
@@ -66,4 +68,11 @@ public interface RoleService {
 	 * @param id
 	 */
 	void removebyid(String id);
+	
+	/** 获取角色（角色下面有权限集合）
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	Map<String,List<SysResourcesVO>> listIncludeResourceAllRole() throws Exception;
 }

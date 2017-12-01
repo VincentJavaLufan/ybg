@@ -87,6 +87,8 @@ var vm = new Vue({
                 contentType : "application/json",
                 data : JSON.stringify(vm.role),
                 success : function(data) {
+                	console.log(data.msg);
+                	// vm.showList = true;
                     alert(data.msg);
                 }
             });

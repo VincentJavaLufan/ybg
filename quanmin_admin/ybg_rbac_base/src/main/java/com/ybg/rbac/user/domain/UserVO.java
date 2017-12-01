@@ -23,6 +23,16 @@ public class UserVO extends UserDO implements UserDetails {
 	List<SysRoleVO>					rolelist;
 	/** 角色ID 集合 **/
 	List<String>					roleids;
+	/** 角色键 集合 **/
+	List<String>					rolekeys;
+	
+	public List<String> getRolekeys() {
+		return rolekeys;
+	}
+	
+	public void setRolekeys(List<String> rolekeys) {
+		this.rolekeys = rolekeys;
+	}
 	
 	public List<String> getRoleids() {
 		return roleids;
@@ -94,7 +104,6 @@ public class UserVO extends UserDO implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-	
 	
 	@Override
 	public String toString() {

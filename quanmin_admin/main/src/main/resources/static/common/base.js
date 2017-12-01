@@ -1,14 +1,12 @@
-﻿function alert(text) {
-    layer.closeAll();//关闭所有 
-    layer.alert(text, {
-        icon : 8
-    });
-    layer.alert(text, {
-        skin: 'layui-layer-molv'
-        ,closeBtn: 0
-        ,anim: 4 //动画类型
-      });
-}
+﻿//function alert(text) {
+////    layer.closeAll();//关闭所有 
+////   ;
+//    layer.alert(text, {
+//        skin: 'layui-layer-molv'
+//        ,closeBtn: 0
+//        ,anim: 4 //动画类型
+//      });
+//}
 
 //重写confirm式样框
 window.confirm = function(msg, callback){

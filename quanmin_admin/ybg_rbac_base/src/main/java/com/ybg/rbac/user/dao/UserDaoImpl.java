@@ -124,14 +124,19 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		UserVO bean = list.size() == 0 ? null : list.get(0);
 		// 查询角色
 		if (bean != null) {
-			List<String> roleids = getJdbcTemplate().query("SELECT roleid FROM sys_user_role WHERE  userid=?", new RowMapper<String>() {
+			List<String> roleids =new ArrayList<>();
+			List<String> rolekeys =new ArrayList<>();
+			 getJdbcTemplate().query("SELECT a.roleid,b.rolekey FROM sys_user_role a , sys_role b  WHERE a.roleid=b.id  and  userid=?", new RowMapper<String>() {
 				
 				@Override
 				public String mapRow(ResultSet rs, int index) throws SQLException {
-					return rs.getString("roleid");
+					roleids.add(rs.getString("roleid"));
+					rolekeys.add(rs.getString("rolekey"));
+					return "";
 				}
 			}, bean.getId());
 			bean.setRoleids(roleids);
+			bean.setRolekeys(rolekeys);
 		}
 		return bean;
 	}

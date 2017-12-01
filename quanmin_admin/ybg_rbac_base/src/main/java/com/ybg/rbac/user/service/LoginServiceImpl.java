@@ -15,6 +15,8 @@ import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
 import com.ybg.rbac.resources.service.ResourcesService;
+import com.ybg.rbac.role.domain.SysRoleVO;
+import com.ybg.rbac.role.service.RoleService;
 import com.ybg.rbac.user.dao.UserDao;
 import com.ybg.rbac.user.domain.UserVO;
 import com.ybg.rbac.user.qvo.UserQuery;
@@ -29,6 +31,8 @@ public class LoginServiceImpl implements UserDetailsService {
 	UserDao				userdao;
 	@Autowired
 	ResourcesService	resourcesService;
+	@Autowired
+	RoleService			roleService;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -39,17 +43,30 @@ public class LoginServiceImpl implements UserDetailsService {
 		}
 		UserVO user = userdao.login(username);
 		// 这里要把权限加进去 不然无法加载权限
-		List<SysResourcesVO> authlist = null;
+		// List<SysResourcesVO> authlist = null;
 		try {
-			authlist = resourcesService.getRolesByRoleIds(user.getRoleids());
+			List<SimpleGrantedAuthority> auths = new ArrayList<SimpleGrantedAuthority>();
+			// authlist = resourcesService.getRolesByRoleIds(user.getRoleids());
+			// List<SysRoleVO> allRole = roleService.listIncludeResourceAllRole();
+			// for(SysRoleVO role:allRole) {
+			// for(String roleid:user.getRoleids()) {
+			// if(roleid.equals(role.getId())) {
+			// auths.add(new SimpleGrantedAuthority(role.getRolekey()));
+			//
+			// }
+			//
+			// }
+			// }
+			for (String rolekey : user.getRolekeys()) {
+				auths.add(new SimpleGrantedAuthority(rolekey));
+			}
+			user.setAuthorities(auths);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		List<SimpleGrantedAuthority> auths = new ArrayList<SimpleGrantedAuthority>();
-		for (SysResourcesVO s : authlist) {
-			auths.add(new SimpleGrantedAuthority(s.getResurl()));
-		}
-		user.setAuthorities(auths);
+		// for (SysResourcesVO s : authlist) {
+		// auths.add(new SimpleGrantedAuthority(s.getResurl()));
+		// }
 		return user;
 	}
 	

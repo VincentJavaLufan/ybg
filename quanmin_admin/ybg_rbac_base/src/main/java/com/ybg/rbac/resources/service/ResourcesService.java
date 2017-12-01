@@ -54,7 +54,6 @@ public interface ResourcesService {
 	 */
 	List<SysResourcesVO> getRolesByRoleId(String roleid) throws Exception;
 	
-	
 	/** 角色 权限集合
 	 * 
 	 * @param roleid
@@ -62,7 +61,6 @@ public interface ResourcesService {
 	 * @throws Exception
 	 */
 	List<SysResourcesVO> getRolesByRoleIds(List<String> roleid) throws Exception;
-	
 	
 	/** 授权的按钮操作
 	 * 
@@ -86,4 +84,12 @@ public interface ResourcesService {
 	 * @throws Exception
 	 */
 	SysResourcesVO get(String id) throws Exception;
+	
+	/** 角色 权限集合
+	 * 
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	List<SysResourcesVO> getRolesByRoleIdHaveNull() throws Exception;
 }

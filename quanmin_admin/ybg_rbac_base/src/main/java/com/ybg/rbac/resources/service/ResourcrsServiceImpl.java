@@ -118,4 +118,10 @@ public class ResourcrsServiceImpl implements ResourcesService {
 	public List<SysResourcesVO> getOperatorButton(String roleid, String parentid) throws Exception {
 		return resourcesDao.getOperatorButton(roleid, parentid);
 	}
+	
+	@Override
+	//@Cacheable(value = "resroleCache", key = "#root.method.name")
+	public List<SysResourcesVO> getRolesByRoleIdHaveNull() throws Exception {
+		return resourcesDao.getRolesByRoleIdHaveNull();
+	}
 }

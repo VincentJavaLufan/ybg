@@ -53,7 +53,13 @@ public interface ResourcesDao {
 	 */
 	List<SysResourcesVO> getRolesByRoleId(String roleid) throws Exception;
 	
-
+	/** 角色 权限集合
+	 * 
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	List<SysResourcesVO> getRolesByRoleIdHaveNull() throws Exception;
 	
 	/** 授权的按钮操作
 	 * 

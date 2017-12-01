@@ -109,13 +109,29 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 	@Override
 	public List<SysResourcesVO> getRolesByRoleId(String roleid) throws Exception {
 		StringBuilder sql = new StringBuilder();
-		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(",sc.colorclass").append(FROM).append("sys_resources res,sys_res_role rr,sys_color sc").append(WHERE).append("res.id=rr.resId");
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append("sys_resources res,sys_res_role rr").append(WHERE).append("res.id=rr.resId");
 		sqlappen(sql, "rr.roleid", roleid);
 		sql.append(AND).append("rr.state=0");
 		sql.append(AND).append("res.isdelete=0");
-		sql.append(AND).append("sc.id=res.colorid");
+		
 		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<SysResourcesVO>(SysResourcesVO.class));
 	}
+	
+	@Override
+	public List<SysResourcesVO> getRolesByRoleIdHaveNull() throws Exception {
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(", IFNULL(sr.rolekey,'ROLR_NULL') rolekey ").append(FROM).append("sys_resources res LEFT JOIN sys_res_role rr").append(ON).append("res.id=rr.resId AND res.isdelete=0");
+		sql.append(" LEFT JOIN sys_role sr  ON rr.roleid=sr.id AND rr.state=0  ");
+		
+		sql.append(WHERE ).append("1=1");
+		//sqlappen(sql, "rr.roleid", roleid);
+	//	sql.append(AND).append("rr.state=0");
+	//	sql.append(AND).append("res.isdelete=0");
+		System.out.println(sql.toString());
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<SysResourcesVO>(SysResourcesVO.class));
+	}
+	
 	
 	@Override
 	public List<SysResourcesVO> getOperatorButton(String roleid, String parentid) throws Exception {
@@ -126,4 +142,6 @@ public class ResourcesDaoImpl extends BaseDao implements ResourcesDao {
 		sqlappen(sql, "parentid", parentid);
 		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<SysResourcesVO>(SysResourcesVO.class));
 	}
+
+
 }
