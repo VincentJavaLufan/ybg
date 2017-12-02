@@ -1,4 +1,5 @@
 package com.ybg.rbac.role.service;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,25 +11,27 @@ import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
 import com.ybg.rbac.resources.dao.ResourcesDao;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
-import com.ybg.rbac.resources.service.ResourcesService;
 import com.ybg.rbac.role.dao.RoleDao;
 import com.ybg.rbac.role.domain.RoleResDO;
 import com.ybg.rbac.role.domain.SysRoleVO;
 import com.ybg.rbac.role.qvo.RoleQuery;
 
-/*** @author https://gitee.com/YYDeament/88ybg
- * 
- * @date 2016/10/1 */
+/***
+ * @author https://gitee.com/YYDeament/88ybg
+ * 角色管理
+ * @date 2016/10/1
+ */
 @Repository
 public class RoleServiceImpl implements RoleService {
-	
+
 	@Autowired
-	RoleDao			roleDao;
+	RoleDao roleDao;
 	@Autowired
-	ResourcesDao	resourcesDao;
-	
+	ResourcesDao resourcesDao;
+
 	@Override
-	/** 返回主键的创建
+	/**
+	 * 返回主键的创建
 	 * 
 	 * @throws Exception
 	 **/
@@ -36,8 +39,9 @@ public class RoleServiceImpl implements RoleService {
 	public SysRoleVO save(SysRoleVO role) throws Exception {
 		return roleDao.save(role);
 	}
-	
-	/** 更新数据，条件 和 需要更新的字段都不能为空 不限个数个条件
+
+	/**
+	 * 更新数据，条件 和 需要更新的字段都不能为空 不限个数个条件
 	 * 
 	 * @author Deament
 	 * @param updatemap
@@ -45,13 +49,14 @@ public class RoleServiceImpl implements RoleService {
 	 * @param wheremap
 	 *            更新中的条件字段和值
 	 * @param table_name
-	 *            表的名称 **/
+	 *            表的名称
+	 **/
 	@Override
 	@CacheEvict(value = "roleCache", allEntries = true)
 	public void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> wheremap) {
 		roleDao.update(updatemap, wheremap);
 	}
-	
+
 	/** 根据id删除 **/
 	@Override
 	@CacheEvict(value = "roleCache", allEntries = true)
@@ -62,8 +67,9 @@ public class RoleServiceImpl implements RoleService {
 		updatemap.put("isdelete", "1");
 		update(updatemap, wheremap);
 	}
-	
-	/** 获取单个实体信息
+
+	/**
+	 * 获取单个实体信息
 	 * 
 	 * @throws Exception
 	 **/
@@ -75,8 +81,9 @@ public class RoleServiceImpl implements RoleService {
 		List<SysRoleVO> list = roleDao.list(qvo);
 		return list != null && list.size() > 0 ? list.get(0) : null;
 	}
-	
-	/** 分页查询
+
+	/**
+	 * 分页查询
 	 * 
 	 * @throws Exception
 	 **/
@@ -85,8 +92,9 @@ public class RoleServiceImpl implements RoleService {
 	public Page list(Page page, RoleQuery qvo) throws Exception {
 		return roleDao.list(page, qvo);
 	}
-	
-	/** 不分页查询
+
+	/**
+	 * 不分页查询
 	 * 
 	 * @throws Exception
 	 **/
@@ -95,29 +103,30 @@ public class RoleServiceImpl implements RoleService {
 	public List<SysRoleVO> list(RoleQuery qvo) throws Exception {
 		return roleDao.list(qvo);
 	}
-	
+
 	/** 角色授权 增删改都在里面了 **/
 	@Override
 	@CacheEvict(value = "resroleCache", allEntries = true)
 	public void saveOrUpdateRoleRes(List<RoleResDO> list) {
 		roleDao.saveOrUpdateRoleRes(list);
 	}
-	
+
 	@Override
-	/** 获取所有角色，并且里面包含权限
+	/**
+	 * 获取所有角色，并且里面包含权限
 	 * 
 	 * @throws Exception
 	 **/
 	public Map<String, List<SysResourcesVO>> listIncludeResourceAllRole() throws Exception {
-		
-		Map<String, List<SysResourcesVO>> map= new LinkedHashMap<>();
-		
+
+		Map<String, List<SysResourcesVO>> map = new LinkedHashMap<>();
+
 		List<SysRoleVO> list = roleDao.list(new RoleQuery());
-		for(SysRoleVO role:list) {
+		for (SysRoleVO role : list) {
 			List<SysResourcesVO> roleresourcelist = resourcesDao.getRolesByRoleId(role.getId());
 			map.put(role.getRolekey(), roleresourcelist);
 		}
-		
+
 		return map;
 	}
 }
