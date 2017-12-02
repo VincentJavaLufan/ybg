@@ -1,91 +1,245 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>88云报告</title>
-<meta name="renderer" content="webkit">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta http-equiv="Access-Control-Allow-Origin" content="*">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="format-detection" content="telephone=no">
-<#include "/common/common2.ftl"/>
-<link rel="stylesheet" href="/js/plugins/layui/css/layui.css" />
-<link rel="stylesheet" href="/css/layerui/swiper.min.css" />
-<link rel="stylesheet" href="/css/layerui/style.css" />
+    <meta charset="UTF-8">
+    <title>88云报告1.7.4 开发版</title>
+	<meta name="keywords" content="88ybg" />
+    <meta name="description" content="88ybg1.7.3" />
+	<meta name="Author" content="larry" />
+	<meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+	<meta name="apple-mobile-web-app-capable" content="yes">	
+	<meta name="format-detection" content="telephone=no">	
+	<link rel="Shortcut Icon" href="/favicon.ico" />
+	<!-- load css -->
+	<link rel="stylesheet" type="text/css" href="/layui/css/layui.css" media="all">
+	<link rel="stylesheet" type="text/css" href="/css/global.css" media="all">
+	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_bmgv5kod196q1tt9.css">
+	<link rel="stylesheet" type="text/css" href="/css/backstage.css" media="all">
+	<script src="/js/plugins/jQuery/jquery-2.3.4.min.js"></script>
+	<script type="text/javascript" src="/common/vue.js"></script>
+	<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?577038104fe0a8e00d90faee2f037aac";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+  	var _mtac = {};
+  	(function() {
+  		var mta = document.createElement("script");
+  		mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.4";
+  		mta.setAttribute("name", "MTAH5");
+  		mta.setAttribute("sid", "500553015");
 
+  		var s = document.getElementsByTagName("script")[0];
+  		s.parentNode.insertBefore(mta, s);
+  	})();
+</script>
+	
 </head>
 <body>
-	<div class="layui-layout layui-layout-admin">
-		<!--  头部区域  -->
-		<div class="layui-header" id="SYSTEM_HEAD"></div>
-		<!--  左侧菜单栏  -->
-		<div class="layui-side layui-bg-black left_sidebar" id="SYSTEM_MENU"></div>
-		<div class="layui-body" id="right_box">
-			<!-- 内容主体区域 -->
-			<div style="width: auto; height: 100%; box-sizing: border-box;">
-				<!-- 右侧内容 -->
-				<div class="layui-tab layui-tab-card marg0" lay-filter="bodyTab" id="top_tabs_box">
-					<ul class="layui-tab-title top_tab" id="top_tabs">
-						<li class="layui-this" lay-id="">
-							<i class="iconfont icon-computer"></i>
-							<cite>后台首页</cite>
-						</li>
-					</ul>
-					<ul class="layui-nav closeBox">
-						<li class="layui-nav-item">
-							<a href="javascript:;">
-								<i class="iconfont icon-caozuo"></i>
-								页面操作
-							</a>
-							<dl class="layui-nav-child">
-								<dd>
-									<a href="javascript:;" class="refresh refreshThis">
-										<i class="layui-icon">&#x1002;</i>
-										刷新当前
-									</a>
-								</dd>
-								<dd>
-									<a href="javascript:;" class="closePageOther">
-										<i class="iconfont icon-huaban"></i>
-										关闭其他
-									</a>
-								</dd>
-								<dd>
-									<a href="javascript:;" class="closePageAll">
-										<i class="iconfont icon-randeng_shipin_suoxutubiao-"></i>
-										关闭全部
-									</a>
-								</dd>
-							</dl>
-						</li>
-					</ul>
-					<div class="layui-tab-content clildFrame" id="clildFrame">
-						<div class="layui-tab-item layui-show" id="loadhtml">
-							<iframe src="/common/login_do/welcome.do"></iframe>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="layui-footer" id="SYSTEM_authinfo" >
-			{{SYSTEM_authinfo}}
+<div class="layui-layout layui-layout-admin" id="layui_layout">
+	<!-- 顶部区域 -->
+	<div class="layui-header header-menu">
+		<div class="logo posb" id="log" style="color: #fff;"><img src="/images/webicon/toplogo.png"></div>
+		<div class="layui-main posb">
+		  	<!-- 左侧导航收缩开关 -->
+		  	<div class="side-menu-switch posb" id="toggle"><span class="switch"  ara-hidden="true"></span></div>
+            <!-- 顶级菜单 -->
+            <div class="larry-top-menu posb">
+            	<ul class="layui-nav clearfix" id="menu">
+            	</ul>
+            </div>
+            <!-- 右侧常用菜单导航 -->
+            <div class="larry-right-menu posb">
+                <!--<button class="layui-btn layui-btn-small" id="dianzhan">-->
+                	<!--<i class="larry-icon larry-dianzan"></i>-->
+                	<!--打赏作者-->
+                <!--</button>-->
+                <ul class="layui-nav clearfix">
+                    <li class="layui-nav-item">
+                        <a class="onFullScreen" id="FullScreen"><i class="larry-icon larry-quanping"></i>全屏</a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a id="lock"><i class="larry-icon larry-diannao5"></i>锁屏</a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a id="clearCached"><i class="larry-icon larry-qingchuhuancun"></i>清除缓存</a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a id="larryTheme"><i class="larry-icon larry-theme1"></i>设置主题</a>
+                    </li>
+                    <!--<li class="layui-nav-item kjfs">
+                        <a class="kuaijiefangshi"><i class="larry-icon larry-kuaijie"></i><cite>快捷方式</cite></a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a href="http://www.larrycms.com/" target="_blank">网站主页</a>
+                            </dd>
+                            <dd>
+                                <a href="http://blog.larrycms.com/" target="_blank">我的博客</a>
+                            </dd>
+                        </dl>
+                    </li>-->
+                    <li class="layui-nav-item exit">
+                        <a  id="logout"><i class="larry-icon larry-exit"></i><cite>退出</cite></a>
+                    </li>
+                </ul>
+            </div>
 		</div>
 	</div>
-	<div class="site-tree-mobile layui-hide">
-		<i class="layui-icon"></i>
-		<span>展开</span>
+	<!-- 左侧导航 -->
+	<div class="layui-side larrycms-left" id="larry-side">
+		 <div class="layui-side-scroll" >
+              <!-- 管理员信息      -->
+              <!--<div class="user-info">
+                   <div class="photo">
+                       <img src="images/user.jpg" alt="">
+                   </div>
+                   <p>admin您好！欢迎登录</p>
+              </div>-->
+              <!-- 系统菜单 -->
+              <div class="sys-menu-box" >
+                   <ul class="layui-nav layui-nav-tree" id="larrySideNav" lay-filter="side" >
+                       
+                   </ul>
+              </div>
+         </div>
 	</div>
-	<div class="site-mobile-shade"></div>
-	<script type="text/javascript" src="/js/plugins/layui/layui.js"></script>
-	
-	<script type="text/javascript">
-        $("#SYSTEM_HEAD").load("/common/login_do/head.do");
-        $("#SYSTEM_MENU").load("/common/login_do/menu.do");
-    </script>
-   
-    <script >
+    <!-- 右侧主题内容 -->
+    <div class="layui-body" id="larry-body">
+        <div class="layui-tab" id="larry-tab" lay-filter="larryTab">
+             <div class="larry-title-box">
+                 <div class="go-left key-press pressKey" id="titleLeft" title="滚动至最右侧"><i class="larry-icon larry-weibiaoti6-copy"></i> </div>
+                 <ul class="layui-tab-title" lay-allowClose="true" id="layui-tab-title" lay-filter="subadd">
+                    <li class="layui-this" id="admin-home"  lay-id="0" fresh=1>
+                        <i class="larry-icon larry-houtaishouye"></i><em>后台首页</em>
+                    </li>
+                 </ul>
+                 <div class="title-right" id="titleRbox">
+                    <div class="go-right key-press pressKey" id="titleRight" title="滚动至最左侧"><i class="larry-icon larry-right"></i></div> 
+                    <div class="refresh key-press" id="refresh_iframe"><i class="larry-icon larry-shuaxin2"></i><cite>刷新</cite></div>
+                    <div class="often key-press" lay-filter='larryOperate' id="buttonRCtrl">
+                        <ul class="layui-nav posr">
+                            <li class="layui-nav-item posb">
+                              <a class="top"><i class="larry-icon larry-caozuo"></i><cite>常用操作</cite></a>
+                              <dl class="layui-nav-child">
+                                  <dd>
+                                      <a  data-eName="closeCurrent"><i class="larry-icon larry-guanbidangqianye"></i>关闭当前选项卡</a>
+                                  </dd>
+                                  <dd>
+                                      <a  data-eName="closeOther"><i class="larry-icon larry-guanbiqita"></i>关闭其他选项卡</a>
+                                  </dd>
+                                  <dd>
+                                      <a  data-eName="closeAll"><i class="larry-icon larry-guanbiquanbufenzu"></i>关闭全部选项卡</a>
+                                  </dd>
+                                  <dd>
+                                      <a  data-eName="refreshAdmin"><i class="larry-icon larry-kuangjia_daohang_shuaxin"></i>刷新最外层框架</a>
+                                  </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                 </div>
+             </div>
+             <div class="layui-tab-content">
+                  <div class="layui-tab-item layui-show" style="height: 100%">
+                      <iframe class="larry-iframe" data-id='0' name="ifr_0" id='ifr0' src="/common/login_do/welcome.do"></iframe>
+                  </div>
+             </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <div class="layui-footer layui-larry-foot psob" id="larry-footer">
+    	   <div class="layui-main">
+               <div class="left-box" style="display:none;">
+                     LarryCMS QQ群：<a href="https://jq.qq.com/?_wv=1027&amp;k=42fC4vT" target="_blank"><img border="0" src="images/group.png" title="LarryCMS官方交流群"></a> 加群下载模板源码
+          
+               </div>
+               
+               <p id="SYSTEM_authinfo">{{SYSTEM_authinfo}}</p> 
+         </div>
+    </div>
+    <!-- footer end -->
+    <!-- layui-layout-admin end -->
+</div>
+<!-- 加载js文件-->
+<script type="text/javascript" src="/layui/layui.js"></script> 
+<script type="text/javascript" src="/js/larrycms.js"></script>
+<!-- 主题配置 -->
+<div class="larryThemeContent" id="LarryThemeSet" style="display:none;">
+    <div class="larry-theme-form">
+        <h3>系统主题预设</h3>
+        <form action="" class="layui-form larry-theme-con">
+            <div class="layui-form-item select-theme">
+                <label class="layui-form-label">主题选择</label>
+                <div class="layui-input-block">
+                    <select lay-filter="larryTheme"  lay-verify="" id="themeName">
+                      <option value="larry">LarryCMS默认主题</option>
+                      <option value="A">LarryCMS深蓝主题</option>
+                      <option value="B">LarryCMS墨绿主题</option>
+                      <option value="larry_">更多主题以后添加</option>
+                    </select>     
+                </div>
+            </div>
+            <div class="layui-form-item fullscreen">
+                <label class="layui-form-label">是否全屏</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" lay-filter="fullscreen" lay-skin="switch"  value="1">
+                </div>
+            </div>
+            <div class="layui-form-item submit-form">
+                 <button class="layui-btn larry-button" lay-submit="" lay-filter="submitlocal">立即设置主题</button>
+                 <button type="reset" class="layui-btn layui-btn-primary">重置当前设置</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- layui-body常用菜单定义 -->
+<div class="rightMenu" id="rightMenu" style="display: none;">
+   <ul>
+        <li data-target="refreshCur">
+            <i class="larry-icon " ></i>刷新当前页面
+        </li>
+        <li data-target="refreshKj">
+            <i class="larry-icon " ></i>刷新外层框架
+        </li>
+        <li data-target="closeCurrent">
+            <i class="larry-icon " ></i>关闭当前选项卡
+        </li>
+        <li data-target="closeOther">
+            <i class="larry-icon " ></i>关闭其他选项卡
+        </li>
+        <li data-target="closeAll">
+            <i class="larry-icon " ></i>全部关闭选项卡
+        </li>
+   </ul>
+</div>
+<!-- 屏幕锁屏 -->
+<div class="lock-screen" style="display: none;">
+   <div class="lock-wrapper" id="lock-screen">
+        <div id="time"></div>
+        <div class="lock-box">
+             <img src="images/user.jpg" alt="">
+             <h1>admin</h1>
+             <form action="" class="layui-form lock-form">
+                  <div class="layui-form-item">
+                       <input type="password" name="lock_password" lay-verify="pass" placeholder="锁屏状态，请输入密码解锁" autocomplete="off" class="layui-input"  autofocus="">
+                  </div>
+                  <div class="layui-form-item">
+                       <button class="layui-btn larry-btn" id="unlock">立即解锁</button>
+                  </div>
+             </form>
+        </div>
+   </div>
+</div>
+ <script >
     var app2 = new Vue({
         el : '#SYSTEM_authinfo',
         data : {
