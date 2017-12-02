@@ -9,14 +9,14 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 /** @author Deament
  * 
  * @date 2016/9/31 ***/
-public class MyAccessDeniedHandler implements AccessDeniedHandler {
+public class YbgAccessDeniedHandler implements AccessDeniedHandler {
 	
 	private String accessDeniedUrl;
 	
-	public MyAccessDeniedHandler() {
+	public YbgAccessDeniedHandler() {
 	}
 	
-	public MyAccessDeniedHandler(String accessDeniedUrl) {
+	public YbgAccessDeniedHandler(String accessDeniedUrl) {
 		this.accessDeniedUrl = accessDeniedUrl;
 	}
 	

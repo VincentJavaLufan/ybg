@@ -11,15 +11,22 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-/** @author Deament
+/** 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 这个也称为授权器，<br>
+ * 通过登录用户的权限信息、资源、获取资源所需的权限来根据不同的授权策略来判断用户是否有权限访问资源。<br>
+ * 接口AccessDecisionManager也是必须实现的。 decide方法里面写的就是授权策略了，<br>
+ * 笔者的实现是，没有明说需要权限的（即没有对应的权限的资源），<br>
+ * 可以访问，用户具有其中一个或多个以上的权限的可以访问。这个就看需求了，需要什么策略，<br>
+ * 读者可以自己写其中的策略逻辑。通过就返回，不通过抛异常就行了，<br>
+ * spring security会自动跳到权限不足页面（配置文件上配的）。
+ * 
+ * @author Deament
  * 
  * @date 2016/9/31 ***/
-public class MyAccessDecisionManager extends AbstractAccessDecisionManager {
+public class YbgAccessDecisionManager extends AbstractAccessDecisionManager {
 	
-	public MyAccessDecisionManager(List<AccessDecisionVoter<? extends Object>> decisionVoters) {
+	public YbgAccessDecisionManager(List<AccessDecisionVoter<? extends Object>> decisionVoters) {
 		super(decisionVoters);
 	}
-	
 	
 	@Override
 	public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException {
@@ -33,7 +40,7 @@ public class MyAccessDecisionManager extends AbstractAccessDecisionManager {
 		Iterator<ConfigAttribute> ite = configAttributes.iterator();
 		while (ite.hasNext()) {
 			ConfigAttribute ca = ite.next();
-			String needRole = ((SecurityConfig)ca).getAttribute();
+			String needRole = ((SecurityConfig) ca).getAttribute();
 			for (GrantedAuthority ga : authentication.getAuthorities()) {
 				if (needRole.equals(ga.getAuthority())) {
 					return;

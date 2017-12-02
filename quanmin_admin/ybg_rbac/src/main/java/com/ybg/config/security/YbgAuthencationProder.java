@@ -13,7 +13,7 @@ import com.ybg.rbac.user.service.LoginServiceImpl;
 
 /** @author 自定义验证 */
 @Component
-public class YcAnthencationProder implements AuthenticationProvider {
+public class YbgAuthencationProder implements AuthenticationProvider {
 	
 	@Autowired
 	private LoginServiceImpl userService;
@@ -29,7 +29,7 @@ public class YcAnthencationProder implements AuthenticationProvider {
 			e.printStackTrace();
 		}
 		if (user == null) {
-			throw new BadCredentialsException("Username not found.");
+			throw new BadCredentialsException("无法找到用户");
 		}
 		Collection<? extends GrantedAuthority> authorities = userService.loadUserByUsername(username).getAuthorities();
 		return new UsernamePasswordAuthenticationToken(user, password, authorities);
