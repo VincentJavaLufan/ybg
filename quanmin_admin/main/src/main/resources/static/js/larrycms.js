@@ -39,19 +39,19 @@ layui.use([ 'elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common' ]
             "pid" : "0"
         }, {
             "title" : "教育系统",
-            "icon" : "larry-neirongguanli",
+            "icon" : "larry-guanbi",
             "pid" : "35"
         }, {
             "title" : "企业系统",
-            "icon" : "larry-weixingongzhongpingtai",
+            "icon" : "larry-guanbi",
             "pid" : "40"
         }, {
             "title" : "测试功能",
-            "icon" : "larry-ht_expand",
+            "icon" : "larry-daimaguanli",
             "pid" : "46"
         }, {
             "title" : "系统监控",
-            "icon" : "larry-ht_expand",
+            "icon" : "larry-jiankong",
             "pid" : "48"
         } ]
         larry.set({
@@ -113,7 +113,7 @@ layui.use([ 'elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common' ]
                         "href" : "/res/res_do/index.do"
                     }, {
                         "title" : "社交管理",
-                        "icon" : "larry-caidanguanli",
+                        "icon" : "larry-zuzhiguanli",
                         "href" : "/thirdoartlogin_do/index.do"
                     }
 
@@ -121,85 +121,85 @@ layui.use([ 'elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common' ]
                 }, {
                     "pid" : "103",
                     "title" : "开发工具",
-                    "icon" : "larry-huiyuanguanli2",
+                    "icon" : "larry-zhandianguanli",
                     "spread" : "true",
                     "children" : [ {
                         "title" : "代码生成",
-                        "icon" : "larry-kehuliebiao",
+                        "icon" : "larry-zhandianguanli",
                         "href" : "/sys/generator_do/index.do"
                     }, {
                         "title" : "API文档",
-                        "icon" : "larry-liuyan",
+                        "icon" : "larry-zhandianguanli",
                         "href" : "/swagger-ui.html"
                     }, {
                         "title" : "二维码",
-                        "icon" : "larry-fengxianbaozhang",
+                        "icon" : "larry-zhandianguanli",
                         "href" : "/common/qrcode/index.do"
                     } ]
                 }, {
                     "pid" : "104",
                     "title" : "OSS管理",
-                    "icon" : "larry-xitongshezhi1",
+                    "icon" : "larry-shangchuanfujian",
                     "spread" : "true",
                     "children" : [ {
                         "title" : "OSS设置",
-                        "icon" : "larry-circularxiangxi",
+                        "icon" : "larry-xitongshezhi3",
                         "href" : "/sys/oss_do/index.do"
                     } ]
                 }, {
                     "pid" : "105",
                     "title" : "任务管理",
-                    "icon" : "larry-a157",
+                    "icon" : "larry-renwuguanli",
                     "href" : "html/temp.html",
                     "spread" : "true",
                     "children" : [ {
                         "title" : "定时任务",
-                        "icon" : "larry-circularxiangxi",
+                        "icon" : "larry-renwuguanli",
                         "href" : "/sys/schedule_do/index.do"
                     }, {
                         "title" : "定时任务日志",
-                        "icon" : "larry-circularxiangxi",
+                        "icon" : "larry-xitongrizhi",
                         "href" : "/sys/scheduleLog_do/index.do"
                     } ]
                 }, {
                     "pid" : "105",
                     "title" : "微信",
-                    "icon" : "larry-a157",
+                    "icon" : "larry-weixingongzhongpingtai",
                     "href" : "html/temp.html",
                     "spread" : "true",
                     "children" : [ {
                         "title" : "微信标签管理",
-                        "icon" : "larry-circularxiangxi",
+                        "icon" : "larry-tags",
                         "href" : "/weixin/tags/index.do"
                     }, {
                         "title" : "微信菜单管理",
-                        "icon" : "larry-circularxiangxi",
+                        "icon" : "larry-zidingyicaidan",
                         "href" : "/weixin/menu_do/index.do"
                     } ]
                 }, {
                     "pid" : "106",
                     "title" : "支付平台",
-                    "icon" : "larry-a157",
+                    "icon" : "larry-zhifu",
                     "href" : "html/temp.html",
                     "spread" : "true",
                     "children" : [ {
                         "title" : "商户管理",
-                        "icon" : "larry-circularxiangxi",
+                        "icon" : "larry-payment",
                         "href" : "/pay/seller/index.do"
                     }, {
                         "title" : "商品管理",
-                        "icon" : "larry-circularxiangxi",
+                        "icon" : "larry-payment",
                         "href" : "/pay/commodity/index.do"
                     } ]
                 }, {
                     "pid" : "107",
                     "title" : "工作流管理",
-                    "icon" : "larry-a157",
+                    "icon" : "larry-jiedianguanli",
                     "href" : "html/temp.html",
                     "spread" : "true",
                     "children" : [ {
                         "title" : "流程设计模型管理",
-                        "icon" : "larry-circularxiangxi",
+                        "icon" : "larry-jiedianguanli",
                         "href" : "/models/model_do/index.do"
                     } ]
                 }
@@ -207,20 +207,20 @@ layui.use([ 'elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common' ]
                 , {
                     "pid" : "107",
                     "title" : "数据报表",
-                    "icon" : "larry-a157",
+                    "icon" : "larry-shujucaiji",
                     "href" : "html/temp.html",
                     "spread" : "true",
                     "children" : [ {
                         "title" : "报表设计",
-                        "icon" : "larry-circularxiangxi",
+                        "icon" : "larry-shujucaiji",
                         "href" : "/ureport/designer"
                     }, {
                         "title" : "规则报表",
-                        "icon" : "larry-circularxiangxi",
+                        "icon" : "larry-shujucaiji",
                         "href" : "/urule/frame"
                     }, {
                         "title" : "流程引擎(uflo)",
-                        "icon" : "larry-circularxiangxi",
+                        "icon" : "larry-shujucaiji",
                         "href" : "/uflo/designer"
                     } ]
                 }
@@ -230,45 +230,45 @@ layui.use([ 'elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common' ]
                 var pid_40 = [ ]
                 var pid_46 = [ {
                     "title" : "测试功能",
-                    "icon" : "larry-zhifubao",
+                    "icon" : "larry-daimaguanli",
                     "spread" : "true",
                     "children" : [ {
                         "title" : "测试：本地单文件上传",
-                        "icon" : "larry-api1",
+                        "icon" : "larry-api",
                         "href" : "/upload"
                     }, {
                         "title" : "测试：本地多文件上传",
-                        "icon" : "larry-iconzfb",
+                        "icon" : "larry-api",
                         "href" : "/upload/batch"
                     }, {
                         "title" : "测试：富文本",
-                        "icon" : "larry-iconzfb",
+                        "icon" : "larry-api",
                         "href" : "/kindeditor/index.do"
                     }, {
                         "title" : "测试：支付模块",
-                        "icon" : "larry-iconzfb",
+                        "icon" : "larry-api",
                         "href" : "/pay/index.do"
                     }, {
                         "title" : "测试：开通会员",
-                        "icon" : "larry-iconzfb",
+                        "icon" : "larry-api",
                         "href" : "/pay/huiyuan/index.do"
                     } ]
                 } ]
                 var pid_48 = [ {
                     "title" : "系统监控",
-                    "icon" : "larry-zhifubao",
+                    "icon" : "larry-jiankong",
                     "spread" : "true",
                     "children" : [ {
                         "title" : "连接池监控访问监控",
-                        "icon" : "larry-api1",
+                        "icon" : "larry-jiankong1",
                         "href" : "/druid/login.html"
                     }, {
                         "title" : "服务器监控",
-                        "icon" : "larry-iconzfb",
+                        "icon" : "larry-jiankong1",
                         "href" : "/monitoring"
                     }, {
                         "title" : "springboot 监控",
-                        "icon" : "larry-iconzfb",
+                        "icon" : "larry-jiankong1",
                         "href" : "/jk"
                     } ]
                 } ]
