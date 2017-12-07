@@ -160,7 +160,7 @@
 		<!-- https 按需引入 <dependency> <groupId>com.ybg</groupId> <artifactId>ybg_https</artifactId> 
 			<version>1.0.0</version> </dependency> -->
 		<!--https end -->
-		<!---->
+		<!--
 		<dependency>
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_uflo</artifactId>
@@ -177,7 +177,7 @@
 			<groupId>com.ybg</groupId>
 			<artifactId>ybg_urule</artifactId>
 			<version>1.0.0</version>
-		</dependency>
+		</dependency>-->
 	</dependencies>
 	<build>
 		<plugins>

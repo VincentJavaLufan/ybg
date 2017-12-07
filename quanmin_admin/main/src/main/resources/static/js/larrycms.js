@@ -204,26 +204,26 @@ layui.use([ 'elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common' ]
                     } ]
                 }
 
-                , {
-                    "pid" : "107",
-                    "title" : "数据报表",
-                    "icon" : "larry-shujucaiji",
-                    "href" : "html/temp.html",
-                    "spread" : "true",
-                    "children" : [ {
-                        "title" : "报表设计",
-                        "icon" : "larry-shujucaiji",
-                        "href" : "/ureport/designer"
-                    }, {
-                        "title" : "规则报表",
-                        "icon" : "larry-shujucaiji",
-                        "href" : "/urule/frame"
-                    }, {
-                        "title" : "流程引擎(uflo)",
-                        "icon" : "larry-shujucaiji",
-                        "href" : "/uflo/designer"
-                    } ]
-                }
+//                , {
+//                    "pid" : "107",
+//                    "title" : "数据报表",
+//                    "icon" : "larry-shujucaiji",
+//                    "href" : "html/temp.html",
+//                    "spread" : "true",
+//                    "children" : [ {
+//                        "title" : "报表设计",
+//                        "icon" : "larry-shujucaiji",
+//                        "href" : "/ureport/designer"
+//                    }, {
+//                        "title" : "规则报表",
+//                        "icon" : "larry-shujucaiji",
+//                        "href" : "/urule/frame"
+//                    }, {
+//                        "title" : "流程引擎(uflo)",
+//                        "icon" : "larry-shujucaiji",
+//                        "href" : "/uflo/designer"
+//                    } ]
+//                }
 
                 ];
                 var pid_35 = [  ]

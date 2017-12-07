@@ -643,7 +643,7 @@
 			<artifactId>mapdb</artifactId>
 			<version>1.0.9</version>
 		</dependency>
-		<!-- 规则报表 -->
+		<!-- 规则报表 
 		<dependency>
 			<groupId>com.bstek.uflo</groupId>
 			<artifactId>uflo-console</artifactId>
@@ -674,7 +674,7 @@
 					<artifactId>derby</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
+		</dependency>-->
 	</dependencies>
 	<build>
 		<plugins>

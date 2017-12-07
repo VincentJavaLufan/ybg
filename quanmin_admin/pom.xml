@@ -60,12 +60,12 @@
 		<module>ybg_qrcode</module>
 		<!-- https 配置模块 非必需 -->
 		<module>ybg_https</module>
-		<!-- uflo 工作流  非必需 -->
-		<module>ybg_uflo</module>
-		<!-- uflo 报表引擎  非必需 -->
-		<module>ybg_ureport</module>
-		<!-- uflo 规则引擎  非必需 -->
-		<module>ybg_urule</module>
+		<!-- uflo 工作流  非必需 
+		<module>ybg_uflo</module>-->
+		<!-- uflo 报表引擎  非必需
+		<module>ybg_ureport</module> -->
+		<!-- uflo 规则引擎  非必需 
+		<module>ybg_urule</module>-->
 		<!-- 本地上传  非必需 -->
 		<module>ybg_local_upload</module>
 	</modules>
