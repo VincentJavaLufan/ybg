@@ -6,12 +6,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
 import com.ybg.base.jdbc.BaseQueryAble;
+import com.ybg.base.jdbc.DataBaseConstant;
 import com.ybg.base.util.Page;
 import com.ybg.gen.entity.TableEntity;
 import com.ybg.gen.qvo.GeneratorQuery;
@@ -24,11 +26,37 @@ public class SysGeneratorDaoImpl extends BaseDao implements SysGeneratorDao {
 	
 	/** 默认使用sys 如果修改数据库 @Qualifier 修改 @Qualifier(DataBaseConstant.JD_EDU) */
 	@Autowired
-	JdbcTemplate jdbcTemplate;
+	JdbcTemplate	jdbcTemplate;
+	@Autowired
+	@Qualifier(value = DataBaseConstant.JD_EDU)
+	JdbcTemplate	edujdbcTemplate;
+	@Autowired
+	@Qualifier(value = DataBaseConstant.JD_OA)
+	JdbcTemplate	oajdbcTemplate;
+	@Autowired
+	@Qualifier(value = DataBaseConstant.JD_QUARTZ)
+	JdbcTemplate	quartzjdbcTemplate;
 	
 	@Override
 	public JdbcTemplate getJdbcTemplate() {
-		return jdbcTemplate;
+		// 切换数据源
+		String dbname = DataBaseConstant.getJdbcTemplate();
+		if (dbname == null) {
+			dbname = DataBaseConstant.JD_SYS;
+		}
+		System.out.println(48 + dbname);
+		switch (dbname) {
+		case DataBaseConstant.JD_SYS:
+			return jdbcTemplate;
+		case DataBaseConstant.JD_EDU:
+			return edujdbcTemplate;
+		case DataBaseConstant.JD_OA:
+			return oajdbcTemplate;
+		case DataBaseConstant.JD_QUARTZ:
+			return quartzjdbcTemplate;
+		default:
+			return jdbcTemplate;
+		}
 	}
 	
 	@Override

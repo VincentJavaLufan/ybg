@@ -11,6 +11,17 @@
 				</label>
 				<input class="form-control" id="tablename" name="tablename">
 			</div>
+			<div class="form-group">
+				<label class="control-label">
+					<span class="h4 font-thin v-middle">数据源:</span>
+				</label>
+				<select class="form-control" id="datasource" name="datasource">
+					<option value="sysJdbcTemplate" selected="selected">系统数据库</option>
+					<option value="oaJdbcTemplate">OA数据库</option>
+					<option value="eduJdbcTemplate">教育数据库</option>
+					<option value="quartzJdbcTemplate">定时任务数据库</option>
+				</select>
+			</div>
 			<a href="javascript:void(0)" class="btn btn-s-md btn-default btn-rounded" id="search">查询</a>
 		</form>
 	</div>
@@ -23,4 +34,5 @@
 		<div id="paging" class="pagclass"></div>
 	</div>
 	<script type="text/javascript" src="/js/gen/list.js"></script>
-</body></html>
+</body>
+</html>
