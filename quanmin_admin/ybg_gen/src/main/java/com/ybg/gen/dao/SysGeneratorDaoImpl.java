@@ -44,7 +44,6 @@ public class SysGeneratorDaoImpl extends BaseDao implements SysGeneratorDao {
 		if (dbname == null) {
 			dbname = DataBaseConstant.JD_SYS;
 		}
-		System.out.println(48 + dbname);
 		switch (dbname) {
 		case DataBaseConstant.JD_SYS:
 			return jdbcTemplate;
