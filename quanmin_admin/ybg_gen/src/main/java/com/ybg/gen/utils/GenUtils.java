@@ -1,7 +1,4 @@
 package com.ybg.gen.utils;
-import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
@@ -9,8 +6,10 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import com.ybg.base.jdbc.util.DateUtil;
+import com.ybg.base.util.SpringContextUtils;
 import com.ybg.gen.entity.ColumnEntity;
 import com.ybg.gen.entity.TableEntity;
+import com.ybg.gen.service.SysGeneratorService;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -29,31 +28,32 @@ import java.util.zip.ZipOutputStream;
  * @date 2016年12月19日 下午11:40:24 */
 public class GenUtils {
 	
-	private static final String	TEMPLATES_DO	= "DO.java.vm";
-	private static final String	TEMPLATES_DAO	= "Dao.java.vm";
-	private static final String	TEMPLATES_DAOIMPL	= "DaoImpl.java.vm";
-	private static final String	TEMPLATES_SERVICE	= "Service.java.vm";
+	private static final String	TEMPLATES_DO			= "DO.java.vm";
+	private static final String	TEMPLATES_DAO			= "Dao.java.vm";
+	private static final String	TEMPLATES_DAOIMPL		= "DaoImpl.java.vm";
+	private static final String	TEMPLATES_SERVICE		= "Service.java.vm";
 	private static final String	TEMPLATES_SERVICEIMPL	= "ServiceImpl.java.vm";
 	private static final String	TEMPLATES_CONTROLLER	= "Controller.java.vm";
-	private static final String	TEMPLATES_LIST_HTML	= "list.html.vm";
-	private static final String	TEMPLATES_LIST_JS	= "list.js.vm";
-	private static final String	TEMPLATES_SQL	= "menu.sql.vm";
-	private static final String	TEMPLATES_VO	= "VO.java.vm";
-	private static final String	TEMPLATES_QUERY	= "Query.java.vm";
-	private static final String	BASE_DIR	= "template";
+	private static final String	TEMPLATES_LIST_HTML		= "list.html.vm";
+	private static final String	TEMPLATES_LIST_JS		= "list.js.vm";
+	private static final String	TEMPLATES_SQL			= "menu.sql.vm";
+	private static final String	TEMPLATES_VO			= "VO.java.vm";
+	private static final String	TEMPLATES_QUERY			= "Query.java.vm";
+	private static final String	BASE_DIR				= "template";
+	
 	public static List<String> getTemplates() {
 		List<String> templates = new ArrayList<String>();
-		templates.add(BASE_DIR+"/"+ TEMPLATES_DO);
-		templates.add(BASE_DIR+"/"+ TEMPLATES_DAO);
-		templates.add(BASE_DIR+"/"+ TEMPLATES_DAOIMPL);
-		templates.add(BASE_DIR+"/"+ TEMPLATES_SERVICE);
-		templates.add(BASE_DIR+"/"+ TEMPLATES_SERVICEIMPL);
-		templates.add(BASE_DIR+"/"+ TEMPLATES_CONTROLLER);
-		templates.add(BASE_DIR+"/"+TEMPLATES_LIST_HTML);
-		templates.add(BASE_DIR+"/"+TEMPLATES_LIST_JS);
-		templates.add(BASE_DIR+"/"+TEMPLATES_SQL);
-		templates.add(BASE_DIR+"/"+TEMPLATES_VO);
-		templates.add(BASE_DIR+"/"+TEMPLATES_QUERY);
+		templates.add(BASE_DIR + "/" + TEMPLATES_DO);
+		templates.add(BASE_DIR + "/" + TEMPLATES_DAO);
+		templates.add(BASE_DIR + "/" + TEMPLATES_DAOIMPL);
+		templates.add(BASE_DIR + "/" + TEMPLATES_SERVICE);
+		templates.add(BASE_DIR + "/" + TEMPLATES_SERVICEIMPL);
+		templates.add(BASE_DIR + "/" + TEMPLATES_CONTROLLER);
+		templates.add(BASE_DIR + "/" + TEMPLATES_LIST_HTML);
+		templates.add(BASE_DIR + "/" + TEMPLATES_LIST_JS);
+		templates.add(BASE_DIR + "/" + TEMPLATES_SQL);
+		templates.add(BASE_DIR + "/" + TEMPLATES_VO);
+		templates.add(BASE_DIR + "/" + TEMPLATES_QUERY);
 		return templates;
 	}
 	
@@ -63,13 +63,13 @@ public class GenUtils {
 	 */
 	public static void generatorCode(Map<String, String> table, List<Map<String, String>> columns, ZipOutputStream zip) throws Exception {
 		// 配置信息
-		Configuration config = getConfig();
+		Map<String, String> config = getConfig();
 		// 表信息
 		TableEntity tableEntity = new TableEntity();
 		tableEntity.setTableName(table.get("tableName"));
 		tableEntity.setComments(table.get("tableComment"));
 		// 表名转换成Java类名
-		String className = tableToJava(tableEntity.getTableName(), config.getString("tablePrefix"));
+		String className = tableToJava(tableEntity.getTableName(), config.get("tablePrefix"));
 		tableEntity.setClassName(className);
 		tableEntity.setClassname(StringUtils.uncapitalize(className));
 		// 列信息
@@ -85,7 +85,10 @@ public class GenUtils {
 			columnEntity.setAttrName(attrName);
 			columnEntity.setAttrname(StringUtils.uncapitalize(attrName));
 			// 列的数据类型，转换成Java类型
-			String attrType = config.getString(columnEntity.getDataType(), "unknowType");
+			String attrType = config.get(columnEntity.getDataType());
+			if (attrType == null) {
+				attrType = "unknowType";
+			}
 			columnEntity.setAttrType(attrType);
 			// 是否主键
 			if ("PRI".equalsIgnoreCase(column.get("columnKey")) && tableEntity.getPk() == null) {
@@ -109,11 +112,11 @@ public class GenUtils {
 		map.put("pk", tableEntity.getPk());
 		map.put("className", tableEntity.getClassName());
 		map.put("classname", tableEntity.getClassname());
-		map.put("pathName", config.getString("pathName") + tableEntity.getClassname().toLowerCase() + "_do/");
+		map.put("pathName", config.get("pathName") + tableEntity.getClassname().toLowerCase() + "_do/");
 		map.put("columns", tableEntity.getColumns());
-		map.put("package", config.getString("package"));
-		map.put("author", config.getString("author"));
-		map.put("email", config.getString("email"));
+		map.put("package", config.get("package"));
+		map.put("author", config.get("author"));
+		map.put("email", config.get("email"));
 		map.put("datetime", DateUtil.getDate());
 		VelocityContext context = new VelocityContext(map);
 		// 获取模板列表
@@ -125,7 +128,7 @@ public class GenUtils {
 			tpl.merge(context, sw);
 			try {
 				// 添加到zip
-				zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.getString("package"))));
+				zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.get("package"))));
 				IOUtils.write(sw.toString(), zip, "UTF-8");
 				IOUtils.closeQuietly(sw);
 				zip.closeEntry();
@@ -152,12 +155,9 @@ public class GenUtils {
 	 * 
 	 * @throws Exception
 	 */
-	public static Configuration getConfig() throws Exception {
-		try {
-			return new PropertiesConfiguration("generator.properties");
-		} catch (ConfigurationException e) {
-			throw new Exception("获取配置文件失败，", e);
-		}
+	public static Map<String, String> getConfig() throws Exception {
+		SysGeneratorService service = SpringContextUtils.getBean(SysGeneratorService.class);
+		return service.queryGenSetting();
 	}
 	
 	/** 获取文件名 */

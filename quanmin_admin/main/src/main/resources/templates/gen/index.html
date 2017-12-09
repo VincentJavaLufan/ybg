@@ -3,36 +3,80 @@
 <#include "/common/common2.ftl"/>
 </head>
 <body>
-	<div class="m-b-md">
-		<form class="form-inline" role="form" id="searchForm" name="searchForm">
-			<div class="form-group">
-				<label class="control-label">
-					<span class="h4 font-thin v-middle">表:</span>
-				</label>
-				<input class="form-control" id="tablename" name="tablename">
-			</div>
-			<div class="form-group">
-				<label class="control-label">
-					<span class="h4 font-thin v-middle">数据源:</span>
-				</label>
-				<select class="form-control" id="datasource" name="datasource">
-					<option value="sysJdbcTemplate" selected="selected">系统数据库</option>
-					<option value="oaJdbcTemplate">OA数据库</option>
-					<option value="eduJdbcTemplate">教育数据库</option>
-					<option value="quartzJdbcTemplate">定时任务数据库</option>
-				</select>
-			</div>
-			<a href="javascript:void(0)" class="btn btn-s-md btn-default btn-rounded" id="search">查询</a>
-		</form>
-	</div>
-	<header class="panel-heading">
-		<div class="doc-buttons">
-			<button type="button" id="delRole" class="btn btn-danger marR10">生成代码</button>
+	<div id="rrapp" v-cloak>
+		<div class="m-b-md">
+			<form class="form-inline" role="form" id="searchForm" name="searchForm">
+				<div class="form-group">
+					<label class="control-label">
+						<span class="h4 font-thin v-middle">表:</span>
+					</label>
+					<input class="form-control" id="tablename" name="tablename">
+				</div>
+				<div class="form-group">
+					<label class="control-label">
+						<span class="h4 font-thin v-middle">数据源:</span>
+					</label>
+					<select class="form-control" id="datasource" name="datasource">
+						<option value="sysJdbcTemplate" selected="selected">系统数据库</option>
+						<option value="oaJdbcTemplate">OA数据库</option>
+						<option value="eduJdbcTemplate">教育数据库</option>
+						<option value="quartzJdbcTemplate">定时任务数据库</option>
+					</select>
+				</div>
+				<a href="javascript:void(0)" class="btn btn-s-md btn-default btn-rounded" @click="query">查询</a>
+			</form>
 		</div>
-	</header>
-	<div class="table-responsive">
-		<div id="paging" class="pagclass"></div>
+		<header class="panel-heading">
+			<div class="doc-buttons">
+				<a href="javascript:void(0)" @click="addConfig" class="btn btn-s-md btn-warning btn-rounded" id="search">修改设置</a>
+				<button type="button" id="delRole" class="btn btn-danger marR10">生成代码</button>
+			</div>
+		</header>
+		<div class="table-responsive" v-show="showList">
+			<div id="paging" class="pagclass"></div>
+		</div>
+		<div v-show="!showList" class="panel panel-default">
+			<div class="panel-heading">{{title}}</div>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-2 control-label">包名</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="javapackage" placeholder="" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">表前缀</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="tablePrefix" placeholder="" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">注释邮箱</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="email" placeholder="" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">注释作者</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="author" placeholder="" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">访问前缀</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="pathName" placeholder="" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label"></div>
+					<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定" />
+					&nbsp;&nbsp;
+					<input type="button" class="btn btn-warning" @click="reload" value="返回" />
+				</div>
+			</form>
+		</div>
 	</div>
-	<script type="text/javascript" src="/js/gen/list.js"></script>
+	<script type="text/javascript" src="/js/system/gen/gen.js"></script>
 </body>
 </html>

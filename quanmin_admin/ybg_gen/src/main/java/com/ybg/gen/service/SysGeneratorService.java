@@ -1,6 +1,7 @@
 package com.ybg.gen.service;
 import java.util.List;
 import java.util.Map;
+import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
 import com.ybg.gen.qvo.GeneratorQuery;
 
@@ -37,4 +38,14 @@ public interface SysGeneratorService {
 	 * @param tableNames
 	 * @return */
 	byte[] generatorCode(String[] tableNames);
+	
+	/** 获取生成配置 **/
+	Map<String, String> queryGenSetting();
+	
+	/** 更新生成设置配置
+	 * 
+	 * @param updatemap
+	 * @param wheremap
+	 */
+	void updateGenSetting(BaseMap<String, Object> updatemap, BaseMap<String, Object> wheremap);
 }

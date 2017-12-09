@@ -2,6 +2,7 @@ package com.ybg.gen.service;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
 import com.ybg.gen.dao.SysGeneratorDao;
 import com.ybg.gen.qvo.GeneratorQuery;
@@ -54,4 +55,16 @@ public class SysGeneratorServiceImpl implements SysGeneratorService {
 		IOUtils.closeQuietly(zip);
 		return outputStream.toByteArray();
 	}
+	
+	@Override
+	public Map<String, String> queryGenSetting() {
+		return sysGeneratorDao.queryGenSetting();
+	}
+
+	@Override
+	public void updateGenSetting(BaseMap<String, Object> updatemap, BaseMap<String, Object> wheremap) {
+		sysGeneratorDao.updateGenSetting(updatemap, wheremap);
+		
+	}
+	
 }

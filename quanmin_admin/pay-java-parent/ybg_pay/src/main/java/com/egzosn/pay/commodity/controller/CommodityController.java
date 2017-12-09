@@ -124,6 +124,7 @@ public class CommodityController {
 	
 	@ApiOperation(value = "获取单个商品", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "java.lang.String") })
+	@ResponseBody
 	@RequestMapping(value = { "get.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<Map<String, Object>> get(@RequestParam(name = "id", required = true) String id) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>(1);

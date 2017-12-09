@@ -387,6 +387,7 @@ public class PayController {
 	 *            订单的请求体
 	 * @return 返回支付方对应接口的结果
 	 */
+	
 	@RequestMapping("secondaryInterface")
 	public Map<String, Object> secondaryInterface(QueryOrder order) {
 		PayResponse payResponse = service.getPayResponse(order.getPayId());

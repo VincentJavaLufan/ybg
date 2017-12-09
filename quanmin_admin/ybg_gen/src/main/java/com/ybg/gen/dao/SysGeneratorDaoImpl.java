@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
+import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.jdbc.BaseQueryAble;
 import com.ybg.base.jdbc.DataBaseConstant;
 import com.ybg.base.util.Page;
@@ -119,5 +120,26 @@ public class SysGeneratorDaoImpl extends BaseDao implements SysGeneratorDao {
 				return map;
 			}
 		});
+	}
+	
+	@Override
+	public Map<String, String> queryGenSetting() {
+		StringBuilder sql = new StringBuilder();
+		sql.append(SELECT).append("`key`,`value` ").append(FROM).append(" sys_gen gen");
+		Map<String, String> map = new LinkedHashMap<String, String>();
+		getJdbcTemplate().query(sql.toString(), new RowMapper<Object>() {
+			
+			@Override
+			public Map<String, String> mapRow(ResultSet rs, int index) throws SQLException {
+				map.put(rs.getString("key"), rs.getString("value"));
+				return null;
+			}
+		});
+		return map;
+	}
+	
+	@Override
+	public void updateGenSetting(BaseMap<String, Object> updatemap, BaseMap<String, Object> wheremap) {
+		baseupdate(updatemap, wheremap, "sys_gen");
 	}
 }

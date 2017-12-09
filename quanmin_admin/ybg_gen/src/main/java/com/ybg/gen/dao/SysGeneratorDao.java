@@ -1,6 +1,7 @@
 package com.ybg.gen.dao;
 import java.util.List;
 import java.util.Map;
+import com.ybg.base.jdbc.BaseMap;
 import com.ybg.base.util.Page;
 import com.ybg.gen.qvo.GeneratorQuery;
 
@@ -31,4 +32,14 @@ public interface SysGeneratorDao {
 	 * @param tableName
 	 * @return */
 	List<Map<String, String>> queryColumns(String tableName);
+	
+	/** 获取生成配置 **/
+	Map<String, String> queryGenSetting();
+	
+	/** 更新生成设置配置
+	 * 
+	 * @param updatemap
+	 * @param wheremap
+	 */
+	void updateGenSetting(BaseMap<String, Object> updatemap, BaseMap<String, Object> wheremap);
 }
