@@ -163,51 +163,24 @@ sh 是liunix 执行
 
 ###  `系统内部界面` 
 
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225615_5146cdb0_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225544_14b5665b_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225638_07386920_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225650_5353ad68_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225702_c1400c23_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225714_3760c3e3_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225723_0798b4ec_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225732_15c2e9f4_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225742_70072048_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225759_4cc74341_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225807_4c68d67b_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225815_75940daf_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225836_bdffff30_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225846_798dbb7f_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225854_abf77003_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225914_80ee5dcc_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225927_228435f0_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225936_e30e8fd8_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/225950_5564f631_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/230013_38075b34_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/230024_ee2ea759_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/230051_7858e0a5_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/230101_25ac01e1_880593.png "屏幕截图.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/1009/230110_0b1ca8cb_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/234557_43f71bb1_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/234729_756f4fc5_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/234806_2521a4ce_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/234822_f399338a_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/234842_0cec4faf_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/234902_091e9f63_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/234918_5577752c_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/234938_13c13dd0_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/234956_2af6865a_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/235026_8f7514b8_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/235050_f684099b_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/235118_56a3a26b_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/235135_f9d58f0d_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/235156_911a83e5_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/235216_e0c28d3c_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/235239_ce638ad4_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/235302_8f52e1b6_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/235415_49d62f94_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/235348_c8a8bf6e_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/235435_9c61fc91_880593.png "屏幕截图.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1209/235508_046077e6_880593.png "屏幕截图.png")
