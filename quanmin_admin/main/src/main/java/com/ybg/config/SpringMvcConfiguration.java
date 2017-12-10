@@ -1,9 +1,6 @@
 package com.ybg.config;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.web.servlet.ErrorPage;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,8 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import com.ybg.component.jwt.HTTPBasicAuthorizeAttribute;
-import com.ybg.component.jwt.HTTPBearerAuthorizeAttribute;
 
 /** @author Deament
  * 
@@ -35,27 +30,5 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-	}
-	
-	@Bean
-	public FilterRegistrationBean basicFilterRegistrationBean() {
-		FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-		HTTPBasicAuthorizeAttribute httpBasicFilter = new HTTPBasicAuthorizeAttribute();
-		registrationBean.setFilter(httpBasicFilter);
-		List<String> urlPatterns = new ArrayList<String>();
-		urlPatterns.add("/user/getuser");
-		registrationBean.setUrlPatterns(urlPatterns);
-		return registrationBean;
-	}
-	
-	@Bean
-	public FilterRegistrationBean jwtFilterRegistrationBean() {
-		FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-		HTTPBearerAuthorizeAttribute httpBearerFilter = new HTTPBearerAuthorizeAttribute();
-		registrationBean.setFilter(httpBearerFilter);
-		List<String> urlPatterns = new ArrayList<String>();
-		urlPatterns.add("/user/getusers");
-		registrationBean.setUrlPatterns(urlPatterns);
-		return registrationBean;
 	}
 }
