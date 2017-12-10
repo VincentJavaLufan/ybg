@@ -45,6 +45,8 @@ public class YbgSecurityMetadataSource implements FilterInvocationSecurityMetada
 	public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
 		// 将参数转为url
 		String url = ((FilterInvocation) object).getRequestUrl();
+		// url 要去除参数。 否则会过滤不掉
+		url = url.split("[?]")[0];
 		// 匹配所有的url，并对角色去重
 		Set<String> roles = new HashSet<String>();
 		try {
