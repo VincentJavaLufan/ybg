@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -49,7 +51,9 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
-			<!--排除默认 见 http://www.cnblogs.com/tomlxq/p/5514658.html <exclusions> <exclusion> <groupId>org.apache.tomcat</groupId> <artifactId>tomcat-jdbc</artifactId> </exclusion> </exclusions> -->
+			<!--排除默认 见 http://www.cnblogs.com/tomlxq/p/5514658.html <exclusions> <exclusion> 
+				<groupId>org.apache.tomcat</groupId> <artifactId>tomcat-jdbc</artifactId> 
+				</exclusion> </exclusions> -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -197,7 +201,8 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		<!-- rabbit <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-amqp</artifactId> </dependency> -->
+		<!-- rabbit <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-amqp</artifactId> 
+			</dependency> -->
 		<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
@@ -227,7 +232,9 @@
 			<artifactId>javacsv</artifactId>
 			<version>2.0</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/net.sourceforge.javydreamercsw/JasperReport PDF 报表生成 <dependency> <groupId>net.sourceforge.javydreamercsw</groupId> <artifactId>JasperReport</artifactId> <version>0.1</version> </dependency> -->
+		<!-- https://mvnrepository.com/artifact/net.sourceforge.javydreamercsw/JasperReport 
+			PDF 报表生成 <dependency> <groupId>net.sourceforge.javydreamercsw</groupId> <artifactId>JasperReport</artifactId> 
+			<version>0.1</version> </dependency> -->
 		<!-- 定时任务 https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
@@ -246,13 +253,17 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.1</version>
 		</dependency>
-		<!-- <dependency> <groupId>com.google.guava</groupId> <artifactId>guava</artifactId> <version>15.0</version> </dependency> -->
+		<!-- <dependency> <groupId>com.google.guava</groupId> <artifactId>guava</artifactId> 
+			<version>15.0</version> </dependency> -->
 		<dependency>
 			<groupId>com.google.zxing</groupId>
 			<artifactId>core</artifactId>
 			<version>3.3.0</version>
 		</dependency>
-		<!-- java 实用工具类 布隆过滤 1.缓存 2.克隆接口 3.类型转换 4.日期处理 5.数据库ORM（基于ActiveRecord思想） 6.基于DFA有限自动机的多个关键字查找 7.HTTP客户端 8.IO和文件 9.有用的一些数据结构 10.日志 11.反射代理类的简化（AOP切面实现） 12.Setting（一种扩展Properties的配置文件） 13.System（JVM和系统信息等） 14.WatchService的封装（文件变动监控） 15.XXXUtil各种有用的工具类 -->
+		<!-- java 实用工具类 布隆过滤 1.缓存 2.克隆接口 3.类型转换 4.日期处理 5.数据库ORM（基于ActiveRecord思想） 
+			6.基于DFA有限自动机的多个关键字查找 7.HTTP客户端 8.IO和文件 9.有用的一些数据结构 10.日志 11.反射代理类的简化（AOP切面实现） 
+			12.Setting（一种扩展Properties的配置文件） 13.System（JVM和系统信息等） 14.WatchService的封装（文件变动监控） 
+			15.XXXUtil各种有用的工具类 -->
 		<dependency>
 			<groupId>com.xiaoleilu</groupId>
 			<artifactId>hutool-all</artifactId>
@@ -275,7 +286,9 @@
 			<artifactId>javamelody-spring-boot-starter</artifactId>
 			<version>1.69.0</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.lowagie/itext PDF的操作 屏蔽吧，好像太多人没法下载 <dependency> <groupId>com.lowagie</groupId> <artifactId>itext</artifactId> <version>2.1.7</version> </dependency> -->
+		<!-- https://mvnrepository.com/artifact/com.lowagie/itext PDF的操作 屏蔽吧，好像太多人没法下载 
+			<dependency> <groupId>com.lowagie</groupId> <artifactId>itext</artifactId> 
+			<version>2.1.7</version> </dependency> -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
@@ -446,14 +459,9 @@
 			<systemPath>${project.basedir}/src/main/resources/lib/aliyun-sdk-mns-1.1.8.jar</systemPath>
 		</dependency>
 		<!-- 阿里云 短信 end -->
-		<!-- 支付宝登陆 
-		<dependency>
-			<groupId>com.aliyun.jdk</groupId>
-			<artifactId>aliyun-java-jdk</artifactId>
-			<version>1.0.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/alipay-sdk-java20171027120314.jar</systemPath>
-		</dependency>-->
+		<!-- 支付宝登陆 <dependency> <groupId>com.aliyun.jdk</groupId> <artifactId>aliyun-java-jdk</artifactId> 
+			<version>1.0.0</version> <scope>system</scope> <systemPath>${project.basedir}/src/main/resources/lib/alipay-sdk-java20171027120314.jar</systemPath> 
+			</dependency> -->
 		<!-- 支付宝登陆 end -->
 		<!-- 验证码 -->
 		<dependency>
@@ -643,38 +651,39 @@
 			<artifactId>mapdb</artifactId>
 			<version>1.0.9</version>
 		</dependency>
-		<!-- 规则报表 
+		<!-- 规则报表 <dependency> <groupId>com.bstek.uflo</groupId> <artifactId>uflo-console</artifactId> 
+			<version>2.0.5</version> </dependency> <dependency> <groupId>com.bstek.ureport</groupId> 
+			<artifactId>ureport2-console</artifactId> <version>2.2</version> <exclusions> 
+			<exclusion> <groupId>org.apache.poi</groupId> <artifactId>poi-ooxml</artifactId> 
+			</exclusion> <exclusion> <groupId>commons-beanutils</groupId> <artifactId>commons-beanutils-core</artifactId> 
+			</exclusion> </exclusions> </dependency> <dependency> <groupId>com.bstek.urule</groupId> 
+			<artifactId>urule-core</artifactId> <version>2.1</version> <exclusions> <exclusion> 
+			<groupId>org.apache.derby</groupId> <artifactId>derby</artifactId> </exclusion> 
+			</exclusions> </dependency> -->
 		<dependency>
-			<groupId>com.bstek.uflo</groupId>
-			<artifactId>uflo-console</artifactId>
-			<version>2.0.5</version>
-		</dependency>
-		<dependency>
-			<groupId>com.bstek.ureport</groupId>
-			<artifactId>ureport2-console</artifactId>
-			<version>2.2</version>
-			<exclusions>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+			
+				<exclusions>
 				<exclusion>
-					<groupId>org.apache.poi</groupId>
-					<artifactId>poi-ooxml</artifactId>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-core</artifactId>
 				</exclusion>
 				<exclusion>
-					<groupId>commons-beanutils</groupId>
-					<artifactId>commons-beanutils-core</artifactId>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.security</groupId>
+					<artifactId>spring-security-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-orm</artifactId>
 				</exclusion>
 			</exclusions>
+			
 		</dependency>
-		<dependency>
-			<groupId>com.bstek.urule</groupId>
-			<artifactId>urule-core</artifactId>
-			<version>2.1</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.derby</groupId>
-					<artifactId>derby</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>-->
 	</dependencies>
 	<build>
 		<plugins>
