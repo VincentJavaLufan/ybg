@@ -12,10 +12,8 @@ import org.apache.commons.lang.StringUtils;
  * @version v1.0 */
 public abstract class AbstractPage implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long	serialVersionUID	= 1L;
+	/** 默认每一页的分页大小，如果需要自己定义 使用page.setpageSize(分页大小)即可 **/
 	public static Integer		DEFAULT_PAGE_SIZE	= 10;
 	/** 对象获取的开始位置，应该总是从1开始 */
 	private Integer				startIndex;
@@ -24,12 +22,11 @@ public abstract class AbstractPage implements Serializable {
 	private Integer				totals;
 	/** 应该总是从1开始 */
 	private Integer				curPage				= 1;
-	/** 查询的结果 */
+	/** 查询的结果 查询后的每一页的分页结果 */
 	private List<?>				result;
 	/** 分页代码 */
 	private String				paginate;
-	/** 辅助 */
-	private List<?>				assistBusiness;
+	/** 总页数 ，总页数等于 总数 除以分页大小 **/
 	private Integer				totalpages;
 	
 	/** 分页插件初始化,请写在最后一步 要获取数据和数据总数目之后使用 **/
@@ -93,7 +90,7 @@ public abstract class AbstractPage implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Page [getCurPage()=" + getCurPage() + ", getPageSize()=" + getPageSize() + ", getTotalPages()=" + getTotalPages() + ", getResult()=" + getResult() + ", getStartIndex()=" + getStartIndex() + ", getTotals()=" + getTotals() + ", getAssistBusiness()=" + getAssistBusiness() + "]";
+		return "Page [getCurPage()=" + getCurPage() + ", getPageSize()=" + getPageSize() + ", getTotalPages()=" + getTotalPages() + ", getResult()=" + getResult() + ", getStartIndex()=" + getStartIndex() + ", getTotals()=" + getTotals() + "]";
 	}
 	
 	public Integer getCurPage() {
@@ -122,6 +119,7 @@ public abstract class AbstractPage implements Serializable {
 		this.pageSize = pageSize;
 	}
 	
+	/** 返回分页数 **/
 	public Integer getTotalPages() {
 		if (totals / this.pageSize < 1) {
 			return 1;
@@ -164,13 +162,5 @@ public abstract class AbstractPage implements Serializable {
 	
 	public void setTotals(Integer totals) {
 		this.totals = totals;
-	}
-	
-	public List<?> getAssistBusiness() {
-		return assistBusiness;
-	}
-	
-	public void setAssistBusiness(List<?> assistBusiness) {
-		this.assistBusiness = assistBusiness;
 	}
 }
