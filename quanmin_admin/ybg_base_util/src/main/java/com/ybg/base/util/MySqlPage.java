@@ -1,10 +1,15 @@
 package com.ybg.base.util;
-
 import com.alibaba.druid.sql.PagerUtils;
 import com.alibaba.druid.util.JdbcConstants;
 
-public class MySqlPage extends AbstractPage{
-
+/** Mysql 分页类
+ * 
+ * @author https://gitee.com/YYDeament/88ybg
+ *
+ * @date
+ * @version v1.0 */
+public class MySqlPage extends AbstractPage {
+	
 	/** 自动生成分页语句 **/
 	@Override
 	public String getPagesql(StringBuilder sql) {

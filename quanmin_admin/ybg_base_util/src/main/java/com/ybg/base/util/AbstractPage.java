@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
-/** 抽象分页类 **/
+/** 抽象分页类
+ * 
+ * @author https://gitee.com/YYDeament/88ybg
+ *
+ * @date
+ * @version v1.0 */
 public abstract class AbstractPage implements Serializable {
 	
 	/**
