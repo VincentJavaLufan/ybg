@@ -47,14 +47,16 @@ public class LoginServiceImpl implements UserDetailsService {
 		UserVO user = userdao.login(username);
 		// 这里要把权限加进去 不然无法加载权限
 		// List<SysResourcesVO> authlist = null;
-		try {
-			List<SimpleGrantedAuthority> auths = new ArrayList<SimpleGrantedAuthority>();
-			for (String rolekey : user.getRolekeys()) {
-				auths.add(new SimpleGrantedAuthority(rolekey));
+		if (user != null) {
+			try {
+				List<SimpleGrantedAuthority> auths = new ArrayList<SimpleGrantedAuthority>();
+				for (String rolekey : user.getRolekeys()) {
+					auths.add(new SimpleGrantedAuthority(rolekey));
+				}
+				user.setAuthorities(auths);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			user.setAuthorities(auths);
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return user;
 	}
