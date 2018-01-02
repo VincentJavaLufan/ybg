@@ -13,7 +13,11 @@ public class MySqlPage extends AbstractPage {
 	/** 自动生成分页语句 **/
 	@Override
 	public String getPagesql(StringBuilder sql) {
-		return PagerUtils.limit(sql.toString(), JdbcConstants.MYSQL, getStartIndex() - 1, getPageSize());
+		int startindex = 0;
+		if (super.getCurPage() != 1) {
+			startindex = (super.getCurPage() - 1) * super.getPageSize();
+		}
+		return PagerUtils.limit(sql.toString(), JdbcConstants.MYSQL, startindex, getPageSize() * super.getCurPage());
 	}
 	
 	/** 自动统计总页数 **/
