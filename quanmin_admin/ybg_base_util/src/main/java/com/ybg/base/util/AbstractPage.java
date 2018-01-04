@@ -98,6 +98,10 @@ public abstract class AbstractPage implements Serializable {
 	}
 	
 	public void setCurPage(Integer curPage) {
+		if(curPage==null || curPage<1) {
+			this.curPage=1;
+			return ;
+		}
 		this.curPage = curPage;
 		Integer start = getPageSize() * (curPage - 1) + 1;
 		setStartIndex(start);
