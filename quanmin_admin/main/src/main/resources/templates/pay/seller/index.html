@@ -6,17 +6,14 @@
 	<div id="rrapp" v-cloak>
 		<div v-show="showList">
 			<div class="m-b-md">
-				<form class="form-inline" role="form" id="searchForm"
-					name="searchForm">
+				<form class="form-inline" role="form" id="searchForm" name="searchForm">
 					<div class="form-group">
 						<label class="control-label">
 							<span class="h4 font-thin v-middle">支付类型:</span>
 						</label>
 						<input class="form-control" id="paytype" name="paytype">
 					</div>
-					<a href="javascript:void(0)"
-						class="btn btn-s-md btn-default btn-rounded" @click="query"
-						id="search">查询</a>
+					<a href="javascript:void(0)" class="btn btn-s-md btn-default btn-rounded" @click="query" id="search">查询</a>
 				</form>
 			</div>
 			<header class="panel-heading">
@@ -36,7 +33,7 @@
 				</div>
 			</header>
 			<div class="table-responsive">
-				<div id="paging" class="pagclass"></div>
+					<table class="layui-hide" id="sellertable"></table>
 			</div>
 		</div>
 		<div v-show="!showList" class="panel panel-default">
@@ -45,57 +42,49 @@
 				<div class="form-group">
 					<div class="col-sm-2 control-label">商户ID</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="seller.partner"
-							placeholder="商户ID" />
+						<input type="text" class="form-control" v-model="seller.partner" placeholder="商户ID" />
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2 control-label">应用ID</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="seller.appid"
-							placeholder="应用ID" />
+						<input type="text" class="form-control" v-model="seller.appid" placeholder="应用ID" />
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2 control-label">公钥</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="seller.publickey"
-							placeholder="公钥" />
+						<input type="text" class="form-control" v-model="seller.publickey" placeholder="公钥" />
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2 control-label">私钥</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control"
-							v-model="seller.privatekey" placeholder="私钥" />
+						<input type="text" class="form-control" v-model="seller.privatekey" placeholder="私钥" />
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2 control-label">异步回调地址</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="seller.notifyurl"
-							placeholder="异步回调地址" />
+						<input type="text" class="form-control" v-model="seller.notifyurl" placeholder="异步回调地址" />
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2 control-label">同步回调地址</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="seller.returnurl"
-							placeholder="同步回调地址" />
+						<input type="text" class="form-control" v-model="seller.returnurl" placeholder="同步回调地址" />
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2 control-label">收款帐号</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="seller.seller"
-							placeholder="收款帐号" />
+						<input type="text" class="form-control" v-model="seller.seller" placeholder="收款帐号" />
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2 control-label">签名类型</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" v-model="seller.signtype"
-							placeholder="签名类型" />
+						<input type="text" class="form-control" v-model="seller.signtype" placeholder="签名类型" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -128,11 +117,9 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2 control-label"></div>
-					<input type="button" class="btn btn-primary" @click="saveOrUpdate"
-						value="确定" />
+					<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定" />
 					&nbsp;&nbsp;
-					<input type="button" class="btn btn-warning" @click="reload"
-						value="返回" />
+					<input type="button" class="btn btn-warning" @click="reload" value="返回" />
 				</div>
 			</form>
 		</div>

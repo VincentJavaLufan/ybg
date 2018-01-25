@@ -52,13 +52,13 @@ public class RoleControllor {
 	}
 	
 	@ApiOperation(value = "角色分页列表", notes = "JSON ", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "RoleQvo") })
+//	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "RoleQvo") })
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute RoleQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow) throws Exception {
+	public Page list(@ModelAttribute RoleQuery qvo,@ModelAttribute Page page) throws Exception {
 		qvo.setBlurred(true);
-		Page page = new Page();
-		page.setCurPage(pageNow);
+//		Page page = new Page();
+//		page.setCurPage(pageNow);
 		page = roleService.list(page, qvo);
 		page.init();
 		return page;

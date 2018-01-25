@@ -17,7 +17,7 @@ public class MySqlPage extends AbstractPage {
 		if (super.getCurPage() != 1) {
 			startindex = (super.getCurPage() - 1) * super.getPageSize();
 		}
-		return PagerUtils.limit(sql.toString(), JdbcConstants.MYSQL, startindex, getPageSize() * super.getCurPage());
+		return PagerUtils.limit(sql.toString(), JdbcConstants.MYSQL, startindex, getPageSize() /** super.getCurPage()**/);
 	}
 	
 	/** 自动统计总页数 **/

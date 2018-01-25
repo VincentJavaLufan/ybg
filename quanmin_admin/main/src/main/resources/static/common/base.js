@@ -10,18 +10,28 @@
 
 //重写confirm式样框
 window.confirm = function(msg, callback){
-    layer.confirm(msg, {btn: ['确定','取消']},
-    function(){//确定事件
-       
-        if(typeof(callback) === "function"){
-            callback("ok");
-           alert(1);
-        }
-    });
+	
+	 layui.use('layer', function(){
+	    layer = layui.layer;
+	    layer.confirm(msg, {btn: ['确定','取消']},
+	    	    function(){//确定事件
+	    	       
+	    	        if(typeof(callback) === "function"){
+	    	            callback("ok");
+	    	           alert(1);
+	    	        }
+	    	    });
+	 });
+	    
+   
 }
 
 function wait() {
-    layer.load();
+	 layui.use('layer', function(){
+		    layer = layui.layer;
+		    layer.load();
+		 });
+    
 
 }
 /** 控制全局界面元素JS** */
@@ -198,8 +208,12 @@ wait();
 }
 /** 关闭等待中图片 * */
 function closewait() {
-    
-    layer.closeAll('loading');
+	 layui.use('layer', function(){
+		    layer = layui.layer;
+		    layer.closeAll('loading');
+		 });
+ 
+   
 }
 //var a=document.body.innerHTML;
 //document.body.innerHTML=a.replace(/\ufeff/g,'');

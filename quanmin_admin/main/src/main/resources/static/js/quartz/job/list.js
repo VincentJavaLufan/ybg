@@ -18,7 +18,7 @@ var vm = new Vue({
             vm.schedule = {};
         },
         update : function() {
-            var jobId = getSelectedRow();
+            var jobId = getSelectedRow('jobtable', 'job_Id');
             if (jobId == null) {
                 return;
             }
@@ -42,7 +42,7 @@ var vm = new Vue({
             });
         },
         del : function() {
-            var jobIds = getSelectedRows();
+            var jobIds = getSelectedRows('jobtable', 'job_Id');
             if (jobIds == null) {
                 return;
             }
@@ -62,7 +62,7 @@ var vm = new Vue({
             });
         },
         pause : function() {
-            var jobIds = getSelectedRows();
+            var jobIds = getSelectedRows('jobtable', 'job_Id');
             if (jobIds == null) {
                 return;
             }
@@ -82,7 +82,7 @@ var vm = new Vue({
             });
         },
         resume : function() {
-            var jobIds = getSelectedRows();
+            var jobIds = getSelectedRows('jobtable', 'job_Id');
             if (jobIds == null) {
                 return;
             }
@@ -102,7 +102,7 @@ var vm = new Vue({
             });
         },
         runOnce : function() {
-            var jobIds = getSelectedRows();
+            var jobIds = getSelectedRows('jobtable', 'job_Id');
             if (jobIds == null) {
                 return;
             }
@@ -123,56 +123,65 @@ var vm = new Vue({
         },
         reload : function(event) {
             vm.showList = true;
-            grid.loadData();
+            layui.use('table', function() {
+                var table = layui.table;
+                table.render({
+                    elem : '#jobtable' // 选定是那个DIV
+                    ,
+                    url : rootPath + '/sys/schedule_do/list.do',
+                    cols : [
+                        [
+                            {
+                                type : 'checkbox'
+                            }, {
+                                field : 'job_Id',
+                                width : 180,
+                                title : '任务ID'
+                            }, {
+                                field : 'bean_Name',
+                                width : 100,
+                                title : 'Spring Bean'
+                            }, {
+                                field : 'method_Name',
+                                title : '方法名',
+                                width : 100
+                            }, {
+                                field : 'params',
+                                title : '参数',
+                                width : 100
+                            }, {
+                                field : 'status',
+                                title : '状态',
+                                width : 100,
+                                templet : function(data) {
+                                    if (data.status == 0) {
+                                        return "开启";
+                                    }
+                                    if (data.status == 1) {
+                                        return "暂停";
+                                    }
+                                    return "数据异常";
+                                }
+                            }, {
+                                field : 'remark',
+                                title : '备注',
+                                width : 100
+                            }, {
+                                field : 'cron_Expression',
+                                title : '定时表达式',
+                                width : 100
+                            }, {
+                                field : 'create_Time',
+                                title : '创建时间',
+                                width : 100
+                            } ] ],
+                    page : true, // 开启分页
+                    request : laypagerequest,
+                    response : laypageresponse,
+                // where : $("#searchForm").serializeJSON()
+                });
+            });
         }
     }
 });
-var pageii = null;
-var grid = null;
-$(function() {
-    grid = lyGrid({
-        id : 'paging',
-        l_column : [
-                {
-                    colkey : "job_Id",
-                    name : "任务ID",
-                    width : "50px",
-                    hide : true
-                }, {
-                    colkey : "bean_Name",
-                    name : "Spring Bean"
-                }, {
-                    colkey : "method_Name",
-                    name : "方法名",
-                }, {
-                    colkey : "params",
-                    name : "参数"
-                }, {
-                    colkey : "status",
-                    name : "状态",
-                    renderData : function(rowindex, data, rowdata, colkeyn) {
-                        if (data == 0) {
-                            return "开启";
-                        }
-                        if (data == 1) {
-                            return "暂停";
-                        }
-                        return "数据异常";
-                    }
-                }, {
-                    colkey : "remark",
-                    name : "备注"
-                }, {
-                    colkey : "cron_Expression",
-                    name : "定时表达式"
-                }, {
-                    colkey : "create_Time",
-                    name : "创建时间"
-                }],
-        jsonUrl : rootPath + '/sys/schedule_do/list.do',
-        checkbox : true,
-        checkValue : 'job_Id',
-    });
-    
-});
-
+vm.reload();

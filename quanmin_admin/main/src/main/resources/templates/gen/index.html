@@ -29,11 +29,11 @@
 		<header class="panel-heading">
 			<div class="doc-buttons">
 				<a href="javascript:void(0)" @click="addConfig" class="btn btn-s-md btn-warning btn-rounded" id="search">修改设置</a>
-				<button type="button" id="delRole" class="btn btn-danger marR10">生成代码</button>
+				<button type="button" class="btn btn-danger marR10 "@click="gencode">生成代码</button>
 			</div>
 		</header>
 		<div class="table-responsive" v-show="showList">
-			<div id="paging" class="pagclass"></div>
+			<table class="layui-hide" id="gentable"></table>
 		</div>
 		<div v-show="!showList" class="panel panel-default">
 			<div class="panel-heading">{{title}}</div>

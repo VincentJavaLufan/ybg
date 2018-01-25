@@ -48,9 +48,9 @@ public class ScheduleJobController {
 	@ApiOperation(value = "定时任务列表", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute ScheduleJobQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, ModelMap map) throws Exception {
-		Page page = new Page();
-		page.setCurPage(pageNow);
+	public Page list(@ModelAttribute ScheduleJobQuery qvo, @ModelAttribute Page page, ModelMap map) throws Exception {
+//		Page page = new Page();
+//		page.setCurPage(pageNow);
 		ScheduleJobQuery qvo2 = new ScheduleJobQuery();
 		qvo2.setBean_Name(qvo.getBean_Name());
 		page = scheduleJobService.queryList(page, qvo2);

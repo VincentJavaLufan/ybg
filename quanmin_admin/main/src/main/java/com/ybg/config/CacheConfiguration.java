@@ -14,8 +14,8 @@ import org.springframework.core.io.ClassPathResource;
  * 
  * @Configuration
  * @EnableCaching 这两个注释取消则 缓存配置失效 ，缓存的方法 将无作用 **/
-@Configuration
-@EnableCaching
+//@Configuration
+//@EnableCaching
 public class CacheConfiguration {
 	
 	/** ehcache主要的管理器

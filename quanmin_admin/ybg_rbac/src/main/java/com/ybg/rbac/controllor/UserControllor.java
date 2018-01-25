@@ -104,13 +104,13 @@ public class UserControllor {
 	 * @throws Exception
 	 **/
 	@ApiOperation(value = "用户分页列表", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "java.lang.Integer"), @ApiImplicitParam(name = "qvo", value = "用户查询条件", required = false, dataType = "UserQvo") })
+//	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "java.lang.Integer"), @ApiImplicitParam(name = "qvo", value = "用户查询条件", required = false, dataType = "UserQvo") })
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute UserQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, @ApiIgnore ModelMap modelMap) throws Exception {
+	public Page list(@ModelAttribute UserQuery qvo, @ModelAttribute Page page, @ApiIgnore ModelMap modelMap) throws Exception {
 		qvo.setBlurred(true);
-		Page page = new Page();
-		page.setCurPage(pageNow);
+		//Page page = new Page();
+		//page.setCurPage(pageNow);
 		page = userService.list(page, qvo);
 		List<UserVO> list = (List<UserVO>) page.getResult();
 		for (UserVO user : list) {

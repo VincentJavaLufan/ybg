@@ -1,54 +1,66 @@
-var pageii = null;
-var grid = null;
-$(function() {
-    grid = lyGrid({
-        id : 'paging',
-        l_column : [
-                {
-                    colkey : "log_Id",
-                    name : "任务ID",
-                    width : "50px",
-                    hide : true
-                }, {
-                    colkey : "bean_Name",
-                    name : "Spring Bean"
-                }, {
-                    colkey : "job_Id",
-                    name : "任务ID"
-                }, {
-                    colkey : "method_Name",
-                    name : "方法名",
-                }, {
-                    colkey : "params",
-                    name : "参数"
-                }, {
-                    colkey : "status",
-                    name : "状态"
-                }, {
-                    colkey : "remark",
-                    name : "备注"
-                }, {
-                    colkey : "create_Time",
-                    name : "创建时间"
-                }, {
-                    colkey : "status",
-                    name : "执行状态"
-                }, {
-                    colkey : "error",
-                    name : "失败信息"
-                }, {
-                    colkey : "times",
-                    name : "耗时"
-                }
-                ],
-        jsonUrl : rootPath + '/sys/scheduleLog_do/list.do',
-        checkbox : true,
-        checkValue : 'log_Id',
-    });
-    $("#search").click("click", function() {// 绑定查询按扭
-        var searchParams = $("#searchForm").serializeJson();// 初始化传参数
-        grid.setOptions({
-            data : searchParams
-        });
-    });
-});
+var vm = new Vue({
+    el : "#rrapp",
+    data : {
+        showList : true
+    },
+    methods : {
+        reload : function() {
+            vm.showList = true;
+            layui.use('table', function() {
+                var table = layui.table;
+                table.render({
+                    elem : '#joblogtable2', // 选定是那个DIV
+                    url : rootPath + '/sys/scheduleLog_do/list.do',
+                    cols : [
+                        [
+                            {
+                                type : 'checkbox'
+                            },  {
+                                field : 'log_Id',
+                                width : 180,
+                                title : '任务ID'
+                            }, {
+                                field : 'bean_Name',
+                                width : 100,
+                                title : 'Spring Bean'
+                            }, {
+                                field : 'method_Name',
+                                title : '方法名',
+                                width : 100
+                            }, {
+                                field : 'params',
+                                title : '参数',
+                                width : 100
+                            }, {
+                                field : 'status',
+                                title : '状态',
+                                width : 100
+                                
+                            }, {
+                                field : 'remark',
+                                title : '备注',
+                                width : 100
+                            }, {
+                                field : 'error',
+                                title : '失败信息',
+                                width : 100
+                            }, {
+                                field : 'create_Time',
+                                title : '创建时间',
+                                width : 100
+                            }, {
+                                field : 'times',
+                                title : '耗时',
+                                width : 100
+                            } ] ],
+                    page : true, // 开启分页
+                    request : laypagerequest,
+                    response : laypageresponse
+                // ,
+                // where : $("#searchForm").serializeJSON()
+                });
+            });// lay
+        }
+    }
+})
+vm.reload();

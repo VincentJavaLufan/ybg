@@ -52,13 +52,13 @@ public class ${className}Controller {
 	}
 	
 	@ApiOperation(value = "${className}分页列表", notes = "JSON ", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "${className}Qvo") })
+	//@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "${className}Qvo") })
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute ${className}Query qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, ModelMap map) throws Exception {
+	public Page list(@ModelAttribute ${className}Query qvo, @ModelAttribute Page page, ModelMap map) throws Exception {
 		qvo.setBlurred(true);
-		Page page = new Page();
-		page.setCurPage(pageNow);
+	//	Page page = new Page();
+	//	page.setCurPage(pageNow);
 		page = ${classname}Service.list(page, qvo);
 		page.init();
 		return page;

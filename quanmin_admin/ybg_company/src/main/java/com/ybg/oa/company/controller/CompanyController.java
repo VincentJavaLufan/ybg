@@ -41,10 +41,10 @@ public class CompanyController {
 	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "CompanyQvo") })
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute CompanyQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, ModelMap map) throws Exception {
+	public Page list(@ModelAttribute CompanyQuery qvo, @ModelAttribute Page page, ModelMap map) throws Exception {
 		qvo.setBlurred(true);
-		Page page = new Page();
-		page.setCurPage(pageNow);
+//		Page page = new Page();
+//		page.setCurPage(pageNow);
 		page = companyService.list(page, qvo);
 		page.init();
 		return page;

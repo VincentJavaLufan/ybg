@@ -59,12 +59,12 @@ public class SysOssController {
 	
 	/** 列表 */
 	@ApiOperation(value = "列表数据", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "SysOssEntity") })
+	//@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "SysOssEntity") })
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute SysOssEntity qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow) {
-		Page page = new Page();
-		page.setCurPage(pageNow);
+	public Page list(@ModelAttribute SysOssEntity qvo,@ModelAttribute Page page)  {
+//		Page page = new Page();
+//		page.setCurPage(pageNow);
 		page = sysOssService.list(page, qvo);
 		page.init();
 		return page;

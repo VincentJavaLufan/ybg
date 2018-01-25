@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,12 +39,12 @@ public class ScheduleJobLogController {
 	/** 定时任务日志列表 
 	 * @throws Exception */
 	@ApiOperation(value = "定是数据列表", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "java.lang.Integer")
+//	@ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "java.lang.Integer")
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow) throws Exception {
-		Page page = new Page();
-		page.setCurPage(pageNow);
+	public Page list(@ModelAttribute Page page) throws Exception {
+//		Page page = new Page();
+//		page.setCurPage(pageNow);
 		ScheduleJobLogQuery qvo = new ScheduleJobLogQuery();
 		page = scheduleJobLogService.queryList(page, qvo);
 		page.init();

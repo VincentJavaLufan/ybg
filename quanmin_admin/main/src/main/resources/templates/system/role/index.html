@@ -1,7 +1,6 @@
 <html>
 <head>
 <#include "/common/common2.ftl"/>
-
 </head>
 <body>
 	<div id="rrapp" v-cloak>
@@ -25,7 +24,7 @@
 				</div>
 			</header>
 			<div class="table-responsive">
-				<div id="paging" class="pagclass"></div>
+				<table class="layui-hide" id="roletable"></table>
 			</div>
 		</div>
 		<div class="panel panel-default" v-show="!showList">
@@ -84,4 +83,5 @@
 		</div>
 	</div>
 	<script src="/js/system/role/role.js"></script>
-</body></html>
+</body>
+</html>

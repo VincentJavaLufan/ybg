@@ -15,7 +15,7 @@ var vm = new Vue({
             vm.m = {};
         },
         update : function() {
-            var jobId = getSelectedRow();
+            var jobId = getSelectedRow('acttable', 'id');
             if (jobId == null) {
                 return;
             }
@@ -38,12 +38,11 @@ var vm = new Vue({
                 }
             });
         },
-        deployment:function(){
-            var id = getSelectedRow();
+        deployment : function() {
+            var id = getSelectedRow('acttable', 'id');
             if (id == null) {
                 return;
             }
-            
             $.ajax({
                 type : "POST",
                 url : rootPath + "/models/model_do/deployment.do",
@@ -51,7 +50,6 @@ var vm = new Vue({
                 data : {
                     'id' : id
                 },
-                
                 success : function(r) {
                     vm.reload();
                     alert(r.msg);
@@ -59,7 +57,7 @@ var vm = new Vue({
             });
         },
         del : function() {
-            var id = getSelectedRows();
+            var id = getSelectedRows('acttable', 'id');
             if (id == null) {
                 return;
             }
@@ -80,41 +78,48 @@ var vm = new Vue({
         },
         reload : function(event) {
             vm.showList = true;
-            grid.loadData();
+            layui.use('table', function() {
+                var table = layui.table;
+                table.render({
+                    elem : '#acttable' // 选定是那个DIV
+                    ,
+                    url : rootPath + '/models/model_do/list.do',
+                    cols : [
+                        [
+                            {
+                                type : 'checkbox'
+                            }, {
+                                field : 'id',
+                                width : 180,
+                                title : 'ID'
+                            }, {
+                                field : 'name',
+                                width : 180,
+                                title : '流程名称'
+                            }, {
+                                field : 'key',
+                                width : 180,
+                                title : '流程关键字'
+                            }, {
+                                field : 'createTime',
+                                width : 180,
+                                title : '创建时间'
+                            }, {
+                              
+                                title : '操作',
+                                minWidth : 100,
+                                templet : function(data) {
+                                    return "<a target='_blank' class='btn btn-primary' href='/modeler.html?modelId=" + data.id + "'> <i class='fa fa-pencil-square-o'></i>设计流程</a>";
+                                }
+                            } ] ],
+                    page : true, // 开启分页
+                    method:'post',
+                    request : laypagerequest,
+                    response : laypageresponse,
+                    where : $("#searchForm").serializeJSON()
+                });
+            });
         }
     }
 });
-var pageii = null;
-var grid = null;
-$(function() {
-    grid = lyGrid({
-        id : 'paging',
-        l_column : [
-                {
-                    colkey : "id",
-                    name : "ID",
-                    width : "50px",
-                    hide : true
-                }, {
-                    colkey : "name",
-                    name : "流程名称"
-                }, {
-                    colkey : "key",
-                    name : "流程关键字",
-                }, {
-                    colkey : "createTime",
-                    name : "创建时间",
-                }, {
-                    colkey : "id",
-                    name : "操作",
-                    renderData : function(rowindex, data, rowdata, colkey)// 渲染数据
-                    {
-                        return "<a target='_blank' class='btn btn-primary' href='/modeler.html?modelId=" + rowdata.id + "'> <i class='fa fa-pencil-square-o'></i>设计流程</a>";
-                    }
-                }],
-        jsonUrl : rootPath + '/models/model_do/list.do',
-        usePage : false,
-        checkbox : true,
-        checkValue : 'id',
-    });
-});
+vm.reload();

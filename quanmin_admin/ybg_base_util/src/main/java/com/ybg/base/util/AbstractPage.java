@@ -28,6 +28,25 @@ public abstract class AbstractPage implements Serializable {
 	private String				paginate;
 	/** 总页数 ，总页数等于 总数 除以分页大小 **/
 	private Integer				totalpages;
+	/** layerUi 前段辅助 */
+	int							code				= 200;
+	String						msg;
+	
+	public int getCode() {
+		return code;
+	}
+	
+	public void setCode(int code) {
+		this.code = code;
+	}
+	
+	public String getMsg() {
+		return msg;
+	}
+	
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
 	
 	/** 分页插件初始化,请写在最后一步 要获取数据和数据总数目之后使用 **/
 	public void init() {
@@ -98,9 +117,9 @@ public abstract class AbstractPage implements Serializable {
 	}
 	
 	public void setCurPage(Integer curPage) {
-		if(curPage==null || curPage<1) {
-			this.curPage=1;
-			return ;
+		if (curPage == null || curPage < 1) {
+			this.curPage = 1;
+			return;
 		}
 		this.curPage = curPage;
 		Integer start = getPageSize() * (curPage - 1) + 1;

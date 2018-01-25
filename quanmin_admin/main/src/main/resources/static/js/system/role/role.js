@@ -28,7 +28,7 @@ var vm = new Vue({
             vm.getMenuTree(null);
         },
         update : function() {
-            var roleId = getSelectedRow();
+            var roleId = getSelectedRow('roletable', 'id');
             if (roleId == null) {
                 return;
             }
@@ -38,11 +38,10 @@ var vm = new Vue({
             vm.getMenuTree(roleId);
         },
         del : function(event) {
-            var roleIds = getSelectedRows();
+            var roleIds = getSelectedRows('roletable', 'id');
             if (roleIds == null) {
                 return;
             }
-            var cbox = grid.getSelectedCheckbox();
             confirm('确定要删除选中的记录？', function() {
                 $.ajax({
                     type : "POST",
@@ -87,68 +86,54 @@ var vm = new Vue({
                 contentType : "application/json",
                 data : JSON.stringify(vm.role),
                 success : function(data) {
-                	console.log(data.msg);
-                	// vm.showList = true;
+                    
+                    // vm.showList = true;
                     alert(data.msg);
                 }
             });
         },
         reload : function() {
-            var searchParams = $("#searchForm").serializeJson();// 初始化传参数
-            grid.setOptions({
-                data : searchParams
-            });
             vm.showList = true;
-            grid.loadData();
+            layui.use('table', function() {
+                var table = layui.table;
+                table.render({
+                    elem : '#roletable' // 选定是那个DIV
+                    ,
+                    url : rootPath + '/role/role_do/list.do',
+                    cols : [
+                        [
+                            {
+                                type : 'checkbox'
+                            }, {
+                                field : 'id',
+                                width : 180,
+                                title : 'ID'
+                            }, {
+                                field : 'name',
+                                width : 180,
+                                title : '角色名'
+                            }, {
+                                field : 'state',
+                                title : '状态',
+                                minWidth : 100,
+                                templet : function(data) {
+                                    if (data.state == 0) {
+                                        return "正常";
+                                    }
+                                    if (data.state == 1) {
+                                        return "<font color='red'>刪除</font>";
+                                    }
+                                    return "数据异常";
+                                }
+                            } ] ],
+                    page : true, // 开启分页
+                    request : laypagerequest,
+                    response : laypageresponse,
+                    where : $("#searchForm").serializeJSON()
+                });
+            });
         }
     }
-});
-
-
-var pageii = null;
-var grid = null;
-$(function() {
-    grid = lyGrid({
-        id : 'paging',
-        l_column : [
-                {
-                    colkey : "id",
-                    name : "id",
-                    width : "50px",
-                    hide : true
-                }, {
-                    colkey : "name",
-                    name : "角色名"
-                }, {
-                    colkey : "state",
-                    name : "状态",
-                    renderData : function(rowindex, data, rowdata, colkeyn) {
-                        if (data == 0) {
-                            return "正常";
-                        }
-                        if (data == 1) {
-                            return "删除";
-                        }
-                        return "数据异常";
-                    }
-                }, {
-                    colkey : "rolekey",
-                    name : "roleKey"
-                }, {
-                    colkey : "description",
-                    name : "描述"
-                }],
-        jsonUrl : rootPath + '/role/role_do/list.do',
-      
-        checkbox : true,// 是否显示复选框
-        checkValue : 'id', // 当checkbox为true时，需要设置存放checkbox的值字段 默认存放字段id的值
-    });
-//    $("#search").click("click", function() {// 绑定查询按扭
-//        var searchParams = $("#searchForm").serializeJson();// 初始化传参数
-//        grid.setOptions({
-//            data : searchParams
-//        });
-//    });
 });
 var setting = {
     data : {
@@ -167,4 +152,4 @@ var setting = {
         nocheckInherit : true
     }
 };
-
+vm.reload();

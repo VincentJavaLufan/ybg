@@ -49,13 +49,13 @@ public class EmployeeController {
 	}
 	
 	@ApiOperation(value = "Employee分页列表", notes = "JSON ", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "EmployeeQvo") })
+//	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "EmployeeQvo") })
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute EmployeeQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, ModelMap map) throws Exception {
+	public Page list(@ModelAttribute EmployeeQuery qvo,@ModelAttribute Page page, ModelMap map) throws Exception {
 		qvo.setBlurred(true);
-		Page page = new Page();
-		page.setCurPage(pageNow);
+//		Page page = new Page();
+//		page.setCurPage(pageNow);
 		page = employeeService.list(page, qvo);
 		page.init();
 		return page;

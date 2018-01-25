@@ -55,63 +55,55 @@ var vm = new Vue({
 
 				},
 				success : function(r) {
-
 					alert(r.msg);
-
 				}
 			});
 		},
 
 		reload : function() {
 			vm.showList = true;
-			grid.loadData();
+			layui.use('table', function() {
+                var table = layui.table;
+                table.render({
+                    elem : '#gentable' // 选定是那个DIV
+                    ,
+                    url : rootPath + '/sys/generator_do/list.do',
+                    cols : [
+                        [
+                            {
+                                type : 'checkbox'
+                            }, {
+                                field : 'tableName',
+                                width : 180,
+                                title : '表名'
+                            }, {
+                                field : 'comments',
+                                title : '备注',
+                                minWidth : 100,
+                                templet : function(data) {
+                                    return data.comments;
+                                }
+                            } ] ],
+                    page : true, // 开启分页
+                    request : laypagerequest,
+                    response : laypageresponse,
+                    where : $("#searchForm").serializeJSON()
+                });
+            });
+		},
+		gencode:function(){
+		    
+		    var roleIds = getSelectedRows('gentable', 'tableName');
+            if (roleIds == null) {
+                return;
+            }
+		    layer.confirm('是否生成？', function(index) {
+		        location.href = '/sys/generator_do/code.do?tables=' + roleIds;
+
+		    });
 		}
 	}
 });
 
-var pageii = null;
-var grid = null;
-$(function() {
-	grid = lyGrid({
-		id : 'paging',
-		l_column : [ {
-			colkey : "id",
-			name : "id",
-			width : "50px",
-			hide : true
-		}, {
-			colkey : "tableName",
-			name : "表名"
-		}, {
-			colkey : "comments",
-			name : "备注"
 
-		} ],
-		jsonUrl : rootPath + '/sys/generator_do/list.do',
-		checkbox : true,
-		checkValue : 'tableName'
-	});
-	$("#search").click("click", function() {// 绑定查询按扭
-		var searchParams = $("#searchForm").serializeJson();// 初始化传参数
-		grid.setOptions({
-			data : searchParams
-		});
-	});
-
-	$("#delRole").click("click", function() {
-		delRole();
-	});
-
-});
-
-function delRole() {
-	var cbox = grid.getSelectedCheckbox();
-	if (cbox == "") {
-		layer.msg("请选择生成表！！");
-		return;
-	}
-	layer.confirm('是否生成？', function(index) {
-		location.href = '/sys/generator_do/code.do?tables=' + cbox.join(",");
-
-	});
-}
+vm.reload();

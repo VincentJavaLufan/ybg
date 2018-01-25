@@ -44,12 +44,12 @@ public class CommodityController {
 	}
 	
 	@ApiOperation(value = "商品分页列表", notes = "JSON ", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "CommodityQvo") })
+	//@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "CommodityQvo") })
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute CommodityQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, ModelMap map) throws Exception {
-		Page page = new Page();
-		page.setCurPage(pageNow);
+	public Page list(@ModelAttribute CommodityQuery qvo, @ModelAttribute Page page, ModelMap map) throws Exception {
+//		Page page = new Page();
+//		page.setCurPage(pageNow);
 		page = commodityService.list(page, qvo);
 		page.init();
 		return page;
