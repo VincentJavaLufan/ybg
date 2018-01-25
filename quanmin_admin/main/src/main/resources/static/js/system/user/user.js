@@ -42,7 +42,7 @@ var vm = new Vue({
             if (userid == null) {
                 return;
             }
-            alert(userid);
+            
             vm.showList = false;
             vm.title = "编辑用户";
             vm.user = {
