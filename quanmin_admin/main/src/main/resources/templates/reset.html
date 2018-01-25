@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="/notebook/notebook_files/font.css" />
 <link rel="stylesheet" href="/notebook/notebook_files/app.v1.css" />
 <script type="text/javascript" src="/js/plugins/jQuery/jquery-2.3.4.min.js"></script>
-<script type="text/javascript" src="/js/layer-v1.9.2/layer/layer.js"></script>
+<script type="text/javascript" src="/js/plugins/layui/lay/modules/layer.js"></script>
 <script type="text/javascript">
 
 	layer.config({
@@ -100,14 +100,10 @@ function checkPassword(){
 </html>
 <script type="text/javascript">
 	<#if error??>
-	if ("${error!}" != "") {
-		
-   
+	if ("${error!}" != "") {		  
 	layer.tips('${error!}', '#username', {
  	 tips: [1, '#FF3333'] //还可配置颜色
-	});
-  
-  
+	});    
 	};
 	</#if>
 	//tologin();
