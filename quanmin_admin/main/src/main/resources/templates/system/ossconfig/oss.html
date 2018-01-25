@@ -8,15 +8,15 @@
 			<div class="m-b-md"></div>
 			<header class="panel-heading">
 				<div class="doc-buttons">
-					<a class="btn btn-danger" @click="addConfig">
+					<a class="layui-btn layui-btn-danger" @click="addConfig">
 						<i class="fa fa-sun-o"></i>
 						&nbsp;云存储配置
 					</a>
-					<a class="btn btn-primary" id="upload">
+					<a class="layui-btn layui-btn-normal" id="upload">
 						<i class="fa fa-plus"></i>
 						&nbsp;上传文件
 					</a>
-					<a class="btn btn-primary" @click="del">
+					<a class="layui-btn layui-btn-normal" @click="del">
 						<i class="fa fa-trash-o"></i>
 						&nbsp;删除
 					</a>
@@ -166,9 +166,9 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2 control-label"></div>
-					<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定" />
+					<input type="button" class="layui-btn layui-btn-normal" @click="saveOrUpdate" value="确定" />
 					&nbsp;&nbsp;
-					<input type="button" class="btn btn-warning" @click="reload" value="返回" />
+					<input type="button" class="layui-btn layui-btn-danger" @click="reload" value="返回" />
 				</div>
 			</form>
 		</div>

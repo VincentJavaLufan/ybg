@@ -29,7 +29,7 @@
 		<header class="panel-heading">
 			<div class="doc-buttons">
 				<a href="javascript:void(0)" @click="addConfig" class="btn btn-s-md btn-warning btn-rounded" id="search">修改设置</a>
-				<button type="button" class="btn btn-danger marR10 "@click="gencode">生成代码</button>
+				<button type="button" class="layui-btn layui-btn-danger"@click="gencode">生成代码</button>
 			</div>
 		</header>
 		<div class="table-responsive" v-show="showList">
@@ -70,9 +70,9 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2 control-label"></div>
-					<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定" />
+					<input type="button" class="layui-btn layui-btn-normal" @click="saveOrUpdate" value="确定" />
 					&nbsp;&nbsp;
-					<input type="button" class="btn btn-warning" @click="reload" value="返回" />
+					<input type="button" class="layui-btn layui-btn-danger" @click="reload" value="返回" />
 				</div>
 			</form>
 		</div>

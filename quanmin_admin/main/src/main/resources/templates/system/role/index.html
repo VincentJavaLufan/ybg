@@ -6,23 +6,19 @@
 	<div id="rrapp" v-cloak>
 		<div v-show="showList">
 			<div class="m-b-md">
-				<form class="form-inline" role="form" id="searchForm" name="searchForm">
-					<div class="form-group">
-						<label class="control-label">
-							<span class="h4 font-thin v-middle">角色名:</span>
-						</label>
-						<input class="form-control" id="name" name="name">
+				<form class="layui-form layui-form-pane" role="form" id="searchForm" name="searchForm">
+					<div class="layui-form-item">
+						<label class="layui-form-label">角色名:</label>
+						<div class="layui-input-inline">
+							<input type="text" name="name" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+						</div>
+						<a href="javascript:void(0)" @click="reload" class="layui-btn layui-btn-normal" id="search">查询</a>
+						<button type="button" @click="del" class="layui-btn layui-btn-danger">删除</button>
+						<button type="button" @click="add" class="layui-btn layui-btn-normal">新增</button>
+						<button type="button" @click="update" class="layui-btn layui-btn-normal">编辑</button>
 					</div>
-					<a href="javascript:void(0)" @click="reload" class="btn btn-s-md btn-default btn-rounded" id="search">查询</a>
 				</form>
 			</div>
-			<header class="panel-heading">
-				<div class="doc-buttons">
-					<button type="button" @click="del" class="btn btn-danger marR10">删除</button>
-					<button type="button" @click="add" class="btn btn-primary marR10">新增</button>
-					<button type="button" @click="update" class="btn btn-info marR10">编辑</button>
-				</div>
-			</header>
 			<div class="table-responsive">
 				<table class="layui-hide" id="roletable"></table>
 			</div>
@@ -74,9 +70,9 @@
 				<footer class="panel-footer text-right bg-light lter">
 					<div class="form-group">
 						<div class="col-sm-2 control-label"></div>
-						<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定" />
+						<input type="button" class="layui-btn layui-btn-normal" @click="saveOrUpdate" value="确定" />
 						&nbsp;&nbsp;
-						<input type="button" class="btn btn-warning" @click="reload" value="返回" />
+						<input type="button" class="layui-btn layui-btn-danger" @click="reload" value="返回" />
 					</div>
 				</footer>
 			</form>
