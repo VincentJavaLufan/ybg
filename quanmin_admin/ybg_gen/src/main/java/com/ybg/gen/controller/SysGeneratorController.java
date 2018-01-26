@@ -51,9 +51,9 @@ public class SysGeneratorController {
 	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "GeneratorQuery") })
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute GeneratorQuery qvo, @RequestParam(name = "pageNow", required = false, defaultValue = "0") Integer pageNow, @RequestParam(name = "datasource", required = false, defaultValue = DataBaseConstant.JD_SYS) String datasource, ModelMap map) throws Exception {
-		Page page = new Page();
-		page.setCurPage(pageNow);
+	public Page list(@ModelAttribute GeneratorQuery qvo,@ModelAttribute Page page , @RequestParam(name = "datasource", required = false, defaultValue = DataBaseConstant.JD_SYS) String datasource, ModelMap map) throws Exception {
+		// Page page = new Page();
+		// page.setCurPage(pageNow);
 		// 线程传参
 		DataBaseConstant.setJdbcTemplate(datasource);
 		System.out.println(datasource);
