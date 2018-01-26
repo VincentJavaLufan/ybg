@@ -1,5 +1,4 @@
-<!-- Content Wrapper. Contains page content -->
-<!-- /.row -->
+
 <html>
 <head>
 <#include "/common/common2.ftl"/>
@@ -9,7 +8,7 @@
 		<div class="col-xs-12">
 			<div class="m-b-md">
 				<div class="form-inline" role="form" id="searchForm" name="searchForm">
-					<a href="javascript:void(0)" @click="updatePassword" class="btn btn-s-md btn-warning btn-rounded" id="search">修改密码</a>
+					<a href="javascript:void(0)" @click="updatePassword" class="layui-btn layui-btn-warm" id="search">修改密码</a>
 				</div>
 			</div>
 		</div>
@@ -110,38 +109,42 @@
                     $("#passwordLayer").css("display", 'block');
                 },
                 updatePassword : function() {
-                    layer.open({
-                        type : 1,
-                        skin : 'layui-layer-molv',
-                        title : "修改密码",
-                        area : [
-                                '600px', '400px'],
-                        shadeClose : false,
-                        content : jQuery("#passwordLayer"),
-                        btn : [
-                                '修改', '取消'],
-                        btn1 : function(index) {
-                            if (vm.newPassword != vm.newPassword2) {
-                                alert("两次密码不一致");
-                                return false;
-                            }
-                            var data = "password=" + vm.password + "&newPassword=" + vm.newPassword;
-                            $.ajax({
-                                type : "POST",
-                                url : "/common/login_do/modifypwd.do",
-                                data : {
-                                    password : vm.password,
-                                    newPassword : vm.newPassword,
-                                    vrifyCode : $("#vrifyCode").val()
-                                },
-                                dataType : "json",
-                                success : function(data) {
-                                    alert(data.msg);
-                                    $("#vrifyCode_modifypwd").attr("src", '/defaultKaptcha?d=' + new Date() * 1);
+                    layui.use('layer', function(){ 
+                        var  layer = layui.layer
+                        layer.open({
+                            type : 1,
+                            skin : 'layui-layer-molv',
+                            title : "修改密码",
+                            area : [
+                                    '600px', '600px'],
+                            shadeClose : false,
+                            content : jQuery("#passwordLayer"),
+                            btn : [
+                                    '修改', '取消'],
+                            btn1 : function(index) {
+                                if (vm.newPassword != vm.newPassword2) {
+                                    alert("两次密码不一致");
+                                    return false;
                                 }
-                            });
-                        }
+                                var data = "password=" + vm.password + "&newPassword=" + vm.newPassword;
+                                $.ajax({
+                                    type : "POST",
+                                    url : "/common/login_do/modifypwd.do",
+                                    data : {
+                                        password : vm.password,
+                                        newPassword : vm.newPassword,
+                                        vrifyCode : $("#vrifyCode").val()
+                                    },
+                                    dataType : "json",
+                                    success : function(data) {
+                                        alert(data.msg);
+                                        $("#vrifyCode_modifypwd").attr("src", '/defaultKaptcha?d=' + new Date() * 1);
+                                    }
+                                });
+                            }
+                        });
                     });
+                   
                 },
                 delsocial : function(pro,provideruserid) {
                     confirm('确定要删除关联？', function() {
@@ -154,7 +157,10 @@
                                 provideruserid,provideruserid
                             },
                             success : function(data) {
-                                layer.closeAll();
+                                layui.use('layer', function(){ 
+                                  var  layer = layui.layer
+                                    layer.closeAll(); 
+                                });
                                 alert(data.msg);
                                 vm.boundinfo();
                                 return false;

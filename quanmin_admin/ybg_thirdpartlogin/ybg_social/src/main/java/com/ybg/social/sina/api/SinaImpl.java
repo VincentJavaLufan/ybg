@@ -3,7 +3,8 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.TokenStrategy;
 import com.alibaba.fastjson.JSONObject;
-import com.xiaoleilu.hutool.http.HttpUtil;
+import cn.hutool.http.HttpUtil;
+
 
 /** @author https://gitee.com/YYDeament/88ybg
  * @date 2017/10/1 / 如果跳转到了 /signin页面 则表示 此类有问题。。真的是这个类 **/

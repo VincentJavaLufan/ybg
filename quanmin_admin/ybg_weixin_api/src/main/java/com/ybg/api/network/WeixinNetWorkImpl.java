@@ -3,14 +3,13 @@ import java.util.List;
 import javax.print.attribute.standard.Media;
 import org.springframework.stereotype.Repository;
 import com.google.gson.JsonObject;
-import com.xiaoleilu.hutool.http.HttpUtil;
 import com.ybg.api.domain.WeixinJson;
 import com.ybg.api.domain.WeixinOpenAuthorizationConfig;
+import cn.hutool.http.HttpUtil;
 import net.sf.json.JSONObject;
-/**
- * @author Deament
- * @date 2017年10月1日
- * **/
+
+/** @author Deament
+ * @date 2017年10月1日 **/
 @Repository
 public class WeixinNetWorkImpl implements WeixinNetWork {
 	

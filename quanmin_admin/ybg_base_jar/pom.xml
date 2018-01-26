@@ -265,10 +265,10 @@
 			12.Setting（一种扩展Properties的配置文件） 13.System（JVM和系统信息等） 14.WatchService的封装（文件变动监控） 
 			15.XXXUtil各种有用的工具类 -->
 		<dependency>
-			<groupId>com.xiaoleilu</groupId>
-			<artifactId>hutool-all</artifactId>
-			<version>3.1.1</version>
-		</dependency>
+  <groupId>cn.hutool</groupId>
+  <artifactId>hutool-all</artifactId>
+  <version>4.0.1</version>
+</dependency>
 		<!-- 生成文档注释 -->
 		<dependency>
 			<groupId>io.springfox</groupId>

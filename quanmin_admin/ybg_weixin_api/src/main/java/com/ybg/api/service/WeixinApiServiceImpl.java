@@ -3,11 +3,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
-import com.xiaoleilu.hutool.http.HttpUtil;
 import com.ybg.api.dao.WeixinApiDao;
 import com.ybg.api.domain.WeixinJson;
 import com.ybg.api.domain.WeixinOpenAuthorizationConfig;
 import com.ybg.api.network.WeixinNetWork;
+import cn.hutool.http.HttpUtil;
 import net.sf.json.JSONObject;
 
 /** @author Deament
