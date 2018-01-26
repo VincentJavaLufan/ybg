@@ -6,8 +6,8 @@
 	<div id="rrapp" v-cloak>
 		<div v-show="showList">
 			<div class="m-b-md">
-				<form class="form-inline" role="form" id="searchForm" name="searchForm">
-					<div class="form-group">
+				<form class="layui-form layui-form-pan" role="form" id="searchForm" name="searchForm">
+					<div class="layui-form-item">
 						<label class="control-label">
 							<span class="h4 font-thin v-middle">支付类型:</span>
 						</label>
@@ -39,66 +39,66 @@
 		<div v-show="!showList" class="panel panel-default">
 			<div class="panel-heading">{{title}}</div>
 			<form class="form-horizontal">
-				<div class="form-group">
-					<div class="col-sm-2 control-label">商户ID</div>
-					<div class="col-sm-10">
+				<div class="layui-form-item">
+					<label class="layui-form-label">商户ID</label>
+					<div class="layui-input-block">
 						<input type="text" class="form-control" v-model="seller.partner" placeholder="商户ID" />
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">应用ID</div>
-					<div class="col-sm-10">
+				<div class="layui-form-item">
+					<label class="layui-form-label">应用ID</label>
+					<div class="layui-input-block">
 						<input type="text" class="form-control" v-model="seller.appid" placeholder="应用ID" />
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">公钥</div>
-					<div class="col-sm-10">
+				<div class="layui-form-item">
+					<label class="layui-form-label">公钥</label>
+					<div class="layui-input-block">
 						<input type="text" class="form-control" v-model="seller.publickey" placeholder="公钥" />
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">私钥</div>
-					<div class="col-sm-10">
+				<div class="layui-form-item">
+					<label class="layui-form-label">私钥</label>
+					<div class="layui-input-block">
 						<input type="text" class="form-control" v-model="seller.privatekey" placeholder="私钥" />
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">异步回调地址</div>
-					<div class="col-sm-10">
+				<div class="layui-form-item">
+					<label class="layui-form-label">异步回调地址</label>
+					<div class="layui-input-block">
 						<input type="text" class="form-control" v-model="seller.notifyurl" placeholder="异步回调地址" />
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">同步回调地址</div>
-					<div class="col-sm-10">
+				<div class="layui-form-item">
+					<label class="layui-form-label">同步回调地址</label>
+					<div class="layui-input-block">
 						<input type="text" class="form-control" v-model="seller.returnurl" placeholder="同步回调地址" />
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">收款帐号</div>
-					<div class="col-sm-10">
+				<div class="layui-form-item">
+					<label class="layui-form-label">收款帐号</label>
+					<div class="layui-input-block">
 						<input type="text" class="form-control" v-model="seller.seller" placeholder="收款帐号" />
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">签名类型</div>
-					<div class="col-sm-10">
+				<div class="layui-form-item">
+					<label class="layui-form-label">签名类型</label>
+					<div class="layui-input-block">
 						<input type="text" class="form-control" v-model="seller.signtype" placeholder="签名类型" />
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">支付类型</div>
-					<div class="col-sm-10">
+				<div class="layui-form-item">
+					<label class="layui-form-label">支付类型</label>
+					<div class="layui-input-block">
 						<select class="form-control" v-model="seller.paytype">
 							<option value="aliPay">支付宝</option>
 							<option value="wxPay">微信</option>
 						</select>
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">消息类型</div>
-					<div class="col-sm-10">
+				<div class="layui-form-item">
+					<label class="layui-form-label">消息类型</label>
+					<div class="layui-input-block">
 						<select class="form-control" v-model="seller.msgtype">
 							<option value="text">文本</option>
 							<option value="xml">XML</option>
@@ -106,17 +106,17 @@
 						</select>
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">是否测试</div>
-					<div class="col-sm-10">
+				<div class="layui-form-item">
+					<label class="layui-form-label">是否测试</label>
+					<div class="layui-input-block">
 						<select class="form-control" v-model="seller.test">
 							<option value="1">是</option>
 							<option value="0">否</option>
 						</select>
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label"></div>
+				<div class="layui-form-item">
+					<label class="layui-form-label"></label>
 					<input type="button" class="layui-btn layui-btn-normal" @click="saveOrUpdate" value="确定" />
 					&nbsp;&nbsp;
 					<input type="button" class="layui-btn layui-btn-danger" @click="reload" value="返回" />

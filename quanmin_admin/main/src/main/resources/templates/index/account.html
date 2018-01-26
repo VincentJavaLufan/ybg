@@ -7,7 +7,7 @@
 	<div class="row" id="rrapp" v-cloak>
 		<div class="col-xs-12">
 			<div class="m-b-md">
-				<div class="form-inline" role="form" id="searchForm" name="searchForm">
+				<div class="layui-form layui-form-pan" role="form" id="searchForm" name="searchForm">
 					<a href="javascript:void(0)" @click="updatePassword" class="layui-btn layui-btn-warm" id="search">修改密码</a>
 				</div>
 			</div>
@@ -56,26 +56,26 @@
 		</div>
 		<div id="passwordLayer" style="display: none; width: 500px;">
 			<form class="form-horizontal">
-				<div class="form-group">
+				<div class="layui-form-item">
 					<div class="col-sm-3 control-label col-xs-3">原密码</div>
 					<div class="col-sm-7 col-xs-6">
 						<input type="password" class="form-control" v-model="password" placeholder="原密码" />
 					</div>
 					<!-- Left side column. contains the sidebar -->
 				</div>
-				<div class="form-group">
+				<div class="layui-form-item">
 					<div class="col-sm-3 control-label col-xs-3">新密码</div>
 					<div class="col-sm-7 col-xs-5">
 						<input type="password" class="form-control" v-model="newPassword" placeholder="新密码" />
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="layui-form-item">
 					<div class="col-sm-3 control-label col-xs-4">再次确认</div>
 					<div class="col-sm-7 col-xs-5">
 						<input type="password" class="form-control" v-model="newPassword2" placeholder="新密码" />
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="layui-form-item">
 					<div class="col-sm-3 control-label col-xs-3">验证码</div>
 					<img id="vrifyCode_modifypwd" alt="验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1" src="/defaultKaptcha" />
 					<input type="text" placeholder="请输入验证码" required="required" id="vrifyCode" name="vrifyCode" class="form-control input-sm" style="width: 30%; display: inline;">

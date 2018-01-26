@@ -7,8 +7,8 @@
 	<div id="rrapp" v-cloak>
 		<div v-show="showList">
 			<div class="m-b-md">
-				<form class="form-inline" role="form" id="searchForm" name="searchForm">
-					<div class="form-group">
+				<form class="layui-form layui-form-pan" role="form" id="searchForm" name="searchForm">
+					<div class="layui-form-item">
 						<label class="control-label">
 							<!-- <span class="h4 font-thin v-middle">名称:</span> -->
 						</label>
@@ -44,21 +44,21 @@
 		</div>
 		<div v-show="!showList" class="panel panel-default">
 			<div class="panel-heading">{{title}}</div>
-			<form class="form-horizontal">
-				<div class="form-group">
-					<div class="col-sm-2 control-label">流程名称</div>
-					<div class="col-sm-10">
+			<form class="layui-form layui-form-pan">
+				<div class="layui-form-item">
+					<label class="layui-form-label">流程名称</label>
+					<div class="layui-input-block">
 						<input type="text" class="form-control" v-model="m.name" placeholder="" />
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label">关键字</div>
-					<div class="col-sm-10">
+				<div class="layui-form-item">
+					<label class="layui-form-label">关键字</label>
+					<div class="layui-input-block">
 						<input type="text" class="form-control" v-model="m.key" placeholder="key" />
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-2 control-label"></div>
+				<div class="layui-form-item">
+					<label class="layui-form-label"></label>
 					<input type="button" class="layui-btn layui-btn-normal" @click="saveOrUpdate" value="确定" />
 					&nbsp;&nbsp;
 					<input type="button" class="layui-btn layui-btn-danger" @click="reload" value="返回" />
