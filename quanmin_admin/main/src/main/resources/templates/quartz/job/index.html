@@ -6,14 +6,14 @@
 	<div id="rrapp" v-cloak>
 		<div v-show="showList">
 			<div class="m-b-md">
-				<form class="layui-form layui-form-pan" role="form" id="searchForm" name="searchForm">
+				<form class="layui-form layui-form-pane" role="form" id="searchForm" name="searchForm">
 					<div class="layui-form-item">
-						<label class="control-label">
-							<span class="h4 font-thin v-middle">任务:</span>
-						</label>
-						<input class="form-control" id="name" name="name">
+						<label class="layui-form-label"> 任务: </label>
+						<div class="layui-input-inline">
+							<input class="layui-input" id="name" name="name">
+						</div>
+						<a href="javascript:void(0)" class="layui-btn layui-btn-normal" @click="query" id="search">查询</a>
 					</div>
-					<a href="javascript:void(0)" class="btn btn-s-md btn-default btn-rounded" @click="query" id="search">查询</a>
 				</form>
 			</div>
 			<header class="panel-heading">
@@ -50,35 +50,35 @@
 		</div>
 		<div v-show="!showList" class="panel panel-default">
 			<div class="panel-heading">{{title}}</div>
-			<form class="form-horizontal">
+			<form class="layui-form layui-form-pane">
 				<div class="layui-form-item">
 					<label class="layui-form-label">bean名称</label>
 					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="schedule.beanName" placeholder="spring bean名称，如：testTask" />
+						<input type="text" class="layui-input" v-model="schedule.beanName" placeholder="spring bean名称，如：testTask" />
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">方法名称</label>
 					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="schedule.methodName" placeholder="方法名称" />
+						<input type="text" class="layui-input" v-model="schedule.methodName" placeholder="方法名称" />
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">参数</label>
 					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="schedule.params" placeholder="参数" />
+						<input type="text" class="layui-input" v-model="schedule.params" placeholder="参数" />
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">cron表达式</label>
 					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="schedule.cronExpression" placeholder="如：0 0 12 * * ?" />
+						<input type="text" class="layui-input" v-model="schedule.cronExpression" placeholder="如：0 0 12 * * ?" />
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">备注</label>
 					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="schedule.remark" placeholder="备注" />
+						<input type="text" class="layui-input" v-model="schedule.remark" placeholder="备注" />
 					</div>
 				</div>
 				<div class="layui-form-item">

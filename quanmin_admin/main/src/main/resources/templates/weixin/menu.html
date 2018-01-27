@@ -6,7 +6,7 @@
 	<div id="rrapp" v-cloak>
 		<div v-show="showList">
 			<div class="m-b-md" style="display: none;">
-				<form class="layui-form layui-form-pan" role="form" id="searchForm" name="searchForm">
+				<form class="layui-form layui-form-pane" role="form" id="searchForm" name="searchForm">
 					<div class="layui-form-item"></div>
 					<a href="javascript:void(0)" class="btn btn-s-md btn-default btn-rounded" id="search">查询</a>
 				</form>
@@ -45,17 +45,17 @@
 		</div>
 		<div v-show="!showList" class="panel panel-default">
 			<div class="panel-heading">{{title}}</div>
-			<form class="form-horizontal">
+			<form class="layui-form layui-form-pane">
 				<div class="layui-form-item">
 					<label class="layui-form-label">名称</label>
 					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="weixinmenu.name" placeholder="" required="required" />
+						<input type="text" style="display: block;" class="layui-input" v-model="weixinmenu.name" placeholder="" required="required" />
 					</div>
 				</div>
 				<div class="layui-form-item" v-if="weixinmenu.id ==null">
 					<label class="layui-form-label">类型</label>
 					<div class="layui-input-block">
-						<select class="form-control" v-model="weixinmenu.ifsub">
+						<select class="layui-input" v-model="weixinmenu.ifsub" style="display: block;">
 							<option value="2">菜单</option>
 							<option value="1">按钮</option>
 						</select>
@@ -64,7 +64,7 @@
 				<div class="layui-form-item" v-if="weixinmenu.ifsub ==2">
 					<label class="layui-form-label">菜单序号</label>
 					<div class="layui-input-block">
-						<select class="form-control" v-model="weixinmenu.menuorder">
+						<select class="layui-input" v-model="weixinmenu.menuorder" style="display: block;">
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
@@ -74,7 +74,7 @@
 				<div class="layui-form-item" v-if="weixinmenu.ifsub ==1">
 					<label class="layui-form-label">按钮序号</label>
 					<div class="layui-input-block">
-						<select class="form-control" v-model="weixinmenu.buttonorder">
+						<select class="layui-input" v-model="weixinmenu.buttonorder">
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
@@ -86,13 +86,13 @@
 				<div class="layui-form-item" v-if="weixinmenu.ifsub ==1&& weixinmenu.id ==null">
 					<label class="layui-form-label">上级菜单</label>
 					<div class="layui-input-block">
-						<input type="text" class="form-control" style="cursor: pointer;" v-model="weixinmenu.parentname" @click="menuTree" readonly="readonly" placeholder="一级菜单" />
+						<input type="text" class="layui-input" style="cursor: pointer;" v-model="weixinmenu.parentname" @click="menuTree" readonly="readonly" placeholder="一级菜单" />
 					</div>
 				</div>
 				<div class="layui-form-item" v-if="weixinmenu.ifsub ==1">
 					<label class="layui-form-label">按钮类型</label>
 					<div class="layui-input-block">
-						<select class="form-control" v-model="weixinmenu.type">
+						<select class="layui-input" v-model="weixinmenu.type">
 							<option value="view">链接类型</option>
 							<!--  <option value="click">点击类型</option>
 							<option value="scancode_push">扫一扫</option>
@@ -109,39 +109,40 @@
 				<div class="layui-form-item" v-if="weixinmenu.type =='click'&&weixinmenu.ifsub ==1">
 					<label class="layui-form-label">按钮KEY值</label>
 					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="weixinmenu.key" placeholder="" required="required" />
+						<input type="text" class="layui-input" v-model="weixinmenu.key" placeholder="" required="required" />
 					</div>
 				</div>
 				<div class="layui-form-item" v-if="weixinmenu.type =='view'&&weixinmenu.ifsub ==1">
 					<label class="layui-form-label">按钮链接</label>
 					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="weixinmenu.url" placeholder="" required="required" />
+						<input type="text" class="layui-input" v-model="weixinmenu.url" placeholder="" required="required" />
 					</div>
 				</div>
 				<div class="layui-form-item" v-if="(weixinmenu.type =='media_id'||weixinmenu.type =='view_limited')&&weixinmenu.ifsub ==1">
 					<label class="layui-form-label">素材ID</label>
 					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="weixinmenu.media_id" placeholder="" required="required" />
+						<input type="text" class="layui-input" v-model="weixinmenu.media_id" placeholder="" required="required" />
 					</div>
 				</div>
 				<div class="layui-form-item" v-if="weixinmenu.type =='miniprogram'&&weixinmenu.ifsub ==1">
 					<label class="layui-form-label">小程序ID</label>
 					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="weixinmenu.appid" placeholder="" />
+						<input type="text" class="layui-input" v-model="weixinmenu.appid" placeholder="" />
 					</div>
 				</div>
 				<div class="layui-form-item" v-if="weixinmenu.type =='miniprogram'&&weixinmenu.ifsub ==1">
 					<label class="layui-form-label">小程序路径</label>
 					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="weixinmenu.pagepath" placeholder="" required="required" />
+						<input type="text" class="layui-input" v-model="weixinmenu.pagepath" placeholder="" required="required" />
 					</div>
 				</div>
-				<div class="layui-form-item">
-					<label class="layui-form-label"></label>
-					<input type="button" class="layui-btn layui-btn-normal" @click="saveOrUpdate" value="确定" />
-					&nbsp;&nbsp;
-					<input type="button" class="layui-btn layui-btn-danger" @click="reload" value="返回" />
-				</div>
+				<footer class="panel-footer text-right bg-light lter">
+					<div class="layui-form-item">
+						<input type="button" class="layui-btn layui-btn-normal" @click="saveOrUpdate" value="确定" />
+						&nbsp;&nbsp;
+						<input type="button" class="layui-btn layui-btn-danger" @click="reload" value="返回" />
+					</div>
+				</footer>
 			</form>
 		</div>
 	</div>
@@ -150,4 +151,5 @@
 		<ul id="menuTree" class="ztree"></ul>
 	</div>
 	<script type="text/javascript" src="/js/weixin/menu.js"></script>
-</body></html>
+</body>
+</html>

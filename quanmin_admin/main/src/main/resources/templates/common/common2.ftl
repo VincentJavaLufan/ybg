@@ -20,7 +20,8 @@
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <link rel="stylesheet" href="/js/plugins/treegrid/jquery.treegrid.css"/>
- <link rel="stylesheet" href="/css/bootstrap-table.min.css"/>
+  <!--
+ <link rel="stylesheet" href="/css/bootstrap-table.min.css"/>-->
   <link rel="stylesheet" href="/js/plugins/layui/css/layui.css" media="all"/>
 
   <!-- jQuery 2.2.3 -->

@@ -5,33 +5,29 @@
 <body>
 	<div id="rrapp" v-cloak>
 		<div v-show="showList">
-			<div class="m-b-md" style="display: none;">
-				<form class="layui-form layui-form-pan" role="form" id="searchForm" name="searchForm">
+			<div class="m-b-md">
+				<form class="layui-form layui-form-pane" role="form" id="searchForm" name="searchForm">
 					<div class="layui-form-item">
-						<label class="control-label">
-							<span class="h4 font-thin v-middle">菜单名:</span>
-						</label>
-						<input class="form-control" id="name" name="name">
+						<label class="layui-form-label">菜单名: </label>
+						<div class="layui-input-inline">
+							<input class="layui-input" id="name" name="name">
+						</div>
+						<a href="javascript:void(0)" class="layui-btn layui-btn-normal" id="search">查询</a>
+						<a class="layui-btn layui-btn-normal" @click="add">
+							<i class="fa fa-plus"></i>
+							&nbsp;新增
+						</a>
+						<a class="layui-btn layui-btn-normal" @click="update">
+							<i class="fa fa-pencil-square-o"></i>
+							&nbsp;修改
+						</a>
+						<a class="layui-btn layui-btn-normal" @click="del">
+							<i class="fa fa-trash-o"></i>
+							&nbsp;删除
+						</a>
 					</div>
-					<a href="javascript:void(0)" class="btn btn-s-md btn-default btn-rounded" id="search">查询</a>
 				</form>
 			</div>
-			<header class="panel-heading">
-				<div class="doc-buttons">
-					<a class="layui-btn layui-btn-normal" @click="add">
-						<i class="fa fa-plus"></i>
-						&nbsp;新增
-					</a>
-					<a class="layui-btn layui-btn-normal" @click="update">
-						<i class="fa fa-pencil-square-o"></i>
-						&nbsp;修改
-					</a>
-					<a class="layui-btn layui-btn-normal" @click="del">
-						<i class="fa fa-trash-o"></i>
-						&nbsp;删除
-					</a>
-				</div>
-			</header>
 			<div style="background-color: #ecf0f5;">
 				<table id="menuTable" data-mobile-responsive="true" data-click-to-select="true">
 					<tr>
@@ -40,70 +36,53 @@
 				</table>
 			</div>
 		</div>
-		<div v-show="!showList" class="panel panel-default">
+		<div class="panel panel-default" v-show="!showList">
 			<div class="panel-heading">{{title}}</div>
-			<form class="form-horizontal">
-				<div class="layui-form-item">
-					<label class="layui-form-label">类型</label>
-					<label class="radio-inline">
-						<input type="radio" name="type" value="0" v-model="menu.type" />
-						目录
-					</label>
-					<label class="radio-inline">
-						<input type="radio" name="type" value="1" v-model="menu.type" />
-						菜单
-					</label>
-					<label class="radio-inline">
-						<input type="radio" name="type" value="2" v-model="menu.type" />
-						按钮
-					</label>
-				</div>
-				<div class="layui-form-item">
-					<label class="layui-form-label">菜单名称</label>
-					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="menu.name" placeholder="菜单名称或按钮名称" />
+			<form class="layui-form layui-form-pane">
+				<div class="panel-body">
+					
+					<div class="layui-form-item">
+						<label class="layui-form-label">菜单名称</label>
+						<div class="layui-input-block">
+							<select class="layui-input" v-model="menu.type" style="display: block;">
+								<option value="0">目录</option>
+								<option value="1">菜单</option>
+								<option value="2">按钮</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">菜单名称</label>
+						<div class="layui-input-block">
+							<input type="text" class="layui-input" v-model="menu.name" placeholder="菜单名称或按钮名称" />
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">上级菜单</label>
+						<div class="layui-input-block">
+							<input type="text" class="layui-input" style="cursor: pointer;" v-model="menu.parentname" @click="menuTree" readonly="readonly" placeholder="一级菜单" />
+						</div>
+					</div>
+					<div v-if="menu.type == 1|| menu.type == 2" class="layui-form-item">
+						<label class="layui-form-label">菜单URL</label>
+						<div class="layui-input-block">
+							<input type="text" class="layui-input" v-model="menu.resurl" placeholder="菜单URL" />
+						</div>
+					</div>
+					<div v-if="menu.type == 1 || menu.type == 2" class="layui-form-item">
+						<label class="layui-form-label">菜单标识</label>
+						<div class="layui-input-block">
+							<input type="text" class="layui-input" v-model="menu.reskey" placeholder="如果是URL 请写URL,否则请与菜单名称一致" />
+						</div>
 					</div>
 				</div>
-				<div class="layui-form-item">
-					<label class="layui-form-label">上级菜单</label>
-					<div class="layui-input-block">
-						<input type="text" class="form-control" style="cursor: pointer;" v-model="menu.parentname" @click="menuTree" readonly="readonly" placeholder="一级菜单" />
+				<footer class="panel-footer text-right bg-light lter">
+					<div class="layui-form-item">
+						<input type="button" class="layui-btn layui-btn-normal" @click="saveOrUpdate" value="确定" />
+						&nbsp;&nbsp;
+						<input type="button" class="layui-btn layui-btn-danger" @click="reload" value="返回" />
 					</div>
-				</div>
-				<div v-if="menu.type == 1|| menu.type == 2" class="layui-form-item">
-					<label class="layui-form-label">菜单URL</label>
-					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="menu.resurl" placeholder="菜单URL" />
-					</div>
-				</div>
-				<div v-if="menu.type == 1 || menu.type == 2" class="layui-form-item">
-					<label class="layui-form-label">菜单标识</label>
-					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="menu.reskey" placeholder="如果是URL 请写URL,否则请与菜单名称一致" />
-					</div>
-				</div>
-				<!--  
-			<div v-if="menu.type != 2" class="layui-form-item">
-				<label class="layui-form-label">排序号</div>
-				<div class="layui-input-block">
-					<input type="number" class="form-control" v-model="menu.orderNum" placeholder="排序号" />
-				</div>
-			</div>-->
-				<!--  
-			<div v-if="menu.type != 2" class="layui-form-item">
-				<label class="layui-form-label">图标</div>
-				<div class="layui-input-block">
-					<input type="text" class="form-control" v-model="menu.icon" placeholder="菜单图标" />
-					<code style="margin-top: 4px; display: block;">获取图标：http://fontawesome.io/icons/</code>
-				</div>
-			</div>
-			-->
-				<div class="layui-form-item">
-					<label class="layui-form-label"></label>
-					<input type="button" class="layui-btn layui-btn-normal" @click="saveOrUpdate" value="确定" />
-					&nbsp;&nbsp;
-					<input type="button" class="layui-btn layui-btn-danger" @click="reload" value="返回" />
-				</div>
+				</footer>
 			</form>
 		</div>
 	</div>
@@ -112,4 +91,5 @@
 		<ul id="menuTree" class="ztree"></ul>
 	</div>
 	<script type="text/javascript" src="/js/system/resources/menu.js"></script>
-</body></html>
+</body>
+</html>

@@ -6,93 +6,78 @@
 <script type="text/javascript" src="/js/system/role/add.js">
     
 </script>
-<style type="text/css">
-.col-sm-3 {
-	width: 15%;
-	float: left;
-}
-
-.col-sm-9 {
-	width: 85%;
-	float: left;
-}
-
-label[class^="btn btn-default"] {
-	margin-top: -4px;
-}
-</style>
 </head>
 <body>
 	<div class="l_err" style="width: 100%; margin-top: 2px;"></div>
-	<form id="form" name="form" class="form-horizontal" method="post" action="/role/role_do/create.do">
+	<form id="form" name="form" class="layui-form layui-form-pane" method="post" action="/role/role_do/create.do">
 		<section class="panel panel-default">
 		<div class="panel-body">
 			<div class="layui-form-item">
-				<label class="col-sm-3 control-label">AppId</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control checkacc" placeholder="请输入AppId" name="name" id="name">
+				<label class="layui-form-label">AppId</label>
+				<div class="layui-input-block">
+					<input type="text" class="layui-input checkacc" placeholder="请输入AppId" name="name" id="name">
 				</div>
 			</div>
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="layui-form-item">
-				<label class="col-sm-3 control-label">密钥</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control checkacc" placeholder="请输入密钥" name="secret" id="secret">
+				<label class="layui-form-label">密钥</label>
+				<div class="layui-input-block">
+					<input type="text" class="layui-input checkacc" placeholder="请输入密钥" name="secret" id="secret">
 				</div>
 			</div>
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="layui-form-item">
-				<label class="col-sm-3 control-label">域名</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" placeholder="请输入域名" name="domain" id="domain">
+				<label class="layui-form-label">域名</label>
+				<div class="layui-input-block">
+					<input type="text" class="layui-input" placeholder="请输入域名" name="domain" id="domain">
 				</div>
 			</div>
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="layui-form-item">
-				<label class="col-sm-3 control-label">微信商API</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" placeholder="请输入域名" name="partnerkey" id="partnerkey">
+				<label class="layui-form-label">微信商API</label>
+				<div class="layui-input-block">
+					<input type="text" class="layui-input" placeholder="请输入域名" name="partnerkey" id="partnerkey">
 				</div>
 			</div>
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="layui-form-item">
-				<label class="col-sm-3 control-label">微信商通知地址</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" placeholder="请输入域名" name="notifyurl" id="notifyurl">
+				<label class="layui-form-label">微信商通知地址</label>
+				<div class="layui-input-block">
+					<input type="text" class="layui-input" placeholder="请输入域名" name="notifyurl" id="notifyurl">
 				</div>
 			</div>
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="layui-form-item">
-				<label class="col-sm-3 control-label">商户ID</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" placeholder="请输入域名" name="mchid" id="mchid">
+				<label class="layui-form-label">商户ID</label>
+				<div class="layui-input-block">
+					<input type="text" class="layui-input" placeholder="请输入域名" name="mchid" id="mchid">
 				</div>
 			</div>
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="layui-form-item">
-				<label class="col-sm-3 control-label">范围</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" placeholder="请输入域名" name="scope" id="scope">
+				<label class="layui-form-label">范围</label>
+				<div class="layui-input-block">
+					<input type="text" class="layui-input" placeholder="请输入域名" name="scope" id="scope">
 				</div>
 			</div>
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="layui-form-item">
-				<label class="col-sm-3 control-label">状态</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" placeholder="请输入域名" name="state" id="state">
+				<label class="layui-form-label">状态</label>
+				<div class="layui-input-block">
+					<input type="text" class="layui-input" placeholder="请输入域名" name="state" id="state">
 				</div>
 			</div>
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="layui-form-item">
-				<label class="col-sm-3 control-label">回调地址</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" placeholder="请输入域名" name="redirecturi" id="redirecturi">
+				<label class="layui-form-label">回调地址</label>
+				<div class="layui-input-block">
+					<input type="text" class="layui-input" placeholder="请输入域名" name="redirecturi" id="redirecturi">
 				</div>
 			</div>
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="layui-form-item">
-				<label class="col-sm-3 control-label">是否使用</label>
-				<div class="col-sm-9">
+				<label class="layui-form-label">是否使用</label>
+				<div class="layui-input-block">
 					<div class="btn-group m-r">
 						<button data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle">
 							<span class="dropdown-label">是</span>

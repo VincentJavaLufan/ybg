@@ -5,60 +5,38 @@
 <script type="text/javascript" src="/js/company/add.js">
     
 </script>
-<style type="text/css">
-.col-sm-3 {
-	width: 15%;
-	float: left;
-	text-align: right;
-}
-
-.col-sm-9 {
-	width: 85%;
-	float: left;
-	text-align: left;
-}
-
-label[class^="btn btn-default"] {
-	margin-top: -4px;
-}
-</style>
 </head>
 <body>
 	<div class="l_err" style="width: 100%; margin-top: 2px;"></div>
-	<form id="form" name="form" class="form-horizontal" method="post"
-		action="/xxp2t/oaEmployee_do/create.do">
+	<form id="form" name="form" class="layui-form layui-form-pane" method="post" action="/xxp2t/oaEmployee_do/create.do">
 		<section class="panel panel-default">
 		<div class="panel-body">
-			<div class="line line-dashed line-lg pull-in"></div>
+			
 			<div class="layui-form-item">
 				<label class="col-sm-3 control-label">id:</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control checkacc"
-						placeholder="请输入id" name="id" id="id">
+				<div class="layui-input-block">
+					<input type="text" class="layui-input" placeholder="请输入id" name="id" id="id">
 				</div>
 			</div>
-			<div class="line line-dashed line-lg pull-in"></div>
+			
 			<div class="layui-form-item">
 				<label class="col-sm-3 control-label">name:</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control checkacc"
-						placeholder="请输入name" name="name" id="name">
+				<div class="layui-input-block">
+					<input type="text" class="layui-input" placeholder="请输入name" name="name" id="name">
 				</div>
 			</div>
-			<div class="line line-dashed line-lg pull-in"></div>
+			
 			<div class="layui-form-item">
 				<label class="col-sm-3 control-label">companyid:</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control checkacc"
-						placeholder="请输入companyid" name="companyid" id="companyid">
+				<div class="layui-input-block">
+					<input type="text" class="layui-input" placeholder="请输入companyid" name="companyid" id="companyid">
 				</div>
 			</div>
-			<div class="line line-dashed line-lg pull-in"></div>
+			
 			<div class="layui-form-item">
 				<label class="col-sm-3 control-label">deptid:</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control checkacc"
-						placeholder="请输入deptid" name="deptid" id="deptid">
+				<div class="layui-input-block">
+					<input type="text" class="layui-input" placeholder="请输入deptid" name="deptid" id="deptid">
 				</div>
 			</div>
 		</div>
@@ -69,7 +47,6 @@ label[class^="btn btn-default"] {
 	<script type="text/javascript">
         onloadurl();
     </script>
-	<script type="text/javascript"
-		src="/notebook/notebook_files/bootstrap-filestyle.min.js"></script>
+	<script type="text/javascript" src="/notebook/notebook_files/bootstrap-filestyle.min.js"></script>
 </body>
 </html>

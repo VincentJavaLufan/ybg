@@ -28,54 +28,48 @@
 		</div>
 		<div class="panel panel-default" v-show="!showList">
 			<div class="panel-heading">{{title}}</div>
-			<form class="form-horizontal">
+			<form class="layui-form layui-form-pane">
 				<div class="panel-body">
 					<input type="hidden" v-model="user.id">
 					<div class="layui-form-item">
-						<label class="col-sm-3 control-label">用户名</label>
-						<div class="col-sm-9">
-							<input type="text" class="form-control" disabled="disabled" required lay-verify="required" placeholder="请输入用户名" v-model="user.username">
+						<label class="layui-form-label">用户名</label>
+						<div class="layui-input-block">
+							<input type="text" class="layui-input" disabled="disabled" required lay-verify="required" placeholder="请输入用户名" v-model="user.username">
 						</div>
 					</div>
-					<div class="line line-dashed line-lg pull-in"></div>
 					<div class="layui-form-item">
-						<label class="col-sm-3 control-label">手机号码</label>
-						<div class="col-sm-9">
-							<input type="text" class="form-control" required lay-verify="required" placeholder="请输入手机号码" v-model="user.phone">
+						<label class="layui-form-label">手机号码</label>
+						<div class="layui-input-block">
+							<input type="text" class="layui-input" required lay-verify="required" placeholder="请输入手机号码" v-model="user.phone">
 						</div>
 					</div>
-					<div class="line line-dashed line-lg pull-in"></div>
 					<div class="layui-form-item">
-						<label class="col-sm-3 control-label">电子邮箱</label>
-						<div class="col-sm-9">
-							<input type="text" class="form-control" required lay-verify="required" placeholder="请输入电子邮箱" v-model="user.email">
+						<label class="layui-form-label">电子邮箱</label>
+						<div class="layui-input-block">
+							<input type="text" class="layui-input" required lay-verify="required" placeholder="请输入电子邮箱" v-model="user.email">
 						</div>
 					</div>
-					<div class="line line-dashed line-lg pull-in"></div>
 					<div class="layui-form-item">
-						<label class="col-sm-3 control-label">所属角色</label>
-						<div class="col-sm-9">
-							<select v-select2="" class="form-control select2" style="width: 100%;" multiple="multiple" data-placeholder="请选择角色" v-model="user.roleids" required lay-verify="required">
+						<label class="layui-form-label">所属角色</label>
+						<div class="layui-input-block">
+							<select v-select2="" class="select2" style="width: 100%;" multiple="multiple" data-placeholder="请选择角色" v-model="user.roleids" required lay-verify="required">
 								<option v-bind:value="roleoption.id" v-for="roleoption in roleoptions">{{ roleoption.name }}</option>
 							</select>
 						</div>
 					</div>
-					<div class="line line-dashed line-lg pull-in"></div>
 					<div class="layui-form-item">
-						<label class="col-sm-3 control-label">是否禁用</label>
-						<div class="col-sm-9">
-							<select class="form-control" v-model="user.state" required lay-verify="required">
+						<label class="layui-form-label">是否禁用</label>
+						<div class="layui-input-block">
+							<select class="layui-input" v-model="user.state" required lay-verify="required">
 								<option value="lock">是</option>
 								<option value="OK">否</option>
 								<option value="die">未激活</option>
 							</select>
 						</div>
 					</div>
-					<div class="line line-dashed line-lg pull-in"></div>
 				</div>
 				<footer class="panel-footer text-right bg-light lter">
 					<div class="layui-form-item">
-						<label class="layui-form-label"></label>
 						<input type="button" class="layui-btn layui-btn-normal" @click="update" value="确定" />
 						&nbsp;&nbsp;
 						<input type="button" class="layui-btn layui-btn-danger" @click="reload" value="返回" />

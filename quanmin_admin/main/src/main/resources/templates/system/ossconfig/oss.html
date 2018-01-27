@@ -28,7 +28,7 @@
 		</div>
 		<div v-show="!showList" class="panel panel-default">
 			<div class="panel-heading">{{title}}</div>
-			<form class="form-horizontal">
+			<form class="layui-form layui-form-pane">
 				<div class="layui-form-item">
 					<label class="layui-form-label">存储类型</label>
 					<label class="radio-inline">
@@ -47,38 +47,38 @@
 				<div v-show="config.type == 1">
 					<div class="layui-form-item">
 						<label class="layui-form-label">&nbsp;</label>
-						<p class="form-control-static">
+						<p class="layui-input-static">
 							<a href="http://www.renren.io/open/qiniu.html" target="_blank">免费申请(七牛)10GB储存空间</a>
 						</p>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">域名</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.qiniuDomain" placeholder="七牛绑定的域名" />
+							<input type="text" class="layui-input" v-model="config.qiniuDomain" placeholder="七牛绑定的域名" />
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">路径前缀</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.qiniuPrefix" placeholder="不设置默认为空" />
+							<input type="text" class="layui-input" v-model="config.qiniuPrefix" placeholder="不设置默认为空" />
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">AccessKey</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.qiniuAccessKey" placeholder="七牛AccessKey" />
+							<input type="text" class="layui-input" v-model="config.qiniuAccessKey" placeholder="七牛AccessKey" />
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">SecretKey</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.qiniuSecretKey" placeholder="七牛SecretKey" />
+							<input type="text" class="layui-input" v-model="config.qiniuSecretKey" placeholder="七牛SecretKey" />
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">空间名</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.qiniuBucketName" placeholder="七牛存储空间名" />
+							<input type="text" class="layui-input" v-model="config.qiniuBucketName" placeholder="七牛存储空间名" />
 						</div>
 					</div>
 				</div>
@@ -86,37 +86,37 @@
 					<div class="layui-form-item">
 						<label class="layui-form-label">域名</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.aliyunDomain" placeholder="阿里云绑定的域名" />
+							<input type="text" class="layui-input" v-model="config.aliyunDomain" placeholder="阿里云绑定的域名" />
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">路径前缀</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.aliyunPrefix" placeholder="不设置默认为空" />
+							<input type="text" class="layui-input" v-model="config.aliyunPrefix" placeholder="不设置默认为空" />
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">EndPoint</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.aliyunEndPoint" placeholder="阿里云EndPoint" />
+							<input type="text" class="layui-input" v-model="config.aliyunEndPoint" placeholder="阿里云EndPoint" />
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">AccessKeyId</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.aliyunAccessKeyId" placeholder="阿里云AccessKeyId" />
+							<input type="text" class="layui-input" v-model="config.aliyunAccessKeyId" placeholder="阿里云AccessKeyId" />
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">AccessKeySecret</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.aliyunAccessKeySecret" placeholder="阿里云AccessKeySecret" />
+							<input type="text" class="layui-input" v-model="config.aliyunAccessKeySecret" placeholder="阿里云AccessKeySecret" />
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">BucketName</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.aliyunBucketName" placeholder="阿里云BucketName" />
+							<input type="text" class="layui-input" v-model="config.aliyunBucketName" placeholder="阿里云BucketName" />
 						</div>
 					</div>
 				</div>
@@ -124,43 +124,43 @@
 					<div class="layui-form-item">
 						<label class="layui-form-label">域名</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.qcloudDomain" placeholder="腾讯云绑定的域名" />
+							<input type="text" class="layui-input" v-model="config.qcloudDomain" placeholder="腾讯云绑定的域名" />
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">路径前缀</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.qcloudPrefix" placeholder="不设置默认为空" />
+							<input type="text" class="layui-input" v-model="config.qcloudPrefix" placeholder="不设置默认为空" />
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">AppId</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.qcloudAppId" placeholder="腾讯云AppId" />
+							<input type="text" class="layui-input" v-model="config.qcloudAppId" placeholder="腾讯云AppId" />
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">SecretId</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.qcloudSecretId" placeholder="腾讯云SecretId" />
+							<input type="text" class="layui-input" v-model="config.qcloudSecretId" placeholder="腾讯云SecretId" />
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">SecretKey</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.qcloudSecretKey" placeholder="腾讯云SecretKey" />
+							<input type="text" class="layui-input" v-model="config.qcloudSecretKey" placeholder="腾讯云SecretKey" />
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">BucketName</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.qcloudBucketName" placeholder="腾讯云BucketName" />
+							<input type="text" class="layui-input" v-model="config.qcloudBucketName" placeholder="腾讯云BucketName" />
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">Bucket所属地区</label>
 						<div class="layui-input-block">
-							<input type="text" class="form-control" v-model="config.qcloudRegion" placeholder="如：sh（可选值 ，华南：gz 华北：tj 华东：sh）" />
+							<input type="text" class="layui-input" v-model="config.qcloudRegion" placeholder="如：sh（可选值 ，华南：gz 华北：tj 华东：sh）" />
 						</div>
 					</div>
 				</div>

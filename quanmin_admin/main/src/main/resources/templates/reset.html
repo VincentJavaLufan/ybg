@@ -61,15 +61,18 @@ function checkPassword(){
 					<input type="hidden" value="${encryptInfo}" id="encryptInfo" name="encryptInfo">
 					<div class="layui-form-item">
 						<label class="control-label">密码</label>
-						<input type="password" placeholder="请输入密码" id="password" name="password" class="form-control input-lg">
+						<input type="password" placeholder="请输入密码" id="password" name="password" class="layui-input input-lg">
 					</div>
 					<div class="layui-form-item">
 						<label class="control-label">确认密码</label>
-						<input type="password" placeholder="请输入密码" id="password2" name="password2" class="form-control input-lg">
+						<input type="password" placeholder="请输入密码" id="password2" name="password2" class="layui-input input-lg">
 					</div>
 					<div class="layui-form-item">
-						<label class="control-label">验证码</label><label><img alt="验证码" onclick = "this.src='/defaultKaptcha?d='+new Date()*1" src="/defaultKaptcha" />  </label>
-						<input type="text" placeholder="请输入验证码" required="required" id="vrifyCode" name="vrifyCode" class="form-control input-sm" style="width: 30%;display: inline;">
+						<label class="control-label">验证码</label>
+						<label>
+							<img alt="验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1" src="/defaultKaptcha" />
+						</label>
+						<input type="text" placeholder="请输入验证码" required="required" id="vrifyCode" name="vrifyCode" class="layui-input input-sm" style="width: 30%; display: inline;">
 					</div>
 					<button type="submit" class="btn btn-primary" onclick="checkPassword()">确定</button>
 					<div class="line line-dashed"></div>

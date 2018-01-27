@@ -5,75 +5,72 @@
 <body>
 	<div id="rrapp" v-cloak>
 		<div class="m-b-md">
-			<form class="layui-form layui-form-pan" role="form" id="searchForm" name="searchForm">
+			<form class="layui-form layui-form-pane" role="form" id="searchForm" name="searchForm">
 				<div class="layui-form-item">
-					<label class="control-label">
-						<span class="h4 font-thin v-middle">表:</span>
-					</label>
-					<input class="form-control" id="tablename" name="tablename">
+					<label class="layui-form-label"> 表: </label>
+					<div class="layui-input-inline">
+						<input class="layui-input" id="tablename" name="tablename">
+					</div>
 				</div>
 				<div class="layui-form-item">
-					<label class="control-label">
-						<span class="h4 font-thin v-middle">数据源:</span>
-					</label>
-					<select class="form-control" id="datasource" name="datasource">
-						<option value="sysJdbcTemplate" selected="selected">系统数据库</option>
-						<option value="oaJdbcTemplate">OA数据库</option>
-						<option value="eduJdbcTemplate">教育数据库</option>
-						<option value="quartzJdbcTemplate">定时任务数据库</option>
-					</select>
+					<label class="layui-form-label"> 数据源: </label>
+					<div class="layui-input-inline">
+						<select class="layui-input" id="datasource" name="datasource">
+							<option value="sysJdbcTemplate" selected="selected">系统数据库</option>
+							<option value="oaJdbcTemplate">OA数据库</option>
+							<option value="eduJdbcTemplate">教育数据库</option>
+							<option value="quartzJdbcTemplate">定时任务数据库</option>
+						</select>
+					</div>
+					<a href="javascript:void(0)" class="layui-btn layui-btn-normal" @click="query">查询</a>
+					<a href="javascript:void(0)" @click="addConfig" class="layui-btn layui-btn-warm" id="search">修改设置</a>
+					<a type="button" class="layui-btn layui-btn-danger" @click="gencode">生成代码</a>
 				</div>
-				<a href="javascript:void(0)" class="btn btn-s-md btn-default btn-rounded" @click="query">查询</a>
 			</form>
 		</div>
-		<header class="panel-heading">
-			<div class="doc-buttons">
-				<a href="javascript:void(0)" @click="addConfig" class="btn btn-s-md btn-warning btn-rounded" id="search">修改设置</a>
-				<button type="button" class="layui-btn layui-btn-danger"@click="gencode">生成代码</button>
-			</div>
-		</header>
 		<div class="table-responsive" v-show="showList">
 			<table class="layui-hide" id="gentable"></table>
 		</div>
 		<div v-show="!showList" class="panel panel-default">
 			<div class="panel-heading">{{title}}</div>
-			<form class="form-horizontal">
+			<form class="layui-form layui-form-pane">
 				<div class="layui-form-item">
 					<label class="layui-form-label">包名</label>
 					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="javapackage" placeholder="" />
+						<input type="text" class="layui-input" v-model="javapackage" placeholder="" />
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">表前缀</label>
 					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="tablePrefix" placeholder="" />
+						<input type="text" class="layui-input" v-model="tablePrefix" placeholder="" />
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">注释邮箱</label>
 					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="email" placeholder="" />
+						<input type="text" class="layui-input" v-model="email" placeholder="" />
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">注释作者</label>
 					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="author" placeholder="" />
+						<input type="text" class="layui-input" v-model="author" placeholder="" />
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">访问前缀</label>
 					<div class="layui-input-block">
-						<input type="text" class="form-control" v-model="pathName" placeholder="" />
+						<input type="text" class="layui-input" v-model="pathName" placeholder="" />
 					</div>
 				</div>
-				<div class="layui-form-item">
-					<label class="layui-form-label"></label>
-					<input type="button" class="layui-btn layui-btn-normal" @click="saveOrUpdate" value="确定" />
-					&nbsp;&nbsp;
-					<input type="button" class="layui-btn layui-btn-danger" @click="reload" value="返回" />
-				</div>
+				<footer class="panel-footer text-right bg-light lter">
+					<div class="layui-form-item">
+						<input type="button" class="layui-btn layui-btn-normal" @click="saveOrUpdate" value="确定" />
+						&nbsp;&nbsp;
+						<input type="button" class="layui-btn layui-btn-danger" @click="reload" value="返回" />
+					</div>
+				</footer>
 			</form>
 		</div>
 	</div>

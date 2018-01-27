@@ -28,7 +28,7 @@ var vm = new Vue({
         },
         getInfo : function(payid) {
             $.get(rootPath + "/pay/seller/get.do?id=" + payid, function(r) {
-                vm.payAccount = r.payAccount;
+                vm.seller = r.seller;
             });
         },
         saveOrUpdate : function(event) {
