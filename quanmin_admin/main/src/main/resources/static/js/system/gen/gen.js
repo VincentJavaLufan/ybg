@@ -97,10 +97,16 @@ var vm = new Vue({
             if (roleIds == null) {
                 return;
             }
-		    layer.confirm('是否生成？', function(index) {
-		        location.href = '/sys/generator_do/code.do?tables=' + roleIds;
+            alert(roleIds)
+            layui.use('layer', function() {
+                layer=layui.layer;
+                layer.confirm('是否生成？', function(index) {
+                    
+                    location.href = '/sys/generator_do/code.do?tables=' + roleIds+"&datasource="+$("#datasource").val();
 
-		    });
+                });
+            }
+		    );
 		}
 	}
 });
