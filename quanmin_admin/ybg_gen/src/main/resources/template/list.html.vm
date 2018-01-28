@@ -1,45 +1,57 @@
 <html>
 <head>
-<#include "/common/common2.ftl"/>
+<\#include "/common/common2.ftl"/>
 </head>
 <body>
-<script src="${rc.contextPath}/js/generator/${pathName}.js"></script>
 <div id="rrapp" v-cloak>
 	<div v-show="showList">
-		<div class="grid-btn">
-			
-			<a class="layui-btn layui-btn-normal" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
-			
-			<a class="layui-btn layui-btn-normal" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
-			
-			<a class="layui-btn layui-btn-normal" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
-			
+	<div class="m-b-md">
+	<form class="layui-form layui-form-pane" role="form" id="searchForm" name="searchForm">
+		<div class="layui-form-item">
+					<!--	<label class="layui-form-label">角色名:</label>
+						<div class="layui-input-inline">
+							<input type="text" name="name" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+						</div>-->
+		<a href="javascript:void(0)" @click="reload" class="layui-btn layui-btn-normal" id="search">查询</a>
+		<button type="button" @click="del" class="layui-btn layui-btn-danger">删除</button>
+		<button type="button" @click="add" class="layui-btn layui-btn-normal">新增</button>
+		<button type="button" @click="update" class="layui-btn layui-btn-normal">编辑</button>
 		</div>
+	</form>
+	</div>
+		
 	    <div class="table-responsive">
-			<div id="paging" class="pagclass"></div>
+			<table class="layui-hide" id="${classname}table"></table>
 		</div>
     </div>
     
     <div v-show="!showList" class="panel panel-default">
 		<div class="panel-heading">{{title}}</div>
-		<form class="form-horizontal">
+		<form class="layui-form layui-form-pane">
+		<div class="panel-body">
+		
 		#foreach($column in $columns)
 		#if($column.columnName != $pk.columnName)
-			<div class="form-group">
-			   	<div class="col-sm-2 control-label">${column.comments}</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="${classname}.${column.attrname}" placeholder="${column.comments}"/>
+		<div class="layui-form-item">
+			
+			   	<label class="layui-form-label">${column.comments}</label>
+			   	<div class="layui-input-block">
+			      <input type="text" class="layui-input" v-model="${classname}.${column.attrname}" placeholder="${column.comments}"/>
 			    </div>
 			</div>
 		#end
 		#end
-			<div class="form-group">
-				<div class="col-sm-2 control-label"></div> 
+		</div>
+		<footer class="panel-footer text-right bg-light lter">
+			<div class="layui-form-item">
+				
 				<input type="button" class="layui-btn layui-btn-normal" @click="saveOrUpdate" value="确定"/>
-				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+				&nbsp;&nbsp;<input type="button" class="layui-btn layui-btn-danger" @click="reload" value="返回"/>
 			</div>
+			</footer>
 		</form>
 	</div>
 </div>
+<script src="/你的JS路径/${pathName}.js"></script>
 </body>
 </html>

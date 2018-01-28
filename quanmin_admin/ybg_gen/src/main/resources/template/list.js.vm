@@ -15,7 +15,7 @@ var vm = new Vue({
 			vm.${classname} = {};
 		},
 		update: function (event) {
-			var $pk.attrname = getSelectedRow();
+			var $pk.attrname = getSelectedRow('${classname}table','${pk.attrname}');
 			if($pk.attrname == null){
 				return ;
 			}
@@ -39,7 +39,7 @@ var vm = new Vue({
 			});
 		},
 		del: function (event) {
-			var ${pk.attrname}s = getSelectedRows();
+			var ${pk.attrname}s = getSelectedRows('${classname}table','${pk.attrname}');
 			if(${pk.attrname}s == null){
 				return ;
 			}			
@@ -51,13 +51,9 @@ var vm = new Vue({
                         ids : ${pk.attrname}s
                     },				   
 				    success: function(r){
-						if(r.code == 0){
-							alert('操作成功', function(index){
-								$("#jqGrid").trigger("reloadGrid");
-							});
-						}else{
+						
 							alert(r.msg);
-						}
+						
 					}
 				});
 			});
@@ -68,40 +64,45 @@ var vm = new Vue({
             });
 		},
 		reload: function (event) {
-			 var searchParams = $("#searchForm").serializeJson();// 初始化传参数
-	            grid.setOptions({
-	                data : searchParams
-	            });
+			
 	            vm.showList = true;
-	            grid.loadData();
+	           layui.use('table', function() {
+                var table = layui.table;
+                table.render({
+                    elem : '#${classname}table' // 选定是那个DIV
+                    ,
+                    url : rootPath + '${pathName}list.do',
+                    cols : [
+                        [
+                            {
+                                type : 'checkbox'
+                            }
+                              #foreach($column in $columns)  
+                            , {
+                                field : '${column.attrname}',
+                                title : '${column.comments}',
+                                minWidth : 100,
+                                templet : function(data) {
+                                   // if (data.state == 0) {
+                                    //    return "正常";
+                                   // }
+                                   // if (data.state == 1) {
+                                   //     return "<font color='red'>刪除</font>";
+                                  //  }
+                                  //  return "数据异常";
+                                  return data.${column.attrname};
+                                }
+                            } #end
+                            ] ],
+                    page : true, // 开启分页
+                    request : laypagerequest,
+                    response : laypageresponse,
+                    where : $("#searchForm").serializeJSON()
+                });
+            });
+        }
 		}
 	}
 });
 
-var pageii = null;
-var grid = null;
-$(function() {
-    grid = lyGrid({
-        id : 'paging',
-        l_column : [        
-        #foreach($column in $columns)               
-        #if($column.columnName != $pk.columnName)
-			{
-                    colkey : "${column.attrname}",
-                    name : "${column.comments}"                 
-            }#if($velocityCount != $columns.size()),#end 
-			#else			
-				{
-                    colkey : "${column.attrname}",
-                    name : "${column.comments}",
-                    width : "50px",
-                    hide : true
-                }
-            #if($velocityCount != $columns.size()),#end 			
-				#end			
-				#end
-              ],
-        jsonUrl : rootPath + '${pathName}list.do',
-        checkbox : true
-    });   
-});
+
