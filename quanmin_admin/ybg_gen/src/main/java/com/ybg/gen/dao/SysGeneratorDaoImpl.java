@@ -127,7 +127,7 @@ public class SysGeneratorDaoImpl extends BaseDao implements SysGeneratorDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append("`key`,`value` ").append(FROM).append(" sys_gen gen");
 		Map<String, String> map = new LinkedHashMap<String, String>();
-		getJdbcTemplate().query(sql.toString(), new RowMapper<Object>() {
+		jdbcTemplate.query(sql.toString(), new RowMapper<Object>() {
 			
 			@Override
 			public Map<String, String> mapRow(ResultSet rs, int index) throws SQLException {

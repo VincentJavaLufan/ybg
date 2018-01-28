@@ -65,12 +65,13 @@ public class SysGeneratorController {
 	/** 生成代码 */
 	@ApiOperation(value = "生成代码", notes = "只能页面传输，参数是tables 用英文逗号分隔", produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(value = { "code.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public void code(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void code(HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "datasource", required = false, defaultValue = DataBaseConstant.JD_SYS) String datasource) throws IOException {
 		String[] tableNames = new String[] {};
 		// 获取表名，不进行xss过滤
 		HttpServletRequest orgRequest = XssHttpServletRequestWrapper.getOrgRequest(request);
 		String tables = orgRequest.getParameter("tables");
 		tableNames = tables.split(",");
+		DataBaseConstant.setJdbcTemplate(datasource);
 		byte[] data = sysGeneratorService.generatorCode(tableNames);
 		response.reset();
 		response.setHeader("Content-Disposition", "attachment; filename=\"gencode.zip\"");
