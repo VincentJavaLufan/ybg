@@ -104,7 +104,7 @@ QQ群：`314658875（收费）`，310391018（免费）
 
 ~~-2.    1.5版本以后 需要在D盘创建一个叫 `repo` 的文件夹,否则无法启动 修改文件的路径在urule 模块 的config.properties 文件。-~~
 
-
+3. 常见问题：Missing artifact org.vaadin.addons:dcharts-widget:jar:0.10.0 这个maven 错误是 阿里云没有jar 包。可以从其他网站下载这个jar 包 然后用Maven命令 安装即可。
 
 
 ------------------------------------
