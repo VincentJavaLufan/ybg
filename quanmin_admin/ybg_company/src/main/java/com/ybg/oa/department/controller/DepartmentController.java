@@ -1,12 +1,7 @@
 package com.ybg.oa.department.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -22,9 +17,7 @@ import com.ybg.base.util.Page;
 import com.ybg.oa.department.domain.DepartmentVO;
 import com.ybg.oa.department.service.DepartmentService;
 import com.ybg.oa.constant.CompanyConstant;
-import com.ybg.oa.department.domain.DepartmentDO;
 import com.ybg.oa.department.qvo.DepartmentQuery;
-import springfox.documentation.annotations.ApiIgnore;
 
 /** @author Deament
  * @email 591518884@qq.com
@@ -40,7 +33,7 @@ public class DepartmentController {
 	@ApiOperation(value = "Department管理页面", notes = "", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = { "index.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String index(ModelMap map) {
-		return "/system/department/index";
+		return "/company/department/department";
 	}
 	
 	@ApiOperation(value = "Department分页列表", notes = "JSON ", produces = MediaType.APPLICATION_JSON_VALUE)

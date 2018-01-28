@@ -25,8 +25,8 @@ public class DepartmentDaoImpl extends BaseDao implements DepartmentDao {
 		return jdbcTemplate;
 	}
 	
-	private static String	QUERY_TABLE_NAME	= " department.name,department.companyid,department.parentid,	  department.companyname, id";
-	private static String	QUERY_TABLE_COLUMN	= "oa_department  department";
+	private static String	QUERY_TABLE_COLUMN	= " department.name,department.companyid,department.parentid,	  department.companyname, department.id ";
+	private static String	QUERY_TABLE_NAME	= "oa_department  department";
 	
 	@Override
 	public DepartmentVO save(DepartmentVO department) throws Exception {
