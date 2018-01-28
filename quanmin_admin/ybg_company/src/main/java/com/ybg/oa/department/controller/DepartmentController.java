@@ -2,6 +2,7 @@ package com.ybg.oa.department.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -47,6 +48,16 @@ public class DepartmentController {
 		page = departmentService.list(page, qvo);
 		page.init();
 		return page;
+	}
+	@ApiOperation(value = "Department分页列表", notes = "JSON ", produces = MediaType.APPLICATION_JSON_VALUE)
+	// @ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "DepartmentQvo") })
+	@ResponseBody
+	@RequestMapping(value = { "treelist.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public List<DepartmentVO> treelist(@ModelAttribute DepartmentQuery qvo, ModelMap map) throws Exception {
+		qvo.setBlurred(true);
+		// Page page = new Page();
+		// page.setCurPage(pageNow);
+		return departmentService.list(qvo);
 	}
 	
 	@ApiOperation(value = "更新Department", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
