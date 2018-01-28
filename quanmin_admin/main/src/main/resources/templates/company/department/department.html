@@ -20,7 +20,13 @@
 				</form>
 			</div>
 			<div class="table-responsive">
-				<table class="layui-hide" id="oaDepartmenttable"></table>
+			<table id="oaDepartmenttable" data-mobile-responsive="true" data-click-to-select="true">
+					<tr>
+						<th data-field="selectItem" data-checkbox="true"></th>
+					</tr>
+				</table>
+				<!--  
+				<table class="layui-hide" id="oaDepartmenttable"></table>-->
 			</div>
 		</div>
 		<div v-show="!showList" class="panel panel-default">
