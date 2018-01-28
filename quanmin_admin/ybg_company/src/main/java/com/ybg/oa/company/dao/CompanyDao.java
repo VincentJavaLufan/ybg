@@ -12,7 +12,8 @@ public interface CompanyDao {
 	
 	/** 返回主键的创建
 	 * 
-	 * @throws Exception **/
+	 * @throws Exception
+	 **/
 	CompanyVO save(CompanyVO bean) throws Exception;
 	
 	/** 更新数据，条件 和 需要更新的字段都不能为空 不限个数个条件
@@ -24,19 +25,34 @@ public interface CompanyDao {
 	 *            更新中的条件字段和值
 	 * @param table_name
 	 *            表的名称 **/
-	// sys_role
 	void update(BaseMap<String, Object> updatemap, BaseMap<String, Object> wheremap);
 	
-	/** 分页查询 **/
-	// sys_role
+	/** 分页查询
+	 * 
+	 * @param page
+	 * @param qvo
+	 * @return
+	 * @throws Exception
+	 */
 	Page list(Page page, CompanyQuery qvo) throws Exception;
 	
-	/** 不分页查询 **/
-	// sys_role
+	/** 不分页查询
+	 * 
+	 * @param qvo
+	 * @return
+	 * @throws Exception
+	 */
 	List<CompanyVO> list(CompanyQuery qvo) throws Exception;
 	
-	/** 根据条件删除 **/
+	/** 根据条件删除
+	 * 
+	 * @param wheremap
+	 */
 	void remove(BaseMap<String, Object> wheremap);
 	
+	/** 查询单个
+	 * 
+	 * @param id
+	 * @return */
 	CompanyVO get(String id);
 }

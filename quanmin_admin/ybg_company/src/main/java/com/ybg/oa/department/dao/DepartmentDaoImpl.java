@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.ybg.base.jdbc.BaseDao;
@@ -29,7 +30,7 @@ public class DepartmentDaoImpl extends BaseDao implements DepartmentDao {
 		return jdbcTemplate;
 	}
 	
-	private static String	QUERY_TABLE_NAME	= "  	  department.name, 	  department.companyid, 	  department.gmt_create, 	  department.parentid, 	  department.gmt_modified, 	  department.companyname, id";
+	private static String	QUERY_TABLE_NAME	= " department.name,department.companyid,department.parentid,	  department.companyname, id";
 	private static String	QUERY_TABLE_COLUMN	= "oa_department  department";
 	
 	@Override
@@ -38,9 +39,7 @@ public class DepartmentDaoImpl extends BaseDao implements DepartmentDao {
 		String id = null;
 		createmap.put("name", department.getName());
 		createmap.put("companyid", department.getCompanyid());
-		createmap.put("gmt_create", department.getGmtCreate());
 		createmap.put("parentid", department.getParentid());
-		createmap.put("gmt_modified", department.getGmtModified());
 		createmap.put("companyname", department.getCompanyname());
 		id = baseCreate(createmap, "oa_department", "id");
 		department.setId((String) id);
@@ -59,7 +58,7 @@ public class DepartmentDaoImpl extends BaseDao implements DepartmentDao {
 		sql.append(getcondition(qvo));
 		page.setTotals(queryForInt(sql));
 		if (page.getTotals() > 0) {
-			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new DepartmentMapper()));
+			page.setResult(getJdbcTemplate().query(page.getPagesql(sql), new BeanPropertyRowMapper<DepartmentVO>(DepartmentVO.class)));
 		}
 		else {
 			page.setResult(new ArrayList<DepartmentVO>());
@@ -78,9 +77,7 @@ public class DepartmentDaoImpl extends BaseDao implements DepartmentDao {
 		sqlappen(sql, "department.id", qvo.getId());
 		sqlappen(sql, "department.name", qvo.getName());
 		sqlappen(sql, "department.companyid", qvo.getCompanyid());
-		sqlappen(sql, "department.gmt_create", qvo.getGmtCreate());
 		sqlappen(sql, "department.parentid", qvo.getParentid());
-		sqlappen(sql, "department.gmt_modified", qvo.getGmtModified());
 		sqlappen(sql, "department.companyname", qvo.getCompanyname());
 		return sql.toString();
 	}
@@ -90,7 +87,7 @@ public class DepartmentDaoImpl extends BaseDao implements DepartmentDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(getcondition(qvo));
-		return getJdbcTemplate().query(sql.toString(), new DepartmentMapper());
+		return getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<DepartmentVO>(DepartmentVO.class));
 	}
 	
 	@Override
@@ -104,7 +101,7 @@ public class DepartmentDaoImpl extends BaseDao implements DepartmentDao {
 		sql.append(SELECT).append(QUERY_TABLE_COLUMN).append(FROM).append(QUERY_TABLE_NAME);
 		sql.append(WHERE).append("1=1");
 		sql.append(AND).append("id='" + id + "'");
-		List<DepartmentVO> list = getJdbcTemplate().query(sql.toString(), new DepartmentMapper());
+		List<DepartmentVO> list = getJdbcTemplate().query(sql.toString(), new BeanPropertyRowMapper<DepartmentVO>(DepartmentVO.class));
 		return QvoConditionUtil.checkList(list) ? list.get(0) : null;
 	}
 }

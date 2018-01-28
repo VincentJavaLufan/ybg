@@ -4,8 +4,12 @@ import io.swagger.annotations.ApiModelProperty;
 import com.ybg.base.jdbc.BaseQueryAble;
 import com.ybg.oa.department.domain.DepartmentDO;
 
-
-/** 查询条件 **/
+/** 查询条件
+ * 
+ * @author https://gitee.com/YYDeament/88ybg
+ *
+ * @date
+ * @version v1.0 */
 @ApiModel(value = "角色查询条件", parent = DepartmentDO.class)
 public class DepartmentQuery extends DepartmentDO implements BaseQueryAble {
 	
@@ -21,6 +25,4 @@ public class DepartmentQuery extends DepartmentDO implements BaseQueryAble {
 	public void setBlurred(boolean blurred) {
 		this.blurred = blurred;
 	}
-	
-	
 }
