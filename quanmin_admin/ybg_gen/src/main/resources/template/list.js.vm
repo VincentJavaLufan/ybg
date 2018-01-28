@@ -106,3 +106,4 @@ var vm = new Vue({
 });
 
 
+vm.reload();
