@@ -6,7 +6,7 @@
 	<div id="rrapp" v-cloak>
 		<div v-show="showList">
 			<div class="m-b-md">
-				<form class="layui-form layui-form-pane" role="form" id="searchForm" name="searchForm">
+				<form class="layui-form-layui-form-pane" role="form" id="searchForm" name="searchForm">
 					<div class="layui-form-item">
 						<!--	<label class="layui-form-label">角色名:</label>
 						<div class="layui-input-inline">
@@ -20,7 +20,7 @@
 				</form>
 			</div>
 			<div class="table-responsive">
-			<table id="oaDepartmenttable" data-mobile-responsive="true" data-click-to-select="true">
+				<table id="oaDepartmenttable" data-mobile-responsive="true" data-click-to-select="true">
 					<tr>
 						<th data-field="selectItem" data-checkbox="true"></th>
 					</tr>
@@ -31,7 +31,7 @@
 		</div>
 		<div v-show="!showList" class="panel panel-default">
 			<div class="panel-heading">{{title}}</div>
-			<form class="layui-form layui-form-pane">
+			<form class="layui-form-layui-form-pane">
 				<div class="panel-body">
 					<div class="layui-form-item">
 						<label class="layui-form-label">部门名称</label>
@@ -46,27 +46,9 @@
 						</div>
 					</div>
 					<div class="layui-form-item">
-						<label class="layui-form-label">创建时间</label>
-						<div class="layui-input-block">
-							<input type="text" class="layui-input" v-model="oaDepartment.gmtCreate" placeholder="创建时间" />
-						</div>
-					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">父级ID</label>
+						<label class="layui-form-label">上一级</label>
 						<div class="layui-input-block">
 							<input type="text" class="layui-input" v-model="oaDepartment.parentid" placeholder="父级ID" />
-						</div>
-					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">修改时间</label>
-						<div class="layui-input-block">
-							<input type="text" class="layui-input" v-model="oaDepartment.gmtModified" placeholder="修改时间" />
-						</div>
-					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">公司名称</label>
-						<div class="layui-input-block">
-							<input type="text" class="layui-input" v-model="oaDepartment.companyname" placeholder="公司名称" />
 						</div>
 					</div>
 				</div>

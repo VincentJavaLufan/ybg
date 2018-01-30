@@ -6,7 +6,7 @@
 	<div id="rrapp" v-cloak>
 		<div v-show="showList">
 			<div class="m-b-md">
-				<form class="layui-form layui-form-pane" role="form" id="searchForm" name="searchForm">
+				<form class="layui-form-layui-form-pane" role="form" id="searchForm" name="searchForm">
 					<div class="layui-form-item">
 						<label class="layui-form-label">角色名:</label>
 						<div class="layui-input-inline">
@@ -25,7 +25,7 @@
 		</div>
 		<div class="panel panel-default" v-show="!showList">
 			<div class="panel-heading">{{title}}</div>
-			<form class="layui-form layui-form-pane">
+			<form class="layui-form-layui-form-pane">
 				<div class="panel-body">
 					<input type="hidden" v-model="role.id">
 					<div class="layui-form-item">
