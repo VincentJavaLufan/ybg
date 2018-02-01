@@ -1,10 +1,15 @@
 package com.ybg.oa.department.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +22,7 @@ import com.ybg.base.util.Json;
 import com.ybg.base.util.Page;
 import com.ybg.oa.department.domain.DepartmentVO;
 import com.ybg.oa.department.service.DepartmentService;
+import com.ybg.oa.company.domain.CompanyVO;
 import com.ybg.oa.constant.CompanyConstant;
 import com.ybg.oa.department.qvo.DepartmentQuery;
 
@@ -37,26 +43,20 @@ public class DepartmentController {
 		return "/company/department/department";
 	}
 	
+	// @ApiOperation(value = "Department分页列表", notes = "JSON ", produces = MediaType.APPLICATION_JSON_VALUE)
+	// @ResponseBody
+	// @RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	// public Page list(@ModelAttribute DepartmentQuery qvo, @ModelAttribute Page page, ModelMap map) throws Exception {
+	// qvo.setBlurred(true);
+	// page = departmentService.list(page, qvo);
+	// page.init();
+	// return page;
+	// }
 	@ApiOperation(value = "Department分页列表", notes = "JSON ", produces = MediaType.APPLICATION_JSON_VALUE)
-	// @ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "DepartmentQvo") })
-	@ResponseBody
-	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute DepartmentQuery qvo, @ModelAttribute Page page, ModelMap map) throws Exception {
-		qvo.setBlurred(true);
-		// Page page = new Page();
-		// page.setCurPage(pageNow);
-		page = departmentService.list(page, qvo);
-		page.init();
-		return page;
-	}
-	@ApiOperation(value = "Department分页列表", notes = "JSON ", produces = MediaType.APPLICATION_JSON_VALUE)
-	// @ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "DepartmentQvo") })
 	@ResponseBody
 	@RequestMapping(value = { "treelist.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public List<DepartmentVO> treelist(@ModelAttribute DepartmentQuery qvo, ModelMap map) throws Exception {
 		qvo.setBlurred(true);
-		// Page page = new Page();
-		// page.setCurPage(pageNow);
 		return departmentService.list(qvo);
 	}
 	
@@ -69,9 +69,8 @@ public class DepartmentController {
 		try {
 			BaseMap<String, Object> updatemap = new BaseMap<String, Object>();
 			updatemap.put("name", department.getName());
-			// updatemap.put("companyid", department.getCompanyid());
 			updatemap.put("parentid", department.getParentid());
-			updatemap.put("companyname", department.getCompanyname());
+			// updatemap.put("companyname", department.getCompanyname());
 			BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
 			wheremap.put("id", department.getId());
 			departmentService.update(updatemap, wheremap);
@@ -118,6 +117,9 @@ public class DepartmentController {
 		Json j = new Json();
 		j.setSuccess(true);
 		try {
+			CompanyVO company = CompanyConstant.getDefaultCompany();
+			bean.setCompanyid(company.getId());
+			bean.setCompanyname(company.getName());
 			departmentService.save(bean);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -126,5 +128,16 @@ public class DepartmentController {
 		}
 		j.setMsg("操作成功");
 		return j;
+	}
+	
+	@ApiOperation(value = "获取单个OaDepartment", notes = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiImplicitParams({ @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "java.lang.String") })
+	@RequestMapping(value = { "get.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public ResponseEntity<Map<String, Object>> get(@RequestParam(name = "id", required = true) String id) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		DepartmentVO bean = departmentService.get(id);
+		result.put("oaDepartment", bean);
+		ResponseEntity<Map<String, Object>> map = new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
+		return map;
 	}
 }
