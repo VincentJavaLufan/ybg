@@ -7,11 +7,11 @@ import com.alipay.api.internal.mapping.ApiField;
  * 身份认证业务初始化接口
  *
  * @author auto create
- * @since 1.0, 2017-11-16 17:29:27
+ * @since 1.0, 2017-11-28 15:46:58
  */
 public class AlipaySecurityRiskAuthenticationInitializeModel extends AlipayObject {
 
-	private static final long serialVersionUID = 8671629724973235465L;
+	private static final long serialVersionUID = 4859492875756146437L;
 
 	/**
 	 * 用于身份安全业务初始化的公共入参

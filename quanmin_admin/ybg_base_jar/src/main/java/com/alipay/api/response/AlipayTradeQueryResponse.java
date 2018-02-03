@@ -13,11 +13,11 @@ import com.alipay.api.AlipayResponse;
  * ALIPAY API: alipay.trade.query response.
  * 
  * @author auto create
- * @since 1.0, 2017-11-23 11:35:53
+ * @since 1.0, 2017-12-12 18:06:58
  */
 public class AlipayTradeQueryResponse extends AlipayResponse {
 
-	private static final long serialVersionUID = 5774267973247674914L;
+	private static final long serialVersionUID = 1626167996393263214L;
 
 	/** 
 	 * 支付宝店铺编号
@@ -50,6 +50,12 @@ public class AlipayTradeQueryResponse extends AlipayResponse {
 	private String buyerUserType;
 
 	/** 
+	 * 平台优惠金额
+	 */
+	@ApiField("discount_amount")
+	private String discountAmount;
+
+	/** 
 	 * 本次交易支付所使用的单品券优惠的商品优惠信息
 	 */
 	@ApiField("discount_goods_detail")
@@ -73,6 +79,12 @@ public class AlipayTradeQueryResponse extends AlipayResponse {
 	 */
 	@ApiField("invoice_amount")
 	private String invoiceAmount;
+
+	/** 
+	 * 商家优惠金额
+	 */
+	@ApiField("mdiscount_amount")
+	private String mdiscountAmount;
 
 	/** 
 	 * 买家支付宝用户号，该字段将废弃，不要使用
@@ -182,6 +194,13 @@ public class AlipayTradeQueryResponse extends AlipayResponse {
 		return this.buyerUserType;
 	}
 
+	public void setDiscountAmount(String discountAmount) {
+		this.discountAmount = discountAmount;
+	}
+	public String getDiscountAmount( ) {
+		return this.discountAmount;
+	}
+
 	public void setDiscountGoodsDetail(String discountGoodsDetail) {
 		this.discountGoodsDetail = discountGoodsDetail;
 	}
@@ -208,6 +227,13 @@ public class AlipayTradeQueryResponse extends AlipayResponse {
 	}
 	public String getInvoiceAmount( ) {
 		return this.invoiceAmount;
+	}
+
+	public void setMdiscountAmount(String mdiscountAmount) {
+		this.mdiscountAmount = mdiscountAmount;
+	}
+	public String getMdiscountAmount( ) {
+		return this.mdiscountAmount;
 	}
 
 	public void setOpenId(String openId) {

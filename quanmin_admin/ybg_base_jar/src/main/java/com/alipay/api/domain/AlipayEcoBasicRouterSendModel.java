@@ -7,11 +7,11 @@ import com.alipay.api.internal.mapping.ApiField;
  * 开发生态基础平台域内路由接口
  *
  * @author auto create
- * @since 1.0, 2017-10-13 10:43:51
+ * @since 1.0, 2017-12-26 10:57:50
  */
 public class AlipayEcoBasicRouterSendModel extends AlipayObject {
 
-	private static final long serialVersionUID = 7334274894421655445L;
+	private static final long serialVersionUID = 6216914942467282169L;
 
 	/**
 	 * 路由数据

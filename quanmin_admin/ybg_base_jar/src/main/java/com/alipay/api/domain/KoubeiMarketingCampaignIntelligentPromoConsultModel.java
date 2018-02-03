@@ -10,11 +10,17 @@ import com.alipay.api.internal.mapping.ApiListField;
  * 智能营销活动咨询推荐接口
  *
  * @author auto create
- * @since 1.0, 2017-11-17 06:02:27
+ * @since 1.0, 2017-12-22 11:10:59
  */
 public class KoubeiMarketingCampaignIntelligentPromoConsultModel extends AlipayObject {
 
-	private static final long serialVersionUID = 1242632445467197187L;
+	private static final long serialVersionUID = 8234521359824445851L;
+
+	/**
+	 * 扩展信息，以key-value的形式传递
+	 */
+	@ApiField("ext_info")
+	private String extInfo;
 
 	/**
 	 * 操作人信息
@@ -27,6 +33,12 @@ public class KoubeiMarketingCampaignIntelligentPromoConsultModel extends AlipayO
 	 */
 	@ApiField("out_request_no")
 	private String outRequestNo;
+
+	/**
+	 * 原智能方案id
+	 */
+	@ApiField("parent_promo_id")
+	private String parentPromoId;
 
 	/**
 	 * 商户和支付宝交互时，用于代表支付宝分配给商户ID
@@ -47,6 +59,13 @@ public class KoubeiMarketingCampaignIntelligentPromoConsultModel extends AlipayO
 	@ApiField("template_code")
 	private String templateCode;
 
+	public String getExtInfo() {
+		return this.extInfo;
+	}
+	public void setExtInfo(String extInfo) {
+		this.extInfo = extInfo;
+	}
+
 	public PromoOperatorInfo getOperatorContext() {
 		return this.operatorContext;
 	}
@@ -59,6 +78,13 @@ public class KoubeiMarketingCampaignIntelligentPromoConsultModel extends AlipayO
 	}
 	public void setOutRequestNo(String outRequestNo) {
 		this.outRequestNo = outRequestNo;
+	}
+
+	public String getParentPromoId() {
+		return this.parentPromoId;
+	}
+	public void setParentPromoId(String parentPromoId) {
+		this.parentPromoId = parentPromoId;
 	}
 
 	public String getPartnerId() {

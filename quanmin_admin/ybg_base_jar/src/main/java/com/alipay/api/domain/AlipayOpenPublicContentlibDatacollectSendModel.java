@@ -7,11 +7,11 @@ import com.alipay.api.internal.mapping.ApiField;
  * 内容中台爬虫数据推送接口
  *
  * @author auto create
- * @since 1.0, 2017-11-01 14:11:25
+ * @since 1.0, 2017-11-24 11:20:06
  */
 public class AlipayOpenPublicContentlibDatacollectSendModel extends AlipayObject {
 
-	private static final long serialVersionUID = 8787968497269483172L;
+	private static final long serialVersionUID = 7333564784531472882L;
 
 	/**
 	 * 爬虫平台推送数据，为json字符串，bizNo 为推送流水号，taskName为任务名，业务数据包含在bizData中

@@ -7,11 +7,17 @@ import com.alipay.api.internal.mapping.ApiField;
  * 查询场景下内容列表信息
  *
  * @author auto create
- * @since 1.0, 2017-10-30 10:40:49
+ * @since 1.0, 2018-01-02 19:59:52
  */
 public class AlipaySocialBaseSceneContentQueryModel extends AlipayObject {
 
-	private static final long serialVersionUID = 3753558377785668321L;
+	private static final long serialVersionUID = 5732245574383223253L;
+
+	/**
+	 * 城市id
+	 */
+	@ApiField("city_id")
+	private String cityId;
 
 	/**
 	 * 内容中台提供的运营后台配置场景id
@@ -30,6 +36,13 @@ public class AlipaySocialBaseSceneContentQueryModel extends AlipayObject {
 	 */
 	@ApiField("user_id")
 	private String userId;
+
+	public String getCityId() {
+		return this.cityId;
+	}
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
 
 	public String getSceneId() {
 		return this.sceneId;

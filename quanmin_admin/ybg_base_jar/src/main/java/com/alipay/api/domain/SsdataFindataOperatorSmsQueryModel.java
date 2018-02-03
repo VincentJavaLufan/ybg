@@ -11,7 +11,7 @@ import com.alipay.api.internal.mapping.ApiField;
  */
 public class SsdataFindataOperatorSmsQueryModel extends AlipayObject {
 
-	private static final long serialVersionUID = 5787788251177577728L;
+	private static final long serialVersionUID = 3563525751381696974L;
 
 	/**
 	 * 系统的业务流水号，在调用提交用户信息时得到的biz_no

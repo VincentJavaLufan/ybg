@@ -7,11 +7,11 @@ import com.alipay.api.internal.mapping.ApiField;
  * 身份认证业务取消接口
  *
  * @author auto create
- * @since 1.0, 2017-11-16 14:06:46
+ * @since 1.0, 2017-11-27 13:52:36
  */
 public class AlipaySecurityRiskAuthenticationCancelModel extends AlipayObject {
 
-	private static final long serialVersionUID = 6282146857715271833L;
+	private static final long serialVersionUID = 6528777922235648124L;
 
 	/**
 	 * 身份认证场景信息

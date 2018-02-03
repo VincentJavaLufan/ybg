@@ -11,7 +11,7 @@ import com.alipay.api.internal.mapping.ApiField;
  */
 public class AlipayOpenPublicLifeMsgRecallModel extends AlipayObject {
 
-	private static final long serialVersionUID = 4263157961547416446L;
+	private static final long serialVersionUID = 4853479351957743568L;
 
 	/**
 	 * 消息id

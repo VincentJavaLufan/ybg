@@ -10,11 +10,17 @@ import com.alipay.api.internal.mapping.ApiListField;
  * 内容中台场景页文章信息
  *
  * @author auto create
- * @since 1.0, 2017-10-30 10:40:49
+ * @since 1.0, 2018-01-02 19:44:01
  */
 public class SceneContent extends AlipayObject {
 
-	private static final long serialVersionUID = 6112589797832976793L;
+	private static final long serialVersionUID = 1142952143776728797L;
+
+	/**
+	 * 文章分类
+	 */
+	@ApiField("article_classify")
+	private Long articleClassify;
 
 	/**
 	 * 文章作者
@@ -100,6 +106,13 @@ public class SceneContent extends AlipayObject {
 	 */
 	@ApiField("type")
 	private String type;
+
+	public Long getArticleClassify() {
+		return this.articleClassify;
+	}
+	public void setArticleClassify(Long articleClassify) {
+		this.articleClassify = articleClassify;
+	}
 
 	public String getAuthor() {
 		return this.author;

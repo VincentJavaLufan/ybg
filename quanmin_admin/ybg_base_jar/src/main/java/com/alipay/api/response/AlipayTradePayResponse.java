@@ -13,11 +13,11 @@ import com.alipay.api.AlipayResponse;
  * ALIPAY API: alipay.trade.pay response.
  * 
  * @author auto create
- * @since 1.0, 2017-11-15 17:09:31
+ * @since 1.0, 2018-01-03 18:35:24
  */
 public class AlipayTradePayResponse extends AlipayResponse {
 
-	private static final long serialVersionUID = 8436878319338551727L;
+	private static final long serialVersionUID = 6167181141768282922L;
 
 	/** 
 	 * 异步支付模式，先享后付业务会返回该参数，目前有三种值：
@@ -67,6 +67,12 @@ SYNC_DIRECT_PAY(同步直接扣款);
 	private String cardBalance;
 
 	/** 
+	 * 平台优惠金额
+	 */
+	@ApiField("discount_amount")
+	private String discountAmount;
+
+	/** 
 	 * 本次交易支付所使用的单品券优惠的商品优惠信息
 	 */
 	@ApiField("discount_goods_detail")
@@ -92,6 +98,12 @@ SYNC_DIRECT_PAY(同步直接扣款);
 	private String invoiceAmount;
 
 	/** 
+	 * 商家优惠金额
+	 */
+	@ApiField("mdiscount_amount")
+	private String mdiscountAmount;
+
+	/** 
 	 * 买家支付宝用户号,该参数已废弃，请不要使用
 	 */
 	@ApiField("open_id")
@@ -104,7 +116,7 @@ SYNC_DIRECT_PAY(同步直接扣款);
 	private String outTradeNo;
 
 	/** 
-	 * 使用积分宝付款的金额
+	 * 使用集分宝付款的金额
 	 */
 	@ApiField("point_amount")
 	private String pointAmount;
@@ -189,6 +201,13 @@ SYNC_DIRECT_PAY(同步直接扣款);
 		return this.cardBalance;
 	}
 
+	public void setDiscountAmount(String discountAmount) {
+		this.discountAmount = discountAmount;
+	}
+	public String getDiscountAmount( ) {
+		return this.discountAmount;
+	}
+
 	public void setDiscountGoodsDetail(String discountGoodsDetail) {
 		this.discountGoodsDetail = discountGoodsDetail;
 	}
@@ -215,6 +234,13 @@ SYNC_DIRECT_PAY(同步直接扣款);
 	}
 	public String getInvoiceAmount( ) {
 		return this.invoiceAmount;
+	}
+
+	public void setMdiscountAmount(String mdiscountAmount) {
+		this.mdiscountAmount = mdiscountAmount;
+	}
+	public String getMdiscountAmount( ) {
+		return this.mdiscountAmount;
 	}
 
 	public void setOpenId(String openId) {

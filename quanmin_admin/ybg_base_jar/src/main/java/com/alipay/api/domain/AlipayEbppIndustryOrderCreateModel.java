@@ -11,7 +11,7 @@ import com.alipay.api.internal.mapping.ApiField;
  */
 public class AlipayEbppIndustryOrderCreateModel extends AlipayObject {
 
-	private static final long serialVersionUID = 8521621337228393195L;
+	private static final long serialVersionUID = 6561475558933272839L;
 
 	/**
 	 * 账单的账期，例如201703表示2017年3月的账单。
