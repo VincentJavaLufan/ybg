@@ -56,7 +56,10 @@
 												<img name="Kaptcha" alt="验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1" src="/defaultKaptcha" />
 											</div>
 										</div>
-										<button type="button" class="layui-btn layui-btn-normal layui-btn-disabled dp-block" lay-submit lay-filter="loginForm" onclick="tologin()">登 录</button>
+										<button type="button" class="layui-btn layui-btn-normal layui-btn-disabled dp-block" lay-submit lay-filter="loginForm" onclick="tologin()">绑定</button>
+										<br>
+												<button type="button" class="layui-btn layui-btn-danger" onclick="newaccount()">不绑定,&nbsp;直接作为新帐号</button>
+											
 									</form>
 								</div>
 								<div class="pad-all">
@@ -197,7 +200,19 @@
                 }
             }
         });
-        var obj = null;
+        function newaccount() {
+            $.post({
+                url : "/common/thirdpart/newaccount",
+                dataType : "json",
+                success : function(data) {
+                    alert(data.msg);
+                    if(data.success){
+                        localtion.href=""
+                    }
+                }
+            });
+        }
+        // var obj = null;
         //如果申请了 微信网站 扫码登陆 请把取消 注释
         // $.get("/common/weixin_do/getAppid", function(data) {
         //     var weixinurl=encodeURIComponent(data.weixinurl+"/common/weixin_do/login.do");

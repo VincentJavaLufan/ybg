@@ -130,17 +130,23 @@ public class LoginControllor {
 	public Json register(UserVO user, @RequestParam(name = "email", required = true) String email, @RequestParam(name = VrifyCodeUtil.PARAMETERNAME, required = true) String vrifyCode, HttpSession session) throws Exception {
 		Json j = new Json();
 		if (!VrifyCodeUtil.checkvrifyCode(vrifyCode, session)) {
-			j.setSuccess(true);
+			j.setSuccess(false);
 			j.setMsg("验证码不正确！");
 			return j;
 		}
+		boolean namestander=user.getUsername().trim().startsWith("qq")||user.getUsername().trim().startsWith("sina")||user.getUsername().trim().startsWith("github")||user.getUsername().trim().startsWith("baidu")||user.getUsername().trim().startsWith("weixin");
+		if(namestander) {
+			j.setSuccess(false);
+			j.setMsg("不能以qq、sina、weixin、baidu、github 开头注册");
+			return j;
+		}
+		
 		j.setSuccess(true);
 		j.setMsg("我们将发送邮箱到您的邮箱中进行验证，大约3小时左右不验证将删除注册信息");
 		String now = DateUtil.getDateTime();
 		user.setCredentialssalt(new DesUtils().encrypt(user.getPassword()));
 		user.setPassword(RbacConstant.getpwd(user.getPassword()));
 		user.setRoleids(RbacConstant.initRole());
-		;
 		user.setPhone("");
 		user.setState(UserStateConstant.DIE);
 		user.setCreatetime(now);

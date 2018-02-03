@@ -1,6 +1,6 @@
 package com.ybg.core.controller;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -44,7 +44,9 @@ import com.ybg.rbac.user.service.UserService;
 import com.ybg.setting.service.SocialUserService;
 import io.swagger.annotations.ApiOperation;
 
-/** @author Deament
+/** 社交登录
+ * 
+ * @author Deament
  * @date 2017/10/1 **/
 @Controller
 public class SocialController {
@@ -115,6 +117,12 @@ public class SocialController {
 		Json j = new Json();
 		j.setMsg("操作成功");
 		j.setSuccess(true);
+		boolean namestander = user.getUsername().trim().startsWith("qq") || user.getUsername().trim().startsWith("sina") || user.getUsername().trim().startsWith("github") || user.getUsername().trim().startsWith("baidu") || user.getUsername().trim().startsWith("weixin");
+		if (namestander) {
+			j.setSuccess(false);
+			j.setMsg("不能以qq、sina、weixin、baidu、github 开头注册");
+			return j;
+		}
 		Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));
 		if (connection.getKey().getProviderId() == null) {
 			j.setMsg("操作失败，请返回主页从新操作！");
@@ -124,7 +132,7 @@ public class SocialController {
 		}
 		// 不管是注册用户还是绑定用户，都会拿到一个用户唯一标识。
 		if (!VrifyCodeUtil.checkvrifyCode(vrifyCode, session)) {
-			j.setSuccess(true);
+			j.setSuccess(false);
 			j.setMsg("验证码不正确！");
 			return j;
 		}
@@ -141,6 +149,7 @@ public class SocialController {
 			userService.save(user);
 		} catch (Exception e) {
 			e.printStackTrace();
+			j.setSuccess(false);
 			j.setMsg("创建失败，已存在该用户");
 			return j;
 		}
@@ -208,15 +217,16 @@ public class SocialController {
 		}
 	}
 	
+	// ProviderSignInAttempt.SESSION_ATTRIBUTE
 	/** 非正规渠道绑定。 **/
 	private Json othertype(HttpServletRequest httpServletRequest) throws AuthenticationException, Exception {
 		Json j = new Json();
-		String providerId = httpServletRequest.getSession().getAttribute("ProviderSignInAttempt").toString();
-		String providerUserId = httpServletRequest.getSession().getAttribute("providerUserId").toString();
 		String username = ServletUtil.getStringParamDefaultBlank(httpServletRequest, "username");
 		String password = ServletUtil.getStringParamDefaultBlank(httpServletRequest, "password");
 		Loginproxy proxy = LoginProxyController.login(httpServletRequest, username, password, null);
 		if (proxy.isSuccess()) {
+			String providerId = httpServletRequest.getSession().getAttribute(ProviderSignInAttempt.SESSION_ATTRIBUTE).toString();
+			String providerUserId = httpServletRequest.getSession().getAttribute("providerUserId").toString();
 			SocialUserInfo userInfo = new SocialUserInfo();
 			userInfo.setProviderId(providerId);
 			userInfo.setProviderUserId(providerUserId);
@@ -224,8 +234,114 @@ public class SocialController {
 			userInfo.setHeadimg("");
 			// providerSignInUtils.doPostSignUp(proxy.getUser().getId(), new ServletWebRequest(httpServletRequest));
 			socialUserService.create(proxy.getUser().getId(), providerUserId, providerId);
-			httpServletRequest.getSession().removeAttribute("ProviderSignInAttempt");
+			httpServletRequest.getSession().removeAttribute(ProviderSignInAttempt.SESSION_ATTRIBUTE);
 			httpServletRequest.getSession().removeAttribute("providerUserId");
+			j.setMsg("绑定成功");
+			j.setSuccess(true);
+			return j;
+		}
+		else {
+			j.setMsg(proxy.getResult());
+			j.setSuccess(false);
+			return j;
+		}
+	}
+	
+	/** 第三方 账号绑定 **/
+	@ResponseBody
+	@PostMapping("/common/thirdpart/newaccount")
+	public Json newaccount(HttpServletRequest httpServletRequest, ModelMap map) throws Exception {
+		Json j = new Json();
+		j.setMsg("操作成功");
+		j.setSuccess(true);
+		Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(httpServletRequest));
+		if (connection != null) {
+			if (connection.getKey().getProviderId() == null) {
+				j.setMsg("操作失败，请返回主页从新操作！");
+				j.setSuccess(false);
+				return j;
+				// 会话失效 或者是被攻击
+			}
+		}
+		else {
+			return OtherNewAccount(httpServletRequest);
+		}
+		SocialUserInfo userInfo = new SocialUserInfo();
+		userInfo.setProviderId(connection.getKey().getProviderId());
+		userInfo.setProviderUserId(connection.getKey().getProviderUserId());
+		userInfo.setNickname(connection.getDisplayName());
+		userInfo.setHeadimg(connection.getImageUrl());
+		String username = userInfo.getProviderId() + "" + userInfo.getProviderUserId();
+		String password = UUID.randomUUID().toString().replaceAll("-", "") + System.currentTimeMillis();
+		String email = password;
+		UserVO user = new UserVO();
+		user.setUsername(username);
+		user.setPassword(password);
+		user.setEmail(email);
+		String now = DateUtil.getDateTime();
+		user.setCredentialssalt(new DesUtils().encrypt(user.getPassword()));
+		user.setPassword(RbacConstant.getpwd(user.getPassword()));
+		user.setRoleids(RbacConstant.initRole());
+		user.setPhone("");
+		user.setState(UserStateConstant.OK);
+		user.setCreatetime(now);
+		try {
+			userService.save(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			j.setSuccess(false);
+			j.setMsg("创建失败，已存在该用户");
+			return j;
+		}
+		Loginproxy proxy = LoginProxyController.login(httpServletRequest, username, password, null);
+		if (proxy.isSuccess()) {
+			providerSignInUtils.doPostSignUp(proxy.getUser().getId(), new ServletWebRequest(httpServletRequest));
+			j.setMsg("绑定成功");
+			j.setSuccess(true);
+			return j;
+		}
+		else {
+			j.setMsg(proxy.getResult());
+			j.setSuccess(false);
+			return j;
+		}
+	}
+	
+	private Json OtherNewAccount(HttpServletRequest httpServletRequest) throws AuthenticationException, Exception {
+		Json j = new Json();
+		String providerId = httpServletRequest.getSession().getAttribute(ProviderSignInAttempt.SESSION_ATTRIBUTE).toString();
+		String providerUserId = httpServletRequest.getSession().getAttribute("providerUserId").toString();
+		SocialUserInfo userInfo = new SocialUserInfo();
+		userInfo.setProviderId(providerId);
+		userInfo.setProviderUserId(providerUserId);
+		userInfo.setNickname("");
+		userInfo.setHeadimg("");
+		// providerSignInUtils.doPostSignUp(proxy.getUser().getId(), new ServletWebRequest(httpServletRequest));
+		String username = userInfo.getProviderId() + "" + userInfo.getProviderUserId();
+		String password = UUID.randomUUID().toString().replaceAll("-", "") + System.currentTimeMillis();
+		String email = password;
+		UserVO user = new UserVO();
+		user.setUsername(username);
+		user.setPassword(password);
+		user.setEmail(email);
+		String now = DateUtil.getDateTime();
+		user.setCredentialssalt(new DesUtils().encrypt(user.getPassword()));
+		user.setPassword(RbacConstant.getpwd(user.getPassword()));
+		user.setRoleids(RbacConstant.initRole());
+		user.setPhone("");
+		user.setState(UserStateConstant.OK);
+		user.setCreatetime(now);
+		try {
+			userService.save(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			j.setSuccess(false);
+			j.setMsg("创建失败，已存在该用户");
+			return j;
+		}
+		Loginproxy proxy = LoginProxyController.login(httpServletRequest, username, password, null);
+		if (proxy.isSuccess()) {
+			providerSignInUtils.doPostSignUp(proxy.getUser().getId(), new ServletWebRequest(httpServletRequest));
 			j.setMsg("绑定成功");
 			j.setSuccess(true);
 			return j;
