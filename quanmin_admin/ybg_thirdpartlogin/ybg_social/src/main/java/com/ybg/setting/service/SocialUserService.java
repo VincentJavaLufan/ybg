@@ -36,4 +36,12 @@ public interface SocialUserService {
 	 * @param prividerid
 	 */
 	void create(String userid, String provideruserid, String prividerid);
+	
+	/** 获取单个 社交用户
+	 * @param provideruserid
+	 * @param prividerid
+	 * @return
+	 */
+	SocialUserVO get(String provideruserid, String prividerid);
+	
 }
