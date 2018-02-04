@@ -15,7 +15,18 @@ public class SysRoleVO extends RoleDO {
 	private static final long	serialVersionUID	= 6992716444714136013L;
 	/** 角色权限id列表 **/
 	private List<String>		menuIdList;
+	private String parentname;
 	
+	
+	public String getParentname() {
+		return parentname;
+	}
+
+	
+	public void setParentname(String parentname) {
+		this.parentname = parentname;
+	}
+
 	public List<String> getMenuIdList() {
 		return menuIdList;
 	}

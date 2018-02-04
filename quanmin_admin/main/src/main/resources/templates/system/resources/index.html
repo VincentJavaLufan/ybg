@@ -8,10 +8,10 @@
 			<div class="m-b-md">
 				<form class="layui-form-layui-form-pane" role="form" id="searchForm" name="searchForm">
 					<div class="layui-form-item">
-						<label class="layui-form-label">菜单名: </label>
+						<!--  <label class="layui-form-label">菜单名: </label>
 						<div class="layui-input-inline">
 							<input class="layui-input" id="name" name="name">
-						</div>
+						</div>-->
 						<a href="javascript:void(0)" class="layui-btn layui-btn-normal" id="search">查询</a>
 						<a class="layui-btn layui-btn-normal" @click="add">
 							<i class="fa fa-plus"></i>
@@ -40,9 +40,8 @@
 			<div class="panel-heading">{{title}}</div>
 			<form class="layui-form-layui-form-pane">
 				<div class="panel-body">
-					
 					<div class="layui-form-item">
-						<label class="layui-form-label">菜单名称</label>
+						<label class="layui-form-label">菜单类型</label>
 						<div class="layui-input-block">
 							<select class="layui-input" v-model="menu.type" style="display: block;">
 								<option value="0">目录</option>
@@ -61,6 +60,7 @@
 						<label class="layui-form-label">上级菜单</label>
 						<div class="layui-input-block">
 							<input type="text" class="layui-input" style="cursor: pointer;" v-model="menu.parentname" @click="menuTree" readonly="readonly" placeholder="一级菜单" />
+							<input type="button" class="layui-btn layui-btn-normal" @click='deleteparentid' value="取消上级" />
 						</div>
 					</div>
 					<div v-if="menu.type == 1|| menu.type == 2" class="layui-form-item">

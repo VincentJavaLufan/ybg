@@ -37,6 +37,10 @@ var vm = new Vue({
                 }
             })
         },
+        deleteparentid : function() {
+            vm.menu.parentname = '空';
+            vm.menu.parentid = "0";
+        },
         add : function() {
             vm.showList = false;
             vm.title = "新增";
@@ -125,9 +129,7 @@ var vm = new Vue({
                         });
                     }
                 });
-                
             });
-           
         },
         reload : function() {
             vm.showList = true;

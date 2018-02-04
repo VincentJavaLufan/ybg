@@ -1,7 +1,6 @@
 package com.ybg.rbac.controllor;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,12 +20,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.base.jdbc.BaseMap;
+import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.Page;
+import com.ybg.base.util.RbacConstant;
 import com.ybg.base.util.ValidatorUtils;
 import com.ybg.rbac.resources.domain.SysResourcesVO;
 import com.ybg.rbac.resources.qvo.ResourcesQuery;
 import com.ybg.rbac.resources.service.ResourcesService;
+import com.ybg.rbac.role.domain.BatchResRoleVO;
 import com.ybg.rbac.role.domain.RoleResDO;
 import com.ybg.rbac.role.domain.SysRoleVO;
 import com.ybg.rbac.role.qvo.RoleQuery;
@@ -52,13 +54,10 @@ public class RoleControllor {
 	}
 	
 	@ApiOperation(value = "角色分页列表", notes = "JSON ", produces = MediaType.APPLICATION_JSON_VALUE)
-//	@ApiImplicitParams({ @ApiImplicitParam(name = "pageNow", value = "当前页数", required = true, dataType = "Integer"), @ApiImplicitParam(name = "qvo", value = "查询页数", required = false, dataType = "RoleQvo") })
 	@ResponseBody
 	@RequestMapping(value = { "list.do" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public Page list(@ModelAttribute RoleQuery qvo,@ModelAttribute Page page) throws Exception {
+	public Page list(@ModelAttribute RoleQuery qvo, @ModelAttribute Page page) throws Exception {
 		qvo.setBlurred(true);
-//		Page page = new Page();
-//		page.setCurPage(pageNow);
 		page = roleService.list(page, qvo);
 		page.init();
 		return page;
@@ -76,6 +75,16 @@ public class RoleControllor {
 		return map;
 	}
 	
+	/** 角色下拉列表
+	 * 
+	 * @throws Exception
+	 **/
+	@ResponseBody
+	@RequestMapping(value = { "selecttreetable.do" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public List<SysRoleVO> selecttreetable() throws Exception {
+		return roleService.list(new RoleQuery());
+	}
+	
 	@ApiOperation(value = "更新角色", notes = "只更新描述，名称，系统唯一标识,状态 ", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@RequestMapping(value = { "update.do" }, method = { RequestMethod.POST })
@@ -88,6 +97,10 @@ public class RoleControllor {
 			updatemap.put("name", role.getName());
 			updatemap.put("rolekey", role.getRolekey());
 			updatemap.put("state", role.getState());
+			if (!QvoConditionUtil.checkString(role.getParentid())) {
+				role.setParentid(RbacConstant.DEFAULT_ROLE_PARENTID);
+			}
+			updatemap.put("parentid", role.getParentid());
 			BaseMap<String, Object> wheremap = new BaseMap<String, Object>();
 			wheremap.put("id", role.getId());
 			roleService.update(updatemap, wheremap);
@@ -99,14 +112,14 @@ public class RoleControllor {
 				rr.setResid(res.getId());
 				rr.setRoleid(roleId);
 				// 禁止使用
-				rr.setState(1);
+				rr.setState(RbacConstant.RESOURCE_BAN);
 				list.add(rr);
 			}
 			if (role.getMenuIdList() != null && role.getMenuIdList().size() > 0) {
 				for (String resid : role.getMenuIdList()) {
 					for (RoleResDO rr : list) {
 						if (rr.getResid().equals(resid)) {
-							rr.setState(0);
+							rr.setState(RbacConstant.RESOURCE_ALLOW);
 						}
 					}
 				}
@@ -159,14 +172,14 @@ public class RoleControllor {
 				rr.setResid(res.getId());
 				rr.setRoleid(roleId);
 				// 禁止使用
-				rr.setState(1);
+				rr.setState(RbacConstant.RESOURCE_BAN);
 				list.add(rr);
 			}
 			if (bean.getMenuIdList() != null && bean.getMenuIdList().size() > 0) {
 				for (String resid : bean.getMenuIdList()) {
 					for (RoleResDO rr : list) {
 						if (rr.getResid().equals(resid)) {
-							rr.setState(0);
+							rr.setState(RbacConstant.RESOURCE_ALLOW);
 						}
 					}
 				}
@@ -181,6 +194,49 @@ public class RoleControllor {
 			j.setMsg("操作失败");
 			return j;
 		}
+		j.setMsg("操作成功");
+		return j;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "batchauthorize.do" }, method = { RequestMethod.POST })
+	public Json batchauthorize(@RequestBody BatchResRoleVO bean) {
+		Json j = new Json();
+		try {
+			// roleService.save(bean);
+			// String roleId = bean.getId();
+			for (String roleId : bean.getRoleIdList()) {
+				List<SysResourcesVO> reslist = resourcesService.list(new ResourcesQuery());
+				List<RoleResDO> list = new ArrayList<RoleResDO>();
+				for (SysResourcesVO res : reslist) {
+					RoleResDO rr = new RoleResDO();
+					rr.setResid(res.getId());
+					rr.setRoleid(roleId);
+					// 禁止使用
+					rr.setState(RbacConstant.RESOURCE_BAN);
+					list.add(rr);
+				}
+				if (bean.getMenuIdList() != null && bean.getMenuIdList().size() > 0) {
+					for (String resid : bean.getMenuIdList()) {
+						for (RoleResDO rr : list) {
+							if (rr.getResid().equals(resid)) {
+								rr.setState(RbacConstant.RESOURCE_ALLOW);
+							}
+						}
+					}
+				}
+				roleService.saveOrUpdateRoleRes(list);
+			}
+		} catch (DuplicateKeyException e) {
+			e.printStackTrace();
+			j.setMsg("操作失败,已存在该记录");
+			return j;
+		} catch (Exception e) {
+			e.printStackTrace();
+			j.setMsg("操作失败");
+			return j;
+		}
+		j.setSuccess(true);
 		j.setMsg("操作成功");
 		return j;
 	}

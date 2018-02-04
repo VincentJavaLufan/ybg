@@ -28,6 +28,14 @@ public class RbacConstant {
 	public static final String	ROLE_OTHER					= "ROLE_OTHER";
 	/** VIP角色KEY **/
 	public static final String	ROLE_VIP					= "ROLE_VIP";
+	/** 默认 角色父级ID **/
+	public static final String	DEFAULT_ROLE_PARENTID		= "0";
+	/** 默认 菜单父级ID **/
+	public static final String	DEFAULT_RESOURCES_PARENTID	= "0";
+	/**资源权限-允许访问**/
+	public static final int		RESOURCE_ALLOW				= 0;
+	/**资源权限-禁止访问**/
+	public static final int		RESOURCE_BAN				= 1;
 	
 	/** 判断当前角色是超管 **/
 	public static boolean isAdmin(UserVO user) {

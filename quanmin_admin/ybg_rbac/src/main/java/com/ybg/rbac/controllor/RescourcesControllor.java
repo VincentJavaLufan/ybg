@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybg.base.jdbc.BaseMap;
+import com.ybg.base.jdbc.util.QvoConditionUtil;
 import com.ybg.base.util.Json;
 import com.ybg.base.util.RbacConstant;
 import com.ybg.base.util.ValidatorUtils;
@@ -108,6 +109,9 @@ public class RescourcesControllor {
 			updatemap.put("ishide", menu.getIshide());
 			updatemap.put("level", menu.getLevel());
 			updatemap.put("name", menu.getName());
+			if (!QvoConditionUtil.checkString(menu.getParentid())) {
+				menu.setParentid(RbacConstant.DEFAULT_RESOURCES_PARENTID);
+			}
 			updatemap.put("parentid", menu.getParentid());
 			updatemap.put("reskey", menu.getReskey());
 			updatemap.put("resurl", menu.getResurl());

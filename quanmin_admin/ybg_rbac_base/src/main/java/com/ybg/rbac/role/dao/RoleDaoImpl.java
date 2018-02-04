@@ -31,7 +31,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 	}
 	
 	private static String	QUERY_TABLE_NAME	= "sys_role role";
-	private static String	QUERY_TABLE_COLUMN	= " role.id,role.state,role.name,role.rolekey,role.description ,role.isdelete ";
+	private static String	QUERY_TABLE_COLUMN	= " role.parentid,role.id,role.state,role.name,role.rolekey,role.description ,role.isdelete ";
 	
 	@Override
 	public SysRoleVO save(SysRoleVO role) throws Exception {
@@ -41,6 +41,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		createmap.put("`name`", role.getName());
 		createmap.put("`rolekey`", role.getRolekey());
 		createmap.put("`description`", role.getDescription());
+		createmap.put("`parentid`", role.getParentid());
 		id = baseCreate(createmap, "sys_role", "id");
 		role.setId((String) id);
 		return role;
@@ -81,6 +82,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 		sqlappen(sql, "role.rolekey", qvo.getRolekey(), qvo);
 		sqlappen(sql, "role.description", qvo.getDescription(), qvo);
 		sqlappen(sql, "role.`name`", qvo.getName(), qvo);
+		sqlappen(sql, "role.parentid", qvo.getParentid());
 		return sql.toString();
 	}
 	

@@ -8,22 +8,28 @@
 			<div class="m-b-md">
 				<form class="layui-form-layui-form-pane" role="form" id="searchForm" name="searchForm">
 					<div class="layui-form-item">
-						<label class="layui-form-label">角色名:</label>
+						<!--  <label class="layui-form-label">角色名:</label>
 						<div class="layui-input-inline">
 							<input type="text" name="name" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-						</div>
+						</div>-->
 						<a href="javascript:void(0)" @click="reload" class="layui-btn layui-btn-normal" id="search">查询</a>
 						<button type="button" @click="del" class="layui-btn layui-btn-danger">删除</button>
 						<button type="button" @click="add" class="layui-btn layui-btn-normal">新增</button>
 						<button type="button" @click="update" class="layui-btn layui-btn-normal">编辑</button>
+						<button type="button" @click="batchauthorize" class="layui-btn layui-btn-normal">批量授权</button>
 					</div>
 				</form>
 			</div>
 			<div class="table-responsive">
-				<table class="layui-hide" id="roletable"></table>
+				<table id="roletable" data-mobile-responsive="true" data-click-to-select="true">
+					<tr>
+						<th data-field="selectItem" data-checkbox="true"></th>
+					</tr>
+				</table>
+				<!--  <table  id="roletable"></table>-->
 			</div>
 		</div>
-		<div class="panel panel-default" v-show="!showList">
+		<div class="panel panel-default" v-show="showedit">
 			<div class="panel-heading">{{title}}</div>
 			<form class="layui-form-layui-form-pane">
 				<div class="panel-body">
@@ -38,6 +44,13 @@
 						<label class="layui-form-label">roleKey</label>
 						<div class="layui-input-block">
 							<input type="text" class="layui-input" required lay-verify="required" placeholder="请输入roleKey" v-model="role.rolekey">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">上级角色</label>
+						<div class="layui-input-block">
+							<input type="text" id="editparentid" class="layui-input" style="cursor: pointer;" v-model="role.parentname" @click="getRoleTree" readonly="readonly" placeholder="" />
+							<input type="button" class="layui-btn layui-btn-normal" @click='deleteparent'  value="取消上级" />
 						</div>
 					</div>
 					<div class="layui-form-item">
@@ -71,6 +84,34 @@
 				</footer>
 			</form>
 		</div>
+		<div class="panel panel-default" v-show="showbatch">
+		<footer class="panel-footer text-right bg-light lter">
+				<div class="layui-form-item">
+					<input type="button" class="layui-btn layui-btn-normal" @click="batchauthorizesubmit" value="确定" />
+					&nbsp;&nbsp;
+					<input type="button" class="layui-btn layui-btn-danger" @click="reload" value="返回" />
+				</div>
+			</footer>
+			<table style="width: 100%">
+				<tr>
+					<td style="text-align: center;">权限</td>
+					<td style="text-align: center;">角色(单击角色/部门加载权限)</td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccccc">
+						<ul id="batchmenuTree" class="ztree"></ul>
+					</td>
+					<td valign="top" bgcolor="#ffffcc">
+						<ul id="batchroleTree" class="ztree"></ul>
+					</td>
+				</tr>
+			</table>
+			
+		</div>
+	</div>
+	<!-- 选择菜单 -->
+	<div id="roleLayer" style="display: none; padding: 10px;">
+		<ul id="editroleTree" class="ztree"></ul>
 	</div>
 	<script src="/js/system/role/role.js"></script>
 </body>
