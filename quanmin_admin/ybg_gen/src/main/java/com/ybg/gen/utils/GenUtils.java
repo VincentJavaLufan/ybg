@@ -10,6 +10,7 @@ import com.ybg.base.util.SpringContextUtils;
 import com.ybg.gen.entity.ColumnEntity;
 import com.ybg.gen.entity.TableEntity;
 import com.ybg.gen.service.SysGeneratorService;
+import cn.hutool.extra.template.VelocityUtil;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -122,6 +123,7 @@ public class GenUtils {
 		// 获取模板列表
 		List<String> templates = getTemplates();
 		for (String template : templates) {
+			
 			// 渲染模板
 			StringWriter sw = new StringWriter();
 			Template tpl = Velocity.getTemplate(template, "UTF-8");
