@@ -1,0 +1,68 @@
+<html>
+<head>
+<#include "/common/common2.ftl"/>
+</head>
+<body>
+	<div id="rrapp" v-cloak>
+		<div v-show="showList">
+			<div class="m-b-md">
+				<form class="layui-form layui-form-pane" role="form" id="searchForm" name="searchForm">
+					<div class="layui-form-item">
+						<!--	<label class="layui-form-label">角色名:</label>
+						<div class="layui-input-inline">
+							<input type="text" name="name" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+						</div>-->
+						<a href="javascript:void(0)" @click="reload" class="layui-btn layui-btn-normal" id="search">查询</a>
+						<button type="button" @click="del" class="layui-btn layui-btn-danger">删除</button>
+						<button type="button" @click="add" class="layui-btn layui-btn-normal">新增</button>
+						<button type="button" @click="update" class="layui-btn layui-btn-normal">编辑</button>
+					</div>
+				</form>
+			</div>
+			<div class="table-responsive">
+				<table class="layui-hide" id="genTemptable"></table>
+			</div>
+		</div>
+		<div v-show="!showList" class="panel panel-default">
+			<div class="panel-heading">{{title}}</div>
+			<form class="layui-form-layui-form-pane">
+				<div class="panel-body">
+					<div class="layui-form-item">
+						<label class="layui-form-label">描述</label>
+						<div class="layui-input-block">
+							<input type="text" class="layui-input" v-model="genTemp.description" placeholder="描述" />
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">文件名称</label>
+						<div class="layui-input-block">
+							<input type="text" class="layui-input" v-model="genTemp.genfilename" placeholder="文件名称" />
+						</div>
+					</div>
+					
+					<div class="layui-form-item">
+						<label class="layui-form-label">文本内容</label>
+						<div class="layui-input-block">
+							<input type="text" class="layui-input" v-model="genTemp.gencontext" placeholder="文本内容" />
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">是否启用</label>
+						<div class="layui-input-block">
+							<input type="text" class="layui-input" v-model="genTemp.state" placeholder="是否启用" />
+						</div>
+					</div>
+				</div>
+				<footer class="panel-footer text-right bg-light lter">
+					<div class="layui-form-item">
+						<input type="button" class="layui-btn layui-btn-normal" @click="saveOrUpdate" value="确定" />
+						&nbsp;&nbsp;
+						<input type="button" class="layui-btn layui-btn-danger" @click="reload" value="返回" />
+					</div>
+				</footer>
+			</form>
+		</div>
+	</div>
+	<script src="/js/system/gen/gentemp.js"></script>
+</body>
+</html>
