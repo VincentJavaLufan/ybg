@@ -127,6 +127,10 @@ layui.use([ 'elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common' ]
                         "title" : "代码生成",
                         "icon" : "larry-zhandianguanli",
                         "href" : "/sys/generator_do/index.do"
+                    },{
+                        "title" : "生成模版管理",
+                        "icon" : "larry-zhandianguanli",
+                        "href" : "/sys/gentemp_do/index.do"
                     }, {
                         "title" : "API文档",
                         "icon" : "larry-zhandianguanli",
@@ -227,7 +231,24 @@ layui.use([ 'elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common' ]
 
                 ];
                 var pid_35 = [  ]
-                var pid_40 = [ ]
+                var pid_40 = [{
+                    "title" : "企业系统",
+                    "icon" : "larry-jiankong",
+                    "spread" : "true",
+                    "children" : [ {
+                        "title" : "部门管理",
+                        "icon" : "larry-jiankong1",
+                        "href" : "/oa/department_do/index.do"
+                    }, {
+                        "title" : "未定义",
+                        "icon" : "larry-jiankong1",
+                        "href" : "#"
+                    }, {
+                        "title" : "未定义",
+                        "icon" : "larry-jiankong1",
+                        "href" : "#"
+                    } ]
+                } ]
                 var pid_46 = [ {
                     "title" : "测试功能",
                     "icon" : "larry-daimaguanli",
