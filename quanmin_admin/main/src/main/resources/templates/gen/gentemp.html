@@ -39,17 +39,20 @@
 							<input type="text" class="layui-input" v-model="genTemp.genfilename" placeholder="文件名称" />
 						</div>
 					</div>
-					
-					<div class="layui-form-item">
-						<label class="layui-form-label">文本内容</label>
-						<div class="layui-input-block">
-							<input type="text" class="layui-input" v-model="genTemp.gencontext" placeholder="文本内容" />
-						</div>
-					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">是否启用</label>
 						<div class="layui-input-block">
-							<input type="text" class="layui-input" v-model="genTemp.state" placeholder="是否启用" />
+							<select v-model="genTemp.state" class="layui-input" required lay-verify="required">
+								<option value="1">启用</option>
+								<option value="0">停用</option>
+							</select>
+							
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">代码模板</label>
+						<div class="layui-input-block">
+							<textarea rows="20" cols="120" v-model="genTemp.gencontext"></textarea>
 						</div>
 					</div>
 				</div>
