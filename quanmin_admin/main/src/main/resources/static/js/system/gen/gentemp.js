@@ -73,10 +73,9 @@ var vm = new Vue({
                                 type : 'checkbox'
                             }, {
                                 field : 'id',
-                                title : '',
+                                title : 'ID',
                                 minWidth : 100,
                                 templet : function(data) {
-                                   
                                     return data.id;
                                 }
                             }, {
@@ -84,7 +83,6 @@ var vm = new Vue({
                                 title : '描述',
                                 minWidth : 100,
                                 templet : function(data) {
-                                   
                                     return data.description;
                                 }
                             }, {
@@ -92,29 +90,19 @@ var vm = new Vue({
                                 title : '文件名称',
                                 minWidth : 100,
                                 templet : function(data) {
-                                   
                                     return data.genfilename;
-                                }
-                            }, {
-                                field : 'gencontext',
-                                title : '文本内容',
-                                minWidth : 100,
-                                templet : function(data) {
-                                   
-                                    return data.gencontext;
                                 }
                             }, {
                                 field : 'state',
                                 title : '是否启用',
                                 minWidth : 100,
                                 templet : function(data) {
-                                    // if (data.state == 0) {
-                                    // return "正常";
-                                    // }
-                                    // if (data.state == 1) {
-                                    // return "<font color='red'>刪除</font>";
-                                    // }
-                                    // return "数据异常";
+                                    if(data.state==1){
+                                        return "启用";
+                                    }
+                                    if(data.state==0){
+                                        return "停用";
+                                    }
                                     return data.state;
                                 }
                             } ] ],
@@ -127,4 +115,5 @@ var vm = new Vue({
         }
     }
 });
+
 vm.reload();
