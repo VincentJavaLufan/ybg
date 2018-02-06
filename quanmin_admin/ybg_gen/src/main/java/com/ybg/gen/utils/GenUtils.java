@@ -7,8 +7,11 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import com.ybg.base.jdbc.util.DateUtil;
 import com.ybg.base.util.SpringContextUtils;
+import com.ybg.gen.domain.GenTempVO;
 import com.ybg.gen.entity.ColumnEntity;
 import com.ybg.gen.entity.TableEntity;
+import com.ybg.gen.qvo.GenTempQuery;
+import com.ybg.gen.service.GenTempService;
 import com.ybg.gen.service.SysGeneratorService;
 import cn.hutool.extra.template.VelocityUtil;
 import java.io.File;
@@ -28,35 +31,6 @@ import java.util.zip.ZipOutputStream;
  * @email sunlightcs@gmail.com
  * @date 2016年12月19日 下午11:40:24 */
 public class GenUtils {
-	
-	private static final String	TEMPLATES_DO			= "DO.java.vm";
-	private static final String	TEMPLATES_DAO			= "Dao.java.vm";
-	private static final String	TEMPLATES_DAOIMPL		= "DaoImpl.java.vm";
-	private static final String	TEMPLATES_SERVICE		= "Service.java.vm";
-	private static final String	TEMPLATES_SERVICEIMPL	= "ServiceImpl.java.vm";
-	private static final String	TEMPLATES_CONTROLLER	= "Controller.java.vm";
-	private static final String	TEMPLATES_LIST_HTML		= "list.html.vm";
-	private static final String	TEMPLATES_LIST_JS		= "list.js.vm";
-	private static final String	TEMPLATES_SQL			= "menu.sql.vm";
-	private static final String	TEMPLATES_VO			= "VO.java.vm";
-	private static final String	TEMPLATES_QUERY			= "Query.java.vm";
-	private static final String	BASE_DIR				= "template";
-	
-	public static List<String> getTemplates() {
-		List<String> templates = new ArrayList<String>();
-		templates.add(BASE_DIR + "/" + TEMPLATES_DO);
-		templates.add(BASE_DIR + "/" + TEMPLATES_DAO);
-		templates.add(BASE_DIR + "/" + TEMPLATES_DAOIMPL);
-		templates.add(BASE_DIR + "/" + TEMPLATES_SERVICE);
-		templates.add(BASE_DIR + "/" + TEMPLATES_SERVICEIMPL);
-		templates.add(BASE_DIR + "/" + TEMPLATES_CONTROLLER);
-		templates.add(BASE_DIR + "/" + TEMPLATES_LIST_HTML);
-		templates.add(BASE_DIR + "/" + TEMPLATES_LIST_JS);
-		templates.add(BASE_DIR + "/" + TEMPLATES_SQL);
-		templates.add(BASE_DIR + "/" + TEMPLATES_VO);
-		templates.add(BASE_DIR + "/" + TEMPLATES_QUERY);
-		return templates;
-	}
 	
 	/** 生成代码
 	 * 
@@ -121,17 +95,20 @@ public class GenUtils {
 		map.put("datetime", DateUtil.getDate());
 		VelocityContext context = new VelocityContext(map);
 		// 获取模板列表
-		List<String> templates = getTemplates();
-		for (String template : templates) {
-			
+		// List<String> templates = getTemplates();
+		List<GenTempVO> templates = getTemplates();
+		for (GenTempVO template : templates) {
 			// 渲染模板
 			StringWriter sw = new StringWriter();
-			Template tpl = Velocity.getTemplate(template, "UTF-8");
-			tpl.merge(context, sw);
+			// Template tpl = Velocity.getTemplate(template, "UTF-8");
+			// tpl.merge(context, sw);
+			String data = VelocityUtil.merge(template.getGencontext(), context);
 			try {
 				// 添加到zip
-				zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.get("package"))));
-				IOUtils.write(sw.toString(), zip, "UTF-8");
+				// zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.get("package"))));
+				zip.putNextEntry(new ZipEntry(dealfilename(template.getGenfilename(), map)));
+				// IOUtils.write(sw.toString(), zip, "UTF-8");
+				IOUtils.write(data, zip, "UTF-8");
 				IOUtils.closeQuietly(sw);
 				zip.closeEntry();
 			} catch (IOException e) {
@@ -162,45 +139,20 @@ public class GenUtils {
 		return service.queryGenSetting();
 	}
 	
-	/** 获取文件名 */
-	public static String getFileName(String template, String className, String packageName) {
-		String packagePath = "main" + File.separator + "java" + File.separator;
-		if (StringUtils.isNotBlank(packageName)) {
-			packagePath += packageName.replace(".", File.separator) + File.separator;
-		}
-		if (template.contains(TEMPLATES_DO)) {
-			return packagePath + "domain" + File.separator + className + "DO.java";
-		}
-		if (template.contains(TEMPLATES_VO)) {
-			return packagePath + "domain" + File.separator + className + "VO.java";
-		}
-		if (template.contains(TEMPLATES_QUERY)) {
-			return packagePath + "qvo" + File.separator + className + "Query.java";
-		}
-		if (template.contains(TEMPLATES_DAO)) {
-			return packagePath + "dao" + File.separator + className + "Dao.java";
-		}
-		if (template.contains(TEMPLATES_DAOIMPL)) {
-			return packagePath + "dao" + File.separator + className + "DaoImpl.java";
-		}
-		if (template.contains(TEMPLATES_SERVICE)) {
-			return packagePath + "service" + File.separator + className + "Service.java";
-		}
-		if (template.contains(TEMPLATES_SERVICEIMPL)) {
-			return packagePath + "service" + File.separator + className + "ServiceImpl.java";
-		}
-		if (template.contains(TEMPLATES_CONTROLLER)) {
-			return packagePath + "controller" + File.separator + className + "Controller.java";
-		}
-		if (template.contains(TEMPLATES_LIST_HTML)) {
-			return "main" + File.separator + "webapp" + File.separator + "WEB-INF" + File.separator + "page" + File.separator + "generator" + File.separator + className.toLowerCase() + ".html";
-		}
-		if (template.contains(TEMPLATES_LIST_JS)) {
-			return "main" + File.separator + "webapp" + File.separator + "js" + File.separator + "generator" + File.separator + className.toLowerCase() + ".js";
-		}
-		if (template.contains(TEMPLATES_SQL)) {
-			return className.toLowerCase() + "_menu.sql";
-		}
-		return null;
+	/** 获取启用模板列表
+	 * 
+	 * @throws Exception
+	 */
+	public static List<GenTempVO> getTemplates() throws Exception {
+		GenTempService service = SpringContextUtils.getBean(GenTempService.class);
+		GenTempQuery qvo = new GenTempQuery();
+		return service.list(qvo);
+	}
+	
+	public static String dealfilename(String filename, Map<String, Object> map) {
+		filename = filename.replace("className", map.get("className").toString());
+		filename = filename.replace("classname", map.get("classname").toString());
+		filename = filename.replace("packagePath", map.get("package").toString());
+		return filename;
 	}
 }
