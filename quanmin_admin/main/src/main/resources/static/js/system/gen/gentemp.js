@@ -1,3 +1,4 @@
+var editor = null;
 var vm = new Vue({
     el : '#rrapp',
     data : {
@@ -25,6 +26,8 @@ var vm = new Vue({
         },
         saveOrUpdate : function(event) {
             var url = vm.genTemp.id == null ? "/sys/gentemp_do/create.do" : "/sys/gentemp_do/update.do";
+            vm.genTemp.gencontext = editor.getValue();
+            console.log(vm.genTemp)
             $.ajax({
                 type : "POST",
                 url : rootPath + url,
@@ -57,9 +60,30 @@ var vm = new Vue({
         getInfo : function(id) {
             $.get(rootPath + "/sys/gentemp_do/get.do?id=" + id, function(r) {
                 vm.genTemp = r.genTemp;
+                if (editor != null) {
+                    $(".CodeMirror").remove()
+                }
+                setTimeout(function() {
+                    editor = CodeMirror.fromTextArea(document.getElementById("gencontext"), {
+                        mode : "text/x-java", // 实现Java代码高亮
+                        lineNumbers : true, // 显示行号
+                        // theme: "dracula", // 设置主题
+                        lineWrapping : true, // 代码折叠
+                        foldGutter : true,
+                        gutters : [
+                            "CodeMirror-linenumbers", "CodeMirror-foldgutter" ],
+                        matchBrackets : true, // 括号匹配
+                    // readOnly: true, //只读
+                    });
+                }, 100)
             });
         },
-        reload : function(event) {
+        init : function() {
+        },
+        reload : function(event) {// 查询方法 网站发我
+        // editor =
+        // CodeMirror.fromTextArea(document.getElementById("gencontext"), {
+        // });
             vm.showList = true;
             layui.use('table', function() {
                 var table = layui.table;
@@ -97,10 +121,10 @@ var vm = new Vue({
                                 title : '是否启用',
                                 minWidth : 100,
                                 templet : function(data) {
-                                    if(data.state==1){
+                                    if (data.state == 1) {
                                         return "启用";
                                     }
-                                    if(data.state==0){
+                                    if (data.state == 0) {
                                         return "停用";
                                     }
                                     return data.state;
@@ -115,5 +139,4 @@ var vm = new Vue({
         }
     }
 });
-
 vm.reload();

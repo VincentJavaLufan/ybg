@@ -1,6 +1,20 @@
 <html>
 <head>
 <#include "/common/common2.ftl"/>
+<link rel="stylesheet" href="/js/plugins/codemirror/codemirror.css" />
+<script src="/js/plugins/codemirror/codemirror.js"></script>
+<link rel="stylesheet" href="/js/plugins/codemirror/addon/fold/foldgutter.css" />
+<script src="/js/plugins/codemirror/addon/fold/foldcode.js"></script>
+<script src="/js/plugins/codemirror/addon/fold/foldgutter.js"></script>
+<script src="/js/plugins/codemirror/addon/fold/brace-fold.js"></script>
+<script src="/js/plugins/codemirror/addon/fold/comment-fold.js"></script>
+<!-- 各种语言样式 -->
+<script src="/js/plugins/codemirror/mode/clike/clike.js"></script>
+<script src="/js/plugins/codemirror/mode/javascript/javascript.js"></script>
+<!-- 各种语言样式end -->
+<script src="/js/plugins/codemirror/addon/edit/matchbrackets.js"></script>
+<link rel="stylesheet" href="/js/plugins/codemirror/addon/hint/show-hint.css">
+<script src="/js/plugins/codemirror/addon/hint/show-hint.js"></script>
 </head>
 <body>
 	<div id="rrapp" v-cloak>
@@ -46,13 +60,12 @@
 								<option value="1">启用</option>
 								<option value="0">停用</option>
 							</select>
-							
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">代码模板</label>
 						<div class="layui-input-block">
-							<textarea rows="20" cols="120" v-model="genTemp.gencontext"></textarea>
+							<textarea rows="20" cols="120" id="gencontext" v-model="genTemp.gencontext">{{genTemp.gencontext}}</textarea>
 						</div>
 					</div>
 				</div>
@@ -67,5 +80,8 @@
 		</div>
 	</div>
 	<script src="/js/system/gen/gentemp.js"></script>
+	<script type="text/javascript">
+        //根据DOM元素的id构造出一个编辑器
+    </script>
 </body>
 </html>
