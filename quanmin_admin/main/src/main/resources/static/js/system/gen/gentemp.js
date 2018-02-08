@@ -63,11 +63,29 @@ var vm = new Vue({
                 if (editor != null) {
                     $(".CodeMirror").remove()
                 }
+                var codetype = "text/x-java";
+                var index = vm.genTemp.genfilename.indexOf('.java');
+                if (index != -1) {
+                    codetype = "text/x-java";
+                }
+                index = vm.genTemp.genfilename.indexOf('.js');
+                if (index != -1) {
+                    codetype = "javscript";
+                }
+                index = vm.genTemp.genfilename.indexOf('.html');
+                if (index != -1) {
+                    codetype = "htmlmixed";
+                }
+                index = vm.genTemp.genfilename.indexOf('.sql');
+                if (index != -1) {
+                    codetype = "sql";
+                }
+                console.log(codetype)
                 setTimeout(function() {
                     editor = CodeMirror.fromTextArea(document.getElementById("gencontext"), {
-                        mode : "text/x-java", // 实现Java代码高亮
+                        mode : codetype, // 实现Java代码高亮
                         lineNumbers : true, // 显示行号
-                        // theme: "dracula", // 设置主题
+                        theme : "eclipse", // 设置主题
                         lineWrapping : true, // 代码折叠
                         foldGutter : true,
                         gutters : [
@@ -81,9 +99,9 @@ var vm = new Vue({
         init : function() {
         },
         reload : function(event) {// 查询方法 网站发我
-        // editor =
-        // CodeMirror.fromTextArea(document.getElementById("gencontext"), {
-        // });
+            // editor =
+            // CodeMirror.fromTextArea(document.getElementById("gencontext"), {
+            // });
             vm.showList = true;
             layui.use('table', function() {
                 var table = layui.table;
