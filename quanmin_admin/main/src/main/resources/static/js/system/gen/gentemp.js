@@ -76,6 +76,10 @@ var vm = new Vue({
                 if (index != -1) {
                     codetype = "xml";
                 }
+                index = vm.genTemp.genfilename.indexOf('.xml');
+                if (index != -1) {
+                    codetype = "xml";
+                }
                 index = vm.genTemp.genfilename.indexOf('.sql');
                 if (index != -1) {
                     codetype = "sql";
