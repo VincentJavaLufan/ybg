@@ -16,7 +16,8 @@ var setting = {
     },
     check : {
         enable : true,
-        nocheckInherit : true
+        nocheckInherit : true,
+        chkboxType :{ "Y" : "s", "N" : "s" }
     }
 };
 
@@ -36,7 +37,8 @@ var rolesetting = {
     },
     check : {
         enable : true,
-        nocheckInherit : true
+        nocheckInherit : true,
+        chkboxType: { "Y" : "s", "N" : "s" }
     },
     callback: {
         onClick: loadrestreedata
@@ -57,7 +59,8 @@ var editsetting = {
     },
     check : {
         enable : false,
-        nocheckInherit : true
+        nocheckInherit : true,
+        chkboxType :{ "Y" : "s", "N" : "s" }
     }
 };
 
