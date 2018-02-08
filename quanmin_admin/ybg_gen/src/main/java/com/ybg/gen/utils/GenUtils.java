@@ -7,6 +7,7 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import com.ybg.base.jdbc.util.DateUtil;
 import com.ybg.base.util.SpringContextUtils;
+import com.ybg.gen.GenCodeConstant;
 import com.ybg.gen.domain.GenTempVO;
 import com.ybg.gen.entity.ColumnEntity;
 import com.ybg.gen.entity.TableEntity;
@@ -95,19 +96,14 @@ public class GenUtils {
 		map.put("datetime", DateUtil.getDate());
 		VelocityContext context = new VelocityContext(map);
 		// 获取模板列表
-		// List<String> templates = getTemplates();
 		List<GenTempVO> templates = getTemplates();
 		for (GenTempVO template : templates) {
 			// 渲染模板
 			StringWriter sw = new StringWriter();
-			// Template tpl = Velocity.getTemplate(template, "UTF-8");
-			// tpl.merge(context, sw);
 			String data = VelocityUtil.merge(template.getGencontext(), context);
 			try {
 				// 添加到zip
-				// zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.get("package"))));
 				zip.putNextEntry(new ZipEntry(dealfilename(template.getGenfilename(), map)));
-				// IOUtils.write(sw.toString(), zip, "UTF-8");
 				IOUtils.write(data, zip, "UTF-8");
 				IOUtils.closeQuietly(sw);
 				zip.closeEntry();
@@ -146,6 +142,7 @@ public class GenUtils {
 	public static List<GenTempVO> getTemplates() throws Exception {
 		GenTempService service = SpringContextUtils.getBean(GenTempService.class);
 		GenTempQuery qvo = new GenTempQuery();
+		qvo.setState(GenCodeConstant.ENABLE);
 		return service.list(qvo);
 	}
 	
