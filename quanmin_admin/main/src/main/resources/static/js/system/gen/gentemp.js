@@ -70,7 +70,7 @@ var vm = new Vue({
                 }
                 index = vm.genTemp.genfilename.indexOf('.js');
                 if (index != -1) {
-                    codetype = "javscript";
+                    codetype = "javascript";
                 }
                 index = vm.genTemp.genfilename.indexOf('.html');
                 if (index != -1) {
