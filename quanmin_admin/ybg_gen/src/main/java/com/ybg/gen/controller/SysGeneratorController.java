@@ -56,7 +56,7 @@ public class SysGeneratorController {
 		// page.setCurPage(pageNow);
 		// 线程传参
 		DataBaseConstant.setJdbcTemplate(datasource);
-		System.out.println(datasource);
+		DataBaseConstant.setJdbcTemplate(DataBaseConstant.JD_SYS);
 		page = sysGeneratorService.list(page, qvo);
 		page.init();
 		return page;
@@ -85,6 +85,7 @@ public class SysGeneratorController {
 	public Json updateSetting(String email, String author, String javapackage, String tablePrefix, String pathName) {
 		Json j = new Json();
 		j.setMsg("操作成功");
+		DataBaseConstant.setJdbcTemplate(DataBaseConstant.JD_SYS);
 		BaseMap<String, Object> updatemap = new BaseMap<>();
 		BaseMap<String, Object> wheremap = new BaseMap<>();
 		updatemap.put("`value`", email);
@@ -118,6 +119,7 @@ public class SysGeneratorController {
 	@RequestMapping(value = { "getsetting.do" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<Map<String, Object>> getsetting() throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>(1);
+		DataBaseConstant.setJdbcTemplate(DataBaseConstant.JD_SYS);
 		result.putAll(sysGeneratorService.queryGenSetting());
 		ResponseEntity<Map<String, Object>> map = new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
 		return map;
