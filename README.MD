@@ -1,6 +1,14 @@
                                                     88ybg 网站 源码开源
 正式地址 www.88ybg.com(`不一定是最新的而且账号密码不是admin/11111111提供的开源数据库才是`)
 
+ybg1.8.2 已经停止框架 
+
+ybg2.0 已经停止框架开发 ，只进行业务开发（报表填报业务） 地址  https://gitee.com/YYDeament_group/ybg-report
+
+ybg3.0 基于springboot2开发 ，进行框架开发   地址 https://gitee.com/SYDeament/ybg_plus
+
+
+
 QQ群：`314658875（收费）`，310391018（免费）
 
 ###  声明，虽然本产品是开源。但未经本人允许擅自申请专利，将公开追究法律责任。
