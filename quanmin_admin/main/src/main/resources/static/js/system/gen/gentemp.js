@@ -11,9 +11,23 @@ var vm = new Vue({
             vm.reload();
         },
         add : function() {
+
             vm.showList = false;
             vm.title = "新增";
             vm.genTemp = {};
+            setTimeout(function() {
+                editor = CodeMirror.fromTextArea(document.getElementById("gencontext"), {
+                    mode : "text/x-java", // 实现Java代码高亮
+                    lineNumbers : true, // 显示行号
+                    theme : "eclipse", // 设置主题
+                    lineWrapping : true, // 代码折叠
+                    foldGutter : true,
+                    gutters : [
+                        "CodeMirror-linenumbers", "CodeMirror-foldgutter" ],
+                    matchBrackets : true, // 括号匹配
+                    // readOnly: true, //只读
+                });
+            }, 100)
         },
         update : function(event) {
             var id = getSelectedRow('genTemptable', 'id');
@@ -22,7 +36,7 @@ var vm = new Vue({
             }
             vm.showList = false;
             vm.title = "修改";
-            vm.getInfo(id)
+
         },
         saveOrUpdate : function(event) {
             var url = vm.genTemp.id == null ? "/sys/gentemp_do/create.do" : "/sys/gentemp_do/update.do";
