@@ -1,5 +1,7 @@
 package com.ybg.api.network;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import javax.print.attribute.standard.Media;
 import org.springframework.stereotype.Repository;
 import com.google.gson.JsonObject;
@@ -93,11 +95,11 @@ public class WeixinNetWorkImpl implements WeixinNetWork {
 	public WeixinJson tag_user_get(String token, int id) {
 		StringBuilder uri = new StringBuilder();
 		uri.append("https://api.weixin.qq.com/cgi-bin/user/tag/get?access_token=" + token);
-		JSONObject json = new JSONObject();
+		Map<String,Object> json = new LinkedHashMap<String, Object>();
 		json.put("id", id);
-		JSONObject json2 = new JSONObject();
+		Map<String,Object> json2 = new LinkedHashMap<String, Object>();
 		json2.put("tag", json);
-		String result = HttpUtil.get(uri.toString(), json2.toString());
+		String result = HttpUtil.get(uri.toString(), json2);
 		return new WeixinJson(result);
 	}
 	
@@ -594,9 +596,9 @@ public class WeixinNetWorkImpl implements WeixinNetWork {
 	public WeixinJson get_current_autoreply_info(String token) {
 		StringBuilder uri = new StringBuilder();
 		uri.append("https://api.weixin.qq.com/cgi-bin/get_current_autoreply_info?access_token=" + token);
-		JSONObject json = new JSONObject();
+		Map<String,Object> json = new LinkedHashMap<String, Object>();
 		// XXX
-		String result = HttpUtil.get(uri.toString(), json.toString());
+		String result = HttpUtil.get(uri.toString(), json);
 		return new WeixinJson(result);
 	}
 	
