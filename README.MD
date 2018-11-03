@@ -3,11 +3,11 @@
 
 ybg1.8.2 已经停止框架 
 
-ybg2.0 已经停止框架开发 ，只进行业务开发（报表填报业务） 地址  https://gitee.com/YYDeament_group/ybg-report
+ybg2.0 已经停止框架开发 ，停止框架（报表填报业务） 地址  https://gitee.com/YYDeament_group/ybg-report
 
-ybg3.0 基于springboot2开发 ，进行框架开发   地址 https://gitee.com/SYDeament/ybg_plus
+ybg3.0 基于springboot2开发 ，停止框架   地址 https://gitee.com/SYDeament/ybg_plus
 
-
+ybg4.0 基于权限服务器，微服务化开发  （维护中） 地址  https://gitee.com/SYDeament/ybg_auth
 
 QQ群：`314658875（收费）`，310391018（免费）
 
